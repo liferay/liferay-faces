@@ -5,26 +5,6 @@
 	xmlns:util="http://www.liferay.com/xml/ns/liferay-faces-util-extension">
 
 	<name>LiferayFacesAlloy</name>
-	<component>
-		<component-type>com.liferay.faces.alloy.component.commandlink.CommandLink</component-type>
-		<component-class>com.liferay.faces.alloy.component.commandlink.CommandLink</component-class>
-	</component>
-	<component>
-		<component-type>com.liferay.faces.alloy.component.inputtext.InputText</component-type>
-		<component-class>com.liferay.faces.alloy.component.inputtext.InputText</component-class>
-	</component>
-	<component>
-		<component-type>com.liferay.faces.alloy.component.link.Link</component-type>
-		<component-class>com.liferay.faces.alloy.component.link.Link</component-class>
-	</component>
-	<component>
-		<component-type>com.liferay.faces.alloy.component.outputtext.OutputText</component-type>
-		<component-class>com.liferay.faces.alloy.component.outputtext.OutputText</component-class>
-	</component>
-	<component>
-		<component-type>com.liferay.faces.alloy.component.panelgroup.PanelGroup</component-type>
-		<component-class>com.liferay.faces.alloy.component.panelgroup.PanelGroup</component-class>
-	</component>
 	<factory>
 		<factory-extension>
 			<util:component-resource-factory>com.liferay.faces.alloy.application.internal.ComponentResourceFactoryAlloyImpl</util:component-resource-factory>

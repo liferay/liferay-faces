@@ -27,6 +27,10 @@ import com.liferay.faces.util.component.ClientComponent;
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
 public abstract class DialogBase extends PanelGroupBlockLayout implements Styleable, ClientComponent {
 
+	// Public Constants
+	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.dialog.Dialog";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.dialog.internal.DialogRenderer";
+
 	// Protected Enumerations
 	protected enum DialogPropertyKeys {
 		autoShow,
@@ -36,8 +40,14 @@ public abstract class DialogBase extends PanelGroupBlockLayout implements Stylea
 		height,
 		hideIconRendered,
 		modal,
+		styleClass,
 		width,
 		zIndex
+	}
+
+	public DialogBase() {
+		super();
+		setRendererType(RENDERER_TYPE);
 	}
 
 	public boolean isAutoShow() {
@@ -96,6 +106,20 @@ public abstract class DialogBase extends PanelGroupBlockLayout implements Stylea
 
 	public void setModal(boolean modal) {
 		getStateHelper().put(DialogPropertyKeys.modal, modal);
+	}
+
+	@Override
+	public String getStyleClass() {
+		// getStateHelper().eval(DialogPropertyKeys.styleClass, null) is called because super.getStyleClass() may return the
+		// STYLE_CLASS_NAME of the super class.
+		String styleClass = (String) getStateHelper().eval(DialogPropertyKeys.styleClass, null);
+
+		return com.liferay.faces.util.component.ComponentUtil.concatCssClasses(styleClass, "alloy-dialog");
+	}
+
+	@Override
+	public void setStyleClass(String styleClass) {
+		getStateHelper().put(DialogPropertyKeys.styleClass, styleClass);
 	}
 
 	public String getWidth() {

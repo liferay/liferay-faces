@@ -15,7 +15,7 @@ package com.liferay.faces.alloy.component.commandbutton;
 
 import java.util.Map;
 
-import com.liferay.faces.alloy.component.commandlink.CommandLink;
+import com.liferay.faces.alloy.component.commandlink.CommandLinkBase;
 
 
 /**
@@ -23,7 +23,7 @@ import com.liferay.faces.alloy.component.commandlink.CommandLink;
  *
  * @author  Neil Griffin
  */
-public abstract class SplitCommandButtonCompat extends CommandLink {
+public abstract class SplitCommandButtonCompat extends CommandLinkBase {
 
 	// Protected Data Members
 	protected CommandButton wrappedCommandButton;

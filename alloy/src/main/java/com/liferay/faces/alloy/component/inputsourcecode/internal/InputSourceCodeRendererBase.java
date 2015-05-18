@@ -43,6 +43,7 @@ public abstract class InputSourceCodeRendererBase extends DelegatingAlloyRendere
 	protected static final String MODE = "mode";
 	protected static final String READ_ONLY = "readOnly";
 	protected static final String SHOW_PRINT_MARGIN = "showPrintMargin";
+	protected static final String STYLE_CLASS = "styleClass";
 	protected static final String TAB_SIZE = "tabSize";
 	protected static final String USE_SOFT_TABS = "useSoftTabs";
 	protected static final String USE_WRAP_MODE = "useWrapMode";
@@ -209,6 +210,16 @@ public abstract class InputSourceCodeRendererBase extends DelegatingAlloyRendere
 
 	protected void encodeHiddenAttributes(FacesContext facesContext, ResponseWriter responseWriter, InputSourceCode inputSourceCode, boolean first) throws IOException {
 		// no-op
+	}
+
+	@Override
+	public String getDelegateComponentFamily() {
+		return InputSourceCode.COMPONENT_FAMILY;
+	}
+
+	@Override
+	public String getDelegateRendererType() {
+		return "javax.faces.Text";
 	}
 }
 //J+

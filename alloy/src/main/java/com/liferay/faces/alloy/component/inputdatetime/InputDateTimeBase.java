@@ -15,7 +15,7 @@ package com.liferay.faces.alloy.component.inputdatetime;
 //J-
 
 import javax.annotation.Generated;
-import com.liferay.faces.alloy.component.inputtext.InputText;
+import com.liferay.faces.alloy.component.inputtext.AbstractInputText;
 
 import com.liferay.faces.util.component.Styleable;
 
@@ -24,7 +24,11 @@ import com.liferay.faces.util.component.Styleable;
  * @author	Kyle Stiemann
  */
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
-public abstract class InputDateTimeBase extends InputText implements Styleable {
+public abstract class InputDateTimeBase extends AbstractInputText implements Styleable {
+
+	// Public Constants
+	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.inputdatetime.InputDateTime";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.inputdatetime.internal.InputDateTimeRenderer";
 
 	// Protected Enumerations
 	protected enum InputDateTimePropertyKeys {
@@ -33,8 +37,14 @@ public abstract class InputDateTimeBase extends InputText implements Styleable {
 		locale,
 		responsive,
 		showOn,
+		styleClass,
 		timeZone,
 		zIndex
+	}
+
+	public InputDateTimeBase() {
+		super();
+		setRendererType(RENDERER_TYPE);
 	}
 
 	public Boolean getAutoHide() {
@@ -75,6 +85,20 @@ public abstract class InputDateTimeBase extends InputText implements Styleable {
 
 	public void setShowOn(String showOn) {
 		getStateHelper().put(InputDateTimePropertyKeys.showOn, showOn);
+	}
+
+	@Override
+	public String getStyleClass() {
+		// getStateHelper().eval(InputDateTimePropertyKeys.styleClass, null) is called because super.getStyleClass() may return the
+		// STYLE_CLASS_NAME of the super class.
+		String styleClass = (String) getStateHelper().eval(InputDateTimePropertyKeys.styleClass, null);
+
+		return com.liferay.faces.util.component.ComponentUtil.concatCssClasses(styleClass, "alloy-input-date-time");
+	}
+
+	@Override
+	public void setStyleClass(String styleClass) {
+		getStateHelper().put(InputDateTimePropertyKeys.styleClass, styleClass);
 	}
 
 	public String getTimeZone() {

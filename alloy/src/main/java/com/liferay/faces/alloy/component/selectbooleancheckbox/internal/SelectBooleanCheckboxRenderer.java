@@ -92,14 +92,4 @@ public class SelectBooleanCheckboxRenderer extends SelectBooleanCheckboxRenderer
 
 		return convertedValue;
 	}
-
-	@Override
-	public String getDelegateComponentFamily() {
-		return SelectBooleanCheckbox.DELEGATE_COMPONENT_FAMILY;
-	}
-
-	@Override
-	public String getDelegateRendererType() {
-		return SelectBooleanCheckbox.DELEGATE_RENDERER_TYPE;
-	}
 }

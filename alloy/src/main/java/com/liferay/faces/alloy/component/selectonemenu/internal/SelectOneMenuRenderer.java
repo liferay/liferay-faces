@@ -23,14 +23,5 @@ import com.liferay.faces.alloy.component.selectonemenu.SelectOneMenu;
  */
 @FacesRenderer(componentFamily = SelectOneMenu.COMPONENT_FAMILY, rendererType = SelectOneMenu.RENDERER_TYPE)
 public class SelectOneMenuRenderer extends SelectOneMenuRendererBase {
-
-	@Override
-	public String getDelegateComponentFamily() {
-		return SelectOneMenu.DELEGATE_COMPONENT_FAMILY;
-	}
-
-	@Override
-	public String getDelegateRendererType() {
-		return SelectOneMenu.DELEGATE_RENDERER_TYPE;
-	}
+	// Initial Generation
 }

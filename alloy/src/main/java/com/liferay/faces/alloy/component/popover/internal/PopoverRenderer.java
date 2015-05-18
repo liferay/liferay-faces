@@ -142,16 +142,6 @@ public class PopoverRenderer extends PopoverRendererBase {
 	}
 
 	@Override
-	public String getDelegateComponentFamily() {
-		return Popover.DELEGATE_COMPONENT_FAMILY;
-	}
-
-	@Override
-	public String getDelegateRendererType() {
-		return Popover.DELEGATE_RENDERER_TYPE;
-	}
-
-	@Override
 	protected String[] getModules(FacesContext facesContext, UIComponent uiComponent) {
 		return MODULES;
 	}

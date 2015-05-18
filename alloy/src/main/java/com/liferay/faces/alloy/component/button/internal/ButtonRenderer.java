@@ -35,5 +35,5 @@ import com.liferay.faces.alloy.component.button.Button;
 )
 //J+
 public class ButtonRenderer extends AbstractButtonRenderer {
-
+	// Initial Generation
 }

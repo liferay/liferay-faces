@@ -25,5 +25,33 @@ import com.liferay.faces.util.component.Styleable;
  */
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
 public abstract class SelectOneRadioBase extends HtmlSelectOneRadio implements Styleable {
+
+	// Public Constants
+	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.selectoneradio.SelectOneRadio";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.selectoneradio.internal.SelectOneRadioRenderer";
+
+	// Protected Enumerations
+	protected enum SelectOneRadioPropertyKeys {
+		styleClass
+	}
+
+	public SelectOneRadioBase() {
+		super();
+		setRendererType(RENDERER_TYPE);
+	}
+
+	@Override
+	public String getStyleClass() {
+		// getStateHelper().eval(SelectOneRadioPropertyKeys.styleClass, null) is called because super.getStyleClass() may return the
+		// STYLE_CLASS_NAME of the super class.
+		String styleClass = (String) getStateHelper().eval(SelectOneRadioPropertyKeys.styleClass, null);
+
+		return com.liferay.faces.util.component.ComponentUtil.concatCssClasses(styleClass, "alloy-select-one-radio");
+	}
+
+	@Override
+	public void setStyleClass(String styleClass) {
+		getStateHelper().put(SelectOneRadioPropertyKeys.styleClass, styleClass);
+	}
 }
 //J+

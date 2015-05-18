@@ -23,14 +23,5 @@ import com.liferay.faces.alloy.component.message.Message;
  */
 @FacesRenderer(componentFamily = Message.COMPONENT_FAMILY, rendererType = Message.RENDERER_TYPE)
 public class MessageRenderer extends MessageRendererBase {
-
-	@Override
-	public String getDelegateComponentFamily() {
-		return Message.DELEGATE_COMPONENT_FAMILY;
-	}
-
-	@Override
-	public String getDelegateRendererType() {
-		return Message.DELEGATE_RENDERER_TYPE;
-	}
+	// Initial Generation
 }

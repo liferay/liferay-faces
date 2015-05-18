@@ -282,16 +282,6 @@ public class SelectStarRatingRenderer extends SelectStarRatingRendererBase {
 	}
 
 	@Override
-	public String getDelegateComponentFamily() {
-		return SelectStarRating.DELEGATE_COMPONENT_FAMILY;
-	}
-
-	@Override
-	public String getDelegateRendererType() {
-		return SelectStarRating.DELEGATE_RENDERER_TYPE;
-	}
-
-	@Override
 	public boolean getRendersChildren() {
 		return true;
 	}

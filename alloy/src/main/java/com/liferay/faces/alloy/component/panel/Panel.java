@@ -26,14 +26,7 @@ import com.liferay.faces.util.component.ComponentUtil;
 public class Panel extends PanelBase {
 
 	// Public Constants
-	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.panel.Panel";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.panel.internal.PanelRenderer";
 	public static final String STYLE_CLASS_NAME = "alloy-panel alloy-panel-default";
-
-	public Panel() {
-		super();
-		setRendererType(RENDERER_TYPE);
-	}
 
 	@Override
 	public String getStyleClass() {

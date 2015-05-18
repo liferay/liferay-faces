@@ -44,23 +44,12 @@ import com.liferay.portal.kernel.util.PropsUtil;
 @FacesComponent(value = InputRichText.COMPONENT_TYPE)
 public class InputRichText extends InputRichTextBase implements ClientBehaviorHolder {
 
-	// Public Constants
-	public static final String COMPONENT_TYPE = "com.liferay.faces.portal.component.inputrichtext.InputRichText";
-	public static final String RENDERER_TYPE =
-		"com.liferay.faces.portal.component.inputrichtext.internal.InputRichTextRenderer";
-	public static final String STYLE_CLASS_NAME = "portal-input-rich-text";
-
 	// Private Constants
 	private static final Collection<String> EVENT_NAMES = Collections.unmodifiableCollection(Arrays.asList("blur",
 				"change", "valueChange", "focus"));
 
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(InputRichText.class);
-
-	public InputRichText() {
-		super();
-		setRendererType(RENDERER_TYPE);
-	}
 
 	@Override
 	protected void validateValue(FacesContext facesContext, Object newValue) {
@@ -152,15 +141,5 @@ public class InputRichText extends InputRichTextBase implements ClientBehaviorHo
 				MessageContextFactory.class);
 
 		return messageContextFactory.getMessageContext();
-	}
-
-	@Override
-	public String getStyleClass() {
-
-		// getStateHelper().eval(PropertyKeys.styleClass, null) is called because super.getStyleClass() may return the
-		// STYLE_CLASS_NAME of the super class.
-		String styleClass = (String) getStateHelper().eval(InputRichTextPropertyKeys.styleClass, null);
-
-		return ComponentUtil.concatCssClasses(styleClass, STYLE_CLASS_NAME);
 	}
 }

@@ -47,6 +47,7 @@ public abstract class InputTimeRendererBase extends InputDateTimeRenderer {
 	protected static final String RESPONSIVE = "responsive";
 	protected static final String SCROLL_INTO_VIEW = "scrollIntoView";
 	protected static final String STEP = "step";
+	protected static final String STYLE_CLASS = "styleClass";
 	protected static final String TIME_SELECT_LISTENER = "timeSelectListener";
 
 	// Private Constants
@@ -89,6 +90,16 @@ public abstract class InputTimeRendererBase extends InputDateTimeRenderer {
 
 	protected void encodeHiddenAttributes(FacesContext facesContext, ResponseWriter responseWriter, InputTime inputTime, boolean first) throws IOException {
 		// no-op
+	}
+
+	@Override
+	public String getDelegateComponentFamily() {
+		return InputTime.COMPONENT_FAMILY;
+	}
+
+	@Override
+	public String getDelegateRendererType() {
+		return "javax.faces.Text";
 	}
 }
 //J+

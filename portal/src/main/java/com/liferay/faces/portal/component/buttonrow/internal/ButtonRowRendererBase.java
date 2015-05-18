@@ -17,6 +17,7 @@ package com.liferay.faces.portal.component.buttonrow.internal;
 
 import javax.annotation.Generated;
 
+import com.liferay.faces.portal.component.buttonrow.ButtonRow;
 
 import com.liferay.faces.util.render.DelegatingRendererBase;
 
@@ -26,5 +27,18 @@ import com.liferay.faces.util.render.DelegatingRendererBase;
  */
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
 public abstract class ButtonRowRendererBase extends DelegatingRendererBase {
+
+	// Protected Constants
+	protected static final String STYLE_CLASS = "styleClass";
+
+	@Override
+	public String getDelegateComponentFamily() {
+		return ButtonRow.COMPONENT_FAMILY;
+	}
+
+	@Override
+	public String getDelegateRendererType() {
+		return "javax.faces.Group";
+	}
 }
 //J+

@@ -15,32 +15,11 @@ package com.liferay.faces.alloy.component.head;
 
 import javax.faces.component.FacesComponent;
 
-import com.liferay.faces.util.component.ComponentUtil;
-
 
 /**
  * @author  Neil Griffin
  */
 @FacesComponent(value = Head.COMPONENT_TYPE)
 public class Head extends HeadBase {
-
-	// Public Constants
-	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.head.Head";
-	public static final String DELEGATE_COMPONENT_FAMILY = COMPONENT_FAMILY;
-	public static final String DELEGATE_RENDERER_TYPE = "javax.faces.Head";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.head.internal.HeadRenderer";
-	public static final String STYLE_CLASS_NAME = "alloy-head";
-
-	public Head() {
-		super();
-		setRendererType(RENDERER_TYPE);
-	}
-
-	@Override
-	public String getStyleClass() {
-
-		String styleClass = super.getStyleClass();
-
-		return ComponentUtil.concatCssClasses(styleClass, STYLE_CLASS_NAME);
-	}
+	// Initial Generation
 }

@@ -26,6 +26,10 @@ import com.liferay.faces.util.component.Styleable;
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
 public abstract class FieldsetBase extends UIPanel implements Styleable {
 
+	// Public Constants
+	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.fieldset.Fieldset";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.fieldset.internal.FieldsetRenderer";
+
 	// Protected Enumerations
 	protected enum FieldsetPropertyKeys {
 		disabled,
@@ -42,6 +46,11 @@ public abstract class FieldsetBase extends UIPanel implements Styleable {
 		onmouseup,
 		style,
 		styleClass
+	}
+
+	public FieldsetBase() {
+		super();
+		setRendererType(RENDERER_TYPE);
 	}
 
 	public boolean isDisabled() {
@@ -152,7 +161,11 @@ public abstract class FieldsetBase extends UIPanel implements Styleable {
 
 	@Override
 	public String getStyleClass() {
-		return (String) getStateHelper().eval(FieldsetPropertyKeys.styleClass, null);
+		// getStateHelper().eval(FieldsetPropertyKeys.styleClass, null) is called because super.getStyleClass() may return the
+		// STYLE_CLASS_NAME of the super class.
+		String styleClass = (String) getStateHelper().eval(FieldsetPropertyKeys.styleClass, null);
+
+		return com.liferay.faces.util.component.ComponentUtil.concatCssClasses(styleClass, "alloy-fieldset");
 	}
 
 	@Override

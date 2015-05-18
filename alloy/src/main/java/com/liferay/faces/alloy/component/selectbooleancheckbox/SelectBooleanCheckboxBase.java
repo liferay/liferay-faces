@@ -25,5 +25,33 @@ import com.liferay.faces.util.component.Styleable;
  */
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
 public abstract class SelectBooleanCheckboxBase extends HtmlSelectBooleanCheckbox implements Styleable {
+
+	// Public Constants
+	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.selectbooleancheckbox.SelectBooleanCheckbox";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.selectbooleancheckbox.internal.SelectBooleanCheckboxRenderer";
+
+	// Protected Enumerations
+	protected enum SelectBooleanCheckboxPropertyKeys {
+		styleClass
+	}
+
+	public SelectBooleanCheckboxBase() {
+		super();
+		setRendererType(RENDERER_TYPE);
+	}
+
+	@Override
+	public String getStyleClass() {
+		// getStateHelper().eval(SelectBooleanCheckboxPropertyKeys.styleClass, null) is called because super.getStyleClass() may return the
+		// STYLE_CLASS_NAME of the super class.
+		String styleClass = (String) getStateHelper().eval(SelectBooleanCheckboxPropertyKeys.styleClass, null);
+
+		return com.liferay.faces.util.component.ComponentUtil.concatCssClasses(styleClass, "alloy-select-boolean-checkbox");
+	}
+
+	@Override
+	public void setStyleClass(String styleClass) {
+		getStateHelper().put(SelectBooleanCheckboxPropertyKeys.styleClass, styleClass);
+	}
 }
 //J+

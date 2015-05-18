@@ -19,4 +19,11 @@ package com.liferay.faces.alloy.component.media;
  */
 public abstract class Media extends MediaBase {
 
+	// Public Constants
+	public static final String COMPONENT_FAMILY = "com.liferay.faces.alloy.component.media";
+
+	@Override
+	public String getFamily() {
+		return COMPONENT_FAMILY;
+	}
 }

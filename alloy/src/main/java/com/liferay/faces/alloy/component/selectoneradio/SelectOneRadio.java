@@ -27,17 +27,7 @@ import com.liferay.faces.util.component.ComponentUtil;
 public class SelectOneRadio extends SelectOneRadioBase {
 
 	// Public Constants
-	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.selectoneradio.SelectOneRadio";
-	public static final String DELEGATE_COMPONENT_FAMILY = COMPONENT_FAMILY;
-	public static final String DELEGATE_RENDERER_TYPE = "javax.faces.Radio";
-	public static final String RENDERER_TYPE =
-		"com.liferay.faces.alloy.component.selectoneradio.internal.SelectOneRadioRenderer";
 	public static final String STYLE_CLASS_NAME = "alloy-select-one-radio radio";
-
-	public SelectOneRadio() {
-		super();
-		setRendererType(RENDERER_TYPE);
-	}
 
 	@Override
 	public String getLabel() {

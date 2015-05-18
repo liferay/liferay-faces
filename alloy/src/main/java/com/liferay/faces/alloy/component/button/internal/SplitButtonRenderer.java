@@ -29,11 +29,11 @@ public class SplitButtonRenderer extends NodeMenuNavRendererBase {
 
 	@Override
 	public String getDelegateComponentFamily() {
-		return SplitButton.DELEGATE_COMPONENT_FAMILY;
+		return SplitButton.COMPONENT_FAMILY;
 	}
 
 	@Override
 	public String getDelegateRendererType() {
-		return SplitButton.DELEGATE_RENDERER_TYPE;
+		return "javax.faces.Link";
 	}
 }

@@ -50,6 +50,7 @@ public abstract class AutoCompleteRendererBase extends DelegatingAlloyRendererBa
 	protected static final String SCROLL_INTO_VIEW = "scrollIntoView";
 	protected static final String SERVER_CUSTOM_FILTER = "serverCustomFilter";
 	protected static final String SERVER_FILTER_TYPE = "serverFilterType";
+	protected static final String STYLE_CLASS = "styleClass";
 	protected static final String TAB_SELECT = "tabSelect";
 	protected static final String WIDTH = "width";
 
@@ -249,6 +250,16 @@ public abstract class AutoCompleteRendererBase extends DelegatingAlloyRendererBa
 
 	protected void encodeHiddenAttributes(FacesContext facesContext, ResponseWriter responseWriter, AutoComplete autoComplete, boolean first) throws IOException {
 		// no-op
+	}
+
+	@Override
+	public String getDelegateComponentFamily() {
+		return AutoComplete.COMPONENT_FAMILY;
+	}
+
+	@Override
+	public String getDelegateRendererType() {
+		return "javax.faces.Text";
 	}
 }
 //J+

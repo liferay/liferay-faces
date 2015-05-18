@@ -23,14 +23,5 @@ import com.liferay.faces.alloy.component.outputlink.OutputLink;
  */
 @FacesRenderer(componentFamily = OutputLink.COMPONENT_FAMILY, rendererType = OutputLink.RENDERER_TYPE)
 public class OutputLinkRenderer extends OutputLinkRendererBase {
-
-	@Override
-	public String getDelegateComponentFamily() {
-		return OutputLink.DELEGATE_COMPONENT_FAMILY;
-	}
-
-	@Override
-	public String getDelegateRendererType() {
-		return OutputLink.DELEGATE_RENDERER_TYPE;
-	}
+	// Initial Generation
 }

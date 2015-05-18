@@ -24,8 +24,6 @@ import java.util.TimeZone;
 import javax.faces.component.FacesComponent;
 import javax.faces.context.FacesContext;
 
-import com.liferay.faces.util.component.ComponentUtil;
-
 
 /**
  * @author  Kyle Stiemann
@@ -34,15 +32,7 @@ import com.liferay.faces.util.component.ComponentUtil;
 public class InputDate extends InputDateBase {
 
 	// Public Constants
-	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.inputdate.InputDate";
 	public static final String DEFAULT_HTML5_DATE_PATTERN = "yyyy-MM-dd";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.inputdate.internal.InputDateRenderer";
-	public static final String STYLE_CLASS_NAME = "alloy-input-date";
-
-	public InputDate() {
-		super();
-		setRendererType(RENDERER_TYPE);
-	}
 
 	@Override
 	protected void validateValue(FacesContext facesContext, Object newValue) {
@@ -127,15 +117,5 @@ public class InputDate extends InputDateBase {
 		}
 
 		return datePattern;
-	}
-
-	@Override
-	public String getStyleClass() {
-
-		// getStateHelper().eval(PropertyKeys.styleClass, null) is called because super.getStyleClass() may return the
-		// STYLE_CLASS_NAME of the super class.
-		String styleClass = (String) getStateHelper().eval(PropertyKeys.styleClass, null);
-
-		return ComponentUtil.concatCssClasses(styleClass, STYLE_CLASS_NAME);
 	}
 }

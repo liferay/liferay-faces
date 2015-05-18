@@ -28,14 +28,5 @@ import com.liferay.faces.alloy.component.outputstylesheet.OutputStylesheet;
 @ListenerFor(systemEventClass = PostAddToViewEvent.class)
 //J+
 public class OutputStylesheetRenderer extends OutputStylesheetRendererBase {
-
-	@Override
-	public String getDelegateComponentFamily() {
-		return OutputStylesheet.DELEGATE_COMPONENT_FAMILY;
-	}
-
-	@Override
-	public String getDelegateRendererType() {
-		return OutputStylesheet.DELEGATE_RENDERER_TYPE;
-	}
+	// Initial Generation
 }

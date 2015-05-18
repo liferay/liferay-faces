@@ -24,5 +24,33 @@ import com.liferay.faces.util.component.Styleable;
  */
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
 public abstract class ButtonRowBase extends HtmlPanelGroup implements Styleable {
+
+	// Public Constants
+	public static final String COMPONENT_TYPE = "com.liferay.faces.portal.component.buttonrow.ButtonRow";
+	public static final String RENDERER_TYPE = "com.liferay.faces.portal.component.buttonrow.internal.ButtonRowRenderer";
+
+	// Protected Enumerations
+	protected enum ButtonRowPropertyKeys {
+		styleClass
+	}
+
+	public ButtonRowBase() {
+		super();
+		setRendererType(RENDERER_TYPE);
+	}
+
+	@Override
+	public String getStyleClass() {
+		// getStateHelper().eval(ButtonRowPropertyKeys.styleClass, null) is called because super.getStyleClass() may return the
+		// STYLE_CLASS_NAME of the super class.
+		String styleClass = (String) getStateHelper().eval(ButtonRowPropertyKeys.styleClass, null);
+
+		return com.liferay.faces.util.component.ComponentUtil.concatCssClasses(styleClass, "portal-button-row");
+	}
+
+	@Override
+	public void setStyleClass(String styleClass) {
+		getStateHelper().put(ButtonRowPropertyKeys.styleClass, styleClass);
+	}
 }
 //J+

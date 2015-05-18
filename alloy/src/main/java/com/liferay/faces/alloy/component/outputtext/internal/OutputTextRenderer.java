@@ -23,14 +23,5 @@ import com.liferay.faces.alloy.component.outputtext.OutputText;
  */
 @FacesRenderer(componentFamily = OutputText.COMPONENT_FAMILY, rendererType = OutputText.RENDERER_TYPE)
 public class OutputTextRenderer extends OutputTextRendererBase {
-
-	@Override
-	public String getDelegateComponentFamily() {
-		return OutputText.DELEGATE_COMPONENT_FAMILY;
-	}
-
-	@Override
-	public String getDelegateRendererType() {
-		return OutputText.DELEGATE_RENDERER_TYPE;
-	}
+	// Initial Generation
 }

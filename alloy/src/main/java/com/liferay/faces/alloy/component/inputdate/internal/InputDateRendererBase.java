@@ -40,6 +40,7 @@ public abstract class InputDateRendererBase extends InputDateTimeRenderer {
 	protected static final String MIN_DATE = "minDate";
 	protected static final String PANES = "panes";
 	protected static final String RESPONSIVE = "responsive";
+	protected static final String STYLE_CLASS = "styleClass";
 
 	// Private Constants
 	private static final String ALLOY_CLASS_NAME = "DatePicker";
@@ -93,6 +94,16 @@ public abstract class InputDateRendererBase extends InputDateTimeRenderer {
 
 	protected void encodeHiddenAttributes(FacesContext facesContext, ResponseWriter responseWriter, InputDate inputDate, boolean first) throws IOException {
 		// no-op
+	}
+
+	@Override
+	public String getDelegateComponentFamily() {
+		return InputDate.COMPONENT_FAMILY;
+	}
+
+	@Override
+	public String getDelegateRendererType() {
+		return "javax.faces.Text";
 	}
 }
 //J+

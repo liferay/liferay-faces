@@ -289,16 +289,6 @@ public class InputDateRenderer extends InputDateRendererBase {
 	}
 
 	@Override
-	public String getDelegateComponentFamily() {
-		return InputText.DELEGATE_COMPONENT_FAMILY;
-	}
-
-	@Override
-	public String getDelegateRendererType() {
-		return InputText.DELEGATE_RENDERER_TYPE;
-	}
-
-	@Override
 	protected InputDateTimeResponseWriter getInputDateTimeResponseWriter(ResponseWriter responseWriter,
 		String inputClientId, boolean mobile, boolean responsive) {
 		return new InputDateResponseWriter(responseWriter, StringPool.INPUT, inputClientId, mobile, responsive);

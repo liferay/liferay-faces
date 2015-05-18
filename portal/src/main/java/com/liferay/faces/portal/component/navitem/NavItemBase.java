@@ -25,6 +25,10 @@ import com.liferay.faces.util.component.Styleable;
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
 public abstract class NavItemBase extends UIColumn implements Styleable {
 
+	// Public Constants
+	public static final String COMPONENT_TYPE = "com.liferay.faces.portal.component.navitem.NavItem";
+	public static final String RENDERER_TYPE = "com.liferay.faces.portal.component.navitem.internal.NavItemRenderer";
+
 	// Protected Enumerations
 	protected enum NavItemPropertyKeys {
 		anchorCssClass,
@@ -41,6 +45,11 @@ public abstract class NavItemBase extends UIColumn implements Styleable {
 		styleClass,
 		title,
 		useDialog
+	}
+
+	public NavItemBase() {
+		super();
+		setRendererType(RENDERER_TYPE);
 	}
 
 	public String getAnchorCssClass() {
@@ -135,7 +144,11 @@ public abstract class NavItemBase extends UIColumn implements Styleable {
 
 	@Override
 	public String getStyleClass() {
-		return (String) getStateHelper().eval(NavItemPropertyKeys.styleClass, null);
+		// getStateHelper().eval(NavItemPropertyKeys.styleClass, null) is called because super.getStyleClass() may return the
+		// STYLE_CLASS_NAME of the super class.
+		String styleClass = (String) getStateHelper().eval(NavItemPropertyKeys.styleClass, null);
+
+		return com.liferay.faces.util.component.ComponentUtil.concatCssClasses(styleClass, "portal-nav-item");
 	}
 
 	@Override

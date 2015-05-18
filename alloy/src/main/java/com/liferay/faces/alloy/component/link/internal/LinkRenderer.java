@@ -23,14 +23,5 @@ import com.liferay.faces.alloy.component.link.Link;
  */
 @FacesRenderer(componentFamily = Link.COMPONENT_FAMILY, rendererType = Link.RENDERER_TYPE)
 public class LinkRenderer extends LinkRendererBase {
-
-	@Override
-	public String getDelegateComponentFamily() {
-		return Link.DELEGATE_COMPONENT_FAMILY;
-	}
-
-	@Override
-	public String getDelegateRendererType() {
-		return Link.DELEGATE_RENDERER_TYPE;
-	}
+	// Initial Generation
 }

@@ -26,10 +26,20 @@ import com.liferay.faces.util.component.Styleable;
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
 public abstract class FieldBase extends PanelGroupBlockLayout implements Styleable {
 
+	// Public Constants
+	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.field.Field";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.field.internal.FieldRenderer";
+
 	// Protected Enumerations
 	protected enum FieldPropertyKeys {
 		label,
-		labelFirst
+		labelFirst,
+		styleClass
+	}
+
+	public FieldBase() {
+		super();
+		setRendererType(RENDERER_TYPE);
 	}
 
 	public String getLabel() {
@@ -46,6 +56,20 @@ public abstract class FieldBase extends PanelGroupBlockLayout implements Styleab
 
 	public void setLabelFirst(boolean labelFirst) {
 		getStateHelper().put(FieldPropertyKeys.labelFirst, labelFirst);
+	}
+
+	@Override
+	public String getStyleClass() {
+		// getStateHelper().eval(FieldPropertyKeys.styleClass, null) is called because super.getStyleClass() may return the
+		// STYLE_CLASS_NAME of the super class.
+		String styleClass = (String) getStateHelper().eval(FieldPropertyKeys.styleClass, null);
+
+		return com.liferay.faces.util.component.ComponentUtil.concatCssClasses(styleClass, "alloy-field");
+	}
+
+	@Override
+	public void setStyleClass(String styleClass) {
+		getStateHelper().put(FieldPropertyKeys.styleClass, styleClass);
 	}
 }
 //J+

@@ -42,6 +42,7 @@ public abstract class DataTableRendererBase extends AlloyRendererBase {
 	protected static final String ROW_SELECT_RANGE_LISTENER = "rowSelectRangeListener";
 	protected static final String SELECTED_ROW_INDEXES = "selectedRowIndexes";
 	protected static final String SELECTION_MODE = "selectionMode";
+	protected static final String STYLE_CLASS = "styleClass";
 
 	// Private Constants
 	private static final String ALLOY_CLASS_NAME = "DataTable";

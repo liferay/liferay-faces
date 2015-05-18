@@ -25,6 +25,10 @@ import com.liferay.faces.util.component.Styleable;
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
 public abstract class InputSearchBase extends UIInput implements Styleable {
 
+	// Public Constants
+	public static final String COMPONENT_TYPE = "com.liferay.faces.portal.component.inputsearch.InputSearch";
+	public static final String RENDERER_TYPE = "com.liferay.faces.portal.component.inputsearch.internal.InputSearchRenderer";
+
 	// Protected Enumerations
 	protected enum InputSearchPropertyKeys {
 		action,
@@ -36,6 +40,11 @@ public abstract class InputSearchBase extends UIInput implements Styleable {
 		style,
 		styleClass,
 		title
+	}
+
+	public InputSearchBase() {
+		super();
+		setRendererType(RENDERER_TYPE);
 	}
 
 	public javax.el.MethodExpression getAction() {
@@ -98,7 +107,11 @@ public abstract class InputSearchBase extends UIInput implements Styleable {
 
 	@Override
 	public String getStyleClass() {
-		return (String) getStateHelper().eval(InputSearchPropertyKeys.styleClass, null);
+		// getStateHelper().eval(InputSearchPropertyKeys.styleClass, null) is called because super.getStyleClass() may return the
+		// STYLE_CLASS_NAME of the super class.
+		String styleClass = (String) getStateHelper().eval(InputSearchPropertyKeys.styleClass, null);
+
+		return com.liferay.faces.util.component.ComponentUtil.concatCssClasses(styleClass, "portal-input-search");
 	}
 
 	@Override

@@ -26,6 +26,10 @@ import com.liferay.faces.util.component.Styleable;
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
 public abstract class CommandButtonBase extends HtmlCommandButton implements Styleable {
 
+	// Public Constants
+	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.commandbutton.CommandButton";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.commandbutton.internal.CommandButtonRenderer";
+
 	// Protected Enumerations
 	protected enum CommandButtonPropertyKeys {
 		ajax,
@@ -34,8 +38,14 @@ public abstract class CommandButtonBase extends HtmlCommandButton implements Sty
 		execute,
 		process,
 		render,
+		styleClass,
 		type,
 		update
+	}
+
+	public CommandButtonBase() {
+		super();
+		setRendererType(RENDERER_TYPE);
 	}
 
 	public boolean isAjax() {
@@ -84,6 +94,20 @@ public abstract class CommandButtonBase extends HtmlCommandButton implements Sty
 
 	public void setRender(String render) {
 		getStateHelper().put(CommandButtonPropertyKeys.render, render);
+	}
+
+	@Override
+	public String getStyleClass() {
+		// getStateHelper().eval(CommandButtonPropertyKeys.styleClass, null) is called because super.getStyleClass() may return the
+		// STYLE_CLASS_NAME of the super class.
+		String styleClass = (String) getStateHelper().eval(CommandButtonPropertyKeys.styleClass, null);
+
+		return com.liferay.faces.util.component.ComponentUtil.concatCssClasses(styleClass, "alloy-command-button");
+	}
+
+	@Override
+	public void setStyleClass(String styleClass) {
+		getStateHelper().put(CommandButtonPropertyKeys.styleClass, styleClass);
 	}
 
 	public String getType() {

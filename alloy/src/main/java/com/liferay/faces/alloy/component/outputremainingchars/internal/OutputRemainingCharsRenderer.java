@@ -140,14 +140,4 @@ public class OutputRemainingCharsRenderer extends OutputRemainingCharsRendererBa
 		encodeClientId(responseWriter, COUNTER, counter, first);
 		first = false;
 	}
-
-	@Override
-	public String getDelegateComponentFamily() {
-		return OutputRemainingChars.DELEGATE_COMPONENT_FAMILY;
-	}
-
-	@Override
-	public String getDelegateRendererType() {
-		return OutputRemainingChars.DELEGATE_RENDERER_TYPE;
-	}
 }

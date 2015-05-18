@@ -24,5 +24,14 @@ import javax.faces.component.html.HtmlInputHidden;
  */
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
 public abstract class InputHiddenBase extends HtmlInputHidden {
+
+	// Public Constants
+	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.inputhidden.InputHidden";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.inputhidden.internal.InputHiddenRenderer";
+
+	public InputHiddenBase() {
+		super();
+		setRendererType(RENDERER_TYPE);
+	}
 }
 //J+

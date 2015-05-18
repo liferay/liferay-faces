@@ -23,14 +23,5 @@ import com.liferay.faces.alloy.component.selectmanylistbox.SelectManyListbox;
  */
 @FacesRenderer(componentFamily = SelectManyListbox.COMPONENT_FAMILY, rendererType = SelectManyListbox.RENDERER_TYPE)
 public class SelectManyListboxRenderer extends SelectManyListboxRendererBase {
-
-	@Override
-	public String getDelegateComponentFamily() {
-		return SelectManyListbox.DELEGATE_COMPONENT_FAMILY;
-	}
-
-	@Override
-	public String getDelegateRendererType() {
-		return SelectManyListbox.DELEGATE_RENDERER_TYPE;
-	}
+	// Initial Generation
 }

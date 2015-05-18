@@ -23,14 +23,5 @@ import com.liferay.faces.alloy.component.inputtextarea.InputTextarea;
  */
 @FacesRenderer(componentFamily = InputTextarea.COMPONENT_FAMILY, rendererType = InputTextarea.RENDERER_TYPE)
 public class InputTextareaRenderer extends InputTextareaRendererBase {
-
-	@Override
-	public String getDelegateComponentFamily() {
-		return InputTextarea.DELEGATE_COMPONENT_FAMILY;
-	}
-
-	@Override
-	public String getDelegateRendererType() {
-		return InputTextarea.DELEGATE_RENDERER_TYPE;
-	}
+	// Initial Generation
 }

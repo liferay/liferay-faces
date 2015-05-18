@@ -25,12 +25,21 @@ import javax.faces.component.UIOutput;
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
 public abstract class OutputScriptBase extends UIOutput {
 
+	// Public Constants
+	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.outputscript.OutputScript";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.outputscript.internal.OutputScriptRenderer";
+
 	// Protected Enumerations
 	protected enum OutputScriptPropertyKeys {
 		library,
 		name,
 		target,
 		use
+	}
+
+	public OutputScriptBase() {
+		super();
+		setRendererType(RENDERER_TYPE);
 	}
 
 	public String getLibrary() {

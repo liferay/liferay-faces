@@ -91,7 +91,7 @@ public class HtmlInputFileRenderer extends DelegatingRendererBase {
 
 	@Override
 	public String getDelegateComponentFamily() {
-		return InputFile.DELEGATE_COMPONENT_FAMILY;
+		return InputFile.COMPONENT_FAMILY;
 	}
 
 	@Override
@@ -101,7 +101,7 @@ public class HtmlInputFileRenderer extends DelegatingRendererBase {
 
 	@Override
 	public String getDelegateRendererType() {
-		return InputFile.DELEGATE_RENDERER_TYPE;
+		return "javax.faces.File";
 	}
 
 	protected Map<String, List<UploadedFile>> getUploadedFileMap(FacesContext facesContext) {

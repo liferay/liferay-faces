@@ -24,17 +24,6 @@ import com.liferay.faces.portal.context.LiferayFacesContext;
 @FacesComponent(value = PermissionsURL.COMPONENT_TYPE)
 public class PermissionsURL extends PermissionsURLBase {
 
-	// Public Constants
-	public static final String COMPONENT_TYPE = "com.liferay.faces.portal.component.permissionsurl.PermissionsURL";
-	public static final String RENDERER_TYPE =
-		"com.liferay.faces.portal.component.permissionsurl.internal.PermissionsURLRenderer";
-	public static final String STYLE_CLASS_NAME = "portal-permissions-url";
-
-	public PermissionsURL() {
-		super();
-		setRendererType(RENDERER_TYPE);
-	}
-
 	@Override
 	public String getResourceGroupId() {
 		String resourceGroupId = super.getResourceGroupId();

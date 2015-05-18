@@ -15,8 +15,6 @@ package com.liferay.faces.alloy.component.audio;
 
 import javax.faces.component.FacesComponent;
 
-import com.liferay.faces.util.component.ComponentUtil;
-
 
 /**
  * @author  Bruno Basto
@@ -24,30 +22,5 @@ import com.liferay.faces.util.component.ComponentUtil;
  */
 @FacesComponent(value = Audio.COMPONENT_TYPE)
 public class Audio extends AudioBase {
-
-	// Public Constants
-	public static final String COMPONENT_FAMILY = "com.liferay.faces.alloy.component.audio";
-	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.audio.Audio";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.audio.internal.AudioRenderer";
-	public static final String STYLE_CLASS_NAME = "alloy-audio";
-
-	public Audio() {
-		super();
-		setRendererType(RENDERER_TYPE);
-	}
-
-	@Override
-	public String getFamily() {
-		return COMPONENT_FAMILY;
-	}
-
-	@Override
-	public String getStyleClass() {
-
-		// getStateHelper().eval(PropertyKeys.styleClass, null) is called because super.getStyleClass() may return the
-		// STYLE_CLASS_NAME of the super class.
-		String styleClass = (String) getStateHelper().eval(MediaPropertyKeys.styleClass, null);
-
-		return ComponentUtil.concatCssClasses(styleClass, STYLE_CLASS_NAME);
-	}
+	// Initial Generation
 }

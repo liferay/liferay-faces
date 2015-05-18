@@ -17,6 +17,7 @@ package com.liferay.faces.alloy.component.commandbutton.internal;
 
 import javax.annotation.Generated;
 
+import com.liferay.faces.alloy.component.commandbutton.CommandButton;
 
 import com.liferay.faces.alloy.component.button.internal.AbstractButtonRenderer;
 
@@ -35,7 +36,18 @@ public abstract class CommandButtonRendererBase extends AbstractButtonRenderer {
 	protected static final String EXECUTE = "execute";
 	protected static final String PROCESS = "process";
 	protected static final String RENDER = "render";
+	protected static final String STYLE_CLASS = "styleClass";
 	protected static final String TYPE = "type";
 	protected static final String UPDATE = "update";
+
+	@Override
+	public String getDelegateComponentFamily() {
+		return CommandButton.COMPONENT_FAMILY;
+	}
+
+	@Override
+	public String getDelegateRendererType() {
+		return "javax.faces.Button";
+	}
 }
 //J+

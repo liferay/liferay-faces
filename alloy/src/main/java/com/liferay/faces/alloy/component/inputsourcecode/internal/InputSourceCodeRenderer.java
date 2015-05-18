@@ -27,7 +27,6 @@ import com.liferay.faces.alloy.component.inputsourcecode.InputSourceCode;
 import com.liferay.faces.util.component.ClientComponent;
 import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.lang.StringPool;
-import com.liferay.faces.util.render.RendererUtil;
 import com.liferay.faces.util.render.internal.DelegationResponseWriter;
 import com.liferay.faces.util.render.internal.HiddenTextResponseWriter;
 
@@ -137,16 +136,6 @@ public class InputSourceCodeRenderer extends InputSourceCodeRendererBase {
 		char separatorChar = UINamingContainer.getSeparatorChar(facesContext);
 
 		return uiComponent.getClientId(facesContext) + separatorChar + BOUNDING_BOX;
-	}
-
-	@Override
-	public String getDelegateComponentFamily() {
-		return InputSourceCode.DELEGATE_COMPONENT_FAMILY;
-	}
-
-	@Override
-	public String getDelegateRendererType() {
-		return InputSourceCode.DELEGATE_RENDERER_TYPE;
 	}
 
 	public DelegationResponseWriter getDelegationResponseWriter(FacesContext facesContext, UIComponent uiComponent) {

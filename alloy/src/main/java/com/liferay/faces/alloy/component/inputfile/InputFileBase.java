@@ -27,6 +27,10 @@ import com.liferay.faces.util.component.ClientComponent;
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
 public abstract class InputFileBase extends HtmlInputFile implements Styleable, ClientComponent {
 
+	// Public Constants
+	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.inputfile.InputFile";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.inputfile.internal.InputFileRenderer";
+
 	// Protected Enumerations
 	protected enum InputFilePropertyKeys {
 		appendNewFiles,
@@ -36,7 +40,13 @@ public abstract class InputFileBase extends HtmlInputFile implements Styleable, 
 		location,
 		multiple,
 		showPreview,
-		showProgress
+		showProgress,
+		styleClass
+	}
+
+	public InputFileBase() {
+		super();
+		setRendererType(RENDERER_TYPE);
 	}
 
 	public boolean isAppendNewFiles() {
@@ -103,6 +113,20 @@ public abstract class InputFileBase extends HtmlInputFile implements Styleable, 
 
 	public void setShowProgress(boolean showProgress) {
 		getStateHelper().put(InputFilePropertyKeys.showProgress, showProgress);
+	}
+
+	@Override
+	public String getStyleClass() {
+		// getStateHelper().eval(InputFilePropertyKeys.styleClass, null) is called because super.getStyleClass() may return the
+		// STYLE_CLASS_NAME of the super class.
+		String styleClass = (String) getStateHelper().eval(InputFilePropertyKeys.styleClass, null);
+
+		return com.liferay.faces.util.component.ComponentUtil.concatCssClasses(styleClass, "alloy-input-file");
+	}
+
+	@Override
+	public void setStyleClass(String styleClass) {
+		getStateHelper().put(InputFilePropertyKeys.styleClass, styleClass);
 	}
 }
 //J+

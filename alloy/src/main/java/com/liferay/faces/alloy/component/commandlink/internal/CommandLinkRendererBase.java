@@ -17,6 +17,7 @@ package com.liferay.faces.alloy.component.commandlink.internal;
 
 import javax.annotation.Generated;
 
+import com.liferay.faces.alloy.component.commandlink.CommandLink;
 
 import com.liferay.faces.util.render.DelegatingRendererBase;
 
@@ -33,6 +34,17 @@ public abstract class CommandLinkRendererBase extends DelegatingRendererBase {
 	protected static final String EXECUTE = "execute";
 	protected static final String PROCESS = "process";
 	protected static final String RENDER = "render";
+	protected static final String STYLE_CLASS = "styleClass";
 	protected static final String UPDATE = "update";
+
+	@Override
+	public String getDelegateComponentFamily() {
+		return CommandLink.COMPONENT_FAMILY;
+	}
+
+	@Override
+	public String getDelegateRendererType() {
+		return "javax.faces.Link";
+	}
 }
 //J+

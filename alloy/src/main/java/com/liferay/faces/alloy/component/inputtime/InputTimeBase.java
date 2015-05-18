@@ -27,6 +27,10 @@ import com.liferay.faces.util.component.ClientComponent;
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
 public abstract class InputTimeBase extends InputDateTime implements Styleable, ClientComponent {
 
+	// Public Constants
+	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.inputtime.InputTime";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.inputtime.internal.InputTimeRenderer";
+
 	// Protected Enumerations
 	protected enum InputTimePropertyKeys {
 		activateFirstItem,
@@ -42,7 +46,13 @@ public abstract class InputTimeBase extends InputDateTime implements Styleable, 
 		responsive,
 		scrollIntoView,
 		step,
+		styleClass,
 		timeSelectListener
+	}
+
+	public InputTimeBase() {
+		super();
+		setRendererType(RENDERER_TYPE);
 	}
 
 	public boolean isActivateFirstItem() {
@@ -147,6 +157,20 @@ public abstract class InputTimeBase extends InputDateTime implements Styleable, 
 
 	public void setStep(Integer step) {
 		getStateHelper().put(InputTimePropertyKeys.step, step);
+	}
+
+	@Override
+	public String getStyleClass() {
+		// getStateHelper().eval(InputTimePropertyKeys.styleClass, null) is called because super.getStyleClass() may return the
+		// STYLE_CLASS_NAME of the super class.
+		String styleClass = (String) getStateHelper().eval(InputTimePropertyKeys.styleClass, null);
+
+		return com.liferay.faces.util.component.ComponentUtil.concatCssClasses(styleClass, "alloy-input-time");
+	}
+
+	@Override
+	public void setStyleClass(String styleClass) {
+		getStateHelper().put(InputTimePropertyKeys.styleClass, styleClass);
 	}
 
 	public javax.el.MethodExpression getTimeSelectListener() {

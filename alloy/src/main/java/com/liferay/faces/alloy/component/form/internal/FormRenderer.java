@@ -105,14 +105,4 @@ public class FormRenderer extends FormRendererBase {
 			super.encodeBegin(facesContext, uiComponent);
 		}
 	}
-
-	@Override
-	public String getDelegateComponentFamily() {
-		return Form.DELEGATE_COMPONENT_FAMILY;
-	}
-
-	@Override
-	public String getDelegateRendererType() {
-		return Form.DELEGATE_RENDERER_TYPE;
-	}
 }

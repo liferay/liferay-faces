@@ -19,7 +19,7 @@ import com.liferay.faces.util.lang.StringPool;
 /**
  * @author  Neil Griffin
  */
-public class PanelGroupBlockLayout extends PanelGroup {
+public class PanelGroupBlockLayout extends PanelGroupBase {
 
 	@Override
 	public String getLayout() {
