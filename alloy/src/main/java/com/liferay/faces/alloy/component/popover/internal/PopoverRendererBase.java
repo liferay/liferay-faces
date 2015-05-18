@@ -42,6 +42,7 @@ public abstract class PopoverRendererBase extends OverlayRendererBase {
 	protected static final String HEIGHT = "height";
 	protected static final String HIDE_ICON_RENDERED = "hideIconRendered";
 	protected static final String POSITION = "position";
+	protected static final String STYLE_CLASS = "styleClass";
 	protected static final String WIDTH = "width";
 	protected static final String Z_INDEX = "zIndex";
 
@@ -121,6 +122,16 @@ public abstract class PopoverRendererBase extends OverlayRendererBase {
 
 	protected void encodeHiddenAttributes(FacesContext facesContext, ResponseWriter responseWriter, Popover popover, boolean first) throws IOException {
 		// no-op
+	}
+
+	@Override
+	public String getDelegateComponentFamily() {
+		return Popover.COMPONENT_FAMILY;
+	}
+
+	@Override
+	public String getDelegateRendererType() {
+		return "javax.faces.Group";
 	}
 }
 //J+

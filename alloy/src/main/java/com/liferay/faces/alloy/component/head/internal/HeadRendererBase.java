@@ -17,6 +17,7 @@ package com.liferay.faces.alloy.component.head.internal;
 
 import javax.annotation.Generated;
 
+import com.liferay.faces.alloy.component.head.Head;
 
 import com.liferay.faces.util.render.DelegatingRendererBase;
 
@@ -31,5 +32,15 @@ public abstract class HeadRendererBase extends DelegatingRendererBase {
 	// Protected Constants
 	protected static final String STYLE = "style";
 	protected static final String STYLE_CLASS = "styleClass";
+
+	@Override
+	public String getDelegateComponentFamily() {
+		return Head.COMPONENT_FAMILY;
+	}
+
+	@Override
+	public String getDelegateRendererType() {
+		return "javax.faces.Head";
+	}
 }
 //J+

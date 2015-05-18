@@ -17,7 +17,6 @@ package com.liferay.faces.alloy.component.icon.internal;
 
 import javax.annotation.Generated;
 
-
 import javax.faces.render.Renderer;
 
 

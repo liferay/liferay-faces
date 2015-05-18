@@ -42,6 +42,7 @@ public abstract class InputFileRendererBase extends InputFileRendererCompat {
 	protected static final String MULTIPLE = "multiple";
 	protected static final String SHOW_PREVIEW = "showPreview";
 	protected static final String SHOW_PROGRESS = "showProgress";
+	protected static final String STYLE_CLASS = "styleClass";
 
 	// Private Constants
 	private static final String ALLOY_CLASS_NAME = "Uploader";
@@ -83,6 +84,16 @@ public abstract class InputFileRendererBase extends InputFileRendererCompat {
 
 	protected void encodeHiddenAttributes(FacesContext facesContext, ResponseWriter responseWriter, InputFile inputFile, boolean first) throws IOException {
 		// no-op
+	}
+
+	@Override
+	public String getDelegateComponentFamily() {
+		return InputFile.COMPONENT_FAMILY;
+	}
+
+	@Override
+	public String getDelegateRendererType() {
+		return "javax.faces.File";
 	}
 }
 //J+

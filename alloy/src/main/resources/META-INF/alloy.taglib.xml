@@ -5200,7 +5200,6 @@ java.lang.Object)</method-signature>
 		<tag-name>menu</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.component.menu.Menu</component-type>
-			<renderer-type>com.liferay.faces.alloy.component.menu.internal.MenuRenderer</renderer-type>
 		</component>
 		<attribute>
 			<description><![CDATA[An EL expression that binds the Java reference to this component in the component tree to a bean property.]]></description>

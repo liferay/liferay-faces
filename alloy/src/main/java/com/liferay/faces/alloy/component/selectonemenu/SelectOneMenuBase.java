@@ -25,5 +25,33 @@ import com.liferay.faces.util.component.Styleable;
  */
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
 public abstract class SelectOneMenuBase extends HtmlSelectOneMenu implements Styleable {
+
+	// Public Constants
+	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.selectonemenu.SelectOneMenu";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.selectonemenu.internal.SelectOneMenuRenderer";
+
+	// Protected Enumerations
+	protected enum SelectOneMenuPropertyKeys {
+		styleClass
+	}
+
+	public SelectOneMenuBase() {
+		super();
+		setRendererType(RENDERER_TYPE);
+	}
+
+	@Override
+	public String getStyleClass() {
+		// getStateHelper().eval(SelectOneMenuPropertyKeys.styleClass, null) is called because super.getStyleClass() may return the
+		// STYLE_CLASS_NAME of the super class.
+		String styleClass = (String) getStateHelper().eval(SelectOneMenuPropertyKeys.styleClass, null);
+
+		return com.liferay.faces.util.component.ComponentUtil.concatCssClasses(styleClass, "alloy-select-one-menu");
+	}
+
+	@Override
+	public void setStyleClass(String styleClass) {
+		getStateHelper().put(SelectOneMenuPropertyKeys.styleClass, styleClass);
+	}
 }
 //J+

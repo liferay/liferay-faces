@@ -26,7 +26,6 @@ import javax.faces.component.behavior.ClientBehaviorHolder;
 import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.event.FacesEvent;
 
-import com.liferay.faces.util.component.ComponentUtil;
 
 
 /**
@@ -38,19 +37,10 @@ public class ProgressBar extends ProgressBarBase implements ClientBehaviorHolder
 
 	// Public Constants
 	public static final String COMPONENT_FAMILY = "com.liferay.faces.alloy.component.progressbar";
-	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.progressbar.ProgressBar";
-	public static final String RENDERER_TYPE =
-		"com.liferay.faces.alloy.component.progressbar.internal.ProgressBarRenderer";
-	public static final String STYLE_CLASS_NAME = "alloy-progress-bar";
 
 	// Private Constants
 	private static final Collection<String> EVENT_NAMES = Collections.unmodifiableCollection(Arrays.asList(
 				"progressComplete", "poll"));
-
-	public ProgressBar() {
-		super();
-		setRendererType(RENDERER_TYPE);
-	}
 
 	@Override
 	public void addClientBehavior(String eventName, ClientBehavior clientBehavior) {
@@ -90,15 +80,5 @@ public class ProgressBar extends ProgressBarBase implements ClientBehaviorHolder
 	@Override
 	public String getFamily() {
 		return COMPONENT_FAMILY;
-	}
-
-	@Override
-	public String getStyleClass() {
-
-		// getStateHelper().eval(PropertyKeys.styleClass, null) is called because super.getStyleClass() may return the
-		// STYLE_CLASS_NAME of the super class.
-		String styleClass = (String) getStateHelper().eval(ProgressBarPropertyKeys.styleClass, null);
-
-		return ComponentUtil.concatCssClasses(styleClass, STYLE_CLASS_NAME);
 	}
 }

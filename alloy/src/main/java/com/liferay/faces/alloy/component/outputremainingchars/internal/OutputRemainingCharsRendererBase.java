@@ -39,6 +39,7 @@ public abstract class OutputRemainingCharsRendererBase extends DelegatingAlloyRe
 	protected static final String MAX_LENGTH = "maxLength";
 	protected static final String ONCE_MAXLENGTH_REACHED = "onceMaxlengthReached";
 	protected static final String ON_MAXLENGTH_REACHED = "onMaxlengthReached";
+	protected static final String STYLE_CLASS = "styleClass";
 	protected static final String VALUE = "value";
 
 	// Private Constants
@@ -93,6 +94,16 @@ public abstract class OutputRemainingCharsRendererBase extends DelegatingAlloyRe
 
 	protected void encodeHiddenAttributes(FacesContext facesContext, ResponseWriter responseWriter, OutputRemainingChars outputRemainingChars, boolean first) throws IOException {
 		// no-op
+	}
+
+	@Override
+	public String getDelegateComponentFamily() {
+		return OutputRemainingChars.COMPONENT_FAMILY;
+	}
+
+	@Override
+	public String getDelegateRendererType() {
+		return "javax.faces.Text";
 	}
 }
 //J+

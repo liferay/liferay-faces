@@ -58,14 +58,4 @@ public class CommandLinkRenderer extends CommandLinkRendererBase implements Comp
 				commandLink.getRender(), commandLink.getUpdate(), "@none");
 		}
 	}
-
-	@Override
-	public String getDelegateComponentFamily() {
-		return CommandLink.DELEGATE_COMPONENT_FAMILY;
-	}
-
-	@Override
-	public String getDelegateRendererType() {
-		return CommandLink.DELEGATE_RENDERER_TYPE;
-	}
 }

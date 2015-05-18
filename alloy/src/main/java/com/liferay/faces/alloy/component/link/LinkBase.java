@@ -25,5 +25,33 @@ import com.liferay.faces.util.component.Styleable;
  */
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
 public abstract class LinkBase extends HtmlOutcomeTargetLink implements Styleable {
+
+	// Public Constants
+	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.link.Link";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.link.internal.LinkRenderer";
+
+	// Protected Enumerations
+	protected enum LinkPropertyKeys {
+		styleClass
+	}
+
+	public LinkBase() {
+		super();
+		setRendererType(RENDERER_TYPE);
+	}
+
+	@Override
+	public String getStyleClass() {
+		// getStateHelper().eval(LinkPropertyKeys.styleClass, null) is called because super.getStyleClass() may return the
+		// STYLE_CLASS_NAME of the super class.
+		String styleClass = (String) getStateHelper().eval(LinkPropertyKeys.styleClass, null);
+
+		return com.liferay.faces.util.component.ComponentUtil.concatCssClasses(styleClass, "alloy-link");
+	}
+
+	@Override
+	public void setStyleClass(String styleClass) {
+		getStateHelper().put(LinkPropertyKeys.styleClass, styleClass);
+	}
 }
 //J+

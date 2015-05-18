@@ -47,6 +47,7 @@ public class SplitButton extends SplitButtonCompat {
 	// Public Constants
 	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.button.internal.SplitButtonRenderer";
 
+	// Private Members
 	private String rendererType;
 
 	public SplitButton() {

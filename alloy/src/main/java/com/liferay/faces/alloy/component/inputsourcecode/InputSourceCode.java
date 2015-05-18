@@ -26,19 +26,6 @@ import com.liferay.faces.util.component.ComponentUtil;
 @FacesComponent(value = InputSourceCode.COMPONENT_TYPE)
 public class InputSourceCode extends InputSourceCodeBase {
 
-	// Public Constants
-	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.inputsourcecode.InputSourceCode";
-	public static final String DELEGATE_COMPONENT_FAMILY = COMPONENT_FAMILY;
-	public static final String DELEGATE_RENDERER_TYPE = "javax.faces.Text";
-	public static final String RENDERER_TYPE =
-		"com.liferay.faces.alloy.component.inputsourcecode.internal.InputSourceCodeRenderer";
-	public static final String STYLE_CLASS_NAME = "alloy-input-source-code";
-
-	public InputSourceCode() {
-		super();
-		setRendererType(RENDERER_TYPE);
-	}
-
 	@Override
 	public String getLabel() {
 
@@ -56,13 +43,4 @@ public class InputSourceCode extends InputSourceCodeBase {
 		return label;
 	}
 
-	@Override
-	public String getStyleClass() {
-
-		// getStateHelper().eval(PropertyKeys.styleClass, null) is called because super.getStyleClass() may return the
-		// STYLE_CLASS_NAME of the super class.
-		String styleClass = (String) getStateHelper().eval(PropertyKeys.styleClass, null);
-
-		return ComponentUtil.concatCssClasses(styleClass, STYLE_CLASS_NAME);
-	}
 }

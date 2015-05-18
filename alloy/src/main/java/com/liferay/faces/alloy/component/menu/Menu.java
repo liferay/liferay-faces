@@ -15,32 +15,11 @@ package com.liferay.faces.alloy.component.menu;
 
 import javax.faces.component.FacesComponent;
 
-import com.liferay.faces.util.component.ComponentUtil;
-
 
 /**
  * @author  Vernon Singleton
  */
 @FacesComponent(value = Menu.COMPONENT_TYPE)
 public class Menu extends MenuBase {
-
-	// Public Constants
-	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.menu.Menu";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.menu.internal.MenuRenderer";
-	public static final String STYLE_CLASS_NAME = "alloy-menu";
-
-	public Menu() {
-		super();
-		setRendererType(RENDERER_TYPE);
-	}
-
-	@Override
-	public String getStyleClass() {
-
-		// getStateHelper().eval(PropertyKeys.styleClass, null) is called because super.getStyleClass() may return the
-		// STYLE_CLASS_NAME of the super class.
-		String styleClass = (String) getStateHelper().eval(MenuPropertyKeys.styleClass, null);
-
-		return ComponentUtil.concatCssClasses(styleClass, STYLE_CLASS_NAME);
-	}
+	// Initial Generation
 }

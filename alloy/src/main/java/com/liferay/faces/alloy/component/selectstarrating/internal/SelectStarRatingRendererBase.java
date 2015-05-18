@@ -36,6 +36,7 @@ public abstract class SelectStarRatingRendererBase extends DelegatingAlloyRender
 	// Protected Constants
 	protected static final String CLIENT_KEY = "clientKey";
 	protected static final String LABEL = "label";
+	protected static final String STYLE_CLASS = "styleClass";
 	protected static final String VALUE = "value";
 
 	// Private Constants
@@ -78,6 +79,16 @@ public abstract class SelectStarRatingRendererBase extends DelegatingAlloyRender
 
 	protected void encodeHiddenAttributes(FacesContext facesContext, ResponseWriter responseWriter, SelectStarRating selectStarRating, boolean first) throws IOException {
 		// no-op
+	}
+
+	@Override
+	public String getDelegateComponentFamily() {
+		return SelectStarRating.COMPONENT_FAMILY;
+	}
+
+	@Override
+	public String getDelegateRendererType() {
+		return "javax.faces.Radio";
 	}
 }
 //J+

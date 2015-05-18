@@ -17,6 +17,7 @@ package com.liferay.faces.alloy.component.link.internal;
 
 import javax.annotation.Generated;
 
+import com.liferay.faces.alloy.component.link.Link;
 
 import com.liferay.faces.util.render.DelegatingRendererBase;
 
@@ -27,5 +28,18 @@ import com.liferay.faces.util.render.DelegatingRendererBase;
  */
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
 public abstract class LinkRendererBase extends DelegatingRendererBase {
+
+	// Protected Constants
+	protected static final String STYLE_CLASS = "styleClass";
+
+	@Override
+	public String getDelegateComponentFamily() {
+		return Link.COMPONENT_FAMILY;
+	}
+
+	@Override
+	public String getDelegateRendererType() {
+		return "javax.faces.Link";
+	}
 }
 //J+

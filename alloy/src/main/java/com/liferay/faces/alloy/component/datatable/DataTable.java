@@ -43,19 +43,12 @@ import com.liferay.faces.util.lang.FacesConstants;
 public class DataTable extends DataTableBase implements ClientBehaviorHolder {
 
 	// Public Constants
-	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.datatable.DataTable";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.datatable.internal.DataTableRenderer";
 	public static final String STYLE_CLASS_NAME = "table table-bordered table-hover table-striped alloy-datatable";
 
 	// Private Constants
 	private static final Collection<String> EVENT_NAMES = Collections.unmodifiableCollection(Arrays.asList(
 				RowSelectEvent.ROW_SELECT, RowSelectRangeEvent.ROW_SELECT_RANGE, RowDeselectEvent.ROW_DESELECT,
 				RowDeselectRangeEvent.ROW_DESELECT_RANGE));
-
-	public DataTable() {
-		super();
-		setRendererType(RENDERER_TYPE);
-	}
 
 	@Override
 	public void addClientBehavior(String eventName, ClientBehavior clientBehavior) {
@@ -195,5 +188,4 @@ public class DataTable extends DataTableBase implements ClientBehaviorHolder {
 	public void setValueExpression(String name, ValueExpression binding) {
 		super.setValueExpression(name, binding);
 	}
-
 }

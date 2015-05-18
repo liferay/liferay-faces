@@ -25,14 +25,5 @@ import com.liferay.faces.alloy.component.selectmanycheckbox.SelectManyCheckbox;
 @FacesRenderer(componentFamily = SelectManyCheckbox.COMPONENT_FAMILY, rendererType = SelectManyCheckbox.RENDERER_TYPE)
 @ResourceDependency(library = "liferay-faces-alloy", name = "alloy.css")
 public class SelectManyCheckboxRenderer extends SelectManyCheckboxRendererBase {
-
-	@Override
-	public String getDelegateComponentFamily() {
-		return SelectManyCheckbox.DELEGATE_COMPONENT_FAMILY;
-	}
-
-	@Override
-	public String getDelegateRendererType() {
-		return SelectManyCheckbox.DELEGATE_RENDERER_TYPE;
-	}
+	// Initial Generation
 }

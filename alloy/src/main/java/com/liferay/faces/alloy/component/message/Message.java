@@ -25,16 +25,7 @@ import com.liferay.faces.util.component.ComponentUtil;
 public class Message extends MessageBase {
 
 	// Public Constants
-	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.message.Message";
-	public static final String DELEGATE_COMPONENT_FAMILY = COMPONENT_FAMILY;
-	public static final String DELEGATE_RENDERER_TYPE = "javax.faces.Message";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.message.internal.MessageRenderer";
 	public static final String STYLE_CLASS_NAME = "help-inline alloy-message";
-
-	public Message() {
-		super();
-		setRendererType(RENDERER_TYPE);
-	}
 
 	@Override
 	public String getStyleClass() {

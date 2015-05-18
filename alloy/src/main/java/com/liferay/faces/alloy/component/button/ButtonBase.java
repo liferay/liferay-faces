@@ -26,11 +26,21 @@ import com.liferay.faces.util.component.Styleable;
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
 public abstract class ButtonBase extends HtmlOutcomeTargetButton implements Styleable {
 
+	// Public Constants
+	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.button.Button";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.button.internal.ButtonRenderer";
+
 	// Protected Enumerations
 	protected enum ButtonPropertyKeys {
 		autofocus,
 		disabled,
+		styleClass,
 		type
+	}
+
+	public ButtonBase() {
+		super();
+		setRendererType(RENDERER_TYPE);
 	}
 
 	public Boolean getAutofocus() {
@@ -47,6 +57,20 @@ public abstract class ButtonBase extends HtmlOutcomeTargetButton implements Styl
 
 	public void setDisabled(boolean disabled) {
 		getStateHelper().put(ButtonPropertyKeys.disabled, disabled);
+	}
+
+	@Override
+	public String getStyleClass() {
+		// getStateHelper().eval(ButtonPropertyKeys.styleClass, null) is called because super.getStyleClass() may return the
+		// STYLE_CLASS_NAME of the super class.
+		String styleClass = (String) getStateHelper().eval(ButtonPropertyKeys.styleClass, null);
+
+		return com.liferay.faces.util.component.ComponentUtil.concatCssClasses(styleClass, "alloy-button");
+	}
+
+	@Override
+	public void setStyleClass(String styleClass) {
+		getStateHelper().put(ButtonPropertyKeys.styleClass, styleClass);
 	}
 
 	public String getType() {

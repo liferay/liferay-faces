@@ -17,7 +17,6 @@ package com.liferay.faces.portal.component.navbar.internal;
 
 import javax.annotation.Generated;
 
-
 import com.liferay.faces.portal.render.internal.DelayedPortalTagRenderer;
 
 

@@ -15,32 +15,11 @@ package com.liferay.faces.alloy.component.datalist;
 
 import javax.faces.component.FacesComponent;
 
-import com.liferay.faces.util.component.ComponentUtil;
-
 
 /**
  * @author  Vernon Singleton
  */
 @FacesComponent(value = DataList.COMPONENT_TYPE)
 public class DataList extends DataListBase {
-
-	// Public Constants
-	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.datalist.DataList";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.datalist.internal.DataListRenderer";
-	public static final String STYLE_CLASS_NAME = "alloy-data-list";
-
-	public DataList() {
-		super();
-		setRendererType(RENDERER_TYPE);
-	}
-
-	@Override
-	public String getStyleClass() {
-
-		// getStateHelper().eval(PropertyKeys.styleClass, null) is called because super.getStyleClass() may return the
-		// STYLE_CLASS_NAME of the super class.
-		String styleClass = (String) getStateHelper().eval(DataListPropertyKeys.styleClass, null);
-
-		return ComponentUtil.concatCssClasses(styleClass, STYLE_CLASS_NAME);
-	}
+	// Initial Generation
 }

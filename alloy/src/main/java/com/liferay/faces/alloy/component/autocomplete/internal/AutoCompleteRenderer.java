@@ -28,7 +28,6 @@ import javax.faces.component.NamingContainer;
 import javax.faces.component.UIComponent;
 import javax.faces.component.UIViewRoot;
 import javax.faces.component.behavior.ClientBehavior;
-import javax.faces.component.behavior.ClientBehaviorContext;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
@@ -426,16 +425,6 @@ public class AutoCompleteRenderer extends AutoCompleteRendererBase {
 		AutoComplete autoComplete = (AutoComplete) uiComponent;
 
 		return isServerFilteringEnabled(autoComplete);
-	}
-
-	@Override
-	public String getDelegateComponentFamily() {
-		return AutoComplete.DELEGATE_COMPONENT_FAMILY;
-	}
-
-	@Override
-	public String getDelegateRendererType() {
-		return AutoComplete.DELEGATE_RENDERER_TYPE;
 	}
 
 	protected boolean isAjaxFiltering(FacesContext facesContext, UIComponent uiComponent) {

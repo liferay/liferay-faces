@@ -22,7 +22,6 @@ import javax.faces.component.UIComponent;
 import javax.faces.component.UIData;
 import javax.faces.component.behavior.ClientBehaviorHolder;
 
-import com.liferay.faces.util.component.ComponentUtil;
 
 
 /**
@@ -33,17 +32,9 @@ public class Paginator extends PaginatorBase implements ClientBehaviorHolder {
 
 	// Public Constants
 	public static final String COMPONENT_FAMILY = "com.liferay.faces.alloy.component.paginator";
-	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.paginator.Paginator";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.paginator.internal.PaginatorRenderer";
-	public static final String STYLE_CLASS_NAME = "alloy-paginator";
 
 	// Private Constants
 	private static final Collection<String> EVENT_NAMES = Collections.unmodifiableCollection(Arrays.asList("action"));
-
-	public Paginator() {
-		super();
-		setRendererType(RENDERER_TYPE);
-	}
 
 	@Override
 	public String getDefaultEventName() {
@@ -94,16 +85,6 @@ public class Paginator extends PaginatorBase implements ClientBehaviorHolder {
 		}
 
 		return render;
-	}
-
-	@Override
-	public String getStyleClass() {
-
-		// getStateHelper().eval(PropertyKeys.styleClass, null) is called because super.getStyleClass() may return the
-		// STYLE_CLASS_NAME of the super class.
-		String styleClass = (String) getStateHelper().eval(PaginatorPropertyKeys.styleClass, null);
-
-		return ComponentUtil.concatCssClasses(styleClass, STYLE_CLASS_NAME);
 	}
 
 	public UIData getUIData() {

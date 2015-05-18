@@ -25,18 +25,7 @@ import com.liferay.faces.util.lang.StringPool;
 public class ButtonRow extends ButtonRowBase {
 
 	// Public Constants
-	public static final String COMPONENT_TYPE = "com.liferay.faces.portal.component.buttonrow.ButtonRow";
-	public static final String RENDERER_TYPE = "com.liferay.faces.portal.component.buttonrow.internal.ButtonRowRenderer";
 	public static final String STYLE_CLASS_NAME = "button-holder portal-button-row";
-	
-	// Public Constants
-	public static final String DELEGATE_COMPONENT_FAMILY = COMPONENT_FAMILY;
-	public static final String DELEGATE_RENDERER_TYPE = "javax.faces.Group";
-
-	public ButtonRow() {
-		super();
-		setRendererType(RENDERER_TYPE);
-	}
 	
 	@Override
 	public String getLayout() {

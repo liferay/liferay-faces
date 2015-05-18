@@ -23,14 +23,5 @@ import com.liferay.faces.alloy.component.outputlabel.OutputLabel;
  */
 @FacesRenderer(componentFamily = OutputLabel.COMPONENT_FAMILY, rendererType = OutputLabel.RENDERER_TYPE)
 public class OutputLabelRenderer extends OutputLabelRendererBase {
-
-	@Override
-	public String getDelegateComponentFamily() {
-		return OutputLabel.DELEGATE_COMPONENT_FAMILY;
-	}
-
-	@Override
-	public String getDelegateRendererType() {
-		return OutputLabel.DELEGATE_RENDERER_TYPE;
-	}
+	// Initial Generation
 }

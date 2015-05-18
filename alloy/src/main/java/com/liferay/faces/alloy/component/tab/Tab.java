@@ -21,7 +21,6 @@ import javax.faces.model.DataModel;
 import javax.faces.render.Renderer;
 
 import com.liferay.faces.alloy.component.tabview.TabView;
-import com.liferay.faces.util.component.ComponentUtil;
 
 
 /**
@@ -47,24 +46,5 @@ import com.liferay.faces.util.component.ComponentUtil;
  */
 @FacesComponent(value = Tab.COMPONENT_TYPE)
 public class Tab extends TabBase {
-
-	// Public Constants
-	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.tab.Tab";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.tab.internal.TabRenderer";
-	public static final String STYLE_CLASS_NAME = "alloy-tab";
-
-	public Tab() {
-		super();
-		setRendererType(RENDERER_TYPE);
-	}
-
-	@Override
-	public String getStyleClass() {
-
-		// getStateHelper().eval(PropertyKeys.styleClass, null) is called because super.getStyleClass() may return the
-		// STYLE_CLASS_NAME of the super class.
-		String styleClass = (String) getStateHelper().eval(TabPropertyKeys.styleClass, null);
-
-		return ComponentUtil.concatCssClasses(styleClass, STYLE_CLASS_NAME);
-	}
+	// Initial Generation
 }

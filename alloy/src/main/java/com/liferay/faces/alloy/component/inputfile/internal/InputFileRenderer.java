@@ -402,16 +402,6 @@ public class InputFileRenderer extends InputFileRendererBase {
 		return submittedValue;
 	}
 
-	@Override
-	public String getDelegateComponentFamily() {
-		return InputFile.DELEGATE_COMPONENT_FAMILY;
-	}
-
-	@Override
-	public String getDelegateRendererType() {
-		return InputFile.DELEGATE_RENDERER_TYPE;
-	}
-
 	protected InputFileValidator getInputFileValidator(InputFile inputFile) {
 
 		InputFileValidator inputFileValidator = null;

@@ -25,14 +25,5 @@ import com.liferay.faces.alloy.component.selectoneradio.SelectOneRadio;
 @FacesRenderer(componentFamily = SelectOneRadio.COMPONENT_FAMILY, rendererType = SelectOneRadio.RENDERER_TYPE)
 @ResourceDependency(library = "liferay-faces-alloy", name = "alloy.css")
 public class SelectOneRadioRenderer extends SelectOneRadioRendererBase {
-
-	@Override
-	public String getDelegateComponentFamily() {
-		return SelectOneRadio.DELEGATE_COMPONENT_FAMILY;
-	}
-
-	@Override
-	public String getDelegateRendererType() {
-		return SelectOneRadio.DELEGATE_RENDERER_TYPE;
-	}
+	// Initial Generation
 }

@@ -13,34 +13,13 @@
  */
 package com.liferay.faces.alloy.component.outputtext;
 
-import com.liferay.faces.util.component.ComponentUtil;
+import javax.faces.component.FacesComponent;
 
 
 /**
  * @author  Vernon Singleton
  */
+@FacesComponent(value = OutputText.COMPONENT_TYPE)
 public class OutputText extends OutputTextBase {
-
-	// Public Constants
-	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.outputtext.OutputText";
-	public static final String DELEGATE_COMPONENT_FAMILY = COMPONENT_FAMILY;
-	public static final String DELEGATE_RENDERER_TYPE = "javax.faces.Text";
-	public static final String RENDERER_TYPE =
-		"com.liferay.faces.alloy.component.outputtext.internal.OutputTextRenderer";
-	public static final String STYLE_CLASS_NAME = "alloy-output-text";
-
-	public OutputText() {
-		super();
-		setRendererType(RENDERER_TYPE);
-	}
-
-	@Override
-	public String getStyleClass() {
-
-		// getStateHelper().eval(PropertyKeys.styleClass, null) is called because super.getStyleClass() may return the
-		// STYLE_CLASS_NAME of the super class.
-		String styleClass = (String) getStateHelper().eval(PropertyKeys.styleClass, null);
-
-		return ComponentUtil.concatCssClasses(styleClass, STYLE_CLASS_NAME);
-	}
+	// Initial Generation
 }

@@ -31,7 +31,6 @@ import javax.faces.event.FacesEvent;
 import com.liferay.faces.alloy.component.tab.Tab;
 import com.liferay.faces.alloy.component.tab.TabSelectEvent;
 import com.liferay.faces.alloy.component.tab.TabUtil;
-import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.helper.IntegerHelper;
 
 
@@ -41,19 +40,9 @@ import com.liferay.faces.util.helper.IntegerHelper;
 @FacesComponent(value = TabView.COMPONENT_TYPE)
 public class TabView extends TabViewBase implements ClientBehaviorHolder {
 
-	// Public Constants
-	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.tabview.TabView";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.tabview.internal.TabViewRenderer";
-	public static final String STYLE_CLASS_NAME = "alloy-tab-view";
-
 	// Private Constants
 	private static final Collection<String> EVENT_NAMES = Collections.unmodifiableCollection(Arrays.asList(
 				TabSelectEvent.TAB_SELECT));
-
-	public TabView() {
-		super();
-		setRendererType(RENDERER_TYPE);
-	}
 
 	@Override
 	public void addClientBehavior(String eventName, ClientBehavior clientBehavior) {
@@ -125,15 +114,5 @@ public class TabView extends TabViewBase implements ClientBehaviorHolder {
 	@Override
 	public Collection<String> getEventNames() {
 		return EVENT_NAMES;
-	}
-
-	@Override
-	public String getStyleClass() {
-
-		// getStateHelper().eval(PropertyKeys.styleClass, null) is called because super.getStyleClass() may return the
-		// STYLE_CLASS_NAME of the super class.
-		String styleClass = (String) getStateHelper().eval(TabViewPropertyKeys.styleClass, null);
-
-		return ComponentUtil.concatCssClasses(styleClass, STYLE_CLASS_NAME);
 	}
 }

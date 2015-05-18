@@ -89,16 +89,6 @@ public class HeadRenderer extends HeadRendererBase {
 	}
 
 	@Override
-	public String getDelegateComponentFamily() {
-		return Head.DELEGATE_COMPONENT_FAMILY;
-	}
-
-	@Override
-	public String getDelegateRendererType() {
-		return Head.DELEGATE_RENDERER_TYPE;
-	}
-
-	@Override
 	public boolean getRendersChildren() {
 		return true;
 	}

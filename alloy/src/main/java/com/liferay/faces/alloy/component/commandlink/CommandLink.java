@@ -13,34 +13,13 @@
  */
 package com.liferay.faces.alloy.component.commandlink;
 
-import com.liferay.faces.util.component.ComponentUtil;
+import javax.faces.component.FacesComponent;
 
 
 /**
  * @author  Vernon Singleton
  */
+@FacesComponent(value = CommandLink.COMPONENT_TYPE)
 public class CommandLink extends CommandLinkBase {
-
-	// Public Constants
-	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.commandlink.CommandLink";
-	public static final String DELEGATE_COMPONENT_FAMILY = COMPONENT_FAMILY;
-	public static final String DELEGATE_RENDERER_TYPE = "javax.faces.Link";
-	public static final String RENDERER_TYPE =
-		"com.liferay.faces.alloy.component.commandlink.internal.CommandLinkRenderer";
-	public static final String STYLE_CLASS_NAME = "alloy-command-link";
-
-	public CommandLink() {
-		super();
-		setRendererType(RENDERER_TYPE);
-	}
-
-	@Override
-	public String getStyleClass() {
-
-		// getStateHelper().eval(PropertyKeys.styleClass, null) is called because super.getStyleClass() may return the
-		// STYLE_CLASS_NAME of the super class.
-		String styleClass = (String) getStateHelper().eval(PropertyKeys.styleClass, null);
-
-		return ComponentUtil.concatCssClasses(styleClass, STYLE_CLASS_NAME);
-	}
+	// Initial Generation
 }

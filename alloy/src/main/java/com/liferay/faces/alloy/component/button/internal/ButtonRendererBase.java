@@ -17,6 +17,7 @@ package com.liferay.faces.alloy.component.button.internal;
 
 import javax.annotation.Generated;
 
+import com.liferay.faces.alloy.component.button.Button;
 
 import com.liferay.faces.alloy.component.button.internal.ButtonRendererCompat;
 
@@ -31,6 +32,17 @@ public abstract class ButtonRendererBase extends ButtonRendererCompat {
 	// Protected Constants
 	protected static final String AUTOFOCUS = "autofocus";
 	protected static final String DISABLED = "disabled";
+	protected static final String STYLE_CLASS = "styleClass";
 	protected static final String TYPE = "type";
+
+	@Override
+	public String getDelegateComponentFamily() {
+		return Button.COMPONENT_FAMILY;
+	}
+
+	@Override
+	public String getDelegateRendererType() {
+		return "javax.faces.Button";
+	}
 }
 //J+

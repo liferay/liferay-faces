@@ -40,18 +40,12 @@ import com.liferay.faces.util.event.PreRenderComponentEventListener;
 )
 public class InputSearch extends InputSearchBase implements ClientBehaviorHolder {
 
-	// Public Constants
-	public static final String COMPONENT_TYPE = "com.liferay.faces.portal.component.inputsearch.InputSearch";
-	public static final String RENDERER_TYPE =
-		"com.liferay.faces.portal.component.inputsearch.internal.InputSearchRenderer";
-
 	// Private Data Members
 	private String defaultEventName;
 	private Collection<String> eventNames;
 
 	public InputSearch() {
 		super();
-		setRendererType(RENDERER_TYPE);
 
 		HtmlCommandButton htmlCommandButton = new HtmlCommandButton();
 		this.defaultEventName = htmlCommandButton.getDefaultEventName();

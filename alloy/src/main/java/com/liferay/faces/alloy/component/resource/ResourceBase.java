@@ -25,11 +25,19 @@ import javax.faces.component.UIComponentBase;
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
 public abstract class ResourceBase extends UIComponentBase {
 
+	// Public Constants
+	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.resource.Resource";
+
 	// Protected Enumerations
 	protected enum ResourcePropertyKeys {
 		contentType,
 		library,
 		name
+	}
+
+	public ResourceBase() {
+		super();
+		setRendererType("");
 	}
 
 	public String getContentType() {

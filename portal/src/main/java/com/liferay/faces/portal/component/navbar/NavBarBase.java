@@ -25,10 +25,19 @@ import com.liferay.faces.util.component.Styleable;
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
 public abstract class NavBarBase extends UIPanel implements Styleable {
 
+	// Public Constants
+	public static final String COMPONENT_TYPE = "com.liferay.faces.portal.component.navbar.NavBar";
+	public static final String RENDERER_TYPE = "com.liferay.faces.portal.component.navbar.internal.NavBarRenderer";
+
 	// Protected Enumerations
 	protected enum NavBarPropertyKeys {
 		style,
 		styleClass
+	}
+
+	public NavBarBase() {
+		super();
+		setRendererType(RENDERER_TYPE);
 	}
 
 	@Override
@@ -43,7 +52,11 @@ public abstract class NavBarBase extends UIPanel implements Styleable {
 
 	@Override
 	public String getStyleClass() {
-		return (String) getStateHelper().eval(NavBarPropertyKeys.styleClass, null);
+		// getStateHelper().eval(NavBarPropertyKeys.styleClass, null) is called because super.getStyleClass() may return the
+		// STYLE_CLASS_NAME of the super class.
+		String styleClass = (String) getStateHelper().eval(NavBarPropertyKeys.styleClass, null);
+
+		return com.liferay.faces.util.component.ComponentUtil.concatCssClasses(styleClass, "portal-nav-bar");
 	}
 
 	@Override

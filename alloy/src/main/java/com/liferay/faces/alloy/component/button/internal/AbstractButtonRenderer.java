@@ -278,16 +278,6 @@ public abstract class AbstractButtonRenderer extends ButtonRendererBase {
 	}
 
 	@Override
-	public String getDelegateComponentFamily() {
-		return Button.DELEGATE_COMPONENT_FAMILY;
-	}
-
-	@Override
-	public String getDelegateRendererType() {
-		return Button.DELEGATE_RENDERER_TYPE;
-	}
-
-	@Override
 	public boolean getRendersChildren() {
 		return true;
 	}

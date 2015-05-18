@@ -15,7 +15,6 @@ package com.liferay.faces.alloy.component.popover;
 
 import javax.faces.component.FacesComponent;
 
-import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.lang.StringPool;
 
 
@@ -24,18 +23,6 @@ import com.liferay.faces.util.lang.StringPool;
  */
 @FacesComponent(value = Popover.COMPONENT_TYPE)
 public class Popover extends PopoverBase {
-
-	// Public Constants
-	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.popover.Popover";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.popover.internal.PopoverRenderer";
-	public static final String DELEGATE_COMPONENT_FAMILY = COMPONENT_FAMILY;
-	public static final String DELEGATE_RENDERER_TYPE = "javax.faces.Group";
-	public static final String STYLE_CLASS_NAME = "alloy-popover";
-
-	public Popover() {
-		super();
-		setRendererType(RENDERER_TYPE);
-	}
 
 	@Override
 	public String getHeaderText() {
@@ -56,15 +43,5 @@ public class Popover extends PopoverBase {
 		}
 
 		return style;
-	}
-
-	@Override
-	public String getStyleClass() {
-
-		// getStateHelper().eval(PropertyKeys.styleClass, null) is called because super.getStyleClass() may return the
-		// STYLE_CLASS_NAME of the super class.
-		String styleClass = (String) getStateHelper().eval(PropertyKeys.styleClass, null);
-
-		return ComponentUtil.concatCssClasses(styleClass, STYLE_CLASS_NAME);
 	}
 }

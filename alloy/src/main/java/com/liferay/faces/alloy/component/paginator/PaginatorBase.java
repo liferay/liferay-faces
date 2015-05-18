@@ -26,6 +26,10 @@ import com.liferay.faces.util.component.Styleable;
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
 public abstract class PaginatorBase extends UIComponentBase implements Styleable {
 
+	// Public Constants
+	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.paginator.Paginator";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.paginator.internal.PaginatorRenderer";
+
 	// Protected Enumerations
 	protected enum PaginatorPropertyKeys {
 		ajax,
@@ -48,6 +52,11 @@ public abstract class PaginatorBase extends UIComponentBase implements Styleable
 		styleClass,
 		summaryPosition,
 		update
+	}
+
+	public PaginatorBase() {
+		super();
+		setRendererType(RENDERER_TYPE);
 	}
 
 	public boolean isAjax() {
@@ -190,7 +199,11 @@ public abstract class PaginatorBase extends UIComponentBase implements Styleable
 
 	@Override
 	public String getStyleClass() {
-		return (String) getStateHelper().eval(PaginatorPropertyKeys.styleClass, null);
+		// getStateHelper().eval(PaginatorPropertyKeys.styleClass, null) is called because super.getStyleClass() may return the
+		// STYLE_CLASS_NAME of the super class.
+		String styleClass = (String) getStateHelper().eval(PaginatorPropertyKeys.styleClass, null);
+
+		return com.liferay.faces.util.component.ComponentUtil.concatCssClasses(styleClass, "alloy-paginator");
 	}
 
 	@Override

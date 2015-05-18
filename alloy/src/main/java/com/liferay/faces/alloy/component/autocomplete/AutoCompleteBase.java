@@ -15,7 +15,7 @@ package com.liferay.faces.alloy.component.autocomplete;
 //J-
 
 import javax.annotation.Generated;
-import com.liferay.faces.alloy.component.inputtext.InputText;
+import com.liferay.faces.alloy.component.inputtext.AbstractInputText;
 
 import com.liferay.faces.util.component.Styleable;
 import com.liferay.faces.util.component.ClientComponent;
@@ -25,7 +25,11 @@ import com.liferay.faces.util.component.ClientComponent;
  * @author	Kyle Stiemann
  */
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
-public abstract class AutoCompleteBase extends InputText implements Styleable, ClientComponent {
+public abstract class AutoCompleteBase extends AbstractInputText implements Styleable, ClientComponent {
+
+	// Public Constants
+	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.autocomplete.AutoComplete";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.autocomplete.internal.AutoCompleteRenderer";
 
 	// Protected Enumerations
 	protected enum AutoCompletePropertyKeys {
@@ -45,8 +49,14 @@ public abstract class AutoCompleteBase extends InputText implements Styleable, C
 		minChars,
 		serverCustomFilter,
 		serverFilterType,
+		styleClass,
 		tabSelect,
 		width
+	}
+
+	public AutoCompleteBase() {
+		super();
+		setRendererType(RENDERER_TYPE);
 	}
 
 	public boolean isActivateFirstItem() {
@@ -177,6 +187,20 @@ public abstract class AutoCompleteBase extends InputText implements Styleable, C
 
 	public void setServerFilterType(String serverFilterType) {
 		getStateHelper().put(AutoCompletePropertyKeys.serverFilterType, serverFilterType);
+	}
+
+	@Override
+	public String getStyleClass() {
+		// getStateHelper().eval(AutoCompletePropertyKeys.styleClass, null) is called because super.getStyleClass() may return the
+		// STYLE_CLASS_NAME of the super class.
+		String styleClass = (String) getStateHelper().eval(AutoCompletePropertyKeys.styleClass, null);
+
+		return com.liferay.faces.util.component.ComponentUtil.concatCssClasses(styleClass, "alloy-auto-complete");
+	}
+
+	@Override
+	public void setStyleClass(String styleClass) {
+		getStateHelper().put(AutoCompletePropertyKeys.styleClass, styleClass);
 	}
 
 	public boolean isTabSelect() {

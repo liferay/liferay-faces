@@ -13,53 +13,13 @@
  */
 package com.liferay.faces.alloy.component.inputtext;
 
-import javax.faces.context.FacesContext;
-import javax.faces.event.PhaseId;
-
-import com.liferay.faces.util.component.ComponentUtil;
+import javax.faces.component.FacesComponent;
 
 
 /**
  * @author  Neil Griffin
  */
+@FacesComponent(value = InputText.COMPONENT_TYPE)
 public class InputText extends InputTextBase {
-
-	// Public Constants
-	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.inputtext.InputText";
-	public static final String DELEGATE_COMPONENT_FAMILY = COMPONENT_FAMILY;
-	public static final String DELEGATE_RENDERER_TYPE = "javax.faces.Text";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.inputtext.internal.InputTextRenderer";
-	public static final String STYLE_CLASS_NAME = "alloy-input-text";
-
-	public InputText() {
-		super();
-		setRendererType(RENDERER_TYPE);
-	}
-
-	@Override
-	public String getLabel() {
-
-		String label = super.getLabel();
-
-		if (label == null) {
-
-			FacesContext facesContext = FacesContext.getCurrentInstance();
-
-			if (facesContext.getCurrentPhaseId() == PhaseId.PROCESS_VALIDATIONS) {
-				label = ComponentUtil.getComponentLabel(this);
-			}
-		}
-
-		return label;
-	}
-
-	@Override
-	public String getStyleClass() {
-
-		// getStateHelper().eval(PropertyKeys.styleClass, null) is called because super.getStyleClass() may return the
-		// STYLE_CLASS_NAME of the super class.
-		String styleClass = (String) getStateHelper().eval(PropertyKeys.styleClass, null);
-
-		return ComponentUtil.concatCssClasses(styleClass, STYLE_CLASS_NAME);
-	}
+	// Initial Generation
 }

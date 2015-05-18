@@ -49,16 +49,6 @@ public class Captcha extends CaptchaBase {
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(Captcha.class);
 
-	// Public Constants
-	public static final String COMPONENT_TYPE = "com.liferay.faces.portal.component.captcha.Captcha";
-	public static final String RENDERER_TYPE = "com.liferay.faces.portal.component.captcha.internal.CaptchaRenderer";
-	public static final String STYLE_CLASS_NAME = "portal-captcha";
-
-	public Captcha() {
-		super();
-		setRendererType(RENDERER_TYPE);
-	}
-
 	@Override
 	protected void validateValue(FacesContext context, Object value) {
 
@@ -133,16 +123,6 @@ public class Captcha extends CaptchaBase {
 		return label;
 	}
 
-	@Override
-	public String getStyleClass() {
-
-		// getStateHelper().eval(PropertyKeys.styleClass, null) is called because super.getStyleClass() may return the
-		// STYLE_CLASS_NAME of the super class.
-		String styleClass = (String) getStateHelper().eval(CaptchaPropertyKeys.styleClass, null);
-
-		return ComponentUtil.concatCssClasses(styleClass, STYLE_CLASS_NAME);
-	}
-
 	protected class CaptchaPortletRequest extends PortletRequestWrapper {
 
 		private String userCaptchaTextValue;
@@ -162,7 +142,5 @@ public class Captcha extends CaptchaBase {
 				return super.getParameter(name);
 			}
 		}
-
 	}
-
 }

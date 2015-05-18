@@ -15,35 +15,11 @@ package com.liferay.faces.alloy.component.outputlabel;
 
 import javax.faces.component.FacesComponent;
 
-import com.liferay.faces.util.component.ComponentUtil;
-
 
 /**
  * @author  Vernon Singleton
  */
 @FacesComponent(value = OutputLabel.COMPONENT_TYPE)
 public class OutputLabel extends OutputLabelBase {
-
-	// Public Constants
-	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.outputlabel.OutputLabel";
-	public static final String DELEGATE_COMPONENT_FAMILY = COMPONENT_FAMILY;
-	public static final String DELEGATE_RENDERER_TYPE = "javax.faces.Label";
-	public static final String RENDERER_TYPE =
-		"com.liferay.faces.alloy.component.outputlabel.internal.OutputLabelRenderer";
-	public static final String STYLE_CLASS_NAME = "alloy-output-label";
-
-	public OutputLabel() {
-		super();
-		setRendererType(RENDERER_TYPE);
-	}
-
-	@Override
-	public String getStyleClass() {
-
-		// getStateHelper().eval(PropertyKeys.styleClass, null) is called because super.getStyleClass() may return the
-		// STYLE_CLASS_NAME of the super class.
-		String styleClass = (String) getStateHelper().eval(PropertyKeys.styleClass, null);
-
-		return ComponentUtil.concatCssClasses(styleClass, STYLE_CLASS_NAME);
-	}
+	// Initial Generation
 }

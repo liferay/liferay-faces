@@ -18,7 +18,6 @@ import javax.faces.component.UIComponent;
 import javax.faces.component.html.HtmlInputText;
 import javax.faces.component.html.HtmlInputTextarea;
 
-import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -31,18 +30,6 @@ public class OutputRemainingChars extends OutputRemainingCharsBase {
 
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(OutputRemainingChars.class);
-
-	// Public Constants
-	public static final String COMPONENT_TYPE =
-		"com.liferay.faces.alloy.component.outputremainingchars.OutputRemainingChars";
-	public static final String RENDERER_TYPE =
-		"com.liferay.faces.alloy.component.outputremainingchars.internal.OutputRemainingCharsRenderer";
-	public static final String STYLE_CLASS_NAME = "alloy-output-remaining-chars";
-
-	public OutputRemainingChars() {
-		super();
-		setRendererType(RENDERER_TYPE);
-	}
 
 	@Override
 	public Integer getMaxLength() {
@@ -79,16 +66,6 @@ public class OutputRemainingChars extends OutputRemainingCharsBase {
 		}
 
 		return maxLength;
-	}
-
-	@Override
-	public String getStyleClass() {
-
-		// getStateHelper().eval(PropertyKeys.styleClass, null) is called because super.getStyleClass() may return the
-		// STYLE_CLASS_NAME of the super class.
-		String styleClass = (String) getStateHelper().eval(PropertyKeys.styleClass, null);
-
-		return ComponentUtil.concatCssClasses(styleClass, STYLE_CLASS_NAME);
 	}
 
 	@Override

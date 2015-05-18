@@ -15,8 +15,6 @@ package com.liferay.faces.alloy.component.icon;
 
 import javax.faces.component.FacesComponent;
 
-import com.liferay.faces.util.component.ComponentUtil;
-
 
 /**
  * @author  Kyle Stiemann
@@ -26,27 +24,9 @@ public class Icon extends IconBase {
 
 	// Public Constants
 	public static final String COMPONENT_FAMILY = "com.liferay.faces.alloy.component.icon";
-	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.icon.Icon";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.icon.internal.IconRenderer";
-	public static final String STYLE_CLASS_NAME = "alloy-icon";
-
-	public Icon() {
-		super();
-		setRendererType(RENDERER_TYPE);
-	}
 
 	@Override
 	public String getFamily() {
 		return COMPONENT_FAMILY;
-	}
-
-	@Override
-	public String getStyleClass() {
-
-		// getStateHelper().eval(PropertyKeys.styleClass, null) is called because super.getStyleClass() may return the
-		// STYLE_CLASS_NAME of the super class.
-		String styleClass = (String) getStateHelper().eval(IconPropertyKeys.styleClass, null);
-
-		return ComponentUtil.concatCssClasses(styleClass, STYLE_CLASS_NAME);
 	}
 }

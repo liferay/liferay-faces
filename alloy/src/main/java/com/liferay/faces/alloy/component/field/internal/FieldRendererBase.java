@@ -17,8 +17,7 @@ package com.liferay.faces.alloy.component.field.internal;
 
 import javax.annotation.Generated;
 
-
-import com.liferay.faces.alloy.component.panelgroup.internal.AbstractPanelGroupRenderer;
+import com.liferay.faces.alloy.component.panelgroup.internal.PanelGroupRendererBase;
 
 
 /**
@@ -26,10 +25,11 @@ import com.liferay.faces.alloy.component.panelgroup.internal.AbstractPanelGroupR
  * @author	Kyle Stiemann
  */
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
-public abstract class FieldRendererBase extends AbstractPanelGroupRenderer {
+public abstract class FieldRendererBase extends PanelGroupRendererBase {
 
 	// Protected Constants
 	protected static final String LABEL = "label";
 	protected static final String LABEL_FIRST = "labelFirst";
+	protected static final String STYLE_CLASS = "styleClass";
 }
 //J+

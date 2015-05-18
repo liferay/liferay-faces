@@ -25,11 +25,6 @@ public class Resource extends ResourceBase {
 
 	// Public Constants
 	public static final String COMPONENT_FAMILY = "com.liferay.faces.alloy.component.resource";
-	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.resource.Resource";
-
-	public Resource() {
-		setRendererType("");
-	}
 
 	@Override
 	public String getFamily() {

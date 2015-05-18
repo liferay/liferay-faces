@@ -25,14 +25,5 @@ import com.liferay.faces.portal.component.buttonrow.ButtonRow;
 @FacesRenderer(componentFamily = ButtonRow.COMPONENT_FAMILY, rendererType = ButtonRow.RENDERER_TYPE)
 //J+
 public class ButtonRowRenderer extends ButtonRowRendererBase {
-
-	@Override
-	public String getDelegateComponentFamily() {
-		return ButtonRow.DELEGATE_COMPONENT_FAMILY;
-	}
-
-	@Override
-	public String getDelegateRendererType() {
-		return ButtonRow.DELEGATE_RENDERER_TYPE;
-	}
+	// Initial Generation
 }

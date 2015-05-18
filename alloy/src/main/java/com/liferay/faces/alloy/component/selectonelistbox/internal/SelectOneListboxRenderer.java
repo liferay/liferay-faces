@@ -23,14 +23,5 @@ import com.liferay.faces.alloy.component.selectonelistbox.SelectOneListbox;
  */
 @FacesRenderer(componentFamily = SelectOneListbox.COMPONENT_FAMILY, rendererType = SelectOneListbox.RENDERER_TYPE)
 public class SelectOneListboxRenderer extends SelectOneListboxRendererBase {
-
-	@Override
-	public String getDelegateComponentFamily() {
-		return SelectOneListbox.DELEGATE_COMPONENT_FAMILY;
-	}
-
-	@Override
-	public String getDelegateRendererType() {
-		return SelectOneListbox.DELEGATE_RENDERER_TYPE;
-	}
+	// Initial Generation
 }

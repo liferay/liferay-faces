@@ -15,32 +15,11 @@ package com.liferay.faces.alloy.component.row;
 
 import javax.faces.component.FacesComponent;
 
-import com.liferay.faces.util.component.ComponentUtil;
-
 
 /**
  * @author  Kyle Stiemann
  */
 @FacesComponent(value = Row.COMPONENT_TYPE)
 public class Row extends RowBase {
-
-	// Public Constants
-	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.row.Row";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.row.internal.RowRenderer";
-	public static final String STYLE_CLASS_NAME = "alloy-row";
-
-	public Row() {
-		super();
-		setRendererType(RENDERER_TYPE);
-	}
-
-	@Override
-	public String getStyleClass() {
-
-		// getStateHelper().eval(PropertyKeys.styleClass, null) is called because super.getStyleClass() may return the
-		// STYLE_CLASS_NAME of the super class.
-		String styleClass = (String) getStateHelper().eval(RowPropertyKeys.styleClass, null);
-
-		return ComponentUtil.concatCssClasses(styleClass, STYLE_CLASS_NAME);
-	}
+	// Initial Generation
 }

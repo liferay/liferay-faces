@@ -156,14 +156,4 @@ public class OutputTooltipRenderer extends OutputTooltipRendererBase {
 
 		encodeOverlayZIndex(responseWriter, outputTooltip, zIndex, LIFERAY_Z_INDEX_TOOLTIP, first);
 	}
-
-	@Override
-	public String getDelegateComponentFamily() {
-		return OutputTooltip.DELEGATE_COMPONENT_FAMILY;
-	}
-
-	@Override
-	public String getDelegateRendererType() {
-		return OutputTooltip.DELEGATE_RENDERER_TYPE;
-	}
 }

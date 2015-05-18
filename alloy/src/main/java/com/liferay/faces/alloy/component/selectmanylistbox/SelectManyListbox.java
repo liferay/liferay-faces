@@ -26,19 +26,6 @@ import com.liferay.faces.util.component.ComponentUtil;
 @FacesComponent(value = SelectManyListbox.COMPONENT_TYPE)
 public class SelectManyListbox extends SelectManyListboxBase {
 
-	// Public Constants
-	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.selectmanylistbox.SelectManyListbox";
-	public static final String DELEGATE_COMPONENT_FAMILY = COMPONENT_FAMILY;
-	public static final String DELEGATE_RENDERER_TYPE = "javax.faces.Listbox";
-	public static final String RENDERER_TYPE =
-		"com.liferay.faces.alloy.component.selectmanylistbox.internal.SelectManyListboxRenderer";
-	public static final String STYLE_CLASS_NAME = "alloy-select-many-listbox";
-
-	public SelectManyListbox() {
-		super();
-		setRendererType(RENDERER_TYPE);
-	}
-
 	@Override
 	public String getLabel() {
 
@@ -54,15 +41,5 @@ public class SelectManyListbox extends SelectManyListboxBase {
 		}
 
 		return label;
-	}
-
-	@Override
-	public String getStyleClass() {
-
-		// getStateHelper().eval(PropertyKeys.styleClass, null) is called because super.getStyleClass() may return the
-		// STYLE_CLASS_NAME of the super class.
-		String styleClass = (String) getStateHelper().eval(PropertyKeys.styleClass, null);
-
-		return ComponentUtil.concatCssClasses(styleClass, STYLE_CLASS_NAME);
 	}
 }
