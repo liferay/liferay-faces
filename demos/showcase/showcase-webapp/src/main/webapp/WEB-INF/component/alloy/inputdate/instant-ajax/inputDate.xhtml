@@ -7,7 +7,7 @@
 			<showcase:example number="1">
 				<alloy:field label="#{i18n['birthday']}">
 					<alloy:inputDate id="birthday" pattern="MM/dd/yyyy" value="#{inputDateModelBean.birthday}">
-						<f:ajax render="myForm:outputModel:modelValue" />
+						<f:ajax render=":myForm:outputModel:modelValue" />
 					</alloy:inputDate>
 				</alloy:field>
 			</showcase:example>
