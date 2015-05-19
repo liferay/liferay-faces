@@ -127,7 +127,7 @@ public class ProgressBarRenderer extends ProgressBarRendererBase {
 				if (i == 0) {
 
 					AjaxBehavior ajaxBehavior = (AjaxBehavior) pollEventClientBehavior;
-					pollEventClientBehavior = new ProgressBarAjaxBehavior(ajaxBehavior, clientId, "pollingFunction");
+					pollEventClientBehavior = new ProgressBarAjaxBehavior(ajaxBehavior, "@this", "pollingFunction");
 				}
 
 				buf.append(pollEventClientBehavior.getScript(clientBehaviorContext));
