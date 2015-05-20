@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <facelet-taglib xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:vdldoc="http://vdldoc.org/vdldoc"
-	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facelettaglibrary_2_2.xsd http://vdldoc.org/vdldoc https://raw.githubusercontent.com/omnifaces/vdldoc/master/src/main/resources/org/omnifaces/vdldoc/resources/vdldoc.taglib.xml.xsd"
+	xmlns:vdldoc="http://vdldoc.omnifaces.org"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facelettaglibrary_2_2.xsd http://vdldoc.omnifaces.org https://raw.githubusercontent.com/omnifaces/vdldoc/master/src/main/resources/org/omnifaces/vdldoc/resources/vdldoc.taglib.xml.xsd"
 	version="2.2">
 	<description><![CDATA[The Liferay Faces Portal facelet component tags with the <code>portal:</code> tag name prefix.]]></description>
 	<namespace>http://liferay.com/faces/portal</namespace>
