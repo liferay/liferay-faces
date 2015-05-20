@@ -9,6 +9,11 @@
 	padding: 4px;
 }
 
+/* alloy-button, alloy-commandbutton */
+.alloy-nodemenunav-after {
+	clear: both;
+}
+
 /* alloy-datatable */
 table.alloy-datatable thead th.facet, table.alloy-datatable tfoot td.facet {
     padding: 2px;
