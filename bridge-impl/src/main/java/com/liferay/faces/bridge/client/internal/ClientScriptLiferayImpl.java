@@ -18,7 +18,6 @@ import java.util.Map;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
-import com.liferay.faces.util.context.ExtFacesContext;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.portal.LiferayPortletUtil;
 import com.liferay.faces.util.portal.WebKeys;
@@ -65,8 +64,9 @@ public class ClientScriptLiferayImpl extends ClientScriptLiferayCompatImpl {
 	// Java 1.6+: @Override
 	public void clear() {
 
-		ExtFacesContext extFacesContext = ExtFacesContext.getInstance();
-		Map<String, Object> requestMap = extFacesContext.getExternalContext().getRequestMap();
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		ExternalContext externalContext = facesContext.getExternalContext();
+		Map<String, Object> requestMap = externalContext.getRequestMap();
 		requestMap.remove(WebKeys.AUI_SCRIPT_DATA);
 		scriptData = null;
 	}
