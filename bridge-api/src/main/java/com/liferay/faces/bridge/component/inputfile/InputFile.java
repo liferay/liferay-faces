@@ -28,19 +28,6 @@ import com.liferay.faces.bridge.event.FileUploadEvent;
 @FacesComponent(value = InputFile.COMPONENT_TYPE)
 public class InputFile extends InputFileBase {
 
-	// Public Constants
-	public static final String COMPONENT_TYPE = "com.liferay.faces.bridge.component.inputfile.InputFile";
-	public static final String DELEGATE_COMPONENT_FAMILY = COMPONENT_FAMILY;
-	public static final String DELEGATE_RENDERER_TYPE = "javax.faces.Text";
-	public static final String RENDERER_TYPE =
-		"com.liferay.faces.bridge.component.inputfile.internal.InputFileRenderer";
-	public static final String STYLE_CLASS_NAME = "bridge-input-file";
-
-	public InputFile() {
-		super();
-		setRendererType(RENDERER_TYPE);
-	}
-
 	@Override
 	public void broadcast(FacesEvent facesEvent) throws AbortProcessingException {
 		super.broadcast(facesEvent);
@@ -93,7 +80,6 @@ public class InputFile extends InputFileBase {
 		// STYLE_CLASS_NAME of the super class.
 		String styleClass = (String) getStateHelper().eval(PropertyKeys.styleClass, null);
 
-		return concatCssClasses(styleClass, STYLE_CLASS_NAME);
+		return concatCssClasses(styleClass, "bridge-input-file");
 	}
-
 }

@@ -17,6 +17,7 @@ package com.liferay.faces.alloy.component.outputstylesheet.internal;
 
 import javax.annotation.Generated;
 
+import com.liferay.faces.alloy.component.outputstylesheet.OutputStylesheet;
 
 import com.liferay.faces.alloy.component.outputscriptstylesheet.internal.OutputScriptStylesheetRendererBase;
 
@@ -32,5 +33,15 @@ public abstract class OutputStylesheetRendererBase extends OutputScriptStyleshee
 	protected static final String LIBRARY = "library";
 	protected static final String MEDIA = "media";
 	protected static final String NAME = "name";
+
+	@Override
+	public String getDelegateComponentFamily() {
+		return javax.faces.component.UIOutput.COMPONENT_FAMILY;
+	}
+
+	@Override
+	public String getDelegateRendererType() {
+		return "javax.faces.resource.Stylesheet";
+	}
 }
 //J+

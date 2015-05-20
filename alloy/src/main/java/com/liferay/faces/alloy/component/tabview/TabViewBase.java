@@ -27,6 +27,10 @@ import com.liferay.faces.util.component.ClientComponent;
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
 public abstract class TabViewBase extends UIData implements Styleable, ClientComponent {
 
+	// Public Constants
+	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.tabview.TabView";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.tabview.internal.TabViewRenderer";
+
 	// Protected Enumerations
 	protected enum TabViewPropertyKeys {
 		clientKey,
@@ -37,6 +41,11 @@ public abstract class TabViewBase extends UIData implements Styleable, ClientCom
 		styleClass,
 		tabSelectListener,
 		width
+	}
+
+	public TabViewBase() {
+		super();
+		setRendererType(RENDERER_TYPE);
 	}
 
 	@Override
@@ -85,7 +94,11 @@ public abstract class TabViewBase extends UIData implements Styleable, ClientCom
 
 	@Override
 	public String getStyleClass() {
-		return (String) getStateHelper().eval(TabViewPropertyKeys.styleClass, null);
+		// getStateHelper().eval(TabViewPropertyKeys.styleClass, null) is called because super.getStyleClass() may return the
+		// STYLE_CLASS_NAME of the super class.
+		String styleClass = (String) getStateHelper().eval(TabViewPropertyKeys.styleClass, null);
+
+		return com.liferay.faces.util.component.ComponentUtil.concatCssClasses(styleClass, "alloy-tab-view");
 	}
 
 	@Override

@@ -102,14 +102,4 @@ public class DialogRenderer extends DialogRendererBase {
 		throws IOException {
 		encodeOverlayZIndex(responseWriter, dialog, zIndex, LIFERAY_Z_INDEX_OVERLAY, first);
 	}
-
-	@Override
-	public String getDelegateComponentFamily() {
-		return Dialog.DELEGATE_COMPONENT_FAMILY;
-	}
-
-	@Override
-	public String getDelegateRendererType() {
-		return Dialog.DELEGATE_RENDERER_TYPE;
-	}
 }

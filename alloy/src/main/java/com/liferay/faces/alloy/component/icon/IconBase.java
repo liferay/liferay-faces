@@ -26,12 +26,21 @@ import com.liferay.faces.util.component.Styleable;
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
 public abstract class IconBase extends UIComponentBase implements Styleable {
 
+	// Public Constants
+	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.icon.Icon";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.icon.internal.IconRenderer";
+
 	// Protected Enumerations
 	protected enum IconPropertyKeys {
 		color,
 		name,
 		style,
 		styleClass
+	}
+
+	public IconBase() {
+		super();
+		setRendererType(RENDERER_TYPE);
 	}
 
 	public String getColor() {
@@ -62,7 +71,11 @@ public abstract class IconBase extends UIComponentBase implements Styleable {
 
 	@Override
 	public String getStyleClass() {
-		return (String) getStateHelper().eval(IconPropertyKeys.styleClass, null);
+		// getStateHelper().eval(IconPropertyKeys.styleClass, null) is called because super.getStyleClass() may return the
+		// STYLE_CLASS_NAME of the super class.
+		String styleClass = (String) getStateHelper().eval(IconPropertyKeys.styleClass, null);
+
+		return com.liferay.faces.util.component.ComponentUtil.concatCssClasses(styleClass, "alloy-icon");
 	}
 
 	@Override

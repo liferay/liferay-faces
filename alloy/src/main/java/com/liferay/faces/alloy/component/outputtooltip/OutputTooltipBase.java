@@ -27,6 +27,10 @@ import com.liferay.faces.util.component.ClientComponent;
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
 public abstract class OutputTooltipBase extends OutputText implements Styleable, ClientComponent {
 
+	// Public Constants
+	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.outputtooltip.OutputTooltip";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.outputtooltip.internal.OutputTooltipRenderer";
+
 	// Protected Enumerations
 	protected enum OutputTooltipPropertyKeys {
 		autoShow,
@@ -35,7 +39,13 @@ public abstract class OutputTooltipBase extends OutputText implements Styleable,
 		headerText,
 		opacity,
 		position,
+		styleClass,
 		zIndex
+	}
+
+	public OutputTooltipBase() {
+		super();
+		setRendererType(RENDERER_TYPE);
 	}
 
 	public boolean isAutoShow() {
@@ -86,6 +96,20 @@ public abstract class OutputTooltipBase extends OutputText implements Styleable,
 
 	public void setPosition(String position) {
 		getStateHelper().put(OutputTooltipPropertyKeys.position, position);
+	}
+
+	@Override
+	public String getStyleClass() {
+		// getStateHelper().eval(OutputTooltipPropertyKeys.styleClass, null) is called because super.getStyleClass() may return the
+		// STYLE_CLASS_NAME of the super class.
+		String styleClass = (String) getStateHelper().eval(OutputTooltipPropertyKeys.styleClass, null);
+
+		return com.liferay.faces.util.component.ComponentUtil.concatCssClasses(styleClass, "alloy-output-tooltip");
+	}
+
+	@Override
+	public void setStyleClass(String styleClass) {
+		getStateHelper().put(OutputTooltipPropertyKeys.styleClass, styleClass);
 	}
 
 	public Integer getzIndex() {

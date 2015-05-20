@@ -25,20 +25,10 @@ import com.liferay.faces.util.component.ComponentUtil;
 public class Messages extends MessagesBase {
 
 	// Public Constants
-	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.messages.Messages";
-	public static final String DELEGATE_COMPONENT_FAMILY = COMPONENT_FAMILY;
-	public static final String DELEGATE_RENDERER_TYPE = "javax.faces.Messages";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.messages.internal.MessagesRenderer";
 	public static final String ERROR_CLASS_NAME = "text-error";
 	public static final String FATAL_CLASS_NAME = ERROR_CLASS_NAME;
 	public static final String INFO_CLASS_NAME = "text-info";
 	public static final String WARN_CLASS_NAME = "text-warning";
-	public static final String STYLE_CLASS_NAME = "alloy-messages";
-
-	public Messages() {
-		super();
-		setRendererType(RENDERER_TYPE);
-	}
 
 	@Override
 	public String getErrorClass() {
@@ -64,15 +54,6 @@ public class Messages extends MessagesBase {
 		return ComponentUtil.concatCssClasses(infoClass, INFO_CLASS_NAME);
 	}
 
-	@Override
-	public String getStyleClass() {
-
-		// getStateHelper().eval(PropertyKeys.styleClass, null) is called because super.getStyleClass() may return the
-		// STYLE_CLASS_NAME of the super class.
-		String styleClass = (String) getStateHelper().eval(PropertyKeys.styleClass, null);
-
-		return ComponentUtil.concatCssClasses(styleClass, STYLE_CLASS_NAME);
-	}
 
 	@Override
 	public String getWarnClass() {

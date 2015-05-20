@@ -27,6 +27,10 @@ import com.liferay.faces.util.component.ClientComponent;
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
 public abstract class InputDateBase extends InputDateTime implements Styleable, ClientComponent {
 
+	// Public Constants
+	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.inputdate.InputDate";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.inputdate.internal.InputDateRenderer";
+
 	// Protected Enumerations
 	protected enum InputDatePropertyKeys {
 		dateSelectListener,
@@ -34,7 +38,13 @@ public abstract class InputDateBase extends InputDateTime implements Styleable, 
 		minDate,
 		panes,
 		pattern,
-		responsive
+		responsive,
+		styleClass
+	}
+
+	public InputDateBase() {
+		super();
+		setRendererType(RENDERER_TYPE);
 	}
 
 	public javax.el.MethodExpression getDateSelectListener() {
@@ -83,6 +93,20 @@ public abstract class InputDateBase extends InputDateTime implements Styleable, 
 
 	public void setResponsive(boolean responsive) {
 		getStateHelper().put(InputDatePropertyKeys.responsive, responsive);
+	}
+
+	@Override
+	public String getStyleClass() {
+		// getStateHelper().eval(InputDatePropertyKeys.styleClass, null) is called because super.getStyleClass() may return the
+		// STYLE_CLASS_NAME of the super class.
+		String styleClass = (String) getStateHelper().eval(InputDatePropertyKeys.styleClass, null);
+
+		return com.liferay.faces.util.component.ComponentUtil.concatCssClasses(styleClass, "alloy-input-date");
+	}
+
+	@Override
+	public void setStyleClass(String styleClass) {
+		getStateHelper().put(InputDatePropertyKeys.styleClass, styleClass);
 	}
 }
 //J+

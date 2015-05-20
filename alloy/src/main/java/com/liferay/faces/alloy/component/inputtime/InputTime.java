@@ -22,8 +22,6 @@ import javax.faces.FacesException;
 import javax.faces.component.FacesComponent;
 import javax.faces.context.FacesContext;
 
-import com.liferay.faces.util.component.ComponentUtil;
-
 
 /**
  * @author  Bruno Basto
@@ -33,18 +31,10 @@ import com.liferay.faces.util.component.ComponentUtil;
 public class InputTime extends InputTimeBase {
 
 	// Public Constants
-	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.inputtime.InputTime";
 	public static final String DEFAULT_HTML5_TIME_PATTERN = "HH:mm";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.inputtime.internal.InputTimeRenderer";
-	public static final String STYLE_CLASS_NAME = "alloy-input-time";
 
 	// Private Constants
 	private static final String MIN_MAX_TIME_PATTERN = "HH:mm:ss";
-
-	public InputTime() {
-		super();
-		setRendererType(RENDERER_TYPE);
-	}
 
 	@Override
 	protected void validateValue(FacesContext facesContext, Object newValue) {
@@ -88,15 +78,5 @@ public class InputTime extends InputTimeBase {
 		}
 
 		return timePattern;
-	}
-
-	@Override
-	public String getStyleClass() {
-
-		// getStateHelper().eval(PropertyKeys.styleClass, null) is called because super.getStyleClass() may return the
-		// STYLE_CLASS_NAME of the super class.
-		String styleClass = (String) getStateHelper().eval(PropertyKeys.styleClass, null);
-
-		return ComponentUtil.concatCssClasses(styleClass, STYLE_CLASS_NAME);
 	}
 }

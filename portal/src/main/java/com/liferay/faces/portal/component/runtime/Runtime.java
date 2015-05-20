@@ -20,13 +20,5 @@ import javax.faces.component.FacesComponent;
  */
 @FacesComponent(value = Runtime.COMPONENT_TYPE)
 public class Runtime extends RuntimeBase {
-
-	// Public Constants
-	public static final String COMPONENT_TYPE = "com.liferay.faces.portal.component.runtime.Runtime";
-	public static final String RENDERER_TYPE = "com.liferay.faces.portal.component.runtime.internal.RuntimeRenderer";
-	
-	public Runtime() {
-		super();
-		setRendererType(RENDERER_TYPE);
-	}	
+	// Initial Generation
 }

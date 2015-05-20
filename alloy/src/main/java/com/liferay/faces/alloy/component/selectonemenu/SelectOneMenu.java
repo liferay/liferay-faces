@@ -26,19 +26,6 @@ import com.liferay.faces.util.component.ComponentUtil;
 @FacesComponent(value = SelectOneMenu.COMPONENT_TYPE)
 public class SelectOneMenu extends SelectOneMenuBase {
 
-	// Public Constants
-	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.selectonemenu.SelectOneMenu";
-	public static final String DELEGATE_COMPONENT_FAMILY = COMPONENT_FAMILY;
-	public static final String DELEGATE_RENDERER_TYPE = "javax.faces.Menu";
-	public static final String RENDERER_TYPE =
-		"com.liferay.faces.alloy.component.selectonemenu.internal.SelectOneMenuRenderer";
-	public static final String STYLE_CLASS_NAME = "alloy-select-one-menu";
-
-	public SelectOneMenu() {
-		super();
-		setRendererType(RENDERER_TYPE);
-	}
-
 	@Override
 	public String getLabel() {
 
@@ -54,15 +41,5 @@ public class SelectOneMenu extends SelectOneMenuBase {
 		}
 
 		return label;
-	}
-
-	@Override
-	public String getStyleClass() {
-
-		// getStateHelper().eval(PropertyKeys.styleClass, null) is called because super.getStyleClass() may return the
-		// STYLE_CLASS_NAME of the super class.
-		String styleClass = (String) getStateHelper().eval(PropertyKeys.styleClass, null);
-
-		return ComponentUtil.concatCssClasses(styleClass, STYLE_CLASS_NAME);
 	}
 }

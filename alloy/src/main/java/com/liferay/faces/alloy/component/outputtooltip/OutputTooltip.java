@@ -15,7 +15,6 @@ package com.liferay.faces.alloy.component.outputtooltip;
 
 import javax.faces.component.FacesComponent;
 
-import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.lang.StringPool;
 
 
@@ -24,17 +23,6 @@ import com.liferay.faces.util.lang.StringPool;
  */
 @FacesComponent(value = OutputTooltip.COMPONENT_TYPE)
 public class OutputTooltip extends OutputTooltipBase {
-
-	// Public Constants
-	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.outputtooltip.OutputTooltip";
-	public static final String RENDERER_TYPE =
-		"com.liferay.faces.alloy.component.outputtooltip.internal.OutputTooltipRenderer";
-	public static final String STYLE_CLASS_NAME = "alloy-output-tooltip";
-
-	public OutputTooltip() {
-		super();
-		setRendererType(RENDERER_TYPE);
-	}
 
 	@Override
 	public String getStyle() {
@@ -50,15 +38,5 @@ public class OutputTooltip extends OutputTooltipBase {
 		}
 
 		return style;
-	}
-
-	@Override
-	public String getStyleClass() {
-
-		// getStateHelper().eval(PropertyKeys.styleClass, null) is called because super.getStyleClass() may return the
-		// STYLE_CLASS_NAME of the super class.
-		String styleClass = (String) getStateHelper().eval(PropertyKeys.styleClass, null);
-
-		return ComponentUtil.concatCssClasses(styleClass, STYLE_CLASS_NAME);
 	}
 }

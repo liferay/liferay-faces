@@ -25,5 +25,33 @@ import com.liferay.faces.util.component.Styleable;
  */
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
 public abstract class InputTextBase extends HtmlInputText implements Styleable {
+
+	// Public Constants
+	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.inputtext.InputText";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.inputtext.internal.InputTextRenderer";
+
+	// Protected Enumerations
+	protected enum InputTextPropertyKeys {
+		styleClass
+	}
+
+	public InputTextBase() {
+		super();
+		setRendererType(RENDERER_TYPE);
+	}
+
+	@Override
+	public String getStyleClass() {
+		// getStateHelper().eval(InputTextPropertyKeys.styleClass, null) is called because super.getStyleClass() may return the
+		// STYLE_CLASS_NAME of the super class.
+		String styleClass = (String) getStateHelper().eval(InputTextPropertyKeys.styleClass, null);
+
+		return com.liferay.faces.util.component.ComponentUtil.concatCssClasses(styleClass, "alloy-input-text");
+	}
+
+	@Override
+	public void setStyleClass(String styleClass) {
+		getStateHelper().put(InputTextPropertyKeys.styleClass, styleClass);
+	}
 }
 //J+

@@ -43,9 +43,4 @@ public class CommandButtonRenderer extends CommandButtonRendererBase implements 
 				"@all", commandButton.getRender(), commandButton.getUpdate(), "@none");
 		}
 	}
-
-	@Override
-	public String getDelegateComponentFamily() {
-		return CommandButton.DELEGATE_COMPONENT_FAMILY;
-	}
 }

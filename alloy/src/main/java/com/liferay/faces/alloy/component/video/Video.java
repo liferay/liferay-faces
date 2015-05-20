@@ -15,38 +15,11 @@ package com.liferay.faces.alloy.component.video;
 
 import javax.faces.component.FacesComponent;
 
-import com.liferay.faces.util.component.ComponentUtil;
-
 
 /**
  * @author  Kyle Stiemann
  */
 @FacesComponent(value = Video.COMPONENT_TYPE)
 public class Video extends VideoBase {
-
-	// Public Constants
-	public static final String COMPONENT_FAMILY = "com.liferay.faces.alloy.component.video";
-	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.video.Video";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.video.internal.VideoRenderer";
-	public static final String STYLE_CLASS_NAME = "alloy-video";
-
-	public Video() {
-		super();
-		setRendererType(RENDERER_TYPE);
-	}
-
-	@Override
-	public String getFamily() {
-		return COMPONENT_FAMILY;
-	}
-
-	@Override
-	public String getStyleClass() {
-
-		// getStateHelper().eval(PropertyKeys.styleClass, null) is called because super.getStyleClass() may return the
-		// STYLE_CLASS_NAME of the super class.
-		String styleClass = (String) getStateHelper().eval(MediaPropertyKeys.styleClass, null);
-
-		return ComponentUtil.concatCssClasses(styleClass, STYLE_CLASS_NAME);
-	}
+	// Initial Generation
 }

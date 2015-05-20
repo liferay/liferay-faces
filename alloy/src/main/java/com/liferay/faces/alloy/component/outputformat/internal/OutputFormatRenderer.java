@@ -23,14 +23,5 @@ import com.liferay.faces.alloy.component.outputformat.OutputFormat;
  */
 @FacesRenderer(componentFamily = OutputFormat.COMPONENT_FAMILY, rendererType = OutputFormat.RENDERER_TYPE)
 public class OutputFormatRenderer extends OutputFormatRendererBase {
-
-	@Override
-	public String getDelegateComponentFamily() {
-		return OutputFormat.DELEGATE_COMPONENT_FAMILY;
-	}
-
-	@Override
-	public String getDelegateRendererType() {
-		return OutputFormat.DELEGATE_RENDERER_TYPE;
-	}
+	// Initial Generation
 }

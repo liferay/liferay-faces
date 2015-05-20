@@ -117,7 +117,7 @@
 				</description>
 				<name>styleClass</name>
 				<type>java.lang.String</type>
-				<generateJava>false</generateJava>
+				<override>true</override>
 			</attribute>
 		</attributes>
 	</component>

@@ -26,10 +26,20 @@ import com.liferay.faces.util.component.Styleable;
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
 public abstract class PanelBase extends PanelGroupBlockLayout implements Styleable {
 
+	// Public Constants
+	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.panel.Panel";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.panel.internal.PanelRenderer";
+
 	// Protected Enumerations
 	protected enum PanelPropertyKeys {
 		footerText,
-		headerText
+		headerText,
+		styleClass
+	}
+
+	public PanelBase() {
+		super();
+		setRendererType(RENDERER_TYPE);
 	}
 
 	public String getFooterText() {
@@ -46,6 +56,20 @@ public abstract class PanelBase extends PanelGroupBlockLayout implements Styleab
 
 	public void setHeaderText(String headerText) {
 		getStateHelper().put(PanelPropertyKeys.headerText, headerText);
+	}
+
+	@Override
+	public String getStyleClass() {
+		// getStateHelper().eval(PanelPropertyKeys.styleClass, null) is called because super.getStyleClass() may return the
+		// STYLE_CLASS_NAME of the super class.
+		String styleClass = (String) getStateHelper().eval(PanelPropertyKeys.styleClass, null);
+
+		return com.liferay.faces.util.component.ComponentUtil.concatCssClasses(styleClass, "alloy-panel");
+	}
+
+	@Override
+	public void setStyleClass(String styleClass) {
+		getStateHelper().put(PanelPropertyKeys.styleClass, styleClass);
 	}
 }
 //J+

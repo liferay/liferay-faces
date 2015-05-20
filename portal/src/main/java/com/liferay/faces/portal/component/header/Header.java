@@ -15,31 +15,10 @@ package com.liferay.faces.portal.component.header;
 
 import javax.faces.component.FacesComponent;
 
-import com.liferay.faces.util.component.ComponentUtil;
-
 /**
  * @author	Vernon Singleton
  */
 @FacesComponent(value = Header.COMPONENT_TYPE)
 public class Header extends HeaderBase {
-
-	// Public Constants
-	public static final String COMPONENT_TYPE = "com.liferay.faces.portal.component.header.Header";
-	public static final String RENDERER_TYPE = "com.liferay.faces.portal.component.header.internal.HeaderRenderer";
-	public static final String STYLE_CLASS_NAME = "portal-header";
-
-	public Header() {
-		super();
-		setRendererType(RENDERER_TYPE);
-	}
-
-	@Override
-	public String getStyleClass() {
-
-		// getStateHelper().eval(PropertyKeys.styleClass, null) is called because super.getStyleClass() may return the
-		// STYLE_CLASS_NAME of the super class.
-		String styleClass = (String) getStateHelper().eval(PropertyKeys.styleClass, null);
-
-		return ComponentUtil.concatCssClasses(styleClass, STYLE_CLASS_NAME);
-	}
+	// Initial Generation
 }

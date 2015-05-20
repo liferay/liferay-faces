@@ -23,14 +23,5 @@ import com.liferay.faces.alloy.component.inputhidden.InputHidden;
  */
 @FacesRenderer(componentFamily = InputHidden.COMPONENT_FAMILY, rendererType = InputHidden.RENDERER_TYPE)
 public class InputHiddenRenderer extends InputHiddenRendererBase {
-
-	@Override
-	public String getDelegateComponentFamily() {
-		return InputHidden.DELEGATE_COMPONENT_FAMILY;
-	}
-
-	@Override
-	public String getDelegateRendererType() {
-		return InputHidden.DELEGATE_RENDERER_TYPE;
-	}
+	// Initial Generation
 }

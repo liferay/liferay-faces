@@ -41,6 +41,7 @@ public abstract class DialogRendererBase extends OverlayRendererBase {
 	protected static final String HEIGHT = "height";
 	protected static final String HIDE_ICON_RENDERED = "hideIconRendered";
 	protected static final String MODAL = "modal";
+	protected static final String STYLE_CLASS = "styleClass";
 	protected static final String WIDTH = "width";
 	protected static final String Z_INDEX = "zIndex";
 
@@ -120,6 +121,16 @@ public abstract class DialogRendererBase extends OverlayRendererBase {
 
 	protected void encodeHiddenAttributes(FacesContext facesContext, ResponseWriter responseWriter, Dialog dialog, boolean first) throws IOException {
 		// no-op
+	}
+
+	@Override
+	public String getDelegateComponentFamily() {
+		return Dialog.COMPONENT_FAMILY;
+	}
+
+	@Override
+	public String getDelegateRendererType() {
+		return "javax.faces.Group";
 	}
 }
 //J+

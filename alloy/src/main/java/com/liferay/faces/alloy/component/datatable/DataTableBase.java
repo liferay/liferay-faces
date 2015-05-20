@@ -27,6 +27,10 @@ import com.liferay.faces.util.component.ClientComponent;
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
 public abstract class DataTableBase extends HtmlDataTable implements Styleable, ClientComponent {
 
+	// Public Constants
+	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.datatable.DataTable";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.datatable.internal.DataTableRenderer";
+
 	// Protected Enumerations
 	protected enum DataTablePropertyKeys {
 		clientKey,
@@ -36,7 +40,13 @@ public abstract class DataTableBase extends HtmlDataTable implements Styleable, 
 		rowSelectListener,
 		rowSelectRangeListener,
 		selectedRowIndexes,
-		selectionMode
+		selectionMode,
+		styleClass
+	}
+
+	public DataTableBase() {
+		super();
+		setRendererType(RENDERER_TYPE);
 	}
 
 	@Override
@@ -103,6 +113,20 @@ public abstract class DataTableBase extends HtmlDataTable implements Styleable, 
 
 	public void setSelectionMode(String selectionMode) {
 		getStateHelper().put(DataTablePropertyKeys.selectionMode, selectionMode);
+	}
+
+	@Override
+	public String getStyleClass() {
+		// getStateHelper().eval(DataTablePropertyKeys.styleClass, null) is called because super.getStyleClass() may return the
+		// STYLE_CLASS_NAME of the super class.
+		String styleClass = (String) getStateHelper().eval(DataTablePropertyKeys.styleClass, null);
+
+		return com.liferay.faces.util.component.ComponentUtil.concatCssClasses(styleClass, "alloy-data-table");
+	}
+
+	@Override
+	public void setStyleClass(String styleClass) {
+		getStateHelper().put(DataTablePropertyKeys.styleClass, styleClass);
 	}
 }
 //J+

@@ -55,14 +55,4 @@ public class MessagesRenderer extends MessagesRendererBase {
 
 		super.encodeBegin(facesContext, uiComponent);
 	}
-
-	@Override
-	public String getDelegateComponentFamily() {
-		return Messages.DELEGATE_COMPONENT_FAMILY;
-	}
-
-	@Override
-	public String getDelegateRendererType() {
-		return Messages.DELEGATE_RENDERER_TYPE;
-	}
 }

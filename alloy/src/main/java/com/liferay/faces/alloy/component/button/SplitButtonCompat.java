@@ -13,7 +13,7 @@
  */
 package com.liferay.faces.alloy.component.button;
 
-import com.liferay.faces.alloy.component.link.Link;
+import com.liferay.faces.alloy.component.link.LinkBase;
 
 
 /**
@@ -21,7 +21,7 @@ import com.liferay.faces.alloy.component.link.Link;
  *
  * @author  Neil Griffin
  */
-public abstract class SplitButtonCompat extends Link {
+public abstract class SplitButtonCompat extends LinkBase {
 
 	// Protected Data Members
 	protected Button wrappedButton;

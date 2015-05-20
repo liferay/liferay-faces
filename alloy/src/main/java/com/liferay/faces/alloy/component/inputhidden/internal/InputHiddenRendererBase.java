@@ -17,6 +17,7 @@ package com.liferay.faces.alloy.component.inputhidden.internal;
 
 import javax.annotation.Generated;
 
+import com.liferay.faces.alloy.component.inputhidden.InputHidden;
 
 import com.liferay.faces.util.render.DelegatingRendererBase;
 
@@ -27,5 +28,15 @@ import com.liferay.faces.util.render.DelegatingRendererBase;
  */
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
 public abstract class InputHiddenRendererBase extends DelegatingRendererBase {
+
+	@Override
+	public String getDelegateComponentFamily() {
+		return InputHidden.COMPONENT_FAMILY;
+	}
+
+	@Override
+	public String getDelegateRendererType() {
+		return "javax.faces.Hidden";
+	}
 }
 //J+

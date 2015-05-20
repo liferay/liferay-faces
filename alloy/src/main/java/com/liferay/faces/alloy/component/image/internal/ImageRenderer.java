@@ -23,14 +23,5 @@ import com.liferay.faces.alloy.component.image.Image;
  */
 @FacesRenderer(componentFamily = Image.COMPONENT_FAMILY, rendererType = Image.RENDERER_TYPE)
 public class ImageRenderer extends ImageRendererBase {
-
-	@Override
-	public String getDelegateComponentFamily() {
-		return Image.DELEGATE_COMPONENT_FAMILY;
-	}
-
-	@Override
-	public String getDelegateRendererType() {
-		return Image.DELEGATE_RENDERER_TYPE;
-	}
+	// Initial Generation
 }

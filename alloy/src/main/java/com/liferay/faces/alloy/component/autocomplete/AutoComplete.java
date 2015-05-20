@@ -35,7 +35,6 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 
-import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.context.MessageContext;
 import com.liferay.faces.util.context.MessageContextFactory;
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
@@ -46,18 +45,6 @@ import com.liferay.faces.util.factory.FactoryExtensionFinder;
  */
 @FacesComponent(value = AutoComplete.COMPONENT_TYPE)
 public class AutoComplete extends AutoCompleteBase implements ClientBehaviorHolder {
-
-	// Public Constants
-	public static final String COMPONENT_FAMILY = "com.liferay.faces.alloy.component.autocomplete";
-	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.autocomplete.AutoComplete";
-	public static final String RENDERER_TYPE =
-		"com.liferay.faces.alloy.component.autocomplete.internal.AutoCompleteRenderer";
-	public static final String STYLE_CLASS_NAME = "alloy-auto-complete";
-
-	public AutoComplete() {
-		super();
-		setRendererType(RENDERER_TYPE);
-	}
 
 	@Override
 	protected void validateValue(FacesContext facesContext, Object newValue) {
@@ -190,11 +177,6 @@ public class AutoComplete extends AutoCompleteBase implements ClientBehaviorHold
 		return (String) getStateHelper().eval(PropertyKeys.autocomplete, "off");
 	}
 
-	@Override
-	public String getFamily() {
-		return COMPONENT_FAMILY;
-	}
-
 	private String getItemValue(FacesContext facesContext, UISelectItems uiSelectItems, Object item) {
 
 		String value = null;
@@ -232,13 +214,4 @@ public class AutoComplete extends AutoCompleteBase implements ClientBehaviorHold
 		return value;
 	}
 
-	@Override
-	public String getStyleClass() {
-
-		// getStateHelper().eval(PropertyKeys.styleClass, null) is called because super.getStyleClass() may return the
-		// STYLE_CLASS_NAME of the super class.
-		String styleClass = (String) getStateHelper().eval(PropertyKeys.styleClass, null);
-
-		return ComponentUtil.concatCssClasses(styleClass, STYLE_CLASS_NAME);
-	}
 }

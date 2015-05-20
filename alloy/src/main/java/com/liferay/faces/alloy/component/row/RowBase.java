@@ -26,11 +26,20 @@ import com.liferay.faces.util.component.Styleable;
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
 public abstract class RowBase extends UIPanel implements Styleable {
 
+	// Public Constants
+	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.row.Row";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.row.internal.RowRenderer";
+
 	// Protected Enumerations
 	protected enum RowPropertyKeys {
 		fluid,
 		style,
 		styleClass
+	}
+
+	public RowBase() {
+		super();
+		setRendererType(RENDERER_TYPE);
 	}
 
 	public boolean isFluid() {
@@ -53,7 +62,11 @@ public abstract class RowBase extends UIPanel implements Styleable {
 
 	@Override
 	public String getStyleClass() {
-		return (String) getStateHelper().eval(RowPropertyKeys.styleClass, null);
+		// getStateHelper().eval(RowPropertyKeys.styleClass, null) is called because super.getStyleClass() may return the
+		// STYLE_CLASS_NAME of the super class.
+		String styleClass = (String) getStateHelper().eval(RowPropertyKeys.styleClass, null);
+
+		return com.liferay.faces.util.component.ComponentUtil.concatCssClasses(styleClass, "alloy-row");
 	}
 
 	@Override

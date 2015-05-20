@@ -23,14 +23,5 @@ import com.liferay.faces.alloy.component.panelgrid.PanelGrid;
  */
 @FacesRenderer(componentFamily = PanelGrid.COMPONENT_FAMILY, rendererType = PanelGrid.RENDERER_TYPE)
 public class PanelGridRenderer extends PanelGridRendererBase {
-
-	@Override
-	public String getDelegateComponentFamily() {
-		return PanelGrid.DELEGATE_COMPONENT_FAMILY;
-	}
-
-	@Override
-	public String getDelegateRendererType() {
-		return PanelGrid.DELEGATE_RENDERER_TYPE;
-	}
+	// Initial Generation
 }

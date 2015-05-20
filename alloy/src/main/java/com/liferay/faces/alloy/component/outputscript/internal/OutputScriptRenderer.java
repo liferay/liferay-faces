@@ -28,7 +28,6 @@ import com.liferay.faces.util.client.ClientScript;
 import com.liferay.faces.util.client.ClientScriptFactory;
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.lang.StringPool;
-import com.liferay.faces.util.render.RendererUtil;
 import com.liferay.faces.util.render.internal.BufferedScriptResponseWriter;
 
 
@@ -113,15 +112,5 @@ public class OutputScriptRenderer extends OutputScriptRendererBase {
 				super.encodeChildren(facesContext, uiComponent);
 			}
 		}
-	}
-
-	@Override
-	public String getDelegateComponentFamily() {
-		return OutputScript.DELEGATE_COMPONENT_FAMILY;
-	}
-
-	@Override
-	public String getDelegateRendererType() {
-		return OutputScript.DELEGATE_RENDERER_TYPE;
 	}
 }

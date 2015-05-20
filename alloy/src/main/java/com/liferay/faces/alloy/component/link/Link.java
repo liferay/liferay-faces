@@ -13,33 +13,13 @@
  */
 package com.liferay.faces.alloy.component.link;
 
-import com.liferay.faces.util.component.ComponentUtil;
+import javax.faces.component.FacesComponent;
 
 
 /**
  * @author  Vernon Singleton
  */
+@FacesComponent(value = Link.COMPONENT_TYPE)
 public class Link extends LinkBase {
-
-	// Public Constants
-	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.link.Link";
-	public static final String DELEGATE_COMPONENT_FAMILY = COMPONENT_FAMILY;
-	public static final String DELEGATE_RENDERER_TYPE = "javax.faces.Link";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.link.internal.LinkRenderer";
-	public static final String STYLE_CLASS_NAME = "alloy-link";
-
-	public Link() {
-		super();
-		setRendererType(RENDERER_TYPE);
-	}
-
-	@Override
-	public String getStyleClass() {
-
-		// getStateHelper().eval(PropertyKeys.styleClass, null) is called because super.getStyleClass() may return the
-		// STYLE_CLASS_NAME of the super class.
-		String styleClass = (String) getStateHelper().eval(PropertyKeys.styleClass, null);
-
-		return ComponentUtil.concatCssClasses(styleClass, STYLE_CLASS_NAME);
-	}
+	// Initial Generation
 }

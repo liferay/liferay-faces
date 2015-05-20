@@ -39,6 +39,7 @@ public abstract class OutputTooltipRendererBase extends OverlayRendererBase {
 	protected static final String HEADER_TEXT = "headerText";
 	protected static final String OPACITY = "opacity";
 	protected static final String POSITION = "position";
+	protected static final String STYLE_CLASS = "styleClass";
 	protected static final String TRIGGER = "trigger";
 	protected static final String Z_INDEX = "zIndex";
 
@@ -118,6 +119,16 @@ public abstract class OutputTooltipRendererBase extends OverlayRendererBase {
 
 	protected void encodeHiddenAttributes(FacesContext facesContext, ResponseWriter responseWriter, OutputTooltip outputTooltip, boolean first) throws IOException {
 		// no-op
+	}
+
+	@Override
+	public String getDelegateComponentFamily() {
+		return OutputTooltip.COMPONENT_FAMILY;
+	}
+
+	@Override
+	public String getDelegateRendererType() {
+		return "javax.faces.Text";
 	}
 }
 //J+

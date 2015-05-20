@@ -794,10 +794,10 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="AutoComplete"
+	<component name="AutoComplete" delegateRendererType="javax.faces.Text"
 		extendsTags="ClientComponent InputText"
 		handlerClass="com.liferay.faces.alloy.component.autocomplete.internal.AutoCompleteHandler"
-		parentClass="com.liferay.faces.alloy.component.inputtext.InputText"
+		parentClass="com.liferay.faces.alloy.component.inputtext.AbstractInputText"
 		rendererParentClass="com.liferay.faces.alloy.render.internal.DelegatingAlloyRendererBase" yui="true"
 		module="autocomplete">
 		<description>
@@ -1005,13 +1005,15 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="Body" extendsTags="StyleableInherited" parentClass="javax.faces.component.html.HtmlBody"
+	<component name="Body" delegateRendererType="javax.faces.Body" extendsTags="StyleableInherited"
+		parentClass="javax.faces.component.html.HtmlBody"
 		rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
 		<description>
 			<![CDATA[Body is a UIOutput that renders a <code>&lt;body&gt;</code> element for webapps and a <code>&lt;div&gt;</code> for portlets. Since it extends HtmlBody, it supports all the features of h:body.]]>
 		</description>
 	</component>
-	<component name="Button" extendsTags="ButtonCommon UIOutcomeTarget" parentClass="javax.faces.component.html.HtmlOutcomeTargetButton"
+	<component name="Button" delegateRendererType="javax.faces.Button" extendsTags="ButtonCommon UIOutcomeTarget"
+		parentClass="javax.faces.component.html.HtmlOutcomeTargetButton"
 		rendererParentClass="com.liferay.faces.alloy.component.button.internal.ButtonRendererCompat">
 		<description>
 			<![CDATA[Button is a UIOutput component that renders a styleable HTML <code>&lt;button&gt;</code> element. The default type is button. Since it extends <a href="http://docs.oracle.com/javaee/7/api/javax/faces/component/html/HtmlOutcomeTargetButton.html" target="_blank"><code>HtmlOutcomeTargetButton</code></a> it supports all the features of <a href="https://javaserverfaces.java.net/nonav/docs/2.2/vdldocs/facelets/h/button.html" target="_blank"><code>h:button</code></a>. The component does not need to be a child of h:form since the outcome attribute is designed to navigate via HTTP GET.]]>
@@ -1129,7 +1131,9 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="CommandButton" extendsTags="AutoAjaxCommandCommon ButtonCommon FacesMessageLabelInherited UICommand" parentClass="javax.faces.component.html.HtmlCommandButton"
+	<component name="CommandButton" delegateRendererType="javax.faces.Button"
+		extendsTags="AutoAjaxCommandCommon ButtonCommon FacesMessageLabelInherited UICommand"
+		parentClass="javax.faces.component.html.HtmlCommandButton"
 		rendererParentClass="com.liferay.faces.alloy.component.button.internal.AbstractButtonRenderer">
 		<description>
 			<![CDATA[CommandButton is a UICommand component that renders a styleable HTML <code>&lt;button&gt;</code> element. The default type is submit. Since it extends <a href="http://docs.oracle.com/javaee/7/api/javax/faces/component/html/HtmlCommandButton.html" target="_blank"><code>HtmlCommandButton</code></a> it supports all the features of <a href="https://javaserverfaces.java.net/nonav/docs/2.2/vdldocs/facelets/h/commandButton.html" target="_blank"><code>h:commandButton</code></a>. The component must be a child of h:form in order to trigger the action or actionListener.]]>
@@ -1178,7 +1182,8 @@
 			<!-- /h:commandButton attributes -->
 		</attributes>
 	</component>
-	<component name="CommandLink" extendsTags="AnchorLinkCommon AutoAjaxCommandCommon DisabledInherited UICommand ValueInherited"
+	<component name="CommandLink" delegateRendererType="javax.faces.Link"
+		extendsTags="AnchorLinkCommon AutoAjaxCommandCommon DisabledInherited UICommand ValueInherited"
 		parentClass="javax.faces.component.html.HtmlCommandLink" rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
 		<description>
 			<![CDATA[CommandLink is a UICommand component that renders an HTML <code>&lt;a&gt;</code> element. Since it extends HtmlCommandLink, it supports all the features of h:commandLink. The component must be a child of h:form in order to trigger the action or actionListener.]]>
@@ -1289,8 +1294,10 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="Dialog" extendsTags="HTMLCommonEvents DialogPopoverCommon OverlayCommon" module="aui-modal"
-		parentClass="com.liferay.faces.alloy.component.panelgroup.PanelGroupBlockLayout" rendererParentClass="com.liferay.faces.alloy.component.overlay.internal.OverlayRendererBase"
+	<component name="Dialog" delegateRendererType="javax.faces.Group"
+		extendsTags="HTMLCommonEvents DialogPopoverCommon OverlayCommon" module="aui-modal"
+		parentClass="com.liferay.faces.alloy.component.panelgroup.PanelGroupBlockLayout"
+		rendererParentClass="com.liferay.faces.alloy.component.overlay.internal.OverlayRendererBase"
 		yui="true" yuiName="Modal">
 		<description>
 			<![CDATA[Dialog is a UIPanel component that that renders a <code>&lt;div&gt;</code> element that is initially styled with display:none so that it can be popped-up as an overlay by calling the JavaScript API. Since it extends HtmlPanelGroup, it supports all the features of h:panelGroup.]]>
@@ -1316,7 +1323,7 @@
 		</attributes>
 	</component>
 	<component name="Field" extendsTags="PanelGroup" parentClass="com.liferay.faces.alloy.component.panelgroup.PanelGroupBlockLayout"
-		rendererParentClass="com.liferay.faces.alloy.component.panelgroup.internal.AbstractPanelGroupRenderer">
+		rendererParentClass="com.liferay.faces.alloy.component.panelgroup.internal.PanelGroupRendererBase">
 		<description>
 			<![CDATA[Field is a UIPanel component that renders a <code>&lt;div&gt;</code> element and a <code>&lt;label&gt;</code> element in order to wrap a field. Since it extends PanelGroup, it supports all the features of alloy:panelGroup.]]>
 		</description>
@@ -1368,7 +1375,8 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="Form" extendsTags="HTMLCommonEvents HTMLPassthrough" parentClass="javax.faces.component.html.HtmlForm"
+	<component name="Form" delegateRendererType="javax.faces.Form" extendsTags="HTMLCommonEvents HTMLPassthrough"
+		parentClass="javax.faces.component.html.HtmlForm"
 		rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
 		<description>
 			<![CDATA[Form is an <a href="http://docs.oracle.com/javaee/7/api/javax/faces/component/html/HtmlForm.html" target="_blank"><code>HtmlForm</code></a> component that delegates rendering to its JSF renderer.]]>
@@ -1424,7 +1432,8 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="Head" extendsTags="Styleable UIOutput" parentClass="javax.faces.component.html.HtmlHead"
+	<component name="Head" delegateRendererType="javax.faces.Head" extendsTags="Styleable UIOutput"
+		parentClass="javax.faces.component.html.HtmlHead"
 		rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
 		<description><![CDATA[Head is a UIOutput that renders a <code>&lt;head&gt;</code> element for webapps, but not for portlets. In the case of portlets, the presence of alloy:head informs the JSF portlet bridge that JSF resources with target="head" should be included in the <code>&lt;head&gt;</code> element rendered by the portal. Since it extends HtmlHead, it supports all the features of h:head.]]></description>
 		<attributes>
@@ -1475,7 +1484,9 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="Image" extendsTags="AltInherited HTMLPassthrough HTMLCommonEvents" parentClass="javax.faces.component.html.HtmlGraphicImage"
+	<component name="Image" delegateRendererType="javax.faces.Image"
+		extendsTags="AltInherited HTMLPassthrough HTMLCommonEvents"
+		parentClass="javax.faces.component.html.HtmlGraphicImage"
 		rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
 		<description>
 			<![CDATA[Image is a UIGraphic component that renders an img element. Since it extends HtmlGraphicImage, it supports all the features of h:graphicImage.]]>
@@ -1555,7 +1566,7 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="InputDate" extendsTags="InputDateTimeCommon"
+	<component name="InputDate" delegateRendererType="javax.faces.Text" extendsTags="InputDateTimeCommon"
 		parentClass="com.liferay.faces.alloy.component.inputdatetime.InputDateTime"
 		rendererParentClass="com.liferay.faces.alloy.component.inputdatetime.internal.InputDateTimeRenderer"
 		module="aui-datepicker" yui="true" yuiName="DatePicker">
@@ -1606,7 +1617,7 @@
 		</attributes>
 	</component>
 	<component name="InputDateTime" extendsTags="InputDateTimeCommon"
-		generateTaglibXML="false" parentClass="com.liferay.faces.alloy.component.inputtext.InputText"
+		generateTaglibXML="false" parentClass="com.liferay.faces.alloy.component.inputtext.AbstractInputText"
 		rendererParentClass="com.liferay.faces.alloy.render.internal.DelegatingAlloyRendererBase">
 		<attributes>
 			<attribute>
@@ -1653,9 +1664,10 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="InputFile" extendsTags="ClientComponent InputText"
+	<component name="InputFile" delegateRendererType="javax.faces.Text" extendsTags="ClientComponent InputText"
 		handlerClass="com.liferay.faces.alloy.component.inputfile.internal.InputFileHandler" module="uploader"
-		parentClass="javax.faces.component.html.HtmlInputText" rendererParentClass="com.liferay.faces.alloy.component.inputfile.internal.InputFileRendererCompat"
+		parentClass="javax.faces.component.html.HtmlInputText"
+		rendererParentClass="com.liferay.faces.alloy.component.inputfile.internal.InputFileRendererCompat"
 		yui="true" yuiName="Uploader">
 		<description>
 			<![CDATA[InputFile is a UIInput component that renders an <code>&lt;input&gt;</code> element with type=file. Since it extends HtmlInputText, it supports all the features of h:inputText and also supports multi-file uploads, instant-Ajax, preview, upload progress, and validation.]]>
@@ -1719,15 +1731,17 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="InputHidden" extendsTags="UIInput" parentClass="javax.faces.component.html.HtmlInputHidden"
+	<component name="InputHidden" delegateRendererType="javax.faces.Hidden" extendsTags="UIInput"
+		parentClass="javax.faces.component.html.HtmlInputHidden"
 		rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase" styleable="false">
 		<description>
 			<![CDATA[InputHidden is a UIInput component that renders an input element with type="hidden". Since it extends HtmlInputHidden, it supports all the features of h:inputHidden.]]>
 		</description>
 	</component>
-	<component name="InputSecret"
+	<component name="InputSecret" delegateRendererType="javax.faces.Secret"
 		extendsTags="AltInherited AutocompleteInherited DisabledInherited FacesMessageLabelInherited InputCommon SizeInherited"
-		parentClass="javax.faces.component.html.HtmlInputSecret" rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
+		parentClass="javax.faces.component.html.HtmlInputSecret"
+		rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
 		<description>
 			<![CDATA[InputSecret is a UIInput component that renders an <code>&lt;input&gt;</code> element with type="password". Since it extends HtmlInputSecret, it supports all the features of h:inputSecret.]]>
 		</description>
@@ -1744,9 +1758,11 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="InputSourceCode" extendsTags="ClientComponent StyleableInherited UIInput" module="aui-ace-editor"
-		parentClass="javax.faces.component.html.HtmlInputText" rendererParentClass="com.liferay.faces.alloy.render.internal.DelegatingAlloyRendererBase"
-		yui="true" yuiName="AceEditor">
+	<component name="InputSourceCode" delegateRendererType="javax.faces.Text"
+		extendsTags="ClientComponent StyleableInherited UIInput" module="aui-ace-editor"
+		parentClass="javax.faces.component.html.HtmlInputText"
+		rendererParentClass="com.liferay.faces.alloy.render.internal.DelegatingAlloyRendererBase" yui="true"
+		yuiName="AceEditor">
 		<description>
 			<![CDATA[InputSourceCode is an input component that renders a field for editing source code text.]]>
 		</description>
@@ -1859,14 +1875,17 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="InputText"
+	<component name="InputText" delegateRendererType="javax.faces.Text"
 		extendsTags="AltInherited AutocompleteInherited DisabledInherited FacesMessageLabelInherited InputCommon SizeInherited"
-		parentClass="javax.faces.component.html.HtmlInputText" rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
+		parentClass="javax.faces.component.html.HtmlInputText"
+		rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
 		<description>
 			<![CDATA[InputText is a UIInput component that renders a field for editing single-line text. Since it extends HtmlInputText, it supports all the features of h:inputText.]]>
 		</description>
 	</component>
-	<component name="InputTextarea" extendsTags="FacesMessageLabelInherited DisabledInherited InputCommon" parentClass="javax.faces.component.html.HtmlInputTextarea"
+	<component name="InputTextarea" delegateRendererType="javax.faces.Textarea"
+		extendsTags="FacesMessageLabelInherited DisabledInherited InputCommon"
+		parentClass="javax.faces.component.html.HtmlInputTextarea"
 		rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
 		<description>
 			<![CDATA[InputTextarea is a UIInput component that renders a field for editing multi-line text. Since it extends HtmlInputTextarea, it supports all the features of h:inputTextarea.]]>
@@ -1890,7 +1909,7 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="InputTime" extendsTags="InputDateTimeCommon"
+	<component name="InputTime" delegateRendererType="javax.faces.Text" extendsTags="InputDateTimeCommon"
 		parentClass="com.liferay.faces.alloy.component.inputdatetime.InputDateTime"
 		rendererParentClass="com.liferay.faces.alloy.component.inputdatetime.internal.InputDateTimeRenderer"
 		module="aui-timepicker" yui="true" yuiName="TimePicker">
@@ -2024,9 +2043,10 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="Link"
+	<component name="Link" delegateRendererType="javax.faces.Link"
 		extendsTags="AnchorLinkCommon DisabledInherited ValueInherited StyleableInherited UIComponentBase UIOutcomeTarget"
-		parentClass="javax.faces.component.html.HtmlOutcomeTargetLink" rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
+		parentClass="javax.faces.component.html.HtmlOutcomeTargetLink"
+		rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
 		<description>
 			<![CDATA[Link is a UIOutcomeTarget component that renders an <code>&lt;a&gt;</code> element (hyperlink). Since it extends HtmlLink, it supports all the features of h:link.]]>
 		</description>
@@ -2279,22 +2299,6 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="Message" extendsTags="MessageCommon" parentClass="javax.faces.component.html.HtmlMessage"
-		rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
-		<description>
-			<![CDATA[Message is a UIMessage component that renders a <code>&lt;span&gt;</code> element containing the text of a single FacesMessage for an associated component. Since it extends HtmlMessage, it supports all the features of h:message.]]>
-		</description>
-		<attributes>
-			<attribute>
-				<description>
-					<![CDATA[The id of the component for which to render an associated message.]]>
-				</description>
-				<name>for</name>
-				<type>java.lang.String</type>
-				<generateJava>false</generateJava>
-			</attribute>
-		</attributes>
-	</component>
 	<component name="LoadConstants" generateJava="false"
 		handlerClass="com.liferay.faces.alloy.taghandler.LoadConstants" handlerClassOnly="true">
 		<description>
@@ -2326,7 +2330,8 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="Menu" generateJava="false" extendsTags="Styleable UIComponentBase" parentClass="javax.faces.component.UIColumn">
+	<component name="Menu" extendsTags="Styleable UIComponentBase" generateRenderer="false"
+		parentClass="javax.faces.component.UIColumn">
 		<description>
 			<![CDATA[A menu is a UIColumn component that renders nested/child tags as content within itself.]]>
 		</description>
@@ -2340,7 +2345,25 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="Messages" extendsTags="MessageCommon" parentClass="javax.faces.component.html.HtmlMessages"
+	<component name="Message" delegateRendererType="javax.faces.Message" extendsTags="MessageCommon"
+		parentClass="javax.faces.component.html.HtmlMessage"
+		rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
+		<description>
+			<![CDATA[Message is a UIMessage component that renders a <code>&lt;span&gt;</code> element containing the text of a single FacesMessage for an associated component. Since it extends HtmlMessage, it supports all the features of h:message.]]>
+		</description>
+		<attributes>
+			<attribute>
+				<description>
+					<![CDATA[The id of the component for which to render an associated message.]]>
+				</description>
+				<name>for</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+		</attributes>
+	</component>
+	<component name="Messages" delegateRendererType="javax.faces.Messages" extendsTags="MessageCommon"
+		parentClass="javax.faces.component.html.HtmlMessages"
 		rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
 		<description>
 			<![CDATA[Messages is a UIMessages component that the text of one or more FacesMessage instances inside a <code>&lt;ul&gt;</code> element or <code>&lt;table&gt;</code> element for an associated component, according to the layout attribute. Since it extends HtmlMessages, it supports all the features of h:messages.]]>
@@ -2372,7 +2395,8 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="OutputScript" extendsTags="UIOutput ResourceCommon"
+	<component name="OutputScript" delegateComponentFamily="javax.faces.component.UIOutput.COMPONENT_FAMILY"
+		delegateRendererType="javax.faces.resource.Script" extendsTags="UIOutput ResourceCommon"
 		parentClass="javax.faces.component.UIOutput" styleable="false"
 		rendererParentClass="com.liferay.faces.alloy.component.outputscriptstylesheet.internal.OutputScriptStylesheetRendererBase">
 		<description>
@@ -2391,7 +2415,8 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="OutputStylesheet" extendsTags="UIOutput ResourceCommon"
+	<component name="OutputStylesheet" delegateComponentFamily="javax.faces.component.UIOutput.COMPONENT_FAMILY"
+		delegateRendererType="javax.faces.resource.Stylesheet" extendsTags="UIOutput ResourceCommon"
 		parentClass="javax.faces.component.UIOutput" styleable="false"
 		rendererParentClass="com.liferay.faces.alloy.component.outputscriptstylesheet.internal.OutputScriptStylesheetRendererBase">
 		<description>
@@ -2405,13 +2430,15 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="OutputFormat" extendsTags="HTMLPassthrough UIOutput EscapeInherited" parentClass="javax.faces.component.html.HtmlOutputFormat"
+	<component name="OutputFormat" delegateRendererType="javax.faces.Format"
+		extendsTags="HTMLPassthrough UIOutput EscapeInherited" parentClass="javax.faces.component.html.HtmlOutputFormat"
 		rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
 		<description>
 			<![CDATA[OutputFormat is a UIOutput component that renders parameterized text. Since it extends HtmlOutputFormat, it supports all the features of h:outputFormat.]]>
 		</description>
 	</component>
-	<component name="OutputLabel" extendsTags="HTMLAccessibilityEvents HTMLPassthrough UIOutput EscapeInherited"
+	<component name="OutputLabel" delegateRendererType="javax.faces.Label"
+		extendsTags="HTMLAccessibilityEvents HTMLPassthrough UIOutput EscapeInherited"
 		parentClass="javax.faces.component.html.HtmlOutputLabel" rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
 		<description>
 			<![CDATA[OutputLabel is a UIOutput component that renders its value attribute within a <code>&lt;label&gt;</code> element. Since it extends HtmlOutputLabel, it supports all the features of h:outputLabel.]]>
@@ -2428,13 +2455,16 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="OutputLink" extendsTags="AnchorLinkCommon DisabledInherited HTMLAccessibilityEvents HTMLPassthrough UIOutput"
-		parentClass="javax.faces.component.html.HtmlOutputLink" rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
+	<component name="OutputLink" delegateRendererType="javax.faces.Link"
+		extendsTags="AnchorLinkCommon DisabledInherited HTMLAccessibilityEvents HTMLPassthrough UIOutput"
+		parentClass="javax.faces.component.html.HtmlOutputLink"
+		rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
 		<description>
 			<![CDATA[OutputLink is a UIOutput component that renders an <code>&lt;a&gt;</code> element (hyperlink). Since it extends HtmlOutputLink, it supports all the features of h:outputLink.]]>
 		</description>
 	</component>
-	<component name="OutputRemainingChars" extendsTags="ClientComponent OutputText" module="aui-char-counter"
+	<component name="OutputRemainingChars" delegateRendererType="javax.faces.Text"
+		extendsTags="ClientComponent OutputText" module="aui-char-counter"
 		parentClass="com.liferay.faces.alloy.component.outputtext.OutputText" rendererParentClass="com.liferay.faces.alloy.render.internal.DelegatingAlloyRendererBase"
 		yui="true" yuiName="CharCounter">
 		<description>
@@ -2488,7 +2518,8 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="OutputText" extendsTags="HTMLPassthrough UIOutput" parentClass="javax.faces.component.html.HtmlOutputText"
+	<component name="OutputText" delegateRendererType="javax.faces.Text" extendsTags="HTMLPassthrough UIOutput"
+		parentClass="javax.faces.component.html.HtmlOutputText"
 		rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
 		<description>
 			<![CDATA[OutputText is an <a href="http://docs.oracle.com/javaee/7/api/javax/faces/component/html/HtmlOutputText.html" target="_blank"><code>HtmlOutputText</code></a> component that delegates rendering to its JSF renderer.]]>
@@ -2502,7 +2533,8 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="OutputTooltip" extendsTags="OutputText OutputTooltipPopoverCommon" module="aui-tooltip"
+	<component name="OutputTooltip" delegateRendererType="javax.faces.Text"
+		extendsTags="OutputText OutputTooltipPopoverCommon" module="aui-tooltip"
 		parentClass="com.liferay.faces.alloy.component.outputtext.OutputText" rendererParentClass="com.liferay.faces.alloy.component.overlay.internal.OverlayRendererBase"
 		yui="true" yuiName="Tooltip">
 		<description>
@@ -2664,7 +2696,8 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="PanelGrid" extendsTags="HTMLTable" parentClass="javax.faces.component.html.HtmlPanelGrid"
+	<component name="PanelGrid" delegateRendererType="javax.faces.Grid" extendsTags="HTMLTable"
+		parentClass="javax.faces.component.html.HtmlPanelGrid"
 		rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
 		<description>
 			<![CDATA[PanelGrid is a UIPanel component that renders a <code>&lt;table&gt;</code> element to layout its children in a tabular grid. Since it extends HtmlPanelGrid, it supports all the features of h:panelGrid.]]>
@@ -2681,7 +2714,7 @@
 		</attributes>
 	</component>
 	<component name="Panel" extendsTags="PanelGroup" parentClass="com.liferay.faces.alloy.component.panelgroup.PanelGroupBlockLayout"
-		rendererParentClass="com.liferay.faces.alloy.component.panelgroup.internal.AbstractPanelGroupRenderer">
+		rendererParentClass="com.liferay.faces.alloy.component.panelgroup.internal.PanelGroupRendererBase">
 		<description>
 			<![CDATA[Panel is a UIPanel component that renders a <code>&lt;div&gt;</code> element with three child <code>&lt;div&gt;</code> elements (one for header, body, and footer). Since it extends HtmlPanelGroup, it supports all the features of h:panelGroup.]]>
 		</description>
@@ -2702,7 +2735,8 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="PanelGroup" extendsTags="HTMLCommonEvents" parentClass="javax.faces.component.html.HtmlPanelGroup"
+	<component name="PanelGroup" delegateRendererType="javax.faces.Group" extendsTags="HTMLCommonEvents"
+		parentClass="javax.faces.component.html.HtmlPanelGroup"
 		rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
 		<description>
 			<![CDATA[PanelGroup is a UIPanel component that renders a <code>&lt;span&gt;</code> or a <code>&lt;div&gt;</code> element for grouping purposes. Since it extends HtmlPanelGroup, it supports all the features of h:panelGroup.]]>
@@ -2718,7 +2752,8 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="Popover" extendsTags="HTMLCommonEvents DialogPopoverCommon OutputTooltipPopoverCommon"
+	<component name="Popover" delegateRendererType="javax.faces.Group"
+		extendsTags="HTMLCommonEvents DialogPopoverCommon OutputTooltipPopoverCommon"
 		module="aui-popover" parentClass="com.liferay.faces.alloy.component.panelgroup.PanelGroupBlockLayout"
 		rendererParentClass="com.liferay.faces.alloy.component.overlay.internal.OverlayRendererBase" yui="true">
 		<description>
@@ -2881,13 +2916,15 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="SelectBooleanCheckbox" extendsTags="DisabledInherited FacesMessageLabelInherited HTMLAccessibilityEvents HTMLInputEvents"
+	<component name="SelectBooleanCheckbox" delegateRendererType="javax.faces.Checkbox"
+		extendsTags="DisabledInherited FacesMessageLabelInherited HTMLAccessibilityEvents HTMLInputEvents"
 		parentClass="javax.faces.component.html.HtmlSelectBooleanCheckbox" rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
 		<description>
 			<![CDATA[SelectBooleanCheckbox is a UISelectOne component that renders a check box. Since it extends HtmlSelectBooleanCheckbox, it supports all the features of h:selectBooleanCheckbox such as accepting f:selectItem or f:selectItems as child tags.]]>
 		</description>
 	</component>
-	<component name="SelectManyCheckbox" extendsTags="UISelectMany DisabledInherited FacesMessageLabelInherited HTMLAccessibilityEvents HTMLInputEvents"
+	<component name="SelectManyCheckbox" delegateRendererType="javax.faces.Checkbox"
+		extendsTags="UISelectMany DisabledInherited FacesMessageLabelInherited HTMLAccessibilityEvents HTMLInputEvents"
 		parentClass="javax.faces.component.html.HtmlSelectManyCheckbox" rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
 		<description>
 			<![CDATA[SelectManyCheckbox is a UISelectMany component that renders checkboxes and enables the user to select multiple values. Since it extends HtmlSelectManyCheckbox, it supports all the features of h:selectManyCheckbox such as accepting f:selectItem or f:selectItems as child tags.]]>
@@ -2927,7 +2964,8 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="SelectManyListbox" extendsTags="UISelectMany DisabledInherited FacesMessageLabelInherited HTMLAccessibilityEvents HTMLInputEvents"
+	<component name="SelectManyListbox" delegateRendererType="javax.faces.Listbox"
+		extendsTags="UISelectMany DisabledInherited FacesMessageLabelInherited HTMLAccessibilityEvents HTMLInputEvents"
 		parentClass="javax.faces.component.html.HtmlSelectManyListbox" rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
 		<description>
 			<![CDATA[SelectManyListbox is a UISelectMany component that renders a select element and enables the user to select multiple values. Since it extends HtmlSelectManyListbox, it supports all the features of h:selectManyListbox such as accepting f:selectItem or f:selectItems as child tags.]]>
@@ -2943,13 +2981,15 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="SelectManyMenu" extendsTags="UISelectMany DisabledInherited FacesMessageLabelInherited HTMLAccessibilityEvents HTMLInputEvents"
+	<component name="SelectManyMenu" delegateRendererType="javax.faces.Menu"
+		extendsTags="UISelectMany DisabledInherited FacesMessageLabelInherited HTMLAccessibilityEvents HTMLInputEvents"
 		parentClass="javax.faces.component.html.HtmlSelectManyMenu" rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
 		<description>
 			<![CDATA[SelectManyMenu is a UISelectMany component that renders a select element and enables the user to select multiple values. It has the same basic features of alloy:selectManyListbox except that there is no size attribute because JSF "select*menu" components always render size=1. Since it extends HtmlSelectManyMenu, it supports all the features of h:selectManyMenu such as accepting f:selectItem or f:selectItems as child tags.]]>
 		</description>
 	</component>
-	<component name="SelectOneListbox" extendsTags="UISelect DisabledInherited FacesMessageLabelInherited HTMLAccessibilityEvents HTMLInputEvents"
+	<component name="SelectOneListbox" delegateRendererType="javax.faces.Listbox"
+		extendsTags="UISelect DisabledInherited FacesMessageLabelInherited HTMLAccessibilityEvents HTMLInputEvents"
 		parentClass="javax.faces.component.html.HtmlSelectOneListbox" rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
 		<description>
 			<![CDATA[SelectOneListbox is a UISelectOne component that renders a `select` element (multi-item list) and enables the user to select one value. Since it extends HtmlSelectOneListbox, it supports all the features of h:selectOneListbox such as accepting f:selectItem or f:selectItems as child tags.]]>
@@ -2965,13 +3005,15 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="SelectOneMenu" extendsTags="UISelect DisabledInherited FacesMessageLabelInherited HTMLAccessibilityEvents HTMLInputEvents"
+	<component name="SelectOneMenu" delegateRendererType="javax.faces.Menu"
+		extendsTags="UISelect DisabledInherited FacesMessageLabelInherited HTMLAccessibilityEvents HTMLInputEvents"
 		parentClass="javax.faces.component.html.HtmlSelectOneMenu" rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
 		<description>
 			<![CDATA[SelectOneMenu is a UISelectOne component that renders a select element (drop down list) and enables the user to select one value. Since it extends HtmlSelectOneMenu, it supports all the features of h:selectOneMenu such as accepting f:selectItem or f:selectItems as child tags.]]>
 		</description>
 	</component>
-	<component name="SelectOneRadio" extendsTags="UISelect DisabledInherited FacesMessageLabelInherited HTMLAccessibilityEvents HTMLInputEvents"
+	<component name="SelectOneRadio" delegateRendererType="javax.faces.Radio"
+		extendsTags="UISelect DisabledInherited FacesMessageLabelInherited HTMLAccessibilityEvents HTMLInputEvents"
 		parentClass="javax.faces.component.html.HtmlSelectOneRadio" rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
 		<description>
 			<![CDATA[SelectOneRadio is a UISelectOne component that renders radio buttons. Since it extends <a href="http://docs.oracle.com/javaee/7/api/javax/faces/component/html/HtmlSelectOneRadio.html" target="_blank"><code>HtmlSelectOneRadio</code></a>, it supports all the features of h:selectOneRadio such as accepting f:selectItem or f:selectItems as child tags.]]>
@@ -2995,8 +3037,10 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="SelectStarRating" extendsTags="SelectOneRadio ClientComponent" module="aui-rating"
-		parentClass="com.liferay.faces.alloy.component.selectoneradio.SelectOneRadio" rendererParentClass="com.liferay.faces.alloy.render.internal.DelegatingAlloyRendererBase"
+	<component name="SelectStarRating" delegateRendererType="javax.faces.Radio"
+		extendsTags="SelectOneRadio ClientComponent" module="aui-rating"
+		parentClass="com.liferay.faces.alloy.component.selectoneradio.SelectOneRadio"
+		rendererParentClass="com.liferay.faces.alloy.render.internal.DelegatingAlloyRendererBase"
 		yui="true" yuiName="Rating">
 		<description>
 			<![CDATA[StarRating is a UISelectOne component that renders a set of stars. The user can click on a star to select a rating and click on the same star a second time to de-select a rating. Since it extends <a href="http://docs.oracle.com/javaee/7/api/javax/faces/component/html/HtmlSelectOneRadio.html" target="_blank"><code>HtmlSelectOneRadio</code></a>, it accepts f:selectItem or f:selectItems as child tags.]]>

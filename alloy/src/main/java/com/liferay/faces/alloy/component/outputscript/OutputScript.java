@@ -14,7 +14,6 @@
 package com.liferay.faces.alloy.component.outputscript;
 
 import javax.faces.component.FacesComponent;
-import javax.faces.component.UIOutput;
 
 
 /**
@@ -22,16 +21,5 @@ import javax.faces.component.UIOutput;
  */
 @FacesComponent(value = OutputScript.COMPONENT_TYPE)
 public class OutputScript extends OutputScriptBase {
-
-	// Public Constants
-	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.outputscript.OutputScript";
-	public static final String DELEGATE_COMPONENT_FAMILY = UIOutput.COMPONENT_FAMILY;
-	public static final String DELEGATE_RENDERER_TYPE = "javax.faces.resource.Script";
-	public static final String RENDERER_TYPE =
-		"com.liferay.faces.alloy.component.outputscript.internal.OutputScriptRenderer";
-
-	public OutputScript() {
-		super();
-		setRendererType(RENDERER_TYPE);
-	}
+	// Initial Generation
 }

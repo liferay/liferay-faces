@@ -23,14 +23,5 @@ import com.liferay.faces.alloy.component.selectmanymenu.SelectManyMenu;
  */
 @FacesRenderer(componentFamily = SelectManyMenu.COMPONENT_FAMILY, rendererType = SelectManyMenu.RENDERER_TYPE)
 public class SelectManyMenuRenderer extends SelectManyMenuRendererBase {
-
-	@Override
-	public String getDelegateComponentFamily() {
-		return SelectManyMenu.DELEGATE_COMPONENT_FAMILY;
-	}
-
-	@Override
-	public String getDelegateRendererType() {
-		return SelectManyMenu.DELEGATE_RENDERER_TYPE;
-	}
+	// Initial Generation
 }

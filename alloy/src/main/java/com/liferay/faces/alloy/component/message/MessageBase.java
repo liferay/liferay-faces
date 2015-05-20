@@ -25,5 +25,33 @@ import com.liferay.faces.util.component.Styleable;
  */
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
 public abstract class MessageBase extends HtmlMessage implements Styleable {
+
+	// Public Constants
+	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.message.Message";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.message.internal.MessageRenderer";
+
+	// Protected Enumerations
+	protected enum MessagePropertyKeys {
+		styleClass
+	}
+
+	public MessageBase() {
+		super();
+		setRendererType(RENDERER_TYPE);
+	}
+
+	@Override
+	public String getStyleClass() {
+		// getStateHelper().eval(MessagePropertyKeys.styleClass, null) is called because super.getStyleClass() may return the
+		// STYLE_CLASS_NAME of the super class.
+		String styleClass = (String) getStateHelper().eval(MessagePropertyKeys.styleClass, null);
+
+		return com.liferay.faces.util.component.ComponentUtil.concatCssClasses(styleClass, "alloy-message");
+	}
+
+	@Override
+	public void setStyleClass(String styleClass) {
+		getStateHelper().put(MessagePropertyKeys.styleClass, styleClass);
+	}
 }
 //J+

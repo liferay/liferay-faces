@@ -17,7 +17,6 @@ package com.liferay.faces.portal.component.captcha.internal;
 
 import javax.annotation.Generated;
 
-
 import javax.faces.render.Renderer;
 
 

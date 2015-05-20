@@ -218,7 +218,7 @@ public class AccordionRenderer extends AccordionRendererBase {
 		responseWriter.write("for(var i=0;i<totalTogglers;i++)");
 		responseWriter.write(StringPool.OPEN_CURLY_BRACE);
 
-		StringBuffer behaviorCallback = new StringBuffer();
+		StringBuilder behaviorCallback = new StringBuilder();
 
 		//J-
 		// var eventTabIndex = 0, togglers = j_idt23.items, total = togglers.length, i = 0;

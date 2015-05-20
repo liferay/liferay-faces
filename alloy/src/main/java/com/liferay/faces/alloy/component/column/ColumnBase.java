@@ -26,6 +26,10 @@ import com.liferay.faces.util.component.Styleable;
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
 public abstract class ColumnBase extends HtmlColumn implements Styleable {
 
+	// Public Constants
+	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.column.Column";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.column.internal.ColumnRenderer";
+
 	// Protected Enumerations
 	protected enum ColumnPropertyKeys {
 		ajax,
@@ -43,6 +47,11 @@ public abstract class ColumnBase extends HtmlColumn implements Styleable {
 		styleClass,
 		update,
 		width
+	}
+
+	public ColumnBase() {
+		super();
+		setRendererType(RENDERER_TYPE);
 	}
 
 	public boolean isAjax() {
@@ -145,7 +154,11 @@ public abstract class ColumnBase extends HtmlColumn implements Styleable {
 
 	@Override
 	public String getStyleClass() {
-		return (String) getStateHelper().eval(ColumnPropertyKeys.styleClass, null);
+		// getStateHelper().eval(ColumnPropertyKeys.styleClass, null) is called because super.getStyleClass() may return the
+		// STYLE_CLASS_NAME of the super class.
+		String styleClass = (String) getStateHelper().eval(ColumnPropertyKeys.styleClass, null);
+
+		return com.liferay.faces.util.component.ComponentUtil.concatCssClasses(styleClass, "alloy-column");
 	}
 
 	@Override

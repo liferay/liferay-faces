@@ -21,13 +21,5 @@ import javax.faces.component.FacesComponent;
  */
 @FacesComponent(value = Nav.COMPONENT_TYPE)
 public class Nav extends NavBase {
-
-	// Public Constants
-	public static final String COMPONENT_TYPE = "com.liferay.faces.portal.component.nav.Nav";
-	public static final String RENDERER_TYPE = "com.liferay.faces.portal.component.nav.internal.NavRenderer";
-
-	public Nav() {
-		super();
-		setRendererType(RENDERER_TYPE);
-	}
+	// Initial Generation
 }

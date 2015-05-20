@@ -26,11 +26,21 @@ import com.liferay.faces.util.component.Styleable;
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
 public abstract class VideoBase extends Media implements Styleable {
 
+	// Public Constants
+	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.video.Video";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.video.internal.VideoRenderer";
+
 	// Protected Enumerations
 	protected enum VideoPropertyKeys {
 		height,
 		poster,
+		styleClass,
 		width
+	}
+
+	public VideoBase() {
+		super();
+		setRendererType(RENDERER_TYPE);
 	}
 
 	public String getHeight() {
@@ -47,6 +57,20 @@ public abstract class VideoBase extends Media implements Styleable {
 
 	public void setPoster(Object poster) {
 		getStateHelper().put(VideoPropertyKeys.poster, poster);
+	}
+
+	@Override
+	public String getStyleClass() {
+		// getStateHelper().eval(VideoPropertyKeys.styleClass, null) is called because super.getStyleClass() may return the
+		// STYLE_CLASS_NAME of the super class.
+		String styleClass = (String) getStateHelper().eval(VideoPropertyKeys.styleClass, null);
+
+		return com.liferay.faces.util.component.ComponentUtil.concatCssClasses(styleClass, "alloy-video");
+	}
+
+	@Override
+	public void setStyleClass(String styleClass) {
+		getStateHelper().put(VideoPropertyKeys.styleClass, styleClass);
 	}
 
 	public String getWidth() {

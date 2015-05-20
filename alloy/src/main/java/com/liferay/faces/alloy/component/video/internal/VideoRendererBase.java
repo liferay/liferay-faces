@@ -17,7 +17,6 @@ package com.liferay.faces.alloy.component.video.internal;
 
 import javax.annotation.Generated;
 
-
 import com.liferay.faces.alloy.component.media.internal.MediaRenderer;
 
 
@@ -31,6 +30,7 @@ public abstract class VideoRendererBase extends MediaRenderer {
 	// Protected Constants
 	protected static final String HEIGHT = "height";
 	protected static final String POSTER = "poster";
+	protected static final String STYLE_CLASS = "styleClass";
 	protected static final String WIDTH = "width";
 }
 //J+

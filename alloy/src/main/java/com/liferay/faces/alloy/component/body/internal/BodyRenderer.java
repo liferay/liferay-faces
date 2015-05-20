@@ -22,9 +22,6 @@ import javax.faces.render.FacesRenderer;
 import javax.faces.render.Renderer;
 
 import com.liferay.faces.alloy.component.body.Body;
-import com.liferay.faces.util.client.BrowserSniffer;
-import com.liferay.faces.util.client.BrowserSnifferFactory;
-import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.util.product.Product;
@@ -85,17 +82,7 @@ public class BodyRenderer extends BodyRendererBase {
 	}
 
 	@Override
-	public String getDelegateComponentFamily() {
-		return Body.DELEGATE_COMPONENT_FAMILY;
-	}
-
-	@Override
 	public Renderer getDelegateRenderer(FacesContext facesContext) {
 		return delegateRenderer;
-	}
-
-	@Override
-	public String getDelegateRendererType() {
-		return Body.DELEGATE_RENDERER_TYPE;
 	}
 }

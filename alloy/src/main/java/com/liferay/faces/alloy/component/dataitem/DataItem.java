@@ -15,32 +15,11 @@ package com.liferay.faces.alloy.component.dataitem;
 
 import javax.faces.component.FacesComponent;
 
-import com.liferay.faces.util.component.ComponentUtil;
-
 
 /**
  * @author  Vernon Singleton
  */
 @FacesComponent(value = DataItem.COMPONENT_TYPE)
 public class DataItem extends DataItemBase {
-
-	// Public Constants
-	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.dataitem.DataItem";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.dataitem.internal.DataItemRenderer";
-	public static final String STYLE_CLASS_NAME = "alloy-data-item";
-
-	public DataItem() {
-		super();
-		setRendererType(RENDERER_TYPE);
-	}
-
-	@Override
-	public String getStyleClass() {
-
-		// getStateHelper().eval(PropertyKeys.styleClass, null) is called because super.getStyleClass() may return the
-		// STYLE_CLASS_NAME of the super class.
-		String styleClass = (String) getStateHelper().eval(DataItemPropertyKeys.styleClass, null);
-
-		return ComponentUtil.concatCssClasses(styleClass, STYLE_CLASS_NAME);
-	}
+	// Initial Generation
 }

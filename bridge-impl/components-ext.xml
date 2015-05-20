@@ -4,7 +4,7 @@
 	<description>
 		<![CDATA[The Liferay Faces Bridge facelet component tags with the <code>bridge:</code> tag name prefix.]]>
 	</description>
-	<component name="InputFile"
+	<component name="InputFile" delegateRendererType="javax.faces.File"
 		extendsTags="AltInherited AutocompleteInherited DisabledInherited FacesMessageLabelInherited HTMLAccessibilityEvents HTMLInputEvents SizeInherited"
 		handlerClass="com.liferay.faces.bridge.component.inputfile.internal.InputFileHandler"
 		module="uploader" parentClass="javax.faces.component.html.HtmlInputText"
@@ -45,6 +45,14 @@
 				<name>maxlength</name>
 				<type>int</type>
 				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[List of CSS class names (separated by spaces) that are to be rendered within the class attribute.]]>
+				</description>
+				<generateJava>false</generateJava>
+				<name>styleClass</name>
+				<type>java.lang.String</type>
 			</attribute>
 		</attributes>
 	</component>

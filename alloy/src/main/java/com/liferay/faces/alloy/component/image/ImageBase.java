@@ -25,5 +25,33 @@ import com.liferay.faces.util.component.Styleable;
  */
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
 public abstract class ImageBase extends HtmlGraphicImage implements Styleable {
+
+	// Public Constants
+	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.image.Image";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.image.internal.ImageRenderer";
+
+	// Protected Enumerations
+	protected enum ImagePropertyKeys {
+		styleClass
+	}
+
+	public ImageBase() {
+		super();
+		setRendererType(RENDERER_TYPE);
+	}
+
+	@Override
+	public String getStyleClass() {
+		// getStateHelper().eval(ImagePropertyKeys.styleClass, null) is called because super.getStyleClass() may return the
+		// STYLE_CLASS_NAME of the super class.
+		String styleClass = (String) getStateHelper().eval(ImagePropertyKeys.styleClass, null);
+
+		return com.liferay.faces.util.component.ComponentUtil.concatCssClasses(styleClass, "alloy-image");
+	}
+
+	@Override
+	public void setStyleClass(String styleClass) {
+		getStateHelper().put(ImagePropertyKeys.styleClass, styleClass);
+	}
 }
 //J+

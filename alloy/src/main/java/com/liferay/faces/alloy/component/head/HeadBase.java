@@ -26,10 +26,19 @@ import com.liferay.faces.util.component.Styleable;
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
 public abstract class HeadBase extends HtmlHead implements Styleable {
 
+	// Public Constants
+	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.head.Head";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.head.internal.HeadRenderer";
+
 	// Protected Enumerations
 	protected enum HeadPropertyKeys {
 		style,
 		styleClass
+	}
+
+	public HeadBase() {
+		super();
+		setRendererType(RENDERER_TYPE);
 	}
 
 	@Override
@@ -44,7 +53,11 @@ public abstract class HeadBase extends HtmlHead implements Styleable {
 
 	@Override
 	public String getStyleClass() {
-		return (String) getStateHelper().eval(HeadPropertyKeys.styleClass, null);
+		// getStateHelper().eval(HeadPropertyKeys.styleClass, null) is called because super.getStyleClass() may return the
+		// STYLE_CLASS_NAME of the super class.
+		String styleClass = (String) getStateHelper().eval(HeadPropertyKeys.styleClass, null);
+
+		return com.liferay.faces.util.component.ComponentUtil.concatCssClasses(styleClass, "alloy-head");
 	}
 
 	@Override

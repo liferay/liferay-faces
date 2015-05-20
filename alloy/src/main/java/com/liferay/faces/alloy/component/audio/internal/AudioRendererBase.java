@@ -17,7 +17,6 @@ package com.liferay.faces.alloy.component.audio.internal;
 
 import javax.annotation.Generated;
 
-
 import com.liferay.faces.alloy.component.media.internal.MediaRenderer;
 
 
@@ -29,6 +28,7 @@ import com.liferay.faces.alloy.component.media.internal.MediaRenderer;
 public abstract class AudioRendererBase extends MediaRenderer {
 
 	// Protected Constants
+	protected static final String STYLE_CLASS = "styleClass";
 	protected static final String VOLUME = "volume";
 }
 //J+

@@ -147,5 +147,4 @@ public class CaptchaRenderer extends DelayedPortalTagRenderer<Captcha, CaptchaTa
 
 		return new StringBuilder(modifiedMarkup);
 	}
-
 }

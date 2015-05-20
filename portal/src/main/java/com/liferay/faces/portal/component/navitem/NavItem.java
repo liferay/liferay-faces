@@ -21,13 +21,5 @@ import javax.faces.component.FacesComponent;
  */
 @FacesComponent(value = NavItem.COMPONENT_TYPE)
 public class NavItem extends NavItemBase {
-
-	// Public Constants
-	public static final String COMPONENT_TYPE = "com.liferay.faces.portal.component.navitem.NavItem";
-	public static final String RENDERER_TYPE = "com.liferay.faces.portal.component.navitem.internal.NavItemRenderer";
-
-	public NavItem() {
-		super();
-		setRendererType(RENDERER_TYPE);
-	}
+	// Initial Generation
 }
