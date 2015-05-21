@@ -17,6 +17,10 @@ div.alloy-button-row:after {
 	overflow: hidden;
 }
 
+div.alloy-button-row button.alloy-button, div.alloy-button-row button.alloy-command-button {
+	margin-right: 4px;
+}
+
 /* alloy-datatable */
 table.alloy-datatable thead th.facet, table.alloy-datatable tfoot td.facet {
     padding: 2px;
