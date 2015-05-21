@@ -11,22 +11,19 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.portal.component.buttonrow;
+package com.liferay.faces.alloy.component.buttonrow;
 
 import javax.faces.component.FacesComponent;
 
 import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.lang.StringPool;
 
+
 /**
- * @author	Vernon Singleton
+ * @author  Vernon Singleton
  */
 @FacesComponent(value = ButtonRow.COMPONENT_TYPE)
 public class ButtonRow extends ButtonRowBase {
-
-	// Public Constants
-	public static final String STYLE_CLASS_NAME = "button-holder portal-button-row";
-	
 	@Override
 	public String getLayout() {
 		return (String) getStateHelper().eval(PropertyKeys.layout, StringPool.BLOCK);
@@ -39,6 +36,6 @@ public class ButtonRow extends ButtonRowBase {
 		// STYLE_CLASS_NAME of the super class.
 		String styleClass = (String) getStateHelper().eval(PropertyKeys.styleClass, null);
 
-		return ComponentUtil.concatCssClasses(styleClass, STYLE_CLASS_NAME);
+		return ComponentUtil.concatCssClasses(styleClass, "alloy-button-row button-holder portal-button-row");
 	}
 }

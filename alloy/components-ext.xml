@@ -1028,6 +1028,13 @@
 			</attribute>
 		</attributes>
 	</component>
+	<component name="ButtonRow" delegateRendererType="javax.faces.Group" extendsTags="HTMLCommonEvents"
+		parentClass="javax.faces.component.html.HtmlPanelGroup"
+		rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
+		<description>
+			<![CDATA[ButtonRow is a UIPanel component that renders a <code>&lt;div&gt;</code> element for grouping purposes. Since it extends HtmlPanelGroup, it supports all the features of h:panelGroup.]]>
+		</description>
+	</component>
 	<component name="Column" extendsTags="AutoAjaxCommon Styleable UIComponentBase" parentClass="javax.faces.component.html.HtmlColumn">
 		<description>
 			<![CDATA[Column is a UIColumn component that renders a div with CSS class name <code>span#</code> (for example: <code>span1</code> or <code>span5</code>).]]>
