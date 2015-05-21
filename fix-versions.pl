@@ -225,6 +225,7 @@ sub do_inplace_edits {
 		# If the JSF version is 2.1, the Facelet Taglib version is 2.0. See
 		# https://issues.liferay.com/browse/FACES-2109#commentauthor_590915_verbose for more details.
 		if ($facesMajor eq 2 and $facesMinor eq 1) {
+			`perl -pi -e 's/xmlns.jcp.org\\/xml\\/ns\\/javaee/java.sun.com\\/xml\\/ns\\/javaee/g' $file`;
 			`perl -pi -e 's/web-facelettaglibrary_[0-9]_[0-9]\\.xsd/web-facelettaglibrary_2_0.xsd/' $file`;
 			`perl -pi -e 's/version="[0-9]\\.[0-9]"/version="2.0"/' $file`;
 		}
