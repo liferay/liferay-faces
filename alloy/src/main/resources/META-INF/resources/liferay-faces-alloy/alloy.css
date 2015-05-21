@@ -12,6 +12,9 @@
 /* alloy-button-row */
 div.alloy-button-row:after {
 	clear: both;
+	content: " ";
+	display: block;
+	overflow: hidden;
 }
 
 /* alloy-datatable */
