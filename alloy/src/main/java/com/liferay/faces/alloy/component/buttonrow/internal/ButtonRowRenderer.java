@@ -11,18 +11,26 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.portal.component.buttonrow.internal;
+package com.liferay.faces.alloy.component.buttonrow.internal;
 
+import javax.faces.application.ResourceDependencies;
+import javax.faces.application.ResourceDependency;
 import javax.faces.render.FacesRenderer;
 
-import com.liferay.faces.portal.component.buttonrow.ButtonRow;
+import com.liferay.faces.alloy.component.buttonrow.ButtonRow;
 
 
 /**
- * @author  Vernon Singleton
+ * @author	Vernon Singleton
  */
 //J-
 @FacesRenderer(componentFamily = ButtonRow.COMPONENT_FAMILY, rendererType = ButtonRow.RENDERER_TYPE)
+@ResourceDependencies(
+	{
+		@ResourceDependency(library = "liferay-faces-reslib", name = "build/aui-css/css/bootstrap.min.css"),
+		@ResourceDependency(library = "liferay-faces-alloy", name = "alloy.css"),
+	}
+)
 //J+
 public class ButtonRowRenderer extends ButtonRowRendererBase {
 	// Initial Generation

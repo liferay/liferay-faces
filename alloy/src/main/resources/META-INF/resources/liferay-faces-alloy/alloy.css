@@ -9,8 +9,8 @@
 	padding: 4px;
 }
 
-/* alloy-button, alloy-commandbutton */
-.alloy-nodemenunav-after {
+/* alloy-button-row */
+div.alloy-button-row:after {
 	clear: both;
 }
 

@@ -11,19 +11,20 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.portal.component.buttonrow.internal;
+package com.liferay.faces.alloy.component.buttonrow.internal;
 //J-
 
 
 import javax.annotation.Generated;
 
-import com.liferay.faces.portal.component.buttonrow.ButtonRow;
+import com.liferay.faces.alloy.component.buttonrow.ButtonRow;
 
 import com.liferay.faces.util.render.DelegatingRendererBase;
 
 
 /**
- * @author	Neil Griffin
+ * @author	Bruno Basto
+ * @author	Kyle Stiemann
  */
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
 public abstract class ButtonRowRendererBase extends DelegatingRendererBase {
