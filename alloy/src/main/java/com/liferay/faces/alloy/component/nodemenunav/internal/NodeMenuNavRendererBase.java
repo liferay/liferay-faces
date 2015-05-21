@@ -236,11 +236,6 @@ public abstract class NodeMenuNavRendererBase extends DelegatingAlloyRendererBas
 
 		// end yui3-menu div
 		responseWriter.endElement(StringPool.DIV);
-
-		// alloy-nodemenunav-after
-		responseWriter.startElement(StringPool.DIV, uiComponent);
-		responseWriter.writeAttribute(StringPool.CLASS, "alloy-nodemenunav-after", null);
-		responseWriter.endElement(StringPool.DIV);
 	}
 
 	public void encodeMenuRecurse(UIComponent uiComponent, ResponseWriter responseWriter, boolean disabled,
