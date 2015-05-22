@@ -59,12 +59,26 @@ public class DialogRenderer extends DialogRendererBase {
 		}
 
 		// Prevent scrolling when the show() JavaScript function is called.
-		responseWriter.write("var " + clientKey + "_scrollx=window.scrollX;");
-		responseWriter.write("var " + clientKey + "_scrolly=window.scrollY;");
-		responseWriter.write("A.Do.before(function(stuff) { " + clientKey + "_scrollx=window.scrollX; " + clientKey +
-			"_scrolly=window.scrollY;},Liferay.component('" + clientKey + "'),'show');");
-		responseWriter.write("A.Do.after(function(stuff){window.scrollTo(" + clientKey + "_scrollx," + clientKey +
-			"_scrolly);},Liferay.component('" + clientKey + "'),'show');");
+		responseWriter.write("var ");
+		responseWriter.write(clientKey);
+		responseWriter.write("_scrollx=window.scrollX;");
+		responseWriter.write("var ");
+		responseWriter.write(clientKey);
+		responseWriter.write("_scrolly=window.scrollY;");
+		responseWriter.write("A.Do.before(function(stuff) { ");
+		responseWriter.write(clientKey);
+		responseWriter.write("_scrollx=window.scrollX; ");
+		responseWriter.write(clientKey);
+		responseWriter.write("_scrolly=window.scrollY;},Liferay.component('");
+		responseWriter.write(clientKey);
+		responseWriter.write("'),'show');");
+		responseWriter.write("A.Do.after(function(stuff){window.scrollTo(");
+		responseWriter.write(clientKey);
+		responseWriter.write("_scrollx,");
+		responseWriter.write(clientKey);
+		responseWriter.write("_scrolly);},Liferay.component('");
+		responseWriter.write(clientKey);
+		responseWriter.write("'),'show');");
 
 		// FACES-2209 remove class="hide" from the "mask" div that is used for modal dialogs
 		// the mask div is placed as the first child of the parent of the dialog
@@ -75,17 +89,18 @@ public class DialogRenderer extends DialogRendererBase {
 		String escapedBoundingBoxClientId = escapeClientId(clientId);
 		responseWriter.write(escapedBoundingBoxClientId);
 		responseWriter.write("').ancestor().one('.hide');");
-		responseWriter.write("if (" + clientKey + "_mask) { " + clientKey + "_mask.removeClass('hide') }; ");
+		responseWriter.write("if (");
+		responseWriter.write(clientKey);
+		responseWriter.write("_mask) { ");
+		responseWriter.write(clientKey);
+		responseWriter.write("_mask.removeClass('hide') }; ");
 
 		if (!dialog.isHideIconRendered()) {
 			responseWriter.write(LIFERAY_COMPONENT);
-			responseWriter.write(StringPool.OPEN_PARENTHESIS);
-			responseWriter.write(StringPool.APOSTROPHE);
+			responseWriter.write("('");
 			responseWriter.write(clientKey);
-			responseWriter.write(StringPool.APOSTROPHE);
-			responseWriter.write(StringPool.CLOSE_PARENTHESIS);
-			responseWriter.write(".removeToolbar('header')");
-			responseWriter.write(StringPool.SEMICOLON);
+			responseWriter.write("')");
+			responseWriter.write(".removeToolbar('header');");
 		}
 
 		if (!dialog.isModal() && dialog.isDismissible()) {
