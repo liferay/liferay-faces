@@ -20,7 +20,10 @@ import javax.faces.context.FacesContext;
 
 /**
  * @author  Neil Griffin
+ *
+ * @deprecated No replacement provided.
  */
+@Deprecated
 public interface UICleanup {
 
 	public void encodeCleanup(FacesContext facesContext) throws IOException;

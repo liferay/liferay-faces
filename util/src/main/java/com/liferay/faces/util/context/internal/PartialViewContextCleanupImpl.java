@@ -42,7 +42,10 @@ import com.liferay.faces.util.logging.LoggerFactory;
  * a way for components to handle this special "cleanup" case during the RENDER_RESPONSE phase.</p>
  *
  * @author  Neil Griffin
+ *
+ * @deprecated No replacement provided.
  */
+@Deprecated
 public class PartialViewContextCleanupImpl extends PartialViewContextWrapper {
 
 	// Logger
