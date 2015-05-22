@@ -66,6 +66,17 @@ public class DialogRenderer extends DialogRendererBase {
 		responseWriter.write("A.Do.after(function(stuff){window.scrollTo(" + clientKey + "_scrollx," + clientKey +
 			"_scrolly);},Liferay.component('" + clientKey + "'),'show');");
 
+		// FACES-2209 remove class="hide" from the "mask" div that is used for modal dialogs
+		// the mask div is placed as the first child of the parent of the dialog
+		// removing this class allows a modal dialog to be fully rendered upon a partial request.
+		responseWriter.write("var " + clientKey + "_mask=A.one('#");
+
+		String clientId = dialog.getClientId(facesContext);
+		String escapedBoundingBoxClientId = escapeClientId(clientId);
+		responseWriter.write(escapedBoundingBoxClientId);
+		responseWriter.write("').ancestor().one('.hide');");
+		responseWriter.write("if (" + clientKey + "_mask) { " + clientKey + "_mask.removeClass('hide') }; ");
+
 		if (!dialog.isHideIconRendered()) {
 			responseWriter.write(LIFERAY_COMPONENT);
 			responseWriter.write(StringPool.OPEN_PARENTHESIS);
