@@ -233,7 +233,6 @@ LFAI = {
 						rowIndexRange = rowIndex;
 					}
 					if (!checkbox.get('checked')) {
-						console.log('checkbox=' + checkbox);
 						checkbox.addClass('preventClientBehavior');
 						checkbox.simulate('click');
 						checkbox.removeClass('preventClientBehavior');
