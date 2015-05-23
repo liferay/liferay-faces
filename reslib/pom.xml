@@ -9,110 +9,6 @@
 	<artifactId>liferay-faces-reslib</artifactId>
 	<name>Liferay Faces Resource Library</name>
 
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>com.googlecode.maven-download-plugin</groupId>
-				<artifactId>download-maven-plugin</artifactId>
-				<version>1.2.1</version>
-				<executions>
-					<execution>
-						<id>unpack-alloy</id>
-						<phase>generate-resources</phase>
-						<goals>
-							<goal>wget</goal>
-						</goals>
-						<configuration>
-							<url>https://github.com/liferay/liferay-portal/raw/6.2.x/portal-web/third-party/alloy-${alloyui.zip.version}.zip</url>
-							<unpack>true</unpack>
-							<outputDirectory>${project.build.directory}/classes/META-INF/resources</outputDirectory>
-							<md5>37cb9069053f2e181bd26bd78a216c53</md5>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<artifactId>maven-antrun-plugin</artifactId>
-				<executions>
-					<execution>
-						<phase>process-resources</phase>
-						<goals>
-							<goal>run</goal>
-						</goals>
-						<configuration>
-							<target>
-								<move file="${project.build.directory}/classes/META-INF/resources/alloy-${alloyui.version}/LICENSE.md" tofile="${project.build.directory}/classes/META-INF/alloyui-bsd-license.md" />
-								<move file="${project.build.directory}/classes/META-INF/resources/alloy-${alloyui.version}/build" todir="${project.build.directory}/classes/META-INF/resources/liferay-faces-reslib" />
-								<delete dir="${project.build.directory}/classes/META-INF/resources/alloy-${alloyui.version}" />
-								<replace token="../img/" value="#{resource['liferay-faces-reslib:build/aui-css/img/" dir="${project.build.directory}/classes/META-INF/resources/liferay-faces-reslib/build/aui-css/css">
-									<include name="bootstrap.min.css" />
-								</replace>
-								<replace token=".png)" value=".png']})" dir="${project.build.directory}/classes/META-INF/resources/liferay-faces-reslib/build/aui-css/css">
-									<include name="bootstrap.min.css" />
-								</replace>
-								<!-- for dialog -->
-								<replace token="url(arrows.png)" value="url(#{resource['liferay-faces-reslib:build/resize-base/assets/skins/sam/arrows.png']})" dir="${project.build.directory}/classes/META-INF/resources/liferay-faces-reslib/build/resize-base/assets/skins/sam">
-									<include name="resize-base.css" />
-								</replace>
-								<!-- menus -->
-								<replace token="url(vertical-menu-submenu-indicator.png)" value="url(#{resource['liferay-faces-reslib:build/node-menunav/assets/skins/sam/vertical-menu-submenu-indicator.png']})" dir="${project.build.directory}/classes/META-INF/resources/liferay-faces-reslib/build/node-menunav/assets/skins/sam">
-									<include name="node-menunav-skin.css" />
-								</replace>
-								<replace token="url(vertical-menu-submenu-indicator.png)" value="url(#{resource['liferay-faces-reslib:build/node-menunav/assets/skins/sam/vertical-menu-submenu-indicator.png']})" dir="${project.build.directory}/classes/META-INF/resources/liferay-faces-reslib/build/node-menunav/assets/skins/sam">
-									<include name="node-menunav.css" />
-								</replace>
-								<replace token="url(../../../../assets/skins/sam/sprite.png)" value="url(#{resource['liferay-faces-reslib:build/aui-color-palette/assets/skins/sam/sprite.png']})" dir="${project.build.directory}/classes/META-INF/resources/liferay-faces-reslib/build/node-menunav/assets/skins/sam">
-									<include name="node-menunav-skin.css" />
-								</replace>
-								<replace token="url(../../../../assets/skins/sam/sprite.png)" value="url(#{resource['liferay-faces-reslib:build/aui-color-palette/assets/skins/sam/sprite.png']})" dir="${project.build.directory}/classes/META-INF/resources/liferay-faces-reslib/build/node-menunav/assets/skins/sam">
-									<include name="node-menunav.css" />
-								</replace>
-								<!-- dataTable -->
-								<replace token="url(sort-arrow-sprite.png)" value="url(#{resource['liferay-faces-reslib:build/aui-datatable-core/assets/skins/sam/sort-arrow-sprite.png']})" dir="${project.build.directory}/classes/META-INF/resources/liferay-faces-reslib/build/aui-datatable-core/assets/skins/sam">
-									<include name="aui-datatable-core.css" />
-									<include name="aui-datatable-core-skin.css" />
-								</replace>
-								<replace token="url(sort-arrow-sprite-ie.png)" value="url(#{resource['liferay-faces-reslib:build/aui-datatable-core/assets/skins/sam/sort-arrow-sprite-ie.png']})" dir="${project.build.directory}/classes/META-INF/resources/liferay-faces-reslib/build/aui-datatable-core/assets/skins/sam">
-									<include name="aui-datatable-core.css" />
-									<include name="aui-datatable-core-skin.css" />
-								</replace>
-							</target>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-		</plugins>
-		<pluginManagement>
-			<plugins>
-				<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself. -->
-				<plugin>
-					<groupId>org.eclipse.m2e</groupId>
-					<artifactId>lifecycle-mapping</artifactId>
-					<version>1.0.0</version>
-					<configuration>
-						<lifecycleMappingMetadata>
-							<pluginExecutions>
-								<pluginExecution>
-									<pluginExecutionFilter>
-										<groupId>com.googlecode.maven-download-plugin</groupId>
-										<artifactId>download-maven-plugin</artifactId>
-										<versionRange>[1.2.0,)</versionRange>
-										<goals>
-											<goal>wget</goal>
-										</goals>
-									</pluginExecutionFilter>
-									<action>
-										<ignore />
-									</action>
-								</pluginExecution>
-							</pluginExecutions>
-						</lifecycleMappingMetadata>
-					</configuration>
-				</plugin>
-			</plugins>
-		</pluginManagement>
-	</build>
-
 	<dependencies>
 		<dependency>
 			<groupId>com.liferay.faces</groupId>
@@ -128,5 +24,149 @@
 			<artifactId>javax.servlet-api</artifactId>
 		</dependency>
 	</dependencies>
+
+	<profiles>
+		<profile>
+			<id>reslib</id>
+			<activation>
+				<file>
+					<exists>src/main/resources/META-INF/resources/liferay-faces-reslib/liferay.js</exists>
+				</file>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>com.googlecode.maven-download-plugin</groupId>
+						<artifactId>download-maven-plugin</artifactId>
+						<version>1.2.1</version>
+						<executions>
+							<execution>
+								<id>unpack-alloy</id>
+								<phase>generate-sources</phase>
+								<goals>
+									<goal>wget</goal>
+								</goals>
+								<configuration>
+									<url>https://github.com/liferay/liferay-portal/raw/6.2.x/portal-web/third-party/alloy-${alloyui.zip.version}.zip</url>
+									<unpack>true</unpack>
+									<outputDirectory>${project.build.directory}/classes/META-INF/resources</outputDirectory>
+									<md5>37cb9069053f2e181bd26bd78a216c53</md5>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<artifactId>maven-antrun-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>move-and-edit-files-in-place</id>
+								<phase>process-sources</phase>
+								<goals>
+									<goal>run</goal>
+								</goals>
+								<configuration>
+									<target>
+										<echo message="Running with reslib profile ..." />
+										<move file="${project.build.directory}/classes/META-INF/resources/alloy-${alloyui.version}/LICENSE.md" tofile="${project.build.directory}/classes/META-INF/alloyui-bsd-license.md" />
+										<move file="${project.build.directory}/classes/META-INF/resources/alloy-${alloyui.version}/build" todir="${project.build.directory}/classes/META-INF/resources/liferay-faces-reslib" />
+										<delete dir="${project.build.directory}/classes/META-INF/resources/alloy-${alloyui.version}" />
+										<replace token="../img/" value="#{resource['liferay-faces-reslib:build/aui-css/img/" dir="${project.build.directory}/classes/META-INF/resources/liferay-faces-reslib/build/aui-css/css">
+											<include name="bootstrap.min.css" />
+										</replace>
+										<replace token=".png)" value=".png']})" dir="${project.build.directory}/classes/META-INF/resources/liferay-faces-reslib/build/aui-css/css">
+											<include name="bootstrap.min.css" />
+										</replace>
+										<!-- for dialog -->
+										<replace token="url(arrows.png)" value="url(#{resource['liferay-faces-reslib:build/resize-base/assets/skins/sam/arrows.png']})" dir="${project.build.directory}/classes/META-INF/resources/liferay-faces-reslib/build/resize-base/assets/skins/sam">
+											<include name="resize-base.css" />
+										</replace>
+										<!-- menus -->
+										<replace token="url(vertical-menu-submenu-indicator.png)" value="url(#{resource['liferay-faces-reslib:build/node-menunav/assets/skins/sam/vertical-menu-submenu-indicator.png']})" dir="${project.build.directory}/classes/META-INF/resources/liferay-faces-reslib/build/node-menunav/assets/skins/sam">
+											<include name="node-menunav-skin.css" />
+										</replace>
+										<replace token="url(vertical-menu-submenu-indicator.png)" value="url(#{resource['liferay-faces-reslib:build/node-menunav/assets/skins/sam/vertical-menu-submenu-indicator.png']})" dir="${project.build.directory}/classes/META-INF/resources/liferay-faces-reslib/build/node-menunav/assets/skins/sam">
+											<include name="node-menunav.css" />
+										</replace>
+										<replace token="url(../../../../assets/skins/sam/sprite.png)" value="url(#{resource['liferay-faces-reslib:build/aui-color-palette/assets/skins/sam/sprite.png']})" dir="${project.build.directory}/classes/META-INF/resources/liferay-faces-reslib/build/node-menunav/assets/skins/sam">
+											<include name="node-menunav-skin.css" />
+										</replace>
+										<replace token="url(../../../../assets/skins/sam/sprite.png)" value="url(#{resource['liferay-faces-reslib:build/aui-color-palette/assets/skins/sam/sprite.png']})" dir="${project.build.directory}/classes/META-INF/resources/liferay-faces-reslib/build/node-menunav/assets/skins/sam">
+											<include name="node-menunav.css" />
+										</replace>
+										<!-- dataTable -->
+										<replace token="url(sort-arrow-sprite.png)" value="url(#{resource['liferay-faces-reslib:build/aui-datatable-core/assets/skins/sam/sort-arrow-sprite.png']})" dir="${project.build.directory}/classes/META-INF/resources/liferay-faces-reslib/build/aui-datatable-core/assets/skins/sam">
+											<include name="aui-datatable-core.css" />
+											<include name="aui-datatable-core-skin.css" />
+										</replace>
+										<replace token="url(sort-arrow-sprite-ie.png)" value="url(#{resource['liferay-faces-reslib:build/aui-datatable-core/assets/skins/sam/sort-arrow-sprite-ie.png']})" dir="${project.build.directory}/classes/META-INF/resources/liferay-faces-reslib/build/aui-datatable-core/assets/skins/sam">
+											<include name="aui-datatable-core.css" />
+											<include name="aui-datatable-core-skin.css" />
+										</replace>
+									</target>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+				<pluginManagement>
+					<plugins>
+						<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself. -->
+						<plugin>
+							<groupId>org.eclipse.m2e</groupId>
+							<artifactId>lifecycle-mapping</artifactId>
+							<version>1.0.0</version>
+							<configuration>
+								<lifecycleMappingMetadata>
+									<pluginExecutions>
+										<pluginExecution>
+											<pluginExecutionFilter>
+												<groupId>com.googlecode.maven-download-plugin</groupId>
+												<artifactId>download-maven-plugin</artifactId>
+												<versionRange>[1.2.0,)</versionRange>
+												<goals>
+													<goal>wget</goal>
+												</goals>
+											</pluginExecutionFilter>
+											<action>
+												<ignore />
+											</action>
+										</pluginExecution>
+									</pluginExecutions>
+								</lifecycleMappingMetadata>
+							</configuration>
+						</plugin>
+					</plugins>
+				</pluginManagement>
+			</build>
+		</profile>
+		<profile>
+			<id>development</id>
+			<build>
+				<plugins>
+					<plugin>
+						<artifactId>maven-antrun-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>no-minify-filter-raw</id>
+								<phase>process-resources</phase>
+								<goals>
+									<goal>run</goal>
+								</goals>
+								<configuration>
+									<target>
+										<echo message="Running with development profile ..." />
+										<replace token="root: 'build/'," value="root: 'build/', filter: 'raw',"
+											dir="${project.build.directory}/classes/META-INF/resources/liferay-faces-reslib">
+											<include name="liferay.js" />
+										</replace>
+									</target>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 
 </project>
