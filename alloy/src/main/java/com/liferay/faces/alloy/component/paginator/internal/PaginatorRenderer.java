@@ -448,7 +448,7 @@ public class PaginatorRenderer extends PaginatorRendererBase implements Componen
 
 			if (clientBehaviorScript != null) {
 				responseWriter.startElement("a", paginator);
-				responseWriter.writeAttribute("href", "#", null);
+				responseWriter.writeAttribute("href", "javascript:void(0);", null);
 				responseWriter.writeAttribute("onclick", clientBehaviorScript, null);
 				responseWriter.write(text);
 				responseWriter.endElement("a");
