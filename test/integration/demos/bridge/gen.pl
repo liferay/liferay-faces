@@ -54,6 +54,7 @@ my %in = (
    Jsf2JspPortletTest => "./jsf2-jsp-portlet/src/test/java/com/liferay/faces/test/Jsf2Jsp.java",
    Jsf2CdiPortletTest => "./jsf2-cdi-portlet/src/test/java/com/liferay/faces/test/Jsf2Cdi.java",
    Jsf2SpringPortletTest => "./jsf2-spring-portlet/src/test/java/com/liferay/faces/test/Jsf2Spring.java",
+   Liferayfaces3PortletTest => "./liferayfaces3-portlet/src/test/java/com/liferay/faces/test/Liferayfaces3.java",
    Icefaces3PortletTest => "./icefaces3-portlet/src/test/java/com/liferay/faces/test/Icefaces3.java",
    Richfaces4PortletTest => "./richfaces4-portlet/src/test/java/com/liferay/faces/test/Richfaces4.java",
    Primefaces3PortletTest => "./primefaces3-portlet/src/test/java/com/liferay/faces/test/Primefaces3.java",
