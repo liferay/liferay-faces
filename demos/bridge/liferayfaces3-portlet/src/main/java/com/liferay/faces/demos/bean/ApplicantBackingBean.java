@@ -49,22 +49,23 @@ public class ApplicantBackingBean implements Serializable {
 	// Injections
 	@ManagedProperty(value = "#{applicantModelBean}")
 	private transient ApplicantModelBean applicantModelBean;
+	@ManagedProperty(value = "#{applicantViewBean}")
+	private transient ApplicantViewBean applicantViewBean;
 	@ManagedProperty(value = "#{listModelBean}")
 	private transient ListModelBean listModelBean;
 
 	public void deleteUploadedFile(ActionEvent actionEvent) {
 
-		UICommand uiCommand = (UICommand) actionEvent.getComponent();
-		String fileId = (String) uiCommand.getValue();
-
 		try {
 			List<UploadedFile> uploadedFiles = applicantModelBean.getUploadedFiles();
+
+			String uploadedFileId = applicantViewBean.getUploadedFileId();
 
 			UploadedFile uploadedFileToDelete = null;
 
 			for (UploadedFile uploadedFile : uploadedFiles) {
 
-				if (uploadedFile.getId().equals(fileId)) {
+				if (uploadedFile.getId().equals(uploadedFileId)) {
 					uploadedFileToDelete = uploadedFile;
 
 					break;
@@ -158,6 +159,12 @@ public class ApplicantBackingBean implements Serializable {
 
 		// Injected via @ManagedProperty annotation
 		this.applicantModelBean = applicantModelBean;
+	}
+
+	public void setApplicantViewBean(ApplicantViewBean applicantViewBean) {
+
+		// Injected via @ManagedProperty annotation
+		this.applicantViewBean = applicantViewBean;
 	}
 
 	public void setListModelBean(ListModelBean listModelBean) {

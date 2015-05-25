@@ -125,8 +125,7 @@
 						<h3>#{i18n['attachments']}</h3>
 						<alloy:dataTable value="#{applicantModelBean.uploadedFiles}" var="uploadedFile">
 							<alloy:column>
-								<alloy:commandButton action="#{applicantBackingBean.fileToDelete(uploadedFile)}"
-									execute="@this" onclick="Liferay.component('dialogKey').show();">
+								<alloy:commandButton execute="@this" onclick="Liferay.component('dialogKey').show();">
 									<alloy:icon name="trash" />
 									<f:setPropertyActionListener value="#{uploadedFile.id}" target="#{applicantViewBean.uploadedFileId}" />
 								</alloy:commandButton>

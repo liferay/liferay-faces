@@ -19,6 +19,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
 
+import com.liferay.faces.util.model.UploadedFile;
+
 
 /**
  * This is a JSF view managed-bean for the applicant.xhtml composition.
@@ -34,6 +36,8 @@ public class ApplicantViewBean implements Serializable {
 
 	// JavaBean Properties for UI
 	private boolean commentsRendered;
+	private UploadedFile fileToDelete;
+	private String uploadedFileId;
 
 	public void toggleComments(ActionEvent actionEvent) {
 		commentsRendered = !commentsRendered;
@@ -45,6 +49,14 @@ public class ApplicantViewBean implements Serializable {
 
 	public boolean isCommentsRendered() {
 		return commentsRendered;
+	}
+
+	public String getUploadedFileId() {
+		return uploadedFileId;
+	}
+
+	public void setUploadedFileId(String uploadedFileId) {
+		this.uploadedFileId = uploadedFileId;
 	}
 
 }
