@@ -36,8 +36,8 @@ public abstract class SelectStarRatingRendererBase extends DelegatingAlloyRender
 	// Protected Constants
 	protected static final String CLIENT_KEY = "clientKey";
 	protected static final String LABEL = "label";
+	protected static final String STYLE = "style";
 	protected static final String STYLE_CLASS = "styleClass";
-	protected static final String VALUE = "value";
 
 	// Private Constants
 	private static final String ALLOY_CLASS_NAME = "Rating";
@@ -52,14 +52,6 @@ public abstract class SelectStarRatingRendererBase extends DelegatingAlloyRender
 		SelectStarRating selectStarRating = (SelectStarRating) uiComponent;
 		boolean first = true;
 
-		Object value = selectStarRating.getValue();
-
-		if (value != null) {
-
-			encodeValue(responseWriter, selectStarRating, value, first);
-			first = false;
-		}
-
 		encodeHiddenAttributes(facesContext, responseWriter, selectStarRating, first);
 	}
 
@@ -71,10 +63,6 @@ public abstract class SelectStarRatingRendererBase extends DelegatingAlloyRender
 	@Override
 	protected String[] getModules(FacesContext facesContext, UIComponent uiComponent) {
 		return MODULES;
-	}
-
-	protected void encodeValue(ResponseWriter responseWriter, SelectStarRating selectStarRating, Object value, boolean first) throws IOException {
-		encodeString(responseWriter, VALUE, value, first);
 	}
 
 	protected void encodeHiddenAttributes(FacesContext facesContext, ResponseWriter responseWriter, SelectStarRating selectStarRating, boolean first) throws IOException {
