@@ -3045,7 +3045,7 @@
 		</attributes>
 	</component>
 	<component name="SelectStarRating" delegateRendererType="javax.faces.Radio"
-		extendsTags="SelectOneRadio ClientComponent" module="aui-rating"
+		extendsTags="ClientComponent FacesMessageLabelInherited StyleableInherited UIComponentBase UIInput" module="aui-rating"
 		parentClass="com.liferay.faces.alloy.component.selectoneradio.SelectOneRadio"
 		rendererParentClass="com.liferay.faces.alloy.render.internal.DelegatingAlloyRendererBase"
 		yui="true" yuiName="Rating">
@@ -3055,21 +3055,43 @@
 		<attributes>
 			<attribute>
 				<description>
-					<![CDATA[A name for this component to be rendered to the user. This name should be localized for the user.]]>
+					<![CDATA[The class name of the converter instance that is to be used by this component.]]>
 				</description>
-				<name>label</name>
-				<type>java.lang.String</type>
-				<inherited>true</inherited>
+				<name>converter</name>
+				<type>javax.faces.convert.Converter</type>
+				<generateJava>false</generateJava>
 			</attribute>
 			<attribute>
 				<description>
-					<![CDATA[The value of this component, which is typically bound via EL to a model bean property.]]>
+					<![CDATA[HTML passthrough attribute specifying the language code used in the element.]]>
 				</description>
-				<name>value</name>
-				<type>java.lang.Object</type>
-				<yui>true</yui>
-				<inherited>true</inherited>
-				<yuiType>String</yuiType>
+				<name>lang</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[HTML passthrough attribute specifying the various WAI-ARIA roles that the element is used for.]]>
+				</description>
+				<name>role</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[HTML passthrough attribute specifying where the element is located in the tabbing progression.]]>
+				</description>
+				<name>tabindex</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[HTML passthrough attribute specifying the title of the element.]]>
+				</description>
+				<name>title</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
 			</attribute>
 		</attributes>
 	</component>
