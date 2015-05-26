@@ -34,8 +34,6 @@ public abstract class SelectStarRatingBase extends SelectOneRadio implements Sty
 	// Protected Enumerations
 	protected enum SelectStarRatingPropertyKeys {
 		clientKey,
-		label,
-		style,
 		styleClass
 	}
 
@@ -52,24 +50,6 @@ public abstract class SelectStarRatingBase extends SelectOneRadio implements Sty
 	@Override
 	public void setClientKey(String clientKey) {
 		getStateHelper().put(SelectStarRatingPropertyKeys.clientKey, clientKey);
-	}
-
-	public String getLabel() {
-		return (String) getStateHelper().eval(SelectStarRatingPropertyKeys.label, null);
-	}
-
-	public void setLabel(String label) {
-		getStateHelper().put(SelectStarRatingPropertyKeys.label, label);
-	}
-
-	@Override
-	public String getStyle() {
-		return (String) getStateHelper().eval(SelectStarRatingPropertyKeys.style, null);
-	}
-
-	@Override
-	public void setStyle(String style) {
-		getStateHelper().put(SelectStarRatingPropertyKeys.style, style);
 	}
 
 	@Override

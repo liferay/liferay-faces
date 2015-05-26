@@ -35,8 +35,6 @@ public abstract class SelectStarRatingRendererBase extends DelegatingAlloyRender
 
 	// Protected Constants
 	protected static final String CLIENT_KEY = "clientKey";
-	protected static final String LABEL = "label";
-	protected static final String STYLE = "style";
 	protected static final String STYLE_CLASS = "styleClass";
 
 	// Private Constants

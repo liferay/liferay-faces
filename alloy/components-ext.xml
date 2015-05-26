@@ -3045,7 +3045,7 @@
 		</attributes>
 	</component>
 	<component name="SelectStarRating" delegateRendererType="javax.faces.Radio"
-		extendsTags="ClientComponent FacesMessageLabel Styleable UIComponentBase UIInput" module="aui-rating"
+		extendsTags="ClientComponent FacesMessageLabelInherited StyleableInherited UIComponentBase UIInput" module="aui-rating"
 		parentClass="com.liferay.faces.alloy.component.selectoneradio.SelectOneRadio"
 		rendererParentClass="com.liferay.faces.alloy.render.internal.DelegatingAlloyRendererBase"
 		yui="true" yuiName="Rating">
