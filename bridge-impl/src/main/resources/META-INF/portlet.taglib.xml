@@ -1,0 +1,220 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<facelet-taglib xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:vdldoc="http://vdldoc.omnifaces.org"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facelettaglibrary_2_2.xsd http://vdldoc.omnifaces.org https://raw.githubusercontent.com/omnifaces/vdldoc/master/src/main/resources/org/omnifaces/vdldoc/resources/vdldoc.taglib.xml.xsd"
+	version="2.2">
+	<description><![CDATA[The Liferay Faces Bridge facelet component tags with the <code>portlet:</code> tag name prefix. These tags are designed to conform as closely as possible to the Java Portlet Specification (JSR-286) section PLT.26.]]></description>
+	<namespace>http://java.sun.com/portlet_2_0</namespace>
+	<tag>
+		<description><![CDATA[Creates a URL that points to the current portlet and triggers an action request with the supplied parameters. If the <code>var</code> attribute is present, the <code>portlet:actionURL</code> tag introduces an EL variable that contains a <code>javax.portlet.ActionURL</code> adequate for postbacks. Otherwise, the URL is written to the response.]]></description>
+		<tag-name>actionURL</tag-name>
+		<component>
+			<component-type>com.liferay.faces.portlet.component.actionurl.ActionURL</component-type>
+			<renderer-type>com.liferay.faces.portlet.component.actionurl.internal.ActionURLRenderer</renderer-type>
+		</component>
+		<attribute>
+			<description><![CDATA[When true, copy the current request's render parameters to the URL. Defaults to false.]]></description>
+			<name>copyCurrentRenderParameters</name>
+			<required>false</required>
+			<type>boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[When true, xml special characters will be escaped. Defaults to true.]]></description>
+			<name>escapeXml</name>
+			<required>false</required>
+			<type>boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The name of the action method to be executed.]]></description>
+			<name>name</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The name of the mode of the portlet which will be accessed via the URL.]]></description>
+			<name>portletMode</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[When true, the URL will be secure. Defaults to the security setting of the current request.]]></description>
+			<name>secure</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Introduces an EL variable that contains the URL.]]></description>
+			<name>var</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The name of the window state of the portlet which will be accessed via the URL.]]></description>
+			<name>windowState</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<tag-extension>
+			<vdldoc:since>4.2.0</vdldoc:since>
+		</tag-extension>
+	</tag>
+	<tag>
+		<description><![CDATA[This has been implemented for the sake of completeness of the portlet: tags from the JSR 286 specification. Please refer to com.liferay.faces.bridge.el.internal.ELResolverImpl and section 6.5.1 of the JSR 329 specification for more information.]]></description>
+		<tag-name>defineObjects</tag-name>
+		<component>
+			<component-type>com.liferay.faces.portlet.component.defineobjects.DefineObjects</component-type>
+		</component>
+		<tag-extension>
+			<vdldoc:since>4.2.0</vdldoc:since>
+		</tag-extension>
+	</tag>
+	<tag>
+		<description><![CDATA[Creates a namespace that will be unique for the current portlet resources. If the <code>var</code> attribute is present, the <code>portlet:namespace</code> tag introduces an EL variable that contains the portlet namespace. Otherwise, the namespace is written to the response.]]></description>
+		<tag-name>namespace</tag-name>
+		<component>
+			<component-type>com.liferay.faces.portlet.component.namespace.Namespace</component-type>
+			<renderer-type>com.liferay.faces.portlet.component.namespace.internal.NamespaceRenderer</renderer-type>
+		</component>
+		<attribute>
+			<description><![CDATA[Introduces an EL variable that contains the portlet namespace.]]></description>
+			<name>var</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<tag-extension>
+			<vdldoc:since>4.2.0</vdldoc:since>
+		</tag-extension>
+	</tag>
+	<tag>
+		<description><![CDATA[The <code>portlet:param</code> tag provides the ability to add a request parameter name=value pair when nested inside a <code>portlet:actionURL</code>, a <code>portletRenderURL</code>, or a <code>portlet:resourceURL</code> tag.]]></description>
+		<tag-name>param</tag-name>
+		<component>
+			<component-type>com.liferay.faces.portlet.component.param.Param</component-type>
+		</component>
+		<attribute>
+			<description><![CDATA[The name of the render parameter.]]></description>
+			<name>name</name>
+			<required>true</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The value of the render parameter.]]></description>
+			<name>value</name>
+			<required>true</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<tag-extension>
+			<vdldoc:since>4.2.0</vdldoc:since>
+		</tag-extension>
+	</tag>
+	<tag>
+		<description><![CDATA[The <code>portlet:property</code> tag provides the ability to add a portlet property name=value pair when nested inside a <code>portlet:actionURL</code>, a <code>portletRenderURL</code>, or a <code>portlet:resourceURL</code> tag. Using <code>portlet:property</code> is equivalent to calling the <code>BaseURL.addProperty()</code> method.]]></description>
+		<tag-name>property</tag-name>
+		<component>
+			<component-type>com.liferay.faces.portlet.component.property.Property</component-type>
+		</component>
+		<attribute>
+			<description><![CDATA[The name of the portlet property.]]></description>
+			<name>name</name>
+			<required>true</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The value of the portlet property.]]></description>
+			<name>value</name>
+			<required>true</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<tag-extension>
+			<vdldoc:since>4.2.0</vdldoc:since>
+		</tag-extension>
+	</tag>
+	<tag>
+		<description><![CDATA[Creates a URL that points to the current portlet and triggers a render request with the supplied parameters. If the <code>var</code> attribute is present, the <code>portlet:renderURL</code> tag introduces an EL variable that contains a <code>javax.portlet.PortletURL</code> adequate for rendering. Otherwise, the URL is written to the response.]]></description>
+		<tag-name>renderURL</tag-name>
+		<component>
+			<component-type>com.liferay.faces.portlet.component.renderurl.RenderURL</component-type>
+			<renderer-type>com.liferay.faces.portlet.component.renderurl.internal.RenderURLRenderer</renderer-type>
+		</component>
+		<attribute>
+			<description><![CDATA[When true, copy the current request's render parameters to the URL. Defaults to false.]]></description>
+			<name>copyCurrentRenderParameters</name>
+			<required>false</required>
+			<type>boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[When true, xml special characters will be escaped. Defaults to true.]]></description>
+			<name>escapeXml</name>
+			<required>false</required>
+			<type>boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The name of the mode of the portlet which will be accessed via the URL.]]></description>
+			<name>portletMode</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[When true, the URL will be secure. Defaults to the security setting of the current request.]]></description>
+			<name>secure</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Introduces an EL variable that contains the URL.]]></description>
+			<name>var</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The name of the window state of the portlet which will be accessed via the URL.]]></description>
+			<name>windowState</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<tag-extension>
+			<vdldoc:since>4.2.0</vdldoc:since>
+		</tag-extension>
+	</tag>
+	<tag>
+		<description><![CDATA[Creates a URL that points to the current portlet and triggers a resource request with the supplied parameters. If the <code>var</code> attribute is present, the <code>portlet:resourceURL</code> tag introduces an EL variable that contains a <code>javax.portlet.ResourceURL</code> adequate for obtaining resources. Otherwise, the URL is written to the response.]]></description>
+		<tag-name>resourceURL</tag-name>
+		<component>
+			<component-type>com.liferay.faces.portlet.component.resourceurl.ResourceURL</component-type>
+			<renderer-type>com.liferay.faces.portlet.component.resourceurl.internal.ResourceURLRenderer</renderer-type>
+		</component>
+		<attribute>
+			<description><![CDATA[The cacheability of the resource returned by the resourceURL. Valid values include <code>ResourceURL.FULL</code>, <code>ResourceURL.PAGE</code>, and <code>ResourceURL.PORTLET</code>. Defaults to <code>ResourceURL.PAGE</code>.]]></description>
+			<name>cacheability</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[When true, xml special characters will be escaped. Defaults to true.]]></description>
+			<name>escapeXml</name>
+			<required>false</required>
+			<type>boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The id for the resource.]]></description>
+			<name>id</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[When true, the URL will be secure. Defaults to the security setting of the current request.]]></description>
+			<name>secure</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Introduces an EL variable that contains the URL.]]></description>
+			<name>var</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<tag-extension>
+			<vdldoc:since>4.2.0</vdldoc:since>
+		</tag-extension>
+	</tag>
+</facelet-taglib>
