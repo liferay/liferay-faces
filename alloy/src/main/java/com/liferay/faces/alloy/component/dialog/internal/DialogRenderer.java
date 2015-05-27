@@ -23,6 +23,7 @@ import javax.faces.context.ResponseWriter;
 import javax.faces.render.FacesRenderer;
 
 import com.liferay.faces.alloy.component.dialog.Dialog;
+import com.liferay.faces.alloy.component.popover.Popover;
 import com.liferay.faces.util.component.ClientComponent;
 import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.lang.StringPool;
@@ -102,6 +103,21 @@ public class DialogRenderer extends DialogRendererBase {
 			responseWriter.write("')");
 			responseWriter.write(".removeToolbar('header');");
 		}
+
+		// move the overlayBody div into the modal-body div
+		String overlayBodyClientId = clientId.concat(OVERLAY_BODY_SUFFIX);
+		String escapedOverlayBodyClientId = escapeClientId(overlayBodyClientId);
+
+		String contentBoxClientId = clientId.concat(CONTENT_BOX_SUFFIX);
+		String escapedContentBoxClientId = escapeClientId(contentBoxClientId);
+
+		responseWriter.write(
+			"A.one('#" +
+			escapedOverlayBodyClientId +
+			"').appendTo(A.one('div#" +
+			escapedContentBoxClientId +
+			">div.modal-body'));"
+		);
 
 		if (!dialog.isModal() && dialog.isDismissible()) {
 			encodeOverlayDismissible(responseWriter, dialog, clientKey);
