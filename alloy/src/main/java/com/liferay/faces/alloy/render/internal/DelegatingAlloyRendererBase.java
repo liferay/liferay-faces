@@ -98,11 +98,6 @@ public abstract class DelegatingAlloyRendererBase extends DelegatingClientCompon
 	}
 
 	@Override
-	public void encodeLiferayComponent(ResponseWriter responseWriter, String clientKey) throws IOException {
-		AlloyRendererCommon.encodeLiferayComponent(responseWriter, clientKey);
-	}
-
-	@Override
 	public void encodeLiferayComponentVar(ResponseWriter responseWriter, String clientVarName, String clientKey)
 		throws IOException {
 		AlloyRendererCommon.encodeLiferayComponentVar(responseWriter, clientVarName, clientKey);

@@ -81,7 +81,7 @@ import com.liferay.faces.util.render.RendererUtil;
 		responseWriter.write(eventName);
 		responseWriter.write(StringPool.APOSTROPHE);
 		responseWriter.write(StringPool.COMMA);
-		responseWriter.write(AlloyRenderer.FUNCTION_EVENT);
+		responseWriter.write("function(event)");
 		responseWriter.write(StringPool.OPEN_CURLY_BRACE);
 		responseWriter.write(callback);
 		responseWriter.write(StringPool.CLOSE_CURLY_BRACE);
@@ -283,7 +283,7 @@ import com.liferay.faces.util.render.RendererUtil;
 	}
 
 	/* package-private */ static void encodeWidgetRender(ResponseWriter responseWriter, boolean first) throws IOException {
-		encodeBoolean(responseWriter, AlloyRenderer.RENDER, true, first);
+		encodeBoolean(responseWriter, "render", true, first);
 	}
 
 	// TODO el method

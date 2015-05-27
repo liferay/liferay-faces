@@ -21,8 +21,6 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 
-import com.liferay.faces.alloy.component.dialog.Dialog;
-import com.liferay.faces.alloy.component.popover.Popover;
 import com.liferay.faces.alloy.render.internal.DelegatingAlloyRendererBase;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.render.internal.DelegationResponseWriter;
@@ -42,7 +40,7 @@ public abstract class OverlayRendererBase extends DelegatingAlloyRendererBase im
 	@Override
 	public void encodeMarkupBegin(FacesContext facesContext, UIComponent uiComponent) throws IOException {
 
-		// NOTE: this is currently only used by Dialog and Popover.  Tooltip overrides this method.
+		// NOTE: This is currently only used by Dialog and Popover. Tooltip overrides this method.
 
 		// Encode the opening boundingBox <div> tag via delegation. Ensure that the "id" attribute is always written so
 		// that Alloy's JavaScript will be able to locate the boundingBox in the DOM.
@@ -66,7 +64,7 @@ public abstract class OverlayRendererBase extends DelegatingAlloyRendererBase im
 	@Override
 	public void encodeMarkupEnd(FacesContext facesContext, UIComponent uiComponent) throws IOException {
 
-		// NOTE: this is currently only used by Dialog and Popover.  Tooltip overrides this method.
+		// NOTE: This is currently only used by Dialog and Popover. Tooltip overrides this method.
 
 		// Encode the closing overlayBody </div> tag.
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
@@ -146,11 +144,10 @@ public abstract class OverlayRendererBase extends DelegatingAlloyRendererBase im
 
 		if (headerText != null) {
 			headerText = "<span class=\"alloy-overlay-title\">" + headerText + "</span>";
-			encodeString(responseWriter, HEADER_CONTENT, headerText, first);
+			encodeString(responseWriter, "headerContent", headerText, first);
 		}
 
-		String bodyText = "";
-		encodeString(responseWriter, BODY_CONTENT, bodyText, first);
+		encodeString(responseWriter, "bodyContent", "", first);
 
 		// Encode the "render: true" Alloy hidden attribute.
 		encodeWidgetRender(responseWriter, first);
@@ -159,7 +156,7 @@ public abstract class OverlayRendererBase extends DelegatingAlloyRendererBase im
 		Boolean autoShow = (Boolean) attributes.get("autoShow");
 
 		if (autoShow != null) {
-			encodeBoolean(responseWriter, VISIBLE, autoShow, first);
+			encodeBoolean(responseWriter, "visible", autoShow, first);
 		}
 	}
 
