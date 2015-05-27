@@ -11,33 +11,42 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.bridge.renderkit.portlet.internal;
+package com.liferay.faces.portlet.component.resourceurl.internal;
 
+import javax.faces.render.FacesRenderer;
+
+import com.liferay.faces.portlet.component.resourceurl.ResourceURL;
 import java.io.IOException;
-
 import javax.faces.component.UIComponent;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.portlet.BaseURL;
 import javax.portlet.MimeResponse;
-import javax.portlet.PortletURL;
-
-import com.liferay.faces.bridge.component.PortletRenderURL;
 
 
 /**
- * This is the default renderer for the {@link PortletRenderURL} component. It conforms as closely as possible to the
- * requirements set forth in section PLT.26.3 of the JSR 286 Portlet Specification, Version 2.0.
- *
- * @author  Neil Griffin
+ * @author	Kyle Stiemann
  */
-public class RenderURLRenderer extends PortletURLRenderer {
+//J-
+@FacesRenderer(componentFamily = ResourceURL.COMPONENT_FAMILY, rendererType = ResourceURL.RENDERER_TYPE)
+//J+
+public class ResourceURLRenderer extends ResourceURLRendererBase {
 
 	@Override
-	public void encodeEnd(FacesContext facesContext, UIComponent uiComponent) throws IOException {
+	protected BaseURL getBaseURL(FacesContext facesContext, UIComponent uiComponent) throws IOException {
+
 		ExternalContext externalContext = facesContext.getExternalContext();
 		MimeResponse mimeResponse = (MimeResponse) externalContext.getResponse();
-		PortletURL renderURL = mimeResponse.createRenderURL();
-		super.encodeEnd(facesContext, uiComponent, renderURL);
-	}
+		javax.portlet.ResourceURL resourceURL = mimeResponse.createResourceURL();
+		ResourceURL resourceURLComponent = (ResourceURL) uiComponent;
+		String cacheability = resourceURLComponent.getCacheability();
+		resourceURL.setCacheability(cacheability);
+		String id = resourceURLComponent.getId();
 
+		if (id != null) {
+			resourceURL.setResourceID(id);
+		}
+
+		return resourceURL;
+	}
 }

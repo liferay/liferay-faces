@@ -46,34 +46,6 @@
 			<renderer-type>javax.faces.Messages</renderer-type>
 		</component-extension>
 	</component>
-	<component>
-		<component-type>com.liferay.faces.bridge.component.PortletRenderURL</component-type>
-		<component-class>com.liferay.faces.bridge.component.PortletRenderURL</component-class>
-	</component>
-	<component>
-		<component-type>com.liferay.faces.bridge.component.PortletActionURL</component-type>
-		<component-class>com.liferay.faces.bridge.component.PortletActionURL</component-class>
-	</component>
-	<component>
-		<component-type>com.liferay.faces.bridge.component.PortletResourceURL</component-type>
-		<component-class>com.liferay.faces.bridge.component.PortletResourceURL</component-class>
-	</component>
-	<component>
-		<component-type>com.liferay.faces.bridge.component.PortletNameSpace</component-type>
-		<component-class>com.liferay.faces.bridge.component.PortletNameSpace</component-class>
-	</component>
-	<component>
-		<component-type>com.liferay.faces.bridge.component.PortletProperty</component-type>
-		<component-class>com.liferay.faces.bridge.component.PortletProperty</component-class>
-	</component>
-	<component>
-		<component-type>com.liferay.faces.bridge.component.PortletParam</component-type>
-		<component-class>com.liferay.faces.bridge.component.PortletParam</component-class>
-	</component>
-	<component>
-		<component-type>com.liferay.faces.bridge.component.PortletDefineObjects</component-type>
-		<component-class>com.liferay.faces.bridge.component.PortletDefineObjects</component-class>
-	</component>
 	<factory>
 		<application-factory>com.liferay.faces.bridge.application.internal.ApplicationFactoryImpl</application-factory>
 		<exception-handler-factory>com.liferay.faces.bridge.context.internal.ExceptionHandlerFactoryImpl</exception-handler-factory>
@@ -130,38 +102,6 @@
 			<component-family>javax.faces.Output</component-family>
 			<renderer-type>javax.faces.Body</renderer-type>
 			<renderer-class>com.liferay.faces.bridge.renderkit.html_basic.internal.BodyRendererBridgeImpl</renderer-class>
-		</renderer>
-	</render-kit>
-	<render-kit>
-		<renderer>
-			<description>Default renderer for portlet:renderURL tag</description>
-			<component-family>javax.faces.Output</component-family>
-			<renderer-type>com.liferay.faces.bridge.renderkit.portlet.internal.RenderURLRenderer</renderer-type>
-			<renderer-class>com.liferay.faces.bridge.renderkit.portlet.internal.RenderURLRenderer</renderer-class>
-		</renderer>
-	</render-kit>
-	<render-kit>
-		<renderer>
-			<description>Default renderer for portlet:actionURL tag</description>
-			<component-family>javax.faces.Output</component-family>
-			<renderer-type>com.liferay.faces.bridge.renderkit.portlet.internal.ActionURLRenderer</renderer-type>
-			<renderer-class>com.liferay.faces.bridge.renderkit.portlet.internal.ActionURLRenderer</renderer-class>
-		</renderer>
-	</render-kit>
-	<render-kit>
-		<renderer>
-			<description>Default renderer for portlet:resourceURL tag</description>
-			<component-family>javax.faces.Output</component-family>
-			<renderer-type>com.liferay.faces.bridge.renderkit.portlet.internal.ResourceURLRenderer</renderer-type>
-			<renderer-class>com.liferay.faces.bridge.renderkit.portlet.internal.ResourceURLRenderer</renderer-class>
-		</renderer>
-	</render-kit>
-	<render-kit>
-		<renderer>
-			<description>Default renderer for portlet:namespace tag</description>
-			<component-family>javax.faces.Output</component-family>
-			<renderer-type>com.liferay.faces.bridge.renderkit.portlet.internal.NameSpaceRenderer</renderer-type>
-			<renderer-class>com.liferay.faces.bridge.renderkit.portlet.internal.NameSpaceRenderer</renderer-class>
 		</renderer>
 	</render-kit>
 </faces-config>

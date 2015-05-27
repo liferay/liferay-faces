@@ -915,6 +915,7 @@
 				<authors>Neil Griffin</authors>
 				<component.impl.output.dir>src/main/java</component.impl.output.dir>
 				<component.api.output.dir>${component.impl.output.dir}</component.api.output.dir>
+				<namespace.URI>http://liferay.com/faces/${namespace}</namespace.URI>
 			</properties>
 			<build>
 				<plugins>
