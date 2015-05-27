@@ -73,7 +73,7 @@ public class SelectStarRatingResponseWriter extends DelegationResponseWriterBase
 			labelElement = false;
 
 			super.writeAttribute(StringPool.TITLE, title, StringPool.TITLE);
-			super.writeAttribute(Styleable.STYLE, AlloyRenderer.DISPLAY_NONE, null);
+			super.writeAttribute(Styleable.STYLE, "display:none;", null);
 			super.endElement(StringPool.INPUT);
 		}
 	}

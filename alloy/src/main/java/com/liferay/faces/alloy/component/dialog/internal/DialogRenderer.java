@@ -111,13 +111,11 @@ public class DialogRenderer extends DialogRendererBase {
 		String contentBoxClientId = clientId.concat(CONTENT_BOX_SUFFIX);
 		String escapedContentBoxClientId = escapeClientId(contentBoxClientId);
 
-		responseWriter.write(
-			"A.one('#" +
-			escapedOverlayBodyClientId +
-			"').appendTo(A.one('div#" +
-			escapedContentBoxClientId +
-			">div.modal-body'));"
-		);
+		responseWriter.write("A.one('#");
+		responseWriter.write(escapedOverlayBodyClientId);
+		responseWriter.write("').appendTo(A.one('div#");
+		responseWriter.write(escapedContentBoxClientId);
+		responseWriter.write(">div.modal-body'));");
 
 		if (!dialog.isModal() && dialog.isDismissible()) {
 			encodeOverlayDismissible(responseWriter, dialog, clientKey);

@@ -27,18 +27,11 @@ public interface AlloyRenderer extends ClientComponentRenderer {
 
 	// Public Constants
 	public static final String A_DOT_ONE = "A.one";
-	public static final String BODY_CONTENT = "bodyContent";
 	public static final String BOUNDING_BOX = "boundingBox";
 	public static final String CONTENT_BOX = "contentBox";
-	public static final String CSS_CLASS = "cssClass";
-	public static final String DISPLAY_NONE = "display:none;";
-	public static final String FUNCTION_EVENT = "function(event)";
-	public static final String HEADER_CONTENT = "headerContent";
 	public static final String LIFERAY_COMPONENT = "Liferay.component";
 	public static final String LIFERAY_Z_INDEX_OVERLAY = "Liferay.zIndex.OVERLAY";
 	public static final String LIFERAY_Z_INDEX_TOOLTIP = "Liferay.zIndex.TOOLTIP";
-	public static final String RENDER = "render";
-	public static final String VISIBLE = "visible";
 
 	public void decodeClientBehaviors(FacesContext facesContext, UIComponent uiComponent);
 
@@ -62,8 +55,6 @@ public interface AlloyRenderer extends ClientComponentRenderer {
 
 	public void encodeInteger(ResponseWriter responseWriter, String attributeName, Integer attributeValue,
 		boolean first) throws IOException;
-
-	public void encodeLiferayComponent(ResponseWriter responseWriter, String clientKey) throws IOException;
 
 	public void encodeLiferayComponentVar(ResponseWriter responseWriter, String clientVarName, String clientKey)
 		throws IOException;

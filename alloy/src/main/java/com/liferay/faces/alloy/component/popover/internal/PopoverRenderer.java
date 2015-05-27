@@ -65,7 +65,6 @@ public class PopoverRenderer extends PopoverRendererBase {
 		ClientComponent clientComponent = (ClientComponent) uiComponent;
 		String clientVarName = ComponentUtil.getClientVarName(facesContext, clientComponent);
 		String clientKey = clientComponent.getClientKey();
-		String clientId = popover.getClientId(facesContext);
 
 		if (clientKey == null) {
 			clientKey = clientVarName;
@@ -87,20 +86,19 @@ public class PopoverRenderer extends PopoverRendererBase {
 			responseWriter.write(StringPool.SEMICOLON);
 		}
 
-		// move the overlayBody div into the popover-content div
+		// Move the overlayBody div into the popover-content div.
+		String clientId = popover.getClientId(facesContext);
 		String overlayBodyClientId = clientId.concat(OVERLAY_BODY_SUFFIX);
 		String escapedOverlayBodyClientId = escapeClientId(overlayBodyClientId);
 
 		String contentBoxClientId = clientId.concat(CONTENT_BOX_SUFFIX);
 		String escapedContentBoxClientId = escapeClientId(contentBoxClientId);
 
-		responseWriter.write(
-			"A.one('#" +
-			escapedOverlayBodyClientId +
-			"').appendTo(A.one('div#" +
-			escapedContentBoxClientId +
-			">div.popover-content'));"
-		);
+		responseWriter.write("A.one('#");
+		responseWriter.write(escapedOverlayBodyClientId);
+		responseWriter.write("').appendTo(A.one('div#");
+		responseWriter.write(escapedContentBoxClientId);
+		responseWriter.write(">div.popover-content'));");
 
 		if (popover.isDismissible()) {
 			encodeOverlayDismissible(responseWriter, popover, clientKey);

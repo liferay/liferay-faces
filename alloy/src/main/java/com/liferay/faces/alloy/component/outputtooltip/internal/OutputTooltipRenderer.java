@@ -143,7 +143,7 @@ public class OutputTooltipRenderer extends OutputTooltipRendererBase {
 		OutputTooltip outputTooltip, boolean first) throws IOException {
 
 		// Encode the "cssClass" Alloy hidden attribute.
-		encodeString(responseWriter, CSS_CLASS, outputTooltip.getStyleClass(), first);
+		encodeString(responseWriter, "cssClass", outputTooltip.getStyleClass(), first);
 
 		first = false;
 
