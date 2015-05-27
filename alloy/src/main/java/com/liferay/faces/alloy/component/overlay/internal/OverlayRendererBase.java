@@ -21,6 +21,8 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 
+import com.liferay.faces.alloy.component.dialog.Dialog;
+import com.liferay.faces.alloy.component.popover.Popover;
 import com.liferay.faces.alloy.render.internal.DelegatingAlloyRendererBase;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.render.internal.DelegationResponseWriter;
@@ -35,9 +37,12 @@ public abstract class OverlayRendererBase extends DelegatingAlloyRendererBase im
 	// Protected Constants
 	protected static final String Z_INDEX = "zIndex";
 	protected static final String CONTENT_BOX_SUFFIX = "_contentBox";
+	protected static final String OVERLAY_BODY_SUFFIX = "_overlayBody";
 
 	@Override
 	public void encodeMarkupBegin(FacesContext facesContext, UIComponent uiComponent) throws IOException {
+
+		// NOTE: this is currently only used by Dialog and Popover.  Tooltip overrides this method.
 
 		// Encode the opening boundingBox <div> tag via delegation. Ensure that the "id" attribute is always written so
 		// that Alloy's JavaScript will be able to locate the boundingBox in the DOM.
@@ -51,13 +56,24 @@ public abstract class OverlayRendererBase extends DelegatingAlloyRendererBase im
 		String contentBoxClientId = clientId.concat(CONTENT_BOX_SUFFIX);
 		responseWriter.startElement(StringPool.DIV, null);
 		responseWriter.writeAttribute(StringPool.ID, contentBoxClientId, null);
+
+		// Encode the opening overlayBody <div> tag with a unique id.
+		String overlayBodyClientId = clientId.concat(OVERLAY_BODY_SUFFIX);
+		responseWriter.startElement(StringPool.DIV, null);
+		responseWriter.writeAttribute(StringPool.ID, overlayBodyClientId, null);
 	}
 
 	@Override
 	public void encodeMarkupEnd(FacesContext facesContext, UIComponent uiComponent) throws IOException {
 
-		// Encode the closing contentBox </div> tag.
+		// NOTE: this is currently only used by Dialog and Popover.  Tooltip overrides this method.
+
+		// Encode the closing overlayBody </div> tag.
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
+		responseWriter.endElement(StringPool.DIV);
+
+		// Encode the closing contentBox </div> tag.
+		responseWriter = facesContext.getResponseWriter();
 		responseWriter.endElement(StringPool.DIV);
 
 		// Encode the closing boundingBox </div> tag via delegation.
@@ -132,6 +148,9 @@ public abstract class OverlayRendererBase extends DelegatingAlloyRendererBase im
 			headerText = "<span class=\"alloy-overlay-title\">" + headerText + "</span>";
 			encodeString(responseWriter, HEADER_CONTENT, headerText, first);
 		}
+
+		String bodyText = "";
+		encodeString(responseWriter, BODY_CONTENT, bodyText, first);
 
 		// Encode the "render: true" Alloy hidden attribute.
 		encodeWidgetRender(responseWriter, first);

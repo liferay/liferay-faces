@@ -27,6 +27,7 @@ public interface AlloyRenderer extends ClientComponentRenderer {
 
 	// Public Constants
 	public static final String A_DOT_ONE = "A.one";
+	public static final String BODY_CONTENT = "bodyContent";
 	public static final String BOUNDING_BOX = "boundingBox";
 	public static final String CONTENT_BOX = "contentBox";
 	public static final String CSS_CLASS = "cssClass";
