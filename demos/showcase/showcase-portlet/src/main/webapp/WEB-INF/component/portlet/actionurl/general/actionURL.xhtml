@@ -4,7 +4,7 @@
 
 	<ui:define name="col1">
 		<showcase:example>
-			<portlet:actionURL var="actionURL">
+			<portlet:actionURL escapeXml="false" var="actionURL">
 				<portlet:param name="foo" value="1234" />
 			</portlet:actionURL>
 			<form action="#{actionURL}" method="post">
