@@ -11,24 +11,23 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.bridge.component;
+package com.liferay.faces.portlet.component.resourceurl.internal;
+//J-
 
-import javax.faces.component.UIComponentBase;
+
+import javax.annotation.Generated;
+
+import com.liferay.faces.portlet.component.baseurl.internal.BaseURLRenderer;
 
 
 /**
- * This has been implemented for the sake of completeness of portlet:defineObjects tag from JSR 286 specification.
- * Please refer to {@link ELResolverImpl} for more information and section 6.5.1 of the JSR 329 specification.
- *
- * @author  Neil Griffin
+ * @author	Neil Griffin
  */
-public class PortletDefineObjects extends UIComponentBase {
+@Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
+public abstract class ResourceURLRendererBase extends BaseURLRenderer {
 
-	public static final String COMPONENT_TYPE = "com.liferay.faces.bridge.component.PortletDefineObjects";
-
-	@Override
-	public String getFamily() {
-		return COMPONENT_TYPE;
-	}
-
+	// Protected Constants
+	protected static final String CACHEABILITY = "cacheability";
+	protected static final String ID = "id";
 }
+//J+

@@ -11,24 +11,24 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.bridge.component;
+package com.liferay.faces.portlet.component.baseurl.internal;
+//J-
 
-import javax.faces.component.UIParameter;
+
+import javax.annotation.Generated;
+
+import javax.faces.render.Renderer;
 
 
 /**
- * This is a marker class which is used in the {@link BaseURLRenderer} for getting properties related to the
- * portlet:property tag which is specified in PLT.26.7 of the JSR 286 specification.
- *
- * @author  Neil Griffin
+ * @author	Neil Griffin
  */
+@Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
+public abstract class BaseURLRendererBase extends Renderer {
 
-public class PortletProperty extends UIParameter {
-
-	public static final String COMPONENT_TYPE = "com.liferay.faces.bridge.component.PortletProperty";
-
-	public String getComponentType() {
-		return COMPONENT_TYPE;
-	}
-
+	// Protected Constants
+	protected static final String ESCAPE_XML = "escapeXml";
+	protected static final String SECURE = "secure";
+	protected static final String VAR = "var";
 }
+//J+

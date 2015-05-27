@@ -156,20 +156,19 @@ public abstract class LiferayURLGeneratorBaseImpl implements LiferayURLGenerator
 	}
 
 	public String generateURL(Map<String, String[]> additionalParameterMap) {
-		return generateURL(additionalParameterMap, null, null);
+		return generateURL(additionalParameterMap, null, null, null, null);
 	}
 
-	public String generateURL(Map<String, String[]> additionalParameterMap, String resourceId) {
-		return generateURL(additionalParameterMap, null, resourceId, null);
+	public String generateURL(Map<String, String[]> additionalParameterMap, String cacheability, String resourceId) {
+		return generateURL(additionalParameterMap, cacheability, null, resourceId, null);
 	}
 
 	public String generateURL(Map<String, String[]> additionalParameterMap, PortletMode portletMode,
 		WindowState windowState) {
-		return generateURL(additionalParameterMap, portletMode, null, windowState);
+		return generateURL(additionalParameterMap, null, portletMode, null, windowState);
 	}
 
-	public String generateURL(Map<String, String[]> additionalParameterMap, PortletMode portletMode, String resourceId,
-		WindowState windowState) {
+	public String generateURL(Map<String, String[]> additionalParameterMap, String cacheability, PortletMode portletMode, String resourceId, WindowState windowState) {
 
 		String toStringValue;
 
@@ -312,10 +311,19 @@ public abstract class LiferayURLGeneratorBaseImpl implements LiferayURLGenerator
 
 			// Possibly add the p_p_cacheability parameter
 			if (LIFECYCLE_RESOURCE_PHASE_ID.equals(portletLifecycleId)) {
-				String cacheability = StringHelper.toString(additionalParameterMap.get(P_P_CACHEABILITY),
-						parameterMap.get(P_P_CACHEABILITY));
+
+				String urlCacheability = null;
 
 				if (cacheability != null) {
+					urlCacheability = cacheability;
+				}
+
+				if (urlCacheability == null) {
+					urlCacheability = StringHelper.toString(additionalParameterMap.get(P_P_CACHEABILITY),
+						parameterMap.get(P_P_CACHEABILITY));
+				}
+
+				if (urlCacheability != null) {
 					appendParameterToURL(P_P_CACHEABILITY, cacheability, url);
 				}
 			}
