@@ -1,0 +1,86 @@
+.aui .side-by-side .alloy-auto-complete, .aui .side-by-side .alloy-input-date input, .aui .side-by-side .alloy-input-text, .aui .side-by-side .alloy-input-secret, .aui .side-by-side .alloy-input-time input, .aui .side-by-side .alloy-input-textarea, .aui .side-by-side .alloy-select-one-menu, .aui .side-by-side .alloy-select-many-listbox, .aui .side-by-side .alloy-select-many-menu, .aui .side-by-side .alloy-select-one-listbox {
+	width: 150px;
+}
+
+.aui .alloy-tab-view .tab img {
+	height: 24px;
+}
+
+.aui code {
+	color: rgb(0, 22, 142);
+}
+
+.alloy-datatable th.header-facet {
+	font-weight: bold;
+	text-align: center;
+}
+
+.aui .aui-field-element .portlet-msg-error {
+	position: relative;
+	top: -10px;
+}
+
+.aui span.inline-warning {
+	color: #ff0000;
+}
+
+.aui .files table {
+	float: right;
+}
+
+.aui .files td,.aui .files th {
+	padding: 6px;
+}
+
+.aui hr {
+	border-top: 1px solid #cfcfcf;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.aui label.field-label {
+	font-weight: bold;
+}
+
+.aui .alloy-select-many-checkbox label,.aui .alloy-select-one-radio label {
+	font-size: 0.9em;
+}
+
+.aui .showcase-example .alloy-field label.control-label {
+	font-size: 1.1em;
+	font-weight: bold;
+}
+
+.aui .showcase-example .alloy-output-label {
+	font-size: 1.1em;
+	font-weight: bold;
+}
+
+.aui ul.feedback {
+	list-style-type: none;
+}
+
+.aui .inline-label, .inline-label {
+	display: inline;
+	margin-left: 4px;
+	margin-right: 10px;
+}
+
+.editableAceEditor .ace_editor {
+	margin-bottom: 10px;
+	margin-top: 10px;
+}
+
+.tab-content img {
+	float: left;
+	margin-right: 10px;
+}
+
+.tab-content p {
+	text-align: middle;
+}
+
+.aui .alloy-auto-complete .yui3-aclist-item-active {
+	background: whitesmoke;
+	color: #000;
+}

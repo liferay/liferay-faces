@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:cc="http://java.sun.com/jsf/composite"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.w3.org/1999/xhtml http://www.w3.org/2002/08/xhtml/xhtml1-transitional.xsd">
+
+	<cc:interface>
+		<cc:attribute name="description" />
+		<cc:attribute name="label" default="#{i18n['component']}" />
+		<cc:attribute name="longDescription" default="false" />
+		<cc:attribute name="number" />
+		<cc:attribute name="renderedCheckbox" default="false" />
+		<cc:attribute name="requiredCheckbox" default="false" />
+		<cc:attribute name="styleClass" />
+	</cc:interface>
+
+	<cc:implementation>
+		<div class="showcase-example #{cc.attrs.styleClass}">
+			<h:outputLabel styleClass="example-label">
+				<c:if test="#{cc.attrs.number == null}">
+					<h:outputText escape="false" styleClass="example-number" value="#{i18n['example']}" />
+				</c:if>
+				<c:if test="#{cc.attrs.number != null}">
+					<h:outputText escape="false" styleClass="example-number" value="#{i18n['example']}&amp;nbsp;#{cc.attrs.number}" />
+				</c:if>
+				<c:if test="#{cc.attrs.description != null}">
+					<h:outputText escape="false" value=":&amp;nbsp;#{cc.attrs.description}" style="font-weight: normal;"/>
+				</c:if>
+			</h:outputLabel>
+			<div class="example-content">
+				<c:if test="#{(cc.attrs.renderedCheckbox and (facesContext.application.projectStage != 'Production'))}">
+					<span class="component-rendered-checkbox">
+						<h:selectBooleanCheckbox immediate="true" value="#{showcaseModelBean.selectedComponent.rendered}">
+							<f:ajax render="@form" />
+						</h:selectBooleanCheckbox>
+						<h:outputLabel styleClass="inline-label" value="#{i18n['rendered']}" />
+					</span>
+				</c:if>
+				<c:if test="#{cc.attrs.requiredCheckbox}">
+					<span class="component-required-checkbox">
+						<h:selectBooleanCheckbox immediate="true" value="#{showcaseModelBean.selectedComponent.required}">
+							<f:ajax render="@form" />
+						</h:selectBooleanCheckbox>
+						<h:outputLabel styleClass="inline-label" value="#{i18n['required']}" />
+					</span>
+				</c:if>
+				<div class="example-usage">
+					<cc:insertChildren />
+				</div>
+			</div>
+		</div>
+	</cc:implementation>
+
+</ui:component>
