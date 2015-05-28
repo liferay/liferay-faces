@@ -11,24 +11,25 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.bridge.component;
+package com.liferay.faces.portlet.component.defineobjects;
+//J-
 
+import javax.annotation.Generated;
 import javax.faces.component.UIComponentBase;
 
 
 /**
- * This has been implemented for the sake of completeness of portlet:defineObjects tag from JSR 286 specification.
- * Please refer to {@link ELResolverImpl} for more information and section 6.5.1 of the JSR 329 specification.
- *
- * @author  Neil Griffin
+ * @author	Neil Griffin
  */
-public class PortletDefineObjects extends UIComponentBase {
+@Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
+public abstract class DefineObjectsBase extends UIComponentBase {
 
-	public static final String COMPONENT_TYPE = "com.liferay.faces.bridge.component.PortletDefineObjects";
+	// Public Constants
+	public static final String COMPONENT_TYPE = "com.liferay.faces.portlet.component.defineobjects.DefineObjects";
 
-	@Override
-	public String getFamily() {
-		return COMPONENT_TYPE;
+	public DefineObjectsBase() {
+		super();
+		setRendererType("");
 	}
-
 }
+//J+

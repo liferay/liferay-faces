@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE components>
+<components extends="../util/common-components.xml">
+	<description>
+		<![CDATA[The Liferay Faces Bridge facelet component tags with the <code>portlet:</code> tag name prefix. These tags are designed to conform as closely as possible to the Java Portlet Specification (JSR-286) section PLT.26.]]>
+	</description>
+	<!-- generateTaglibXML="false" tags for common attributes -->
+	<component name="BaseURLInherited" generateJava="false" generateTaglibXML="false">
+		<attributes>
+			<attribute>
+				<defaultValue>true</defaultValue>
+				<description>
+					<![CDATA[When true, xml special characters will be escaped. Defaults to true.]]>
+				</description>
+				<generateJava>false</generateJava>
+				<name>escapeXml</name>
+				<type>boolean</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[When true, the URL will be secure. Defaults to the security setting of the current request.]]>
+				</description>
+				<generateJava>false</generateJava>
+				<name>secure</name>
+				<type>java.lang.Boolean</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Introduces an EL variable that contains the URL.]]>
+				</description>
+				<generateJava>false</generateJava>
+				<name>var</name>
+				<type>java.lang.String</type>
+			</attribute>
+		</attributes>
+	</component>
+	<component name="RenderURLInherited" extendsTags="BaseURLInherited" generateJava="false" generateTaglibXML="false">
+		<attributes>
+			<attribute>
+				<defaultValue>false</defaultValue>
+				<description>
+					<![CDATA[When true, copy the current request's render parameters to the URL. Defaults to false.]]>
+				</description>
+				<generateJava>false</generateJava>
+				<name>copyCurrentRenderParameters</name>
+				<type>boolean</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The name of the mode of the portlet which will be accessed via the URL.]]>
+				</description>
+				<generateJava>false</generateJava>
+				<name>portletMode</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The name of the window state of the portlet which will be accessed via the URL.]]>
+				</description>
+				<generateJava>false</generateJava>
+				<name>windowState</name>
+				<type>java.lang.String</type>
+			</attribute>
+		</attributes>
+	</component>
+	<component name="BaseURL" generateTaglibXML="false" styleable="false">
+		<description>
+			<![CDATA[Abstract Java base component for portlet URL components.]]>
+		</description>
+		<attributes>
+			<attribute>
+				<defaultValue>true</defaultValue>
+				<name>escapeXml</name>
+				<type>boolean</type>
+			</attribute>
+			<attribute>
+				<name>secure</name>
+				<type>java.lang.Boolean</type>
+			</attribute>
+			<attribute>
+				<name>var</name>
+				<type>java.lang.String</type>
+			</attribute>
+		</attributes>
+	</component>
+	<!-- /generateTaglibXML="false" tags for common attributes -->
+	<component name="ActionURL" extendsTags="RenderURLInherited"
+		parentClass="com.liferay.faces.portlet.component.renderurl.RenderURLBase"
+		rendererParentClass="com.liferay.faces.portlet.component.renderurl.internal.AbstractRenderURLRenderer"
+		styleable="false">
+		<description>
+			<![CDATA[Creates a URL that points to the current portlet and triggers an action request with the supplied parameters. If the <code>var</code> attribute is present, the <code>portlet:actionURL</code> tag introduces an EL variable that contains a <code>javax.portlet.ActionURL</code> adequate for postbacks. Otherwise, the URL is written to the response.]]>
+		</description>
+		<attributes>
+			<attribute>
+				<description>
+					<![CDATA[The name of the action method to be executed.]]>
+				</description>
+				<name>name</name>
+				<type>java.lang.String</type>
+			</attribute>
+		</attributes>
+	</component>
+	<component name="DefineObjects" generateRenderer="false" styleable="false">
+		<description>
+			<![CDATA[This has been implemented for the sake of completeness of the portlet: tags from the JSR 286 specification. Please refer to com.liferay.faces.bridge.el.internal.ELResolverImpl and section 6.5.1 of the JSR 329 specification for more information.]]>
+		</description>
+	</component>
+	<component name="Namespace" styleable="false">
+		<description>
+			<![CDATA[Creates a namespace that will be unique for the current portlet resources. If the <code>var</code> attribute is present, the <code>portlet:namespace</code> tag introduces an EL variable that contains the portlet namespace. Otherwise, the namespace is written to the response.]]>
+		</description>
+		<attributes>
+			<attribute>
+				<description>
+					<![CDATA[Introduces an EL variable that contains the portlet namespace.]]>
+				</description>
+				<name>var</name>
+				<type>java.lang.String</type>
+			</attribute>
+		</attributes>
+	</component>
+	<component name="Param" generateRenderer="false" styleable="false">
+		<description>
+			<![CDATA[The <code>portlet:param</code> tag provides the ability to add a request parameter name=value pair when nested inside a <code>portlet:actionURL</code>, a <code>portletRenderURL</code>, or a <code>portlet:resourceURL</code> tag.]]>
+		</description>
+		<attributes>
+			<attribute>
+				<description>
+					<![CDATA[The name of the render parameter.]]>
+				</description>
+				<name>name</name>
+				<required>true</required>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The value of the render parameter.]]>
+				</description>
+				<name>value</name>
+				<required>true</required>
+				<type>java.lang.String</type>
+			</attribute>
+		</attributes>
+	</component>
+	<component name="Property" generateRenderer="false" styleable="false">
+		<description>
+			<![CDATA[The <code>portlet:property</code> tag provides the ability to add a portlet property name=value pair when nested inside a <code>portlet:actionURL</code>, a <code>portletRenderURL</code>, or a <code>portlet:resourceURL</code> tag. Using <code>portlet:property</code> is equivalent to calling the <code>BaseURL.addProperty()</code> method.]]>
+		</description>
+		<attributes>
+			<attribute>
+				<description>
+					<![CDATA[The name of the portlet property.]]>
+				</description>
+				<name>name</name>
+				<required>true</required>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The value of the portlet property.]]>
+				</description>
+				<name>value</name>
+				<required>true</required>
+				<type>java.lang.String</type>
+			</attribute>
+		</attributes>
+	</component>
+	<component name="RenderURL" extendsTags="BaseURLInherited"
+		parentClass="com.liferay.faces.portlet.component.baseurl.BaseURL"
+		rendererParentClass="com.liferay.faces.portlet.component.baseurl.internal.BaseURLRenderer"
+		styleable="false">
+		<description>
+			<![CDATA[Creates a URL that points to the current portlet and triggers a render request with the supplied parameters. If the <code>var</code> attribute is present, the <code>portlet:renderURL</code> tag introduces an EL variable that contains a <code>javax.portlet.PortletURL</code> adequate for rendering. Otherwise, the URL is written to the response.]]>
+		</description>
+		<attributes>
+			<attribute>
+				<defaultValue>false</defaultValue>
+				<description>
+					<![CDATA[When true, copy the current request's render parameters to the URL. Defaults to false.]]>
+				</description>
+				<name>copyCurrentRenderParameters</name>
+				<type>boolean</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The name of the mode of the portlet which will be accessed via the URL.]]>
+				</description>
+				<name>portletMode</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The name of the window state of the portlet which will be accessed via the URL.]]>
+				</description>
+				<name>windowState</name>
+				<type>java.lang.String</type>
+			</attribute>
+		</attributes>
+	</component>
+	<component name="ResourceURL" extendsTags="BaseURLInherited"
+		parentClass="com.liferay.faces.portlet.component.baseurl.BaseURL"
+		rendererParentClass="com.liferay.faces.portlet.component.baseurl.internal.BaseURLRenderer"
+		styleable="false">
+		<description>
+			<![CDATA[Creates a URL that points to the current portlet and triggers a resource request with the supplied parameters. If the <code>var</code> attribute is present, the <code>portlet:resourceURL</code> tag introduces an EL variable that contains a <code>javax.portlet.ResourceURL</code> adequate for obtaining resources. Otherwise, the URL is written to the response.]]>
+		</description>
+		<attributes>
+			<attribute>
+				<defaultValue>javax.portlet.ResourceURL.PAGE</defaultValue>
+				<description>
+					<![CDATA[The cacheability of the resource returned by the resourceURL. Valid values include <code>ResourceURL.FULL</code>, <code>ResourceURL.PAGE</code>, and <code>ResourceURL.PORTLET</code>. Defaults to <code>ResourceURL.PAGE</code>.]]>
+				</description>
+				<name>cacheability</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The id for the resource.]]>
+				</description>
+				<name>id</name>
+				<override>true</override>
+				<type>java.lang.String</type>
+			</attribute>
+		</attributes>
+	</component>
+</components>

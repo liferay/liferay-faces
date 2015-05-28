@@ -34,7 +34,7 @@ public class LiferayResourceURLImpl extends LiferayBaseURLImpl implements Lifera
 	public String toString() {
 
 		if (toStringValue == null) {
-			toStringValue = getLiferayURLGenerator().generateURL(getParameterMap(), resourceId);
+			toStringValue = getLiferayURLGenerator().generateURL(getParameterMap(), cacheLevel, resourceId);
 		}
 
 		return toStringValue;

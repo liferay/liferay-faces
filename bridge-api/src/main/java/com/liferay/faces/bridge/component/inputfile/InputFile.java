@@ -14,12 +14,15 @@
 package com.liferay.faces.bridge.component.inputfile;
 
 import javax.el.MethodExpression;
+
 //JSF 2.0+: import javax.faces.component.FacesComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AbortProcessingException;
 import javax.faces.event.FacesEvent;
 
 import com.liferay.faces.bridge.event.FileUploadEvent;
+import com.liferay.faces.util.component.ComponentStateHelper;
+import com.liferay.faces.util.component.StateHelper;
 
 
 /**
@@ -35,6 +38,9 @@ public class InputFile extends InputFileBase {
 	public static final String RENDERER_TYPE =
 		"com.liferay.faces.bridge.component.inputfile.internal.InputFileRenderer";
 	public static final String STYLE_CLASS_NAME = "bridge-input-file";
+
+	// Private Data Members
+	private StateHelper stateHelper;
 
 	public InputFile() {
 		super();
@@ -57,6 +63,24 @@ public class InputFile extends InputFileBase {
 		catch (Exception e) {
 			throw new AbortProcessingException(e);
 		}
+	}
+
+	@Override
+	public void restoreState(FacesContext facesContext, Object state) {
+
+		Object[] values = (Object[]) state;
+		super.restoreState(facesContext, values[0]);
+		getStateHelper().restoreState(facesContext, values[1]);
+	}
+
+	@Override
+	public Object saveState(FacesContext facesContext) {
+
+		Object[] values = new Object[2];
+		values[0] = super.saveState(facesContext);
+		values[1] = getStateHelper().saveState(facesContext);
+
+		return values;
 	}
 
 	private String concatCssClasses(String... classNames) {
@@ -84,6 +108,16 @@ public class InputFile extends InputFileBase {
 		}
 
 		return allClasses;
+	}
+
+	@Override
+	public StateHelper getStateHelper() {
+
+		if (stateHelper == null) {
+			stateHelper = new ComponentStateHelper(this);
+		}
+
+		return stateHelper;
 	}
 
 	@Override
