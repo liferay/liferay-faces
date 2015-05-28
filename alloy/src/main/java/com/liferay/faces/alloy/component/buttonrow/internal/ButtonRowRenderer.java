@@ -28,7 +28,7 @@ import com.liferay.faces.alloy.component.buttonrow.ButtonRow;
 @ResourceDependencies(
 	{
 		@ResourceDependency(library = "liferay-faces-reslib", name = "build/aui-css/css/bootstrap.min.css"),
-		@ResourceDependency(library = "liferay-faces-alloy", name = "alloy.css"),
+		@ResourceDependency(library = "liferay-faces-alloy", name = "alloy.css")
 	}
 )
 //J+
