@@ -324,7 +324,7 @@ public abstract class LiferayURLGeneratorBaseImpl implements LiferayURLGenerator
 				}
 
 				if (urlCacheability != null) {
-					appendParameterToURL(P_P_CACHEABILITY, cacheability, url);
+					appendParameterToURL(P_P_CACHEABILITY, urlCacheability, url);
 				}
 			}
 
