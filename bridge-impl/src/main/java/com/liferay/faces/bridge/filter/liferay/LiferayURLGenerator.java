@@ -40,10 +40,11 @@ public interface LiferayURLGenerator {
 	 *
 	 * @param   additionalParameterMap  Additional URL parameters.
 	 * @param   resourceId              The resource ID.
+	 * @param   cacheability            The resource's cacheability level.
 	 *
 	 * @return  The Liferay-compatible URL.
 	 */
-	public String generateURL(Map<String, String[]> additionalParameterMap, String resourceId);
+	public String generateURL(Map<String, String[]> additionalParameterMap, String cacheability, String resourceId);
 
 	/**
 	 * Generates a Liferay-compatible URL with the specified additional URL parameters, portlet mode, and window state.

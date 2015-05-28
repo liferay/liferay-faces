@@ -79,6 +79,9 @@
 			<id>generate-components</id>
 			<properties>
 				<namespace>bridge</namespace>
+				<!-- To generate portlet components, run:
+					mvn generate-source -P generate-components -Dnamespace=portlet -Dnamespace.URI=http://java.sun.com/portlet_2_0
+				-->
 				<component.api.output.dir>../bridge-api/${component.impl.output.dir}</component.api.output.dir>
 			</properties>
 		</profile>

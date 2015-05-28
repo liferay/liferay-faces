@@ -51,6 +51,34 @@
 			<renderer-type>javax.faces.Messages</renderer-type>
 		</component-extension>
 	</component>
+	<component>
+		<component-type>com.liferay.faces.portlet.component.renderurl.RenderURL</component-type>
+		<component-class>com.liferay.faces.portlet.component.renderurl.RenderURL</component-class>
+	</component>
+	<component>
+		<component-type>com.liferay.faces.portlet.component.actionurl.ActionURL</component-type>
+		<component-class>com.liferay.faces.portlet.component.actionurl.ActionURL</component-class>
+	</component>
+	<component>
+		<component-type>com.liferay.faces.portlet.component.resourceurl.ResourceURL</component-type>
+		<component-class>com.liferay.faces.portlet.component.resourceurl.ResourceURL</component-class>
+	</component>
+	<component>
+		<component-type>com.liferay.faces.portlet.component.namespace.Namespace</component-type>
+		<component-class>com.liferay.faces.portlet.component.namespace.Namespace</component-class>
+	</component>
+	<component>
+		<component-type>com.liferay.faces.portlet.component.property.Property</component-type>
+		<component-class>com.liferay.faces.portlet.component.property.Property</component-class>
+	</component>
+	<component>
+		<component-type>com.liferay.faces.portlet.component.param.Param</component-type>
+		<component-class>com.liferay.faces.portlet.component.param.Param</component-class>
+	</component>
+	<component>
+		<component-type>com.liferay.faces.portlet.component.defineobjects.DefineObjects</component-type>
+		<component-class>com.liferay.faces.portlet.component.defineobjects.DefineObjects</component-class>
+	</component>
 	<factory>
 		<application-factory>com.liferay.faces.bridge.application.internal.ApplicationFactoryImpl</application-factory>
 		<factory-extension>
@@ -99,26 +127,26 @@
 		<renderer>
 			<description>Default renderer for portlet:renderURL tag</description>
 			<component-family>javax.faces.Output</component-family>
-			<renderer-type>com.liferay.faces.bridge.renderkit.portlet.internal.RenderURLRenderer</renderer-type>
-			<renderer-class>com.liferay.faces.bridge.renderkit.portlet.internal.RenderURLRenderer</renderer-class>
+			<renderer-type>com.liferay.faces.portlet.component.renderurl.internal.RenderURLRenderer</renderer-type>
+			<renderer-class>com.liferay.faces.portlet.component.renderurl.internal.RenderURLRenderer</renderer-class>
 		</renderer>
 		<renderer>
 			<description>Default renderer for portlet:actionURL tag</description>
 			<component-family>javax.faces.Output</component-family>
-			<renderer-type>com.liferay.faces.bridge.renderkit.portlet.internal.ActionURLRenderer</renderer-type>
-			<renderer-class>com.liferay.faces.bridge.renderkit.portlet.internal.ActionURLRenderer</renderer-class>
+			<renderer-type>com.liferay.faces.portlet.component.actionurl.internal.ActionURLRenderer</renderer-type>
+			<renderer-class>com.liferay.faces.portlet.component.actionurl.internal.ActionURLRenderer</renderer-class>
 		</renderer>
 		<renderer>
 			<description>Default renderer for portlet:resourceURL tag</description>
 			<component-family>javax.faces.Output</component-family>
-			<renderer-type>com.liferay.faces.bridge.renderkit.portlet.internal.ResourceURLRenderer</renderer-type>
-			<renderer-class>com.liferay.faces.bridge.renderkit.portlet.internal.ResourceURLRenderer</renderer-class>
+			<renderer-type>com.liferay.faces.portlet.component.resourceurl.internal.ResourceURLRenderer</renderer-type>
+			<renderer-class>com.liferay.faces.portlet.component.resourceurl.internal.ResourceURLRenderer</renderer-class>
 		</renderer>
 		<renderer>
 			<description>Default renderer for portlet:namespace tag</description>
 			<component-family>javax.faces.Output</component-family>
-			<renderer-type>com.liferay.faces.bridge.renderkit.portlet.internal.NameSpaceRenderer</renderer-type>
-			<renderer-class>com.liferay.faces.bridge.renderkit.portlet.internal.NameSpaceRenderer</renderer-class>
+			<renderer-type>com.liferay.faces.portlet.component.namespace.internal.NameSpaceRenderer</renderer-type>
+			<renderer-class>com.liferay.faces.portlet.component.namespace.internal.NamespaceRenderer</renderer-class>
 		</renderer>
 	</render-kit>
 </faces-config>

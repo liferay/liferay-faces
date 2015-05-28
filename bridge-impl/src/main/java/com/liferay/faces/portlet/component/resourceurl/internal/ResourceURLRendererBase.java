@@ -11,24 +11,23 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.bridge.component;
+package com.liferay.faces.portlet.component.resourceurl.internal;
+//J-
 
-import javax.faces.component.UIParameter;
+
+import javax.annotation.Generated;
+
+import com.liferay.faces.portlet.component.baseurl.internal.BaseURLRenderer;
 
 
 /**
- * This is a marker class which is used in the {@link BaseURLRenderer} for getting parameters related to the
- * portlet:param tag which is specified in PLT.26.6 of the JSR 286 specification.
- *
- * @author  Neil Griffin
+ * @author	Neil Griffin
  */
+@Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
+public abstract class ResourceURLRendererBase extends BaseURLRenderer {
 
-public class PortletParam extends UIParameter {
-
-	public static final String COMPONENT_TYPE = "com.liferay.faces.bridge.component.PortletParam";
-
-	public String getComponentType() {
-		return COMPONENT_TYPE;
-	}
-
+	// Protected Constants
+	protected static final String CACHEABILITY = "cacheability";
+	protected static final String ID = "id";
 }
+//J+
