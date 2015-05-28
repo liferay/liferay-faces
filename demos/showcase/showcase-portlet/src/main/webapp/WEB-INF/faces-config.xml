@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config version="2.1" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_1.xsd"
+	xmlns:util="http://www.liferay.com/xml/ns/liferay-faces-util-extension">
+
+	<factory>
+		<factory-extension>
+			<util:message-context-factory>com.liferay.faces.demos.context.ShowcaseMessageContextFactory</util:message-context-factory>
+		</factory-extension>
+	</factory>
+	<lifecycle>
+		<phase-listener>com.liferay.faces.util.lifecycle.DebugPhaseListener</phase-listener>
+		<phase-listener>com.liferay.faces.util.lifecycle.ViewScopePhaseListener</phase-listener>
+	</lifecycle>
+
+</faces-config>
