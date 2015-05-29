@@ -234,10 +234,6 @@ sub do_inplace_edits {
 			`perl -pi -e 's/web-facelettaglibrary_[0-9]_[0-9]\\.xsd/web-facelettaglibrary_${facesMajor}_${facesMinor}.xsd/' $file`;
 			`perl -pi -e 's/version="[0-9]\\.[0-9]"/version="$facesVersion"/' $file`;
 		}
-		else {
-			`perl -pi -e 's/web-facelettaglibrary_[0-9]_[0-9]\\.xsd/web-facelettaglibrary_${facesMajor}_${facesMinor}.xsd/' $file`;
-			`perl -pi -e 's/version="[0-9]\\.[0-9]"/version="$facesVersion"/' $file`;
-		}
 	}
 
 	#
