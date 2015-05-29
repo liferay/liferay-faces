@@ -1,14 +1,16 @@
-<faces-config version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+<faces-config version="1.2" xmlns="http://java.sun.com/xml/ns/javaee"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
-	<ordering>
-		<after>
-        	<others />
-        </after>
-		<before>
-			<name>c</name>
-		</before>
-	</ordering>
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_1_2.xsd">
+	<faces-config-extension>
+		<ordering>
+			<after>
+        		<others />
+        	</after>
+			<before>
+				<name>c</name>
+			</before>
+		</ordering>
+	</faces-config-extension>
 	<application>
 		<view-handler>com.a.ViewHandlerImpl</view-handler>
 	</application>
