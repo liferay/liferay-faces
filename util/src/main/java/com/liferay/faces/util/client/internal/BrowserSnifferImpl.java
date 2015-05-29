@@ -29,7 +29,7 @@ public class BrowserSnifferImpl extends LiferayPortalBrowserSnifferImpl implemen
 
 	// Private Constants
 	private static final boolean LIFERAY_FACES_BRIDGE_DETECTED = ProductMap.getInstance().get(
-			ProductConstants.LIFERAY_FACES_BRIDGE).isDetected();
+		ProductConstants.LIFERAY_FACES_BRIDGE).isDetected();
 	private static final boolean LIFERAY_PORTAL_DETECTED = ProductMap.getInstance().get(ProductConstants.LIFERAY_PORTAL)
 		.isDetected();
 
@@ -50,7 +50,7 @@ public class BrowserSnifferImpl extends LiferayPortalBrowserSnifferImpl implemen
 		}
 	}
 
-	// Java 6: @Override
+	@Override
 	public boolean isIpad() {
 		String userAgent = getUserAgent(httpServletRequest);
 
@@ -61,137 +61,137 @@ public class BrowserSnifferImpl extends LiferayPortalBrowserSnifferImpl implemen
 		return false;
 	}
 
-	// Java 6: @Override
+	@Override
 	public boolean acceptsGzip() {
 		return acceptsGzip(httpServletRequest);
 	}
 
-	// Java 6: @Override
+	@Override
 	public boolean isIeOnWin32() {
 		return isIeOnWin32(httpServletRequest);
 	}
 
-	// Java 6: @Override
+	@Override
 	public boolean isIeOnWin64() {
 		return isIeOnWin64(httpServletRequest);
 	}
 
-	// Java 6: @Override
+	@Override
 	public boolean isMozilla() {
 		return isMozilla(httpServletRequest);
 	}
 
-	// Java 6: @Override
+	@Override
 	public boolean isOpera() {
 		return isOpera(httpServletRequest);
 	}
 
-	// Java 6: @Override
+	@Override
 	public String getBrowserId() {
 		return getBrowserId(httpServletRequest);
 	}
 
-	// Java 6: @Override
+	@Override
 	public boolean isMac() {
 		return isMac(httpServletRequest);
 	}
 
-	// Java 6: @Override
+	@Override
 	public boolean isAndroid() {
 		return isAndroid(httpServletRequest);
 	}
 
-	// Java 6: @Override
+	@Override
 	public boolean isChrome() {
 		return isChrome(httpServletRequest);
 	}
 
-	// Java 6: @Override
+	@Override
 	public boolean isIe() {
 		return isIe(httpServletRequest);
 	}
 
-	// Java 6: @Override
+	@Override
 	public boolean isIphone() {
 		return isIphone(httpServletRequest);
 	}
 
-	// Java 6: @Override
+	@Override
 	public boolean isMobile() {
 		return isMobile(httpServletRequest);
 	}
 
-	// Java 6: @Override
+	@Override
 	public boolean isRtf() {
 		return isRtf(httpServletRequest);
 	}
 
-	// Java 6: @Override
+	@Override
 	public boolean isSafari() {
 		return isSafari(httpServletRequest);
 	}
 
-	// Java 6: @Override
+	@Override
 	public boolean isWapXhtml() {
 		return isWapXhtml(httpServletRequest);
 	}
 
-	// Java 6: @Override
+	@Override
 	public boolean isWml() {
 		return isWml(httpServletRequest);
 	}
 
-	// Java 6: @Override
+	@Override
 	public float getMajorVersion() {
 		return getMajorVersion(httpServletRequest);
 	}
 
-	// Java 6: @Override
+	@Override
 	public boolean isSun() {
 		return isSun(httpServletRequest);
 	}
 
-	// Java 6: @Override
+	@Override
 	public boolean isGecko() {
 		return isGecko(httpServletRequest);
 	}
 
-	// Java 6: @Override
+	@Override
 	public boolean isWap() {
 		return isWap(httpServletRequest);
 	}
 
-	// Java 6: @Override
+	@Override
 	public boolean isAir() {
 		return isAir(httpServletRequest);
 	}
 
-	// Java 6: @Override
+	@Override
 	public String getRevision() {
 		return getRevision(httpServletRequest);
 	}
 
-	// Java 6: @Override
+	@Override
 	public boolean isWindows() {
 		return isWindows(httpServletRequest);
 	}
 
-	// Java 6: @Override
+	@Override
 	public boolean isWebKit() {
 		return isWebKit(httpServletRequest);
 	}
 
-	// Java 6: @Override
+	@Override
 	public String getVersion() {
 		return getVersion(httpServletRequest);
 	}
 
-	// Java 6: @Override
+	@Override
 	public boolean isFirefox() {
 		return isFirefox(httpServletRequest);
 	}
 
-	// Java 6: @Override
+	@Override
 	public boolean isLinux() {
 		return isLinux(httpServletRequest);
 	}
