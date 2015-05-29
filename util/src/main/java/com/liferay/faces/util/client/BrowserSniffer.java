@@ -42,6 +42,8 @@ public interface BrowserSniffer {
 
 	public boolean isIphone();
 
+	public boolean isIpad();
+
 	public boolean isMobile();
 
 	public boolean isRtf();
