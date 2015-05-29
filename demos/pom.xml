@@ -15,6 +15,7 @@
 	<modules>
 		<module>bridge</module>
 		<module>portal</module>
+		<module>showcase</module>
 	</modules>
 
 	<profiles>
