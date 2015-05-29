@@ -51,6 +51,17 @@ public class BrowserSnifferImpl extends LiferayPortalBrowserSnifferImpl implemen
 	}
 
 	// Java 6: @Override
+	public boolean isIpad() {
+		String userAgent = getUserAgent(httpServletRequest);
+
+		if (userAgent.contains("ipad")) {
+			return true;
+		}
+
+		return false;
+	}
+
+	// Java 6: @Override
 	public boolean acceptsGzip() {
 		return acceptsGzip(httpServletRequest);
 	}
