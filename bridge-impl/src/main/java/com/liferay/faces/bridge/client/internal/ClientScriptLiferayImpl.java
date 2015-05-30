@@ -47,8 +47,13 @@ public class ClientScriptLiferayImpl extends ClientScriptLiferayCompatImpl {
 
 		if (scriptData == null) {
 
-			scriptData = new ScriptData();
-			requestMap.put(WebKeys.AUI_SCRIPT_DATA, scriptData);
+			scriptData = (ScriptData) requestMap.get(WebKeys.AUI_SCRIPT_DATA);
+
+			if (scriptData == null) {
+
+				scriptData = new ScriptData();
+				requestMap.put(WebKeys.AUI_SCRIPT_DATA, scriptData);
+			}
 		}
 
 		String portletId = StringPool.BLANK;
