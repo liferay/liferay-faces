@@ -2472,7 +2472,7 @@
 	</component>
 	<component name="OutputRemainingChars" delegateRendererType="javax.faces.Text"
 		extendsTags="ClientComponent OutputText" module="aui-char-counter"
-		parentClass="com.liferay.faces.alloy.component.outputtext.OutputText" rendererParentClass="com.liferay.faces.alloy.render.internal.DelegatingAlloyRendererBase"
+		parentClass="com.liferay.faces.alloy.component.outputtext.OutputTextBase" rendererParentClass="com.liferay.faces.alloy.render.internal.DelegatingAlloyRendererBase"
 		yui="true" yuiName="CharCounter">
 		<description>
 			<![CDATA[OutputRemainingChars is a UIOutput component that displays the number of characters remaining for an associated alloy:inputText or alloy:inputTextarea.]]>
@@ -2542,7 +2542,7 @@
 	</component>
 	<component name="OutputTooltip" delegateRendererType="javax.faces.Text"
 		extendsTags="OutputText OutputTooltipPopoverCommon" module="aui-tooltip"
-		parentClass="com.liferay.faces.alloy.component.outputtext.OutputText" rendererParentClass="com.liferay.faces.alloy.component.overlay.internal.OverlayRendererBase"
+		parentClass="com.liferay.faces.alloy.component.outputtext.OutputTextBase" rendererParentClass="com.liferay.faces.alloy.component.overlay.internal.OverlayRendererBase"
 		yui="true" yuiName="Tooltip">
 		<description>
 			<![CDATA[OutputTooltip is a UIOutput component that renders a <code>&lt;div&gt;</code> element which is displayed as an overlay that is initially styled with display:none so that it can be popped-up as an overlay. Since it extends HtmlOutputText, it supports all the features of h:outputText.]]>
