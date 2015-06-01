@@ -125,28 +125,28 @@
 			<renderer-class>com.liferay.faces.bridge.component.inputfile.internal.InputFileRenderer</renderer-class>
 		</renderer>
 		<renderer>
-			<description>Default renderer for portlet:renderURL tag</description>
-			<component-family>javax.faces.Output</component-family>
-			<renderer-type>com.liferay.faces.portlet.component.renderurl.internal.RenderURLRenderer</renderer-type>
-			<renderer-class>com.liferay.faces.portlet.component.renderurl.internal.RenderURLRenderer</renderer-class>
-		</renderer>
-		<renderer>
 			<description>Default renderer for portlet:actionURL tag</description>
-			<component-family>javax.faces.Output</component-family>
+			<component-family>com.liferay.faces.portlet.component.baseurl</component-family>
 			<renderer-type>com.liferay.faces.portlet.component.actionurl.internal.ActionURLRenderer</renderer-type>
 			<renderer-class>com.liferay.faces.portlet.component.actionurl.internal.ActionURLRenderer</renderer-class>
 		</renderer>
 		<renderer>
-			<description>Default renderer for portlet:resourceURL tag</description>
-			<component-family>javax.faces.Output</component-family>
-			<renderer-type>com.liferay.faces.portlet.component.resourceurl.internal.ResourceURLRenderer</renderer-type>
-			<renderer-class>com.liferay.faces.portlet.component.resourceurl.internal.ResourceURLRenderer</renderer-class>
-		</renderer>
-		<renderer>
 			<description>Default renderer for portlet:namespace tag</description>
-			<component-family>javax.faces.Output</component-family>
+			<component-family>com.liferay.faces.portlet.component.namespace</component-family>
 			<renderer-type>com.liferay.faces.portlet.component.namespace.internal.NameSpaceRenderer</renderer-type>
 			<renderer-class>com.liferay.faces.portlet.component.namespace.internal.NamespaceRenderer</renderer-class>
+		</renderer>
+		<renderer>
+			<description>Default renderer for portlet:renderURL tag</description>
+			<component-family>com.liferay.faces.portlet.component.baseurl</component-family>
+			<renderer-type>com.liferay.faces.portlet.component.renderurl.internal.RenderURLRenderer</renderer-type>
+			<renderer-class>com.liferay.faces.portlet.component.renderurl.internal.RenderURLRenderer</renderer-class>
+		</renderer>
+		<renderer>
+			<description>Default renderer for portlet:resourceURL tag</description>
+			<component-family>com.liferay.faces.portlet.component.baseurl</component-family>
+			<renderer-type>com.liferay.faces.portlet.component.resourceurl.internal.ResourceURLRenderer</renderer-type>
+			<renderer-class>com.liferay.faces.portlet.component.resourceurl.internal.ResourceURLRenderer</renderer-class>
 		</renderer>
 	</render-kit>
 </faces-config>
