@@ -2939,22 +2939,6 @@
 		<attributes>
 			<attribute>
 				<description>
-					<![CDATA[The width of the table border (measured in pixels).]]>
-				</description>
-				<name>border</name>
-				<type>int</type>
-				<generateJava>false</generateJava>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[The direction in which the layout of the component should be displayed. Valid values include <code>lineDirection</code> (the default) and <code>pageDirection</code>.]]>
-				</description>
-				<name>layout</name>
-				<type>java.lang.String</type>
-				<generateJava>false</generateJava>
-			</attribute>
-			<attribute>
-				<description>
 					<![CDATA[A CSS class name to apply to the label of each selected item.]]>
 				</description>
 				<name>selectedClass</name>
@@ -3025,24 +3009,6 @@
 		<description>
 			<![CDATA[SelectOneRadio is a UISelectOne component that renders radio buttons. Since it extends <a href="http://docs.oracle.com/javaee/7/api/javax/faces/component/html/HtmlSelectOneRadio.html" target="_blank"><code>HtmlSelectOneRadio</code></a>, it supports all the features of h:selectOneRadio such as accepting f:selectItem or f:selectItems as child tags.]]>
 		</description>
-		<attributes>
-			<attribute>
-				<description>
-					<![CDATA[The width of the table border (measured in pixels).]]>
-				</description>
-				<name>border</name>
-				<type>int</type>
-				<generateJava>false</generateJava>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[The direction in which the layout of the component should be displayed. Valid values include <code>lineDirection</code> (the default) and <code>pageDirection</code>.]]>
-				</description>
-				<name>layout</name>
-				<type>java.lang.String</type>
-				<generateJava>false</generateJava>
-			</attribute>
-		</attributes>
 	</component>
 	<component name="SelectStarRating" delegateRendererType="javax.faces.Radio"
 		extendsTags="ClientComponent FacesMessageLabelInherited StyleableInherited UIComponentBase UIInput" module="aui-rating"

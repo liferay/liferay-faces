@@ -7744,12 +7744,6 @@ java.lang.Object)</method-signature>
 			<type>javax.faces.component.UIComponent</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[The width of the table border (measured in pixels).]]></description>
-			<name>border</name>
-			<required>false</required>
-			<type>int</type>
-		</attribute>
-		<attribute>
 			<description><![CDATA[An optional attribute that can contain a value like <code>java.util.ArrayList</code> or <code>java.util.HashSet</code> that indicates the type of <code>java.util.Collection</code> for the component's value.]]></description>
 			<name>collectionType</name>
 			<required>false</required>
@@ -7818,12 +7812,6 @@ java.lang.Object)</method-signature>
 		<attribute>
 			<description><![CDATA[HTML passthrough attribute specifying the language code used in the element.]]></description>
 			<name>lang</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[The direction in which the layout of the component should be displayed. Valid values include <code>lineDirection</code> (the default) and <code>pageDirection</code>.]]></description>
-			<name>layout</name>
 			<required>false</required>
 			<type>java.lang.String</type>
 		</attribute>
@@ -9058,12 +9046,6 @@ java.lang.Object)</method-signature>
 			<type>javax.faces.component.UIComponent</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[The width of the table border (measured in pixels).]]></description>
-			<name>border</name>
-			<required>false</required>
-			<type>int</type>
-		</attribute>
-		<attribute>
 			<description><![CDATA[The class name of the converter instance that is to be used by this component.]]></description>
 			<name>converter</name>
 			<required>false</required>
@@ -9126,12 +9108,6 @@ java.lang.Object)</method-signature>
 		<attribute>
 			<description><![CDATA[HTML passthrough attribute specifying the language code used in the element.]]></description>
 			<name>lang</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[The direction in which the layout of the component should be displayed. Valid values include <code>lineDirection</code> (the default) and <code>pageDirection</code>.]]></description>
-			<name>layout</name>
 			<required>false</required>
 			<type>java.lang.String</type>
 		</attribute>
