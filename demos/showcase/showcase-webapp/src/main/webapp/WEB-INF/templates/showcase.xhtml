@@ -8,9 +8,9 @@
 	<link rel="stylesheet" type="text/css" href="#{request.contextPath}/resources/css/showcase.css" />
 	<h:panelGrid columns="2" styleClass="row">
 		<h:panelGroup layout="block" styleClass="aui-column showcase-nav-col" width="#{browserSniffer.ipad ? '30' : '25'}">
-			<!-- <h:link outcome="home"> -->
+			<ui:remove><!-- <h:link outcome="home"> --></ui:remove>
 				<h:graphicImage value="/resources/images/liferay-faces-logo-nav.png" styleClass="logo" />
-			<!-- </h:link> -->
+			<ui:remove><!-- </h:link> --></ui:remove>
 			<ui:repeat selectedIndex="#{selectedComponent.categoryIndex}" value="#{listModelBean.showcaseCategories}"
 				var="showcaseCategory">
 				<h:panelGroup layout="block" styleClass="tab">

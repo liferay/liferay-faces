@@ -4,11 +4,11 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets" template="/WEB-INF/templates/showcase-#{showcaseModelBean.deploymentType}.xhtml">
 
 	<ui:define name="content">
-		<!-- <f:metadata>
+		<ui:remove><!-- <f:metadata>
 			<f:viewParam name="componentPrefix" value="#{showcaseModelBean.viewParameters.componentPrefix}" />
 			<f:viewParam name="componentName" value="#{showcaseModelBean.viewParameters.componentName}" />
 			<f:viewParam name="componentUseCase" value="#{showcaseModelBean.viewParameters.componentUseCase}" />
-		</f:metadata> -->
+		</f:metadata> --></ui:remove>
 		<link rel="stylesheet" type="text/css" href="#{request.contextPath}/resources/css/component.css" />
 		<c:set value="#{showcaseModelBean.selectedComponent}" var="selectedComponent" />
 		<c:set value="#{selectedComponent.camelCaseName}" var="selectedComponentCamelCaseName" />
