@@ -1,0 +1,15 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:portlet="http://java.sun.com/portlet_2_0"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:showcase="http://liferay.com/faces/showcase"
+	template="/WEB-INF/templates/component-3col.xhtml">
+
+	<ui:define name="col1">
+		<showcase:example>
+			<portlet:resourceURL escapeXml="false" var="resourceURL">
+				<portlet:param name="javax.faces.resource" value="liferay-faces-logo.png" />
+				<portlet:param name="ln" value="images" />
+			</portlet:resourceURL>
+			<img src="#{resourceURL}" />
+		</showcase:example>
+	</ui:define>
+
+</ui:composition>

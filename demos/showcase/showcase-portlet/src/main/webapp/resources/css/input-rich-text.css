@@ -1,0 +1,9 @@
+/* The Liferay Portal margin-bottom is 30px for div elements with class="control-group" (such as alloy:field). */
+/* Set the margin-bottom to zero since the portal:inputRichText is not a child of the alloy:field component tag. */ 
+.aui div.input-rich-text-field.control-group {
+	margin-bottom: 0px;
+}
+
+.aui div.portal-input-rich-text {
+	margin-bottom: 30px;
+}

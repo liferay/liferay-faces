@@ -1,0 +1,24 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:showcase="http://liferay.com/faces/showcase">
+
+	<showcase:note>
+		<h2>#{i18n['note']}</h2>
+		<p>
+			<h:outputText escape="false" value="#{i18n['bridge-inputfile-portlet-only']}" />
+		</p>
+		<p>
+			<!-- <h:outputText value="#{i18n['please-consider-using']} " />
+			<h:link value="alloy:inputFile">
+				<f:param name="componentPrefix" value="alloy" />
+				<f:param name="componentName" value="inputfile" />
+				<f:param name="componentUseCase" value="general" />
+			</h:link>
+			<h:outputText escape="false" value=" #{i18n['alloy-input-file-benefits-description']}" /> -->
+		</p>
+		<p>
+			<h:outputText escape="false" value="#{i18n['the-enclosing-form-must-have-multipart-form-data']} " />
+		</p>
+	</showcase:note>
+
+</ui:composition>

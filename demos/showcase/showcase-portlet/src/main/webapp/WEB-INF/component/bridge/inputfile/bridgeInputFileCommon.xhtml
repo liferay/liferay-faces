@@ -1,0 +1,27 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:c="http://java.sun.com/jstl/core" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	<c:set value="#{bridgeInputFileModelBean.uploadedFiles.size()}" var="totalFiles" />
+	<h:dataTable id="modelValue" rendered="#{totalFiles > 0}" styleClass="files"
+		value="#{bridgeInputFileModelBean.uploadedFiles}" var="uploadedFile">
+		<h:column>
+			<h:commandButton actionListener="#{bridgeInputFileBackingBean.deleteUploadedFile}"
+				image="/resources/images/icon-delete.png"
+				onclick="if (! confirm('#{i18n['are-you-sure-you-want-to-delete-this']}')) {return false;}"
+				render="@form" value="#{uploadedFile.id}">
+			</h:commandButton>
+		</h:column>
+		<h:column>
+			<h:panelGroup layout="block">
+				<h:outputText rendered="#{totalFiles > 0}" value="#{i18n['file-name']}" />
+			</h:panelGroup>
+			<h:outputText value="#{uploadedFile.name}" />
+		</h:column>
+		<h:column >
+			<h:panelGroup layout="block">
+				<h:outputText rendered="#{totalFiles > 0}" value="#{i18n['size']}" />
+			</h:panelGroup>
+			<h:outputText value="#{uploadedFile.size}" />
+		</h:column>
+	</h:dataTable>
+</ui:composition>
