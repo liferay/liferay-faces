@@ -4,22 +4,22 @@
 	<namespace>http://liferay.com/faces/showcase</namespace>
 	<tag>
 		<tag-name>example</tag-name>
-		<source>/resources/showcase/example.xhtml</source>
+		<source>resources/showcase/example.xhtml</source>
 	</tag>
 	<tag>
 		<tag-name>note</tag-name>
-		<source>/resources/showcase/note.xhtml</source>
+		<source>resources/showcase/note.xhtml</source>
 	</tag>
 	<tag>
 		<tag-name>outputAttribute</tag-name>
-		<source>/resources/showcase/outputAttribute.xhtml</source>
+		<source>resources/showcase/outputAttribute.xhtml</source>
 	</tag>
 	<tag>
 		<tag-name>outputModel</tag-name>
-		<source>/resources/showcase/outputModel.xhtml</source>
+		<source>resources/showcase/outputModel.xhtml</source>
 	</tag>
 	<tag>
 		<tag-name>outputParameter</tag-name>
-		<source>/resources/showcase/outputParameter.xhtml</source>
+		<source>resources/showcase/outputParameter.xhtml</source>
 	</tag>
 </facelet-taglib>
