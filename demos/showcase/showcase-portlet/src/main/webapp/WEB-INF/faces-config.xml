@@ -5,7 +5,7 @@
 	xmlns:util="http://www.liferay.com/xml/ns/liferay-faces-util-extension">
 
 	<application>
-		<view-handler>com.liferay.faces.bridge.application.internal.ViewHandlerFaceletImpl</view-handler>
+		<view-handler>com.liferay.faces.bridge.application.PortletFaceletViewHandler</view-handler>
 	</application>
 	<converter>
 		<converter-id>convertGmapCountry</converter-id>

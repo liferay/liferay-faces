@@ -8,7 +8,7 @@
 			<base-name>i18n</base-name>
 			<var>i18n</var>
 		</resource-bundle>
-		<view-handler>com.liferay.faces.bridge.application.internal.ViewHandlerFaceletImpl</view-handler>
+		<view-handler>com.liferay.faces.bridge.application.PortletFaceletViewHandler</view-handler>
 	</application>
 	<managed-bean>
 		<managed-bean-name>bookingService</managed-bean-name>
