@@ -14,11 +14,11 @@
 package com.liferay.faces.alloy.component.outputtooltip;
 //J-
 
-import com.liferay.faces.alloy.component.outputtext.OutputTextBase;
-import com.liferay.faces.util.component.ClientComponent;
-import com.liferay.faces.util.component.Styleable;
-
 import javax.annotation.Generated;
+import com.liferay.faces.alloy.component.outputtext.OutputTextBase;
+
+import com.liferay.faces.util.component.Styleable;
+import com.liferay.faces.util.component.ClientComponent;
 
 /**
  * @author	Bruno Basto
