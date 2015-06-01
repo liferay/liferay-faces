@@ -3,7 +3,8 @@
 	xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:alloy="http://liferay.com/faces/alloy"
 	xmlns:aui-cc="http://liferay.com/faces/aui-cc" xmlns:liferay-ui="http://liferay.com/faces/ui"
 	xmlns:liferay-util="http://liferay.com/faces/util" xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:portlet="http://java.sun.com/portlet_2_0">
+	xmlns:portlet="http://java.sun.com/portlet_2_0" xmlns:portal="http://liferay.com/faces/portal"
+	xmlns:aui="http://liferay.com/faces/aui">
 	<alloy:form id="f">
 		<h1 class="header-title">#{i18n['new-user-registration']}</h1>
 		<aui-cc:messages globalOnly="true" layout="table" />
@@ -39,18 +40,19 @@
 						value="#{registrantModelBean.registrant.password1}" required="true" />
 					<aui-cc:input inlineMessage="true" label="#{i18n['confirm-password']}" type="password"
 						value="#{registrantModelBean.registrant.password2}" required="true" />
-					<liferay-ui:captcha rendered="#{registrantBackingBean.captchaRendered}" />
-					<aui-cc:input inlineMessage="true" label="#{i18n['text-verification']}"
-						value="#{registrantModelBean.registrant.captchaText}" required="true">
-						<liferay-util:validateCaptcha for="inputText" />
-					</aui-cc:input>
+					<aui:field label="#{i18n['text-verification']}" 
+						rendered="#{registrantBackingBean.captchaRendered}">
+						<portal:captcha id="captchaInput" value="#{registrantModelBean.registrant.captchaText}"
+						required="true"/>
+						<aui-cc:message for="captchaInput" style="display: inline;" />
+					</aui:field>
 				</alloy:fieldset>
 			</alloy:column>
 		</alloy:row>
-		<portal:buttonRow>
+		<alloy:buttonRow>
 			<h:commandButton actionListener="#{registrantBackingBean.submit}"
 				styleClass="aui-button-input aui-button-input-submit" value="#{i18n['submit']}" />
-		</portal:buttonRow>
+		</alloy:buttonRow>
 	</alloy:form>
 
 </ui:composition>

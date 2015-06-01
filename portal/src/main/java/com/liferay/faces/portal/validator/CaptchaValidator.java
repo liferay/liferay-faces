@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.captcha.CaptchaUtil;
 
 /**
  * @author  Neil Griffin
+ * @deprecated  see {@link com.liferay.faces.portal.component.captcha.Captcha}.
  */
 public class CaptchaValidator implements Validator {
 
