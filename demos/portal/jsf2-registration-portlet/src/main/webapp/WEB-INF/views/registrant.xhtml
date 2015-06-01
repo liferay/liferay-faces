@@ -1,51 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
-	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:alloy="http://liferay.com/faces/alloy"
-	xmlns:aui-cc="http://liferay.com/faces/aui-cc" xmlns:liferay-ui="http://liferay.com/faces/ui"
-	xmlns:liferay-util="http://liferay.com/faces/util" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-	xmlns:portlet="http://java.sun.com/portlet_2_0" xmlns:portal="http://liferay.com/faces/portal">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
+	xmlns:portal="http://liferay.com/faces/portal" xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 	<alloy:form id="f">
 		<h1 class="header-title">#{i18n['new-user-registration']}</h1>
-		<aui-cc:messages globalOnly="true" layout="table" />
+		<alloy:messages globalOnly="true" layout="table" />
 		<alloy:row>
 			<alloy:column width="20">
 				<alloy:fieldset label="#{i18n['identification']}">
-					<aui-cc:input inlineMessage="true" label="#{i18n['first-name']}"
-						value="#{registrantModelBean.registrant.firstName}" required="true" />
-					<aui-cc:input inlineMessage="true" label="#{i18n['middle-name']}"
-						value="#{registrantModelBean.registrant.middleName}" required="true" />
-					<aui-cc:input inlineMessage="true" label="#{i18n['last-name']}" value="#{registrantModelBean.registrant.lastName}"
-						required="true" />
-					<aui-cc:input inlineMessage="true" label="#{i18n['email-address']}"
-						value="#{registrantModelBean.registrant.emailAddress}" required="true" />
-
-					<aui-cc:input inlineMessage="true" label="#{i18n['screen-name']}"
-						value="#{registrantModelBean.registrant.screenName}" required="true" />
+					<alloy:field label="#{i18n['first-name']}">
+						<alloy:inputText value="#{registrantModelBean.registrant.firstName}" required="true" />
+					</alloy:field>
+					<alloy:field label="#{i18n['middle-name']}">
+						<alloy:inputText value="#{registrantModelBean.registrant.middleName}" required="true" />
+					</alloy:field>
+					<alloy:field label="#{i18n['last-name']}">
+						<alloy:inputText value="#{registrantModelBean.registrant.lastName}"	required="true" />
+					</alloy:field>
+					<alloy:field label="#{i18n['email-address']}">
+						<alloy:inputText value="#{registrantModelBean.registrant.emailAddress}" required="true" />
+					</alloy:field>
+					<alloy:field label="#{i18n['screen-name']}">
+						<alloy:inputText value="#{registrantModelBean.registrant.screenName}" required="true" />
+					</alloy:field>
 				</alloy:fieldset>
 			</alloy:column>
 			<alloy:column width="20">
 				<alloy:fieldset label="#{i18n['additional-info']}">
-					<aui-cc:input inlineMessage="true" label="#{i18n['company-name']}"
-						value="#{registrantModelBean.registrant.companyName}" required="true" />
-					<aui-cc:input inlineMessage="true" label="#{i18n['mobile-phone']}"
-						value="#{registrantModelBean.registrant.mobilePhone}" required="true" />
-					<aui-cc:input inlineMessage="true" label="#{i18n['favorite-color']}"
-						value="#{registrantModelBean.registrant.favoriteColor}" required="false" />
+					<alloy:field label="#{i18n['company-name']}">
+						<alloy:inputText value="#{registrantModelBean.registrant.companyName}" required="true" />
+					</alloy:field>
+					<alloy:field label="#{i18n['mobile-phone']}">
+						<alloy:inputText value="#{registrantModelBean.registrant.mobilePhone}" required="true" />
+					</alloy:field>
+					<alloy:field label="#{i18n['favorite-color']}">
+						<alloy:inputText value="#{registrantModelBean.registrant.favoriteColor}" required="false" />
+					</alloy:field>
 				</alloy:fieldset>
 			</alloy:column>
 			<alloy:column width="20">
 				<alloy:fieldset label="#{i18n['security']}">
-					<aui-cc:input inlineMessage="true" label="#{i18n['password']}" type="password"
-						value="#{registrantModelBean.registrant.password1}" required="true" />
-					<aui-cc:input inlineMessage="true" label="#{i18n['confirm-password']}" type="password"
-						value="#{registrantModelBean.registrant.password2}" required="true" />
-					<portal:captcha rendered="#{registrantBackingBean.captchaRendered}" />					
+					<alloy:field label="#{i18n['password']}">
+						<alloy:inputSecret required="true" value="#{registrantModelBean.registrant.password1}" />
+					</alloy:field>
+					<alloy:field label="#{i18n['confirm-password']}">
+						<alloy:inputSecret required="true" value="#{registrantModelBean.registrant.password2}" />
+					</alloy:field>
+					<alloy:field label="#{i18n['text-verification']}">
+						<portal:captcha rendered="#{registrantBackingBean.captchaRendered}" required="true"
+							value="#{registrantModelBean.registrant.captchaText}" />
+					</alloy:field>
 				</alloy:fieldset>
 			</alloy:column>
 		</alloy:row>
 		<alloy:buttonRow>
-			<h:commandButton actionListener="#{registrantBackingBean.submit}"
-				styleClass="aui-button-input aui-button-input-submit" value="#{i18n['submit']}" />
+			<alloy:commandButton actionListener="#{registrantBackingBean.submit}" ajax="false"
+				value="#{i18n['submit']}" />
 		</alloy:buttonRow>
 	</alloy:form>
 
