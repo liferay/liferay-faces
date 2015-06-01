@@ -11,7 +11,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.bridge.application.internal;
+package com.liferay.faces.bridge.application;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -33,13 +33,13 @@ import com.sun.facelets.FaceletViewHandler;
  *
  * @author  Neil Griffin
  */
-public class ViewHandlerFaceletImpl extends FaceletViewHandler {
+public class PortletFaceletViewHandler extends FaceletViewHandler {
 
 	// Private Constants
 	private static final String FACELETS_CONTENT_TYPE = "facelets.ContentType";
 	private static final String FACELETS_ENCODING = "facelets.Encoding";
 
-	public ViewHandlerFaceletImpl(ViewHandler parent) {
+	public PortletFaceletViewHandler(ViewHandler parent) {
 		super(parent);
 	}
 
@@ -67,5 +67,4 @@ public class ViewHandlerFaceletImpl extends FaceletViewHandler {
 
 		return responseWriter;
 	}
-
 }
