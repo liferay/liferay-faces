@@ -5,43 +5,47 @@
 	<tag>
 		<tag-name>actionURL</tag-name>
 		<component>
-			<component-type>com.liferay.faces.bridge.component.PortletActionURL</component-type>
+			<component-type>com.liferay.faces.portlet.component.actionurl.ActionURL</component-type>
+			<renderer-type>com.liferay.faces.portlet.component.actionurl.internal.ActionURLRenderer</renderer-type>
 		</component>
 	</tag>
 	<tag>
 		<tag-name>defineObjects</tag-name>
 		<component>
-			<component-type>com.liferay.faces.bridge.component.PortletDefineObjects</component-type>
+			<component-type>com.liferay.faces.portlet.component.defineobjects.DefineObjects</component-type>
 		</component>
 	</tag>
 	<tag>
 		<tag-name>namespace</tag-name>
 		<component>
-			<component-type>com.liferay.faces.bridge.component.PortletNameSpace</component-type>
+			<component-type>com.liferay.faces.portlet.component.namespace.Namespace</component-type>
+			<renderer-type>com.liferay.faces.portlet.component.namespace.internal.NameSpaceRenderer</renderer-type>
 		</component>
 	</tag>
 	<tag>
 		<tag-name>param</tag-name>
 		<component>
-			<component-type>com.liferay.faces.bridge.component.PortletParam</component-type>
+			<component-type>com.liferay.faces.portlet.component.param.Param</component-type>
 		</component>
 	</tag>
 	<tag>
 		<tag-name>property</tag-name>
 		<component>
-			<component-type>com.liferay.faces.bridge.component.PortletProperty</component-type>
+			<component-type>com.liferay.faces.portlet.component.property.Property</component-type>
 		</component>
 	</tag>
 	<tag>
 		<tag-name>renderURL</tag-name>
 		<component>
-			<component-type>com.liferay.faces.bridge.component.PortletRenderURL</component-type>
+			<component-type>com.liferay.faces.portlet.component.renderurl.RenderURL</component-type>
+			<renderer-type>com.liferay.faces.portlet.component.renderurl.internal.RenderURLRenderer</renderer-type>
 		</component>
 	</tag>
 	<tag>
 		<tag-name>resourceURL</tag-name>
 		<component>
-			<component-type>com.liferay.faces.bridge.component.PortletResourceURL</component-type>
+			<component-type>com.liferay.faces.portlet.component.resourceurl.ResourceURL</component-type>
+			<renderer-type>com.liferay.faces.portlet.component.resourceurl.internal.ResourceURLRenderer</renderer-type>
 		</component>
 	</tag>
 </facelet-taglib>
