@@ -27,7 +27,7 @@ import com.liferay.faces.util.component.ComponentUtil;
 public class SelectManyCheckbox extends SelectManyCheckboxBase {
 
 	// Public Constants
-	public static final String STYLE_CLASS_NAME = "alloy-select-many-checkbox radio";
+	public static final String STYLE_CLASS_NAME = "alloy-select-many-checkbox checkbox";
 
 	@Override
 	public String getLabel() {

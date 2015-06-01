@@ -32,9 +32,6 @@ import com.liferay.faces.util.lang.StringPool;
 @FacesRenderer(componentFamily = Field.COMPONENT_FAMILY, rendererType = Field.RENDERER_TYPE)
 public class FieldRenderer extends FieldRendererBase {
 
-	// Private Constants
-	private static final String CONTROL_LABEL = "control-label";
-
 	@Override
 	public void encodeChildren(FacesContext facesContext, UIComponent uiComponent) throws IOException {
 
@@ -88,7 +85,7 @@ public class FieldRenderer extends FieldRendererBase {
 	protected void encodeCheckboxLabelInnerHTML(ResponseWriter responseWriter, String label, String checkboxClientId)
 		throws IOException {
 
-		responseWriter.writeAttribute(StringPool.CLASS, CONTROL_LABEL + " checkbox", null);
+		responseWriter.writeAttribute(StringPool.CLASS, "checkbox", null);
 		responseWriter.writeAttribute("for", checkboxClientId, null);
 		responseWriter.writeText(label, LABEL);
 	}
@@ -96,7 +93,7 @@ public class FieldRenderer extends FieldRendererBase {
 	protected void encodeLabel(ResponseWriter responseWriter, Field field, String label) throws IOException {
 
 		responseWriter.startElement(LABEL, field);
-		responseWriter.writeAttribute(StringPool.CLASS, CONTROL_LABEL, null);
+		responseWriter.writeAttribute(StringPool.CLASS, "control-label", null);
 		responseWriter.writeText(label, LABEL);
 		responseWriter.endElement(LABEL);
 	}
