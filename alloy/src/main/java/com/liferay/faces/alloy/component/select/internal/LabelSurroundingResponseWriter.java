@@ -28,6 +28,7 @@ import com.liferay.faces.util.render.internal.DelegationResponseWriterBase;
  */
 public class LabelSurroundingResponseWriter extends DelegationResponseWriterBase {
 
+	// Private Data Members
 	private String cssClass;
 	private Map<String, Object> inputAttributes = new HashMap<String, Object>();
 	private boolean inputMovedInsideLabel = false;
