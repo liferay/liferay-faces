@@ -63,5 +63,6 @@ public class TestPages {
 
 	static {
 		GUEST_PAGES = new ArrayList<PortalPage>();
+		GUEST_PAGES.add(new PortalPage("SHOWCASE", "1_WAR_showcaseportlet", "2_columns_iii"));
 	}
 }

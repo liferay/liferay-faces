@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config version="1.2" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_1_2.xsd">
+
+	<navigation-rule>
+		<from-view-id>/views/component.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>toParam</from-outcome>
+			<to-view-id>/views/component.xhtml</to-view-id>
+			<redirect>
+				<view-param>
+					<name>componentPrefix</name>
+					<value>alloy</value>
+				</view-param>
+				<view-param>
+					<name>componentName</name>
+					<value>#{showcaseModelBean.selectedComponent.lowerCaseName}</value>
+				</view-param>
+				<view-param>
+					<name>componentUseCase</name>
+					<value>param</value>
+				</view-param>
+			</redirect>
+		</navigation-case>
+	</navigation-rule>
+
+</faces-config>

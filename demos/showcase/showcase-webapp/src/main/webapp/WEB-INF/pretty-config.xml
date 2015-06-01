@@ -1,0 +1,16 @@
+<pretty-config xmlns="http://ocpsoft.org/schema/rewrite-config-prettyfaces" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+  xsi:schemaLocation="http://ocpsoft.org/schema/rewrite-config-prettyfaces
+                      http://ocpsoft.org/xml/ns/prettyfaces/rewrite-config-prettyfaces.xsd">
+
+	<url-mapping id="welcome">
+		<pattern value="/" />
+		<view-id value="/views/home.faces" />
+	</url-mapping>
+
+	<url-mapping id="liferay-friendly-url">
+		<pattern value="/web/guest/showcase/-/component/#{componentPrefix}/#{componentName}/#{componentUseCase}" />
+		<view-id value="/views/component.faces" />
+	</url-mapping>
+
+</pretty-config>

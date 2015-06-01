@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config version="1.2" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_1_2.xsd"
+	xmlns:util="http://www.liferay.com/xml/ns/liferay-faces-util-extension">
+
+	<application>
+		<view-handler>com.liferay.faces.bridge.application.internal.ViewHandlerFaceletImpl</view-handler>
+	</application>
+	<converter>
+		<converter-id>convertGmapCountry</converter-id>
+		<converter-class>com.liferay.faces.demos.converter.CountryGmapConverter</converter-class>
+	</converter>
+	<converter>
+		<converter-id>convertCountry</converter-id>
+		<converter-class>com.liferay.faces.demos.converter.CountryConverter</converter-class>
+	</converter>
+	<factory>
+		<factory-extension>
+			<util:message-context-factory>com.liferay.faces.demos.context.ShowcaseMessageContextFactory</util:message-context-factory>
+		</factory-extension>
+	</factory>
+	<lifecycle>
+		<phase-listener>com.liferay.faces.util.lifecycle.DebugPhaseListener</phase-listener>
+		<!-- <phase-listener>com.liferay.faces.util.lifecycle.ViewScopePhaseListener</phase-listener> -->
+	</lifecycle>
+	<managed-bean>
+		<managed-bean-name>bridgeInputFileBackingBean</managed-bean-name>
+		<managed-bean-class>com.liferay.faces.demos.bean.BridgeInputFileBackingBean</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+		<managed-property>
+			<property-name>bridgeInputFileModelBean</property-name>
+			<value>#{bridgeInputFileModelBean}</value>
+		</managed-property>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>bridgeInputFileModelBean</managed-bean-name>
+		<managed-bean-class>com.liferay.faces.demos.bean.BridgeInputFileModelBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>compatBean</managed-bean-name>
+		<managed-bean-class>com.liferay.faces.demos.bean.CompatBean</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>countryService</managed-bean-name>
+		<managed-bean-class>com.liferay.faces.demos.service.CountryServiceMockImpl</managed-bean-class>
+		<managed-bean-scope>application</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>customerService</managed-bean-name>
+		<managed-bean-class>com.liferay.faces.demos.service.CustomerServiceMockImpl</managed-bean-class>
+		<managed-bean-scope>application</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>inputRichTextBacking</managed-bean-name>
+		<managed-bean-class>com.liferay.faces.demos.bean.InputRichTextBacking</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>permissionsURLModelBean</managed-bean-name>
+		<managed-bean-class>com.liferay.faces.demos.bean.PermissionsURLModelBean</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+
+</faces-config>

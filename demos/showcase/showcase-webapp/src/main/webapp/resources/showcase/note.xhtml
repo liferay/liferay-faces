@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.w3.org/1999/xhtml http://www.w3.org/2002/08/xhtml/xhtml1-transitional.xsd">
+
+	<ui:remove><!-- <cc:interface>
+		<cc:attribute name="iconSize" default="big" />
+		<cc:attribute name="value" />
+	</cc:interface> --></ui:remove>
+
+	<c:if test="#{empty iconSize}">
+		<c:set var="iconSize" value="big" />
+	</c:if>
+
+	<ui:remove><!-- <cc:implementation> --></ui:remove>
+		<div class="showcase-note">
+			<h:panelGrid columns="2">
+				<c:choose>
+					<c:when test="#{iconSize == 'small'}">
+						<h:graphicImage value="/resources/images/note.png" style="height: 40px;" />
+					</c:when>
+					<c:otherwise>
+						<h:graphicImage value="/resources/images/note.png" />
+					</c:otherwise>
+				</c:choose>
+				<h:panelGroup layout="block">
+					<h:outputText escape="false" value="#{value}" />
+					<ui:insert />
+				</h:panelGroup>
+			</h:panelGrid>
+		</div>
+	<ui:remove><!-- </cc:implementation> --></ui:remove>
+
+</ui:component>

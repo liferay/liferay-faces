@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:c="http://java.sun.com/jstl/core" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets">
+	<c:set value="#{showcaseModelBean.selectedComponent}" var="selectedComponent" />
+	<c:set value="#{selectedComponent.key}" var="selectedComponentKey" />
+	<c:set value="#{selectedComponent.useCaseName}" var="selectedComponentUseCaseName" />
+	<link rel="stylesheet" type="text/css" href="#{request.contextPath}/resources/css/showcase.css" />
+	<h:panelGrid columns="2" styleClass="row">
+		<h:panelGroup layout="block" styleClass="aui-column showcase-nav-col" width="#{browserSniffer.ipad ? '30' : '25'}">
+			<!-- <h:link outcome="home"> -->
+				<h:graphicImage value="/resources/images/liferay-faces-logo-nav.png" styleClass="logo" />
+			<!-- </h:link> -->
+			<ui:repeat selectedIndex="#{selectedComponent.categoryIndex}" value="#{listModelBean.showcaseCategories}"
+				var="showcaseCategory">
+				<h:panelGroup layout="block" styleClass="tab">
+					<h:panelGroup layout="block">
+						<h:panelGroup layout="block">
+							<h:graphicImage value="/resources/images/icon-#{showcaseCategory}.png" />
+							<h:outputText styleClass="category-name" value="#{i18n[showcaseCategory]}" />
+						</h:panelGroup>
+					</h:panelGroup>
+					<ul class="nav nav-list">
+						<ui:repeat value="#{listModelBean.showcaseCategoryMap[showcaseCategory]}" var="showcaseComponent">
+							<li class="#{(selectedComponentKey == showcaseComponent.key) ? 'active' : ''}">
+								<a href="#{compatBean.getComponentURL(showcaseComponent.prefix,showcaseComponent.lowerCaseName,'general')}">
+									<h:outputText value="#{showcaseComponent}" />
+									<h:graphicImage value="/resources/images/chevron-right.png" />
+								</a>
+								<ui:fragment rendered="#{selectedComponentKey == showcaseComponent.key}">
+									<ul class="nav nav-list" >
+										<ui:repeat value="#{selectedComponent.useCases}" var="useCase">
+											<li class="#{(selectedComponentUseCaseName == useCase.name) ? 'active' : ''}"
+												style="white-space: nowrap;">
+												<a href="#{compatBean.getComponentURL(selectedComponent.prefix,selectedComponent.lowerCaseName,useCase.name)}">
+													<h:outputText value="#{i18n[useCase.name]}" />
+													<h:graphicImage value="/resources/images/chevron-right.png" />
+												</a>
+											</li>
+										</ui:repeat>
+									</ul>
+								</ui:fragment>
+							</li>
+						</ui:repeat>
+					</ul>
+				</h:panelGroup>
+			</ui:repeat>
+		</h:panelGroup>
+		<h:panelGroup layout="block" styleClass="aui-column" style="margin-left: 4px;" width="#{browserSniffer.ipad ? '70' : '75'}">
+			<h:panelGroup layout="block" styleClass="showcase-container">
+				<ui:insert name="content" />
+			</h:panelGroup>
+			<h:panelGroup layout="block" styleClass="showcase-container showcase-info">
+				<h:outputText escape="false" value="#{listModelBean.dependencyInfo}" />
+			</h:panelGroup>
+		</h:panelGroup>
+	</h:panelGrid>
+</ui:composition>

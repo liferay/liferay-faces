@@ -1,0 +1,16 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:portlet="http://java.sun.com/portlet_2_0"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:showcase="http://liferay.com/faces/showcase"
+	template="/WEB-INF/templates/component-3col.xhtml">
+
+	<ui:define name="col1">
+		<showcase:example>
+			<portlet:actionURL escapeXml="false" var="actionURL">
+				<portlet:param name="foo" value="1234" />
+			</portlet:actionURL>
+			<form action="#{actionURL}" method="post">
+				<input type="submit" value="#{i18n['submit-non-faces-postback']}" />
+			</form>
+		</showcase:example>
+	</ui:define>
+
+</ui:composition>

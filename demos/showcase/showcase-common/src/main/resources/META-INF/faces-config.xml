@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config version="1.2" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_1_2.xsd"
+	xmlns:util="http://www.liferay.com/xml/ns/liferay-faces-util-extension">
+	<faces-config-extension>
+		<name>ShowcaseUtil</name>
+	</faces-config-extension>
+	<lifecycle>
+		<phase-listener>com.liferay.faces.demos.event.CurrentPhaseListener</phase-listener>
+		<phase-listener>com.liferay.faces.demos.event.ViewParamsPhaseListener</phase-listener>
+	</lifecycle>
+	<managed-bean>
+		<managed-bean-name>listModelBean</managed-bean-name>
+		<managed-bean-class>com.liferay.faces.demos.bean.ListModelBean</managed-bean-class>
+		<managed-bean-scope>application</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>liferayBenefitService</managed-bean-name>
+		<managed-bean-class>com.liferay.faces.demos.service.LiferayBenefitServiceMockImpl</managed-bean-class>
+		<managed-bean-scope>application</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>showcaseModelBean</managed-bean-name>
+		<managed-bean-class>com.liferay.faces.demos.bean.ShowcaseModelBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+		<managed-property>
+			<property-name>listModelBean</property-name>
+			<value>#{listModelBean}</value>
+		</managed-property>
+	</managed-bean>
+</faces-config>
