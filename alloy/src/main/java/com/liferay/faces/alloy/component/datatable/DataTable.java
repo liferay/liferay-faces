@@ -42,9 +42,6 @@ import com.liferay.faces.util.lang.FacesConstants;
 @FacesComponent(value = DataTable.COMPONENT_TYPE)
 public class DataTable extends DataTableBase implements ClientBehaviorHolder {
 
-	// Public Constants
-	public static final String STYLE_CLASS_NAME = "table table-bordered table-hover table-striped alloy-datatable";
-
 	// Private Constants
 	private static final Collection<String> EVENT_NAMES = Collections.unmodifiableCollection(Arrays.asList(
 				RowSelectEvent.ROW_SELECT, RowSelectRangeEvent.ROW_SELECT_RANGE, RowDeselectEvent.ROW_DESELECT,
@@ -172,16 +169,6 @@ public class DataTable extends DataTableBase implements ClientBehaviorHolder {
 		}
 
 		return rowDataList;
-	}
-
-	@Override
-	public String getStyleClass() {
-
-		// getStateHelper().eval(PropertyKeys.styleClass, null) is called because super.getStyleClass() may return the
-		// STYLE_CLASS_NAME of the super class.
-		String styleClass = (String) getStateHelper().eval(PropertyKeys.styleClass, null);
-
-		return ComponentUtil.concatCssClasses(styleClass, STYLE_CLASS_NAME);
 	}
 
 	@Override
