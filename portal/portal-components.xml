@@ -274,6 +274,7 @@
 				<type>String</type>
 			</attribute>
 			<attribute>
+				<defaultToComponentLabel>false</defaultToComponentLabel>
 				<description>
 					<![CDATA[The label of the anchor tag rendered inside the list item element.]]>
 				</description>

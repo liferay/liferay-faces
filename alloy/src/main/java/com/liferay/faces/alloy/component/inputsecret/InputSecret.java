@@ -14,10 +14,6 @@
 package com.liferay.faces.alloy.component.inputsecret;
 
 import javax.faces.component.FacesComponent;
-import javax.faces.context.FacesContext;
-import javax.faces.event.PhaseId;
-
-import com.liferay.faces.util.component.ComponentUtil;
 
 
 /**
@@ -25,21 +21,5 @@ import com.liferay.faces.util.component.ComponentUtil;
  */
 @FacesComponent(value = InputSecret.COMPONENT_TYPE)
 public class InputSecret extends InputSecretBase {
-
-	@Override
-	public String getLabel() {
-
-		String label = super.getLabel();
-
-		if (label == null) {
-
-			FacesContext facesContext = FacesContext.getCurrentInstance();
-
-			if (facesContext.getCurrentPhaseId() == PhaseId.PROCESS_VALIDATIONS) {
-				label = ComponentUtil.getComponentLabel(this);
-			}
-		}
-
-		return label;
-	}
+	// Initial Generation
 }

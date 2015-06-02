@@ -30,6 +30,7 @@ import com.liferay.faces.alloy.component.select.internal.SelectDelegatingRendere
 public abstract class SelectManyCheckboxRendererBase extends SelectDelegatingRendererBase {
 
 	// Protected Constants
+	protected static final String LABEL = "label";
 	protected static final String STYLE_CLASS = "styleClass";
 
 	@Override

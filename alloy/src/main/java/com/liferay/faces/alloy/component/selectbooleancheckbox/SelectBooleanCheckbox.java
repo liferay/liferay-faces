@@ -14,10 +14,6 @@
 package com.liferay.faces.alloy.component.selectbooleancheckbox;
 
 import javax.faces.component.FacesComponent;
-import javax.faces.context.FacesContext;
-import javax.faces.event.PhaseId;
-
-import com.liferay.faces.util.component.ComponentUtil;
 
 
 /**
@@ -25,34 +21,5 @@ import com.liferay.faces.util.component.ComponentUtil;
  */
 @FacesComponent(value = SelectBooleanCheckbox.COMPONENT_TYPE)
 public class SelectBooleanCheckbox extends SelectBooleanCheckboxBase {
-
-	// Public Constants
-	public static final String STYLE_CLASS_NAME = "alloy-select-boolean-checkbox checkbox";
-
-	@Override
-	public String getLabel() {
-
-		String label = super.getLabel();
-
-		if (label == null) {
-
-			FacesContext facesContext = FacesContext.getCurrentInstance();
-
-			if (facesContext.getCurrentPhaseId() == PhaseId.PROCESS_VALIDATIONS) {
-				label = ComponentUtil.getComponentLabel(this);
-			}
-		}
-
-		return label;
-	}
-
-	@Override
-	public String getStyleClass() {
-
-		// getStateHelper().eval(PropertyKeys.styleClass, null) is called because super.getStyleClass() may return the
-		// STYLE_CLASS_NAME of the super class.
-		String styleClass = (String) getStateHelper().eval(PropertyKeys.styleClass, null);
-
-		return ComponentUtil.concatCssClasses(styleClass, STYLE_CLASS_NAME);
-	}
+	// Initial Generation
 }

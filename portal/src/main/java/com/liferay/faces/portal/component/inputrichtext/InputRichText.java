@@ -22,10 +22,8 @@ import javax.faces.application.FacesMessage;
 import javax.faces.component.FacesComponent;
 import javax.faces.component.behavior.ClientBehaviorHolder;
 import javax.faces.context.FacesContext;
-import javax.faces.event.PhaseId;
 import javax.faces.validator.LengthValidator;
 
-import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.context.MessageContext;
 import com.liferay.faces.util.context.MessageContextFactory;
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
@@ -116,23 +114,6 @@ public class InputRichText extends InputRichTextBase implements ClientBehaviorHo
 	@Override
 	public Collection<String> getEventNames() {
 		return EVENT_NAMES;
-	}
-
-	@Override
-	public String getLabel() {
-
-		String label = super.getLabel();
-
-		if (label == null) {
-
-			FacesContext facesContext = FacesContext.getCurrentInstance();
-
-			if (facesContext.getCurrentPhaseId() == PhaseId.PROCESS_VALIDATIONS) {
-				label = ComponentUtil.getComponentLabel(this);
-			}
-		}
-
-		return label;
 	}
 
 	protected MessageContext getMessageContext() {

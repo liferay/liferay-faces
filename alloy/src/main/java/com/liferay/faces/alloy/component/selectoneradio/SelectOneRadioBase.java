@@ -32,12 +32,35 @@ public abstract class SelectOneRadioBase extends HtmlSelectOneRadio implements S
 
 	// Protected Enumerations
 	protected enum SelectOneRadioPropertyKeys {
+		label,
 		styleClass
 	}
 
 	public SelectOneRadioBase() {
 		super();
 		setRendererType(RENDERER_TYPE);
+	}
+
+	@Override
+	public String getLabel() {
+
+		String label = (String) getStateHelper().eval(SelectOneRadioPropertyKeys.styleClass, null);
+
+		if (label == null) {
+
+			javax.faces.context.FacesContext facesContext = javax.faces.context.FacesContext.getCurrentInstance();
+
+			if (facesContext.getCurrentPhaseId() == javax.faces.event.PhaseId.PROCESS_VALIDATIONS) {
+				label = com.liferay.faces.util.component.ComponentUtil.getComponentLabel(this);
+			}
+		}
+
+		return label;
+	}
+
+	@Override
+	public void setLabel(String label) {
+		getStateHelper().put(SelectOneRadioPropertyKeys.label, label);
 	}
 
 	@Override
