@@ -88,7 +88,7 @@ public abstract class InputFileRendererBase extends InputFileRendererCompat {
 
 	@Override
 	public String getDelegateComponentFamily() {
-		return InputFile.COMPONENT_FAMILY;
+		return javax.faces.component.html.HtmlInputText.COMPONENT_FAMILY;
 	}
 
 	@Override

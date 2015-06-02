@@ -1673,7 +1673,8 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="InputFile" delegateRendererType="javax.faces.Text" extendsTags="ClientComponent InputText"
+	<component name="InputFile" delegateComponentFamily="javax.faces.component.html.HtmlInputText.COMPONENT_FAMILY"
+		delegateRendererType="javax.faces.Text" extendsTags="ClientComponent InputText"
 		handlerClass="com.liferay.faces.alloy.component.inputfile.internal.InputFileHandler" module="uploader"
 		parentClass="javax.faces.component.html.HtmlInputText"
 		rendererParentClass="com.liferay.faces.alloy.component.inputfile.internal.InputFileRendererCompat"
