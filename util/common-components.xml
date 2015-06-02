@@ -413,6 +413,18 @@
 			</attribute>
 		</attributes>
 	</component>
+	<component name="FacesMessageLabelOverride" generateJava="false" generateTaglibXML="false">
+		<attributes>
+			<attribute>
+				<description>
+					<![CDATA[A localized label for this component that is typically only rendered in a FacesMessage when validation fails.]]>
+				</description>
+				<name>label</name>
+				<override>true</override>
+				<type>java.lang.String</type>
+			</attribute>
+		</attributes>
+	</component>
 	<component name="HTMLAccessibility" extendsTags="HTMLCommonEvents HTMLPassthrough" generateJava="false"
 		generateTaglibXML="false">
 		<attributes>

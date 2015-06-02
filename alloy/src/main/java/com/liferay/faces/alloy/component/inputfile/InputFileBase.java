@@ -37,6 +37,7 @@ public abstract class InputFileBase extends HtmlInputText implements Styleable, 
 		auto,
 		clientKey,
 		fileUploadListener,
+		label,
 		location,
 		multiple,
 		showPreview,
@@ -81,6 +82,28 @@ public abstract class InputFileBase extends HtmlInputText implements Styleable, 
 
 	public void setFileUploadListener(javax.el.MethodExpression fileUploadListener) {
 		getStateHelper().put(InputFilePropertyKeys.fileUploadListener, fileUploadListener);
+	}
+
+	@Override
+	public String getLabel() {
+
+		String label = (String) getStateHelper().eval(InputFilePropertyKeys.styleClass, null);
+
+		if (label == null) {
+
+			javax.faces.context.FacesContext facesContext = javax.faces.context.FacesContext.getCurrentInstance();
+
+			if (facesContext.getCurrentPhaseId() == javax.faces.event.PhaseId.PROCESS_VALIDATIONS) {
+				label = com.liferay.faces.util.component.ComponentUtil.getComponentLabel(this);
+			}
+		}
+
+		return label;
+	}
+
+	@Override
+	public void setLabel(String label) {
+		getStateHelper().put(InputFilePropertyKeys.label, label);
 	}
 
 	public String getLocation() {

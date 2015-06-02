@@ -32,12 +32,35 @@ public abstract class SelectManyCheckboxBase extends HtmlSelectManyCheckbox impl
 
 	// Protected Enumerations
 	protected enum SelectManyCheckboxPropertyKeys {
+		label,
 		styleClass
 	}
 
 	public SelectManyCheckboxBase() {
 		super();
 		setRendererType(RENDERER_TYPE);
+	}
+
+	@Override
+	public String getLabel() {
+
+		String label = (String) getStateHelper().eval(SelectManyCheckboxPropertyKeys.styleClass, null);
+
+		if (label == null) {
+
+			javax.faces.context.FacesContext facesContext = javax.faces.context.FacesContext.getCurrentInstance();
+
+			if (facesContext.getCurrentPhaseId() == javax.faces.event.PhaseId.PROCESS_VALIDATIONS) {
+				label = com.liferay.faces.util.component.ComponentUtil.getComponentLabel(this);
+			}
+		}
+
+		return label;
+	}
+
+	@Override
+	public void setLabel(String label) {
+		getStateHelper().put(SelectManyCheckboxPropertyKeys.label, label);
 	}
 
 	@Override

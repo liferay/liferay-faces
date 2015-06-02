@@ -32,12 +32,35 @@ public abstract class InputTextBase extends HtmlInputText implements Styleable {
 
 	// Protected Enumerations
 	protected enum InputTextPropertyKeys {
+		label,
 		styleClass
 	}
 
 	public InputTextBase() {
 		super();
 		setRendererType(RENDERER_TYPE);
+	}
+
+	@Override
+	public String getLabel() {
+
+		String label = (String) getStateHelper().eval(InputTextPropertyKeys.styleClass, null);
+
+		if (label == null) {
+
+			javax.faces.context.FacesContext facesContext = javax.faces.context.FacesContext.getCurrentInstance();
+
+			if (facesContext.getCurrentPhaseId() == javax.faces.event.PhaseId.PROCESS_VALIDATIONS) {
+				label = com.liferay.faces.util.component.ComponentUtil.getComponentLabel(this);
+			}
+		}
+
+		return label;
+	}
+
+	@Override
+	public void setLabel(String label) {
+		getStateHelper().put(InputTextPropertyKeys.label, label);
 	}
 
 	@Override

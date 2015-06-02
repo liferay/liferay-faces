@@ -795,9 +795,9 @@
 		</attributes>
 	</component>
 	<component name="AutoComplete" delegateRendererType="javax.faces.Text"
-		extendsTags="ClientComponent InputText"
+		extendsTags="ClientComponent FacesMessageLabelInherited InputText"
 		handlerClass="com.liferay.faces.alloy.component.autocomplete.internal.AutoCompleteHandler"
-		parentClass="com.liferay.faces.alloy.component.inputtext.AbstractInputText"
+		parentClass="com.liferay.faces.alloy.component.inputtext.InputTextBase"
 		rendererParentClass="com.liferay.faces.alloy.render.internal.DelegatingAlloyRendererBase" yui="true"
 		module="autocomplete">
 		<description>
@@ -1139,7 +1139,7 @@
 		</attributes>
 	</component>
 	<component name="CommandButton" delegateRendererType="javax.faces.Button"
-		extendsTags="AutoAjaxCommandCommon ButtonCommon FacesMessageLabelInherited UICommand"
+		extendsTags="AutoAjaxCommandCommon ButtonCommon UICommand"
 		parentClass="javax.faces.component.html.HtmlCommandButton"
 		rendererParentClass="com.liferay.faces.alloy.component.button.internal.AbstractButtonRenderer">
 		<description>
@@ -1155,6 +1155,7 @@
 			</attribute>
 			<!-- h:commandButton attributes -->
 			<attribute>
+				<defaultToComponentLabel>false</defaultToComponentLabel>
 				<description>
 					<![CDATA[A name for this component to be rendered to the user. This name should be localized for the user.]]>
 				</description>
@@ -1337,6 +1338,7 @@
 		</description>
 		<attributes>
 			<attribute>
+				<defaultToComponentLabel>false</defaultToComponentLabel>
 				<description>
 					<![CDATA[The text value for the rendered &lt;label&gt; element.]]>
 				</description>
@@ -1626,7 +1628,7 @@
 		</attributes>
 	</component>
 	<component name="InputDateTime" extendsTags="InputDateTimeCommon"
-		generateTaglibXML="false" parentClass="com.liferay.faces.alloy.component.inputtext.AbstractInputText"
+		generateTaglibXML="false" parentClass="com.liferay.faces.alloy.component.inputtext.InputTextBase"
 		rendererParentClass="com.liferay.faces.alloy.render.internal.DelegatingAlloyRendererBase">
 		<attributes>
 			<attribute>
@@ -1749,7 +1751,7 @@
 		</description>
 	</component>
 	<component name="InputSecret" delegateRendererType="javax.faces.Secret"
-		extendsTags="AltInherited AutocompleteInherited DisabledInherited FacesMessageLabelInherited InputCommon SizeInherited"
+		extendsTags="AltInherited AutocompleteInherited DisabledInherited FacesMessageLabelOverride InputCommon SizeInherited"
 		parentClass="javax.faces.component.html.HtmlInputSecret"
 		rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
 		<description>
@@ -1886,7 +1888,7 @@
 		</attributes>
 	</component>
 	<component name="InputText" delegateRendererType="javax.faces.Text"
-		extendsTags="AltInherited AutocompleteInherited DisabledInherited FacesMessageLabelInherited InputCommon SizeInherited"
+		extendsTags="AltInherited AutocompleteInherited DisabledInherited FacesMessageLabelOverride InputCommon SizeInherited"
 		parentClass="javax.faces.component.html.HtmlInputText"
 		rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
 		<description>
@@ -1894,7 +1896,7 @@
 		</description>
 	</component>
 	<component name="InputTextarea" delegateRendererType="javax.faces.Textarea"
-		extendsTags="FacesMessageLabelInherited DisabledInherited InputCommon"
+		extendsTags="FacesMessageLabelOverride DisabledInherited InputCommon"
 		parentClass="javax.faces.component.html.HtmlInputTextarea"
 		rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
 		<description>
@@ -2347,6 +2349,7 @@
 		</description>
 		<attributes>
 			<attribute>
+				<defaultToComponentLabel>false</defaultToComponentLabel>
 				<description>
 					<![CDATA[The visible label for the menu. This is only used if a facet with name="label" is not present.]]>
 				</description>
@@ -2822,6 +2825,7 @@
 				<yui>true</yui>
 			</attribute>
 			<attribute>
+				<defaultToComponentLabel>false</defaultToComponentLabel>
 				<description>
 					<![CDATA[The label which appears on the progress bar. The <code>{0}</code> token can be used to include the value in the label.]]>
 				</description>
@@ -2928,7 +2932,7 @@
 		</attributes>
 	</component>
 	<component name="SelectBooleanCheckbox" delegateRendererType="javax.faces.Checkbox"
-		extendsTags="DisabledInherited FacesMessageLabelInherited HTMLAccessibilityEvents HTMLInputEvents"
+		extendsTags="DisabledInherited FacesMessageLabelOverride HTMLAccessibilityEvents HTMLInputEvents"
 		extraStyleClasses="checkbox" parentClass="javax.faces.component.html.HtmlSelectBooleanCheckbox"
 		rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
 		<description>
@@ -2936,7 +2940,7 @@
 		</description>
 	</component>
 	<component name="SelectManyCheckbox" delegateRendererType="javax.faces.Checkbox"
-		extendsTags="UISelectMany DisabledInherited FacesMessageLabelInherited HTMLAccessibilityEvents HTMLInputEvents"
+		extendsTags="UISelectMany DisabledInherited FacesMessageLabelOverride HTMLAccessibilityEvents HTMLInputEvents"
 		extraStyleClasses="checkbox" parentClass="javax.faces.component.html.HtmlSelectManyCheckbox"
 		rendererParentClass="com.liferay.faces.alloy.component.select.internal.SelectDelegatingRendererBase">
 		<description>
@@ -2962,7 +2966,7 @@
 		</attributes>
 	</component>
 	<component name="SelectManyListbox" delegateRendererType="javax.faces.Listbox"
-		extendsTags="UISelectMany DisabledInherited FacesMessageLabelInherited HTMLAccessibilityEvents HTMLInputEvents"
+		extendsTags="UISelectMany DisabledInherited FacesMessageLabelOverride HTMLAccessibilityEvents HTMLInputEvents"
 		parentClass="javax.faces.component.html.HtmlSelectManyListbox" rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
 		<description>
 			<![CDATA[SelectManyListbox is a UISelectMany component that renders a select element and enables the user to select multiple values. Since it extends HtmlSelectManyListbox, it supports all the features of h:selectManyListbox such as accepting f:selectItem or f:selectItems as child tags.]]>
@@ -2979,14 +2983,14 @@
 		</attributes>
 	</component>
 	<component name="SelectManyMenu" delegateRendererType="javax.faces.Menu"
-		extendsTags="UISelectMany DisabledInherited FacesMessageLabelInherited HTMLAccessibilityEvents HTMLInputEvents"
+		extendsTags="UISelectMany DisabledInherited FacesMessageLabelOverride HTMLAccessibilityEvents HTMLInputEvents"
 		parentClass="javax.faces.component.html.HtmlSelectManyMenu" rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
 		<description>
 			<![CDATA[SelectManyMenu is a UISelectMany component that renders a select element and enables the user to select multiple values. It has the same basic features of alloy:selectManyListbox except that there is no size attribute because JSF "select*menu" components always render size=1. Since it extends HtmlSelectManyMenu, it supports all the features of h:selectManyMenu such as accepting f:selectItem or f:selectItems as child tags.]]>
 		</description>
 	</component>
 	<component name="SelectOneListbox" delegateRendererType="javax.faces.Listbox"
-		extendsTags="UISelect DisabledInherited FacesMessageLabelInherited HTMLAccessibilityEvents HTMLInputEvents"
+		extendsTags="UISelect DisabledInherited FacesMessageLabelOverride HTMLAccessibilityEvents HTMLInputEvents"
 		parentClass="javax.faces.component.html.HtmlSelectOneListbox" rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
 		<description>
 			<![CDATA[SelectOneListbox is a UISelectOne component that renders a `select` element (multi-item list) and enables the user to select one value. Since it extends HtmlSelectOneListbox, it supports all the features of h:selectOneListbox such as accepting f:selectItem or f:selectItems as child tags.]]>
@@ -3003,14 +3007,14 @@
 		</attributes>
 	</component>
 	<component name="SelectOneMenu" delegateRendererType="javax.faces.Menu"
-		extendsTags="UISelect DisabledInherited FacesMessageLabelInherited HTMLAccessibilityEvents HTMLInputEvents"
+		extendsTags="UISelect DisabledInherited FacesMessageLabelOverride HTMLAccessibilityEvents HTMLInputEvents"
 		parentClass="javax.faces.component.html.HtmlSelectOneMenu" rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
 		<description>
 			<![CDATA[SelectOneMenu is a UISelectOne component that renders a select element (drop down list) and enables the user to select one value. Since it extends HtmlSelectOneMenu, it supports all the features of h:selectOneMenu such as accepting f:selectItem or f:selectItems as child tags.]]>
 		</description>
 	</component>
 	<component name="SelectOneRadio" delegateRendererType="javax.faces.Radio"
-		extendsTags="UISelect DisabledInherited FacesMessageLabelInherited HTMLAccessibilityEvents HTMLInputEvents"
+		extendsTags="UISelect DisabledInherited FacesMessageLabelOverride HTMLAccessibilityEvents HTMLInputEvents"
 		extraStyleClasses="radio" parentClass="javax.faces.component.html.HtmlSelectOneRadio"
 		rendererParentClass="com.liferay.faces.alloy.component.select.internal.SelectDelegatingRendererBase">
 		<description>

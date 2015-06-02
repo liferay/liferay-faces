@@ -38,6 +38,7 @@ public abstract class InputFileRendererBase extends InputFileRendererCompat {
 	protected static final String AUTO = "auto";
 	protected static final String CLIENT_KEY = "clientKey";
 	protected static final String FILE_UPLOAD_LISTENER = "fileUploadListener";
+	protected static final String LABEL = "label";
 	protected static final String LOCATION = "location";
 	protected static final String MULTIPLE = "multiple";
 	protected static final String SHOW_PREVIEW = "showPreview";

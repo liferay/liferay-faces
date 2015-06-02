@@ -43,7 +43,19 @@ public abstract class CaptchaBase extends UIInput implements Styleable {
 	}
 
 	public String getLabel() {
-		return (String) getStateHelper().eval(CaptchaPropertyKeys.label, null);
+
+		String label = (String) getStateHelper().eval(CaptchaPropertyKeys.styleClass, null);
+
+		if (label == null) {
+
+			javax.faces.context.FacesContext facesContext = javax.faces.context.FacesContext.getCurrentInstance();
+
+			if (facesContext.getCurrentPhaseId() == javax.faces.event.PhaseId.PROCESS_VALIDATIONS) {
+				label = com.liferay.faces.util.component.ComponentUtil.getComponentLabel(this);
+			}
+		}
+
+		return label;
 	}
 
 	public void setLabel(String label) {

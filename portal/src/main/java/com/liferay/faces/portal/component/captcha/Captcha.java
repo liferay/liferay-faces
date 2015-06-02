@@ -21,11 +21,9 @@ import javax.faces.component.FacesComponent;
 import javax.faces.component.UIViewRoot;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-import javax.faces.event.PhaseId;
 import javax.portlet.PortletRequest;
 import javax.portlet.filter.PortletRequestWrapper;
 
-import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.context.MessageContext;
 import com.liferay.faces.util.context.MessageContextFactory;
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
@@ -104,23 +102,6 @@ public class Captcha extends CaptchaBase {
 				setValid(false);
 			}
 		}
-	}
-
-	@Override
-	public String getLabel() {
-
-		String label = super.getLabel();
-
-		if (label == null) {
-
-			FacesContext facesContext = FacesContext.getCurrentInstance();
-
-			if (facesContext.getCurrentPhaseId() == PhaseId.PROCESS_VALIDATIONS) {
-				label = ComponentUtil.getComponentLabel(this);
-			}
-		}
-
-		return label;
 	}
 
 	protected class CaptchaPortletRequest extends PortletRequestWrapper {

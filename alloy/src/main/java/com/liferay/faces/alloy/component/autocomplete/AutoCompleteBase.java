@@ -15,7 +15,7 @@ package com.liferay.faces.alloy.component.autocomplete;
 //J-
 
 import javax.annotation.Generated;
-import com.liferay.faces.alloy.component.inputtext.AbstractInputText;
+import com.liferay.faces.alloy.component.inputtext.InputTextBase;
 
 import com.liferay.faces.util.component.Styleable;
 import com.liferay.faces.util.component.ClientComponent;
@@ -25,7 +25,7 @@ import com.liferay.faces.util.component.ClientComponent;
  * @author	Kyle Stiemann
  */
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
-public abstract class AutoCompleteBase extends AbstractInputText implements Styleable, ClientComponent {
+public abstract class AutoCompleteBase extends InputTextBase implements Styleable, ClientComponent {
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.autocomplete.AutoComplete";

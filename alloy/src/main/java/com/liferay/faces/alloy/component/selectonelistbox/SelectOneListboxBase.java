@@ -32,12 +32,35 @@ public abstract class SelectOneListboxBase extends HtmlSelectOneListbox implemen
 
 	// Protected Enumerations
 	protected enum SelectOneListboxPropertyKeys {
+		label,
 		styleClass
 	}
 
 	public SelectOneListboxBase() {
 		super();
 		setRendererType(RENDERER_TYPE);
+	}
+
+	@Override
+	public String getLabel() {
+
+		String label = (String) getStateHelper().eval(SelectOneListboxPropertyKeys.styleClass, null);
+
+		if (label == null) {
+
+			javax.faces.context.FacesContext facesContext = javax.faces.context.FacesContext.getCurrentInstance();
+
+			if (facesContext.getCurrentPhaseId() == javax.faces.event.PhaseId.PROCESS_VALIDATIONS) {
+				label = com.liferay.faces.util.component.ComponentUtil.getComponentLabel(this);
+			}
+		}
+
+		return label;
+	}
+
+	@Override
+	public void setLabel(String label) {
+		getStateHelper().put(SelectOneListboxPropertyKeys.label, label);
 	}
 
 	@Override

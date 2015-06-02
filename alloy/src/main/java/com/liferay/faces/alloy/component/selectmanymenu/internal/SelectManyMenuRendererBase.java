@@ -30,6 +30,7 @@ import com.liferay.faces.util.render.DelegatingRendererBase;
 public abstract class SelectManyMenuRendererBase extends DelegatingRendererBase {
 
 	// Protected Constants
+	protected static final String LABEL = "label";
 	protected static final String STYLE_CLASS = "styleClass";
 
 	@Override
