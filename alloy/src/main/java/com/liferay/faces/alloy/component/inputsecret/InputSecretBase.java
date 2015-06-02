@@ -44,7 +44,7 @@ public abstract class InputSecretBase extends HtmlInputSecret implements Styleab
 	@Override
 	public String getLabel() {
 
-		String label = (String) getStateHelper().eval(InputSecretPropertyKeys.styleClass, null);
+		String label = (String) getStateHelper().eval(InputSecretPropertyKeys.label, null);
 
 		if (label == null) {
 

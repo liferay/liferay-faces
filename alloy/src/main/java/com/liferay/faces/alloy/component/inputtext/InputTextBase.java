@@ -44,7 +44,7 @@ public abstract class InputTextBase extends HtmlInputText implements Styleable {
 	@Override
 	public String getLabel() {
 
-		String label = (String) getStateHelper().eval(InputTextPropertyKeys.styleClass, null);
+		String label = (String) getStateHelper().eval(InputTextPropertyKeys.label, null);
 
 		if (label == null) {
 

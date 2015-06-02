@@ -44,7 +44,7 @@ public abstract class SelectManyMenuBase extends HtmlSelectManyMenu implements S
 	@Override
 	public String getLabel() {
 
-		String label = (String) getStateHelper().eval(SelectManyMenuPropertyKeys.styleClass, null);
+		String label = (String) getStateHelper().eval(SelectManyMenuPropertyKeys.label, null);
 
 		if (label == null) {
 

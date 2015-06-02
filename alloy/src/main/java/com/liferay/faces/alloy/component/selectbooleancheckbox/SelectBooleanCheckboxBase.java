@@ -44,7 +44,7 @@ public abstract class SelectBooleanCheckboxBase extends HtmlSelectBooleanCheckbo
 	@Override
 	public String getLabel() {
 
-		String label = (String) getStateHelper().eval(SelectBooleanCheckboxPropertyKeys.styleClass, null);
+		String label = (String) getStateHelper().eval(SelectBooleanCheckboxPropertyKeys.label, null);
 
 		if (label == null) {
 

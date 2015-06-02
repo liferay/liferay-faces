@@ -44,7 +44,7 @@ public abstract class CaptchaBase extends UIInput implements Styleable {
 
 	public String getLabel() {
 
-		String label = (String) getStateHelper().eval(CaptchaPropertyKeys.styleClass, null);
+		String label = (String) getStateHelper().eval(CaptchaPropertyKeys.label, null);
 
 		if (label == null) {
 

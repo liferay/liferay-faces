@@ -44,7 +44,7 @@ public abstract class SelectOneListboxBase extends HtmlSelectOneListbox implemen
 	@Override
 	public String getLabel() {
 
-		String label = (String) getStateHelper().eval(SelectOneListboxPropertyKeys.styleClass, null);
+		String label = (String) getStateHelper().eval(SelectOneListboxPropertyKeys.label, null);
 
 		if (label == null) {
 

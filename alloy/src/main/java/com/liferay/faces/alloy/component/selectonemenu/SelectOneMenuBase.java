@@ -44,7 +44,7 @@ public abstract class SelectOneMenuBase extends HtmlSelectOneMenu implements Sty
 	@Override
 	public String getLabel() {
 
-		String label = (String) getStateHelper().eval(SelectOneMenuPropertyKeys.styleClass, null);
+		String label = (String) getStateHelper().eval(SelectOneMenuPropertyKeys.label, null);
 
 		if (label == null) {
 

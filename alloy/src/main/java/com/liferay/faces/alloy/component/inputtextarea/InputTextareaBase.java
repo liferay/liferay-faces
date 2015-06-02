@@ -44,7 +44,7 @@ public abstract class InputTextareaBase extends HtmlInputTextarea implements Sty
 	@Override
 	public String getLabel() {
 
-		String label = (String) getStateHelper().eval(InputTextareaPropertyKeys.styleClass, null);
+		String label = (String) getStateHelper().eval(InputTextareaPropertyKeys.label, null);
 
 		if (label == null) {
 
