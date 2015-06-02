@@ -7725,7 +7725,7 @@ java.lang.Object)</method-signature>
 		</tag-extension>
 	</tag>
 	<tag>
-		<description><![CDATA[SelectManyCheckbox is a UISelectMany component that renders checkboxes and enables the user to select multiple values. Since it extends HtmlSelectManyCheckbox, it supports all the features of h:selectManyCheckbox such as accepting f:selectItem or f:selectItems as child tags.]]></description>
+		<description><![CDATA[SelectManyCheckbox is a UISelectMany component that renders checkboxes and enables the user to select multiple values. Since it extends HtmlSelectManyCheckbox, it supports all the features of h:selectManyCheckbox such as accepting f:selectItem or f:selectItems as child tags. However, since it does not render a &lt;table&gt;, it does not support h:selectManyCheckbox's <code>border</code> and <code>layout</code> attributes.]]></description>
 		<tag-name>selectManyCheckbox</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.component.selectmanycheckbox.SelectManyCheckbox</component-type>
@@ -9027,7 +9027,7 @@ java.lang.Object)</method-signature>
 		</tag-extension>
 	</tag>
 	<tag>
-		<description><![CDATA[SelectOneRadio is a UISelectOne component that renders radio buttons. Since it extends <a href="http://docs.oracle.com/javaee/7/api/javax/faces/component/html/HtmlSelectOneRadio.html" target="_blank"><code>HtmlSelectOneRadio</code></a>, it supports all the features of h:selectOneRadio such as accepting f:selectItem or f:selectItems as child tags.]]></description>
+		<description><![CDATA[SelectOneRadio is a UISelectOne component that renders radio buttons. Since it extends <a href="http://docs.oracle.com/javaee/7/api/javax/faces/component/html/HtmlSelectOneRadio.html" target="_blank"><code>HtmlSelectOneRadio</code></a>, it supports all the features of h:selectOneRadio such as accepting f:selectItem or f:selectItems as child tags. However, since it does not render a &lt;table&gt;, it does not support h:selectOneRadio's <code>border</code> and <code>layout</code> attributes.]]></description>
 		<tag-name>selectOneRadio</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.component.selectoneradio.SelectOneRadio</component-type>

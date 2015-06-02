@@ -27,7 +27,7 @@ import com.liferay.faces.util.component.ComponentUtil;
 public class SelectBooleanCheckbox extends SelectBooleanCheckboxBase {
 
 	// Public Constants
-	public static final String STYLE_CLASS_NAME = "alloy-select-boolean-checkbox radio";
+	public static final String STYLE_CLASS_NAME = "alloy-select-boolean-checkbox checkbox";
 
 	@Override
 	public String getLabel() {
