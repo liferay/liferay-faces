@@ -26,6 +26,7 @@ public class RequestParameterValuesMapEntry extends AbstractPropertyMapEntry<Str
 
 	public RequestParameterValuesMapEntry(String key, RequestParameterValuesMap requestParameterValuesMap) {
 		super(key);
+		this.requestParameterValuesMap = requestParameterValuesMap;
 	}
 
 	public String[] getValue() {
