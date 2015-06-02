@@ -15,25 +15,11 @@ package com.liferay.faces.alloy.component.message;
 
 import javax.faces.component.FacesComponent;
 
-import com.liferay.faces.util.component.ComponentUtil;
-
 
 /**
  * @author  Neil Griffin
  */
 @FacesComponent(value = Message.COMPONENT_TYPE)
 public class Message extends MessageBase {
-
-	// Public Constants
-	public static final String STYLE_CLASS_NAME = "help-inline alloy-message";
-
-	@Override
-	public String getStyleClass() {
-
-		// getStateHelper().eval(PropertyKeys.styleClass, null) is called because super.getStyleClass() may return the
-		// STYLE_CLASS_NAME of the super class.
-		String styleClass = (String) getStateHelper().eval(PropertyKeys.styleClass, null);
-
-		return ComponentUtil.concatCssClasses(styleClass, STYLE_CLASS_NAME);
-	}
+	// Initial Generation
 }

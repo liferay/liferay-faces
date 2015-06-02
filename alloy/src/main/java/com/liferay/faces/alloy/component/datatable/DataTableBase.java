@@ -121,7 +121,7 @@ public abstract class DataTableBase extends HtmlDataTable implements Styleable, 
 		// STYLE_CLASS_NAME of the super class.
 		String styleClass = (String) getStateHelper().eval(DataTablePropertyKeys.styleClass, null);
 
-		return com.liferay.faces.util.component.ComponentUtil.concatCssClasses(styleClass, "alloy-data-table");
+		return com.liferay.faces.util.component.ComponentUtil.concatCssClasses(styleClass, "alloy-data-table", "table table-bordered table-hover table-striped");
 	}
 
 	@Override

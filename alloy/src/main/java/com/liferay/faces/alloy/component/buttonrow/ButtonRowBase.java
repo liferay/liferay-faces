@@ -46,7 +46,7 @@ public abstract class ButtonRowBase extends HtmlPanelGroup implements Styleable 
 		// STYLE_CLASS_NAME of the super class.
 		String styleClass = (String) getStateHelper().eval(ButtonRowPropertyKeys.styleClass, null);
 
-		return com.liferay.faces.util.component.ComponentUtil.concatCssClasses(styleClass, "alloy-button-row");
+		return com.liferay.faces.util.component.ComponentUtil.concatCssClasses(styleClass, "alloy-button-row", "button-holder");
 	}
 
 	@Override

@@ -15,8 +15,6 @@ package com.liferay.faces.alloy.component.panel;
 
 import javax.faces.component.FacesComponent;
 
-import com.liferay.faces.util.component.ComponentUtil;
-
 
 /**
  * @author  Bruno Basto
@@ -24,17 +22,5 @@ import com.liferay.faces.util.component.ComponentUtil;
  */
 @FacesComponent(value = Panel.COMPONENT_TYPE)
 public class Panel extends PanelBase {
-
-	// Public Constants
-	public static final String STYLE_CLASS_NAME = "alloy-panel alloy-panel-default";
-
-	@Override
-	public String getStyleClass() {
-
-		// getStateHelper().eval(PropertyKeys.styleClass, null) is called because super.getStyleClass() may return the
-		// STYLE_CLASS_NAME of the super class.
-		String styleClass = (String) getStateHelper().eval(PropertyKeys.styleClass, null);
-
-		return ComponentUtil.concatCssClasses(styleClass, STYLE_CLASS_NAME);
-	}
+	// Initial Generation
 }

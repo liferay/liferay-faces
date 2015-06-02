@@ -1029,7 +1029,7 @@
 		</attributes>
 	</component>
 	<component name="ButtonRow" delegateRendererType="javax.faces.Group" extendsTags="HTMLCommonEvents"
-		parentClass="javax.faces.component.html.HtmlPanelGroup"
+		extraStyleClasses="button-holder" parentClass="javax.faces.component.html.HtmlPanelGroup"
 		rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
 		<description>
 			<![CDATA[ButtonRow is a UIPanel component that renders a <code>&lt;div&gt;</code> element for grouping purposes. Since it extends HtmlPanelGroup, it supports all the features of h:panelGroup.]]>
@@ -1218,6 +1218,7 @@
 		</attributes>
 	</component>
 	<component name="DataTable" extendsTags="ClientComponent UIData HTMLCommonEvents HTMLPassthrough HTMLTable"
+		extraStyleClasses="table table-bordered table-hover table-striped"
 		handlerClass="com.liferay.faces.alloy.component.datatable.internal.DataTableHandler"
 		module="aui-datatable" parentClass="javax.faces.component.html.HtmlDataTable"
 		rendererParentClass="com.liferay.faces.alloy.render.internal.AlloyRendererBase" yui="true">
@@ -1360,7 +1361,8 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="Fieldset" extendsTags="KeyboardDOMEvents MouseDOMEvents Styleable UIComponentBase" parentClass="javax.faces.component.UIPanel">
+	<component name="Fieldset" extendsTags="KeyboardDOMEvents MouseDOMEvents Styleable UIComponentBase"
+		extraStyleClasses="fieldset" parentClass="javax.faces.component.UIPanel">
 		<description>
 			<![CDATA[Fieldset is a UIPanel component that renders a &lt;fieldset&gt; element in order to group form elements.]]>
 		</description>
@@ -2353,7 +2355,7 @@
 		</attributes>
 	</component>
 	<component name="Message" delegateRendererType="javax.faces.Message" extendsTags="MessageCommon"
-		parentClass="javax.faces.component.html.HtmlMessage"
+		extraStyleClasses="help-inline" parentClass="javax.faces.component.html.HtmlMessage"
 		rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
 		<description>
 			<![CDATA[Message is a UIMessage component that renders a <code>&lt;span&gt;</code> element containing the text of a single FacesMessage for an associated component. Since it extends HtmlMessage, it supports all the features of h:message.]]>
@@ -2720,7 +2722,8 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="Panel" extendsTags="PanelGroup" parentClass="com.liferay.faces.alloy.component.panelgroup.PanelGroupBlockLayout"
+	<component name="Panel" extendsTags="PanelGroup" extraStyleClasses="alloy-panel-default"
+		parentClass="com.liferay.faces.alloy.component.panelgroup.PanelGroupBlockLayout"
 		rendererParentClass="com.liferay.faces.alloy.component.panelgroup.internal.PanelGroupRendererBase">
 		<description>
 			<![CDATA[Panel is a UIPanel component that renders a <code>&lt;div&gt;</code> element with three child <code>&lt;div&gt;</code> elements (one for header, body, and footer). Since it extends HtmlPanelGroup, it supports all the features of h:panelGroup.]]>
@@ -2925,14 +2928,15 @@
 	</component>
 	<component name="SelectBooleanCheckbox" delegateRendererType="javax.faces.Checkbox"
 		extendsTags="DisabledInherited FacesMessageLabelInherited HTMLAccessibilityEvents HTMLInputEvents"
-		parentClass="javax.faces.component.html.HtmlSelectBooleanCheckbox" rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
+		extraStyleClasses="checkbox" parentClass="javax.faces.component.html.HtmlSelectBooleanCheckbox"
+		rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
 		<description>
 			<![CDATA[SelectBooleanCheckbox is a UISelectOne component that renders a check box. Since it extends HtmlSelectBooleanCheckbox, it supports all the features of h:selectBooleanCheckbox such as accepting f:selectItem or f:selectItems as child tags.]]>
 		</description>
 	</component>
 	<component name="SelectManyCheckbox" delegateRendererType="javax.faces.Checkbox"
 		extendsTags="UISelectMany DisabledInherited FacesMessageLabelInherited HTMLAccessibilityEvents HTMLInputEvents"
-		parentClass="javax.faces.component.html.HtmlSelectManyCheckbox"
+		extraStyleClasses="checkbox" parentClass="javax.faces.component.html.HtmlSelectManyCheckbox"
 		rendererParentClass="com.liferay.faces.alloy.component.select.internal.SelectDelegatingRendererBase">
 		<description>
 			<![CDATA[SelectManyCheckbox is a UISelectMany component that renders checkboxes and enables the user to select multiple values. Since it extends HtmlSelectManyCheckbox, it supports all the features of h:selectManyCheckbox such as accepting f:selectItem or f:selectItems as child tags. However, since it does not render a &lt;table&gt;, it does not support h:selectManyCheckbox's <code>border</code> and <code>layout</code> attributes.]]>
@@ -3006,7 +3010,7 @@
 	</component>
 	<component name="SelectOneRadio" delegateRendererType="javax.faces.Radio"
 		extendsTags="UISelect DisabledInherited FacesMessageLabelInherited HTMLAccessibilityEvents HTMLInputEvents"
-		parentClass="javax.faces.component.html.HtmlSelectOneRadio"
+		extraStyleClasses="radio" parentClass="javax.faces.component.html.HtmlSelectOneRadio"
 		rendererParentClass="com.liferay.faces.alloy.component.select.internal.SelectDelegatingRendererBase">
 		<description>
 			<![CDATA[SelectOneRadio is a UISelectOne component that renders radio buttons. Since it extends <a href="http://docs.oracle.com/javaee/7/api/javax/faces/component/html/HtmlSelectOneRadio.html" target="_blank"><code>HtmlSelectOneRadio</code></a>, it supports all the features of h:selectOneRadio such as accepting f:selectItem or f:selectItems as child tags. However, since it does not render a &lt;table&gt;, it does not support h:selectOneRadio's <code>border</code> and <code>layout</code> attributes.]]>

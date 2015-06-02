@@ -46,7 +46,7 @@ public abstract class SelectOneRadioBase extends HtmlSelectOneRadio implements S
 		// STYLE_CLASS_NAME of the super class.
 		String styleClass = (String) getStateHelper().eval(SelectOneRadioPropertyKeys.styleClass, null);
 
-		return com.liferay.faces.util.component.ComponentUtil.concatCssClasses(styleClass, "alloy-select-one-radio");
+		return com.liferay.faces.util.component.ComponentUtil.concatCssClasses(styleClass, "alloy-select-one-radio", "radio");
 	}
 
 	@Override
