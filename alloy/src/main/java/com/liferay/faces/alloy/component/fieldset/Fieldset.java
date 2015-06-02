@@ -15,26 +15,11 @@ package com.liferay.faces.alloy.component.fieldset;
 
 import javax.faces.component.FacesComponent;
 
-import com.liferay.faces.util.component.ComponentUtil;
-
 
 /**
  * @author  Kyle Stiemann
  */
 @FacesComponent(value = Fieldset.COMPONENT_TYPE)
 public class Fieldset extends FieldsetBase {
-
-	// Public Constants
-	public static final String STYLE_CLASS_NAME = "alloy-fieldset fieldset";
-
-	
-	@Override
-	public String getStyleClass() {
-
-		// getStateHelper().eval(PropertyKeys.styleClass, null) is called because super.getStyleClass() may return the
-		// STYLE_CLASS_NAME of the super class.
-		String styleClass = (String) getStateHelper().eval(FieldsetPropertyKeys.styleClass, null);
-
-		return ComponentUtil.concatCssClasses(styleClass, STYLE_CLASS_NAME);
-	}
+	// Initial Generation
 }

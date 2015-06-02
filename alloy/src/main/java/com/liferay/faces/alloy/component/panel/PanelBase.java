@@ -64,7 +64,7 @@ public abstract class PanelBase extends PanelGroupBlockLayout implements Styleab
 		// STYLE_CLASS_NAME of the super class.
 		String styleClass = (String) getStateHelper().eval(PanelPropertyKeys.styleClass, null);
 
-		return com.liferay.faces.util.component.ComponentUtil.concatCssClasses(styleClass, "alloy-panel");
+		return com.liferay.faces.util.component.ComponentUtil.concatCssClasses(styleClass, "alloy-panel", "alloy-panel-default");
 	}
 
 	@Override

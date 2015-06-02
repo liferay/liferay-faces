@@ -15,7 +15,6 @@ package com.liferay.faces.alloy.component.buttonrow;
 
 import javax.faces.component.FacesComponent;
 
-import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.lang.StringPool;
 
 
@@ -24,18 +23,9 @@ import com.liferay.faces.util.lang.StringPool;
  */
 @FacesComponent(value = ButtonRow.COMPONENT_TYPE)
 public class ButtonRow extends ButtonRowBase {
+
 	@Override
 	public String getLayout() {
 		return (String) getStateHelper().eval(PropertyKeys.layout, StringPool.BLOCK);
-	}
-
-	@Override
-	public String getStyleClass() {
-
-		// getStateHelper().eval(PropertyKeys.styleClass, null) is called because super.getStyleClass() may return the
-		// STYLE_CLASS_NAME of the super class.
-		String styleClass = (String) getStateHelper().eval(PropertyKeys.styleClass, null);
-
-		return ComponentUtil.concatCssClasses(styleClass, "alloy-button-row button-holder portal-button-row");
 	}
 }

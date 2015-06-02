@@ -46,7 +46,7 @@ public abstract class SelectManyCheckboxBase extends HtmlSelectManyCheckbox impl
 		// STYLE_CLASS_NAME of the super class.
 		String styleClass = (String) getStateHelper().eval(SelectManyCheckboxPropertyKeys.styleClass, null);
 
-		return com.liferay.faces.util.component.ComponentUtil.concatCssClasses(styleClass, "alloy-select-many-checkbox");
+		return com.liferay.faces.util.component.ComponentUtil.concatCssClasses(styleClass, "alloy-select-many-checkbox", "checkbox");
 	}
 
 	@Override

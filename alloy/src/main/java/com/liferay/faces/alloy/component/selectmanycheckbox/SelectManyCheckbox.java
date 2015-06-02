@@ -26,9 +26,6 @@ import com.liferay.faces.util.component.ComponentUtil;
 @FacesComponent(value = SelectManyCheckbox.COMPONENT_TYPE)
 public class SelectManyCheckbox extends SelectManyCheckboxBase {
 
-	// Public Constants
-	public static final String STYLE_CLASS_NAME = "alloy-select-many-checkbox checkbox";
-
 	@Override
 	public String getLabel() {
 
@@ -44,15 +41,5 @@ public class SelectManyCheckbox extends SelectManyCheckboxBase {
 		}
 
 		return label;
-	}
-
-	@Override
-	public String getStyleClass() {
-
-		// getStateHelper().eval(PropertyKeys.styleClass, null) is called because super.getStyleClass() may return the
-		// STYLE_CLASS_NAME of the super class.
-		String styleClass = (String) getStateHelper().eval(PropertyKeys.styleClass, null);
-
-		return ComponentUtil.concatCssClasses(styleClass, STYLE_CLASS_NAME);
 	}
 }

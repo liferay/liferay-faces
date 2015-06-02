@@ -46,7 +46,7 @@ public abstract class SelectBooleanCheckboxBase extends HtmlSelectBooleanCheckbo
 		// STYLE_CLASS_NAME of the super class.
 		String styleClass = (String) getStateHelper().eval(SelectBooleanCheckboxPropertyKeys.styleClass, null);
 
-		return com.liferay.faces.util.component.ComponentUtil.concatCssClasses(styleClass, "alloy-select-boolean-checkbox");
+		return com.liferay.faces.util.component.ComponentUtil.concatCssClasses(styleClass, "alloy-select-boolean-checkbox", "checkbox");
 	}
 
 	@Override
