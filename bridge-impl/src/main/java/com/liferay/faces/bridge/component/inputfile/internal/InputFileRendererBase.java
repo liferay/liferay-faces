@@ -17,6 +17,7 @@ package com.liferay.faces.bridge.component.inputfile.internal;
 
 import javax.annotation.Generated;
 
+import com.liferay.faces.bridge.component.inputfile.InputFile;
 
 import com.liferay.faces.util.render.DelegatingRendererBase;
 
@@ -31,5 +32,15 @@ public abstract class InputFileRendererBase extends DelegatingRendererBase {
 	protected static final String AUTO = "auto";
 	protected static final String FILE_UPLOAD_LISTENER = "fileUploadListener";
 	protected static final String MULTIPLE = "multiple";
+
+	@Override
+	public String getDelegateComponentFamily() {
+		return javax.faces.component.html.HtmlInputText.COMPONENT_FAMILY;
+	}
+
+	@Override
+	public String getDelegateRendererType() {
+		return "javax.faces.Text";
+	}
 }
 //J+
