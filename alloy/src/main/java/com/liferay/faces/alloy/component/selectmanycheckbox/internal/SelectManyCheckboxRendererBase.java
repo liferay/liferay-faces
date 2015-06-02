@@ -19,7 +19,7 @@ import javax.annotation.Generated;
 
 import com.liferay.faces.alloy.component.selectmanycheckbox.SelectManyCheckbox;
 
-import com.liferay.faces.util.render.DelegatingRendererBase;
+import com.liferay.faces.alloy.component.select.internal.SelectDelegatingRendererBase;
 
 
 /**
@@ -27,7 +27,7 @@ import com.liferay.faces.util.render.DelegatingRendererBase;
  * @author	Kyle Stiemann
  */
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
-public abstract class SelectManyCheckboxRendererBase extends DelegatingRendererBase {
+public abstract class SelectManyCheckboxRendererBase extends SelectDelegatingRendererBase {
 
 	// Protected Constants
 	protected static final String STYLE_CLASS = "styleClass";

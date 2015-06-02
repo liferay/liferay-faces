@@ -13,16 +13,9 @@
  */
 package com.liferay.faces.alloy.component.selectmanycheckbox.internal;
 
-import java.io.IOException;
-
 import javax.faces.application.ResourceDependency;
-import javax.faces.component.UIComponent;
-import javax.faces.context.FacesContext;
-import javax.faces.context.ResponseWriter;
 import javax.faces.render.FacesRenderer;
 
-import com.liferay.faces.alloy.component.select.internal.LabelSurroundingResponseWriter;
-import com.liferay.faces.alloy.component.select.internal.TableSuppressingResponseWriter;
 import com.liferay.faces.alloy.component.selectmanycheckbox.SelectManyCheckbox;
 
 
@@ -34,50 +27,7 @@ import com.liferay.faces.alloy.component.selectmanycheckbox.SelectManyCheckbox;
 public class SelectManyCheckboxRenderer extends SelectManyCheckboxRendererBase {
 
 	@Override
-	public void encodeAll(FacesContext facesContext, UIComponent uiComponent) throws IOException {
-
-		ResponseWriter responseWriter = facesContext.getResponseWriter();
-		ResponseWriter delegationResponseWriter = getSelectManyCheckboxResponseWriter(responseWriter);
-		facesContext.setResponseWriter(delegationResponseWriter);
-		super.encodeAll(facesContext, uiComponent);
-		facesContext.setResponseWriter(responseWriter);
-	}
-
-	@Override
-	public void encodeBegin(FacesContext facesContext, UIComponent uiComponent) throws IOException {
-
-		ResponseWriter responseWriter = facesContext.getResponseWriter();
-		ResponseWriter delegationResponseWriter = getSelectManyCheckboxResponseWriter(responseWriter);
-		facesContext.setResponseWriter(delegationResponseWriter);
-		super.encodeBegin(facesContext, uiComponent);
-		facesContext.setResponseWriter(responseWriter);
-	}
-
-	@Override
-	public void encodeChildren(FacesContext facesContext, UIComponent uiComponent) throws IOException {
-
-		ResponseWriter responseWriter = facesContext.getResponseWriter();
-		ResponseWriter delegationResponseWriter = getSelectManyCheckboxResponseWriter(responseWriter);
-		facesContext.setResponseWriter(delegationResponseWriter);
-		super.encodeChildren(facesContext, uiComponent);
-		facesContext.setResponseWriter(responseWriter);
-	}
-
-	@Override
-	public void encodeEnd(FacesContext facesContext, UIComponent uiComponent) throws IOException {
-
-		ResponseWriter responseWriter = facesContext.getResponseWriter();
-		ResponseWriter delegationResponseWriter = getSelectManyCheckboxResponseWriter(responseWriter);
-		facesContext.setResponseWriter(delegationResponseWriter);
-		super.encodeEnd(facesContext, uiComponent);
-		facesContext.setResponseWriter(responseWriter);
-	}
-
-	private ResponseWriter getSelectManyCheckboxResponseWriter(ResponseWriter responseWriter) {
-
-		responseWriter = new TableSuppressingResponseWriter(responseWriter);
-		responseWriter = new LabelSurroundingResponseWriter(responseWriter, "checkbox");
-
-		return responseWriter;
+	protected String getSelectType() {
+		return "checkbox";
 	}
 }

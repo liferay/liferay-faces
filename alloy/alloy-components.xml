@@ -2932,9 +2932,10 @@
 	</component>
 	<component name="SelectManyCheckbox" delegateRendererType="javax.faces.Checkbox"
 		extendsTags="UISelectMany DisabledInherited FacesMessageLabelInherited HTMLAccessibilityEvents HTMLInputEvents"
-		parentClass="javax.faces.component.html.HtmlSelectManyCheckbox" rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
+		parentClass="javax.faces.component.html.HtmlSelectManyCheckbox"
+		rendererParentClass="com.liferay.faces.alloy.component.select.internal.SelectDelegatingRendererBase">
 		<description>
-			<![CDATA[SelectManyCheckbox is a UISelectMany component that renders checkboxes and enables the user to select multiple values. Since it extends HtmlSelectManyCheckbox, it supports all the features of h:selectManyCheckbox such as accepting f:selectItem or f:selectItems as child tags.]]>
+			<![CDATA[SelectManyCheckbox is a UISelectMany component that renders checkboxes and enables the user to select multiple values. Since it extends HtmlSelectManyCheckbox, it supports all the features of h:selectManyCheckbox such as accepting f:selectItem or f:selectItems as child tags. However, since it does not render a &lt;table&gt;, it does not support h:selectManyCheckbox's <code>border</code> and <code>layout</code> attributes.]]>
 		</description>
 		<attributes>
 			<attribute>
@@ -3005,9 +3006,10 @@
 	</component>
 	<component name="SelectOneRadio" delegateRendererType="javax.faces.Radio"
 		extendsTags="UISelect DisabledInherited FacesMessageLabelInherited HTMLAccessibilityEvents HTMLInputEvents"
-		parentClass="javax.faces.component.html.HtmlSelectOneRadio" rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
+		parentClass="javax.faces.component.html.HtmlSelectOneRadio"
+		rendererParentClass="com.liferay.faces.alloy.component.select.internal.SelectDelegatingRendererBase">
 		<description>
-			<![CDATA[SelectOneRadio is a UISelectOne component that renders radio buttons. Since it extends <a href="http://docs.oracle.com/javaee/7/api/javax/faces/component/html/HtmlSelectOneRadio.html" target="_blank"><code>HtmlSelectOneRadio</code></a>, it supports all the features of h:selectOneRadio such as accepting f:selectItem or f:selectItems as child tags.]]>
+			<![CDATA[SelectOneRadio is a UISelectOne component that renders radio buttons. Since it extends <a href="http://docs.oracle.com/javaee/7/api/javax/faces/component/html/HtmlSelectOneRadio.html" target="_blank"><code>HtmlSelectOneRadio</code></a>, it supports all the features of h:selectOneRadio such as accepting f:selectItem or f:selectItems as child tags. However, since it does not render a &lt;table&gt;, it does not support h:selectOneRadio's <code>border</code> and <code>layout</code> attributes.]]>
 		</description>
 	</component>
 	<component name="SelectStarRating" delegateRendererType="javax.faces.Radio"
