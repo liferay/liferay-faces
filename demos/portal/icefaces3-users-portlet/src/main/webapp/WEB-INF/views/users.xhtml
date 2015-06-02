@@ -60,11 +60,11 @@
 					</alloy:fieldset>
 				</alloy:column>
 			</alloy:row>
-			<portal:buttonRow>
+			<alloy:buttonRow>
 				<ace:pushButton id="pushButtonSubmit" actionListener="#{usersBackingBean.save}" value="#{i18n['submit']}" />
 				<ace:pushButton id="pushButtonCancel" actionListener="#{usersBackingBean.cancel}" immediate="true"
 					value="#{i18n['cancel']}" />
-			</portal:buttonRow>
+			</alloy:buttonRow>
 			<hr />
 		</h:panelGroup>
 		<h:panelGroup layout="block" rendered="#{!usersViewBean.formRendered}">

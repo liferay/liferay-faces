@@ -14,9 +14,9 @@
 			<ace:fileEntry id="fileEntryComp" absolutePath="#{docLibBackingBean.fileUploadAbsolutePath}"
 				fileEntryListener="#{docLibBackingBean.handleFileUpload}" />
 			<hr />
-			<portal:buttonRow>
+			<alloy:buttonRow>
 				<h:commandButton onclick="uploadDialog.hide()" value="#{i18n['upload-document']}" />
-			</portal:buttonRow>
+			</alloy:buttonRow>
 		</ace:dialog>
 		<ace:dialog id="addFolderDialog" header="#{i18n['add-folder']}" modal="true" widgetVar="addFolderDialog"
 			message="#{i18n.replace('upload-documents-no-larger-than-x-k', docUploadBackingBean.maxFileSizeKB)}" width="640"
@@ -27,10 +27,10 @@
 					value="#{docLibBackingBean.folderName}" />
 				<aui-cc:input inlineMessage="true" label="#{i18n['description']}" required="false" cols="100" rows="10"
 					type="textarea" value="#{docLibBackingBean.folderDescription}" />
-				<portal:buttonRow>
+				<alloy:buttonRow>
 					<h:commandButton actionListener="#{docLibBackingBean.addFolder}" onclick="addFolderDialog.hide()"
 						value="#{i18n['submit']}" />
-				</portal:buttonRow>
+				</alloy:buttonRow>
 			</alloy:fieldset>
 		</ace:dialog>
 	</h:form>

@@ -8,11 +8,11 @@
 				<f:selectItem itemLabel="#{i18n['select']}" itemValue="" />
 				<f:selectItems itemValue="#{group.groupId}" itemLabel="#{group.name}" value="#{preferencesBackingBean.groups}" var="group" />
 			</aui-cc:select>
-			<portal:buttonRow>
+			<alloy:buttonRow>
 				<aui-cc:button type="submit">
 					<f:actionListener for="click" binding="#{preferencesBackingBean.submitActionListener}" />
 				</aui-cc:button>
-			</portal:buttonRow>
+			</alloy:buttonRow>
 		</alloy:fieldset>
 	</alloy:form>
 </ui:composition>
