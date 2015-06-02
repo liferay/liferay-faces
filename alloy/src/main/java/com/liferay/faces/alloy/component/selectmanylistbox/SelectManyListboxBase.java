@@ -44,7 +44,7 @@ public abstract class SelectManyListboxBase extends HtmlSelectManyListbox implem
 	@Override
 	public String getLabel() {
 
-		String label = (String) getStateHelper().eval(SelectManyListboxPropertyKeys.styleClass, null);
+		String label = (String) getStateHelper().eval(SelectManyListboxPropertyKeys.label, null);
 
 		if (label == null) {
 

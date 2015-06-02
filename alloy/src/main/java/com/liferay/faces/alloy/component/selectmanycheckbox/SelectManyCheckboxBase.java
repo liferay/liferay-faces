@@ -44,7 +44,7 @@ public abstract class SelectManyCheckboxBase extends HtmlSelectManyCheckbox impl
 	@Override
 	public String getLabel() {
 
-		String label = (String) getStateHelper().eval(SelectManyCheckboxPropertyKeys.styleClass, null);
+		String label = (String) getStateHelper().eval(SelectManyCheckboxPropertyKeys.label, null);
 
 		if (label == null) {
 

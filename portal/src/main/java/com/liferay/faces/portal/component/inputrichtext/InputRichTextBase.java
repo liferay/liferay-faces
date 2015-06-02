@@ -89,7 +89,7 @@ public abstract class InputRichTextBase extends UIInput implements Styleable {
 
 	public String getLabel() {
 
-		String label = (String) getStateHelper().eval(InputRichTextPropertyKeys.styleClass, null);
+		String label = (String) getStateHelper().eval(InputRichTextPropertyKeys.label, null);
 
 		if (label == null) {
 

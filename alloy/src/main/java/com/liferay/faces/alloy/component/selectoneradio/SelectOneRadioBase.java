@@ -44,7 +44,7 @@ public abstract class SelectOneRadioBase extends HtmlSelectOneRadio implements S
 	@Override
 	public String getLabel() {
 
-		String label = (String) getStateHelper().eval(SelectOneRadioPropertyKeys.styleClass, null);
+		String label = (String) getStateHelper().eval(SelectOneRadioPropertyKeys.label, null);
 
 		if (label == null) {
 

@@ -87,7 +87,7 @@ public abstract class InputFileBase extends HtmlInputFile implements Styleable, 
 	@Override
 	public String getLabel() {
 
-		String label = (String) getStateHelper().eval(InputFilePropertyKeys.styleClass, null);
+		String label = (String) getStateHelper().eval(InputFilePropertyKeys.label, null);
 
 		if (label == null) {
 
