@@ -9285,7 +9285,7 @@ java.lang.Object)</method-signature>
 		</tag-extension>
 	</tag>
 	<tag>
-		<description><![CDATA[StarRating is a UISelectOne component that renders a set of stars. The user can click on a star to select a rating and click on the same star a second time to de-select a rating. Since it extends <a href="http://docs.oracle.com/javaee/7/api/javax/faces/component/html/HtmlSelectOneRadio.html" target="_blank"><code>HtmlSelectOneRadio</code></a>, it accepts f:selectItem or f:selectItems as child tags.]]></description>
+		<description><![CDATA[SelectStarRating is a UISelectOne component that renders a set of stars. The user can click on a star to select a rating and click on the same star a second time to de-select a rating. Since it extends <a href="http://docs.oracle.com/javaee/7/api/javax/faces/component/html/HtmlSelectOneRadio.html" target="_blank"><code>HtmlSelectOneRadio</code></a>, it accepts f:selectItem or f:selectItems as child tags.]]></description>
 		<tag-name>selectStarRating</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.component.selectstarrating.SelectStarRating</component-type>
