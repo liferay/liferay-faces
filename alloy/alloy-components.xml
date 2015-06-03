@@ -1771,7 +1771,7 @@
 		</attributes>
 	</component>
 	<component name="InputSourceCode" delegateRendererType="javax.faces.Text"
-		extendsTags="ClientComponent StyleableInherited UIInput" module="aui-ace-editor"
+		extendsTags="ClientComponent FacesMessageLabelOverride StyleableInherited UIInput" module="aui-ace-editor"
 		parentClass="javax.faces.component.html.HtmlInputText"
 		rendererParentClass="com.liferay.faces.alloy.render.internal.DelegatingAlloyRendererBase" yui="true"
 		yuiName="AceEditor">

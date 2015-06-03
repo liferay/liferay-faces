@@ -4037,6 +4037,12 @@ java.lang.Object)</method-signature>
 			<type>java.lang.Boolean</type>
 		</attribute>
 		<attribute>
+			<description><![CDATA[A localized label for this component that is typically only rendered in a FacesMessage when validation fails.]]></description>
+			<name>label</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
 			<description><![CDATA[The locale of the text that the editor is editing or displaying.]]></description>
 			<name>locale</name>
 			<required>false</required>
