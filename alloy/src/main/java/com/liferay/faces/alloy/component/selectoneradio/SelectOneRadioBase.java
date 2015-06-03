@@ -32,7 +32,6 @@ public abstract class SelectOneRadioBase extends HtmlSelectOneRadio implements S
 
 	// Protected Enumerations
 	protected enum SelectOneRadioPropertyKeys {
-		label,
 		styleClass
 	}
 
@@ -44,7 +43,7 @@ public abstract class SelectOneRadioBase extends HtmlSelectOneRadio implements S
 	@Override
 	public String getLabel() {
 
-		String label = (String) getStateHelper().eval(SelectOneRadioPropertyKeys.label, null);
+		String label = super.getLabel();
 
 		if (label == null) {
 
@@ -56,11 +55,6 @@ public abstract class SelectOneRadioBase extends HtmlSelectOneRadio implements S
 		}
 
 		return label;
-	}
-
-	@Override
-	public void setLabel(String label) {
-		getStateHelper().put(SelectOneRadioPropertyKeys.label, label);
 	}
 
 	@Override
