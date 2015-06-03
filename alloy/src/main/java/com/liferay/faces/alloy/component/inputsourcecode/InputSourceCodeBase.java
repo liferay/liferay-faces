@@ -36,6 +36,7 @@ public abstract class InputSourceCodeBase extends HtmlInputText implements Style
 		clientKey,
 		height,
 		highlightActiveLine,
+		label,
 		locale,
 		maxLines,
 		minLines,
@@ -78,6 +79,28 @@ public abstract class InputSourceCodeBase extends HtmlInputText implements Style
 
 	public void setHighlightActiveLine(Boolean highlightActiveLine) {
 		getStateHelper().put(InputSourceCodePropertyKeys.highlightActiveLine, highlightActiveLine);
+	}
+
+	@Override
+	public String getLabel() {
+
+		String label = (String) getStateHelper().eval(InputSourceCodePropertyKeys.label, null);
+
+		if (label == null) {
+
+			javax.faces.context.FacesContext facesContext = javax.faces.context.FacesContext.getCurrentInstance();
+
+			if (facesContext.getCurrentPhaseId() == javax.faces.event.PhaseId.PROCESS_VALIDATIONS) {
+				label = com.liferay.faces.util.component.ComponentUtil.getComponentLabel(this);
+			}
+		}
+
+		return label;
+	}
+
+	@Override
+	public void setLabel(String label) {
+		getStateHelper().put(InputSourceCodePropertyKeys.label, label);
 	}
 
 	public String getLocale() {
