@@ -11,7 +11,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.alloy.component.selectstarrating.internal;
+package com.liferay.faces.alloy.component.selectrating.internal;
 
 import java.io.IOException;
 
@@ -43,7 +43,7 @@ import com.liferay.faces.util.render.internal.DelegationResponseWriterBase;
 /**
  * @author  Vernon Singleton
  */
-public class SelectStarRatingResponseWriter extends DelegationResponseWriterBase {
+public class SelectRatingResponseWriter extends DelegationResponseWriterBase {
 
 	// Public constants.
 	public static final int NO_SELECTION_INDEX = -1;
@@ -56,7 +56,7 @@ public class SelectStarRatingResponseWriter extends DelegationResponseWriterBase
 	private long selectedIndex;
 	private Object title;
 
-	public SelectStarRatingResponseWriter(ResponseWriter responseWriter) {
+	public SelectRatingResponseWriter(ResponseWriter responseWriter) {
 		super(responseWriter);
 		this.index = NO_SELECTION_INDEX;
 		this.selectedIndex = NO_SELECTION_INDEX;

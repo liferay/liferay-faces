@@ -11,24 +11,29 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.alloy.component.selectstarrating.internal;
+package com.liferay.faces.alloy.component.selectrating;
 //J-
 
-
 import javax.annotation.Generated;
+import com.liferay.faces.alloy.component.selectoneradio.SelectOneRadioBase;
 
-import com.liferay.faces.alloy.component.selectrating.internal.SelectRatingRenderer;
-
+import com.liferay.faces.util.component.Styleable;
+import com.liferay.faces.util.component.ClientComponent;
 
 /**
  * @author	Bruno Basto
  * @author	Kyle Stiemann
  */
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
-public abstract class SelectStarRatingRendererBase extends SelectRatingRenderer {
+public abstract class SelectRatingBase extends SelectOneRadioBase implements Styleable, ClientComponent {
 
-	// Protected Constants
-	protected static final String CLIENT_KEY = "clientKey";
-	protected static final String STYLE_CLASS = "styleClass";
+	// Public Constants
+	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.selectrating.SelectRating";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.selectrating.internal.SelectRatingRenderer";
+
+	public SelectRatingBase() {
+		super();
+		setRendererType(RENDERER_TYPE);
+	}
 }
 //J+

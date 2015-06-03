@@ -11,15 +11,24 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.alloy.component.selectthumbrating;
+package com.liferay.faces.alloy.component.selectthumbrating.internal;
+//J-
 
-import javax.faces.component.FacesComponent;
+
+import javax.annotation.Generated;
+
+import com.liferay.faces.alloy.component.selectrating.internal.SelectRatingRenderer;
 
 
 /**
- * @author  Vernon Singleton
+ * @author	Bruno Basto
+ * @author	Kyle Stiemann
  */
-@FacesComponent(value = SelectThumbRating.COMPONENT_TYPE)
-public final class SelectThumbRating extends SelectThumbRatingBase {
-	// Initial Generation
+@Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
+public abstract class SelectThumbRatingRendererBase extends SelectRatingRenderer {
+
+	// Protected Constants
+	protected static final String CLIENT_KEY = "clientKey";
+	protected static final String STYLE_CLASS = "styleClass";
 }
+//J+
