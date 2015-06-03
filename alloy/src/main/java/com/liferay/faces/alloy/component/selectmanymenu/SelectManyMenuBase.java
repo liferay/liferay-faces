@@ -32,7 +32,6 @@ public abstract class SelectManyMenuBase extends HtmlSelectManyMenu implements S
 
 	// Protected Enumerations
 	protected enum SelectManyMenuPropertyKeys {
-		label,
 		styleClass
 	}
 
@@ -44,7 +43,7 @@ public abstract class SelectManyMenuBase extends HtmlSelectManyMenu implements S
 	@Override
 	public String getLabel() {
 
-		String label = (String) getStateHelper().eval(SelectManyMenuPropertyKeys.label, null);
+		String label = super.getLabel();
 
 		if (label == null) {
 
@@ -56,11 +55,6 @@ public abstract class SelectManyMenuBase extends HtmlSelectManyMenu implements S
 		}
 
 		return label;
-	}
-
-	@Override
-	public void setLabel(String label) {
-		getStateHelper().put(SelectManyMenuPropertyKeys.label, label);
 	}
 
 	@Override

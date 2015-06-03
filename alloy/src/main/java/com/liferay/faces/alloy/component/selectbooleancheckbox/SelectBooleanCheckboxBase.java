@@ -32,7 +32,6 @@ public abstract class SelectBooleanCheckboxBase extends HtmlSelectBooleanCheckbo
 
 	// Protected Enumerations
 	protected enum SelectBooleanCheckboxPropertyKeys {
-		label,
 		styleClass
 	}
 
@@ -44,7 +43,7 @@ public abstract class SelectBooleanCheckboxBase extends HtmlSelectBooleanCheckbo
 	@Override
 	public String getLabel() {
 
-		String label = (String) getStateHelper().eval(SelectBooleanCheckboxPropertyKeys.label, null);
+		String label = super.getLabel();
 
 		if (label == null) {
 
@@ -56,11 +55,6 @@ public abstract class SelectBooleanCheckboxBase extends HtmlSelectBooleanCheckbo
 		}
 
 		return label;
-	}
-
-	@Override
-	public void setLabel(String label) {
-		getStateHelper().put(SelectBooleanCheckboxPropertyKeys.label, label);
 	}
 
 	@Override

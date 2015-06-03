@@ -32,7 +32,6 @@ public abstract class InputTextareaBase extends HtmlInputTextarea implements Sty
 
 	// Protected Enumerations
 	protected enum InputTextareaPropertyKeys {
-		label,
 		styleClass
 	}
 
@@ -44,7 +43,7 @@ public abstract class InputTextareaBase extends HtmlInputTextarea implements Sty
 	@Override
 	public String getLabel() {
 
-		String label = (String) getStateHelper().eval(InputTextareaPropertyKeys.label, null);
+		String label = super.getLabel();
 
 		if (label == null) {
 
@@ -56,11 +55,6 @@ public abstract class InputTextareaBase extends HtmlInputTextarea implements Sty
 		}
 
 		return label;
-	}
-
-	@Override
-	public void setLabel(String label) {
-		getStateHelper().put(InputTextareaPropertyKeys.label, label);
 	}
 
 	@Override

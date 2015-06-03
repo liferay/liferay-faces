@@ -32,7 +32,6 @@ public abstract class SelectOneMenuBase extends HtmlSelectOneMenu implements Sty
 
 	// Protected Enumerations
 	protected enum SelectOneMenuPropertyKeys {
-		label,
 		styleClass
 	}
 
@@ -44,7 +43,7 @@ public abstract class SelectOneMenuBase extends HtmlSelectOneMenu implements Sty
 	@Override
 	public String getLabel() {
 
-		String label = (String) getStateHelper().eval(SelectOneMenuPropertyKeys.label, null);
+		String label = super.getLabel();
 
 		if (label == null) {
 
@@ -56,11 +55,6 @@ public abstract class SelectOneMenuBase extends HtmlSelectOneMenu implements Sty
 		}
 
 		return label;
-	}
-
-	@Override
-	public void setLabel(String label) {
-		getStateHelper().put(SelectOneMenuPropertyKeys.label, label);
 	}
 
 	@Override

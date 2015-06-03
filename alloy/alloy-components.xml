@@ -607,7 +607,7 @@
 		</attributes>
 	</component>
 	<component name="InputDateTimeCommon"
-		extendsTags="AltInherited DisabledInherited FacesMessageLabelInherited InputCommon SizeInherited"
+		extendsTags="AltInherited DisabledInherited FacesMessageLabelInheritedGenerateJavaFalse InputCommon SizeInherited"
 		generateJava="false" generateTaglibXML="false">
 		<!-- This component exists so that InputDate and InputTime can extend it. It includes all the attributes of -->
 		<!-- InputDateTime with <generateJava>false</generateJava>. If InputDate and InputTime extended -->
@@ -795,7 +795,7 @@
 		</attributes>
 	</component>
 	<component name="AutoComplete" delegateRendererType="javax.faces.Text"
-		extendsTags="ClientComponent FacesMessageLabelInherited InputText"
+		extendsTags="ClientComponent FacesMessageLabelInheritedGenerateJavaFalse InputText"
 		handlerClass="com.liferay.faces.alloy.component.autocomplete.internal.AutoCompleteHandler"
 		parentClass="com.liferay.faces.alloy.component.inputtext.InputTextBase"
 		rendererParentClass="com.liferay.faces.alloy.render.internal.DelegatingAlloyRendererBase" yui="true"
@@ -1750,7 +1750,7 @@
 		</description>
 	</component>
 	<component name="InputSecret" delegateRendererType="javax.faces.Secret"
-		extendsTags="AltInherited AutocompleteInherited DisabledInherited FacesMessageLabelOverride InputCommon SizeInherited"
+		extendsTags="AltInherited AutocompleteInherited DisabledInherited FacesMessageLabelInherited InputCommon SizeInherited"
 		parentClass="javax.faces.component.html.HtmlInputSecret"
 		rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
 		<description>
@@ -1770,7 +1770,7 @@
 		</attributes>
 	</component>
 	<component name="InputSourceCode" delegateRendererType="javax.faces.Text"
-		extendsTags="ClientComponent FacesMessageLabelOverride StyleableInherited UIInput" module="aui-ace-editor"
+		extendsTags="ClientComponent FacesMessageLabelInherited StyleableInherited UIInput" module="aui-ace-editor"
 		parentClass="javax.faces.component.html.HtmlInputText"
 		rendererParentClass="com.liferay.faces.alloy.render.internal.DelegatingAlloyRendererBase" yui="true"
 		yuiName="AceEditor">
@@ -1887,7 +1887,7 @@
 		</attributes>
 	</component>
 	<component name="InputText" delegateRendererType="javax.faces.Text"
-		extendsTags="AltInherited AutocompleteInherited DisabledInherited FacesMessageLabelOverride InputCommon SizeInherited"
+		extendsTags="AltInherited AutocompleteInherited DisabledInherited FacesMessageLabelInherited InputCommon SizeInherited"
 		parentClass="javax.faces.component.html.HtmlInputText"
 		rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
 		<description>
@@ -1895,7 +1895,7 @@
 		</description>
 	</component>
 	<component name="InputTextarea" delegateRendererType="javax.faces.Textarea"
-		extendsTags="FacesMessageLabelOverride DisabledInherited InputCommon"
+		extendsTags="FacesMessageLabelInherited DisabledInherited InputCommon"
 		parentClass="javax.faces.component.html.HtmlInputTextarea"
 		rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
 		<description>
@@ -2931,7 +2931,7 @@
 		</attributes>
 	</component>
 	<component name="SelectBooleanCheckbox" delegateRendererType="javax.faces.Checkbox"
-		extendsTags="DisabledInherited FacesMessageLabelOverride HTMLAccessibilityEvents HTMLInputEvents"
+		extendsTags="DisabledInherited FacesMessageLabelInherited HTMLAccessibilityEvents HTMLInputEvents"
 		extraStyleClasses="checkbox" parentClass="javax.faces.component.html.HtmlSelectBooleanCheckbox"
 		rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
 		<description>
@@ -2939,7 +2939,7 @@
 		</description>
 	</component>
 	<component name="SelectManyCheckbox" delegateRendererType="javax.faces.Checkbox"
-		extendsTags="UISelectMany DisabledInherited FacesMessageLabelOverride HTMLAccessibilityEvents HTMLInputEvents"
+		extendsTags="UISelectMany DisabledInherited FacesMessageLabelInherited HTMLAccessibilityEvents HTMLInputEvents"
 		extraStyleClasses="checkbox" parentClass="javax.faces.component.html.HtmlSelectManyCheckbox"
 		rendererParentClass="com.liferay.faces.alloy.component.select.internal.SelectDelegatingRendererBase">
 		<description>
@@ -2965,7 +2965,7 @@
 		</attributes>
 	</component>
 	<component name="SelectManyListbox" delegateRendererType="javax.faces.Listbox"
-		extendsTags="UISelectMany DisabledInherited FacesMessageLabelOverride HTMLAccessibilityEvents HTMLInputEvents"
+		extendsTags="UISelectMany DisabledInherited FacesMessageLabelInherited HTMLAccessibilityEvents HTMLInputEvents"
 		parentClass="javax.faces.component.html.HtmlSelectManyListbox" rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
 		<description>
 			<![CDATA[SelectManyListbox is a UISelectMany component that renders a select element and enables the user to select multiple values. Since it extends HtmlSelectManyListbox, it supports all the features of h:selectManyListbox such as accepting f:selectItem or f:selectItems as child tags.]]>
@@ -2982,14 +2982,14 @@
 		</attributes>
 	</component>
 	<component name="SelectManyMenu" delegateRendererType="javax.faces.Menu"
-		extendsTags="UISelectMany DisabledInherited FacesMessageLabelOverride HTMLAccessibilityEvents HTMLInputEvents"
+		extendsTags="UISelectMany DisabledInherited FacesMessageLabelInherited HTMLAccessibilityEvents HTMLInputEvents"
 		parentClass="javax.faces.component.html.HtmlSelectManyMenu" rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
 		<description>
 			<![CDATA[SelectManyMenu is a UISelectMany component that renders a select element and enables the user to select multiple values. It has the same basic features of alloy:selectManyListbox except that there is no size attribute because JSF "select*menu" components always render size=1. Since it extends HtmlSelectManyMenu, it supports all the features of h:selectManyMenu such as accepting f:selectItem or f:selectItems as child tags.]]>
 		</description>
 	</component>
 	<component name="SelectOneListbox" delegateRendererType="javax.faces.Listbox"
-		extendsTags="UISelect DisabledInherited FacesMessageLabelOverride HTMLAccessibilityEvents HTMLInputEvents"
+		extendsTags="UISelect DisabledInherited FacesMessageLabelInherited HTMLAccessibilityEvents HTMLInputEvents"
 		parentClass="javax.faces.component.html.HtmlSelectOneListbox" rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
 		<description>
 			<![CDATA[SelectOneListbox is a UISelectOne component that renders a `select` element (multi-item list) and enables the user to select one value. Since it extends HtmlSelectOneListbox, it supports all the features of h:selectOneListbox such as accepting f:selectItem or f:selectItems as child tags.]]>
@@ -3006,14 +3006,14 @@
 		</attributes>
 	</component>
 	<component name="SelectOneMenu" delegateRendererType="javax.faces.Menu"
-		extendsTags="UISelect DisabledInherited FacesMessageLabelOverride HTMLAccessibilityEvents HTMLInputEvents"
+		extendsTags="UISelect DisabledInherited FacesMessageLabelInherited HTMLAccessibilityEvents HTMLInputEvents"
 		parentClass="javax.faces.component.html.HtmlSelectOneMenu" rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
 		<description>
 			<![CDATA[SelectOneMenu is a UISelectOne component that renders a select element (drop down list) and enables the user to select one value. Since it extends HtmlSelectOneMenu, it supports all the features of h:selectOneMenu such as accepting f:selectItem or f:selectItems as child tags.]]>
 		</description>
 	</component>
 	<component name="SelectOneRadio" delegateRendererType="javax.faces.Radio"
-		extendsTags="UISelect DisabledInherited FacesMessageLabelOverride HTMLAccessibilityEvents HTMLInputEvents"
+		extendsTags="UISelect DisabledInherited FacesMessageLabelInherited HTMLAccessibilityEvents HTMLInputEvents"
 		extraStyleClasses="radio" parentClass="javax.faces.component.html.HtmlSelectOneRadio"
 		rendererParentClass="com.liferay.faces.alloy.component.select.internal.SelectDelegatingRendererBase">
 		<description>
@@ -3021,8 +3021,8 @@
 		</description>
 	</component>
 	<component name="SelectStarRating" delegateRendererType="javax.faces.Radio"
-		extendsTags="ClientComponent FacesMessageLabelInherited StyleableInherited UIComponentBase UIInput" module="aui-rating"
-		parentClass="com.liferay.faces.alloy.component.selectoneradio.SelectOneRadio"
+		extendsTags="ClientComponent FacesMessageLabelInheritedGenerateJavaFalse StyleableInherited UIComponentBase UIInput"
+		module="aui-rating" parentClass="com.liferay.faces.alloy.component.selectoneradio.SelectOneRadio"
 		rendererParentClass="com.liferay.faces.alloy.render.internal.DelegatingAlloyRendererBase"
 		yui="true" yuiName="Rating">
 		<description>
