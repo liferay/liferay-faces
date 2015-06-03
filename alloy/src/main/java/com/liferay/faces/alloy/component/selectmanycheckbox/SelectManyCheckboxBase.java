@@ -32,7 +32,6 @@ public abstract class SelectManyCheckboxBase extends HtmlSelectManyCheckbox impl
 
 	// Protected Enumerations
 	protected enum SelectManyCheckboxPropertyKeys {
-		label,
 		styleClass
 	}
 
@@ -44,7 +43,7 @@ public abstract class SelectManyCheckboxBase extends HtmlSelectManyCheckbox impl
 	@Override
 	public String getLabel() {
 
-		String label = (String) getStateHelper().eval(SelectManyCheckboxPropertyKeys.label, null);
+		String label = super.getLabel();
 
 		if (label == null) {
 
@@ -56,11 +55,6 @@ public abstract class SelectManyCheckboxBase extends HtmlSelectManyCheckbox impl
 		}
 
 		return label;
-	}
-
-	@Override
-	public void setLabel(String label) {
-		getStateHelper().put(SelectManyCheckboxPropertyKeys.label, label);
 	}
 
 	@Override
