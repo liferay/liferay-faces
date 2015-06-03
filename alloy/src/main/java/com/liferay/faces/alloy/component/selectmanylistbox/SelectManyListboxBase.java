@@ -32,7 +32,6 @@ public abstract class SelectManyListboxBase extends HtmlSelectManyListbox implem
 
 	// Protected Enumerations
 	protected enum SelectManyListboxPropertyKeys {
-		label,
 		styleClass
 	}
 
@@ -44,7 +43,7 @@ public abstract class SelectManyListboxBase extends HtmlSelectManyListbox implem
 	@Override
 	public String getLabel() {
 
-		String label = (String) getStateHelper().eval(SelectManyListboxPropertyKeys.label, null);
+		String label = super.getLabel();
 
 		if (label == null) {
 
@@ -56,11 +55,6 @@ public abstract class SelectManyListboxBase extends HtmlSelectManyListbox implem
 		}
 
 		return label;
-	}
-
-	@Override
-	public void setLabel(String label) {
-		getStateHelper().put(SelectManyListboxPropertyKeys.label, label);
 	}
 
 	@Override

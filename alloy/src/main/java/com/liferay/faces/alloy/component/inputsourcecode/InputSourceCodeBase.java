@@ -36,7 +36,6 @@ public abstract class InputSourceCodeBase extends HtmlInputText implements Style
 		clientKey,
 		height,
 		highlightActiveLine,
-		label,
 		locale,
 		maxLines,
 		minLines,
@@ -84,7 +83,7 @@ public abstract class InputSourceCodeBase extends HtmlInputText implements Style
 	@Override
 	public String getLabel() {
 
-		String label = (String) getStateHelper().eval(InputSourceCodePropertyKeys.label, null);
+		String label = super.getLabel();
 
 		if (label == null) {
 
@@ -96,11 +95,6 @@ public abstract class InputSourceCodeBase extends HtmlInputText implements Style
 		}
 
 		return label;
-	}
-
-	@Override
-	public void setLabel(String label) {
-		getStateHelper().put(InputSourceCodePropertyKeys.label, label);
 	}
 
 	public String getLocale() {
