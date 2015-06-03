@@ -101,6 +101,16 @@ public class LabelSurroundingResponseWriter extends DelegationResponseWriterBase
 
 			super.writeAttribute("class", cssClass, null);
 			super.startElement("input", component);
+			String cssClasses = (String) inputAttributes.get("class");
+
+			if (cssClasses == null) {
+				cssClasses = "field";
+			}
+			else {
+				cssClasses = cssClasses + " field";
+			}
+
+			inputAttributes.put("class", cssClasses);
 
 			for (Map.Entry<String, Object> attribute : inputAttributes.entrySet()) {
 				super.writeAttribute(attribute.getKey(), attribute.getValue(), null);

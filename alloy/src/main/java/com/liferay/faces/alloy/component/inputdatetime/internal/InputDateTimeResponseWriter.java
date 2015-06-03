@@ -41,8 +41,11 @@ public class InputDateTimeResponseWriter extends IdDelegationResponseWriter {
 	@Override
 	public void writeAttribute(String name, Object value, String property) throws IOException {
 
-		if (StringPool.CLASS.equalsIgnoreCase(name) || Styleable.STYLE.equalsIgnoreCase(name)) {
-			super.writeAttribute(name, "input-medium", property);
+		if (StringPool.CLASS.equalsIgnoreCase(name)) {
+			super.writeAttribute(name, "input-medium field", property);
+		}
+		else if (Styleable.STYLE.equalsIgnoreCase(name)) {
+			// no-op
 		}
 		else {
 			super.writeAttribute(name, value, property);

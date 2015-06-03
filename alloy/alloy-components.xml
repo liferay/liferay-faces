@@ -1676,8 +1676,8 @@
 		</attributes>
 	</component>
 	<component name="InputFile" delegateRendererType="javax.faces.File" extendsTags="ClientComponent InputText"
-		handlerClass="com.liferay.faces.alloy.component.inputfile.internal.InputFileHandler" module="uploader"
-		parentClass="javax.faces.component.html.HtmlInputFile"
+		extraStyleClasses="field" handlerClass="com.liferay.faces.alloy.component.inputfile.internal.InputFileHandler"
+		module="uploader" parentClass="javax.faces.component.html.HtmlInputFile"
 		rendererParentClass="com.liferay.faces.alloy.component.inputfile.internal.InputFileRendererCompat"
 		yui="true" yuiName="Uploader">
 		<description>
@@ -1749,7 +1749,7 @@
 			<![CDATA[InputHidden is a UIInput component that renders an input element with type="hidden". Since it extends HtmlInputHidden, it supports all the features of h:inputHidden.]]>
 		</description>
 	</component>
-	<component name="InputSecret" delegateRendererType="javax.faces.Secret"
+	<component name="InputSecret" delegateRendererType="javax.faces.Secret" extraStyleClasses="field"
 		extendsTags="AltInherited AutocompleteInherited DisabledInherited FacesMessageLabelOverride InputCommon SizeInherited"
 		parentClass="javax.faces.component.html.HtmlInputSecret"
 		rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
@@ -1886,7 +1886,7 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="InputText" delegateRendererType="javax.faces.Text"
+	<component name="InputText" delegateRendererType="javax.faces.Text" extraStyleClasses="field"
 		extendsTags="AltInherited AutocompleteInherited DisabledInherited FacesMessageLabelOverride InputCommon SizeInherited"
 		parentClass="javax.faces.component.html.HtmlInputText"
 		rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
@@ -1895,7 +1895,7 @@
 		</description>
 	</component>
 	<component name="InputTextarea" delegateRendererType="javax.faces.Textarea"
-		extendsTags="FacesMessageLabelOverride DisabledInherited InputCommon"
+		extendsTags="FacesMessageLabelOverride DisabledInherited InputCommon" extraStyleClasses="field"
 		parentClass="javax.faces.component.html.HtmlInputTextarea"
 		rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
 		<description>

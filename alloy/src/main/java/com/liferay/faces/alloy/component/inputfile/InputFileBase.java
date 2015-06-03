@@ -144,7 +144,7 @@ public abstract class InputFileBase extends HtmlInputFile implements Styleable, 
 		// STYLE_CLASS_NAME of the super class.
 		String styleClass = (String) getStateHelper().eval(InputFilePropertyKeys.styleClass, null);
 
-		return com.liferay.faces.util.component.ComponentUtil.concatCssClasses(styleClass, "alloy-input-file");
+		return com.liferay.faces.util.component.ComponentUtil.concatCssClasses(styleClass, "alloy-input-file", "field");
 	}
 
 	@Override

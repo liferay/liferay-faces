@@ -69,7 +69,7 @@ public abstract class InputTextareaBase extends HtmlInputTextarea implements Sty
 		// STYLE_CLASS_NAME of the super class.
 		String styleClass = (String) getStateHelper().eval(InputTextareaPropertyKeys.styleClass, null);
 
-		return com.liferay.faces.util.component.ComponentUtil.concatCssClasses(styleClass, "alloy-input-textarea");
+		return com.liferay.faces.util.component.ComponentUtil.concatCssClasses(styleClass, "alloy-input-textarea", "field");
 	}
 
 	@Override
