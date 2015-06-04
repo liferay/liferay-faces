@@ -116,11 +116,6 @@ public class BridgePortalContextLiferayImpl extends BridgePortalContextLiferayCo
 	}
 
 	@Override
-	protected String getForwardOnDispatch() {
-		return null;
-	}
-
-	@Override
 	protected String getMarkupHeadElementSupported() {
 
 		// Liferay Portal added support for this feature in v6.0.3 but a bug prevented it from working, even in v6.0.5.
