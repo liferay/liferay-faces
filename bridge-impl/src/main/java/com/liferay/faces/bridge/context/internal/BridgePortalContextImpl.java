@@ -53,7 +53,6 @@ public class BridgePortalContextImpl implements BridgePortalContext {
 		propertyNameList.add(ADD_SCRIPT_TEXT_TO_HEAD_SUPPORT);
 		propertyNameList.add(ADD_STYLE_SHEET_RESOURCE_TO_HEAD_SUPPORT);
 		propertyNameList.add(CREATE_RENDER_URL_DURING_ACTION_PHASE_SUPPORT);
-		propertyNameList.add(FORWARD_ON_DISPATCH_SUPPORT);
 		propertyNameList.add(POST_REDIRECT_GET_SUPPORT);
 		propertyNameList.add(SET_HTTP_STATUS_CODE_SUPPORT);
 		propertyNameList.add(SET_RESOURCE_RESPONSE_BUFFER_SIZE_SUPPORT);
@@ -77,10 +76,6 @@ public class BridgePortalContextImpl implements BridgePortalContext {
 		// Portlet 2.0 does not support this feature but perhaps Portlet 3.0 will.
 		// https://java.net/jira/browse/PORTLETSPEC3-49
 		return null;
-	}
-
-	protected String getForwardOnDispatch() {
-		return "true";
 	}
 
 	protected String getMarkupHeadElementSupported() {
@@ -114,9 +109,6 @@ public class BridgePortalContextImpl implements BridgePortalContext {
 		}
 		else if (CREATE_RENDER_URL_DURING_ACTION_PHASE_SUPPORT.equals(name)) {
 			return getCreateRenderUrlDuringActionPhase();
-		}
-		else if (FORWARD_ON_DISPATCH_SUPPORT.equals(name)) {
-			return getForwardOnDispatch();
 		}
 		else if (STRICT_NAMESPACED_PARAMETERS_SUPPORT.equals(name)) {
 			return getNamespacedParametersRequired();
