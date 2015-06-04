@@ -45,6 +45,17 @@ public class PortletRequestDispatcherBridgeLiferayImpl extends PortletRequestDis
 	}
 
 	@Override
+	public void forward(PortletRequest portletRequest, PortletResponse portletResponse) throws PortletException,
+		IOException {
+
+		// Liferay Portal's implementation of PortletRequestDispatcher.forward(PortletRequest,PortletResponse) is not
+		// compatible with the requirements of the JSF Portlet Bridge and causes failures in the Bridge TCK
+		// dispatchUsesForwardTest and bridgeSetsContentTypeTest. As a workaround, call
+		// PortletRequestDispatcher.include(PortletRequest,PortletResponse).
+		include(portletRequest, portletResponse);
+	}
+
+	@Override
 	public void include(PortletRequest portletRequest, PortletResponse portletResponse) throws PortletException,
 		IOException {
 
