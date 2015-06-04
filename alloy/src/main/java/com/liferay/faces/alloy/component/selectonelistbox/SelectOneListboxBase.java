@@ -32,7 +32,6 @@ public abstract class SelectOneListboxBase extends HtmlSelectOneListbox implemen
 
 	// Protected Enumerations
 	protected enum SelectOneListboxPropertyKeys {
-		label,
 		styleClass
 	}
 
@@ -44,7 +43,7 @@ public abstract class SelectOneListboxBase extends HtmlSelectOneListbox implemen
 	@Override
 	public String getLabel() {
 
-		String label = (String) getStateHelper().eval(SelectOneListboxPropertyKeys.label, null);
+		String label = super.getLabel();
 
 		if (label == null) {
 
@@ -56,11 +55,6 @@ public abstract class SelectOneListboxBase extends HtmlSelectOneListbox implemen
 		}
 
 		return label;
-	}
-
-	@Override
-	public void setLabel(String label) {
-		getStateHelper().put(SelectOneListboxPropertyKeys.label, label);
 	}
 
 	@Override

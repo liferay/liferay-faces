@@ -32,7 +32,6 @@ public abstract class InputTextBase extends HtmlInputText implements Styleable {
 
 	// Protected Enumerations
 	protected enum InputTextPropertyKeys {
-		label,
 		styleClass
 	}
 
@@ -44,7 +43,7 @@ public abstract class InputTextBase extends HtmlInputText implements Styleable {
 	@Override
 	public String getLabel() {
 
-		String label = (String) getStateHelper().eval(InputTextPropertyKeys.label, null);
+		String label = super.getLabel();
 
 		if (label == null) {
 
@@ -56,11 +55,6 @@ public abstract class InputTextBase extends HtmlInputText implements Styleable {
 		}
 
 		return label;
-	}
-
-	@Override
-	public void setLabel(String label) {
-		getStateHelper().put(InputTextPropertyKeys.label, label);
 	}
 
 	@Override

@@ -32,7 +32,6 @@ public abstract class InputSecretBase extends HtmlInputSecret implements Styleab
 
 	// Protected Enumerations
 	protected enum InputSecretPropertyKeys {
-		label,
 		styleClass
 	}
 
@@ -44,7 +43,7 @@ public abstract class InputSecretBase extends HtmlInputSecret implements Styleab
 	@Override
 	public String getLabel() {
 
-		String label = (String) getStateHelper().eval(InputSecretPropertyKeys.label, null);
+		String label = super.getLabel();
 
 		if (label == null) {
 
@@ -56,11 +55,6 @@ public abstract class InputSecretBase extends HtmlInputSecret implements Styleab
 		}
 
 		return label;
-	}
-
-	@Override
-	public void setLabel(String label) {
-		getStateHelper().put(InputSecretPropertyKeys.label, label);
 	}
 
 	@Override
