@@ -28,12 +28,10 @@ public abstract class SelectRating extends SelectOneRadioBase implements ClientC
 	@Override
 	protected void validateValue(FacesContext context, Object value) {
 
-		// AlloyUI sets the initial value of its hidden input to -1
-		// -1 has been modified by this point in the lifecycle to be "" to play
-		// nice with JSF. Unfortunately "" would
-		// be invalid, if it is not in the list of rating options, so we will
-		// force validateValue to see that the value
-		// is null instead of "". JSF will allow null as valid.
+		// AlloyUI sets the initial value of its hidden input to -1. But -1 has been modified by this point in the
+		// lifecycle to be the empty string in order to be compatible with JSF. Since the empty string it is not in the
+		// list of rating options, it is technically an invalid option. As a workaround, consider an empty string value
+		// to be null (which will enable JSF validation processing to proceed).
 		if (value instanceof String) {
 			String valueString = (String) value;
 
