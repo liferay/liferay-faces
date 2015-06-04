@@ -45,7 +45,7 @@ public class InputDateTimeResponseWriter extends IdDelegationResponseWriter {
 			super.writeAttribute(name, "input-medium field", property);
 		}
 		else if (Styleable.STYLE.equalsIgnoreCase(name)) {
-			// no-op
+			// no-op because the style attribute is applied to the outermost div instead of the input.
 		}
 		else {
 			super.writeAttribute(name, value, property);
