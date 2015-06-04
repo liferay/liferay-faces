@@ -3020,14 +3020,12 @@
 			<![CDATA[SelectOneRadio is a UISelectOne component that renders radio buttons. Since it extends <a href="http://docs.oracle.com/javaee/7/api/javax/faces/component/html/HtmlSelectOneRadio.html" target="_blank"><code>HtmlSelectOneRadio</code></a>, it supports all the features of h:selectOneRadio such as accepting f:selectItem or f:selectItems as child tags. However, since it does not render a &lt;table&gt;, it does not support h:selectOneRadio's <code>border</code> and <code>layout</code> attributes.]]>
 		</description>
 	</component>
-	<component name="SelectStarRating" delegateRendererType="javax.faces.Radio"
-		extendsTags="ClientComponent FacesMessageLabelInherited StyleableInherited UIComponentBase UIInput" module="aui-rating"
-		parentClass="com.liferay.faces.alloy.component.selectoneradio.SelectOneRadio"
+	<component name="SelectRating" delegateRendererType="javax.faces.Radio"
+		extendsTags="FacesMessageLabelInherited UIComponentBase UIInput"
+		generateTaglibXML="false" module="aui-rating"
+		parentClass="com.liferay.faces.alloy.component.selectoneradio.SelectOneRadioBase"
 		rendererParentClass="com.liferay.faces.alloy.render.internal.DelegatingAlloyRendererBase"
 		yui="true" yuiName="Rating">
-		<description>
-			<![CDATA[StarRating is a UISelectOne component that renders a set of stars. The user can click on a star to select a rating and click on the same star a second time to de-select a rating. Since it extends <a href="http://docs.oracle.com/javaee/7/api/javax/faces/component/html/HtmlSelectOneRadio.html" target="_blank"><code>HtmlSelectOneRadio</code></a>, it accepts f:selectItem or f:selectItems as child tags.]]>
-		</description>
 		<attributes>
 			<attribute>
 				<description>
@@ -3071,9 +3069,16 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="SelectThumbRating" extendsTags="SelectStarRating" generateJava="false" module="aui-rating"
-		parentClass="com.liferay.faces.alloy.component.selectstarrating.SelectStarRating" rendererParentClass="com.liferay.faces.alloy.component.selectstarrating.SelectStarRatingRenderer"
-		yui="true" yuiName="ThumbRating">
+	<component name="SelectStarRating" extendsTags="ClientComponent StyleableInherited SelectRating"
+		parentClass="com.liferay.faces.alloy.component.selectrating.SelectRating"
+		rendererParentClass="com.liferay.faces.alloy.component.selectrating.internal.SelectRatingRenderer">
+		<description>
+			<![CDATA[SelectStarRating is a UISelectOne component that renders a set of stars. The user can click on a star to select a rating and click on the same star a second time to de-select a rating. Since it extends <a href="http://docs.oracle.com/javaee/7/api/javax/faces/component/html/HtmlSelectOneRadio.html" target="_blank"><code>HtmlSelectOneRadio</code></a>, it accepts f:selectItem or f:selectItems as child tags.]]>
+		</description>
+	</component>
+	<component name="SelectThumbRating" extendsTags="ClientComponent StyleableInherited SelectRating"
+		parentClass="com.liferay.faces.alloy.component.selectrating.SelectRating"
+		rendererParentClass="com.liferay.faces.alloy.component.selectrating.internal.SelectRatingRenderer">
 		<description>
 			<![CDATA[SelectThumbRating is a UISelectOne component that renders a pair of thumb icons that a user can select to indicate their favor. The user can click on a thumb to select their favor and click on the same thumb a second time to de-select their favor. Since it extends <a href="http://docs.oracle.com/javaee/7/api/javax/faces/component/html/HtmlSelectOneRadio.html" target="_blank"><code>HtmlSelectOneRadio</code></a>, it accepts f:selectItem or f:selectItems as children.]]>
 		</description>

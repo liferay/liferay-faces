@@ -14,9 +14,6 @@
 package com.liferay.faces.alloy.component.selectstarrating;
 
 import javax.faces.component.FacesComponent;
-import javax.faces.context.FacesContext;
-
-import com.liferay.faces.util.lang.StringPool;
 
 
 /**
@@ -24,24 +21,5 @@ import com.liferay.faces.util.lang.StringPool;
  */
 @FacesComponent(value = SelectStarRating.COMPONENT_TYPE)
 public class SelectStarRating extends SelectStarRatingBase {
-
-	@Override
-	protected void validateValue(FacesContext context, Object value) {
-
-		// AlloyUI sets the initial value of its hidden input to -1
-		// -1 has been modified by this point in the lifecycle to be "" to play
-		// nice with JSF. Unfortunately "" would
-		// be invalid, if it is not in the list of rating options, so we will
-		// force validateValue to see that the value
-		// is null instead of "". JSF will allow null as valid.
-		if (value instanceof String) {
-			String valueString = (String) value;
-
-			if (StringPool.BLANK.equals(valueString)) {
-				value = null;
-			}
-		}
-
-		super.validateValue(context, value);
-	}
+	// Initial Generation
 }
