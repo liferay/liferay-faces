@@ -19,15 +19,16 @@ import java.net.URL;
 import java.util.Enumeration;
 import java.util.Set;
 
-import javax.faces.FacesWrapper;
 import javax.portlet.PortletContext;
 import javax.portlet.PortletRequestDispatcher;
+
+import com.liferay.faces.util.helper.Wrapper;
 
 
 /**
  * @author  Neil Griffin
  */
-public abstract class PortletContextWrapper implements PortletContext, FacesWrapper<PortletContext> {
+public abstract class PortletContextWrapper implements PortletContext, Wrapper<PortletContext> {
 
 	public void log(String msg) {
 		getWrapped().log(msg);

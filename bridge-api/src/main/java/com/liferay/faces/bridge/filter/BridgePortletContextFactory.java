@@ -13,14 +13,15 @@
  */
 package com.liferay.faces.bridge.filter;
 
-import javax.faces.FacesWrapper;
 import javax.portlet.PortletContext;
+
+import com.liferay.faces.util.helper.Wrapper;
 
 
 /**
  * @author  Neil Griffin
  */
-public abstract class BridgePortletContextFactory implements FacesWrapper<BridgePortletContextFactory> {
+public abstract class BridgePortletContextFactory implements Wrapper<BridgePortletContextFactory> {
 
 	public abstract PortletContext getPortletContext(PortletContext portletContext);
 }

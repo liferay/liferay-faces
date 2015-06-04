@@ -15,7 +15,6 @@ package com.liferay.faces.bridge.filter.internal;
 
 import java.io.IOException;
 
-import javax.faces.FacesWrapper;
 import javax.portlet.PortletException;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletRequestDispatcher;
@@ -23,12 +22,14 @@ import javax.portlet.PortletResponse;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
+import com.liferay.faces.util.helper.Wrapper;
+
 
 /**
  * @author  Neil Griffin
  */
 public abstract class PortletRequestDispatcherWrapper implements PortletRequestDispatcher,
-	FacesWrapper<PortletRequestDispatcher> {
+	Wrapper<PortletRequestDispatcher> {
 
 	public void forward(PortletRequest request, PortletResponse response) throws PortletException, IOException {
 		getWrapped().forward(request, response);
