@@ -39,6 +39,7 @@ import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.bridge.context.BridgeContextFactory;
 import com.liferay.faces.bridge.context.IncongruityContext;
 import com.liferay.faces.bridge.context.IncongruityContextFactory;
+import com.liferay.faces.bridge.filter.BridgePortletContextFactory;
 import com.liferay.faces.bridge.helper.internal.PortletModeHelper;
 import com.liferay.faces.bridge.scope.BridgeRequestScope;
 import com.liferay.faces.bridge.scope.BridgeRequestScopeCache;
@@ -82,8 +83,11 @@ public abstract class BridgePhaseBaseImpl implements BridgePhase {
 
 		this.portletConfig = portletConfig;
 		this.bridgeConfig = bridgeConfig;
-		this.portletContext = portletConfig.getPortletContext();
 		this.portletName = portletConfig.getPortletName();
+
+		BridgePortletContextFactory bridgePortletContextFactory = (BridgePortletContextFactory) BridgeFactoryFinder
+			.getFactory(BridgePortletContextFactory.class);
+		this.portletContext = bridgePortletContextFactory.getPortletContext(portletConfig.getPortletContext());
 
 		// Initialize the incongruity context implementation.
 		IncongruityContextFactory incongruityContextFactory = (IncongruityContextFactory) FactoryExtensionFinder
