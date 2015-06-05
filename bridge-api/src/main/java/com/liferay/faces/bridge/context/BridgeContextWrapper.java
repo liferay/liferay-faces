@@ -88,11 +88,6 @@ public abstract class BridgeContextWrapper extends BridgeContext implements Wrap
 	}
 
 	@Override
-	public boolean isBridgeRequestScopePreserved() {
-		return getWrapped().isBridgeRequestScopePreserved();
-	}
-
-	@Override
 	public String getDefaultRenderKitId() {
 		return getWrapped().getDefaultRenderKitId();
 	}

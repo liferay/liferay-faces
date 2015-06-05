@@ -115,7 +115,7 @@ public class BridgePhaseRenderImpl extends BridgePhaseCompat_2_2_Impl {
 	protected void cleanup() {
 
 		// If required, cause the BridgeRequestScope to go out-of-scope.
-		if ((bridgeContext != null) && !bridgeContext.isBridgeRequestScopePreserved()) {
+		if ((bridgeContext != null) && !bridgeRequestScopePreserved) {
 			bridgeRequestScopeCache.remove(bridgeRequestScope.getId());
 		}
 
