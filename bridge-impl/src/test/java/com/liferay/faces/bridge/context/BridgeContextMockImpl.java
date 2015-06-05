@@ -115,11 +115,6 @@ public class BridgeContextMockImpl extends BridgeContext {
 	}
 
 	@Override
-	public boolean isBridgeRequestScopePreserved() {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
 	public String getDefaultRenderKitId() {
 		throw new UnsupportedOperationException();
 	}

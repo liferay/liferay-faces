@@ -672,16 +672,6 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 	}
 
 	@Override
-	public boolean isBridgeRequestScopePreserved() {
-
-		if (bridgeRequestScopePreserved == null) {
-			bridgeRequestScopePreserved = PortletConfigParam.BridgeRequestScopePreserved.getBooleanValue(portletConfig);
-		}
-
-		return bridgeRequestScopePreserved;
-	}
-
-	@Override
 	public String getDefaultRenderKitId() {
 
 		if (defaultRenderKitId == null) {
