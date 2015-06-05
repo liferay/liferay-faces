@@ -238,9 +238,12 @@ public abstract class BridgePhaseBaseImpl implements BridgePhase {
 						bridgeRequestScopeKey, bridgeRequestScopeId, bridgeRequestScope);
 				}
 				else {
-					logger.error(
-						"Found render parameter name=[{0}] value=[{1}] BUT bridgeRequestScope is NOT in the cache",
-						bridgeRequestScopeKey, bridgeRequestScopeId);
+
+					if (bridgeRequestScopePreserved) {
+						logger.error(
+							"Found render parameter name=[{0}] value=[{1}] BUT bridgeRequestScope is NOT in the cache",
+							bridgeRequestScopeKey, bridgeRequestScopeId);
+					}
 				}
 			}
 
