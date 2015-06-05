@@ -10,9 +10,6 @@
 	<artifactId>FACES-1427-portlet</artifactId>
 	<packaging>war</packaging>
 	<name>FACES-1427</name>
-	<properties>
-		<mojarra.version>${icefaces.mojarra.version}</mojarra.version>
-	</properties>
 
 	<dependencies>
 		<dependency>

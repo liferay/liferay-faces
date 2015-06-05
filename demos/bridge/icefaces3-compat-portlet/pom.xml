@@ -10,9 +10,6 @@
 	<artifactId>icefaces3-compat-portlet</artifactId>
 	<name>ICEfaces3 Compat Portlet</name>
 	<packaging>war</packaging>
-	<properties>
-		<mojarra.version>${icefaces.mojarra.version}</mojarra.version>
-	</properties>
 
 	<profiles>
 		<profile>
