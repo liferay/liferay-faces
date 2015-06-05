@@ -89,11 +89,6 @@ public abstract class BridgeContextWrapper extends BridgeContext implements Face
 	}
 
 	@Override
-	public boolean isBridgeRequestScopePreserved() {
-		return getWrapped().isBridgeRequestScopePreserved();
-	}
-
-	@Override
 	public String getDefaultRenderKitId() {
 		return getWrapped().getDefaultRenderKitId();
 	}

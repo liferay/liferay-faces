@@ -137,15 +137,6 @@ public abstract class BridgeContext {
 	public abstract BridgeRequestScope getBridgeRequestScope();
 
 	/**
-	 * Returns the flag indicating whether or not the current {@link BridgeRequestScope} is preserved at the end of the
-	 * {@link javax.portlet.RenderRequest}.
-	 *
-	 * @return  <code>true</code> if the scope is to be preserved, otherwise <code>false</code>. Default value is <code>
-	 *          false</code> which is an optimization for JSF 2 that deviates from the Bridge Spec. See FACES-219.
-	 */
-	public abstract boolean isBridgeRequestScopePreserved();
-
-	/**
 	 * Returns the default Render Kit ID, which is optionally specified by developers with the in the
 	 * WEB-INF/portlet.xml descriptor. If not specified by the developer, then returns null.
 	 */
