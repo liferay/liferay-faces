@@ -100,7 +100,7 @@
 		<icefaces4.version>4.0.0</icefaces4.version>
 		<icefaces.mojarra.version>2.2.7</icefaces.mojarra.version>
 		<jstl.version>1.2</jstl.version>
-		<liferay.version>6.2.1</liferay.version>
+		<liferay.version>6.2.3</liferay.version>
 		<liferay.app.server.deploy.dir>${liferay.app.server.dir}/webapps</liferay.app.server.deploy.dir>
 		<liferay.app.server.dir>${liferay.home}/tomcat-${liferay.tomcat.version}</liferay.app.server.dir>
 		<liferay.app.server.lib.global.dir>${liferay.app.server.dir}/lib/ext</liferay.app.server.lib.global.dir>
@@ -506,7 +506,7 @@
 		<profile>
 			<id>ee</id>
 			<properties>
-				<liferay.deploy.version>6.2.10.1-ga1</liferay.deploy.version>
+				<liferay.deploy.version>6.2.10-sp11</liferay.deploy.version>
 			</properties>
 		</profile>
 		<profile>
