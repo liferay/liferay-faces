@@ -98,7 +98,6 @@
 		<faces.version>${mojarra.version}</faces.version>
 		<full.version>${project.version} (${codename} / ${timestamp} AD)</full.version>
 		<icefaces4.version>4.0.0</icefaces4.version>
-		<icefaces.mojarra.version>2.2.7</icefaces.mojarra.version>
 		<jstl.version>1.2</jstl.version>
 		<liferay.version>6.2.3</liferay.version>
 		<liferay.app.server.deploy.dir>${liferay.app.server.dir}/webapps</liferay.app.server.deploy.dir>

@@ -10,9 +10,6 @@
 	<artifactId>icefaces4-portlet</artifactId>
 	<packaging>war</packaging>
 	<name>ICEfaces4 Portlet</name>
-	<properties>
-		<mojarra.version>${icefaces.mojarra.version}</mojarra.version>
-	</properties>
 
 	<profiles>
 		<profile>
