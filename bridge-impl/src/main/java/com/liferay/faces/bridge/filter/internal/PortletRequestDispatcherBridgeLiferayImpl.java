@@ -61,12 +61,15 @@ public class PortletRequestDispatcherBridgeLiferayImpl extends PortletRequestDis
 
 		boolean unwrapRequest = false;
 
-		// Versions of Liferay Portal older than 6.1.2 (CE) and 6.1.30 (EE) will throw a ClassCastException when a
-		// PortletRequestWrapper is specified. For more info, see https://issues.liferay.com/browse/LPS-36713 and
-		// https://github.com/liferay/liferay-portal/commit/093dabbb252e2bba5404cddbcb600d787ef0b010
+		// Versions of Liferay Portal older than 6.0.0 throw a ClassCastException when RenderRequestWrapper is used.
+		// For more info, see https://issues.liferay.com/browse/LPS-3311
 		if (LIFERAY_PORTAL_MAJOR_VERSION < 6) {
 			unwrapRequest = true;
 		}
+
+		// Versions of Liferay Portal older than 6.1.2 (CE) and 6.1.30 (EE) will throw a ClassCastException when a
+		// PortletRequestWrapper is specified. For more info, see https://issues.liferay.com/browse/LPS-36713 and
+		// https://github.com/liferay/liferay-portal/commit/093dabbb252e2bba5404cddbcb600d787ef0b010
 		else if (LIFERAY_PORTAL_MAJOR_VERSION == 6) {
 
 			if (LIFERAY_PORTAL_MINOR_VERSION == 0) {
