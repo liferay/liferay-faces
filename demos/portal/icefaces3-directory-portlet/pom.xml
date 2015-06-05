@@ -11,9 +11,6 @@
 	<packaging>war</packaging>
 	<name>ICEfaces3 Directory Portlet</name>
 	<description>This plugin is an alternate portlet for the Liferay Directory that utilizes ICEfaces.</description>
-	<properties>
-		<mojarra.version>${icefaces.mojarra.version}</mojarra.version>
-	</properties>
 
 	<dependencies>
 		<dependency>
