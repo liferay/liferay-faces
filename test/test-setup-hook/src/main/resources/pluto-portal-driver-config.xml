@@ -1,8 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE pluto-portal-driver>
-<!-- NOTE: Using DOCTYPE as a workaround to prevent Eclipse warning -->
-<!-- http://issues.liferay.com/browse/FACES-1433 -->
-<!-- https://issues.apache.org/jira/browse/PLUTO-473 -->
 <pluto-portal-driver>
 	<portal-name>pluto-portal-driver</portal-name>
 	<portal-version>2.0.0</portal-version>
