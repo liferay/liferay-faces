@@ -1,6 +1,6 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
-	xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:showcase="http://java.sun.com/jsf/composite/showcase" template="/WEB-INF/templates/component-1col-80.xhtml">
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:showcase="http://java.sun.com/jsf/composite/showcase"
+	template="/WEB-INF/templates/component-1col-80.xhtml">
 
 	<ui:define name="col1">
 		<alloy:outputScript use="event">
@@ -8,7 +8,7 @@
 			document.getElementById('#{attributeValue.clientId}').innerHTML =
 				'action=' + document.getElementById('#{myForm.clientId}').action;
 		});
-	</alloy:outputScript>
+		</alloy:outputScript>
 		<alloy:form binding="#{myForm}" includeViewParams="true">
 			<alloy:messages globalOnly="true" />
 			<showcase:example>

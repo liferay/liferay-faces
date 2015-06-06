@@ -6,7 +6,7 @@
 		<alloy:form>
 			<showcase:example>
 				<alloy:messages globalOnly="true" layout="table" />
-				<alloy:commandButton action="#{formBackingBean.submit}" render="@form"
+				<alloy:commandButton action="#{formBackingBean.submit}" ajax="false"
 					value="#{i18n['submit-and-re-render-form']}" />
 			</showcase:example>
 		</alloy:form>
