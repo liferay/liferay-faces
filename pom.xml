@@ -69,22 +69,6 @@
 		<tag>HEAD</tag>
 	</scm>
 
-	<modules>
-		<module>init</module>
-		<module>util</module>
-		<module>maven</module>
-		<module>reslib</module>
-		<module>alloy</module>
-		<module>bridge-api</module>
-		<module>bridge-impl</module>
-		<module>portal</module>
-		<module>support</module>
-		<module>demos</module>
-		<module>issues</module>
-		<module>test</module>
-		<module>doc</module>
-	</modules>
-
 	<properties>
 		<alloyui.version>2.0.0</alloyui.version>
 		<alloyui.zip.version>2.0.0.50</alloyui.zip.version>
@@ -508,6 +492,15 @@
 			<properties>
 				<project.stage>Development</project.stage>
 			</properties>
+			<modules>
+				<module>util</module>
+				<module>reslib</module>
+				<module>alloy</module>
+				<module>bridge-api</module>
+				<module>bridge-impl</module>
+				<module>portal</module>
+				<module>demos</module>
+			</modules>
 		</profile>
 		<profile>
 			<id>ee</id>
@@ -658,6 +651,27 @@
 					</plugin>
 				</plugins>
 			</build>
+		</profile>
+		<profile>
+			<id>modules</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<modules>
+				<module>init</module>
+				<module>util</module>
+				<module>maven</module>
+				<module>reslib</module>
+				<module>alloy</module>
+				<module>bridge-api</module>
+				<module>bridge-impl</module>
+				<module>portal</module>
+				<module>support</module>
+				<module>demos</module>
+				<module>issues</module>
+				<module>test</module>
+				<module>doc</module>
+			</modules>
 		</profile>
 		<profile>
 			<id>mojarra</id>
