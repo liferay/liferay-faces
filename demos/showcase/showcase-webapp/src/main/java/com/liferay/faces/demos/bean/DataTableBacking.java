@@ -54,7 +54,7 @@ public class DataTableBacking implements Serializable {
 
 	// Injections
 	@ManagedProperty(value = "#{customerService}")
-	private CustomerService customerService;
+	private transient CustomerService customerService;
 
 	// Private Data Members
 	private List<Customer> customerDataModel;
