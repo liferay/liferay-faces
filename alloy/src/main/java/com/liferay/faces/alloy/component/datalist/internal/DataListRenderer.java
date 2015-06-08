@@ -109,8 +109,7 @@ public class DataListRenderer extends DataListRendererBase {
 
 					// Encode the starting element that represents the specified child's content.
 					responseWriter.startElement(itemTag, prototypeChildDataItem);
-					responseWriter.writeAttribute(StringPool.CLASS, styleClass + StringPool.DASH + ITEM,
-						StringPool.CLASS);
+					RendererUtil.encodeStyleable(responseWriter, prototypeChildDataItem);
 
 					// Encode the children of the specified child as the actual content.
 					prototypeChildDataItem.encodeAll(facesContext);
