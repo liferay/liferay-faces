@@ -9,7 +9,7 @@
 				<alloy:button onclick="Liferay.component('dialogKey1').toggle();" title="#{i18n['button-title']}"
 					value="#{i18n['click-here-to-toggle-the-dialog']}" />
 				<alloy:dialog clientKey="dialogKey1" headerText="#{i18n['header-text']}">
-					<alloy:field label="#{i18n['text-field']}" styleClass="dialog-content">
+					<alloy:field label="#{i18n['text-field']}">
 						<alloy:inputText value="#{dialogModelBean.text}" />
 					</alloy:field>
 					<alloy:commandButton action="#{dialogBackingBean.submit}" render="@form"
@@ -30,7 +30,7 @@
 				<alloy:button onclick="Liferay.component('dialogKey2').show();" title="#{i18n['button-title']}"
 					value="#{i18n['click-here-to-show-the-dialog-and-cilck-outside-the-dialog-to-hide']}" />
 				<alloy:dialog clientKey="dialogKey2" dismissible="true" headerText="#{i18n['header-text']}">
-					<alloy:field label="#{i18n['text-field']}" styleClass="dialog-content">
+					<alloy:field label="#{i18n['text-field']}">
 						<alloy:inputText value="#{dialogModelBean.text}" />
 					</alloy:field>
 					<alloy:commandButton action="#{dialogBackingBean.submit}" render="@form"
@@ -51,7 +51,7 @@
 				<alloy:button onclick="Liferay.component('dialogKey3').show();" title="#{i18n['button-title']}"
 					value="#{i18n['click-here-to-show-the-modal-dialog']}" />
 				<alloy:dialog clientKey="dialogKey3" headerText="#{i18n['header-text']}" modal="true">
-					<alloy:field label="#{i18n['text-field']}" styleClass="dialog-content">
+					<alloy:field label="#{i18n['text-field']}">
 						<alloy:inputText value="#{dialogModelBean.text}" />
 					</alloy:field>
 					<alloy:commandButton action="#{dialogBackingBean.submit}" render="@form"

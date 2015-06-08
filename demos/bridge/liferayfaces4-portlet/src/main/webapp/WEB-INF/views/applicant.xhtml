@@ -116,7 +116,7 @@
                 <alloy:column id="c2a" styleClass="uploaded-files">
 					<alloy:form id="f2">
 						<alloy:dialog clientKey="dialogKey" dismissible="true" headerText="#{i18n['confirm']}">
-							<alloy:field styleClass="dialog-content">
+							<alloy:field>
 								<alloy:outputText value="#{i18n['are-you-sure-you-want-to-delete-this']}" />
 							</alloy:field>
 							<alloy:commandButton actionListener="#{applicantBackingBean.deleteUploadedFile}" render="@form" value="#{i18n['yes']}" />
