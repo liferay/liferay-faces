@@ -15,10 +15,12 @@ package com.liferay.faces.demos.bean;
 
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.component.UICommand;
+import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
 import com.liferay.faces.bridge.event.FileUploadEvent;
@@ -71,11 +73,24 @@ public class BridgeInputFileBackingBean {
 	}
 
 	public void handleFileUpload(FileUploadEvent fileUploadEvent) {
+
 		List<UploadedFile> uploadedFiles = bridgeInputFileModelBean.getUploadedFiles();
 		UploadedFile uploadedFile = fileUploadEvent.getUploadedFile();
-		uploadedFiles.add(uploadedFile);
-		logger.debug("Received fileName=[{0}] absolutePath=[{1}]", uploadedFile.getName(),
-			uploadedFile.getAbsolutePath());
+
+		if (uploadedFile.getStatus() == UploadedFile.Status.FILE_SAVED) {
+
+			FacesContext facesContext = FacesContext.getCurrentInstance();
+			FacesMessage facesMessage = new FacesMessage("Received fileUploadEvent for file named '" +
+					uploadedFile.getName() + "' in the " + fileUploadEvent.getPhaseId().toString() + " phase.");
+			facesContext.addMessage(null, facesMessage);
+			uploadedFiles.add(uploadedFile);
+			logger.debug("Received fileName=[{0}] absolutePath=[{1}]", uploadedFile.getName(),
+				uploadedFile.getAbsolutePath());
+		}
+		else {
+			logger.error("Failed to receive uploaded file due to error status=[{0}] message=[{1}]",
+				uploadedFile.getStatus(), uploadedFile.getMessage());
+		}
 	}
 
 	public void setBridgeInputFileModelBean(BridgeInputFileModelBean bridgeInputFileModelBean) {
