@@ -73,15 +73,24 @@ public class InputFileBackingBean {
 	}
 
 	public void handleFileUpload(FileUploadEvent fileUploadEvent) {
+
 		List<UploadedFile> uploadedFiles = inputFileModelBean.getUploadedFiles();
 		UploadedFile uploadedFile = fileUploadEvent.getUploadedFile();
-		uploadedFiles.add(uploadedFile);
-		FacesContext facesContext = FacesContext.getCurrentInstance();
-		FacesMessage facesMessage = new FacesMessage("Received fileUploadEvent for file named '" +  uploadedFile.getName() + "' in the " +
-				fileUploadEvent.getPhaseId().getName() + " phase.");
-		facesContext.addMessage(null, facesMessage);
-		logger.debug("Received fileName=[{0}] absolutePath=[{1}]", uploadedFile.getName(),
-			uploadedFile.getAbsolutePath());
+
+		if (uploadedFile.getStatus() == UploadedFile.Status.FILE_SAVED) {
+
+			FacesContext facesContext = FacesContext.getCurrentInstance();
+			FacesMessage facesMessage = new FacesMessage("Received fileUploadEvent for file named '" +
+					uploadedFile.getName() + "' in the " + fileUploadEvent.getPhaseId().getName() + " phase.");
+			facesContext.addMessage(null, facesMessage);
+			uploadedFiles.add(uploadedFile);
+			logger.debug("Received fileName=[{0}] absolutePath=[{1}]", uploadedFile.getName(),
+				uploadedFile.getAbsolutePath());
+		}
+		else {
+			logger.error("Failed to receive uploaded file due to error status=[{0}] message=[{1}]",
+				uploadedFile.getStatus(), uploadedFile.getMessage());
+		}
 	}
 
 	public void setInputFileModelBean(InputFileModelBean inputFileModelBean) {
