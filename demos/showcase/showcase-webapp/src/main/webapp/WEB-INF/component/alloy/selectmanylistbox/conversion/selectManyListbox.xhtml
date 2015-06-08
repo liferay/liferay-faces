@@ -5,8 +5,7 @@
 	<ui:define name="col1">
 		<alloy:form>
 			<showcase:example description="#{i18n['conversion-to-a-date-using-f-convertdatetime']}">
-				<alloy:outputLabel styleClass="alloy-output-label"
-					value="#{i18n['which-of-the-following-dates-are-in-the-18th-century']}" />
+				<alloy:outputLabel value="#{i18n['which-of-the-following-dates-are-in-the-18th-century']}" />
 				<alloy:messages globalOnly="true" styleClass="feedback" />
 				<alloy:selectManyListbox value="#{selectManyModelBean.dates}">
 					<f:convertDateTime pattern="MM/dd/yyyy G" />
