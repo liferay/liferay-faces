@@ -256,7 +256,7 @@ public class InputFileRenderer extends InputFileRendererBase {
 		String chooseFiles = getMessageContext().getMessage(locale, "choose-files");
 		StringBuilder selectFilesButtonScript = new StringBuilder();
 		selectFilesButtonScript.append(
-			"A.Node.create(\"<button type='button' class='yui3-widget btn btn-content' role='button' aria-label='");
+			"A.Node.create(\"<button type='button' class='alloy-button' role='button' aria-label='");
 		selectFilesButtonScript.append(chooseFiles);
 		selectFilesButtonScript.append("' tabindex='{tabIndex}'>");
 		selectFilesButtonScript.append(chooseFiles);
@@ -278,11 +278,11 @@ public class InputFileRenderer extends InputFileRendererBase {
 		responseWriter.startElement("div", inputFile);
 		responseWriter.startElement("table", inputFile);
 		responseWriter.writeAttribute("id", clientId + "_table", null);
-		responseWriter.writeAttribute("class", "yui3-datatable-table", null);
+		responseWriter.writeAttribute("class", "table table-bordered", null);
 		responseWriter.startElement("thead", inputFile);
+		responseWriter.writeAttribute("class", "table-columns", null);
 		responseWriter.startElement("tr", inputFile);
 		responseWriter.startElement("th", inputFile);
-		responseWriter.writeAttribute("class", "yui3-datatable-header", null);
 
 		MessageContextFactory messageContextFactory = (MessageContextFactory) FactoryExtensionFinder.getFactory(
 				MessageContextFactory.class);
@@ -291,13 +291,11 @@ public class InputFileRenderer extends InputFileRendererBase {
 		responseWriter.writeText(i18nFileName, null);
 		responseWriter.endElement("th");
 		responseWriter.startElement("th", inputFile);
-		responseWriter.writeAttribute("class", "yui3-datatable-header", null);
 
 		String i18nFileType = messageContext.getMessage(locale, "file-type");
 		responseWriter.writeText(i18nFileType, null);
 		responseWriter.endElement("th");
 		responseWriter.startElement("th", inputFile);
-		responseWriter.writeAttribute("class", "yui3-datatable-header", null);
 
 		String i18nFileSize = messageContext.getMessage(locale, "file-size");
 		responseWriter.writeText(i18nFileSize, null);
@@ -307,8 +305,7 @@ public class InputFileRenderer extends InputFileRendererBase {
 		responseWriter.startElement("tfoot", inputFile);
 		responseWriter.startElement("tr", inputFile);
 		responseWriter.startElement("td", inputFile);
-		responseWriter.writeAttribute("class", "yui3-datatable-cell", null);
-		responseWriter.writeAttribute("colspan", "2", null);
+		responseWriter.writeAttribute("colspan", "3", null);
 
 		String i18nNoFilesSelected = messageContext.getMessage(locale, "no-files-selected");
 		responseWriter.writeText(i18nNoFilesSelected, null);
@@ -336,7 +333,7 @@ public class InputFileRenderer extends InputFileRendererBase {
 		responseWriter.writeAttribute("class", "upload-files-box", null);
 		responseWriter.startElement("button", uiComponent);
 		responseWriter.writeAttribute("id", clientId + "_uploadFilesButton", null);
-		responseWriter.writeAttribute("class", "yui3-widget btn btn-content", null);
+		responseWriter.writeAttribute("class", "alloy-button", null);
 
 		MessageContextFactory messageContextFactory = (MessageContextFactory) FactoryExtensionFinder.getFactory(
 				MessageContextFactory.class);
@@ -348,29 +345,26 @@ public class InputFileRenderer extends InputFileRendererBase {
 		responseWriter.startElement("div", uiComponent);
 		responseWriter.startElement("table", uiComponent);
 		responseWriter.writeAttribute("id", clientId + "_table", null);
-		responseWriter.writeAttribute("class", "yui3-datatable-table", null);
+		responseWriter.writeAttribute("class", "table table-bordered", null);
 		responseWriter.startElement("thead", uiComponent);
+		responseWriter.writeAttribute("class", "table-columns", null);
 		responseWriter.startElement("tr", uiComponent);
 		responseWriter.startElement("th", uiComponent);
-		responseWriter.writeAttribute("class", "yui3-datatable-header", null);
 
 		String i18nFileName = messageContext.getMessage(locale, "file-name");
 		responseWriter.writeText(i18nFileName, null);
 		responseWriter.endElement("th");
 		responseWriter.startElement("th", uiComponent);
-		responseWriter.writeAttribute("class", "yui3-datatable-header", null);
 
 		String i18nFileType = messageContext.getMessage(locale, "file-type");
 		responseWriter.writeText(i18nFileType, null);
 		responseWriter.endElement("th");
 		responseWriter.startElement("th", uiComponent);
-		responseWriter.writeAttribute("class", "yui3-datatable-header", null);
 
 		String i18nFileSize = messageContext.getMessage(locale, "file-size");
 		responseWriter.writeText(i18nFileSize, null);
 		responseWriter.endElement("th");
 		responseWriter.startElement("th", uiComponent);
-		responseWriter.writeAttribute("class", "yui3-datatable-header", null);
 
 		String i18nProgress = messageContext.getMessage(locale, "progress");
 		responseWriter.writeText(i18nProgress, null);
@@ -380,8 +374,7 @@ public class InputFileRenderer extends InputFileRendererBase {
 		responseWriter.startElement("tfoot", uiComponent);
 		responseWriter.startElement("tr", uiComponent);
 		responseWriter.startElement("td", uiComponent);
-		responseWriter.writeAttribute("class", "yui3-datatable-cell", null);
-		responseWriter.writeAttribute("colspan", "3", null);
+		responseWriter.writeAttribute("colspan", "4", null);
 
 		String i18nNoFilesSelected = messageContext.getMessage(locale, "no-files-selected");
 		responseWriter.writeText(i18nNoFilesSelected, null);
