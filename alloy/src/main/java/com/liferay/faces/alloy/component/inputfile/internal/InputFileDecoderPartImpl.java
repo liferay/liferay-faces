@@ -103,7 +103,7 @@ public class InputFileDecoderPartImpl extends InputFileDecoderBase {
 						}
 					}
 
-					if (fileName != null) {
+					if ((fileName != null) && (fileName.length() > 0)) {
 
 						try {
 
