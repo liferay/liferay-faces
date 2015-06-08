@@ -30,7 +30,6 @@ import com.liferay.faces.alloy.component.select.internal.SelectDelegatingRendere
 public abstract class SelectOneRadioRendererBase extends SelectDelegatingRendererBase {
 
 	// Protected Constants
-	protected static final String LABEL = "label";
 	protected static final String STYLE_CLASS = "styleClass";
 
 	@Override

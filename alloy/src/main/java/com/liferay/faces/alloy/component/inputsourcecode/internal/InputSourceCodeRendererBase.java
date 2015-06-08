@@ -37,7 +37,6 @@ public abstract class InputSourceCodeRendererBase extends DelegatingAlloyRendere
 	protected static final String CLIENT_KEY = "clientKey";
 	protected static final String HEIGHT = "height";
 	protected static final String HIGHLIGHT_ACTIVE_LINE = "highlightActiveLine";
-	protected static final String LABEL = "label";
 	protected static final String LOCALE = "locale";
 	protected static final String MAX_LINES = "maxLines";
 	protected static final String MIN_LINES = "minLines";
