@@ -6,7 +6,7 @@
 		<!-- Example 1: ValueChangeListener execution when immediate is true -->
 		<alloy:form>
 			<showcase:example description="#{i18n['valuechangelistener-execution-when-immediate-is-true']}" number="1">
-				<alloy:outputLabel styleClass="alloy-output-label" value="#{i18n['agree']}" />
+				<alloy:outputLabel value="#{i18n['agree']}" />
 				<alloy:messages globalOnly="true" styleClass="feedback" />
 				<alloy:selectBooleanCheckbox immediate="true" value="#{selectBooleanCheckboxModelBean.agree}"
 					valueChangeListener="#{selectBooleanCheckboxBackingBean.valueChangeListener}">
@@ -24,7 +24,7 @@
 		<!-- Example 2: ValueChangeListener execution when immediate is false (the default) -->
 		<alloy:form>
 			<showcase:example description="#{i18n['valuechangelistener-execution-when-immediate-is-false']}" number="2">
-				<alloy:outputLabel styleClass="alloy-output-label" value="#{i18n['agree']}" />
+				<alloy:outputLabel value="#{i18n['agree']}" />
 				<alloy:messages globalOnly="true" styleClass="feedback" />
 				<alloy:selectBooleanCheckbox value="#{selectBooleanCheckboxModelBean.agree}"
 					valueChangeListener="#{selectBooleanCheckboxBackingBean.valueChangeListener}">
