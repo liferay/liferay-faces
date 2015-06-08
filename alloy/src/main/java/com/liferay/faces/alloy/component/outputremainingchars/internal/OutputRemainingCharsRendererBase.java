@@ -40,7 +40,6 @@ public abstract class OutputRemainingCharsRendererBase extends DelegatingAlloyRe
 	protected static final String ONCE_MAXLENGTH_REACHED = "onceMaxlengthReached";
 	protected static final String ON_MAXLENGTH_REACHED = "onMaxlengthReached";
 	protected static final String STYLE_CLASS = "styleClass";
-	protected static final String VALUE = "value";
 
 	// Private Constants
 	private static final String ALLOY_CLASS_NAME = "CharCounter";
