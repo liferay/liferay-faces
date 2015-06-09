@@ -29,10 +29,11 @@ import javax.faces.context.ResponseWriter;
 import javax.faces.render.FacesRenderer;
 
 import com.liferay.faces.alloy.component.progressbar.ProgressBar;
-import com.liferay.faces.util.client.ClientScript;
-import com.liferay.faces.util.client.ClientScriptFactory;
+import com.liferay.faces.util.client.Script;
+import com.liferay.faces.util.client.ScriptFactory;
 import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.component.Styleable;
+import com.liferay.faces.util.context.FacesRequestContext;
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.js.JavaScriptFragment;
 import com.liferay.faces.util.lang.StringPool;
@@ -135,6 +136,7 @@ public class ProgressBarRenderer extends ProgressBarRendererBase {
 			}
 
 			buf.append("}");
+
 			JavaScriptFragment anonymousFunction = new JavaScriptFragment(buf.toString());
 
 			//J-
@@ -343,10 +345,8 @@ public class ProgressBarRenderer extends ProgressBarRendererBase {
 			encodeFunctionCall(bufferedScriptResponseWriter, "LFAI.setProgressBarServerValue", hiddenClientId,
 				liferayComponent, value);
 
-			ClientScriptFactory clientScriptFactory = (ClientScriptFactory) FactoryExtensionFinder.getFactory(
-					ClientScriptFactory.class);
-			ClientScript clientScript = clientScriptFactory.getClientScript();
-			clientScript.append(bufferedScriptResponseWriter.toString());
+			FacesRequestContext facesRequestContext = FacesRequestContext.getCurrentInstance();
+			facesRequestContext.addScript(bufferedScriptResponseWriter.toString());
 		}
 		else {
 			super.encodeJavaScript(facesContext, uiComponent);

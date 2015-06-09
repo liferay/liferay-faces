@@ -13,46 +13,28 @@
  */
 package com.liferay.faces.util.client.internal;
 
-import java.io.Serializable;
-
-import com.liferay.faces.util.client.ClientScript;
+import com.liferay.faces.util.client.AlloyScript;
+import com.liferay.faces.util.client.Script;
+import com.liferay.faces.util.client.ScriptFactory;
 
 
 /**
  * @author  Kyle Stiemann
  */
-public class ClientScriptImpl implements ClientScript, Serializable {
+public class ScriptFactoryImpl extends ScriptFactory {
 
-	// serialVersionUID
-	private static final long serialVersionUID = 875641899489661794L;
-
-	// Private Members
-	private StringBuilder scripts;
-
-	public ClientScriptImpl() {
-		scripts = new StringBuilder();
+	@Override
+	public AlloyScript getAlloyScript(String content, String[] modules) {
+		return new AlloyScriptImpl(content, modules);
 	}
 
 	@Override
-	public void append(String content) {
-
-		scripts.append("(function() {");
-		scripts.append(content);
-		scripts.append("})();");
+	public Script getScript(String content) {
+		return new ScriptImpl(content);
 	}
 
 	@Override
-	public void append(String content, String options) {
-		append(content);
-	}
-
-	@Override
-	public void clear() {
-		scripts.setLength(0);
-	}
-
-	@Override
-	public String toString() {
-		return scripts.toString();
+	public ScriptFactory getWrapped() {
+		return null;
 	}
 }

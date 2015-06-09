@@ -19,9 +19,12 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 
-import com.liferay.faces.alloy.client.internal.AlloyClientScriptUtil;
+import com.liferay.faces.alloy.client.internal.AlloyScriptUtil;
+import com.liferay.faces.util.client.BrowserSniffer;
+import com.liferay.faces.util.client.BrowserSnifferFactory;
 import com.liferay.faces.util.component.ClientComponent;
 import com.liferay.faces.util.component.ComponentUtil;
+import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.render.RendererUtil;
 
@@ -132,11 +135,14 @@ import com.liferay.faces.util.render.RendererUtil;
 		if (sandboxed) {
 
 			String yuiConfig = alloyRenderer.getYUIConfig(facesContext, responseWriter, uiComponent);
-			String alloyBeginScript = AlloyClientScriptUtil.getAlloyBeginScript(facesContext, modules, yuiConfig);
+			BrowserSnifferFactory browserSnifferFactory = (BrowserSnifferFactory) FactoryExtensionFinder.getFactory(
+					BrowserSnifferFactory.class);
+			BrowserSniffer browserSniffer = browserSnifferFactory.getBrowserSniffer(facesContext.getExternalContext());
+			String alloyBeginScript = AlloyScriptUtil.getAlloyBeginScript(browserSniffer, modules, yuiConfig);
 			responseWriter.write(alloyBeginScript);
 		}
 
-		if (ajax && (uiComponent instanceof ClientComponent) ) {
+		if (ajax && (uiComponent instanceof ClientComponent)) {
 
 			ClientComponent clientComponent = (ClientComponent) uiComponent;
 			String clientVarName = ComponentUtil.getClientVarName(facesContext, clientComponent);

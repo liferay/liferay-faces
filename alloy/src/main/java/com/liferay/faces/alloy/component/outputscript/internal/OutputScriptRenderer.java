@@ -22,10 +22,13 @@ import javax.faces.event.ListenerFor;
 import javax.faces.event.PostAddToViewEvent;
 import javax.faces.render.FacesRenderer;
 
-import com.liferay.faces.alloy.client.internal.AlloyClientScriptUtil;
+import com.liferay.faces.alloy.client.internal.AlloyScriptUtil;
 import com.liferay.faces.alloy.component.outputscript.OutputScript;
-import com.liferay.faces.util.client.ClientScript;
-import com.liferay.faces.util.client.ClientScriptFactory;
+import com.liferay.faces.util.client.BrowserSniffer;
+import com.liferay.faces.util.client.BrowserSnifferFactory;
+import com.liferay.faces.util.client.Script;
+import com.liferay.faces.util.client.ScriptFactory;
+import com.liferay.faces.util.context.FacesRequestContext;
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.render.internal.BufferedScriptResponseWriter;
@@ -39,10 +42,6 @@ import com.liferay.faces.util.render.internal.BufferedScriptResponseWriter;
 @ListenerFor(systemEventClass = PostAddToViewEvent.class)
 //J+
 public class OutputScriptRenderer extends OutputScriptRendererBase {
-
-	// Private Constants
-	private static final String FUNCTION_BEGIN_SCRIPT = "(function(){";
-	private static final String FUNCTION_END_SCRIPT = "})();";
 
 	@Override
 	public void encodeChildren(FacesContext facesContext, UIComponent uiComponent) throws IOException {
@@ -68,26 +67,25 @@ public class OutputScriptRenderer extends OutputScriptRendererBase {
 				ResponseWriter responseWriter = facesContext.getResponseWriter();
 				BufferedScriptResponseWriter bufferedScriptResponseWriter = new BufferedScriptResponseWriter();
 				facesContext.setResponseWriter(bufferedScriptResponseWriter);
+				super.encodeChildren(facesContext, uiComponent);
+				facesContext.setResponseWriter(responseWriter);
+
+				Script script;
+				String bufferedScriptString = bufferedScriptResponseWriter.toString();
+				ScriptFactory scriptFactory = (ScriptFactory) FactoryExtensionFinder.getFactory(ScriptFactory.class);
 
 				// Note: If the script uses YUI or AlloyUI modules then a YUI sandbox will be created automatically by
 				// the ClientScript when RendererUtil.renderScript() is called below.
 				if ((use != null) && (use.length() > 0)) {
-					super.encodeChildren(facesContext, uiComponent);
+					script = scriptFactory.getAlloyScript(bufferedScriptString, use.split(","));
 				}
-
-				// Otherwise the sandbox the script with an anonymous self-executing function.
 				else {
-					bufferedScriptResponseWriter.write(FUNCTION_BEGIN_SCRIPT);
-					super.encodeChildren(facesContext, uiComponent);
-					bufferedScriptResponseWriter.write(FUNCTION_END_SCRIPT);
+					script = scriptFactory.getScript(bufferedScriptString);
 				}
 
 				// Render the script at the bottom of the page immediately before the closing </body> tag.
-				ClientScriptFactory clientScriptFactory = (ClientScriptFactory) FactoryExtensionFinder.getFactory(
-						ClientScriptFactory.class);
-				ClientScript clientScript = clientScriptFactory.getClientScript();
-				clientScript.append(bufferedScriptResponseWriter.toString(), use);
-				facesContext.setResponseWriter(responseWriter);
+				FacesRequestContext facesRequestContext = FacesRequestContext.getCurrentInstance();
+				facesRequestContext.addScript(script);
 			}
 
 			// Otherwise if the script uses YUI or AlloyUI modules then create a YUI sandbox which specifies the
@@ -101,7 +99,11 @@ public class OutputScriptRenderer extends OutputScriptRendererBase {
 				// In order to determine the exact YUI sandbox string to write, the modules and browser information
 				// must be passed to RendererUtil.getAlloyBeginScript().
 				String[] modules = use.split(StringPool.COMMA);
-				String alloyBeginScript = AlloyClientScriptUtil.getAlloyBeginScript(facesContext, modules);
+				BrowserSnifferFactory browserSnifferFactory = (BrowserSnifferFactory) FactoryExtensionFinder.getFactory(
+						BrowserSnifferFactory.class);
+				BrowserSniffer browserSniffer = browserSnifferFactory.getBrowserSniffer(
+						facesContext.getExternalContext());
+				String alloyBeginScript = AlloyScriptUtil.getAlloyBeginScript(browserSniffer, modules);
 				OutputScriptResponseWriter outputScriptResponseWriter = new OutputScriptResponseWriter(responseWriter,
 						alloyBeginScript);
 				super.encodeChildren(facesContext, uiComponent, outputScriptResponseWriter);

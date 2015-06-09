@@ -6,10 +6,10 @@
 
 	<name>LiferayFacesAlloy</name>
 	<factory>
+		<partial-view-context-factory>com.liferay.faces.alloy.context.internal.PartialViewContextFactoryAlloyImpl</partial-view-context-factory>
 		<factory-extension>
 			<util:component-resource-factory>com.liferay.faces.alloy.application.internal.ComponentResourceFactoryAlloyImpl</util:component-resource-factory>
 			<util:message-context-factory>com.liferay.faces.alloy.context.internal.MessageContextFactoryAlloyImpl</util:message-context-factory>
-			<util:client-script-factory>com.liferay.faces.alloy.client.internal.ClientScriptFactoryAlloyImpl</util:client-script-factory>
 		</factory-extension>
 	</factory>
 	<render-kit>

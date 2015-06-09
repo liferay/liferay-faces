@@ -14,13 +14,16 @@
 package com.liferay.faces.alloy.component.body.internal;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.faces.component.UIComponent;
+import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 
-import com.liferay.faces.util.client.ClientScript;
-import com.liferay.faces.util.client.ClientScriptFactory;
-import com.liferay.faces.util.factory.FactoryExtensionFinder;
+import com.liferay.faces.alloy.client.internal.AlloyScriptUtil;
+import com.liferay.faces.util.client.BrowserSniffer;
+import com.liferay.faces.util.client.Script;
+import com.liferay.faces.util.context.FacesRequestContext;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.render.ContentTypes;
 import com.liferay.faces.util.render.internal.DelegationResponseWriterBase;
@@ -32,23 +35,27 @@ import com.liferay.faces.util.render.internal.DelegationResponseWriterBase;
 public class BodyResponseWriter extends DelegationResponseWriterBase {
 
 	// Private Data Members
+	private FacesContext facesContext;
 	private UIComponent uiComponent;
+	private BrowserSniffer browserSniffer;
 
-	public BodyResponseWriter(ResponseWriter responseWriter) {
+	public BodyResponseWriter(ResponseWriter responseWriter, FacesContext facesContext, BrowserSniffer browserSniffer) {
 		super(responseWriter);
+		this.browserSniffer = browserSniffer;
+		this.facesContext = facesContext;
 	}
 
 	@Override
 	public void endElement(String name) throws IOException {
 
-		if (StringPool.BODY.equals(name)) {
+		if (StringPool.BODY.equals(name) && !facesContext.getPartialViewContext().isAjaxRequest()) {
+
 			super.startElement(StringPool.SCRIPT, uiComponent);
 			super.writeAttribute(StringPool.TYPE, ContentTypes.TEXT_JAVASCRIPT, null);
 
-			ClientScriptFactory clientScriptFactory = (ClientScriptFactory) FactoryExtensionFinder.getFactory(
-					ClientScriptFactory.class);
-			ClientScript clientScript = clientScriptFactory.getClientScript();
-			super.write(clientScript.toString());
+			FacesRequestContext facesRequestContext = FacesRequestContext.getCurrentInstance();
+			List<Script> scripts = facesRequestContext.getScripts();
+			AlloyScriptUtil.writeScripts(this, scripts, browserSniffer);
 			super.endElement(StringPool.SCRIPT);
 		}
 
