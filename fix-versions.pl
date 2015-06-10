@@ -163,7 +163,7 @@ sub do_inplace_edits {
 	# If the current file is named "web.xml", then potentially fix the
 	# version number specified in the schemaLocation url.
 	#
-	elsif ($file eq "web.xml" and ($File::Find::name =~ /\/src/)) {
+	elsif ((($file eq "web.xml") or ($file =~ m/web[-].*\.xml/)) and ($File::Find::name =~ /\/src/)) {
 		print "$File::Find::name\n";
 		$_ = $File::Find::name;
 
@@ -171,7 +171,7 @@ sub do_inplace_edits {
 			print "intentionally skipping $File::Find::name with faces version $facesVersion\n";
 		} else {
 			open OUT, ">web.xml.tmp" or die "cannot open >web.xml.tmp: $!\n";
-			open IN, "web.xml" or die "cannot open web.xml: $!\n";
+			open IN, $file or die "cannot open $file: $!\n";
 			while(<IN>) {
 				if (/web-app_/) {
 					s/web-app_\d+_\d+.xsd/web-app_${servletApiURL}.xsd/;
@@ -187,7 +187,7 @@ sub do_inplace_edits {
 			}
 			close IN;
 			close OUT;
-			rename("web.xml.tmp", "web.xml");
+			rename("web.xml.tmp", $file);
 		}
 	}
 
