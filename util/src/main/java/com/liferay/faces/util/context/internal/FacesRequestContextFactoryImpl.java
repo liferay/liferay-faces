@@ -11,19 +11,24 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.util.client;
+package com.liferay.faces.util.context.internal;
+
+import com.liferay.faces.util.context.FacesRequestContext;
+import com.liferay.faces.util.context.FacesRequestContextFactory;
+
 
 /**
- * @author  Neil Griffin
+ * @author  Kyle Stiemann
  */
-public interface ClientScript {
-
-	public void append(String content);
-
-	public void append(String content, String options);
-
-	public void clear();
+public class FacesRequestContextFactoryImpl extends FacesRequestContextFactory {
 
 	@Override
-	public String toString();
+	public FacesRequestContext getFacesRequestContext() {
+		return new FacesRequestContextImpl();
+	}
+
+	@Override
+	public FacesRequestContextFactory getWrapped() {
+		return null;
+	}
 }
