@@ -13,6 +13,8 @@
  */
 package com.liferay.faces.demos.bean;
 
+import java.io.Serializable;
+
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.faces.flow.FlowScoped;
@@ -29,7 +31,7 @@ import com.liferay.faces.util.logging.LoggerFactory;
  */
 @Named
 @FlowScoped("survey")
-public class SurveyFlowModelBean {
+public class SurveyFlowModelBean implements Serializable {
 
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(SurveyFlowModelBean.class);

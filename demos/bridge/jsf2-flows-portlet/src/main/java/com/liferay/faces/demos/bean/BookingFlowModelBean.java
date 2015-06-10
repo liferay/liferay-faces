@@ -13,6 +13,7 @@
  */
 package com.liferay.faces.demos.bean;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -37,7 +38,7 @@ import com.liferay.faces.util.logging.LoggerFactory;
  */
 @Named
 @FlowScoped("booking")
-public class BookingFlowModelBean {
+public class BookingFlowModelBean implements Serializable {
 
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(BookingFlowModelBean.class);
