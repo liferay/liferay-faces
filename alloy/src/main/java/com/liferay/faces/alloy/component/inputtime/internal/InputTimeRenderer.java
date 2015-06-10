@@ -35,13 +35,12 @@ import javax.faces.render.FacesRenderer;
 
 import com.liferay.faces.alloy.component.inputdatetime.InputDateTime;
 import com.liferay.faces.alloy.component.inputdatetime.internal.InputDateTimeResponseWriter;
-import com.liferay.faces.alloy.component.inputtext.InputText;
 import com.liferay.faces.alloy.component.inputtime.InputTime;
+import com.liferay.faces.alloy.render.internal.JavaScriptFragment;
 import com.liferay.faces.util.client.BrowserSniffer;
 import com.liferay.faces.util.client.BrowserSnifferFactory;
 import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
-import com.liferay.faces.util.js.JavaScriptFragment;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.render.RendererUtil;
 
