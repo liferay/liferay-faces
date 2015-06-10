@@ -19,12 +19,10 @@ import java.util.List;
 
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
+import javax.faces.context.ResponseWriter;
 
-import com.liferay.faces.bridge.BridgeFactoryFinder;
 import com.liferay.faces.bridge.renderkit.html_basic.internal.BodyRendererBridgeImpl;
-import com.liferay.faces.util.client.ClientScript;
-import com.liferay.faces.util.client.ClientScriptFactory;
-import com.liferay.faces.util.factory.FactoryExtensionFinder;
+import com.liferay.faces.util.context.FacesRequestContext;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -65,33 +63,30 @@ public class BodyRendererPrimeFacesImpl extends BodyRendererBridgeImpl {
 
 	@Override
 	@SuppressWarnings("unchecked")
-	public void encodeEnd(FacesContext facesContext, UIComponent uiComponent) throws IOException {
+	protected void encodeScripts(FacesContext facesContext, ResponseWriter responseWriter, UIComponent uiComponent)
+		throws IOException {
 
-		// Delegate to the superclass to render any resources with target="body" and also the closing </div> tag.
-		super.encodeEnd(facesContext, uiComponent);
+		Object requestContext = getRequestContextCurrentInstance();
 
-		// If this is not an Ajax request, then render each of the PrimeFaces scripts at the bottom of the portal page.
-		if (!facesContext.getPartialViewContext().isAjaxRequest()) {
+		try {
 
-			Object requestContext = getRequestContextCurrentInstance();
+			List<String> scriptsToExecute = (List<String>) GET_SCRIPTS_TO_EXECUTE_METHOD.invoke(requestContext);
 
-			try {
-				List<String> scriptsToExecute = (List<String>) GET_SCRIPTS_TO_EXECUTE_METHOD.invoke(requestContext);
+			if (scriptsToExecute != null) {
 
-				if (scriptsToExecute != null) {
-					ClientScriptFactory clientScriptFactory = (ClientScriptFactory) BridgeFactoryFinder.getFactory(
-						ClientScriptFactory.class);
-					ClientScript clientScript = clientScriptFactory.getClientScript();
+				FacesRequestContext facesRequestContext = FacesRequestContext.getCurrentInstance();
 
-					for (String scriptToExecute : scriptsToExecute) {
-						clientScript.append(scriptToExecute, null);
-					}
+				for (String scriptToExecute : scriptsToExecute) {
+					facesRequestContext.addScript(scriptToExecute);
 				}
 			}
-			catch (Exception e) {
-				logger.error(e);
-			}
 		}
+		catch (Exception e) {
+			logger.error(e);
+		}
+
+		// Allow the BodyRendererBridgeImpl to render the scripts.
+		super.encodeScripts(facesContext, responseWriter, uiComponent);
 	}
 
 	protected Object getRequestContextCurrentInstance() {

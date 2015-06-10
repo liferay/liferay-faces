@@ -11,24 +11,36 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-
 package com.liferay.faces.alloy.client.internal;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
+
+import javax.faces.context.ResponseWriter;
+
+import com.liferay.faces.util.client.AlloyScript;
 import com.liferay.faces.util.client.BrowserSniffer;
+<<<<<<< HEAD:alloy/src/main/java/com/liferay/faces/alloy/client/internal/AlloyClientScriptUtil.java
 import com.liferay.faces.util.client.BrowserSnifferFactory;
 import com.liferay.faces.util.client.ClientScript;
 import com.liferay.faces.util.client.ClientScriptFactory;
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.lang.StringPool;
+=======
+import com.liferay.faces.util.client.Script;
+>>>>>>> 0bf7eb1... FACES-2274 Replace ClientScript code with new FacesRequestContext and simple Script:alloy/src/main/java/com/liferay/faces/alloy/client/internal/AlloyScriptUtil.java
 import com.liferay.faces.util.product.ProductConstants;
 import com.liferay.faces.util.product.ProductMap;
-import javax.faces.context.FacesContext;
 
 
 /**
  * @author  Kyle Stiemann
  */
-public class AlloyClientScriptUtil {
+public class AlloyScriptUtil {
 
 	// Private Constants
 	private static final boolean LIFERAY_FACES_BRIDGE_DETECTED = ProductMap.getInstance().get(
@@ -36,26 +48,55 @@ public class AlloyClientScriptUtil {
 	private static final boolean LIFERAY_PORTAL_DETECTED = ProductMap.getInstance().get(ProductConstants.LIFERAY_PORTAL)
 		.isDetected();
 
-	public static void renderScript(String script, String use) {
+	public static void writeScripts(ResponseWriter responseWriter, List<Script> scripts, BrowserSniffer browserSniffer)
+		throws IOException {
 
-		ClientScriptFactory clientScriptFactory = (ClientScriptFactory) FactoryExtensionFinder.getFactory(
-				ClientScriptFactory.class);
-		ClientScript clientScript = clientScriptFactory.getClientScript();
-		clientScript.append(script, use);
+		Set<String> allModules = new TreeSet<String>();
+		List<AlloyScript> alloyScripts = new ArrayList<AlloyScript>();
+		List<Script> basicScripts = new ArrayList<Script>();
+
+		for (Script script : scripts) {
+
+			if (script instanceof AlloyScript) {
+
+				AlloyScript alloyScript = (AlloyScript) script;
+				final String[] modules = alloyScript.getModules();
+				Collections.addAll(allModules, modules);
+				alloyScripts.add(alloyScript);
+			}
+			else {
+				basicScripts.add(script);
+			}
+		}
+
+		for (Script script : basicScripts) {
+			responseWriter.write(script.getContent());
+		}
+
+		if (!alloyScripts.isEmpty()) {
+
+			String alloyBeginScript = getAlloyBeginScript(browserSniffer, allModules.toArray(new String[] {}));
+			responseWriter.write(alloyBeginScript);
+
+			for (AlloyScript alloyScript : alloyScripts) {
+
+				responseWriter.write("(function(){");
+				responseWriter.write(alloyScript.getContent());
+				responseWriter.write("})();");
+			}
+
+			responseWriter.write("});");
+		}
 	}
 
-	public static String getAlloyBeginScript(FacesContext facesContext, String[] modules) {
-		return getAlloyBeginScript(facesContext, modules, null);
+	public static String getAlloyBeginScript(BrowserSniffer browserSniffer, String[] modules) {
+		return getAlloyBeginScript(browserSniffer, modules, null);
 	}
 
-	public static String getAlloyBeginScript(FacesContext facesContext, String[] modules, String config) {
+	public static String getAlloyBeginScript(BrowserSniffer browserSniffer, String[] modules, String config) {
 
 		boolean browserIE = false;
 		float browserMajorVersion = 1;
-
-		BrowserSnifferFactory browserSnifferFactory = (BrowserSnifferFactory) FactoryExtensionFinder.getFactory(
-				BrowserSnifferFactory.class);
-		BrowserSniffer browserSniffer = browserSnifferFactory.getBrowserSniffer(facesContext.getExternalContext());
 
 		if (LIFERAY_PORTAL_DETECTED) {
 			browserIE = browserSniffer.isIe();
@@ -70,10 +111,6 @@ public class AlloyClientScriptUtil {
 		}
 
 		return getAlloyBeginScript(modules, config, browserMajorVersion, browserIE);
-	}
-
-	public static String getAlloyBeginScript(String[] modules, float browserMajorVersion, boolean browserIE) {
-		return getAlloyBeginScript(modules, null, browserMajorVersion, browserIE);
 	}
 
 	private static String getAlloyBeginScript(String[] modules, String config, float browserMajorVersion,
