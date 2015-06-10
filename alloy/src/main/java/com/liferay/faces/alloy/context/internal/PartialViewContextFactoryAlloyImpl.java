@@ -11,29 +11,45 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.util.context.internal;
+package com.liferay.faces.alloy.context.internal;
 
 import javax.faces.context.FacesContext;
 import javax.faces.context.PartialViewContext;
 import javax.faces.context.PartialViewContextFactory;
 
+import com.liferay.faces.util.product.ProductConstants;
+import com.liferay.faces.util.product.ProductMap;
+
 
 /**
  * @author  Neil Griffin
  */
-public class PartialViewContextFactoryScriptImpl extends PartialViewContextFactory {
+public class PartialViewContextFactoryAlloyImpl extends PartialViewContextFactory {
+
+	// Private Constants
+	private static final boolean LIFERAY_PORTAL_DETECTED = ProductMap.getInstance().get(ProductConstants.LIFERAY_PORTAL)
+		.isDetected();
+	private static final boolean LIFERAY_FACES_BRIDGE_DETECTED = ProductMap.getInstance().get(
+			ProductConstants.LIFERAY_FACES_BRIDGE).isDetected();
 
 	// Private Data Members
 	private PartialViewContextFactory wrappedPartialViewContextFactory;
 
-	public PartialViewContextFactoryScriptImpl(PartialViewContextFactory partialViewContextFactory) {
+	public PartialViewContextFactoryAlloyImpl(PartialViewContextFactory partialViewContextFactory) {
 		this.wrappedPartialViewContextFactory = partialViewContextFactory;
 	}
 
+	@Override
 	public PartialViewContext getPartialViewContext(FacesContext facesContext) {
 
 		PartialViewContext partialViewContext = wrappedPartialViewContextFactory.getPartialViewContext(facesContext);
-		partialViewContext = new PartialViewContextScriptImpl(partialViewContext);
+
+		if (LIFERAY_PORTAL_DETECTED && LIFERAY_FACES_BRIDGE_DETECTED) {
+			// Use the Bridge's PartialViewContext.
+		}
+		else {
+			partialViewContext = new PartialViewContextAlloyImpl(partialViewContext);
+		}
 
 		return partialViewContext;
 	}
