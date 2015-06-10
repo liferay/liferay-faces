@@ -11,36 +11,15 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.util.client;
+package com.liferay.faces.util.context;
 
 import javax.faces.FacesWrapper;
 
 
 /**
- * @author  Neil Griffin
+ * @author  Kyle Stiemann
  */
-public abstract class ClientScriptWrapper implements ClientScript, FacesWrapper<ClientScript> {
+public abstract class FacesRequestContextFactory implements FacesWrapper<FacesRequestContextFactory> {
 
-	@Override
-	public void append(String content) {
-		getWrapped().append(content);
-	}
-
-	@Override
-	public void append(String content, String use) {
-		getWrapped().append(content, use);
-	}
-
-	@Override
-	public void clear() {
-		getWrapped().clear();
-	}
-
-	@Override
-	public String toString() {
-		return getWrapped().toString();
-	}
-
-	@Override
-	public abstract ClientScript getWrapped();
+	public abstract FacesRequestContext getFacesRequestContext();
 }

@@ -31,9 +31,7 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.Tag;
 
-import com.liferay.faces.util.client.ClientScript;
-import com.liferay.faces.util.client.ClientScriptFactory;
-import com.liferay.faces.util.factory.FactoryExtensionFinder;
+import com.liferay.faces.util.context.FacesRequestContext;
 import com.liferay.faces.util.jsp.PageContextAdapter;
 import com.liferay.faces.util.jsp.StringJspWriter;
 import com.liferay.faces.util.portal.ScriptTagUtil;
@@ -100,10 +98,9 @@ public abstract class PortalTagRenderer<U extends UIComponent, T extends Tag> ex
 			String scripts = portalTagOutput.getScripts();
 
 			if (scripts != null) {
-				ClientScriptFactory clientScriptFactory = (ClientScriptFactory) FactoryExtensionFinder.getFactory(
-						ClientScriptFactory.class);
-				ClientScript clientScript = clientScriptFactory.getClientScript();
-				clientScript.append(scripts);
+
+				FacesRequestContext facesRequestContext = FacesRequestContext.getCurrentInstance();
+				facesRequestContext.addScript(scripts);
 			}
 		}
 		catch (JspException e) {

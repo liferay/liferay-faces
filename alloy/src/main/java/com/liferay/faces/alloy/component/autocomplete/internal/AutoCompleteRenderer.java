@@ -34,12 +34,9 @@ import javax.faces.context.ResponseWriter;
 import javax.faces.render.FacesRenderer;
 
 import com.liferay.faces.alloy.component.autocomplete.AutoComplete;
-import com.liferay.faces.util.client.ClientScript;
-import com.liferay.faces.util.client.ClientScriptFactory;
 import com.liferay.faces.util.component.ClientComponent;
 import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.component.Styleable;
-import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.js.JavaScriptFragment;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.render.RendererUtil;
@@ -355,21 +352,7 @@ public class AutoCompleteRenderer extends AutoCompleteRendererBase {
 					liferayComponentJavaScriptFragment, resultArrayStringBuilder, hiddenClientId);
 
 				String[] modules = getModules(facesContext, uiComponent);
-				StringBuilder useStringBuilder = new StringBuilder();
-
-				for (int i = 0; i < modules.length; i++) {
-
-					if (i > 0) {
-						useStringBuilder.append(", ");
-					}
-
-					useStringBuilder.append(modules[i]);
-				}
-
-				ClientScriptFactory clientScriptFactory = (ClientScriptFactory) FactoryExtensionFinder.getFactory(
-						ClientScriptFactory.class);
-				ClientScript clientScript = clientScriptFactory.getClientScript();
-				clientScript.append(bufferedScriptResponseWriter.toString(), useStringBuilder.toString());
+				renderScript(facesContext, bufferedScriptResponseWriter.toString(), modules);
 			}
 			else {
 				super.encodeJavaScript(facesContext, uiComponent);

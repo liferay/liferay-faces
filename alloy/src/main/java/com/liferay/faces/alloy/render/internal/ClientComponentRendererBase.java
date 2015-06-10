@@ -20,10 +20,10 @@ import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 import javax.faces.render.Renderer;
 
-import com.liferay.faces.util.client.ClientScript;
-import com.liferay.faces.util.client.ClientScriptFactory;
+import com.liferay.faces.util.client.Script;
+import com.liferay.faces.util.client.ScriptFactory;
+import com.liferay.faces.util.context.FacesRequestContext;
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
-import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.render.internal.BufferedScriptResponseWriter;
 
 
@@ -104,34 +104,30 @@ public abstract class ClientComponentRendererBase extends Renderer implements Cl
 		encodeJavaScriptCustom(facesContext, uiComponent);
 		encodeJavaScriptEnd(facesContext, uiComponent);
 
-		String use = null;
+		String[] modules = null;
 
 		if (!isSandboxed(facesContext, uiComponent)) {
-
-			String[] modules = getModules(facesContext, uiComponent);
-
-			if (modules != null) {
-
-				StringBuilder stringBuilder = new StringBuilder();
-
-				for (int i = 0; i < modules.length; i++) {
-
-					if (i > 0) {
-						stringBuilder.append(StringPool.COMMA);
-					}
-
-					stringBuilder.append(modules[i]);
-				}
-
-				use = stringBuilder.toString();
-			}
+			modules = getModules(facesContext, uiComponent);
 		}
 
-		ClientScriptFactory clientScriptFactory = (ClientScriptFactory) FactoryExtensionFinder.getFactory(
-				ClientScriptFactory.class);
-		ClientScript clientScript = clientScriptFactory.getClientScript();
-		clientScript.append(bufferedScriptResponseWriter.toString(), use);
+		renderScript(facesContext, bufferedScriptResponseWriter.toString(), modules);
 		facesContext.setResponseWriter(responseWriter);
+	}
+
+	protected void renderScript(FacesContext facesContext, String bufferedScriptString, String[] modules) {
+
+		Script script;
+		ScriptFactory scriptFactory = (ScriptFactory) FactoryExtensionFinder.getFactory(ScriptFactory.class);
+
+		if (modules != null) {
+			script = scriptFactory.getAlloyScript(bufferedScriptString, modules);
+		}
+		else {
+			script = scriptFactory.getScript(bufferedScriptString);
+		}
+
+		FacesRequestContext facesRequestContext = FacesRequestContext.getCurrentInstance();
+		facesRequestContext.addScript(script);
 	}
 
 	protected boolean isSandboxed(FacesContext facesContext, UIComponent uiComponent) {
