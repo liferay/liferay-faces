@@ -27,6 +27,9 @@ import com.liferay.faces.util.client.Script;
 import com.liferay.faces.util.client.ScriptFactory;
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.lang.StringPool;
+import com.liferay.faces.util.logging.Logger;
+import com.liferay.faces.util.logging.LoggerFactory;
+import com.liferay.faces.util.product.Product;
 import com.liferay.faces.util.render.ContentTypes;
 import com.liferay.faces.util.render.internal.BufferedScriptResponseWriter;
 
@@ -35,6 +38,9 @@ import com.liferay.faces.util.render.internal.BufferedScriptResponseWriter;
  * @author  Neil Griffin
  */
 public class ScriptRenderer extends ScriptRendererCompat {
+
+	// Logger
+	private static final Logger logger = LoggerFactory.getLogger(ScriptRenderer.class);
 
 	// Private Constants
 	private static final String BOTTOM = "bottom";
@@ -72,8 +78,15 @@ public class ScriptRenderer extends ScriptRendererCompat {
 			if (INLINE.equals(position)) {
 				inline = true;
 			}
-			else if (isBottomOfPageSupported() && BOTTOM.equals(position)) {
-				inline = false;
+			else if (BOTTOM.equals(position)) {
+
+				if (isBottomOfPageSupported()) {
+					inline = false;
+				}
+				else {
+					inline = true;
+					logger.warn("position=\"bottom\" not supported -- rendering script inline");
+				}
 			}
 		}
 
