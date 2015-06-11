@@ -74,8 +74,6 @@ public class OutputScriptRenderer extends OutputScriptRendererBase {
 				String bufferedScriptString = bufferedScriptResponseWriter.toString();
 				ScriptFactory scriptFactory = (ScriptFactory) FactoryExtensionFinder.getFactory(ScriptFactory.class);
 
-				// Note: If the script uses YUI or AlloyUI modules then a YUI sandbox will be created automatically by
-				// the ClientScript when RendererUtil.renderScript() is called below.
 				if ((use != null) && (use.length() > 0)) {
 					script = scriptFactory.getAlloyScript(bufferedScriptString, use.split(","));
 				}

@@ -19,6 +19,9 @@ import com.liferay.faces.util.client.Script;
 
 
 /**
+ * This class defines the usage of a {@link ThreadLocal} singleton that exists alongside the {@link
+ * javax.faces.context.FacesContext}.
+ *
  * @author  Kyle Stiemann
  */
 public abstract class FacesRequestContext {
@@ -30,6 +33,12 @@ public abstract class FacesRequestContext {
 		return instance.get();
 	}
 
+	/**
+	 * Sets or removes the value of the {@link ThreadLocal} singleton instance.
+	 *
+	 * @param  facesRequestContext  If a non-null value is specified, then it will become the singleton value. If null
+	 *                              is specified, then singleton value is removed from the ThreadLocal. is removed.
+	 */
 	public static void setCurrentInstance(FacesRequestContext facesRequestContext) {
 
 		if (facesRequestContext == null) {
@@ -40,13 +49,24 @@ public abstract class FacesRequestContext {
 		}
 	}
 
+	/**
+	 * Adds the specified {@link Script} to the list of scripts that are to be executed on the client.
+	 */
 	public abstract void addScript(Script script);
 
+	/**
+	 * Adds the specified script to the list of scripts that are to be executed on the client.
+	 */
 	public abstract void addScript(String script);
 
-	public abstract void addScripts(List<Script> scripts);
-
+	/**
+	 * Releases any resources that are associated with this {@link FacesRequestContext} instance.
+	 */
 	public abstract void release();
 
+	/**
+	 * Returns an immutable list of scripts that were added via the {@link #addScript(Script)} or {@link
+	 * #addScript(String)} method.
+	 */
 	public abstract List<Script> getScripts();
 }

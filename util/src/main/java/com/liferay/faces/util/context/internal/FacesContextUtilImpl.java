@@ -22,11 +22,14 @@ import com.liferay.faces.util.factory.FactoryExtensionFinder;
 
 
 /**
+ * The purpose of this class is to provide a way to automatically instantiate and release the {@link
+ * FacesRequestContext} {@link ThreadLocal} singleton.
+ *
  * @author  Kyle Stiemann
  */
 public class FacesContextUtilImpl extends FacesContextWrapper {
 
-	// Private Members
+	// Private Data Members
 	private FacesContext wrappedFacesContext;
 
 	FacesContextUtilImpl(FacesContext facesContext) {
@@ -41,7 +44,10 @@ public class FacesContextUtilImpl extends FacesContextWrapper {
 
 	@Override
 	public void release() {
-		FacesRequestContext.getCurrentInstance().release();
+
+		FacesRequestContext facesRequestContext = FacesRequestContext.getCurrentInstance();
+		facesRequestContext.release();
+		FacesRequestContext.setCurrentInstance(null);
 		super.release();
 	}
 

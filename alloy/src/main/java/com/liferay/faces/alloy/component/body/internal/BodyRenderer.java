@@ -16,7 +16,9 @@ package com.liferay.faces.alloy.component.body.internal;
 import java.io.IOException;
 
 import javax.faces.component.UIComponent;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.faces.context.PartialViewContext;
 import javax.faces.context.ResponseWriter;
 import javax.faces.render.FacesRenderer;
 import javax.faces.render.Renderer;
@@ -81,9 +83,12 @@ public class BodyRenderer extends BodyRendererBase {
 			ResponseWriter responseWriter = facesContext.getResponseWriter();
 			BrowserSnifferFactory browserSnifferFactory = (BrowserSnifferFactory) FactoryExtensionFinder.getFactory(
 					BrowserSnifferFactory.class);
-			BrowserSniffer browserSniffer = browserSnifferFactory.getBrowserSniffer(facesContext.getExternalContext());
-			BodyResponseWriter delegationResponseWriter = new BodyResponseWriter(responseWriter, facesContext,
-					browserSniffer);
+			ExternalContext externalContext = facesContext.getExternalContext();
+			BrowserSniffer browserSniffer = browserSnifferFactory.getBrowserSniffer(externalContext);
+			PartialViewContext partialViewContext = facesContext.getPartialViewContext();
+			boolean ajaxRequest = partialViewContext.isAjaxRequest();
+			BodyResponseWriter delegationResponseWriter = new BodyResponseWriter(responseWriter, browserSniffer,
+					ajaxRequest);
 			super.encodeEnd(facesContext, uiComponent, delegationResponseWriter);
 		}
 	}
