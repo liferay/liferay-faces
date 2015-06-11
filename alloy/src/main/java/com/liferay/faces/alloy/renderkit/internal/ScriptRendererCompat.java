@@ -34,10 +34,14 @@ import com.liferay.faces.util.portal.WebKeys;
 @Deprecated
 public abstract class ScriptRendererCompat extends Renderer {
 
-	protected void addScript(Script script) {
+	protected void addScriptToBottomOfPage(Script script) {
 
 		FacesRequestContext facesRequestContext = FacesRequestContext.getCurrentInstance();
 		facesRequestContext.addScript(script);
+	}
+
+	protected boolean isBottomOfPageSupported() {
+		return true;
 	}
 
 	protected boolean isInline(FacesContext facesContext) {
