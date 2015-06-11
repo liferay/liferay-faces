@@ -86,27 +86,14 @@ public class PartialViewContextBridgeImpl extends PartialViewContextWrapper {
 
 			if (!wroteEval) {
 
-<<<<<<< HEAD:util/src/main/java/com/liferay/faces/util/context/internal/PartialViewContextScriptImpl.java
-				ClientScriptFactory clientScriptFactory = (ClientScriptFactory) FactoryExtensionFinder.getFactory(
-						ClientScriptFactory.class);
-				ClientScript clientScript = clientScriptFactory.getClientScript();
-				String clientScriptText = clientScript.toString();
-=======
 				FacesRequestContext facesRequestContext = FacesRequestContext.getCurrentInstance();
 				List<Script> scripts = facesRequestContext.getScripts();
->>>>>>> 0bf7eb1... FACES-2274 Replace ClientScript code with new FacesRequestContext and simple Script:bridge-impl/src/main/java/com/liferay/faces/bridge/context/internal/PartialViewContextBridgeImpl.java
 
 				if (!scripts.isEmpty()) {
 
 					super.startEval();
-<<<<<<< HEAD:util/src/main/java/com/liferay/faces/util/context/internal/PartialViewContextScriptImpl.java
-					super.write(clientScriptText);
-					clientScript.clear();
-=======
 					BridgeScriptUtil.writeScripts(partialResponseWriter, scripts);
->>>>>>> 0bf7eb1... FACES-2274 Replace ClientScript code with new FacesRequestContext and simple Script:bridge-impl/src/main/java/com/liferay/faces/bridge/context/internal/PartialViewContextBridgeImpl.java
 					super.endEval();
-					wroteEval = true;
 				}
 			}
 
@@ -116,26 +103,11 @@ public class PartialViewContextBridgeImpl extends PartialViewContextWrapper {
 		@Override
 		public void endEval() throws IOException {
 
-<<<<<<< HEAD:util/src/main/java/com/liferay/faces/util/context/internal/PartialViewContextScriptImpl.java
-			if (!wroteEval) {
-
-				ClientScriptFactory clientScriptFactory = (ClientScriptFactory) FactoryExtensionFinder.getFactory(
-						ClientScriptFactory.class);
-				ClientScript clientScript = clientScriptFactory.getClientScript();
-				String clientScriptText = clientScript.toString();
-
-				if (clientScriptText.length() > 0) {
-					super.write(clientScriptText);
-					clientScript.clear();
-				}
-
-=======
 			FacesRequestContext facesRequestContext = FacesRequestContext.getCurrentInstance();
 			List<Script> scripts = facesRequestContext.getScripts();
 
 			if (!scripts.isEmpty()) {
 				BridgeScriptUtil.writeScripts(partialResponseWriter, scripts);
->>>>>>> 0bf7eb1... FACES-2274 Replace ClientScript code with new FacesRequestContext and simple Script:bridge-impl/src/main/java/com/liferay/faces/bridge/context/internal/PartialViewContextBridgeImpl.java
 			}
 
 			super.endEval();
