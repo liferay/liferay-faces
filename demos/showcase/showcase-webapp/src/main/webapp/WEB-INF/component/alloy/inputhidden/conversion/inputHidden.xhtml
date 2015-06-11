@@ -8,9 +8,11 @@
 			<showcase:example description="#{i18n['conversion-to-a-date-using-converter-attribute']}" number="1">
 				<div class="showcase-container">
 					<alloy:outputText value="#{i18n['this-is-a-div-that-contains-a-hidden-input']}" />
-					<alloy:inputHidden id="hidden1" binding="#{inputHidden1}" converter="javax.faces.DateTime"
-						converterMessage="#{i18n['converter-message']}" value="#{inputHiddenModelBean.date}" />
-					<alloy:message for="hidden1" />
+					<alloy:field>
+						<alloy:inputHidden id="hidden1" binding="#{inputHidden1}" converter="javax.faces.DateTime"
+							converterMessage="#{i18n['converter-message']}" value="#{inputHiddenModelBean.date}" />
+						<alloy:message for="hidden1" />
+					</alloy:field>
 				</div>
 				<alloy:button onclick="document.getElementById('#{inputHidden1.clientId}').value=this.value;"
 					value="#{inputHiddenModelBean.testDate1}">
@@ -35,12 +37,14 @@
 			<showcase:example description="#{i18n['conversion-to-a-date-using-f-convertdatetime']}" number="2">
 				<div class="showcase-container">
 					<alloy:outputText value="#{i18n['this-is-a-div-that-contains-a-hidden-input']}" />
-					<alloy:inputHidden id="hidden2" binding="#{inputHidden2}"
-						converterMessage="#{i18n['converter-message']}"
-						value="#{inputHiddenModelBean.date}">
-						<f:convertDateTime pattern="MM/dd/yyyy" />
-					</alloy:inputHidden>
-					<alloy:message for="hidden2" />
+					<alloy:field>
+						<alloy:inputHidden id="hidden2" binding="#{inputHidden2}"
+							converterMessage="#{i18n['converter-message']}"
+							value="#{inputHiddenModelBean.date}">
+							<f:convertDateTime pattern="MM/dd/yyyy" />
+						</alloy:inputHidden>
+						<alloy:message for="hidden2" />
+					</alloy:field>
 				</div>
 				<alloy:button onclick="document.getElementById('#{inputHidden2.clientId}').value=this.value;"
 					value="#{inputHiddenModelBean.testDate2}">
