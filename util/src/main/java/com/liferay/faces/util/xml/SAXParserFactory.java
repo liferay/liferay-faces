@@ -14,8 +14,9 @@
 package com.liferay.faces.util.xml;
 
 import com.liferay.faces.util.xml.internal.SAXParserImpl;
-import java.util.HashMap;
+
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
@@ -46,7 +47,7 @@ public class SAXParserFactory extends javax.xml.parsers.SAXParserFactory {
 
 	protected SAXParserFactory() {
 		super();
-		this.featureMap = new HashMap<String, Boolean>();
+		this.featureMap = new ConcurrentHashMap<String, Boolean>();
 	}
 
 	public static SAXParserFactory newInstance() {
