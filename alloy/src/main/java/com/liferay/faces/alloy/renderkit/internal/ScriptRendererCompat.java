@@ -13,15 +13,10 @@
  */
 package com.liferay.faces.alloy.renderkit.internal;
 
-import java.util.Map;
-
-import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.render.Renderer;
 
 import com.liferay.faces.util.client.Script;
-import com.liferay.faces.util.portal.LiferayThemeDisplayUtil;
-import com.liferay.faces.util.portal.WebKeys;
 
 
 /**
@@ -31,23 +26,20 @@ import com.liferay.faces.util.portal.WebKeys;
  */
 public abstract class ScriptRendererCompat extends Renderer {
 
-	protected void addScript(Script script) {
+	protected void addScriptToBottomOfPage(Script script) {
 		// Unsupported for JSF 1.2 due to the lack of FacesRequestContext
+	}
+
+	protected boolean isBottomOfPageSupported() {
+
+		// Unsupported for JSF 1.2 due to the lack of FacesRequestContext
+		return false;
 	}
 
 	protected boolean isInline(FacesContext facesContext) {
 
-		boolean inline = false;
-		ExternalContext externalContext = facesContext.getExternalContext();
-		Map<String, Object> requestMap = externalContext.getRequestMap();
-		Object themeDisplay = requestMap.get(WebKeys.THEME_DISPLAY);
-
-		if (themeDisplay != null) {
-			inline = LiferayThemeDisplayUtil.isIsolated(themeDisplay) ||
-				LiferayThemeDisplayUtil.isStateExclusive(themeDisplay);
-		}
-
-		return inline;
+		// Must always be inline for JSF 1.2 due to the lack of FacesRequestContext
+		return true;
 	}
 
 	protected boolean isAjaxRequest(FacesContext facesContext) {
