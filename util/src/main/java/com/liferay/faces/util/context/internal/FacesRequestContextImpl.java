@@ -48,11 +48,6 @@ public class FacesRequestContextImpl extends FacesRequestContext {
 	}
 
 	@Override
-	public void addScripts(List<Script> scripts) {
-		scripts.addAll(scripts);
-	}
-
-	@Override
 	public void release() {
 		scripts = null;
 	}

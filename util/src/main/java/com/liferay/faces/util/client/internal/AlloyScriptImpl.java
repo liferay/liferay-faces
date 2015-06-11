@@ -21,10 +21,11 @@ import com.liferay.faces.util.client.AlloyScript;
  */
 public class AlloyScriptImpl extends ScriptImpl implements AlloyScript {
 
-	// Private Members
-	private final String[] modules;
+	// Private Data Members
+	private String[] modules;
 
 	public AlloyScriptImpl(String content, String[] modules) {
+
 		super(content);
 
 		if (modules == null) {
