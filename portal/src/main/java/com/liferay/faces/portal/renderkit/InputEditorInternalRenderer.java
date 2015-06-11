@@ -32,8 +32,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.liferay.faces.portal.component.InputEditorInternal;
 import com.liferay.faces.portal.servlet.ScriptCapturingHttpServletRequest;
-import com.liferay.faces.util.client.ClientScript;
-import com.liferay.faces.util.client.ClientScriptFactory;
+import com.liferay.faces.util.client.AlloyScript;
+import com.liferay.faces.util.client.ScriptFactory;
+import com.liferay.faces.util.context.FacesRequestContext;
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.jsp.JspIncludeResponse;
 import com.liferay.faces.util.jsp.PageContextAdapter;
@@ -195,10 +196,6 @@ public class InputEditorInternalRenderer extends Renderer implements CleanupRend
 
 			if (editorType.indexOf(CKEDITOR) >= 0) {
 
-				ClientScriptFactory clientScriptFactory = (ClientScriptFactory) FactoryExtensionFinder.getFactory(
-						ClientScriptFactory.class);
-				ClientScript clientScript = clientScriptFactory.getClientScript();
-
 				// FACES-1441: The liferay-ui:input-editor JSP tag (and associated ckeditor.jsp file) do not provide a
 				// way to hook-in to the "onblur" callback feature of the CKEditor. In order to overcome this
 				// limitation, it is necessary to append a <script>...</script> to the response that provides this
@@ -223,7 +220,11 @@ public class InputEditorInternalRenderer extends Renderer implements CleanupRend
 				// Otherwise, append the script to the WebKeys.AUI_SCRIPT_DATA request attribute, which will cause the
 				// script to be rendered at the bottom of the portal page.
 				else {
-					clientScript.append(onBlurScript, "aui-base");
+					ScriptFactory scriptFactory = (ScriptFactory) FactoryExtensionFinder.getFactory(
+							ScriptFactory.class);
+					AlloyScript alloyScript = scriptFactory.getAlloyScript(onBlurScript, new String[] { "aui-base" });
+					FacesRequestContext facesRequestContext = FacesRequestContext.getCurrentInstance();
+					facesRequestContext.addScript(alloyScript);
 				}
 
 				// FACES-1439: If the component was rendered on the page on the previous JSF lifecycle, then prevent it
@@ -251,7 +252,9 @@ public class InputEditorInternalRenderer extends Renderer implements CleanupRend
 					bufferedResponse = parsedResponse.getNonScripts();
 
 					String scripts = parsedResponse.getScripts();
-					clientScript.append(scripts, null);
+
+					FacesRequestContext facesRequestContext = FacesRequestContext.getCurrentInstance();
+					facesRequestContext.addScript(scripts);
 					logger.trace(scripts);
 				}
 			}
@@ -376,12 +379,9 @@ public class InputEditorInternalRenderer extends Renderer implements CleanupRend
 		scriptBuilder.append("'];");
 		scriptBuilder.append("}");
 
+		FacesRequestContext facesRequestContext = FacesRequestContext.getCurrentInstance();
 		String script = scriptBuilder.toString();
-
-		ClientScriptFactory clientScriptFactory = (ClientScriptFactory) FactoryExtensionFinder.getFactory(
-				ClientScriptFactory.class);
-		ClientScript clientScript = clientScriptFactory.getClientScript();
-		clientScript.append(script, null);
+		facesRequestContext.addScript(script);
 
 		logger.trace(script);
 	}
