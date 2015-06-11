@@ -123,6 +123,12 @@ public class ListModelBean {
 		}
 
 		if (LIFERAY_PORTAL_DETECTED) {
+
+			if (developmentMode) {
+				namespaces.add("aui");
+				namespaces.add("liferay-ui");
+			}
+
 			namespaces.add("portal");
 		}
 
