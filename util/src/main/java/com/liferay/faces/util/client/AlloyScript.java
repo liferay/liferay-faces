@@ -13,34 +13,10 @@
  */
 package com.liferay.faces.util.client;
 
-import com.liferay.faces.util.helper.Wrapper;
-
-
 /**
- * @author  Neil Griffin
+ * @author  Kyle Stiemann
  */
-public abstract class ClientScriptWrapper implements ClientScript, Wrapper<ClientScript> {
+public interface AlloyScript extends Script {
 
-	// Java 1.6+: @Override
-	public void append(String content) {
-		getWrapped().append(content);
-	}
-
-	// Java 1.6+: @Override
-	public void append(String content, String use) {
-		getWrapped().append(content, use);
-	}
-
-	// Java 1.6+: @Override
-	public void clear() {
-		getWrapped().clear();
-	}
-
-	@Override
-	public String toString() {
-		return getWrapped().toString();
-	}
-
-	// Java 1.6+: @Override
-	public abstract ClientScript getWrapped();
+	public String[] getModules();
 }
