@@ -18,5 +18,5 @@ package com.liferay.faces.util.client;
  */
 public interface Script {
 
-	public String getContent();
+	public String getSourceCode();
 }
