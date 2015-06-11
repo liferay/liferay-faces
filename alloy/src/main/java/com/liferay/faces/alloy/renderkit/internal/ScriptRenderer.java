@@ -13,14 +13,21 @@
  */
 package com.liferay.faces.alloy.renderkit.internal;
 
-import com.liferay.faces.alloy.client.internal.AlloyClientScriptUtil;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 
+import com.liferay.faces.alloy.client.internal.AlloyScriptUtil;
+import com.liferay.faces.util.client.BrowserSniffer;
+import com.liferay.faces.util.client.BrowserSnifferFactory;
+import com.liferay.faces.util.client.Script;
+import com.liferay.faces.util.client.ScriptFactory;
+import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.render.ContentTypes;
 import com.liferay.faces.util.render.internal.BufferedScriptResponseWriter;
@@ -89,7 +96,11 @@ public class ScriptRenderer extends ScriptRendererCompat {
 
 			if (inlineUse != null) {
 				String[] useArray = new String[] { inlineUse };
-				String alloyBeginScript = AlloyClientScriptUtil.getAlloyBeginScript(facesContext, useArray);
+				BrowserSnifferFactory browserSnifferFactory = (BrowserSnifferFactory) FactoryExtensionFinder.getFactory(
+						BrowserSnifferFactory.class);
+				BrowserSniffer browserSniffer = browserSnifferFactory.getBrowserSniffer(
+						facesContext.getExternalContext());
+				String alloyBeginScript = AlloyScriptUtil.getAlloyBeginScript(browserSniffer, useArray);
 				responseWriter.write(alloyBeginScript);
 			}
 		}
@@ -115,7 +126,26 @@ public class ScriptRenderer extends ScriptRendererCompat {
 
 			Map<String, Object> attributes = uiComponent.getAttributes();
 			String use = (String) attributes.get(USE);
-			AlloyClientScriptUtil.renderScript(bufferedScriptResponseWriter.toString(), use);
+
+			ScriptFactory scriptFactory = (ScriptFactory) FactoryExtensionFinder.getFactory(ScriptFactory.class);
+
+			Script script;
+			String scriptSourceCode = bufferedScriptResponseWriter.toString();
+
+			if (use == null) {
+				script = scriptFactory.getScript(scriptSourceCode);
+			}
+			else {
+				script = scriptFactory.getAlloyScript(scriptSourceCode, new String[] { use });
+			}
+
+			List<Script> scripts = new ArrayList<Script>(1);
+			scripts.add(script);
+
+			BrowserSnifferFactory browserSnifferFactory = (BrowserSnifferFactory) FactoryExtensionFinder.getFactory(
+					BrowserSnifferFactory.class);
+			BrowserSniffer browserSniffer = browserSnifferFactory.getBrowserSniffer(facesContext.getExternalContext());
+			AlloyScriptUtil.writeScripts(backupResponseWriter, scripts, browserSniffer);
 		}
 	}
 
