@@ -62,7 +62,7 @@ public class AlloyScriptUtil {
 		}
 
 		for (Script script : basicScripts) {
-			responseWriter.write(script.getContent());
+			responseWriter.write(script.getSourceCode());
 		}
 
 		if (!alloyScripts.isEmpty()) {
@@ -73,7 +73,7 @@ public class AlloyScriptUtil {
 			for (AlloyScript alloyScript : alloyScripts) {
 
 				responseWriter.write("(function(){");
-				responseWriter.write(alloyScript.getContent());
+				responseWriter.write(alloyScript.getSourceCode());
 				responseWriter.write("})();");
 			}
 
