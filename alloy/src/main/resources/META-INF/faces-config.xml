@@ -79,7 +79,6 @@
 	<factory>
 		<factory-extension>
 			<util:message-context-factory>com.liferay.faces.alloy.context.internal.MessageContextFactoryAlloyImpl</util:message-context-factory>
-			<util:client-script-factory>com.liferay.faces.alloy.client.internal.ClientScriptFactoryAlloyImpl</util:client-script-factory>
 		</factory-extension>
 	</factory>
 	<render-kit>

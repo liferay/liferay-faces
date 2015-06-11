@@ -11,19 +11,30 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.util.client;
+package com.liferay.faces.util.client.internal;
+
+import com.liferay.faces.util.client.AlloyScript;
+import com.liferay.faces.util.client.Script;
+import com.liferay.faces.util.client.ScriptFactory;
+
 
 /**
- * @author  Neil Griffin
+ * @author  Kyle Stiemann
  */
-public interface ClientScript {
-
-	public void append(String content);
-
-	public void append(String content, String options);
-
-	public void clear();
+public class ScriptFactoryImpl extends ScriptFactory {
 
 	@Override
-	public String toString();
+	public AlloyScript getAlloyScript(String content, String[] modules) {
+		return new AlloyScriptImpl(content, modules);
+	}
+
+	@Override
+	public Script getScript(String content) {
+		return new ScriptImpl(content);
+	}
+
+	@Override
+	public ScriptFactory getWrapped() {
+		return null;
+	}
 }
