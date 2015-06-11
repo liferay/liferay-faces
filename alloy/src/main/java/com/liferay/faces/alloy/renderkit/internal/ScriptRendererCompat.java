@@ -19,6 +19,8 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.render.Renderer;
 
+import com.liferay.faces.util.client.Script;
+import com.liferay.faces.util.context.FacesRequestContext;
 import com.liferay.faces.util.portal.LiferayThemeDisplayUtil;
 import com.liferay.faces.util.portal.WebKeys;
 
@@ -27,10 +29,16 @@ import com.liferay.faces.util.portal.WebKeys;
  * This class provides a compatibility layer for JSF1/JSF2 and different versions of the Liferay Portal API.
  *
  * @author      Neil Griffin
- * @deprecated  See {@link com.liferay.faces.alloy.renderkit.ScriptRenderer}.
+ * @deprecated  See {@link com.liferay.faces.alloy.renderkit.internal.ScriptRenderer}.
  */
 @Deprecated
 public abstract class ScriptRendererCompat extends Renderer {
+
+	protected void addScript(Script script) {
+
+		FacesRequestContext facesRequestContext = FacesRequestContext.getCurrentInstance();
+		facesRequestContext.addScript(script);
+	}
 
 	protected boolean isInline(FacesContext facesContext) {
 

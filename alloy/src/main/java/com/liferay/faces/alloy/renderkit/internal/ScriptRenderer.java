@@ -14,8 +14,6 @@
 package com.liferay.faces.alloy.renderkit.internal;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 import javax.faces.component.UIComponent;
@@ -27,7 +25,6 @@ import com.liferay.faces.util.client.BrowserSniffer;
 import com.liferay.faces.util.client.BrowserSnifferFactory;
 import com.liferay.faces.util.client.Script;
 import com.liferay.faces.util.client.ScriptFactory;
-import com.liferay.faces.util.context.FacesRequestContext;
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.render.ContentTypes;
@@ -140,8 +137,7 @@ public class ScriptRenderer extends ScriptRendererCompat {
 				script = scriptFactory.getAlloyScript(scriptSourceCode, new String[] { use });
 			}
 
-			FacesRequestContext facesRequestContext = FacesRequestContext.getCurrentInstance();
-			facesRequestContext.addScript(script);
+			addScript(script);
 		}
 	}
 
