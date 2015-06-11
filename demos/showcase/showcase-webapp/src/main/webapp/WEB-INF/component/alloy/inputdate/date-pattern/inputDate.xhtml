@@ -5,7 +5,10 @@
 	<ui:define name="col1">
 		<alloy:form>
 			<showcase:example description="#{i18n['alloy-inputdate-date-pattern-example']}">
-				<alloy:inputDate id="birthday" pattern="EEEE, MMM dd, yyyy" value="#{inputDateModelBean.birthday}" />
+				<alloy:field>
+					<alloy:inputDate id="birthday" pattern="EEEE, MMM dd, yyyy" value="#{inputDateModelBean.birthday}" />
+					<alloy:message for="birthday" />
+				</alloy:field>
 				<hr />
 				<alloy:commandButton render="@form" value="#{i18n['submit']}" />
 			</showcase:example>
