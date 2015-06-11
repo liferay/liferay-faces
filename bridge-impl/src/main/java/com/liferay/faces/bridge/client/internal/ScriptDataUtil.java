@@ -59,10 +59,10 @@ public class ScriptDataUtil extends ScriptDataUtilCompat {
 					firstModule = false;
 				}
 
-				scriptDataAppend(scriptData, portletId, alloyScript.getContent(), modulesStringBuilder.toString());
+				scriptDataAppend(scriptData, portletId, alloyScript.getSourceCode(), modulesStringBuilder.toString());
 			}
 			else {
-				scriptDataAppend(scriptData, portletId, script.getContent(), null);
+				scriptDataAppend(scriptData, portletId, script.getSourceCode(), null);
 			}
 		}
 	}
