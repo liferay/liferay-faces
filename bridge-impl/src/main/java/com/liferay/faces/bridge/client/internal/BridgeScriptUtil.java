@@ -31,7 +31,7 @@ public class BridgeScriptUtil {
 		for (Script script : scripts) {
 
 			responseWriter.write("(function(){");
-			responseWriter.write(script.getContent());
+			responseWriter.write(script.getSourceCode());
 			responseWriter.write("})();");
 		}
 	}

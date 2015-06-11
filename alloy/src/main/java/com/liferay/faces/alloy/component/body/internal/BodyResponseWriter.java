@@ -17,7 +17,6 @@ import java.io.IOException;
 import java.util.List;
 
 import javax.faces.component.UIComponent;
-import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 
 import com.liferay.faces.alloy.client.internal.AlloyScriptUtil;
@@ -35,20 +34,20 @@ import com.liferay.faces.util.render.internal.DelegationResponseWriterBase;
 public class BodyResponseWriter extends DelegationResponseWriterBase {
 
 	// Private Data Members
-	private FacesContext facesContext;
+	private boolean ajaxRequest;
 	private UIComponent uiComponent;
 	private BrowserSniffer browserSniffer;
 
-	public BodyResponseWriter(ResponseWriter responseWriter, FacesContext facesContext, BrowserSniffer browserSniffer) {
+	public BodyResponseWriter(ResponseWriter responseWriter, BrowserSniffer browserSniffer, boolean ajaxRequest) {
 		super(responseWriter);
 		this.browserSniffer = browserSniffer;
-		this.facesContext = facesContext;
+		this.ajaxRequest = ajaxRequest;
 	}
 
 	@Override
 	public void endElement(String name) throws IOException {
 
-		if (StringPool.BODY.equals(name) && !facesContext.getPartialViewContext().isAjaxRequest()) {
+		if (StringPool.BODY.equals(name) && !ajaxRequest) {
 
 			super.startElement(StringPool.SCRIPT, uiComponent);
 			super.writeAttribute(StringPool.TYPE, ContentTypes.TEXT_JAVASCRIPT, null);

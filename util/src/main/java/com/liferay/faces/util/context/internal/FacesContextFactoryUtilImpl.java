@@ -28,12 +28,13 @@ public class FacesContextFactoryUtilImpl extends FacesContextFactory {
 	private FacesContextFactory wrappedFacesContextFactory;
 
 	public FacesContextFactoryUtilImpl(FacesContextFactory facesContextFactory) {
-		wrappedFacesContextFactory = facesContextFactory;
+		this.wrappedFacesContextFactory = facesContextFactory;
 	}
 
 	@Override
 	public FacesContext getFacesContext(Object context, Object request, Object response, Lifecycle lifecycle)
 		throws FacesException {
+
 		FacesContext facesContext = wrappedFacesContextFactory.getFacesContext(context, request, response, lifecycle);
 
 		return new FacesContextUtilImpl(facesContext);
