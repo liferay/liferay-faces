@@ -21,14 +21,14 @@ import com.liferay.faces.util.client.Script;
  */
 public class ScriptImpl implements Script {
 
-	// Private Members
-	private final String content;
+	// Private Data Members
+	private String sourceCode;
 
-	public ScriptImpl(String content) {
-		this.content = content;
+	public ScriptImpl(String sourceCode) {
+		this.sourceCode = sourceCode;
 	}
 
-	public String getContent() {
-		return content;
+	public String getSourceCode() {
+		return sourceCode;
 	}
 }
