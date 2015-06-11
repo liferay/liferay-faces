@@ -27,6 +27,7 @@ import com.liferay.faces.util.client.BrowserSniffer;
 import com.liferay.faces.util.client.BrowserSnifferFactory;
 import com.liferay.faces.util.client.Script;
 import com.liferay.faces.util.client.ScriptFactory;
+import com.liferay.faces.util.context.FacesRequestContext;
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.render.ContentTypes;
@@ -137,13 +138,8 @@ public class ScriptRenderer extends ScriptRendererCompat {
 				script = scriptFactory.getAlloyScript(scriptSourceCode, new String[] { use });
 			}
 
-			List<Script> scripts = new ArrayList<Script>(1);
-			scripts.add(script);
-
-			BrowserSnifferFactory browserSnifferFactory = (BrowserSnifferFactory) FactoryExtensionFinder.getFactory(
-					BrowserSnifferFactory.class);
-			BrowserSniffer browserSniffer = browserSnifferFactory.getBrowserSniffer(facesContext.getExternalContext());
-			AlloyScriptUtil.writeScripts(backupResponseWriter, scripts, browserSniffer);
+			FacesRequestContext facesRequestContext = FacesRequestContext.getCurrentInstance();
+			facesRequestContext.addScript(script);
 		}
 	}
 
