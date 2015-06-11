@@ -24,15 +24,7 @@ import javax.faces.context.ResponseWriter;
 
 import com.liferay.faces.util.client.AlloyScript;
 import com.liferay.faces.util.client.BrowserSniffer;
-<<<<<<< HEAD:alloy/src/main/java/com/liferay/faces/alloy/client/internal/AlloyClientScriptUtil.java
-import com.liferay.faces.util.client.BrowserSnifferFactory;
-import com.liferay.faces.util.client.ClientScript;
-import com.liferay.faces.util.client.ClientScriptFactory;
-import com.liferay.faces.util.factory.FactoryExtensionFinder;
-import com.liferay.faces.util.lang.StringPool;
-=======
 import com.liferay.faces.util.client.Script;
->>>>>>> 0bf7eb1... FACES-2274 Replace ClientScript code with new FacesRequestContext and simple Script:alloy/src/main/java/com/liferay/faces/alloy/client/internal/AlloyScriptUtil.java
 import com.liferay.faces.util.product.ProductConstants;
 import com.liferay.faces.util.product.ProductMap;
 
