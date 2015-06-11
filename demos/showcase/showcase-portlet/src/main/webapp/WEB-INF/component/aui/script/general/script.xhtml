@@ -1,0 +1,29 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
+	xmlns:aui="http://liferay.com/faces/aui" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:showcase="http://java.sun.com/jsf/composite/showcase"	template="/WEB-INF/templates/component-2col.xhtml">
+
+	<ui:define name="col1">
+		<!-- Example 1: Script rendered inline -->
+		<alloy:form>
+			<showcase:example description="#{i18n['aui-script-general-example-1']}" number="1" renderedCheckbox="true">
+				<alloy:panelGroup rendered="#{showcaseModelBean.selectedComponent.rendered}">
+					<span id="example1:text"></span>
+				</alloy:panelGroup>
+				<aui:script position="inline" rendered="#{showcaseModelBean.selectedComponent.rendered}">
+					document.getElementById('example1:text').innerHTML = '#{i18n['aui-script-general-script-1']}';
+				</aui:script>
+			</showcase:example>
+		</alloy:form>
+	</ui:define>
+
+	<ui:define name="col2">
+		<!-- Example 2: Script rendered at the bottom of the page -->
+		<showcase:example description="#{i18n['aui-script-general-example-2']}" number="2">
+			<span id="example2:text"></span>
+			<aui:script position="bottom">
+				document.getElementById('example2:text').innerHTML = '#{i18n['aui-script-general-script-2']}';
+			</aui:script>
+		</showcase:example>
+	</ui:define>
+
+</ui:composition>
