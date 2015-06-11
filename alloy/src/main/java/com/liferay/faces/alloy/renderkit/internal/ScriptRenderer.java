@@ -72,7 +72,7 @@ public class ScriptRenderer extends ScriptRendererCompat {
 			if (INLINE.equals(position)) {
 				inline = true;
 			}
-			else if (BOTTOM.equals(position)) {
+			else if (isBottomOfPageSupported() && BOTTOM.equals(position)) {
 				inline = false;
 			}
 		}
@@ -135,7 +135,7 @@ public class ScriptRenderer extends ScriptRendererCompat {
 				script = scriptFactory.getAlloyScript(scriptSourceCode, new String[] { use });
 			}
 
-			addScript(script);
+			addScriptToBottomOfPage(script);
 		}
 	}
 
