@@ -122,6 +122,12 @@ public class ListModelBean {
 		}
 
 		if (LIFERAY_PORTAL_DETECTED) {
+
+			if (developmentMode) {
+				namespaces.add("aui");
+				namespaces.add("liferay-ui");
+			}
+
 			namespaces.add("portal");
 		}
 
@@ -175,14 +181,14 @@ public class ListModelBean {
 
 								if (sourceFileName.endsWith(".css")) {
 
-									String sourcePath = File.separator + "WEB-INF" + File.separator + "resources" + File.separator + "css" +
+									String sourcePath = File.separator + "resources" + File.separator + "css" +
 										File.separator + sourceFileName;
 
 									sourceFileURL = startupExternalContext.getResource(sourcePath);
 								}
 								else if (sourceFileName.endsWith(".js")) {
 
-									String sourcePath = File.separator + "WEB-INF" + File.separator + "resources" + File.separator + "js" +
+									String sourcePath = File.separator + "resources" + File.separator + "js" +
 										File.separator + sourceFileName;
 
 									sourceFileURL = startupExternalContext.getResource(sourcePath);
