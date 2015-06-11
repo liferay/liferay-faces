@@ -19,6 +19,7 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.render.Renderer;
 
+import com.liferay.faces.util.client.Script;
 import com.liferay.faces.util.portal.LiferayThemeDisplayUtil;
 import com.liferay.faces.util.portal.WebKeys;
 
@@ -29,6 +30,10 @@ import com.liferay.faces.util.portal.WebKeys;
  * @author  Neil Griffin
  */
 public abstract class ScriptRendererCompat extends Renderer {
+
+	protected void addScript(Script script) {
+		// Unsupported for JSF 1.2 due to the lack of FacesRequestContext
+	}
 
 	protected boolean isInline(FacesContext facesContext) {
 
