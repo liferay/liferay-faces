@@ -165,6 +165,9 @@ public class Field extends FieldBase {
 							}
 						}
 					}
+					else {
+						editableValueHoldersValid = true;
+					}
 				}
 				else {
 					editableValueHoldersValid = false;

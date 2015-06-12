@@ -5,7 +5,10 @@
 	<ui:define name="col1">
 		<alloy:form>
 			<showcase:example description="#{i18n['alloy-inputtime-time-pattern-example']}">
-				<alloy:inputTime id="time" value="#{inputTimeModelBean.time}" pattern="hh:mm:ss a" />
+				<alloy:field>
+					<alloy:inputTime id="time" value="#{inputTimeModelBean.time}" pattern="hh:mm:ss a" />
+					<alloy:message for="time" />
+				</alloy:field>
 				<hr />
 				<alloy:commandButton render="@form" value="#{i18n['submit']}" />
 			</showcase:example>
