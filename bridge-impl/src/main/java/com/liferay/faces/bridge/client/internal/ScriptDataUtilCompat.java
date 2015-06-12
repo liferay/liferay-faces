@@ -22,6 +22,6 @@ import com.liferay.portal.kernel.servlet.taglib.aui.ScriptData;
 public class ScriptDataUtilCompat {
 
 	protected static void scriptDataAppend(ScriptData scriptData, String portletId, String content, String use) {
-		scriptData.append(portletId, content, use);
+		scriptData.append(content, use);
 	}
 }
