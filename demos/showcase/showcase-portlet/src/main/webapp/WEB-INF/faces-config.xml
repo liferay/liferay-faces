@@ -54,13 +54,8 @@
 		<managed-bean-scope>application</managed-bean-scope>
 	</managed-bean>
 	<managed-bean>
-		<managed-bean-name>inputRichTextBacking</managed-bean-name>
-		<managed-bean-class>com.liferay.faces.demos.bean.InputRichTextBacking</managed-bean-class>
-		<managed-bean-scope>request</managed-bean-scope>
-	</managed-bean>
-	<managed-bean>
-		<managed-bean-name>permissionsURLModelBean</managed-bean-name>
-		<managed-bean-class>com.liferay.faces.demos.bean.PermissionsURLModelBean</managed-bean-class>
+		<managed-bean-name>inputEditorBacking</managed-bean-name>
+		<managed-bean-class>com.liferay.faces.demos.bean.InputEditorBacking</managed-bean-class>
 		<managed-bean-scope>request</managed-bean-scope>
 	</managed-bean>
 

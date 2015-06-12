@@ -1,5 +1,5 @@
-<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
-	xmlns:aui="http://liferay.com/faces/aui" xmlns:ui="http://java.sun.com/jsf/facelets"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:aui="http://liferay.com/faces/aui"
+	xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:showcase="http://java.sun.com/jsf/composite/showcase"	template="/WEB-INF/templates/component-2col.xhtml">
 
 	<ui:define name="col1">
@@ -18,9 +18,9 @@
 		<!-- Example 2: Node module -->
 		<showcase:example description="#{i18n['aui-script-modules-example-2']}" number="2">
 			<span id="example2:text"></span>
-			<alloy:button id="button" binding="#{button}" value="#{i18n['click-here-to-execute-the-click-event-callback']}" />
+			<h:commandButton id="button" binding="#{button}" value="#{i18n['click-here-to-execute-the-click-event-callback']}" />
 			<aui:script use="node" position="bottom">
-				A.one('##{alloy:escapeClientId(button.clientId)}').on('click', function () {
+				A.one('##{aui:escapeClientId(button.getClientId(facesContext))}').on('click', function () {
 					document.getElementById('example2:text').innerHTML = '#{i18n['aui-script-modules-script-2']}';
 				});
 			</aui:script>
