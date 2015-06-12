@@ -15,13 +15,14 @@ package com.liferay.faces.demos.bean;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+// JSF 2: import javax.faces.bean.ManagedBean;
+// JSF 2: import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.PhaseId;
 import javax.faces.event.ValueChangeEvent;
 
 import com.liferay.faces.demos.dto.Applicant;
+import com.liferay.faces.demos.event.CurrentPhaseListener;
 import com.liferay.faces.demos.util.ViewParamUtil;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
@@ -33,8 +34,8 @@ import com.liferay.faces.util.product.ProductMap;
 /**
  * @author  Neil Griffin
  */
-@ManagedBean
-@RequestScoped
+// JSF 2: @ManagedBean
+// JSF 2: @RequestScoped
 public class InputEditorBacking {
 
 	private static final Logger logger = LoggerFactory.getLogger(InputEditorBacking.class);
@@ -61,7 +62,7 @@ public class InputEditorBacking {
 	public void valueChangeListener(ValueChangeEvent valueChangeEvent) {
 
 		FacesContext facesContext = FacesContext.getCurrentInstance();
-		PhaseId phaseId = facesContext.getCurrentPhaseId();
+		String phaseId = (String) facesContext.getExternalContext().getRequestMap().get(CurrentPhaseListener.PHASE_ID);
 		logger.debug("valueChangeListener: phaseId=[{0}]", phaseId.toString());
 
 		String phaseName = phaseId.toString();

@@ -1,19 +1,19 @@
-<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
-	xmlns:aui="http://liferay.com/faces/aui" xmlns:ui="http://java.sun.com/jsf/facelets"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:aui="http://liferay.com/faces/aui"
+	xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:showcase="http://java.sun.com/jsf/composite/showcase"	template="/WEB-INF/templates/component-2col.xhtml">
 
 	<ui:define name="col1">
 		<!-- Example 1: Script rendered inline -->
-		<alloy:form>
+		<h:form>
 			<showcase:example description="#{i18n['aui-script-general-example-1']}" number="1" renderedCheckbox="true">
-				<alloy:panelGroup rendered="#{showcaseModelBean.selectedComponent.rendered}">
+				<h:panelGroup rendered="#{showcaseModelBean.selectedComponent.rendered}">
 					<span id="example1:text"></span>
-				</alloy:panelGroup>
+				</h:panelGroup>
 				<aui:script position="inline" rendered="#{showcaseModelBean.selectedComponent.rendered}">
 					document.getElementById('example1:text').innerHTML = '#{i18n['aui-script-general-script-1']}';
 				</aui:script>
 			</showcase:example>
-		</alloy:form>
+		</h:form>
 	</ui:define>
 
 	<ui:define name="col2">
