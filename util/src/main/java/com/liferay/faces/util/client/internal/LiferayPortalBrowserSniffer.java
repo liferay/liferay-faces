@@ -17,6 +17,9 @@ import javax.servlet.http.HttpServletRequest;
 
 //J-
 /**
+ * This class was copied from Liferay Portal in order to utilize the features of the Portal's BrowserSniffer without
+ * depending on Liferay's Portal Service.
+ *
  * See http://www.zytrax.com/tech/web/browser_ids.htm for examples.
  *
  * @author Brian Wing Shun Chan
