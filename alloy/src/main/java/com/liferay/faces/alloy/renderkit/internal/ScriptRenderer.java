@@ -109,7 +109,7 @@ public class ScriptRenderer extends ScriptRendererCompat {
 						BrowserSnifferFactory.class);
 				BrowserSniffer browserSniffer = browserSnifferFactory.getBrowserSniffer(
 						facesContext.getExternalContext());
-				String alloyBeginScript = AlloyScriptUtil.getAlloyBeginScript(browserSniffer, useArray);
+				String alloyBeginScript = AlloyScriptUtil.getAlloyBeginScript(useArray, browserSniffer);
 				responseWriter.write(alloyBeginScript);
 			}
 		}
