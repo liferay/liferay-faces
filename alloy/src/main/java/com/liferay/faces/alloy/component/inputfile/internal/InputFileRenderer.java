@@ -35,14 +35,13 @@ import javax.faces.validator.Validator;
 import com.liferay.faces.alloy.component.inputfile.FileUploadEvent;
 import com.liferay.faces.alloy.component.inputfile.InputFile;
 import com.liferay.faces.alloy.component.inputfile.InputFileValidator;
+import com.liferay.faces.alloy.render.internal.JavaScriptFragment;
 import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.component.Styleable;
 import com.liferay.faces.util.context.MessageContext;
 import com.liferay.faces.util.context.MessageContextFactory;
 import com.liferay.faces.util.context.map.MultiPartFormData;
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
-import com.liferay.faces.util.js.JavaScriptArray;
-import com.liferay.faces.util.js.JavaScriptFragment;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.model.UploadedFile;
 import com.liferay.faces.util.product.ProductConstants;
@@ -110,7 +109,7 @@ public class InputFileRenderer extends InputFileRendererBase {
 		String clientId = inputFile.getClientId(facesContext);
 
 		// Determine the valid content-types and maximum file size from the validator (if specified).
-		JavaScriptArray contentTypes = new JavaScriptArray();
+		JavaScriptFragment contentTypes = new JavaScriptFragment("[]");
 		JavaScriptFragment alloyNamespace = new JavaScriptFragment("A");
 		long maxFileSize = Long.MAX_VALUE;
 		InputFileValidator inputFileValidator = getInputFileValidator(inputFile);
@@ -119,7 +118,7 @@ public class InputFileRenderer extends InputFileRendererBase {
 			String validContentTypes = inputFileValidator.getContentTypes();
 
 			if (validContentTypes != null) {
-				contentTypes = new JavaScriptArray(validContentTypes.split(","));
+				contentTypes = toJavaScriptArray(validContentTypes.split(","));
 			}
 
 			maxFileSize = inputFileValidator.getMaxFileSize();
@@ -387,6 +386,29 @@ public class InputFileRenderer extends InputFileRendererBase {
 		responseWriter.endElement("tbody");
 		responseWriter.endElement("table");
 		responseWriter.endElement("div");
+	}
+
+	private JavaScriptFragment toJavaScriptArray(String[] items) {
+
+		StringBuilder buf = new StringBuilder(StringPool.OPEN_BRACKET);
+
+		if (items != null) {
+
+			for (int i = 0; i < items.length; i++) {
+
+				if (i > 0) {
+					buf.append(StringPool.COMMA);
+				}
+
+				buf.append(StringPool.APOSTROPHE);
+				buf.append(items[i].trim());
+				buf.append(StringPool.APOSTROPHE);
+			}
+		}
+
+		buf.append(StringPool.CLOSE_BRACKET);
+
+		return new JavaScriptFragment(buf.toString());
 	}
 
 	@Override
