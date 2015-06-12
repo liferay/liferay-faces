@@ -138,7 +138,7 @@ import com.liferay.faces.util.render.RendererUtil;
 			BrowserSnifferFactory browserSnifferFactory = (BrowserSnifferFactory) FactoryExtensionFinder.getFactory(
 					BrowserSnifferFactory.class);
 			BrowserSniffer browserSniffer = browserSnifferFactory.getBrowserSniffer(facesContext.getExternalContext());
-			String alloyBeginScript = AlloyScriptUtil.getAlloyBeginScript(browserSniffer, modules, yuiConfig);
+			String alloyBeginScript = AlloyScriptUtil.getAlloyBeginScript(modules, yuiConfig, browserSniffer);
 			responseWriter.write(alloyBeginScript);
 		}
 

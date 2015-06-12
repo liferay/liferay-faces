@@ -101,7 +101,7 @@ public class OutputScriptRenderer extends OutputScriptRendererBase {
 						BrowserSnifferFactory.class);
 				BrowserSniffer browserSniffer = browserSnifferFactory.getBrowserSniffer(
 						facesContext.getExternalContext());
-				String alloyBeginScript = AlloyScriptUtil.getAlloyBeginScript(browserSniffer, modules);
+				String alloyBeginScript = AlloyScriptUtil.getAlloyBeginScript(modules, browserSniffer);
 				OutputScriptResponseWriter outputScriptResponseWriter = new OutputScriptResponseWriter(responseWriter,
 						alloyBeginScript);
 				super.encodeChildren(facesContext, uiComponent, outputScriptResponseWriter);
