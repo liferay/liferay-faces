@@ -99,7 +99,6 @@
 			<bridge:incongruity-context-factory>com.liferay.faces.bridge.context.internal.IncongruityContextFactoryImpl</bridge:incongruity-context-factory>
 			<bridge:liferay-url-factory>com.liferay.faces.bridge.filter.liferay.internal.LiferayURLFactoryImpl</bridge:liferay-url-factory>
 			<bridge:view-handler-factory>com.liferay.faces.bridge.application.internal.ViewHandlerFactoryImpl</bridge:view-handler-factory>
-			<util:client-script-factory>com.liferay.faces.bridge.client.internal.ClientScriptFactoryLiferayImpl</util:client-script-factory>
 		</factory-extension>
 	</factory>
 	<lifecycle>
