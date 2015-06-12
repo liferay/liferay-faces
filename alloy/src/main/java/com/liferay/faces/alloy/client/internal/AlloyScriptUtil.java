@@ -67,7 +67,7 @@ public class AlloyScriptUtil {
 
 		if (!alloyScripts.isEmpty()) {
 
-			String alloyBeginScript = getAlloyBeginScript(browserSniffer, allModules.toArray(new String[] {}));
+			String alloyBeginScript = getAlloyBeginScript(allModules.toArray(new String[] {}), browserSniffer);
 			responseWriter.write(alloyBeginScript);
 
 			for (AlloyScript alloyScript : alloyScripts) {
@@ -81,28 +81,12 @@ public class AlloyScriptUtil {
 		}
 	}
 
-	public static String getAlloyBeginScript(BrowserSniffer browserSniffer, String[] modules) {
-		return getAlloyBeginScript(browserSniffer, modules, null);
+	public static String getAlloyBeginScript(String[] modules, BrowserSniffer browserSniffer) {
+		return getAlloyBeginScript(modules, null, browserSniffer);
 	}
 
-	public static String getAlloyBeginScript(BrowserSniffer browserSniffer, String[] modules, String config) {
-
-		boolean browserIE = false;
-		float browserMajorVersion = 1;
-
-		if (LIFERAY_PORTAL_DETECTED) {
-			browserIE = browserSniffer.isIe();
-			browserMajorVersion = browserSniffer.getMajorVersion();
-		}
-		else if (LIFERAY_FACES_BRIDGE_DETECTED) {
-			// no-op because there is no way to obtain the underlying HttpServletRequest.
-		}
-		else {
-			browserIE = browserSniffer.isIe();
-			browserMajorVersion = browserSniffer.getMajorVersion();
-		}
-
-		return getAlloyBeginScript(modules, config, browserMajorVersion, browserIE);
+	public static String getAlloyBeginScript(String[] modules, String config, BrowserSniffer browserSniffer) {
+		return getAlloyBeginScript(modules, config, browserSniffer.getMajorVersion(), browserSniffer.isIe());
 	}
 
 	private static String getAlloyBeginScript(String[] modules, String config, float browserMajorVersion,

@@ -15,6 +15,7 @@ package com.liferay.faces.util.client;
 
 import javax.faces.FacesException;
 import javax.faces.context.ExternalContext;
+import javax.servlet.http.HttpServletRequest;
 
 import com.liferay.faces.util.helper.Wrapper;
 
@@ -25,4 +26,6 @@ import com.liferay.faces.util.helper.Wrapper;
 public abstract class BrowserSnifferFactory implements Wrapper<BrowserSnifferFactory> {
 
 	public abstract BrowserSniffer getBrowserSniffer(ExternalContext externalContext) throws FacesException;
+
+	public abstract BrowserSniffer getBrowserSniffer(HttpServletRequest httpServletRequest) throws FacesException;
 }
