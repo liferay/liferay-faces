@@ -263,7 +263,7 @@ public class InputFileRenderer extends InputFileRendererBase {
 		encodeNonEscapedObject(responseWriter, "selectFilesButton", selectFilesButtonScript, first);
 	}
 
-	private void encodePreview(FacesContext facesContext, ResponseWriter responseWriter, InputFile inputFile)
+	protected void encodePreview(FacesContext facesContext, ResponseWriter responseWriter, InputFile inputFile)
 		throws IOException {
 
 		// Delegate writing of the entire <input type="file"...> ... </input> element to the delegate renderer.
@@ -319,7 +319,7 @@ public class InputFileRenderer extends InputFileRendererBase {
 		responseWriter.endElement("div");
 	}
 
-	private void encodeProgress(FacesContext facesContext, ResponseWriter responseWriter, UIComponent uiComponent,
+	protected void encodeProgress(FacesContext facesContext, ResponseWriter responseWriter, UIComponent uiComponent,
 		String clientId) throws IOException {
 
 		Locale locale = facesContext.getViewRoot().getLocale();
@@ -388,7 +388,7 @@ public class InputFileRenderer extends InputFileRendererBase {
 		responseWriter.endElement("div");
 	}
 
-	private JavaScriptFragment toJavaScriptArray(String[] items) {
+	protected JavaScriptFragment toJavaScriptArray(String[] items) {
 
 		StringBuilder buf = new StringBuilder(StringPool.OPEN_BRACKET);
 
