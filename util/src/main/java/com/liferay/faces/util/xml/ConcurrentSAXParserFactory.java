@@ -13,8 +13,6 @@
  */
 package com.liferay.faces.util.xml;
 
-import com.liferay.faces.util.xml.internal.SAXParserImpl;
-
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -24,6 +22,8 @@ import javax.xml.parsers.SAXParser;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXNotRecognizedException;
 import org.xml.sax.SAXNotSupportedException;
+
+import com.liferay.faces.util.xml.internal.SAXParserImpl;
 
 
 /**
@@ -40,18 +40,18 @@ import org.xml.sax.SAXNotSupportedException;
  *
  * @author  Neil Griffin
  */
-public class SAXParserFactory extends javax.xml.parsers.SAXParserFactory {
+public class ConcurrentSAXParserFactory extends javax.xml.parsers.SAXParserFactory {
 
 	// Private Data Members
 	private Map<String, Boolean> featureMap;
 
-	protected SAXParserFactory() {
+	protected ConcurrentSAXParserFactory() {
 		super();
 		this.featureMap = new ConcurrentHashMap<String, Boolean>();
 	}
 
-	public static SAXParserFactory newInstance() {
-		return new SAXParserFactory();
+	public static javax.xml.parsers.SAXParserFactory newInstance() {
+		return new ConcurrentSAXParserFactory();
 	}
 
 	@Override
