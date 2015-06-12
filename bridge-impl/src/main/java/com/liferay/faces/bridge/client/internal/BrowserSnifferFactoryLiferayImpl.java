@@ -13,15 +13,18 @@
  */
 package com.liferay.faces.bridge.client.internal;
 
-import com.liferay.faces.util.client.BrowserSniffer;
-import com.liferay.faces.util.client.BrowserSnifferFactory;
-import com.liferay.faces.util.product.ProductConstants;
-import com.liferay.faces.util.product.ProductMap;
-import com.liferay.portal.util.PortalUtil;
 import javax.faces.FacesException;
 import javax.faces.context.ExternalContext;
 import javax.portlet.PortletRequest;
 import javax.servlet.http.HttpServletRequest;
+
+import com.liferay.faces.util.client.BrowserSniffer;
+import com.liferay.faces.util.client.BrowserSnifferFactory;
+import com.liferay.faces.util.product.ProductConstants;
+import com.liferay.faces.util.product.ProductMap;
+
+import com.liferay.portal.util.PortalUtil;
+
 
 /**
  * @author  Kyle Stiemann
@@ -35,28 +38,24 @@ public class BrowserSnifferFactoryLiferayImpl extends BrowserSnifferFactory {
 	// Private Data Memebers
 	private BrowserSnifferFactory wrappedBrowserSnifferFactory;
 
-	public BrowserSnifferFactoryLiferayImpl(BrowserSnifferFactory wrappedBrowserSnifferFactory) {
-		this.wrappedBrowserSnifferFactory = wrappedBrowserSnifferFactory;
+	public BrowserSnifferFactoryLiferayImpl(BrowserSnifferFactory browserSnifferFactory) {
+		this.wrappedBrowserSnifferFactory = browserSnifferFactory;
 	}
 
 	@Override
 	public BrowserSniffer getBrowserSniffer(ExternalContext externalContext) throws FacesException {
 
-		HttpServletRequest httpServletRequest = null;
-
 		if (LIFERAY_PORTAL_DETECTED) {
 
 			PortletRequest portletRequest = (PortletRequest) externalContext.getRequest();
-			httpServletRequest = PortalUtil.getHttpServletRequest(portletRequest);
+			HttpServletRequest httpServletRequest = PortalUtil.getHttpServletRequest(portletRequest);
+
+			// Calling ExternalContext.setRequest(httpServletRequest) adds extra overhead because all of the
+			// underlying maps have to get re-created. Instead, create a simple ExternalContextWrapper.
+			externalContext = new ExternalContextBrowserSnifferImpl(externalContext, httpServletRequest);
 		}
-		// Otherwise there is no way to obtain the underlying HttpServletRequest.
 
-		return getBrowserSniffer(httpServletRequest);
-	}
-
-	@Override
-	public BrowserSniffer getBrowserSniffer(HttpServletRequest httpServletRequest) throws FacesException {
-		return wrappedBrowserSnifferFactory.getBrowserSniffer(httpServletRequest);
+		return wrappedBrowserSnifferFactory.getBrowserSniffer(externalContext);
 	}
 
 	@Override

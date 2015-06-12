@@ -11,33 +11,34 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.util.client.internal;
+package com.liferay.faces.bridge.client.internal;
 
-import javax.faces.FacesException;
 import javax.faces.context.ExternalContext;
+import javax.faces.context.ExternalContextWrapper;
 import javax.servlet.http.HttpServletRequest;
-
-import com.liferay.faces.util.client.BrowserSniffer;
-import com.liferay.faces.util.client.BrowserSnifferFactory;
 
 
 /**
  * @author  Neil Griffin
  */
-public class BrowserSnifferFactoryImpl extends BrowserSnifferFactory {
+public class ExternalContextBrowserSnifferImpl extends ExternalContextWrapper {
 
-	@Override
-	public BrowserSniffer getBrowserSniffer(ExternalContext externalContext) throws FacesException {
+	// Private Data Members
+	private ExternalContext wrappedExternalContext;
+	private HttpServletRequest httpServletRequest;
 
-		HttpServletRequest httpServletRequest = (HttpServletRequest) externalContext.getRequest();
-
-		return new BrowserSnifferImpl(httpServletRequest);
+	public ExternalContextBrowserSnifferImpl(ExternalContext externalContext, HttpServletRequest httpServletRequest) {
+		this.wrappedExternalContext = externalContext;
+		this.httpServletRequest = httpServletRequest;
 	}
 
-	// Java 1.6+: @Override
-	public BrowserSnifferFactory getWrapped() {
+	@Override
+	public Object getRequest() {
+		return httpServletRequest;
+	}
 
-		// Since this is the default factory instance, it will never wrap another factory.
-		return null;
+	@Override
+	public ExternalContext getWrapped() {
+		return wrappedExternalContext;
 	}
 }
