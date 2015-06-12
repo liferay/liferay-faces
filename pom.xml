@@ -87,7 +87,7 @@
 		<full.version>${project.version} (${codename} / ${timestamp} AD)</full.version>
 		<icefaces1.version>1.8.2</icefaces1.version>
 		<jstl.version>1.2</jstl.version>
-		<liferay.version>6.2.1</liferay.version>
+		<liferay.version>6.2.3</liferay.version>
 		<liferay.app.server.deploy.dir>${liferay.app.server.dir}/webapps</liferay.app.server.deploy.dir>
 		<liferay.app.server.dir>${liferay.home}/tomcat-${liferay.tomcat.version}</liferay.app.server.dir>
 		<liferay.app.server.lib.global.dir>${liferay.app.server.dir}/lib/ext</liferay.app.server.lib.global.dir>
