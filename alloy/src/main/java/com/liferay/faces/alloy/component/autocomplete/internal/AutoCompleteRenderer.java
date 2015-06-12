@@ -34,10 +34,10 @@ import javax.faces.context.ResponseWriter;
 import javax.faces.render.FacesRenderer;
 
 import com.liferay.faces.alloy.component.autocomplete.AutoComplete;
+import com.liferay.faces.alloy.render.internal.JavaScriptFragment;
 import com.liferay.faces.util.component.ClientComponent;
 import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.component.Styleable;
-import com.liferay.faces.util.js.JavaScriptFragment;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.render.RendererUtil;
 import com.liferay.faces.util.render.internal.BufferedScriptResponseWriter;
