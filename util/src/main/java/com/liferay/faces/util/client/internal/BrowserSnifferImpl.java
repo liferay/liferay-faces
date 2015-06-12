@@ -13,13 +13,9 @@
  */
 package com.liferay.faces.util.client.internal;
 
-import javax.faces.context.ExternalContext;
 import javax.servlet.http.HttpServletRequest;
 
 import com.liferay.faces.util.client.BrowserSniffer;
-import com.liferay.faces.util.portal.PortalUtil;
-import com.liferay.faces.util.product.ProductConstants;
-import com.liferay.faces.util.product.ProductMap;
 
 
 /**
@@ -27,38 +23,11 @@ import com.liferay.faces.util.product.ProductMap;
  */
 public class BrowserSnifferImpl extends LiferayPortalBrowserSnifferImpl implements BrowserSniffer {
 
-	// Private Constants
-	private static final boolean LIFERAY_FACES_BRIDGE_DETECTED = ProductMap.getInstance().get(
-			ProductConstants.LIFERAY_FACES_BRIDGE).isDetected();
-	private static final boolean LIFERAY_PORTAL_DETECTED = ProductMap.getInstance().get(ProductConstants.LIFERAY_PORTAL)
-		.isDetected();
-
 	// Private Data Members
 	private HttpServletRequest httpServletRequest;
 
-	public BrowserSnifferImpl(ExternalContext externalContext) {
-
-		if (LIFERAY_PORTAL_DETECTED) {
-
-			this.httpServletRequest = PortalUtil.getHttpServletRequest(externalContext);
-		}
-		else if (LIFERAY_FACES_BRIDGE_DETECTED) {
-			// no-op because there is no way to obtain the underlying HttpServletRequest.
-		}
-		else {
-			this.httpServletRequest = (HttpServletRequest) externalContext.getRequest();
-		}
-	}
-
-	@Override
-	public boolean isIpad() {
-		String userAgent = getUserAgent(httpServletRequest);
-
-		if (userAgent.contains("ipad")) {
-			return true;
-		}
-
-		return false;
+	public BrowserSnifferImpl(HttpServletRequest httpServletRequest) {
+		this.httpServletRequest = httpServletRequest;
 	}
 
 	@Override
@@ -99,6 +68,17 @@ public class BrowserSnifferImpl extends LiferayPortalBrowserSnifferImpl implemen
 	@Override
 	public boolean isAndroid() {
 		return isAndroid(httpServletRequest);
+	}
+
+	@Override
+	public boolean isIpad() {
+		String userAgent = getUserAgent(httpServletRequest);
+
+		if (userAgent.contains("ipad")) {
+			return true;
+		}
+
+		return false;
 	}
 
 	@Override
