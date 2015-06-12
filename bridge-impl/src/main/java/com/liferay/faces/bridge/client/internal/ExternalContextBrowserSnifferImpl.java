@@ -13,15 +13,26 @@
  */
 package com.liferay.faces.bridge.client.internal;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.security.Principal;
+import java.util.Iterator;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Set;
+
 import javax.faces.context.ExternalContext;
-import javax.faces.context.ExternalContextWrapper;
 import javax.servlet.http.HttpServletRequest;
+
+import com.liferay.faces.util.helper.Wrapper;
 
 
 /**
  * @author  Neil Griffin
  */
-public class ExternalContextBrowserSnifferImpl extends ExternalContextWrapper {
+public class ExternalContextBrowserSnifferImpl extends ExternalContext implements Wrapper<ExternalContext> {
 
 	// Private Data Members
 	private ExternalContext wrappedExternalContext;
@@ -33,8 +44,173 @@ public class ExternalContextBrowserSnifferImpl extends ExternalContextWrapper {
 	}
 
 	@Override
+	public void dispatch(String path) throws IOException {
+		wrappedExternalContext.dispatch(path);
+	}
+
+	@Override
+	public String encodeActionURL(String url) {
+		return wrappedExternalContext.encodeActionURL(url);
+	}
+
+	@Override
+	public String encodeNamespace(String name) {
+		return wrappedExternalContext.encodeNamespace(name);
+	}
+
+	@Override
+	public String encodeResourceURL(String url) {
+		return wrappedExternalContext.encodeResourceURL(url);
+	}
+
+	@Override
+	public void log(String message) {
+		wrappedExternalContext.log(message);
+	}
+
+	@Override
+	public void log(String message, Throwable exception) {
+		wrappedExternalContext.log(message, exception);
+	}
+
+	@Override
+	public void redirect(String url) throws IOException {
+		wrappedExternalContext.redirect(url);
+	}
+
+	@Override
+	public Map<String, Object> getApplicationMap() {
+		return wrappedExternalContext.getApplicationMap();
+	}
+
+	@Override
+	public String getAuthType() {
+		return wrappedExternalContext.getAuthType();
+	}
+
+	@Override
+	public Object getContext() {
+		return wrappedExternalContext.getContext();
+	}
+
+	@Override
+	public boolean isUserInRole(String role) {
+		return wrappedExternalContext.isUserInRole(role);
+	}
+
+	@Override
+	public String getInitParameter(String name) {
+		return wrappedExternalContext.getInitParameter(name);
+	}
+
+	@Override
+	public Map getInitParameterMap() {
+		return wrappedExternalContext.getInitParameterMap();
+	}
+
+	@Override
+	public String getRemoteUser() {
+		return wrappedExternalContext.getRemoteUser();
+	}
+
+	@Override
 	public Object getRequest() {
 		return httpServletRequest;
+	}
+
+	@Override
+	public String getRequestContextPath() {
+		return wrappedExternalContext.getRequestContextPath();
+	}
+
+	@Override
+	public Map<String, Object> getRequestCookieMap() {
+		return wrappedExternalContext.getRequestCookieMap();
+	}
+
+	@Override
+	public Map<String, String> getRequestHeaderMap() {
+		return wrappedExternalContext.getRequestHeaderMap();
+	}
+
+	@Override
+	public Map<String, String[]> getRequestHeaderValuesMap() {
+		return wrappedExternalContext.getRequestHeaderValuesMap();
+	}
+
+	@Override
+	public Locale getRequestLocale() {
+		return wrappedExternalContext.getRequestLocale();
+	}
+
+	@Override
+	public Iterator<Locale> getRequestLocales() {
+		return wrappedExternalContext.getRequestLocales();
+	}
+
+	@Override
+	public Map<String, Object> getRequestMap() {
+		return wrappedExternalContext.getRequestMap();
+	}
+
+	@Override
+	public Map<String, String> getRequestParameterMap() {
+		return wrappedExternalContext.getRequestParameterMap();
+	}
+
+	@Override
+	public Iterator<String> getRequestParameterNames() {
+		return wrappedExternalContext.getRequestParameterNames();
+	}
+
+	@Override
+	public Map<String, String[]> getRequestParameterValuesMap() {
+		return wrappedExternalContext.getRequestParameterValuesMap();
+	}
+
+	@Override
+	public String getRequestPathInfo() {
+		return wrappedExternalContext.getRequestPathInfo();
+	}
+
+	@Override
+	public String getRequestServletPath() {
+		return wrappedExternalContext.getRequestServletPath();
+	}
+
+	@Override
+	public URL getResource(String path) throws MalformedURLException {
+		return wrappedExternalContext.getResource(path);
+	}
+
+	@Override
+	public InputStream getResourceAsStream(String path) {
+		return wrappedExternalContext.getResourceAsStream(path);
+	}
+
+	@Override
+	public Set<String> getResourcePaths(String path) {
+		return wrappedExternalContext.getResourcePaths(path);
+	}
+
+	@Override
+	public Object getResponse() {
+		return wrappedExternalContext.getResponse();
+	}
+
+	@Override
+	public Object getSession(boolean create) {
+		return wrappedExternalContext.getSession(create);
+	}
+
+	@Override
+	public Map<String, Object> getSessionMap() {
+		return wrappedExternalContext.getSessionMap();
+	}
+
+	@Override
+	public Principal getUserPrincipal() {
+		return wrappedExternalContext.getUserPrincipal();
 	}
 
 	@Override
