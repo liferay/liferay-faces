@@ -13,7 +13,6 @@
  */
 package com.liferay.faces.util.xml;
 
-import com.liferay.faces.util.xml.internal.SAXParserImpl;
 import java.net.URL;
 
 import javax.xml.parsers.SAXParser;
@@ -29,6 +28,7 @@ import org.xml.sax.helpers.DefaultHandler;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
+import com.liferay.faces.util.xml.internal.SAXParserImpl;
 
 
 /**
@@ -43,7 +43,7 @@ public class SAXParserTest {
 	public void testFaceletComposition() {
 
 		try {
-			SAXParserFactory saxParserFactory = SAXParserFactory.newInstance();
+			ConcurrentSAXParserFactory saxParserFactory = ConcurrentSAXParserFactory.newInstance();
 
 			if (saxParserFactory != null) {
 				SAXParser saxParser = saxParserFactory.newSAXParser();
