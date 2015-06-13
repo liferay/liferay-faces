@@ -56,23 +56,6 @@ public abstract class InputFileBase extends HtmlInputFile {
 		getStateHelper().put(InputFilePropertyKeys.fileUploadListener, fileUploadListener);
 	}
 
-	@Override
-	public String getLabel() {
-
-		String label = super.getLabel();
-
-		if (label == null) {
-
-			javax.faces.context.FacesContext facesContext = javax.faces.context.FacesContext.getCurrentInstance();
-
-			if (facesContext.getCurrentPhaseId() == javax.faces.event.PhaseId.PROCESS_VALIDATIONS) {
-				label = com.liferay.faces.util.component.ComponentUtil.getComponentLabel(this);
-			}
-		}
-
-		return label;
-	}
-
 	public String getMultiple() {
 		return (String) getStateHelper().eval(InputFilePropertyKeys.multiple, null);
 	}
