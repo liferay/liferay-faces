@@ -78,6 +78,7 @@
 		<arquillian.graphene.version>2.0.0.Final</arquillian.graphene.version>
 		<cdi.version>1.0-SP4</cdi.version>
 		<codename>Ephesus</codename>
+		<component.namespace>none</component.namespace>
 		<faces.group.id>com.sun.faces</faces.group.id>
 		<faces.api.artifact.id>jsf-api</faces.api.artifact.id>
 		<faces.api.scope>compile</faces.api.scope>
@@ -87,7 +88,6 @@
 		<faces.spec.version>2.1</faces.spec.version>
 		<faces.version>${mojarra.version}</faces.version>
 		<full.version>${project.version} (${codename} / ${timestamp} AD)</full.version>
-		<generator.component.namespace>none</generator.component.namespace>
 		<icefaces3.version>3.3.0</icefaces3.version>
 		<jstl.version>1.2</jstl.version>
 		<liferay.version>6.2.3</liferay.version>
@@ -913,12 +913,11 @@
 		</profile>
 		<profile>
 			<id>generate-components</id>
-			<!-- Note: this profile can only be actived from the alloy/, bridge-impl/, or portal/ directories. -->
+			<!-- Note: this profile can only be active from the alloy/, bridge-impl/, or portal/ directories. -->
 			<properties>
 				<authors>Neil Griffin</authors>
-				<component.impl.output.dir>src/main/java</component.impl.output.dir>
-				<component.api.output.dir>${component.impl.output.dir}</component.api.output.dir>
-				<namespace.URI>http://liferay.com/faces/${generator.component.namespace}</namespace.URI>
+				<component.api.output.dir>src/main/java</component.api.output.dir>
+				<component.namespace.URI>http://liferay.com/faces/${component.namespace}</component.namespace.URI>
 			</properties>
 			<build>
 				<plugins>
