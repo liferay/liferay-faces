@@ -50,7 +50,7 @@ public class LiferaySharedPageTop {
 
 	// FACES-1442: The SAXParserFactory.newSAXParser() method that comes with the JRE suffers from a
 	// performance problem. Use the Liferay factory intead.
-	private static final com.liferay.faces.util.xml.ConcurrentSAXParserFactory saxParserFactory =
+	private static final javax.xml.parsers.SAXParserFactory saxParserFactory =
 		com.liferay.faces.util.xml.ConcurrentSAXParserFactory.newInstance();
 
 	// Private Data Members
