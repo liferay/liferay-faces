@@ -20,9 +20,9 @@ package com.liferay.faces.util.xml;
 public class SAXParserFactory extends ConcurrentSAXParserFactory {
 
 	/**
-	 * @deprecated  Call {@link ConcurrentSAXParserFactory#newInstance()} instead.
+	 * @deprecated  Replaced by {@link ConcurrentSAXParserFactory#newInstance()}.
 	 */
-	public static javax.xml.parsers.SAXParserFactory newInstance() {
-		return ConcurrentSAXParserFactory.newInstance();
+	public static SAXParserFactory newInstance() {
+		return new SAXParserFactory();
 	}
 }
