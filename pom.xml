@@ -157,9 +157,7 @@
 						<!-- liferay.auto.deploy.dir is the location where WARs are copied for deployment -->
 						<autoDeployDir>${liferay.auto.deploy.dir}</autoDeployDir>
 						<!-- liferay.deploy.dir is the location where extracted WARs are finally deployed -->
-						<deployDir>${liferay.deploy.dir}</deployDir>
 						<liferayVersion>${liferay.maven.plugin.version}</liferayVersion>
-						<pluginType>portlet</pluginType>
 					</configuration>
 				</plugin>
 				<plugin>
