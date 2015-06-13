@@ -18,6 +18,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
 
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXNotRecognizedException;
@@ -27,12 +28,12 @@ import com.liferay.faces.util.xml.internal.SAXParserImpl;
 
 
 /**
- * <p>This class serves as an alternative to the {@link javax.xml.parsers.SAXParserFactory} that is provided by the JRE
- * and provides the following benefits: 1) The static {@link #newSAXParser()} method does not suffer from the
- * performance problem of obtaining parser implementations from the classpath, and 2) Since {@link #newSAXParser()} can
- * be called without performance concerns, multi-threaded environments (like web applications and portlets) can feel
- * free to call the method as much as required in each request, in order to maintain thread-safety. The drawback is that
- * the {@link SAXParserImpl} class does fully implement all of the functionality of the one provided by the JRE.</p>
+ * <p>This class serves as an alternative to the {@link SAXParserFactory} that is provided by the JRE and provides the
+ * following benefits: 1) The static {@link #newSAXParser()} method does not suffer from the performance problem of
+ * obtaining parser implementations from the classpath, and 2) Since {@link #newSAXParser()} can be called without
+ * performance concerns, multi-threaded environments (like web applications and portlets) can feel free to call the
+ * method as much as required in each request, in order to maintain thread-safety. The drawback is that the {@link
+ * SAXParserImpl} class does fully implement all of the functionality of the one provided by the JRE.</p>
  *
  * <p>For more information about the performance issues of the implementation provided by the JRE, see <a
  * href="http://www.ibm.com/developerworks/xml/library/x-perfap2/index.html">Reuse parser instances with the Xerces2 SAX
@@ -40,7 +41,7 @@ import com.liferay.faces.util.xml.internal.SAXParserImpl;
  *
  * @author  Neil Griffin
  */
-public class ConcurrentSAXParserFactory extends javax.xml.parsers.SAXParserFactory {
+public class ConcurrentSAXParserFactory extends SAXParserFactory {
 
 	// Private Data Members
 	private Map<String, Boolean> featureMap;
@@ -50,7 +51,7 @@ public class ConcurrentSAXParserFactory extends javax.xml.parsers.SAXParserFacto
 		this.featureMap = new ConcurrentHashMap<String, Boolean>();
 	}
 
-	public static javax.xml.parsers.SAXParserFactory newInstance() {
+	public static SAXParserFactory newInstance() {
 		return new ConcurrentSAXParserFactory();
 	}
 

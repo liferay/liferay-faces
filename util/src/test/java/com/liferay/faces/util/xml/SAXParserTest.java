@@ -16,6 +16,7 @@ package com.liferay.faces.util.xml;
 import java.net.URL;
 
 import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -43,7 +44,7 @@ public class SAXParserTest {
 	public void testFaceletComposition() {
 
 		try {
-			ConcurrentSAXParserFactory saxParserFactory = ConcurrentSAXParserFactory.newInstance();
+			SAXParserFactory saxParserFactory = ConcurrentSAXParserFactory.newInstance();
 
 			if (saxParserFactory != null) {
 				SAXParser saxParser = saxParserFactory.newSAXParser();
