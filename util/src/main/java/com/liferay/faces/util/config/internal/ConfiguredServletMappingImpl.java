@@ -67,6 +67,16 @@ public class ConfiguredServletMappingImpl implements ConfiguredServletMapping {
 		}
 	}
 
+	public ConfiguredServletMappingImpl(String extension, boolean extensionMapped, String path, boolean pathMapped,
+		String servletName, String urlPattern) {
+		this.extension = extension;
+		this.extensionMapped = extensionMapped;
+		this.path = path;
+		this.pathMapped = pathMapped;
+		this.servletName = servletName;
+		this.urlPattern = urlPattern;
+	}
+
 	@Override
 	public String toString() {
 		return "extension=" + extension + " extensionMapped=" + extensionMapped + " path=" + path + " pathMapped=" +
