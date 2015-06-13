@@ -18,6 +18,7 @@ import java.io.IOException;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
 
 import com.liferay.faces.util.config.ApplicationConfig;
 import com.liferay.faces.util.config.FacesConfig;
@@ -53,7 +54,7 @@ public class ApplicationConfigInitializerImpl implements ApplicationConfigInitia
 		ResourceReader resourceReader = newResourceReader();
 
 		// Obtain a SAX Parser Factory.
-		ConcurrentSAXParserFactory saxParserFactory = ConcurrentSAXParserFactory.newInstance();
+		SAXParserFactory saxParserFactory = ConcurrentSAXParserFactory.newInstance();
 		saxParserFactory.setValidating(false);
 		saxParserFactory.setNamespaceAware(true);
 
