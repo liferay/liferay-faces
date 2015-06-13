@@ -77,7 +77,7 @@
 		<profile>
 			<id>generate-components</id>
 			<properties>
-				<namespace>bridge</namespace>
+				<generator.component.namespace>bridge</generator.component.namespace>
 				<!-- To generate portlet components, run:
 					mvn generate-source -P generate-components -Dnamespace=portlet -Dnamespace.URI=http://java.sun.com/portlet_2_0
 				-->
