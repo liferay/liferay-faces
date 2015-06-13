@@ -227,7 +227,7 @@
 					Bruno Basto,\
 					Kyle Stiemann
 				</authors>
-				<namespace>alloy</namespace>
+				<generator.component.namespace>alloy</generator.component.namespace>
 			</properties>
 		</profile>
 	</profiles>

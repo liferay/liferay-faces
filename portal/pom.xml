@@ -144,7 +144,7 @@
 		<profile>
 			<id>generate-components</id>
 			<properties>
-				<namespace>portal</namespace>
+				<generator.component.namespace>portal</generator.component.namespace>
 			</properties>
 		</profile>
 	</profiles>
