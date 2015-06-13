@@ -67,14 +67,10 @@ public class ConfiguredServletMappingImpl implements ConfiguredServletMapping {
 		}
 	}
 
-	public ConfiguredServletMappingImpl(String extension, boolean extensionMapped, String path, boolean pathMapped,
-		String servletName, String urlPattern) {
-		this.extension = extension;
-		this.extensionMapped = extensionMapped;
-		this.path = path;
-		this.pathMapped = pathMapped;
-		this.servletName = servletName;
-		this.urlPattern = urlPattern;
+	@Override
+	public String toString() {
+		return "extension=" + extension + " extensionMapped=" + extensionMapped + " path=" + path + " pathMapped=" +
+			pathMapped + " servletName=" + servletName + " urlPattern=" + urlPattern;
 	}
 
 	public boolean isExtensionMapped() {
@@ -97,7 +93,7 @@ public class ConfiguredServletMappingImpl implements ConfiguredServletMapping {
 
 			if (extensionMapped) {
 				match = uri.endsWith(extension);
-				logger.debug(
+				logger.trace(
 					"Testing match for servlet-mapping url-pattern=[{0}] EXTENSION=[{1}] uri=[{2}] match=[{3}]",
 					urlPattern, extension, uri, match);
 			}
@@ -110,7 +106,7 @@ public class ConfiguredServletMappingImpl implements ConfiguredServletMapping {
 				}
 
 				match = (path.contains(uriPath) || uriPath.startsWith(path));
-				logger.debug("Testing match for servlet-mapping url-pattern=[{0}] PATH=[{1}] uri=[{2}] match=[{3}]",
+				logger.trace("Testing match for servlet-mapping url-pattern=[{0}] PATH=[{1}] uri=[{2}] match=[{3}]",
 					urlPattern, path, uri, match);
 			}
 		}
@@ -128,9 +124,5 @@ public class ConfiguredServletMappingImpl implements ConfiguredServletMapping {
 
 	public String getUrlPattern() {
 		return urlPattern;
-	}
-	
-	public String toString() {
-		return "TOSTRING extension=" + extension + " extensionMapped=" + extensionMapped + " path=" + path + " pathMapped=" + pathMapped + " servletName=" + servletName + " urlPattern=" + urlPattern;
 	}
 }
