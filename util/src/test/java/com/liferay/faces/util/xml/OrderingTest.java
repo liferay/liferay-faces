@@ -24,6 +24,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -51,7 +52,7 @@ public class OrderingTest {
 		String configPath) {
 
 		try {
-			ConcurrentSAXParserFactory saxParserFactory = ConcurrentSAXParserFactory.newInstance();
+			SAXParserFactory saxParserFactory = ConcurrentSAXParserFactory.newInstance();
 			SAXParser saxParser = saxParserFactory.newSAXParser();
 			FacesConfigDescriptorParser facesConfigDescriptorParser = new FacesConfigDescriptorParserImpl(saxParser,
 					false);
