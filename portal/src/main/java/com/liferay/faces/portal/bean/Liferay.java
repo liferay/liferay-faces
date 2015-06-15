@@ -27,7 +27,6 @@ import com.liferay.faces.portal.el.PortraitURLMap;
 import com.liferay.faces.portal.el.ThemeImageURLMap;
 import com.liferay.faces.portal.security.UserPermissionMap;
 import com.liferay.faces.util.helper.BooleanHelper;
-import com.liferay.faces.util.portal.WebKeys;
 
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
@@ -73,7 +72,7 @@ public class Liferay implements Serializable {
 		// available during the RENDER_PHASE of the portlet lifecycle.
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		PortletRequest portletRequest = (PortletRequest) facesContext.getExternalContext().getRequest();
-		portlet = (Portlet) portletRequest.getAttribute(WebKeys.RENDER_PORTLET);
+		portlet = (Portlet) portletRequest.getAttribute("RENDER_PORTLET");
 	}
 
 	/**
