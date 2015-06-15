@@ -15,7 +15,7 @@ package com.liferay.faces.portal.servlet;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.liferay.faces.util.portal.WebKeys;
+import com.liferay.portal.kernel.util.WebKeys;
 
 
 /**
