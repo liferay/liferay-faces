@@ -49,13 +49,19 @@ public abstract class ScriptRendererCompat extends Renderer {
 		return true;
 	}
 
-	private boolean isIsolated(Object themeDisplay) throws Exception {
+	private boolean isIsolated(Object themeDisplay) {
 
 		boolean isolated = false;
-		Method isIsolated = themeDisplay.getClass().getMethod("isIsolated");
 
-		if (isIsolated != null) {
-			isolated = (Boolean) isIsolated.invoke(themeDisplay);
+		try {
+			Method isIsolated = themeDisplay.getClass().getMethod("isIsolated");
+
+			if (isIsolated != null) {
+				isolated = (Boolean) isIsolated.invoke(themeDisplay);
+			}
+		}
+		catch (Exception e) {
+			logger.error(e);
 		}
 
 		return isolated;
@@ -70,24 +76,25 @@ public abstract class ScriptRendererCompat extends Renderer {
 
 		if (themeDisplay != null) {
 
-			try {
-				inline = isIsolated(themeDisplay) || isStateExclusive(themeDisplay);
-			}
-			catch (Exception e) {
-				logger.warn(e.getMessage());
-			}
+			inline = isIsolated(themeDisplay) || isStateExclusive(themeDisplay);
 		}
 
 		return inline;
 	}
 
-	private boolean isStateExclusive(Object themeDisplay) throws Exception {
+	private boolean isStateExclusive(Object themeDisplay) {
 
 		boolean stateExclusive = false;
-		Method isStateExclusive = themeDisplay.getClass().getMethod("isStateExclusive");
 
-		if (isStateExclusive != null) {
-			stateExclusive = (Boolean) isStateExclusive.invoke(themeDisplay);
+		try {
+			Method isStateExclusive = themeDisplay.getClass().getMethod("isStateExclusive");
+
+			if (isStateExclusive != null) {
+				stateExclusive = (Boolean) isStateExclusive.invoke(themeDisplay);
+			}
+		}
+		catch (Exception e) {
+			logger.error(e);
 		}
 
 		return stateExclusive;
