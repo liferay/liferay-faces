@@ -29,22 +29,22 @@ import com.liferay.faces.util.client.Script;
 public abstract class ScriptRendererCompat extends Renderer {
 
 	protected void addScriptToBottomOfPage(Script script) {
-		// Unsupported for JSF 1.2 due to the lack of FacesRequestContext
+		// Unsupported for Liferay Portal 5.2 to the lack of FacesRequestContext
 	}
 
 	protected boolean isBottomOfPageSupported() {
 
-		// Unsupported for JSF 1.2 due to the lack of FacesRequestContext
+		// Unsupported for Liferay Portal 5.2 due to the lack of FacesRequestContext
 		return false;
 	}
 
 	protected boolean isInline(FacesContext facesContext) {
 
-		// Must always be inline for JSF 1.2 due to the lack of FacesRequestContext
+		// Must always be inline for Liferay Portal 5.2 due to the lack of FacesRequestContext
 		return true;
 	}
 
 	protected boolean isAjaxRequest(FacesContext facesContext) {
-		return false; // Ajax not supported with JSF 1.2
+		return facesContext.getPartialViewContext().isAjaxRequest();
 	}
 }
