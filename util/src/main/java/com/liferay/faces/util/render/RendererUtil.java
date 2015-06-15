@@ -25,12 +25,13 @@ import javax.faces.context.ResponseWriter;
 
 import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.component.Styleable;
-import com.liferay.faces.util.lang.FacesConstants;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
+
 import java.util.Arrays;
 import java.util.Collection;
+
 import javax.faces.application.Application;
 import javax.faces.component.behavior.AjaxBehavior;
 
@@ -97,14 +98,14 @@ public class RendererUtil {
 			Map<String, List<ClientBehavior>> clientBehaviorMap = clientBehaviorHolder.getClientBehaviors();
 
 			Map<String, String> requestParameterMap = facesContext.getExternalContext().getRequestParameterMap();
-			String behaviorEvent = requestParameterMap.get(FacesConstants.JAVAX_FACES_BEHAVIOR_EVENT);
+			String behaviorEvent = requestParameterMap.get("javax.faces.behavior.event");
 
 			if (behaviorEvent != null) {
 
 				List<ClientBehavior> clientBehaviors = clientBehaviorMap.get(behaviorEvent);
 
 				if (clientBehaviors != null) {
-					String source = requestParameterMap.get(FacesConstants.JAVAX_FACES_SOURCE);
+					String source = requestParameterMap.get("javax.faces.source");
 
 					if (source != null) {
 						String clientId = uiComponent.getClientId(facesContext);
