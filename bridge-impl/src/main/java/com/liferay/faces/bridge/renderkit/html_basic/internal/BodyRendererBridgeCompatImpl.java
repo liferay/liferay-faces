@@ -13,22 +13,26 @@
  */
 package com.liferay.faces.bridge.renderkit.html_basic.internal;
 
+import java.io.IOException;
+import java.util.List;
+import java.util.Map;
+
+import javax.faces.component.UIComponent;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
+import javax.faces.context.ResponseWriter;
+
 import com.liferay.faces.bridge.client.internal.BridgeScriptUtil;
 import com.liferay.faces.bridge.client.internal.ScriptDataUtil;
 import com.liferay.faces.bridge.renderkit.bridge.internal.BridgeRenderer;
 import com.liferay.faces.util.client.Script;
 import com.liferay.faces.util.context.FacesRequestContext;
-import com.liferay.faces.util.portal.WebKeys;
 import com.liferay.faces.util.product.ProductConstants;
 import com.liferay.faces.util.product.ProductMap;
+
 import com.liferay.portal.kernel.servlet.taglib.aui.ScriptData;
-import java.io.IOException;
-import java.util.List;
-import java.util.Map;
-import javax.faces.component.UIComponent;
-import javax.faces.context.ExternalContext;
-import javax.faces.context.FacesContext;
-import javax.faces.context.ResponseWriter;
+import com.liferay.portal.kernel.util.WebKeys;
+
 
 /**
  * @author  Kyle Stiemann
