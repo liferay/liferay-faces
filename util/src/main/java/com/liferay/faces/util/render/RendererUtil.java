@@ -28,10 +28,8 @@ import com.liferay.faces.util.component.Styleable;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
-
 import java.util.Arrays;
 import java.util.Collection;
-
 import javax.faces.application.Application;
 import javax.faces.component.behavior.AjaxBehavior;
 
