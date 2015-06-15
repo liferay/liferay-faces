@@ -51,7 +51,7 @@ import com.liferay.portal.kernel.servlet.taglib.aui.ScriptData;
  *
  * @author  Neil Griffin
  */
-public class BodyRendererBridgeImpl extends BridgeRenderer {
+public class BodyRendererBridgeImpl extends BodyRendererBridgeCompatImpl {
 
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(BodyRendererBridgeImpl.class);
@@ -63,8 +63,6 @@ public class BodyRendererBridgeImpl extends BridgeRenderer {
 			"onclick", "ondblclick", "onkeydown", "onkeypress", "onkeyup", "onload", "onmousedown", "onmousemove",
 			"onmouseout", "onmouseover", "onmouseup", "onunload", ATTR_STYLE_CLASS, StringPool.TITLE
 		};
-	private static final boolean LIFERAY_PORTAL_DETECTED = ProductMap.getInstance().get(ProductConstants.LIFERAY_PORTAL)
-		.isDetected();
 	private static final String STYLE_CLASS_PORTLET_BODY = "liferay-faces-bridge-body";
 
 	/**
@@ -204,34 +202,5 @@ public class BodyRendererBridgeImpl extends BridgeRenderer {
 
 		// Render the closing </div> tag.
 		responseWriter.endElement(ELEMENT_DIV);
-	}
-
-	protected void encodeScripts(FacesContext facesContext, ResponseWriter responseWriter, UIComponent uiComponent)
-		throws IOException {
-
-		FacesRequestContext facesRequestContext = FacesRequestContext.getCurrentInstance();
-		List<Script> scripts = facesRequestContext.getScripts();
-
-		if (LIFERAY_PORTAL_DETECTED) {
-
-			ExternalContext externalContext = facesContext.getExternalContext();
-			Map<String, Object> requestMap = externalContext.getRequestMap();
-			ScriptData scriptData = (ScriptData) requestMap.get(WebKeys.AUI_SCRIPT_DATA);
-
-			if (scriptData == null) {
-
-				scriptData = new ScriptData();
-				requestMap.put(WebKeys.AUI_SCRIPT_DATA, scriptData);
-			}
-
-			ScriptDataUtil.scriptDataAppendScripts(scriptData, requestMap, scripts);
-		}
-		else {
-
-			responseWriter.startElement("script", uiComponent);
-			responseWriter.writeAttribute("type", "text/javascript", null);
-			BridgeScriptUtil.writeScripts(responseWriter, scripts);
-			responseWriter.endElement("script");
-		}
 	}
 }
