@@ -141,7 +141,7 @@ public class ListModelBean {
 		for (String namespace : namespaces) {
 
 			Properties properties = new Properties();
-			String filename = namespace + ".properties";
+			String filename = namespace + "-tags.properties";
 			URL resource = classLoader.getResource(filename);
 
 			if (resource != null) {
