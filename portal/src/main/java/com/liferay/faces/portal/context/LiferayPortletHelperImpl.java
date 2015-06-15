@@ -23,7 +23,6 @@ import com.liferay.faces.portal.bean.Liferay;
 import com.liferay.faces.portal.security.AuthorizationException;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
-import com.liferay.faces.util.portal.WebKeys;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Group;
@@ -147,7 +146,7 @@ public class LiferayPortletHelperImpl implements LiferayPortletHelper, Serializa
 	public Portlet getPortlet() {
 
 		// Attempt to get the Portlet object from the "RENDER_PORTLET" request attribute.
-		Portlet portlet = (Portlet) getPortletRequest().getAttribute(WebKeys.RENDER_PORTLET);
+		Portlet portlet = (Portlet) getPortletRequest().getAttribute("RENDER_PORTLET");
 
 		// FACES-1212: If the request attribute was null, then this method is being called outside of the RENDER_PHASE
 		// of the portlet lifecycle. In that case, use the cached version of the Portlet object from the "liferay"
@@ -227,7 +226,7 @@ public class LiferayPortletHelperImpl implements LiferayPortletHelper, Serializa
 	}
 
 	public ThemeDisplay getThemeDisplay() {
-		ThemeDisplay themeDisplay = (ThemeDisplay) getPortletRequest().getAttribute(WebKeys.THEME_DISPLAY);
+		ThemeDisplay themeDisplay = (ThemeDisplay) getPortletRequest().getAttribute("THEME_DISPLAY");
 
 		return themeDisplay;
 	}
