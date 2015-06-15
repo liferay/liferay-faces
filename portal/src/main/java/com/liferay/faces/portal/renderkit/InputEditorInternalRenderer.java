@@ -42,11 +42,13 @@ import com.liferay.faces.util.jsp.StringJspWriter;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
-import com.liferay.faces.util.portal.EditorUtil;
 import com.liferay.faces.util.portal.ScriptTagUtil;
 import com.liferay.faces.util.portal.WebKeys;
 import com.liferay.faces.util.render.internal.CleanupRenderer;
 
+
+import com.liferay.portal.kernel.util.WebKeys;
+import com.liferay.portal.kernel.editor.EditorUtil;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
