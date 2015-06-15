@@ -51,7 +51,6 @@
 		<exception-handler-factory>com.liferay.faces.bridge.context.internal.ExceptionHandlerFactoryImpl</exception-handler-factory>
 		<external-context-factory>com.liferay.faces.bridge.context.internal.ExternalContextFactoryImpl</external-context-factory>
 		<faces-context-factory>com.liferay.faces.bridge.context.internal.FacesContextFactoryImpl</faces-context-factory>
-		<partial-view-context-factory>com.liferay.faces.bridge.context.internal.PartialViewContextFactoryBridgeImpl</partial-view-context-factory>
 		<view-declaration-language-factory>com.liferay.faces.bridge.application.view.internal.ViewDeclarationLanguageFactoryImpl</view-declaration-language-factory>
 		<visit-context-factory>com.liferay.faces.bridge.component.visit.internal.VisitContextFactoryImpl</visit-context-factory>
 		<factory-extension>

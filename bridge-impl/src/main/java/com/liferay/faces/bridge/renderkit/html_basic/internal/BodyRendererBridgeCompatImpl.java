@@ -11,15 +11,21 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.util.context;
+package com.liferay.faces.bridge.renderkit.html_basic.internal;
 
-import javax.faces.FacesWrapper;
-
+import com.liferay.faces.bridge.renderkit.bridge.internal.BridgeRenderer;
+import java.io.IOException;
+import javax.faces.component.UIComponent;
+import javax.faces.context.FacesContext;
+import javax.faces.context.ResponseWriter;
 
 /**
  * @author  Kyle Stiemann
  */
-public abstract class FacesRequestContextFactory implements FacesWrapper<FacesRequestContextFactory> {
+public abstract class BodyRendererBridgeCompatImpl extends BridgeRenderer {
 
-	public abstract FacesRequestContext getFacesRequestContext();
+	protected void encodeScripts(FacesContext facesContext, ResponseWriter responseWriter, UIComponent uiComponent)
+		throws IOException {
+		// no-op since rendering scripts at the bottom of the page is not supported in Liferay Portal 5.2.
+	}
 }

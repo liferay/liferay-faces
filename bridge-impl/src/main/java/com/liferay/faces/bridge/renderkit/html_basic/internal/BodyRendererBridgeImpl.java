@@ -15,33 +15,24 @@ package com.liferay.faces.bridge.renderkit.html_basic.internal;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Map;
 
 import javax.faces.component.UIComponent;
 import javax.faces.component.UIViewRoot;
-import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 import javax.faces.render.Renderer;
 import javax.portlet.faces.component.PortletNamingContainerUIViewRoot;
 
-import com.liferay.faces.bridge.client.internal.BridgeScriptUtil;
-import com.liferay.faces.bridge.client.internal.ScriptDataUtil;
-import com.liferay.faces.bridge.renderkit.bridge.internal.BridgeRenderer;
 import com.liferay.faces.util.application.ComponentResource;
 import com.liferay.faces.util.application.ComponentResourceFactory;
 import com.liferay.faces.util.application.ComponentResourceUtil;
-import com.liferay.faces.util.client.Script;
-import com.liferay.faces.util.context.FacesRequestContext;
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
-import com.liferay.faces.util.portal.WebKeys;
 import com.liferay.faces.util.product.ProductConstants;
 import com.liferay.faces.util.product.ProductMap;
 
-import com.liferay.portal.kernel.servlet.taglib.aui.ScriptData;
 
 
 /**
@@ -51,7 +42,7 @@ import com.liferay.portal.kernel.servlet.taglib.aui.ScriptData;
  *
  * @author  Neil Griffin
  */
-public class BodyRendererBridgeImpl extends BridgeRenderer {
+public class BodyRendererBridgeImpl extends BodyRendererBridgeCompatImpl {
 
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(BodyRendererBridgeImpl.class);
@@ -63,8 +54,6 @@ public class BodyRendererBridgeImpl extends BridgeRenderer {
 			"onclick", "ondblclick", "onkeydown", "onkeypress", "onkeyup", "onload", "onmousedown", "onmousemove",
 			"onmouseout", "onmouseover", "onmouseup", "onunload", ATTR_STYLE_CLASS, StringPool.TITLE
 		};
-	private static final boolean LIFERAY_PORTAL_DETECTED = ProductMap.getInstance().get(ProductConstants.LIFERAY_PORTAL)
-		.isDetected();
 	private static final String STYLE_CLASS_PORTLET_BODY = "liferay-faces-bridge-body";
 
 	/**
@@ -204,34 +193,5 @@ public class BodyRendererBridgeImpl extends BridgeRenderer {
 
 		// Render the closing </div> tag.
 		responseWriter.endElement(ELEMENT_DIV);
-	}
-
-	protected void encodeScripts(FacesContext facesContext, ResponseWriter responseWriter, UIComponent uiComponent)
-		throws IOException {
-
-		FacesRequestContext facesRequestContext = FacesRequestContext.getCurrentInstance();
-		List<Script> scripts = facesRequestContext.getScripts();
-
-		if (LIFERAY_PORTAL_DETECTED) {
-
-			ExternalContext externalContext = facesContext.getExternalContext();
-			Map<String, Object> requestMap = externalContext.getRequestMap();
-			ScriptData scriptData = (ScriptData) requestMap.get(WebKeys.AUI_SCRIPT_DATA);
-
-			if (scriptData == null) {
-
-				scriptData = new ScriptData();
-				requestMap.put(WebKeys.AUI_SCRIPT_DATA, scriptData);
-			}
-
-			ScriptDataUtil.scriptDataAppendScripts(scriptData, requestMap, scripts);
-		}
-		else {
-
-			responseWriter.startElement("script", uiComponent);
-			responseWriter.writeAttribute("type", "text/javascript", null);
-			BridgeScriptUtil.writeScripts(responseWriter, scripts);
-			responseWriter.endElement("script");
-		}
 	}
 }

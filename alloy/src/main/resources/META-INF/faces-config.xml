@@ -61,7 +61,6 @@
 		<converter-class>com.liferay.faces.alloy.converter.LongListConverter</converter-class>
 	</converter>
 	<factory>
-		<partial-view-context-factory>com.liferay.faces.alloy.context.internal.PartialViewContextFactoryAlloyImpl</partial-view-context-factory>
 		<factory-extension>
 			<util:message-context-factory>com.liferay.faces.alloy.context.internal.MessageContextFactoryAlloyImpl</util:message-context-factory>
 		</factory-extension>

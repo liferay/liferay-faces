@@ -28,7 +28,6 @@ import com.liferay.faces.bridge.component.primefaces.internal.PrimeFacesFileUplo
 import com.liferay.faces.bridge.renderkit.bridge.internal.ResponseWriterBridgeImpl;
 import com.liferay.faces.bridge.renderkit.icefaces.internal.DataPaginatorRenderer;
 import com.liferay.faces.bridge.renderkit.icefaces.internal.HeadRendererICEfacesImpl;
-import com.liferay.faces.bridge.renderkit.primefaces.internal.BodyRendererPrimeFacesImpl;
 import com.liferay.faces.bridge.renderkit.primefaces.internal.FileUploadRendererPrimeFacesImpl;
 import com.liferay.faces.bridge.renderkit.primefaces.internal.FormRendererPrimeFacesImpl;
 import com.liferay.faces.bridge.renderkit.primefaces.internal.HeadRendererPrimeFacesImpl;
@@ -98,10 +97,6 @@ public class RenderKitBridgeImpl extends RenderKitWrapper {
 				else {
 					renderer = new HeadRendererBridgeImpl();
 				}
-			}
-			else if (JAVAX_FACES_BODY.equals(rendererType) && PRIMEFACES.isDetected() &&
-					(PRIMEFACES.getMajorVersion() >= 5)) {
-				renderer = new BodyRendererPrimeFacesImpl();
 			}
 			else if (SCRIPT_RENDERER_TYPE.equals(rendererType) || STYLESHEET_RENDERER_TYPE.equals(rendererType)) {
 				renderer = new ResourceRendererBridgeImpl(renderer);
