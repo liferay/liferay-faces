@@ -18,10 +18,10 @@ import java.util.Map;
 
 import com.liferay.faces.util.client.AlloyScript;
 import com.liferay.faces.util.client.Script;
-import com.liferay.faces.util.portal.LiferayPortletUtil;
 import com.liferay.faces.util.portal.WebKeys;
 
 import com.liferay.portal.kernel.servlet.taglib.aui.ScriptData;
+import com.liferay.portal.model.Portlet;
 
 
 /**
@@ -33,10 +33,12 @@ public class ScriptDataUtil extends ScriptDataUtilCompat {
 		List<Script> scripts) {
 
 		String portletId = "";
-		Object portlet = requestMap.get(WebKeys.RENDER_PORTLET);
+		Object portletObject = requestMap.get(WebKeys.RENDER_PORTLET);
 
-		if (portlet != null) {
-			portletId = LiferayPortletUtil.getPortletId(portlet);
+		if (portletObject != null && portletObject instanceof Portlet) {
+
+			Portlet portlet = (Portlet) portletObject;
+			portletId = portlet.getPortletId();
 		}
 
 		StringBuilder modulesStringBuilder = new StringBuilder();
