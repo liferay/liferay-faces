@@ -36,9 +36,9 @@ import com.liferay.faces.util.context.PartialResponseWriterWrapper;
 import com.liferay.faces.util.jsp.PageContextAdapter;
 import com.liferay.faces.util.jsp.StringJspWriter;
 import com.liferay.faces.util.portal.ScriptTagUtil;
-import com.liferay.faces.util.portal.WebKeys;
 
 import com.liferay.portal.kernel.servlet.taglib.aui.ScriptData;
+import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.util.PortalUtil;
 
 
