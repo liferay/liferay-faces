@@ -13,6 +13,7 @@
  */
 package com.liferay.faces.alloy.renderkit.internal;
 
+import java.lang.reflect.Method;
 import java.util.Map;
 
 import javax.faces.context.ExternalContext;
@@ -21,7 +22,8 @@ import javax.faces.render.Renderer;
 
 import com.liferay.faces.util.client.Script;
 import com.liferay.faces.util.context.FacesRequestContext;
-import com.liferay.faces.util.portal.LiferayThemeDisplayUtil;
+import com.liferay.faces.util.logging.Logger;
+import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.util.portal.WebKeys;
 
 
@@ -34,6 +36,9 @@ import com.liferay.faces.util.portal.WebKeys;
 @Deprecated
 public abstract class ScriptRendererCompat extends Renderer {
 
+	// Logger
+	private static final Logger logger = LoggerFactory.getLogger(ScriptRendererCompat.class);
+
 	protected void addScriptToBottomOfPage(Script script) {
 
 		FacesRequestContext facesRequestContext = FacesRequestContext.getCurrentInstance();
@@ -44,6 +49,18 @@ public abstract class ScriptRendererCompat extends Renderer {
 		return true;
 	}
 
+	private boolean isIsolated(Object themeDisplay) throws Exception {
+
+		boolean isolated = false;
+		Method isIsolated = themeDisplay.getClass().getMethod("isIsolated");
+
+		if (isIsolated != null) {
+			isolated = (Boolean) isIsolated.invoke(themeDisplay);
+		}
+
+		return isolated;
+	}
+
 	protected boolean isInline(FacesContext facesContext) {
 
 		boolean inline = false;
@@ -52,11 +69,28 @@ public abstract class ScriptRendererCompat extends Renderer {
 		Object themeDisplay = requestMap.get(WebKeys.THEME_DISPLAY);
 
 		if (themeDisplay != null) {
-			inline = LiferayThemeDisplayUtil.isIsolated(themeDisplay) ||
-				LiferayThemeDisplayUtil.isStateExclusive(themeDisplay);
+
+			try {
+				inline = isIsolated(themeDisplay) || isStateExclusive(themeDisplay);
+			}
+			catch (Exception e) {
+				logger.warn(e.getMessage());
+			}
 		}
 
 		return inline;
+	}
+
+	private boolean isStateExclusive(Object themeDisplay) throws Exception {
+
+		boolean stateExclusive = false;
+		Method isStateExclusive = themeDisplay.getClass().getMethod("isStateExclusive");
+
+		if (isStateExclusive != null) {
+			stateExclusive = (Boolean) isStateExclusive.invoke(themeDisplay);
+		}
+
+		return stateExclusive;
 	}
 
 	protected boolean isAjaxRequest(FacesContext facesContext) {
