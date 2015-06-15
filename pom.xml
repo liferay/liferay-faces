@@ -125,7 +125,7 @@
 		<primefaces4.version>4.0</primefaces4.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.stage>Production</project.stage>
-		<richfaces4.version>4.5.4.Final</richfaces4.version>
+		<richfaces4.version>4.5.6.Final</richfaces4.version>
 		<selenium.version>2.35.0</selenium.version>
 		<spring.version>3.0.7.RELEASE</spring.version>
 		<surefire.version>2.12</surefire.version>
