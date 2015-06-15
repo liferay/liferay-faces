@@ -25,7 +25,6 @@ import javax.faces.context.ResponseWriter;
 
 import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.component.Styleable;
-import com.liferay.faces.util.lang.FacesConstants;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
@@ -45,6 +44,8 @@ public class RendererUtil {
 			"onclick", "ondblclick", "onmousedown", "onmousemove", "onmouseout", "onmouseover", "onmouseup"
 		};
 	public static final String[] KEYBOARD_DOM_EVENTS = { "onkeydown", "onkeypress", "onkeyup" };
+	public static final String JAVAX_FACES_BEHAVIOR_EVENT = "javax.faces.behavior.event";
+	public static final String JAVAX_FACES_SOURCE = "javax.faces.source";
 
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(com.liferay.faces.util.render.RendererUtil.class);
@@ -97,14 +98,14 @@ public class RendererUtil {
 			Map<String, List<ClientBehavior>> clientBehaviorMap = clientBehaviorHolder.getClientBehaviors();
 
 			Map<String, String> requestParameterMap = facesContext.getExternalContext().getRequestParameterMap();
-			String behaviorEvent = requestParameterMap.get(FacesConstants.JAVAX_FACES_BEHAVIOR_EVENT);
+			String behaviorEvent = requestParameterMap.get(JAVAX_FACES_BEHAVIOR_EVENT);
 
 			if (behaviorEvent != null) {
 
 				List<ClientBehavior> clientBehaviors = clientBehaviorMap.get(behaviorEvent);
 
 				if (clientBehaviors != null) {
-					String source = requestParameterMap.get(FacesConstants.JAVAX_FACES_SOURCE);
+					String source = requestParameterMap.get(JAVAX_FACES_SOURCE);
 
 					if (source != null) {
 						String clientId = uiComponent.getClientId(facesContext);
