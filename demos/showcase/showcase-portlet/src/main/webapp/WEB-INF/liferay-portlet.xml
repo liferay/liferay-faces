@@ -4,9 +4,6 @@
 <liferay-portlet-app>
 	<portlet>
 		<portlet-name>1</portlet-name>
-		<friendly-url-mapper-class>com.liferay.portal.kernel.portlet.DefaultFriendlyURLMapper</friendly-url-mapper-class>
-		<friendly-url-mapping>component</friendly-url-mapping>
-		<friendly-url-routes>friendly-url-routes.xml</friendly-url-routes>
 		<render-weight>1</render-weight>
 		<ajaxable>false</ajaxable>
 		<add-default-resource>true</add-default-resource>
