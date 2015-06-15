@@ -19,9 +19,9 @@ import java.util.GregorianCalendar;
 import org.junit.Test;
 
 import com.liferay.faces.bridge.event.internal.liferay.LiferaySharedPageTop;
+import com.liferay.faces.bridge.event.internal.liferay.StringBundler;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
-import com.liferay.faces.util.portal.StringBundler;
 
 import junit.framework.Assert;
 

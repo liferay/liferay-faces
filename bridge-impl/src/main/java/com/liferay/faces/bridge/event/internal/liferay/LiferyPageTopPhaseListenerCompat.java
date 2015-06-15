@@ -20,7 +20,6 @@ import javax.portlet.PortletRequest;
 import javax.servlet.http.HttpServletRequest;
 
 import com.liferay.faces.bridge.context.BridgeContext;
-import com.liferay.faces.util.portal.StringBundler;
 
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.util.PortalUtil;
