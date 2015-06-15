@@ -33,7 +33,6 @@ import com.liferay.faces.alloy.component.tab.TabCollapseEvent;
 import com.liferay.faces.alloy.component.tab.TabExpandEvent;
 import com.liferay.faces.alloy.component.tab.TabUtil;
 import com.liferay.faces.util.helper.IntegerHelper;
-import com.liferay.faces.util.lang.FacesConstants;
 import com.liferay.faces.util.lang.StringPool;
 
 
@@ -99,7 +98,7 @@ public class Accordion extends AccordionBase implements ClientBehaviorHolder {
 			// Queue an accordion tab event rather than the specified faces event.
 			AjaxBehaviorEvent behaviorEvent = (AjaxBehaviorEvent) facesEvent;
 			Behavior behavior = behaviorEvent.getBehavior();
-			String eventName = requestParameterMap.get(FacesConstants.JAVAX_FACES_BEHAVIOR_EVENT);
+			String eventName = requestParameterMap.get("javax.faces.behavior.event");
 
 			if (TabCollapseEvent.TAB_COLLAPSE.equals(eventName)) {
 				TabCollapseEvent tabCollapseEvent = new TabCollapseEvent(this, behavior, tab, rowData);

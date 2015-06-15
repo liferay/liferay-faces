@@ -31,9 +31,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.event.FacesEvent;
 
-import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.helper.IntegerHelper;
-import com.liferay.faces.util.lang.FacesConstants;
 
 
 /**
@@ -76,7 +74,7 @@ public class DataTable extends DataTableBase implements ClientBehaviorHolder {
 			// Queue an accordion tab event rather than the specified faces event.
 			AjaxBehaviorEvent behaviorEvent = (AjaxBehaviorEvent) facesEvent;
 			Behavior behavior = behaviorEvent.getBehavior();
-			String eventName = requestParameterMap.get(FacesConstants.JAVAX_FACES_BEHAVIOR_EVENT);
+			String eventName = requestParameterMap.get("javax.faces.behavior.event");
 
 			if (RowSelectEvent.ROW_SELECT.equals(eventName) || RowDeselectEvent.ROW_DESELECT.equals(eventName)) {
 
