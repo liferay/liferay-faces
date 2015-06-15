@@ -14,6 +14,7 @@
 package com.liferay.faces.bridge.context.internal;
 
 import java.io.IOException;
+import java.lang.reflect.Method;
 import java.util.List;
 import java.util.Map;
 
@@ -28,6 +29,7 @@ import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.jsp.PageContext;
 
 import com.liferay.faces.bridge.client.internal.ScriptDataUtil;
 import com.liferay.faces.util.client.Script;
@@ -35,7 +37,11 @@ import com.liferay.faces.util.context.FacesRequestContext;
 import com.liferay.faces.util.context.PartialResponseWriterWrapper;
 import com.liferay.faces.util.jsp.PageContextAdapter;
 import com.liferay.faces.util.jsp.StringJspWriter;
-import com.liferay.faces.util.portal.ScriptTagUtil;
+import com.liferay.faces.util.logging.Logger;
+import com.liferay.faces.util.logging.LoggerFactory;
+import com.liferay.faces.util.product.Product;
+import com.liferay.faces.util.product.ProductConstants;
+import com.liferay.faces.util.product.ProductMap;
 
 import com.liferay.portal.kernel.servlet.taglib.aui.ScriptData;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -51,6 +57,46 @@ import com.liferay.portal.util.PortalUtil;
  */
 public class PartialViewContextLiferayImpl extends PartialViewContextWrapper {
 
+	// Logger
+	private static final Logger logger = LoggerFactory.getLogger(PartialViewContextLiferayImpl.class);
+
+	// Private Constants
+	private static final String FLUSH_SCRIPT_DATA = "flushScriptData";
+	private static final Method FLUSH_SCRIPT_DATA_METHOD;
+	private static final String SCRIPT_TAG_FQCN = "com.liferay.taglib.aui.ScriptTag";
+
+	static {
+
+		Product liferayPortal = ProductMap.getInstance().get(ProductConstants.LIFERAY_PORTAL);
+
+		if (liferayPortal.isDetected()) {
+
+			int buildNumber = liferayPortal.getBuildId();
+
+			if (buildNumber >= 6011) {
+
+				Method flushScriptDataMethod = null;
+
+				try {
+					Class<?> scriptTagClass = Class.forName(SCRIPT_TAG_FQCN);
+					flushScriptDataMethod = scriptTagClass.getMethod(FLUSH_SCRIPT_DATA,
+							new Class[] { PageContext.class });
+				}
+				catch (Exception e) {
+					logger.error(e);
+				}
+
+				FLUSH_SCRIPT_DATA_METHOD = flushScriptDataMethod;
+			}
+			else {
+				FLUSH_SCRIPT_DATA_METHOD = null;
+			}
+		}
+		else {
+			FLUSH_SCRIPT_DATA_METHOD = null;
+		}
+	}
+
 	// Private Data Members
 	private FacesContext facesContext;
 	private PartialResponseWriter partialResponseWriter;
@@ -59,6 +105,19 @@ public class PartialViewContextLiferayImpl extends PartialViewContextWrapper {
 	public PartialViewContextLiferayImpl(PartialViewContext partialViewContext, FacesContext facesContext) {
 		this.wrappedPartialViewContext = partialViewContext;
 		this.facesContext = facesContext;
+	}
+
+	private static void flushScriptData(PageContext pageContext) {
+
+		try {
+
+			if (FLUSH_SCRIPT_DATA_METHOD != null) {
+				FLUSH_SCRIPT_DATA_METHOD.invoke(null, new Object[] { pageContext });
+			}
+		}
+		catch (Exception e) {
+			logger.error(e);
+		}
 	}
 
 	/**
@@ -155,7 +214,7 @@ public class PartialViewContextLiferayImpl extends PartialViewContextWrapper {
 			ScriptDataWriter scriptDataWriter = new ScriptDataWriter();
 			PageContextAdapter pageContextAdapter = new PageContextAdapter(httpServletRequest, httpServletResponse,
 					elContext, scriptDataWriter);
-			ScriptTagUtil.flushScriptData(pageContextAdapter);
+			flushScriptData(pageContextAdapter);
 			requestMap.put(WebKeys.AUI_SCRIPT_DATA, savedScriptData);
 			responseWriter.write(scriptDataWriter.toString());
 		}

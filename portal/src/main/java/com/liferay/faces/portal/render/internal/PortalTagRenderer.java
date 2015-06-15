@@ -14,6 +14,7 @@
 package com.liferay.faces.portal.render.internal;
 
 import java.io.IOException;
+import java.lang.reflect.Method;
 import java.util.Map;
 
 import javax.el.ELContext;
@@ -29,12 +30,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
+import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.Tag;
 
 import com.liferay.faces.util.context.FacesRequestContext;
 import com.liferay.faces.util.jsp.PageContextAdapter;
 import com.liferay.faces.util.jsp.StringJspWriter;
-import com.liferay.faces.util.portal.ScriptTagUtil;
+import com.liferay.faces.util.logging.Logger;
+import com.liferay.faces.util.logging.LoggerFactory;
+import com.liferay.faces.util.product.Product;
+import com.liferay.faces.util.product.ProductConstants;
+import com.liferay.faces.util.product.ProductMap;
 
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.util.PortalUtil;
@@ -48,12 +54,65 @@ import com.liferay.portal.util.PortalUtil;
  */
 public abstract class PortalTagRenderer<U extends UIComponent, T extends Tag> extends Renderer {
 
+	// Logger
+	private static final Logger logger = LoggerFactory.getLogger(PortalTagRenderer.class);
+
+	// Private Constants
+	private static final String FLUSH_SCRIPT_DATA = "flushScriptData";
+	private static final Method FLUSH_SCRIPT_DATA_METHOD;
+	private static final String SCRIPT_TAG_FQCN = "com.liferay.taglib.aui.ScriptTag";
+
 	// Protected Constants
 	protected static final String CORRESPONDING_JSP_TAG = "correspondingJspTag";
 	protected static final String POST_CHILD_MARKUP = "postChildMarkup";
 
+	static {
+
+		Product liferayPortal = ProductMap.getInstance().get(ProductConstants.LIFERAY_PORTAL);
+
+		if (liferayPortal.isDetected()) {
+
+			int buildNumber = liferayPortal.getBuildId();
+
+			if (buildNumber >= 6011) {
+
+				Method flushScriptDataMethod = null;
+
+				try {
+					Class<?> scriptTagClass = Class.forName(SCRIPT_TAG_FQCN);
+					flushScriptDataMethod = scriptTagClass.getMethod(FLUSH_SCRIPT_DATA,
+							new Class[] { PageContext.class });
+				}
+				catch (Exception e) {
+					logger.error(e);
+				}
+
+				FLUSH_SCRIPT_DATA_METHOD = flushScriptDataMethod;
+			}
+			else {
+				FLUSH_SCRIPT_DATA_METHOD = null;
+			}
+		}
+		else {
+			FLUSH_SCRIPT_DATA_METHOD = null;
+		}
+	}
+
 	// Self-Injections
 	private static PortalTagOutputParser portalTagOutputParser = new PortalTagOutputParserImpl();
+
+	private static void flushScriptData(PageContext pageContext) {
+
+		try {
+
+			if (FLUSH_SCRIPT_DATA_METHOD != null) {
+				FLUSH_SCRIPT_DATA_METHOD.invoke(null, new Object[] { pageContext });
+			}
+		}
+		catch (Exception e) {
+			logger.error(e);
+		}
+	}
 
 	/**
 	 * Creates a new instance of the JSP tag.
@@ -203,7 +262,7 @@ public abstract class PortalTagRenderer<U extends UIComponent, T extends Tag> ex
 
 				try {
 					jspWriter.write(portalTagOutputParser.getScriptSectionMarker());
-					ScriptTagUtil.flushScriptData(pageContextAdapter);
+					flushScriptData(pageContextAdapter);
 				}
 				catch (IOException e) {
 					throw new JspException(e);
