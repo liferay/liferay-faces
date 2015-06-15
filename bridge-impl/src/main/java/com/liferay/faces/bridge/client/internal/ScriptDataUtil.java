@@ -18,9 +18,9 @@ import java.util.Map;
 
 import com.liferay.faces.util.client.AlloyScript;
 import com.liferay.faces.util.client.Script;
-import com.liferay.faces.util.portal.WebKeys;
 
 import com.liferay.portal.kernel.servlet.taglib.aui.ScriptData;
+import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.Portlet;
 
 
@@ -35,7 +35,7 @@ public class ScriptDataUtil extends ScriptDataUtilCompat {
 		String portletId = "";
 		Object portletObject = requestMap.get(WebKeys.RENDER_PORTLET);
 
-		if (portletObject != null && portletObject instanceof Portlet) {
+		if ((portletObject != null) && (portletObject instanceof Portlet)) {
 
 			Portlet portlet = (Portlet) portletObject;
 			portletId = portlet.getPortletId();
