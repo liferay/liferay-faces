@@ -21,7 +21,6 @@ import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
 import javax.servlet.ServletContext;
 
-import com.liferay.faces.util.application.ResourceConstants;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -53,7 +52,7 @@ public class ExternalContextFactoryImpl extends ExternalContextFactory {
 
 			ExternalContext externalContext = new ExternalContextImpl((PortletContext) context,
 					(PortletRequest) request, (PortletResponse) response);
-			String resourceName = externalContext.getRequestParameterMap().get(ResourceConstants.JAVAX_FACES_RESOURCE);
+			String resourceName = externalContext.getRequestParameterMap().get("javax.faces.resource");
 
 			// Workaround for FACES-2133
 			if ("org.richfaces.resource.MediaOutputResource".equals(resourceName)) {

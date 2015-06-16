@@ -30,7 +30,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.liferay.faces.reslib.config.ResLibConfigParam;
 import com.liferay.faces.util.HttpHeaders;
-import com.liferay.faces.util.application.ResourceConstants;
 import com.liferay.faces.util.application.ResourceHandlerWrapperBase;
 import com.liferay.faces.util.config.ApplicationConfig;
 import com.liferay.faces.util.config.ConfiguredServletMapping;
@@ -102,7 +101,7 @@ public class ResLibResourceHandler extends ResourceHandlerWrapperBase {
 		else {
 			ExternalContext externalContext = facesContext.getExternalContext();
 			Map<String, String> requestParameterMap = externalContext.getRequestParameterMap();
-			String libraryName = requestParameterMap.get(ResourceConstants.LN);
+			String libraryName = requestParameterMap.get(StringPool.LN);
 
 			if (LIBRARY_NAME.equals(libraryName)) {
 
