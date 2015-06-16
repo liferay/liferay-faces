@@ -69,6 +69,8 @@ public interface AlloyRenderer extends ClientComponentRenderer {
 
 	public String escapeClientId(String clientId);
 
+	public String escapeJavaScript(String javaScript);
+
 	public String getAlloyClassName(FacesContext facesContext, UIComponent uiComponent);
 
 	public String getYUIConfig(FacesContext facesContext, ResponseWriter responseWriter, UIComponent uiComponent)

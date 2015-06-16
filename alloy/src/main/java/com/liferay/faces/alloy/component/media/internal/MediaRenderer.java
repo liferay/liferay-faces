@@ -107,9 +107,9 @@ public abstract class MediaRenderer extends MediaRendererCompat {
 		encodeMediaSize(responseWriter, media);
 
 		// Encode JSF 2.1 passthrough attributes
-		RendererUtil.encodePassThroughAttributes(responseWriter, uiComponent, RendererUtil.KEYBOARD_DOM_EVENTS);
-		RendererUtil.encodePassThroughAttributes(responseWriter, uiComponent, RendererUtil.MOUSE_DOM_EVENTS);
-		RendererUtil.encodePassThroughAttributes(responseWriter, uiComponent, MEDIA_DOM_EVENTS);
+		encodePassThroughAttributes(responseWriter, uiComponent, KEYBOARD_DOM_EVENTS);
+		encodePassThroughAttributes(responseWriter, uiComponent, MOUSE_DOM_EVENTS);
+		encodePassThroughAttributes(responseWriter, uiComponent, MEDIA_DOM_EVENTS);
 
 		// Encode JSF 2.2 passthrough attributes (attributes prefixed with the http://xmlns.jcp.org/jsf/passthrough
 		// namespace)

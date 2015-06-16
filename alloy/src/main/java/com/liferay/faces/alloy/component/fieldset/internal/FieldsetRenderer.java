@@ -55,8 +55,8 @@ public class FieldsetRenderer extends FieldsetRendererBase {
 		}
 
 		RendererUtil.encodeStyleable(responseWriter, fieldset);
-		RendererUtil.encodePassThroughAttributes(responseWriter, uiComponent, RendererUtil.KEYBOARD_DOM_EVENTS);
-		RendererUtil.encodePassThroughAttributes(responseWriter, uiComponent, RendererUtil.MOUSE_DOM_EVENTS);
+		encodePassThroughAttributes(responseWriter, uiComponent, KEYBOARD_DOM_EVENTS);
+		encodePassThroughAttributes(responseWriter, uiComponent, MOUSE_DOM_EVENTS);
 	}
 
 	@Override

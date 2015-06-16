@@ -103,11 +103,11 @@ public class SelectRatingRenderer extends SelectRatingRendererBase {
 		responseWriter.write("document.getElementsByName('");
 
 		String clientId = uiComponent.getClientId(facesContext);
-		String escapedClientId = RendererUtil.escapeJavaScript(clientId);
+		String escapedClientId = escapeJavaScript(clientId);
 		responseWriter.write(escapedClientId);
 		responseWriter.write("')[0].value='");
 
-		String escapedHiddenInputValue = RendererUtil.escapeJavaScript(hiddenInputValue);
+		String escapedHiddenInputValue = escapeJavaScript(hiddenInputValue);
 		responseWriter.write(escapedHiddenInputValue);
 		responseWriter.write(StringPool.APOSTROPHE);
 		responseWriter.write(StringPool.SEMICOLON);

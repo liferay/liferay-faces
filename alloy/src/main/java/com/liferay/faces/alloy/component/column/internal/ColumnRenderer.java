@@ -31,6 +31,7 @@ import javax.faces.render.FacesRenderer;
 
 import com.liferay.faces.alloy.component.column.Column;
 import com.liferay.faces.alloy.component.datatable.DataTable;
+import com.liferay.faces.alloy.render.internal.AlloyRendererUtil;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.render.RendererUtil;
 
@@ -143,7 +144,7 @@ public class ColumnRenderer extends ColumnRendererBase implements ComponentSyste
 		UIComponent parent = column.getParent();
 
 		if ((parent instanceof DataTable) && column.isAjax()) {
-			RendererUtil.addDefaultAjaxBehavior(column, column.getExecute(), column.getProcess(), "@parent",
+			AlloyRendererUtil.addDefaultAjaxBehavior(column, column.getExecute(), column.getProcess(), "@parent",
 				column.getRender(), column.getUpdate(), "@parent");
 		}
 	}

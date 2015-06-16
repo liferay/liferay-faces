@@ -21,7 +21,7 @@ import javax.faces.context.PartialResponseWriter;
 import javax.faces.context.PartialViewContext;
 import javax.faces.context.PartialViewContextWrapper;
 
-import com.liferay.faces.alloy.client.internal.AlloyScriptUtil;
+import com.liferay.faces.alloy.render.internal.AlloyRendererUtil;
 import com.liferay.faces.util.client.BrowserSniffer;
 import com.liferay.faces.util.client.BrowserSnifferFactory;
 import com.liferay.faces.util.client.Script;
@@ -105,7 +105,7 @@ public class PartialViewContextAlloyImpl extends PartialViewContextWrapper {
 				if (!scripts.isEmpty()) {
 
 					super.startEval();
-					AlloyScriptUtil.writeScripts(partialResponseWriter, scripts, browserSniffer);
+					AlloyRendererUtil.writeScripts(partialResponseWriter, scripts, browserSniffer);
 					super.endEval();
 				}
 			}
@@ -120,7 +120,7 @@ public class PartialViewContextAlloyImpl extends PartialViewContextWrapper {
 			List<Script> scripts = facesRequestContext.getScripts();
 
 			if (!scripts.isEmpty()) {
-				AlloyScriptUtil.writeScripts(partialResponseWriter, scripts, browserSniffer);
+				AlloyRendererUtil.writeScripts(partialResponseWriter, scripts, browserSniffer);
 			}
 
 			super.endEval();

@@ -128,6 +128,11 @@ public abstract class AlloyRendererBase extends ClientComponentRendererBase impl
 	}
 
 	@Override
+	public String escapeJavaScript(String javaScript) {
+		return AlloyRendererCommon.escapeJavaScript(javaScript);
+	}
+
+	@Override
 	public String getYUIConfig(FacesContext facesContext, ResponseWriter responseWriter, UIComponent uiComponent)
 		throws IOException {
 		return null;
