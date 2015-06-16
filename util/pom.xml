@@ -25,19 +25,9 @@
 		</dependency>
 		<!-- END: Only required for file upload -->
 		<dependency>
-			<groupId>com.liferay.portal</groupId>
-			<artifactId>portal-service</artifactId>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
 			<groupId>com.sun.facelets</groupId>
 			<artifactId>jsf-facelets</artifactId>
 			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>com.liferay.portal</groupId>
-			<artifactId>util-taglib</artifactId>
-			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>javax.el</groupId>
