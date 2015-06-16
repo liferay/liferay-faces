@@ -16,13 +16,13 @@ package com.liferay.faces.util.jsp;
 import java.io.IOException;
 import java.io.Writer;
 
-import javax.faces.FacesWrapper;
+import com.liferay.faces.util.helper.Wrapper;
 
 
 /**
  * @author  Kyle Stiemann
  */
-public abstract class StringJspWriterWrapper extends StringJspWriter implements FacesWrapper<StringJspWriter> {
+public abstract class StringJspWriterWrapper extends StringJspWriter implements Wrapper<StringJspWriter> {
 
 	protected StringJspWriterWrapper(int bufferSize, boolean autoFlush) {
 		super(bufferSize, autoFlush);

@@ -14,17 +14,18 @@
 package com.liferay.faces.util.jsp;
 
 import javax.el.ELContext;
-import javax.faces.FacesWrapper;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.BodyContent;
 
+import com.liferay.faces.util.helper.Wrapper;
+
 
 /**
  * @author  Kyle Stiemann
  */
-public abstract class JspAdapterFactory implements FacesWrapper<JspAdapterFactory> {
+public abstract class JspAdapterFactory implements Wrapper<JspAdapterFactory> {
 
 	public abstract BodyContent getBodyContent(StringJspWriter stringJspWriter);
 
