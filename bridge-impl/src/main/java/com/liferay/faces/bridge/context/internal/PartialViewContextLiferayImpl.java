@@ -28,13 +28,16 @@ import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.jsp.PageContext;
 
 import com.liferay.faces.bridge.client.internal.ScriptDataUtil;
 import com.liferay.faces.util.client.Script;
 import com.liferay.faces.util.context.FacesRequestContext;
 import com.liferay.faces.util.context.PartialResponseWriterWrapper;
-import com.liferay.faces.util.jsp.PageContextAdapter;
+import com.liferay.faces.util.factory.FactoryExtensionFinder;
+import com.liferay.faces.util.jsp.JspAdapterFactory;
 import com.liferay.faces.util.jsp.StringJspWriter;
+import com.liferay.faces.util.jsp.StringJspWriterWrapper;
 
 import com.liferay.portal.kernel.servlet.taglib.aui.ScriptData;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -151,15 +154,22 @@ public class PartialViewContextLiferayImpl extends PartialViewContextWrapper {
 			PortletResponse portletResponse = (PortletResponse) externalContext.getResponse();
 			HttpServletResponse httpServletResponse = PortalUtil.getHttpServletResponse(portletResponse);
 			ELContext elContext = facesContext.getELContext();
-			ScriptDataWriter scriptDataWriter = new ScriptDataWriter();
-			PageContextAdapter pageContextAdapter = new PageContextAdapter(httpServletRequest, httpServletResponse,
+			JspAdapterFactory jspAdapterFactory = (JspAdapterFactory) FactoryExtensionFinder.getFactory(
+					JspAdapterFactory.class);
+			StringJspWriter stringJspWriter = jspAdapterFactory.getStringJspWriter();
+			ScriptDataWriter scriptDataWriter = new ScriptDataWriter(stringJspWriter);
+			PageContext pageContext = jspAdapterFactory.getPageContext(httpServletRequest, httpServletResponse,
 					elContext, scriptDataWriter);
-			ScriptTagUtil.flushScriptData(pageContextAdapter);
+			ScriptTagUtil.flushScriptData(pageContext);
 			requestMap.put(WebKeys.AUI_SCRIPT_DATA, savedScriptData);
 			responseWriter.write(scriptDataWriter.toString());
 		}
 
-		private class ScriptDataWriter extends StringJspWriter {
+		private class ScriptDataWriter extends StringJspWriterWrapper {
+
+			public ScriptDataWriter(StringJspWriter wrappedStringJspWriter) {
+				super(wrappedStringJspWriter);
+			}
 
 			@Override
 			public void write(String string) throws IOException {
