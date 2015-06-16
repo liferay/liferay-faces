@@ -46,6 +46,8 @@ public class JspAdapterFactoryImpl extends JspAdapterFactory {
 
 	@Override
 	public JspAdapterFactory getWrapped() {
+
+		// Since this is the factory instance provided by default, it will never wrap another factory.
 		return null;
 	}
 }
