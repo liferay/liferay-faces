@@ -13,9 +13,9 @@
  */
 package com.liferay.faces.portal.render.internal;
 
+import com.liferay.faces.util.ContentTypes;
 import com.liferay.faces.util.jsp.PageContextAdapter;
 import com.liferay.faces.util.lang.StringPool;
-import com.liferay.faces.util.render.ContentTypes;
 
 
 /**
