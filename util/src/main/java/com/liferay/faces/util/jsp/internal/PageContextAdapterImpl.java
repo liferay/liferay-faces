@@ -11,7 +11,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.util.jsp;
+package com.liferay.faces.util.jsp.internal;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -33,6 +33,12 @@ import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.Tag;
 
+import com.liferay.faces.util.jsp.ApplicationScope;
+import com.liferay.faces.util.jsp.PageAdapter;
+import com.liferay.faces.util.jsp.RequestScope;
+import com.liferay.faces.util.jsp.ServletConfigAdapter;
+import com.liferay.faces.util.jsp.SessionScope;
+import com.liferay.faces.util.jsp.StringJspWriter;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -43,10 +49,10 @@ import com.liferay.faces.util.logging.LoggerFactory;
  *
  * @author  Neil Griffin
  */
-public class PageContextAdapter extends PageContext {
+public class PageContextAdapterImpl extends PageContext {
 
 	// Logger
-	private static final Logger logger = LoggerFactory.getLogger(PageContextAdapter.class);
+	private static final Logger logger = LoggerFactory.getLogger(PageContextAdapterImpl.class);
 
 	// Private Data Members
 	private ApplicationScope applicationScope;
@@ -62,12 +68,7 @@ public class PageContextAdapter extends PageContext {
 	private SessionScope sessionScope;
 	private StringJspWriter stringJspWriter;
 
-	public PageContextAdapter(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse,
-		ELContext elContext) {
-		this(httpServletRequest, httpServletResponse, elContext, new StringJspWriter());
-	}
-
-	public PageContextAdapter(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse,
+	public PageContextAdapterImpl(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse,
 		ELContext elContext, StringJspWriter stringJspWriter) {
 
 		this.httpServletRequest = httpServletRequest;
