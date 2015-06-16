@@ -167,8 +167,12 @@ public class PartialViewContextLiferayImpl extends PartialViewContextWrapper {
 
 		private class ScriptDataWriter extends StringJspWriterWrapper {
 
-			public ScriptDataWriter(StringJspWriter wrappedStringJspWriter) {
-				super(wrappedStringJspWriter);
+			// Private Data Members
+			private StringJspWriter wrappedStringJspWriter;
+
+			public ScriptDataWriter(StringJspWriter stringJspWriter) {
+				super(0, true);
+				this.wrappedStringJspWriter = stringJspWriter;
 			}
 
 			@Override
@@ -177,6 +181,11 @@ public class PartialViewContextLiferayImpl extends PartialViewContextWrapper {
 				if (!(string.startsWith("<script") || string.endsWith("script>"))) {
 					super.write(string);
 				}
+			}
+
+			@Override
+			public StringJspWriter getWrapped() {
+				return wrappedStringJspWriter;
 			}
 		}
 	}
