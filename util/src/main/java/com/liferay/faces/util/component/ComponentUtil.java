@@ -158,6 +158,11 @@ public class ComponentUtil {
 		return uiComponent;
 	}
 
+	/**
+	 * @deprecated  Call {@link #matchComponentInHierarchy(FacesContext, UIComponent, String)} and pass {@link
+	 *              FacesContext#getViewRoot()} instead.
+	 */
+	@Deprecated
 	public static UIComponent matchComponentInViewRoot(FacesContext facesContext, String partialClientId) {
 		return matchComponentInHierarchy(facesContext, facesContext.getViewRoot(), partialClientId);
 	}
