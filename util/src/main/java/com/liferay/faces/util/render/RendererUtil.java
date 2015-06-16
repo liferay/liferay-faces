@@ -14,9 +14,13 @@
 package com.liferay.faces.util.render;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 import javax.faces.component.UIComponent;
+import javax.faces.component.behavior.ClientBehavior;
+import javax.faces.component.behavior.ClientBehaviorHolder;
+import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 
 import com.liferay.faces.util.component.ComponentUtil;
@@ -29,34 +33,34 @@ import com.liferay.faces.util.lang.StringPool;
  */
 public class RendererUtil {
 
-	// Public Constants
-	public static final String[] MOUSE_DOM_EVENTS = {
-			"onclick", "ondblclick", "onmousedown", "onmousemove", "onmouseout", "onmouseover", "onmouseup"
-		};
-	public static final String[] KEYBOARD_DOM_EVENTS = { "onkeydown", "onkeypress", "onkeyup" };
+	public static void decodeClientBehaviors(FacesContext facesContext, UIComponent uiComponent) {
 
-	// Private Constants
-	private static final String JAVA_SCRIPT_HEX_PREFIX = "\\x";
-	private static final char[] _HEX_DIGITS = {
-			'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'
-		};
+		if (uiComponent instanceof ClientBehaviorHolder) {
 
-	/**
-	 * This method exists as a convenience for Component developers to encode attributes that pass through to the DOM in
-	 * JSF 2.1.
-	 */
-	public static void encodePassThroughAttributes(ResponseWriter responseWriter, UIComponent uiComponent,
-		final String[] PASS_THROUGH_ATTRIBUTES) throws IOException {
+			ClientBehaviorHolder clientBehaviorHolder = (ClientBehaviorHolder) uiComponent;
+			Map<String, List<ClientBehavior>> clientBehaviorMap = clientBehaviorHolder.getClientBehaviors();
 
-		Map<String, Object> attributes = uiComponent.getAttributes();
+			Map<String, String> requestParameterMap = facesContext.getExternalContext().getRequestParameterMap();
+			String behaviorEvent = requestParameterMap.get("javax.faces.behavior.event");
 
-		for (final String PASS_THROUGH_ATTRIBUTE : PASS_THROUGH_ATTRIBUTES) {
+			if (behaviorEvent != null) {
 
-			Object passThroughAttributeValue = attributes.get(PASS_THROUGH_ATTRIBUTE);
+				List<ClientBehavior> clientBehaviors = clientBehaviorMap.get(behaviorEvent);
 
-			if (passThroughAttributeValue != null) {
-				responseWriter.writeAttribute(PASS_THROUGH_ATTRIBUTE, passThroughAttributeValue,
-					PASS_THROUGH_ATTRIBUTE);
+				if (clientBehaviors != null) {
+					String source = requestParameterMap.get("javax.faces.source");
+
+					if (source != null) {
+						String clientId = uiComponent.getClientId(facesContext);
+
+						if (clientId.startsWith(source)) {
+
+							for (ClientBehavior behavior : clientBehaviors) {
+								behavior.decode(facesContext, uiComponent);
+							}
+						}
+					}
+				}
 			}
 		}
 	}
@@ -87,51 +91,5 @@ public class RendererUtil {
 		if (style != null) {
 			responseWriter.writeAttribute(Styleable.STYLE, style, Styleable.STYLE);
 		}
-	}
-
-	public static String escapeJavaScript(String javaScript) {
-
-		StringBuilder stringBuilder = new StringBuilder();
-		char[] javaScriptCharArray = javaScript.toCharArray();
-
-		for (char character : javaScriptCharArray) {
-
-			if ((character > 255) || Character.isLetterOrDigit(character)) {
-
-				stringBuilder.append(character);
-			}
-			else {
-				stringBuilder.append(JAVA_SCRIPT_HEX_PREFIX);
-
-				String hexString = toHexString(character);
-
-				if (hexString.length() == 1) {
-					stringBuilder.append(StringPool.ASCII_TABLE[48]);
-				}
-
-				stringBuilder.append(hexString);
-			}
-		}
-
-		if (stringBuilder.length() != javaScript.length()) {
-			javaScript = stringBuilder.toString();
-		}
-
-		return javaScript;
-	}
-
-	private static String toHexString(int i) {
-		char[] buffer = new char[8];
-
-		int index = 8;
-
-		do {
-			buffer[--index] = _HEX_DIGITS[i & 15];
-
-			i >>>= 4;
-		}
-		while (i != 0);
-
-		return new String(buffer, index, 8 - index);
 	}
 }
