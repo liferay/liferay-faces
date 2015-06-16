@@ -20,11 +20,11 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.ResponseWriter;
 
 import com.liferay.faces.alloy.render.internal.AlloyRendererUtil;
+import com.liferay.faces.util.ContentTypes;
 import com.liferay.faces.util.client.BrowserSniffer;
 import com.liferay.faces.util.client.Script;
 import com.liferay.faces.util.context.FacesRequestContext;
 import com.liferay.faces.util.lang.StringPool;
-import com.liferay.faces.util.render.ContentTypes;
 import com.liferay.faces.util.render.internal.DelegationResponseWriterBase;
 
 

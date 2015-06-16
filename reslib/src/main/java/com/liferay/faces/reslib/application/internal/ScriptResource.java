@@ -22,7 +22,7 @@ import javax.faces.application.Resource;
 import javax.faces.application.ResourceHandler;
 import javax.faces.context.FacesContext;
 
-import com.liferay.faces.util.render.ContentTypes;
+import com.liferay.faces.util.ContentTypes;
 
 
 /**
