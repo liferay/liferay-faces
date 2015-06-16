@@ -42,7 +42,6 @@ import com.liferay.faces.util.client.BrowserSnifferFactory;
 import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.lang.StringPool;
-import com.liferay.faces.util.render.RendererUtil;
 
 
 /**
@@ -215,7 +214,7 @@ public class InputTimeRenderer extends InputTimeRendererBase {
 
 				Date time = new Date(milliseconds);
 				String dateString = simpleDateFormat.format(time);
-				String escapedDateString = RendererUtil.escapeJavaScript(dateString);
+				String escapedDateString = escapeJavaScript(dateString);
 
 				responseWriter.write(StringPool.APOSTROPHE);
 				responseWriter.write(escapedDateString);

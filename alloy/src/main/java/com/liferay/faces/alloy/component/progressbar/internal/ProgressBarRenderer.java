@@ -297,7 +297,7 @@ public class ProgressBarRenderer extends ProgressBarRendererBase {
 		//J+
 		if ((label != null) && label.contains(TOKEN)) {
 
-			String escapedLabel = RendererUtil.escapeJavaScript(label);
+			String escapedLabel = escapeJavaScript(label);
 			encodeNonEscapedObject(responseWriter, VALUE_CHANGE,
 				"function(event){this.set('label','".concat(escapedLabel).concat(
 					"'.replace(LFAI.TOKEN_REGEX, event.newVal));}"), onFirst);

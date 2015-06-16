@@ -19,14 +19,12 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 
-import com.liferay.faces.alloy.client.internal.AlloyScriptUtil;
 import com.liferay.faces.util.client.BrowserSniffer;
 import com.liferay.faces.util.client.BrowserSnifferFactory;
 import com.liferay.faces.util.component.ClientComponent;
 import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.lang.StringPool;
-import com.liferay.faces.util.render.RendererUtil;
 
 
 /**
@@ -38,9 +36,13 @@ import com.liferay.faces.util.render.RendererUtil;
 	private static final String A_DOT = "A.";
 	private static final String DESTROY = "destroy";
 	private static final String IF = "if";
+	private static final String JAVA_SCRIPT_HEX_PREFIX = "\\x";
 	private static final String NEW = "new";
 	private static final String BACKSLASH_COLON = "\\\\:";
 	private static final String REGEX_COLON = "[:]";
+	private static final char[] _HEX_DIGITS = {
+			'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'
+		};
 
 	/* package-private */ static void encodeBoolean(ResponseWriter responseWriter, String attributeName, Boolean attributeValue,
 		boolean first) throws IOException {
@@ -138,7 +140,7 @@ import com.liferay.faces.util.render.RendererUtil;
 			BrowserSnifferFactory browserSnifferFactory = (BrowserSnifferFactory) FactoryExtensionFinder.getFactory(
 					BrowserSnifferFactory.class);
 			BrowserSniffer browserSniffer = browserSnifferFactory.getBrowserSniffer(facesContext.getExternalContext());
-			String alloyBeginScript = AlloyScriptUtil.getAlloyBeginScript(modules, yuiConfig, browserSniffer);
+			String alloyBeginScript = AlloyRendererUtil.getAlloyBeginScript(modules, yuiConfig, browserSniffer);
 			responseWriter.write(alloyBeginScript);
 		}
 
@@ -216,7 +218,7 @@ import com.liferay.faces.util.render.RendererUtil;
 		responseWriter.write(StringPool.OPEN_PARENTHESIS);
 		responseWriter.write(StringPool.APOSTROPHE);
 
-		String escapedClientKey = RendererUtil.escapeJavaScript(clientKey);
+		String escapedClientKey = escapeJavaScript(clientKey);
 		responseWriter.write(escapedClientKey);
 		responseWriter.write(StringPool.APOSTROPHE);
 		responseWriter.write(StringPool.COMMA);
@@ -243,7 +245,7 @@ import com.liferay.faces.util.render.RendererUtil;
 		responseWriter.write(StringPool.OPEN_PARENTHESIS);
 		responseWriter.write(StringPool.APOSTROPHE);
 
-		String escapedClientKey = RendererUtil.escapeJavaScript(clientKey);
+		String escapedClientKey = escapeJavaScript(clientKey);
 		responseWriter.write(escapedClientKey);
 		responseWriter.write(StringPool.APOSTROPHE);
 		responseWriter.write(StringPool.CLOSE_PARENTHESIS);
@@ -275,7 +277,7 @@ import com.liferay.faces.util.render.RendererUtil;
 	/* package-private */ static void encodeString(ResponseWriter responseWriter, String attributeName, Object attributeValue,
 		boolean first) throws IOException {
 
-		String escapedAttributeValue = RendererUtil.escapeJavaScript(attributeValue.toString());
+		String escapedAttributeValue = escapeJavaScript(attributeValue.toString());
 
 		if (!first) {
 			responseWriter.write(StringPool.COMMA);
@@ -300,10 +302,41 @@ import com.liferay.faces.util.render.RendererUtil;
 		if (escapedClientId != null) {
 
 			escapedClientId = escapedClientId.replaceAll(REGEX_COLON, BACKSLASH_COLON);
-			escapedClientId = RendererUtil.escapeJavaScript(escapedClientId);
+			escapedClientId = escapeJavaScript(escapedClientId);
 		}
 
 		return escapedClientId;
+	}
+
+	/* package-private */ static String escapeJavaScript(String javaScript) {
+
+		StringBuilder stringBuilder = new StringBuilder();
+		char[] javaScriptCharArray = javaScript.toCharArray();
+
+		for (char character : javaScriptCharArray) {
+
+			if ((character > 255) || Character.isLetterOrDigit(character)) {
+
+				stringBuilder.append(character);
+			}
+			else {
+				stringBuilder.append(JAVA_SCRIPT_HEX_PREFIX);
+
+				String hexString = toHexString(character);
+
+				if (hexString.length() == 1) {
+					stringBuilder.append(StringPool.ASCII_TABLE[48]);
+				}
+
+				stringBuilder.append(hexString);
+			}
+		}
+
+		if (stringBuilder.length() != javaScript.length()) {
+			javaScript = stringBuilder.toString();
+		}
+
+		return javaScript;
 	}
 
 	private static void encodeFunctionParameter(ResponseWriter responseWriter, Object parameter) throws IOException {
@@ -347,4 +380,20 @@ import com.liferay.faces.util.render.RendererUtil;
 			}
 		}
 	}
+
+	private static String toHexString(int i) {
+		char[] buffer = new char[8];
+
+		int index = 8;
+
+		do {
+			buffer[--index] = _HEX_DIGITS[i & 15];
+
+			i >>>= 4;
+		}
+		while (i != 0);
+
+		return new String(buffer, index, 8 - index);
+	}
+
 }

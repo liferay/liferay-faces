@@ -39,7 +39,6 @@ import com.liferay.faces.util.client.BrowserSnifferFactory;
 import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.lang.StringPool;
-import com.liferay.faces.util.render.RendererUtil;
 
 
 /**
@@ -208,7 +207,7 @@ public class InputDateRenderer extends InputDateRendererBase {
 				// attached to the input.
 				String datePattern = inputDate.getPattern();
 				String mask = getMaskFromDatePattern(datePattern);
-				String escapedMask = RendererUtil.escapeJavaScript(mask);
+				String escapedMask = escapeJavaScript(mask);
 				date = new JavaScriptFragment("A.Date.format(event.date,{format:'".concat(escapedMask).concat("'})"));
 			}
 

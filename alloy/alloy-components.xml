@@ -1364,7 +1364,8 @@
 		</attributes>
 	</component>
 	<component name="Fieldset" extendsTags="KeyboardDOMEvents MouseDOMEvents Styleable UIComponentBase"
-		extraStyleClasses="fieldset" parentClass="javax.faces.component.UIPanel">
+		extraStyleClasses="fieldset" parentClass="javax.faces.component.UIPanel"
+		rendererParentClass="com.liferay.faces.util.render.PassThroughRenderer">
 		<description>
 			<![CDATA[Fieldset is a UIPanel component that renders a &lt;fieldset&gt; element in order to group form elements.]]>
 		</description>
@@ -2062,7 +2063,8 @@
 			<![CDATA[Link is a UIOutcomeTarget component that renders an <code>&lt;a&gt;</code> element (hyperlink). Since it extends HtmlLink, it supports all the features of h:link.]]>
 		</description>
 	</component>
-	<component name="Media" extendsTags="KeyboardDOMEvents MouseDOMEvents Styleable ResourceCommon" generateTaglibXML="false">
+	<component name="Media" extendsTags="KeyboardDOMEvents MouseDOMEvents Styleable ResourceCommon" generateTaglibXML="false"
+		rendererParentClass="com.liferay.faces.util.render.PassThroughRenderer">
 		<attributes>
 			<attribute>
 				<defaultValue>false</defaultValue>

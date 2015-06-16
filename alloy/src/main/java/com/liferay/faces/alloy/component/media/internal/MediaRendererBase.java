@@ -17,7 +17,7 @@ package com.liferay.faces.alloy.component.media.internal;
 
 import javax.annotation.Generated;
 
-import javax.faces.render.Renderer;
+import com.liferay.faces.alloy.render.internal.PassThroughRenderer;
 
 
 /**
@@ -25,7 +25,7 @@ import javax.faces.render.Renderer;
  * @author	Kyle Stiemann
  */
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
-public abstract class MediaRendererBase extends Renderer {
+public abstract class MediaRendererBase extends PassThroughRenderer {
 
 	// Protected Constants
 	protected static final String AUTOPLAY = "autoplay";
