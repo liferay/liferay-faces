@@ -19,7 +19,6 @@ import java.util.List;
 import org.xml.sax.Attributes;
 
 import com.liferay.faces.bridge.internal.BridgeConstants;
-import com.liferay.faces.util.application.ResourceConstants;
 import com.liferay.faces.util.lang.StringPool;
 
 
@@ -154,10 +153,10 @@ public class HeadResource {
 					if (equalsPos > 0) {
 						String name = nameValuePair.substring(0, equalsPos);
 
-						if (name.endsWith(ResourceConstants.JAVAX_FACES_RESOURCE)) {
+						if (name.endsWith("javax.faces.resource")) {
 							facesResource = nameValuePair.substring(equalsPos + 1);
 						}
-						else if (name.endsWith(ResourceConstants.LN)) {
+						else if (name.endsWith(StringPool.LN)) {
 							facesLibrary = nameValuePair.substring(equalsPos + 1);
 						}
 					}

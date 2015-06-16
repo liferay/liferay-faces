@@ -36,7 +36,6 @@ import javax.portlet.PortletResponse;
 import com.liferay.faces.bridge.component.internal.ResourceComponent;
 import com.liferay.faces.bridge.renderkit.html_basic.internal.HeadRendererBridgeImpl;
 import com.liferay.faces.bridge.util.internal.URLUtil;
-import com.liferay.faces.util.application.ResourceConstants;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
@@ -111,8 +110,8 @@ public class HeadRendererPrimeFacesImpl extends HeadRendererBridgeImpl {
 			ExternalContext externalContext = facesContext.getExternalContext();
 			PortletResponse portletResponse = (PortletResponse) externalContext.getResponse();
 			String namespace = portletResponse.getNamespace();
-			String resourceNameParam = namespace + ResourceConstants.JAVAX_FACES_RESOURCE;
-			String libraryNameParam = namespace + ResourceConstants.LN;
+			String resourceNameParam = namespace + "javax.faces.resource";
+			String libraryNameParam = namespace + StringPool.LN;
 
 			for (String externalScriptURL : externalScriptURLs) {
 
