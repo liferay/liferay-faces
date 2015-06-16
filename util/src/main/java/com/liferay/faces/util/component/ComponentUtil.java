@@ -158,10 +158,6 @@ public class ComponentUtil {
 		return uiComponent;
 	}
 
-	public static UIComponent matchComponentInViewRoot(FacesContext facesContext, String partialClientId) {
-		return matchComponentInHierarchy(facesContext, facesContext.getViewRoot(), partialClientId);
-	}
-
 	public static String getClientVarName(FacesContext facesContext, ClientComponent clientComponent) {
 
 		char separatorChar = UINamingContainer.getSeparatorChar(facesContext);
