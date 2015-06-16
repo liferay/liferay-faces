@@ -27,8 +27,8 @@ import javax.faces.event.PostAddToViewEvent;
 import javax.faces.render.FacesRenderer;
 
 import com.liferay.faces.alloy.component.commandlink.CommandLink;
+import com.liferay.faces.alloy.render.internal.AlloyRendererUtil;
 import com.liferay.faces.util.render.internal.DelegationResponseWriter;
-import com.liferay.faces.util.render.RendererUtil;
 
 
 /**
@@ -54,8 +54,8 @@ public class CommandLinkRenderer extends CommandLinkRendererBase implements Comp
 		CommandLink commandLink = (CommandLink) componentSystemEvent.getComponent();
 
 		if (commandLink.isAjax()) {
-			RendererUtil.addDefaultAjaxBehavior(commandLink, commandLink.getExecute(), commandLink.getProcess(), "@all",
-				commandLink.getRender(), commandLink.getUpdate(), "@none");
+			AlloyRendererUtil.addDefaultAjaxBehavior(commandLink, commandLink.getExecute(), commandLink.getProcess(),
+				"@all", commandLink.getRender(), commandLink.getUpdate(), "@none");
 		}
 	}
 }

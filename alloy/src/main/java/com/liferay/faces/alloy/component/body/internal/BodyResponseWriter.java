@@ -19,7 +19,7 @@ import java.util.List;
 import javax.faces.component.UIComponent;
 import javax.faces.context.ResponseWriter;
 
-import com.liferay.faces.alloy.client.internal.AlloyScriptUtil;
+import com.liferay.faces.alloy.render.internal.AlloyRendererUtil;
 import com.liferay.faces.util.client.BrowserSniffer;
 import com.liferay.faces.util.client.Script;
 import com.liferay.faces.util.context.FacesRequestContext;
@@ -54,7 +54,7 @@ public class BodyResponseWriter extends DelegationResponseWriterBase {
 
 			FacesRequestContext facesRequestContext = FacesRequestContext.getCurrentInstance();
 			List<Script> scripts = facesRequestContext.getScripts();
-			AlloyScriptUtil.writeScripts(this, scripts, browserSniffer);
+			AlloyRendererUtil.writeScripts(this, scripts, browserSniffer);
 			super.endElement(StringPool.SCRIPT);
 		}
 
