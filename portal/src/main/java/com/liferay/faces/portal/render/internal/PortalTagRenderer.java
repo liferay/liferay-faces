@@ -34,7 +34,6 @@ import javax.servlet.jsp.tagext.Tag;
 import com.liferay.faces.util.context.FacesRequestContext;
 import com.liferay.faces.util.jsp.PageContextAdapter;
 import com.liferay.faces.util.jsp.StringJspWriter;
-import com.liferay.faces.util.portal.ScriptTagUtil;
 
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.util.PortalUtil;
