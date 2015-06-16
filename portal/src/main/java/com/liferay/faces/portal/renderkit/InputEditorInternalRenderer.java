@@ -32,6 +32,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.liferay.faces.portal.component.InputEditorInternal;
+import com.liferay.faces.portal.render.internal.ScriptTagUtil;
 import com.liferay.faces.portal.servlet.ScriptCapturingHttpServletRequest;
 import com.liferay.faces.util.context.FacesRequestContext;
 import com.liferay.faces.util.jsp.JspIncludeResponse;
@@ -40,10 +41,9 @@ import com.liferay.faces.util.jsp.StringJspWriter;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
-import com.liferay.faces.util.portal.ScriptTagUtil;
 
-import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.kernel.editor.EditorUtil;
+import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
