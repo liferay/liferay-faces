@@ -23,14 +23,15 @@ import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.BodyContent;
 
 import org.w3c.dom.Element;
 
 import com.liferay.faces.bridge.renderkit.html_basic.internal.ElementImpl;
 import com.liferay.faces.bridge.taglib.liferay.internal.HtmlTopTag;
-import com.liferay.faces.util.jsp.PageContextAdapter;
-import com.liferay.faces.util.jsp.StringBodyContent;
+import com.liferay.faces.util.factory.FactoryExtensionFinder;
+import com.liferay.faces.util.jsp.JspAdapterFactory;
 import com.liferay.faces.util.jsp.StringJspWriter;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
@@ -71,11 +72,13 @@ public class HeadResponseWriterLiferayImpl extends HeadResponseWriterBase {
 		ELContext elContext = facesContext.getELContext();
 
 		// Invoke the Liferay HtmlTopTag class directly (rather than using liferay-util:html-top from a JSP).
-		StringJspWriter stringJspWriter = new StringJspWriter();
-		BodyContent bodyContent = new StringBodyContent(stringJspWriter);
+		JspAdapterFactory jspAdapterFactory = (JspAdapterFactory) FactoryExtensionFinder.getFactory(
+				JspAdapterFactory.class);
+		StringJspWriter stringJspWriter = jspAdapterFactory.getStringJspWriter();
+		BodyContent bodyContent = jspAdapterFactory.getBodyContent(stringJspWriter);
 		String elementAsString = element.toString();
 		HtmlTopTag htmlTopTag = new HtmlTopTag();
-		PageContextAdapter pageContextAdapter = new PageContextAdapter(httpServletRequest, httpServletResponse,
+		PageContext pageContextAdapter = jspAdapterFactory.getPageContext(httpServletRequest, httpServletResponse,
 				elContext, stringJspWriter);
 		htmlTopTag.setPageContext(pageContextAdapter);
 		htmlTopTag.doStartTag();
