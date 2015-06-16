@@ -13,18 +13,23 @@
  */
 package com.liferay.faces.util.jsp;
 
-import javax.servlet.jsp.JspWriter;
+import javax.el.ELContext;
+import javax.faces.FacesWrapper;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.jsp.PageContext;
+import javax.servlet.jsp.tagext.BodyContent;
 
 
 /**
  * @author  Kyle Stiemann
  */
-public abstract class StringJspWriter extends JspWriter {
+public abstract class JspAdapterFactory implements FacesWrapper<JspAdapterFactory> {
 
-	protected StringJspWriter(int bufferSize, boolean autoFlush) {
-		super(bufferSize, autoFlush);
-	}
+	public abstract BodyContent getBodyContent(StringJspWriter stringJspWriter);
 
-	@Override
-	public abstract String toString();
+	public abstract PageContext getPageContext(HttpServletRequest httpServletRequest,
+		HttpServletResponse httpServletResponse, ELContext elContext, StringJspWriter stringJspWriter);
+
+	public abstract StringJspWriter getStringJspWriter();
 }

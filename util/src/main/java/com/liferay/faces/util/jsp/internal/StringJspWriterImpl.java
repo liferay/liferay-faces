@@ -11,185 +11,184 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.util.jsp;
+package com.liferay.faces.util.jsp.internal;
 
 import java.io.IOException;
-import java.io.Reader;
-import java.io.StringReader;
-import java.io.Writer;
+import java.io.StringWriter;
 
 import javax.servlet.jsp.JspWriter;
-import javax.servlet.jsp.tagext.BodyContent;
+
+import com.liferay.faces.util.jsp.StringJspWriter;
+import com.liferay.faces.util.lang.StringPool;
 
 
 /**
- * This class serves as an implementation of {@link BodyContent} that utilizes a {@link StringJspWriter} instead of a
- * {@link JspWriter} provided by the servlet container. This provides the ability to have JSP {@link Tag} classes write
- * their {@link BodyContent} to an underlying String rather than to a JSP, which is helpful when invoking {@link Tag}
- * classes directly for use with Facelets.
+ * This class is an implementation of {@link JspWriter} that writes to an underlying String instead of JSP.
  *
  * @author  Neil Griffin
  */
-public class StringBodyContent extends BodyContent {
+public class StringJspWriterImpl extends StringJspWriter {
+
+	// Public Constants
+	public static final boolean DEFAULT_AUTO_FLUSH = true;
+	public static final int DEFAULT_BUFFER_SIZE = 1024;
 
 	// Private Data Members
-	private StringJspWriter facesStringWriter;
+	private StringWriter stringWriter;
 
-	public StringBodyContent() {
-		this(new StringJspWriter());
-	}
-
-	public StringBodyContent(int bufferSize) {
-		this(new StringJspWriter(bufferSize));
-	}
-
-	public StringBodyContent(StringJspWriter facesStringWriter) {
-		super(facesStringWriter);
-		this.facesStringWriter = facesStringWriter;
-	}
-
-	public StringBodyContent(int bufferSize, boolean autoFlush) {
-		this(new StringJspWriter(bufferSize, autoFlush));
+	public StringJspWriterImpl() {
+		super(DEFAULT_BUFFER_SIZE, DEFAULT_AUTO_FLUSH);
+		this.stringWriter = new StringWriter(DEFAULT_BUFFER_SIZE);
 	}
 
 	@Override
 	public void clear() throws IOException {
-		facesStringWriter.clear();
+		stringWriter = new StringWriter(getBufferSize());
 	}
 
 	@Override
 	public void clearBuffer() throws IOException {
-		facesStringWriter.clearBuffer();
+		stringWriter = new StringWriter(getBufferSize());
 	}
 
 	@Override
 	public void close() throws IOException {
-		facesStringWriter.close();
+		stringWriter.close();
+	}
+
+	@Override
+	public void flush() throws IOException {
+		stringWriter.flush();
 	}
 
 	@Override
 	public void newLine() throws IOException {
-		facesStringWriter.newLine();
+		stringWriter.write(StringPool.NEW_LINE);
 	}
 
 	@Override
 	public void print(boolean b) throws IOException {
-		facesStringWriter.print(b);
+		stringWriter.write(Boolean.toString(b));
 	}
 
 	@Override
 	public void print(char c) throws IOException {
-		facesStringWriter.print(c);
+		stringWriter.write(Character.toString(c));
 	}
 
 	@Override
 	public void print(int i) throws IOException {
-		facesStringWriter.print(i);
+		stringWriter.write(Integer.toString(i));
 	}
 
 	@Override
 	public void print(long l) throws IOException {
-		facesStringWriter.print(l);
+		stringWriter.write(Long.toString(l));
 	}
 
 	@Override
 	public void print(float f) throws IOException {
-		facesStringWriter.print(f);
+		stringWriter.write(Float.toString(f));
 	}
 
 	@Override
 	public void print(double d) throws IOException {
-		facesStringWriter.print(d);
+		stringWriter.write(Double.toString(d));
 	}
 
 	@Override
 	public void print(char[] s) throws IOException {
-		facesStringWriter.print(s);
+		stringWriter.write(s);
 	}
 
 	@Override
 	public void print(String s) throws IOException {
-		facesStringWriter.print(s);
+
+		if (s != null) {
+			stringWriter.write(s);
+		}
 	}
 
 	@Override
 	public void print(Object o) throws IOException {
-		facesStringWriter.print(o);
+
+		if (o != null) {
+			stringWriter.write(o.toString());
+		}
 	}
 
 	@Override
 	public void println() throws IOException {
-		facesStringWriter.println();
+		stringWriter.write(StringPool.NEW_LINE);
 	}
 
 	@Override
 	public void println(boolean b) throws IOException {
-		facesStringWriter.println(b);
+		print(b);
+		println();
 	}
 
 	@Override
 	public void println(char c) throws IOException {
-		facesStringWriter.println(c);
+		print(c);
+		println();
 	}
 
 	@Override
 	public void println(int i) throws IOException {
-		facesStringWriter.println(i);
+		print(i);
+		println();
 	}
 
 	@Override
 	public void println(long l) throws IOException {
-		facesStringWriter.println(l);
+		print(l);
+		println();
 	}
 
 	@Override
 	public void println(float f) throws IOException {
-		facesStringWriter.println(f);
+		print(f);
+		println();
 	}
 
 	@Override
 	public void println(double d) throws IOException {
-		facesStringWriter.println(d);
+		print(d);
+		println();
 	}
 
 	@Override
 	public void println(char[] s) throws IOException {
-		facesStringWriter.println(s);
+		print(s);
+		println();
 	}
 
 	@Override
 	public void println(String s) throws IOException {
-		facesStringWriter.println(s);
+		print(s);
+		println();
 	}
 
 	@Override
 	public void println(Object o) throws IOException {
-		facesStringWriter.println(o);
+		print(o);
+		println();
 	}
 
 	@Override
-	public void write(char[] buf, int off, int len) throws IOException {
-		facesStringWriter.write(buf, off, len);
+	public String toString() {
+		return stringWriter.toString();
 	}
 
 	@Override
-	public void writeOut(Writer out) throws IOException {
-		out.write(getString());
-	}
-
-	@Override
-	public Reader getReader() {
-		return new StringReader(getString());
+	public void write(char[] cbuf, int off, int len) throws IOException {
+		stringWriter.write(cbuf, off, len);
 	}
 
 	@Override
 	public int getRemaining() {
-		return facesStringWriter.getRemaining();
-	}
-
-	@Override
-	public String getString() {
-		return facesStringWriter.toString();
+		return getBufferSize() - stringWriter.getBuffer().length();
 	}
 
 }
