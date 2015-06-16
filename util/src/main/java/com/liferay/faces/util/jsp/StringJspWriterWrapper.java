@@ -22,197 +22,192 @@ import javax.faces.FacesWrapper;
 /**
  * @author  Kyle Stiemann
  */
-public class StringJspWriterWrapper extends StringJspWriter implements FacesWrapper<StringJspWriter> {
+public abstract class StringJspWriterWrapper extends StringJspWriter implements FacesWrapper<StringJspWriter> {
 
-	StringJspWriter wrappedStringJspWriter;
-
-	public StringJspWriterWrapper(StringJspWriter wrappedStringJspWriter) {
-		super(0, true);
-		this.wrappedStringJspWriter = wrappedStringJspWriter;
+	protected StringJspWriterWrapper(int bufferSize, boolean autoFlush) {
+		super(bufferSize, autoFlush);
 	}
 
 	@Override
 	public Writer append(char c) throws IOException {
-		return wrappedStringJspWriter.append(c);
+		return getWrapped().append(c);
 	}
 
 	@Override
 	public Writer append(CharSequence csq) throws IOException {
-		return wrappedStringJspWriter.append(csq);
+		return getWrapped().append(csq);
 	}
 
 	@Override
 	public Writer append(CharSequence csq, int start, int end) throws IOException {
-		return wrappedStringJspWriter.append(csq, start, end);
+		return getWrapped().append(csq, start, end);
 	}
 
 	@Override
 	public void clear() throws IOException {
-		wrappedStringJspWriter.clear();
+		getWrapped().clear();
 	}
 
 	@Override
 	public void clearBuffer() throws IOException {
-		wrappedStringJspWriter.clearBuffer();
+		getWrapped().clearBuffer();
 	}
 
 	@Override
 	public void close() throws IOException {
-		wrappedStringJspWriter.close();
+		getWrapped().close();
 	}
 
 	@Override
 	public void flush() throws IOException {
-		wrappedStringJspWriter.flush();
+		getWrapped().flush();
 	}
 
 	@Override
 	public void newLine() throws IOException {
-		wrappedStringJspWriter.newLine();
+		getWrapped().newLine();
 	}
 
 	@Override
 	public void print(boolean bln) throws IOException {
-		wrappedStringJspWriter.print(bln);
+		getWrapped().print(bln);
 	}
 
 	@Override
 	public void print(char c) throws IOException {
-		wrappedStringJspWriter.print(c);
+		getWrapped().print(c);
 	}
 
 	@Override
 	public void print(int i) throws IOException {
-		wrappedStringJspWriter.print(i);
+		getWrapped().print(i);
 	}
 
 	@Override
 	public void print(long l) throws IOException {
-		wrappedStringJspWriter.print(l);
+		getWrapped().print(l);
 	}
 
 	@Override
 	public void print(float f) throws IOException {
-		wrappedStringJspWriter.print(f);
+		getWrapped().print(f);
 	}
 
 	@Override
 	public void print(double d) throws IOException {
-		wrappedStringJspWriter.print(d);
+		getWrapped().print(d);
 	}
 
 	@Override
 	public void print(char[] chars) throws IOException {
-		wrappedStringJspWriter.print(chars);
+		getWrapped().print(chars);
 	}
 
 	@Override
 	public void print(String string) throws IOException {
-		wrappedStringJspWriter.print(string);
+		getWrapped().print(string);
 	}
 
 	@Override
 	public void print(Object o) throws IOException {
-		wrappedStringJspWriter.print(o);
+		getWrapped().print(o);
 	}
 
 	@Override
 	public void println() throws IOException {
-		wrappedStringJspWriter.println();
+		getWrapped().println();
 	}
 
 	@Override
 	public void println(boolean bln) throws IOException {
-		wrappedStringJspWriter.println(bln);
+		getWrapped().println(bln);
 	}
 
 	@Override
 	public void println(char c) throws IOException {
-		wrappedStringJspWriter.println(c);
+		getWrapped().println(c);
 	}
 
 	@Override
 	public void println(int i) throws IOException {
-		wrappedStringJspWriter.println(i);
+		getWrapped().println(i);
 	}
 
 	@Override
 	public void println(long l) throws IOException {
-		wrappedStringJspWriter.println(l);
+		getWrapped().println(l);
 	}
 
 	@Override
 	public void println(float f) throws IOException {
-		wrappedStringJspWriter.println(f);
+		getWrapped().println(f);
 	}
 
 	@Override
 	public void println(double d) throws IOException {
-		wrappedStringJspWriter.println(d);
+		getWrapped().println(d);
 	}
 
 	@Override
 	public void println(char[] chars) throws IOException {
-		wrappedStringJspWriter.println(chars);
+		getWrapped().println(chars);
 	}
 
 	@Override
 	public void println(String string) throws IOException {
-		wrappedStringJspWriter.println(string);
+		getWrapped().println(string);
 	}
 
 	@Override
 	public void println(Object o) throws IOException {
-		wrappedStringJspWriter.println(o);
+		getWrapped().println(o);
 	}
 
 	@Override
 	public String toString() {
-		return wrappedStringJspWriter.toString();
+		return getWrapped().toString();
 	}
 
 	@Override
 	public void write(String str) throws IOException {
-		wrappedStringJspWriter.write(str);
+		getWrapped().write(str);
 	}
 
 	@Override
 	public void write(char[] cbuf) throws IOException {
-		wrappedStringJspWriter.write(cbuf);
+		getWrapped().write(cbuf);
 	}
 
 	@Override
 	public void write(int c) throws IOException {
-		wrappedStringJspWriter.write(c);
+		getWrapped().write(c);
 	}
 
 	@Override
 	public void write(String str, int off, int len) throws IOException {
-		wrappedStringJspWriter.write(str, off, len);
+		getWrapped().write(str, off, len);
 	}
 
 	@Override
 	public void write(char[] cbuf, int off, int len) throws IOException {
-		wrappedStringJspWriter.write(cbuf, off, len);
+		getWrapped().write(cbuf, off, len);
 	}
 
 	@Override
 	public int getBufferSize() {
-		return wrappedStringJspWriter.getBufferSize();
+		return getWrapped().getBufferSize();
 	}
 
 	@Override
 	public boolean isAutoFlush() {
-		return wrappedStringJspWriter.isAutoFlush();
+		return getWrapped().isAutoFlush();
 	}
 
 	@Override
 	public int getRemaining() {
-		return wrappedStringJspWriter.getRemaining();
+		return getWrapped().getRemaining();
 	}
 
 	@Override
-	public StringJspWriter getWrapped() {
-		return wrappedStringJspWriter;
-	}
+	public abstract StringJspWriter getWrapped();
 }
