@@ -20,7 +20,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 
-import com.liferay.faces.alloy.client.internal.AlloyScriptUtil;
+import com.liferay.faces.alloy.render.internal.AlloyRendererUtil;
 import com.liferay.faces.util.client.BrowserSniffer;
 import com.liferay.faces.util.client.BrowserSnifferFactory;
 import com.liferay.faces.util.client.Script;
@@ -29,7 +29,6 @@ import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
-import com.liferay.faces.util.product.Product;
 import com.liferay.faces.util.render.ContentTypes;
 import com.liferay.faces.util.render.internal.BufferedScriptResponseWriter;
 
@@ -109,7 +108,7 @@ public class ScriptRenderer extends ScriptRendererCompat {
 						BrowserSnifferFactory.class);
 				BrowserSniffer browserSniffer = browserSnifferFactory.getBrowserSniffer(
 						facesContext.getExternalContext());
-				String alloyBeginScript = AlloyScriptUtil.getAlloyBeginScript(useArray, browserSniffer);
+				String alloyBeginScript = AlloyRendererUtil.getAlloyBeginScript(useArray, browserSniffer);
 				responseWriter.write(alloyBeginScript);
 			}
 		}
