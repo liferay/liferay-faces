@@ -29,6 +29,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.liferay.faces.reslib.config.ResLibConfigParam;
+import com.liferay.faces.util.HttpHeaders;
 import com.liferay.faces.util.application.ResourceConstants;
 import com.liferay.faces.util.application.ResourceHandlerWrapperBase;
 import com.liferay.faces.util.config.ApplicationConfig;
@@ -38,7 +39,6 @@ import com.liferay.faces.util.io.ResourceOutputStream;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.product.ProductConstants;
 import com.liferay.faces.util.product.ProductMap;
-import com.liferay.faces.util.render.HttpHeaders;
 
 
 /**
