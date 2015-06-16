@@ -23,9 +23,9 @@ import javax.portlet.PortletRequest;
 import javax.portlet.filter.PortletRequestWrapper;
 import javax.servlet.http.HttpServletRequest;
 
+import com.liferay.faces.util.HttpHeaders;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
-import com.liferay.faces.util.render.HttpHeaders;
 
 import com.liferay.portal.model.Portlet;
 
