@@ -15,8 +15,8 @@ package com.liferay.faces.util.client.internal;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.liferay.faces.util.HttpHeaders;
 import com.liferay.faces.util.lang.StringPool;
-import com.liferay.faces.util.render.HttpHeaders;
 
 //J-
 /**
