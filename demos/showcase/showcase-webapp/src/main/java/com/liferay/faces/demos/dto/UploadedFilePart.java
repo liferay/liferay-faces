@@ -22,8 +22,8 @@ import java.util.Map;
 import javax.faces.FacesWrapper;
 import javax.servlet.http.Part;
 
+import com.liferay.faces.util.HttpHeaders;
 import com.liferay.faces.util.model.UploadedFile;
-import com.liferay.faces.util.render.HttpHeaders;
 
 
 /**
