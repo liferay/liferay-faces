@@ -11,11 +11,11 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.util.jsp;
+package com.liferay.faces.util.jsp.internal;
 
 import java.util.Enumeration;
 
-import javax.servlet.http.HttpSession;
+import javax.servlet.ServletContext;
 
 import com.liferay.faces.util.map.AbstractPropertyMap;
 import com.liferay.faces.util.map.AbstractPropertyMapEntry;
@@ -24,39 +24,39 @@ import com.liferay.faces.util.map.AbstractPropertyMapEntry;
 /**
  * @author  Neil Griffin
  */
-public class SessionScope extends AbstractPropertyMap<Object> {
+public class ApplicationScope extends AbstractPropertyMap<Object> {
 
 	// Private Data Members
-	private HttpSession httpSession;
+	private ServletContext servletContext;
 
-	public SessionScope(HttpSession httpSession) {
-		this.httpSession = httpSession;
+	public ApplicationScope(ServletContext servletContext) {
+		this.servletContext = servletContext;
 	}
 
 	@Override
 	protected AbstractPropertyMapEntry<Object> createPropertyMapEntry(String name) {
-		return new SessionScopeEntry(httpSession, name);
+		return new ApplicationScopeEntry(servletContext, name);
 	}
 
 	@Override
 	protected void removeProperty(String name) {
-		httpSession.removeAttribute(name);
+		servletContext.removeAttribute(name);
 	}
 
 	@Override
 	protected Object getProperty(String name) {
-		return httpSession.getAttribute(name);
+		return servletContext.getAttribute(name);
 	}
 
 	@Override
 	protected void setProperty(String name, Object value) {
-		httpSession.setAttribute(name, value);
+		servletContext.setAttribute(name, value);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	protected Enumeration<String> getPropertyNames() {
-		return (Enumeration<String>) httpSession.getAttributeNames();
+		return (Enumeration<String>) servletContext.getAttributeNames();
 	}
 
 }
