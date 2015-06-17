@@ -6,7 +6,7 @@
 		<tag-name>inputFile</tag-name>
 		<component>
 			<component-type>com.liferay.faces.bridge.component.inputfile.InputFile</component-type>
-			<renderer-type>com.liferay.faces.bridge.component.inputfile.internal.InputFileRenderer</renderer-type>
+			<renderer-type>com.liferay.faces.bridge.component.inputfile.InputFileRenderer</renderer-type>
 			<handler-class>com.liferay.faces.bridge.component.inputfile.internal.InputFileHandler</handler-class>
 		</component>
 	</tag>
