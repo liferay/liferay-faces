@@ -10,7 +10,7 @@
 		<tag-name>actionURL</tag-name>
 		<component>
 			<component-type>com.liferay.faces.portlet.component.actionurl.ActionURL</component-type>
-			<renderer-type>com.liferay.faces.portlet.component.actionurl.internal.ActionURLRenderer</renderer-type>
+			<renderer-type>com.liferay.faces.portlet.component.actionurl.ActionURLRenderer</renderer-type>
 		</component>
 		<attribute>
 			<description><![CDATA[When true, copy the current request's render parameters to the URL. Defaults to false.]]></description>
@@ -73,7 +73,7 @@
 		<tag-name>namespace</tag-name>
 		<component>
 			<component-type>com.liferay.faces.portlet.component.namespace.Namespace</component-type>
-			<renderer-type>com.liferay.faces.portlet.component.namespace.internal.NamespaceRenderer</renderer-type>
+			<renderer-type>com.liferay.faces.portlet.component.namespace.NamespaceRenderer</renderer-type>
 		</component>
 		<attribute>
 			<description><![CDATA[Introduces an EL variable that contains the portlet namespace.]]></description>
@@ -134,7 +134,7 @@
 		<tag-name>renderURL</tag-name>
 		<component>
 			<component-type>com.liferay.faces.portlet.component.renderurl.RenderURL</component-type>
-			<renderer-type>com.liferay.faces.portlet.component.renderurl.internal.RenderURLRenderer</renderer-type>
+			<renderer-type>com.liferay.faces.portlet.component.renderurl.RenderURLRenderer</renderer-type>
 		</component>
 		<attribute>
 			<description><![CDATA[When true, copy the current request's render parameters to the URL. Defaults to false.]]></description>
@@ -181,7 +181,7 @@
 		<tag-name>resourceURL</tag-name>
 		<component>
 			<component-type>com.liferay.faces.portlet.component.resourceurl.ResourceURL</component-type>
-			<renderer-type>com.liferay.faces.portlet.component.resourceurl.internal.ResourceURLRenderer</renderer-type>
+			<renderer-type>com.liferay.faces.portlet.component.resourceurl.ResourceURLRenderer</renderer-type>
 		</component>
 		<attribute>
 			<description><![CDATA[The cacheability of the resource returned by the resourceURL. Valid values include <code>ResourceURL.FULL</code>, <code>ResourceURL.PAGE</code>, and <code>ResourceURL.PORTLET</code>. Defaults to <code>ResourceURL.PAGE</code>.]]></description>
