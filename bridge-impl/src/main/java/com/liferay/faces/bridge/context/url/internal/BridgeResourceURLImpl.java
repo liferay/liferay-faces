@@ -29,7 +29,6 @@ import javax.portlet.faces.Bridge;
 import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.bridge.context.url.BridgeResourceURL;
 import com.liferay.faces.bridge.context.url.BridgeURI;
-import com.liferay.faces.util.application.ResourceConstants;
 import com.liferay.faces.util.helper.BooleanHelper;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
@@ -150,7 +149,7 @@ public class BridgeResourceURLImpl extends BridgeResourceURLCompatImpl implement
 		}
 
 		// Otherwise, if the URL is identified by the ResourceHandler as a JSF2 resource URL, then
-		else if ((uri != null) && (uri.contains(ResourceConstants.JAVAX_FACES_RESOURCE))) {
+		else if ((uri != null) && (uri.contains("javax.faces.resource"))) {
 
 			// If the URL has already been encoded, then return the URL string unmodified.
 			if (uri.indexOf(ENCODED_RESOURCE_TOKEN) > 0) {
