@@ -13,6 +13,8 @@
  */
 package com.liferay.faces.util.context.internal;
 
+import com.liferay.faces.util.context.ExtFacesContext;
+import com.liferay.faces.util.context.FacesContextHelper;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
@@ -37,9 +39,6 @@ import javax.faces.context.ResponseWriter;
 import javax.faces.event.PhaseId;
 import javax.faces.event.PhaseListener;
 import javax.faces.render.RenderKit;
-
-import com.liferay.faces.util.context.ExtFacesContext;
-import com.liferay.faces.util.context.FacesContextHelper;
 
 
 /**
@@ -413,11 +412,6 @@ public class ExtFacesContextImpl extends ExtFacesContext {
 		return FacesContext.getCurrentInstance();
 	}
 
-	/**
-	 * @deprecated  Call {@link FacesRequestContext#addScript(com.liferay.faces.util.client.Script)} or {@link
-	 *              FacesRequestContext#getScripts()} instead.
-	 */
-	@Deprecated
 	public Map<String, String> getJavaScriptMap() {
 		return facesContextHelper.getJavaScriptMap();
 	}

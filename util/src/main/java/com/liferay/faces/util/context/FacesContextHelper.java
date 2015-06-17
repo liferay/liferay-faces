@@ -258,11 +258,7 @@ public interface FacesContextHelper {
 
 	/**
 	 * Returns the map of JavaScript strings that need to be included at the end of a response.
-	 *
-	 * @deprecated  Call {@link FacesRequestContext#addScript(com.liferay.faces.util.client.Script)} or {@link
-	 *              FacesRequestContext#getScripts()} instead.
 	 */
-	@Deprecated
 	public abstract Map<String, String> getJavaScriptMap();
 
 	/**

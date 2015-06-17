@@ -533,11 +533,8 @@ public class LiferayFacesContextImpl extends LiferayFacesContext implements Seri
 	}
 
 	/**
-	 * @see         FacesContextHelper#getJavaScriptMap()
-	 * @deprecated  Call {@link FacesRequestContext#addScript(com.liferay.faces.util.client.Script)} or {@link
-	 *              FacesRequestContext#getScripts()} instead.
+	 * @see  FacesContextHelper#getJavaScriptMap()
 	 */
-	@Deprecated
 	public Map<String, String> getJavaScriptMap() {
 		return facesContextHelper.getJavaScriptMap();
 	}

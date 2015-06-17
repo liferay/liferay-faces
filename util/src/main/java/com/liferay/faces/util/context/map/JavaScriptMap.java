@@ -13,6 +13,7 @@
  */
 package com.liferay.faces.util.context.map;
 
+import java.lang.reflect.Method;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -20,11 +21,12 @@ import java.util.Map;
 
 import javax.faces.context.FacesContext;
 
-import com.liferay.faces.util.context.FacesRequestContext;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.util.map.AbstractPropertyMap;
 import com.liferay.faces.util.map.AbstractPropertyMapEntry;
+import com.liferay.faces.util.product.ProductConstants;
+import com.liferay.faces.util.product.ProductMap;
 
 
 /**
@@ -33,55 +35,18 @@ import com.liferay.faces.util.map.AbstractPropertyMapEntry;
  * org.icefaces.util.JavaScriptRunner} so that the ICEfaces DOMPartialViewContext class can have a chance to render
  * JavaScript fragments. Otherwise, the implementation stores the map as a request attribute.
  *
- * @author      Neil Griffin
- * @deprecated  Call {@link FacesRequestContext#addScript(com.liferay.faces.util.client.Script)} instead.
+ * @author  Neil Griffin
  */
-@Deprecated
 public class JavaScriptMap extends AbstractPropertyMap<String> {
 
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(JavaScriptMap.class);
 
-	/**
-	 * @deprecated  Call {@link FacesRequestContext#addScript(com.liferay.faces.util.client.Script)} instead.
-	 */
-	@Deprecated
-	@Override
-	public String put(String key, String value) {
-
-		FacesRequestContext facesRequestContext = FacesRequestContext.getCurrentInstance();
-		facesRequestContext.addScript(value);
-
-		return super.put(key, value);
-	}
-
-	/**
-	 * @deprecated  Call {@link FacesRequestContext#addScript(com.liferay.faces.util.client.Script)} instead.
-	 */
-	@Deprecated
-	@Override
-	public void putAll(Map<? extends String, ? extends String> map) {
-
-		FacesRequestContext facesRequestContext = FacesRequestContext.getCurrentInstance();
-
-		for (Entry<? extends String, ? extends String> entry : map.entrySet()) {
-			facesRequestContext.addScript(entry.getValue());
-		}
-
-		super.putAll(map);
-	}
-
-	/**
-	 * @deprecated  No replacement available.
-	 */
-	@Deprecated
-	@Override
-	public String remove(Object key) {
-
-		logger.warn("Attempted to remove key={0} from JavaScriptMap which is no longer supported.");
-
-		return super.remove(key);
-	}
+	// Private Constants
+	private static final String FQCN_ICEFACES_JS_RUNNER = "org.icefaces.util.JavaScriptRunner";
+	private static final boolean ICEFACES_DETECTED = ProductMap.getInstance().get(ProductConstants.ICEFACES)
+		.isDetected();
+	private static final String METHOD_RUNSCRIPT = "runScript";
 
 	@Override
 	protected AbstractPropertyMapEntry<String> createPropertyMapEntry(String name) {
@@ -90,18 +55,43 @@ public class JavaScriptMap extends AbstractPropertyMap<String> {
 
 	@Override
 	protected void removeProperty(String name) {
-		getRequestAttribute().remove(name);
+
+		if (!ICEFACES_DETECTED) {
+			getRequestAttribute().remove(name);
+		}
 	}
 
 	@Override
 	protected String getProperty(String name) {
-		return getRequestAttribute().get(name);
+
+		if (ICEFACES_DETECTED) {
+			return null;
+		}
+		else {
+			return getRequestAttribute().get(name);
+		}
 	}
 
 	@Override
 	protected void setProperty(String name, String value) {
-		Map<String, String> javaScriptMap = getRequestAttribute();
-		javaScriptMap.put(name, value);
+
+		if (ICEFACES_DETECTED) {
+
+			try {
+				Class<?> jsRunnerClass = Class.forName(FQCN_ICEFACES_JS_RUNNER);
+				Method runScriptMethod = jsRunnerClass.getMethod(METHOD_RUNSCRIPT,
+						new Class[] { FacesContext.class, String.class });
+				FacesContext facesContext = FacesContext.getCurrentInstance();
+				runScriptMethod.invoke(null, new Object[] { facesContext, value });
+			}
+			catch (Exception e) {
+				logger.error(e);
+			}
+		}
+		else {
+			Map<String, String> javaScriptMap = getRequestAttribute();
+			javaScriptMap.put(name, value);
+		}
 	}
 
 	@Override
