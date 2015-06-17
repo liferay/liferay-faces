@@ -43,8 +43,9 @@ div.alloy-dialog div.modal-header span.alloy-overlay-title {
 }
 
 /* alloy-input-date / alloy-input-time */
-.alloy-input-date .alloy-button,.alloy-input-time .alloy-button {
-	margin-bottom: 10px;
+.alloy-input-date .input-medium,.alloy-input-date .alloy-button,.alloy-input-date .input-medium,
+.alloy-input-time .alloy-button {
+	margin-bottom: 7px;
 }
 
 /* alloy-input-file */
