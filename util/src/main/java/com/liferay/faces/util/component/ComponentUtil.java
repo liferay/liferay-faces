@@ -34,38 +34,6 @@ public class ComponentUtil {
 	private static final String DOUBLE_BACKSLASH_COLON = "\\\\\\\\:";
 	private static final String REGEX_COLON = "[:]";
 
-	public static String appendToCssClasses(String cssClass, String suffix) {
-
-		String value = cssClass;
-
-		if (value != null) {
-			value = value.trim();
-
-			if (value.length() > 0) {
-				StringBuilder buf = new StringBuilder();
-				String[] cssClasses = cssClass.trim().split(StringPool.SPACE);
-				boolean firstClass = true;
-
-				for (String curCssClass : cssClasses) {
-
-					if (firstClass) {
-						firstClass = false;
-					}
-					else {
-						buf.append(StringPool.SPACE);
-					}
-
-					buf.append(curCssClass);
-					buf.append(suffix);
-				}
-
-				value = buf.toString();
-			}
-		}
-
-		return value;
-	}
-
 	public static String concatCssClasses(String... classNames) {
 
 		StringBuilder cssClassBuilder = new StringBuilder();
