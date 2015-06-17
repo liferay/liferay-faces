@@ -26,7 +26,7 @@ public abstract class RenderURLBase extends BaseURL {
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.portlet.component.renderurl.RenderURL";
-	public static final String RENDERER_TYPE = "com.liferay.faces.portlet.component.renderurl.internal.RenderURLRenderer";
+	public static final String RENDERER_TYPE = "com.liferay.faces.portlet.component.renderurl.RenderURLRenderer";
 
 	// Protected Enumerations
 	protected enum RenderURLPropertyKeys {
