@@ -29,7 +29,7 @@ public abstract class OutputRemainingCharsBase extends OutputTextBase implements
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.outputremainingchars.OutputRemainingChars";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.outputremainingchars.internal.OutputRemainingCharsRenderer";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.outputremainingchars.OutputRemainingCharsRenderer";
 
 	// Protected Enumerations
 	protected enum OutputRemainingCharsPropertyKeys {

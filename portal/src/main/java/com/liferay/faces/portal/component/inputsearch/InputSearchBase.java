@@ -27,7 +27,7 @@ public abstract class InputSearchBase extends UIInput implements Styleable {
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.portal.component.inputsearch.InputSearch";
-	public static final String RENDERER_TYPE = "com.liferay.faces.portal.component.inputsearch.internal.InputSearchRenderer";
+	public static final String RENDERER_TYPE = "com.liferay.faces.portal.component.inputsearch.InputSearchRenderer";
 
 	// Protected Enumerations
 	protected enum InputSearchPropertyKeys {

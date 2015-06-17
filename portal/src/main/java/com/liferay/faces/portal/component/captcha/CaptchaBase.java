@@ -27,7 +27,7 @@ public abstract class CaptchaBase extends UIInput implements Styleable {
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.portal.component.captcha.Captcha";
-	public static final String RENDERER_TYPE = "com.liferay.faces.portal.component.captcha.internal.CaptchaRenderer";
+	public static final String RENDERER_TYPE = "com.liferay.faces.portal.component.captcha.CaptchaRenderer";
 
 	// Protected Enumerations
 	protected enum CaptchaPropertyKeys {

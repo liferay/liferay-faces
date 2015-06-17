@@ -28,7 +28,7 @@ public abstract class SelectOneRadioBase extends HtmlSelectOneRadio implements S
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.selectoneradio.SelectOneRadio";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.selectoneradio.internal.SelectOneRadioRenderer";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.selectoneradio.SelectOneRadioRenderer";
 
 	// Protected Enumerations
 	protected enum SelectOneRadioPropertyKeys {

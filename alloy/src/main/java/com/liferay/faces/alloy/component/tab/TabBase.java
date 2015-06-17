@@ -28,7 +28,7 @@ public abstract class TabBase extends UIColumn implements Styleable {
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.tab.Tab";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.tab.internal.TabRenderer";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.tab.TabRenderer";
 
 	// Protected Enumerations
 	protected enum TabPropertyKeys {

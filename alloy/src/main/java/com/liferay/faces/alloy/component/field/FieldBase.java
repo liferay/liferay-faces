@@ -28,7 +28,7 @@ public abstract class FieldBase extends PanelGroupBlockLayout implements Styleab
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.field.Field";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.field.internal.FieldRenderer";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.field.FieldRenderer";
 
 	// Protected Enumerations
 	protected enum FieldPropertyKeys {

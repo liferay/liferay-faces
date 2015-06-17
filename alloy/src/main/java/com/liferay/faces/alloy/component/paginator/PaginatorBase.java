@@ -28,7 +28,7 @@ public abstract class PaginatorBase extends UIComponentBase implements Styleable
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.paginator.Paginator";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.paginator.internal.PaginatorRenderer";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.paginator.PaginatorRenderer";
 
 	// Protected Enumerations
 	protected enum PaginatorPropertyKeys {

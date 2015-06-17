@@ -28,7 +28,7 @@ public abstract class OutputFormatBase extends HtmlOutputFormat implements Style
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.outputformat.OutputFormat";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.outputformat.internal.OutputFormatRenderer";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.outputformat.OutputFormatRenderer";
 
 	// Protected Enumerations
 	protected enum OutputFormatPropertyKeys {

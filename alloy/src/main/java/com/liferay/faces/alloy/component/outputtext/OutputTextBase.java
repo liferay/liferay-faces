@@ -28,7 +28,7 @@ public abstract class OutputTextBase extends HtmlOutputText implements Styleable
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.outputtext.OutputText";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.outputtext.internal.OutputTextRenderer";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.outputtext.OutputTextRenderer";
 
 	// Protected Enumerations
 	protected enum OutputTextPropertyKeys {

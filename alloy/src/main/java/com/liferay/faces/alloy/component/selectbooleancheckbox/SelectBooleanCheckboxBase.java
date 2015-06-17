@@ -28,7 +28,7 @@ public abstract class SelectBooleanCheckboxBase extends HtmlSelectBooleanCheckbo
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.selectbooleancheckbox.SelectBooleanCheckbox";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.selectbooleancheckbox.internal.SelectBooleanCheckboxRenderer";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.selectbooleancheckbox.SelectBooleanCheckboxRenderer";
 
 	// Protected Enumerations
 	protected enum SelectBooleanCheckboxPropertyKeys {

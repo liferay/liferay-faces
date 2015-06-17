@@ -29,7 +29,7 @@ public abstract class OutputTooltipBase extends OutputTextBase implements Stylea
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.outputtooltip.OutputTooltip";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.outputtooltip.internal.OutputTooltipRenderer";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.outputtooltip.OutputTooltipRenderer";
 
 	// Protected Enumerations
 	protected enum OutputTooltipPropertyKeys {

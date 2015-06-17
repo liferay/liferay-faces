@@ -28,7 +28,7 @@ public abstract class SelectOneMenuBase extends HtmlSelectOneMenu implements Sty
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.selectonemenu.SelectOneMenu";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.selectonemenu.internal.SelectOneMenuRenderer";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.selectonemenu.SelectOneMenuRenderer";
 
 	// Protected Enumerations
 	protected enum SelectOneMenuPropertyKeys {

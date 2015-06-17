@@ -28,7 +28,7 @@ public abstract class InputSecretBase extends HtmlInputSecret implements Styleab
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.inputsecret.InputSecret";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.inputsecret.internal.InputSecretRenderer";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.inputsecret.InputSecretRenderer";
 
 	// Protected Enumerations
 	protected enum InputSecretPropertyKeys {

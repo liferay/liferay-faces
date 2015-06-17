@@ -28,7 +28,7 @@ public abstract class OutputLabelBase extends HtmlOutputLabel implements Styleab
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.outputlabel.OutputLabel";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.outputlabel.internal.OutputLabelRenderer";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.outputlabel.OutputLabelRenderer";
 
 	// Protected Enumerations
 	protected enum OutputLabelPropertyKeys {

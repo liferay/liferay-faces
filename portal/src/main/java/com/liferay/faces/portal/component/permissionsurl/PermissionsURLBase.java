@@ -26,7 +26,7 @@ public abstract class PermissionsURLBase extends UIOutput {
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.portal.component.permissionsurl.PermissionsURL";
-	public static final String RENDERER_TYPE = "com.liferay.faces.portal.component.permissionsurl.internal.PermissionsURLRenderer";
+	public static final String RENDERER_TYPE = "com.liferay.faces.portal.component.permissionsurl.PermissionsURLRenderer";
 
 	// Protected Enumerations
 	protected enum PermissionsURLPropertyKeys {

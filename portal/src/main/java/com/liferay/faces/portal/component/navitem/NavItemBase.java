@@ -27,7 +27,7 @@ public abstract class NavItemBase extends UIColumn implements Styleable {
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.portal.component.navitem.NavItem";
-	public static final String RENDERER_TYPE = "com.liferay.faces.portal.component.navitem.internal.NavItemRenderer";
+	public static final String RENDERER_TYPE = "com.liferay.faces.portal.component.navitem.NavItemRenderer";
 
 	// Protected Enumerations
 	protected enum NavItemPropertyKeys {
