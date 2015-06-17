@@ -28,7 +28,7 @@ public abstract class CommandLinkBase extends HtmlCommandLink implements Styleab
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.commandlink.CommandLink";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.commandlink.internal.CommandLinkRenderer";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.commandlink.CommandLinkRenderer";
 
 	// Protected Enumerations
 	protected enum CommandLinkPropertyKeys {

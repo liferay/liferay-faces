@@ -28,7 +28,7 @@ public abstract class FormBase extends HtmlForm implements Styleable {
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.form.Form";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.form.internal.FormRenderer";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.form.FormRenderer";
 
 	// Protected Enumerations
 	protected enum FormPropertyKeys {

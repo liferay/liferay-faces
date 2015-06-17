@@ -28,7 +28,7 @@ public abstract class InputTextBase extends HtmlInputText implements Styleable {
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.inputtext.InputText";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.inputtext.internal.InputTextRenderer";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.inputtext.InputTextRenderer";
 
 	// Protected Enumerations
 	protected enum InputTextPropertyKeys {

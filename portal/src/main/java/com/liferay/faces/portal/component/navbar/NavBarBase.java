@@ -27,7 +27,7 @@ public abstract class NavBarBase extends UIPanel implements Styleable {
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.portal.component.navbar.NavBar";
-	public static final String RENDERER_TYPE = "com.liferay.faces.portal.component.navbar.internal.NavBarRenderer";
+	public static final String RENDERER_TYPE = "com.liferay.faces.portal.component.navbar.NavBarRenderer";
 
 	// Protected Enumerations
 	protected enum NavBarPropertyKeys {

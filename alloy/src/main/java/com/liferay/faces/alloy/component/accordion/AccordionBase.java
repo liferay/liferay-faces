@@ -29,7 +29,7 @@ public abstract class AccordionBase extends UIData implements Styleable, ClientC
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.accordion.Accordion";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.accordion.internal.AccordionRenderer";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.accordion.AccordionRenderer";
 
 	// Protected Enumerations
 	protected enum AccordionPropertyKeys {

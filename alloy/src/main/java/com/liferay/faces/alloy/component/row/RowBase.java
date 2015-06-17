@@ -28,7 +28,7 @@ public abstract class RowBase extends UIPanel implements Styleable {
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.row.Row";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.row.internal.RowRenderer";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.row.RowRenderer";
 
 	// Protected Enumerations
 	protected enum RowPropertyKeys {

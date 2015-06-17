@@ -29,7 +29,7 @@ public abstract class ProgressBarBase extends UIComponentBase implements Styleab
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.progressbar.ProgressBar";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.progressbar.internal.ProgressBarRenderer";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.progressbar.ProgressBarRenderer";
 
 	// Protected Enumerations
 	protected enum ProgressBarPropertyKeys {

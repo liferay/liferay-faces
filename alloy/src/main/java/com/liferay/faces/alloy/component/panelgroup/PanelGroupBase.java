@@ -28,7 +28,7 @@ public abstract class PanelGroupBase extends HtmlPanelGroup implements Styleable
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.panelgroup.PanelGroup";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.panelgroup.internal.PanelGroupRenderer";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.panelgroup.PanelGroupRenderer";
 
 	// Protected Enumerations
 	protected enum PanelGroupPropertyKeys {

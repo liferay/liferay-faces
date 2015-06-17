@@ -26,7 +26,7 @@ public abstract class ActionURLBase extends RenderURLBase {
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.portlet.component.actionurl.ActionURL";
-	public static final String RENDERER_TYPE = "com.liferay.faces.portlet.component.actionurl.internal.ActionURLRenderer";
+	public static final String RENDERER_TYPE = "com.liferay.faces.portlet.component.actionurl.ActionURLRenderer";
 
 	// Protected Enumerations
 	protected enum ActionURLPropertyKeys {

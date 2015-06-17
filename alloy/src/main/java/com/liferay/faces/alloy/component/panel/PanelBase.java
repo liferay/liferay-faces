@@ -28,7 +28,7 @@ public abstract class PanelBase extends PanelGroupBlockLayout implements Styleab
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.panel.Panel";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.panel.internal.PanelRenderer";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.panel.PanelRenderer";
 
 	// Protected Enumerations
 	protected enum PanelPropertyKeys {

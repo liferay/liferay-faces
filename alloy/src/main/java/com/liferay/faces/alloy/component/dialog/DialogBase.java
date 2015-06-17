@@ -29,7 +29,7 @@ public abstract class DialogBase extends PanelGroupBlockLayout implements Stylea
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.dialog.Dialog";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.dialog.internal.DialogRenderer";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.dialog.DialogRenderer";
 
 	// Protected Enumerations
 	protected enum DialogPropertyKeys {

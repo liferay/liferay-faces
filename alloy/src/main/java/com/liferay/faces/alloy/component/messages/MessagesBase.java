@@ -28,7 +28,7 @@ public abstract class MessagesBase extends HtmlMessages implements Styleable {
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.messages.Messages";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.messages.internal.MessagesRenderer";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.messages.MessagesRenderer";
 
 	// Protected Enumerations
 	protected enum MessagesPropertyKeys {

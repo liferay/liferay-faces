@@ -28,7 +28,7 @@ public abstract class SelectStarRatingBase extends SelectRating implements Style
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.selectstarrating.SelectStarRating";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.selectstarrating.internal.SelectStarRatingRenderer";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.selectstarrating.SelectStarRatingRenderer";
 
 	// Protected Enumerations
 	protected enum SelectStarRatingPropertyKeys {

@@ -27,7 +27,7 @@ public abstract class NavBarSearchBase extends UIPanel implements Styleable {
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.portal.component.navbarsearch.NavBarSearch";
-	public static final String RENDERER_TYPE = "com.liferay.faces.portal.component.navbarsearch.internal.NavBarSearchRenderer";
+	public static final String RENDERER_TYPE = "com.liferay.faces.portal.component.navbarsearch.NavBarSearchRenderer";
 
 	// Protected Enumerations
 	protected enum NavBarSearchPropertyKeys {

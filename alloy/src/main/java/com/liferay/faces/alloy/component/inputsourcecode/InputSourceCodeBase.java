@@ -29,7 +29,7 @@ public abstract class InputSourceCodeBase extends HtmlInputText implements Style
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.inputsourcecode.InputSourceCode";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.inputsourcecode.internal.InputSourceCodeRenderer";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.inputsourcecode.InputSourceCodeRenderer";
 
 	// Protected Enumerations
 	protected enum InputSourceCodePropertyKeys {

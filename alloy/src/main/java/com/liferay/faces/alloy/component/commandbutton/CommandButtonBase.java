@@ -28,7 +28,7 @@ public abstract class CommandButtonBase extends HtmlCommandButton implements Sty
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.commandbutton.CommandButton";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.commandbutton.internal.CommandButtonRenderer";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.commandbutton.CommandButtonRenderer";
 
 	// Protected Enumerations
 	protected enum CommandButtonPropertyKeys {

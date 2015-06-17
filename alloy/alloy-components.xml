@@ -1365,7 +1365,7 @@
 	</component>
 	<component name="Fieldset" extendsTags="KeyboardDOMEvents MouseDOMEvents Styleable UIComponentBase"
 		extraStyleClasses="fieldset" parentClass="javax.faces.component.UIPanel"
-		rendererParentClass="com.liferay.faces.util.render.PassThroughRenderer">
+		rendererParentClass="com.liferay.faces.alloy.render.internal.PassThroughRenderer">
 		<description>
 			<![CDATA[Fieldset is a UIPanel component that renders a &lt;fieldset&gt; element in order to group form elements.]]>
 		</description>
@@ -2064,7 +2064,7 @@
 		</description>
 	</component>
 	<component name="Media" extendsTags="KeyboardDOMEvents MouseDOMEvents Styleable ResourceCommon" generateTaglibXML="false"
-		rendererParentClass="com.liferay.faces.util.render.PassThroughRenderer">
+		rendererParentClass="com.liferay.faces.alloy.render.internal.PassThroughRenderer">
 		<attributes>
 			<attribute>
 				<defaultValue>false</defaultValue>

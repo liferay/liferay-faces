@@ -27,7 +27,7 @@ public abstract class OutputStylesheetBase extends UIOutput {
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.outputstylesheet.OutputStylesheet";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.outputstylesheet.internal.OutputStylesheetRenderer";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.outputstylesheet.OutputStylesheetRenderer";
 
 	// Protected Enumerations
 	protected enum OutputStylesheetPropertyKeys {

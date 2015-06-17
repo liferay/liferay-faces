@@ -29,7 +29,7 @@ public abstract class TabViewBase extends UIData implements Styleable, ClientCom
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.tabview.TabView";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.tabview.internal.TabViewRenderer";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.tabview.TabViewRenderer";
 
 	// Protected Enumerations
 	protected enum TabViewPropertyKeys {

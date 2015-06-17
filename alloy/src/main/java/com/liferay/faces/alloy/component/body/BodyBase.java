@@ -28,7 +28,7 @@ public abstract class BodyBase extends HtmlBody implements Styleable {
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.body.Body";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.body.internal.BodyRenderer";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.body.BodyRenderer";
 
 	// Protected Enumerations
 	protected enum BodyPropertyKeys {

@@ -28,7 +28,7 @@ public abstract class HeadBase extends HtmlHead implements Styleable {
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.head.Head";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.head.internal.HeadRenderer";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.head.HeadRenderer";
 
 	// Protected Enumerations
 	protected enum HeadPropertyKeys {

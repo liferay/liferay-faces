@@ -29,7 +29,7 @@ public abstract class DataTableBase extends HtmlDataTable implements Styleable, 
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.datatable.DataTable";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.datatable.internal.DataTableRenderer";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.datatable.DataTableRenderer";
 
 	// Protected Enumerations
 	protected enum DataTablePropertyKeys {

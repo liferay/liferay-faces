@@ -28,7 +28,7 @@ public abstract class SelectManyMenuBase extends HtmlSelectManyMenu implements S
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.selectmanymenu.SelectManyMenu";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.selectmanymenu.internal.SelectManyMenuRenderer";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.selectmanymenu.SelectManyMenuRenderer";
 
 	// Protected Enumerations
 	protected enum SelectManyMenuPropertyKeys {

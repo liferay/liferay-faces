@@ -28,7 +28,7 @@ public abstract class FieldsetBase extends UIPanel implements Styleable {
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.fieldset.Fieldset";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.fieldset.internal.FieldsetRenderer";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.fieldset.FieldsetRenderer";
 
 	// Protected Enumerations
 	protected enum FieldsetPropertyKeys {

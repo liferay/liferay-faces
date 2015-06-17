@@ -28,7 +28,7 @@ public abstract class SelectOneListboxBase extends HtmlSelectOneListbox implemen
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.selectonelistbox.SelectOneListbox";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.selectonelistbox.internal.SelectOneListboxRenderer";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.selectonelistbox.SelectOneListboxRenderer";
 
 	// Protected Enumerations
 	protected enum SelectOneListboxPropertyKeys {

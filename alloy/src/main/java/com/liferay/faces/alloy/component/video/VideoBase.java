@@ -28,7 +28,7 @@ public abstract class VideoBase extends Media implements Styleable {
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.video.Video";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.video.internal.VideoRenderer";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.video.VideoRenderer";
 
 	// Protected Enumerations
 	protected enum VideoPropertyKeys {

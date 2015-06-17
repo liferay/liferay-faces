@@ -27,7 +27,7 @@ public abstract class OutputScriptBase extends UIOutput {
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.outputscript.OutputScript";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.outputscript.internal.OutputScriptRenderer";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.outputscript.OutputScriptRenderer";
 
 	// Protected Enumerations
 	protected enum OutputScriptPropertyKeys {

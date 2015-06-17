@@ -28,7 +28,7 @@ public abstract class ButtonBase extends HtmlOutcomeTargetButton implements Styl
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.button.Button";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.button.internal.ButtonRenderer";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.button.ButtonRenderer";
 
 	// Protected Enumerations
 	protected enum ButtonPropertyKeys {

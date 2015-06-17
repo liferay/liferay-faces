@@ -29,7 +29,7 @@ public abstract class InputFileBase extends HtmlInputText implements Styleable, 
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.inputfile.InputFile";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.inputfile.internal.InputFileRenderer";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.inputfile.InputFileRenderer";
 
 	// Protected Enumerations
 	protected enum InputFilePropertyKeys {

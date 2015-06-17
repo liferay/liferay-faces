@@ -28,7 +28,7 @@ public abstract class InputTextareaBase extends HtmlInputTextarea implements Sty
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.inputtextarea.InputTextarea";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.inputtextarea.internal.InputTextareaRenderer";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.inputtextarea.InputTextareaRenderer";
 
 	// Protected Enumerations
 	protected enum InputTextareaPropertyKeys {
