@@ -13,11 +13,6 @@
  */
 package com.liferay.faces.bridge.internal;
 
-import com.liferay.faces.util.lang.StringPool;
-
-import com.liferay.portal.model.ResourceConstants;
-
-
 /**
  * @author  Neil Griffin
  */
@@ -39,17 +34,4 @@ public class BridgeConstants {
 	// Miscellaneous Constants
 	public static final String MULTIPART_CONTENT_TYPE_PREFIX = "multipart/";
 	public static final String SRC = "src";
-
-	/**
-	 * @deprecated  Replaced by {@link ResourceConstants#JAVAX_FACES_RESOURCE}
-	 */
-	@Deprecated
-	public static final String JAVAX_FACES_RESOURCE = "javax.faces.resource";
-
-	/**
-	 * @deprecated  Replaced by {@link ResourceConstants#LN}
-	 */
-	@Deprecated
-	public static final String LN = StringPool.LN;
-
 }
