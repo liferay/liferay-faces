@@ -71,10 +71,14 @@ public class JavaScriptMap extends AbstractPropertyMap<String> {
 		super.putAll(map);
 	}
 
+	/**
+	 * @deprecated  No replacement available.
+	 */
+	@Deprecated
 	@Override
 	public String remove(Object key) {
 
-		logger.warn("Removing Script from JavaScriptMap. Script will still be rendered to the response.");
+		logger.warn("Attempted to remove key={0} from JavaScriptMap which is no longer supported.");
 
 		return super.remove(key);
 	}
