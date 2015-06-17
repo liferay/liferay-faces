@@ -30,19 +30,19 @@ public class ResourceConstants {
 	public static final String JAVAX_FACES_RESOURCE = "javax.faces.resource";
 
 	/**
-	 * @deprecated  Use {@link StringPool.LIBRARY} instead.
+	 * @deprecated  Use {@link StringPool#LIBRARY} instead.
 	 */
 	@Deprecated
 	public static final String LIBRARY = StringPool.LIBRARY;
 
 	/**
-	 * @deprecated  Use {@link StringPool.LN} instead.
+	 * @deprecated  Use {@link StringPool#LN} instead.
 	 */
 	@Deprecated
 	public static final String LN = StringPool.LN;
 
 	/**
-	 * @deprecated  Use {@link StringPool.NAME} instead.
+	 * @deprecated  Use {@link StringPool#NAME} instead.
 	 */
 	@Deprecated
 	public static final String NAME = StringPool.NAME;
