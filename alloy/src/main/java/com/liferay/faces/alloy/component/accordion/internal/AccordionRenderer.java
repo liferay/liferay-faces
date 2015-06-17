@@ -35,7 +35,6 @@ import com.liferay.faces.alloy.component.tab.Tab;
 import com.liferay.faces.alloy.component.tab.TabCollapseEvent;
 import com.liferay.faces.alloy.component.tab.TabExpandEvent;
 import com.liferay.faces.alloy.component.tab.TabUtil;
-import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.component.Styleable;
 import com.liferay.faces.util.helper.IntegerHelper;
 import com.liferay.faces.util.lang.StringPool;
@@ -187,7 +186,7 @@ public class AccordionRenderer extends AccordionRendererBase {
 		Accordion accordion = (Accordion) uiComponent;
 
 		// var clientVarName = Liferay.component('clientKey');
-		String clientVarName = ComponentUtil.getClientVarName(facesContext, accordion);
+		String clientVarName = getClientVarName(facesContext, accordion);
 		String clientKey = accordion.getClientKey();
 
 		if (clientKey == null) {

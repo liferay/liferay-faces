@@ -25,7 +25,6 @@ import javax.faces.context.ResponseWriter;
 import javax.faces.render.FacesRenderer;
 
 import com.liferay.faces.alloy.component.outputremainingchars.OutputRemainingChars;
-import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.lang.StringPool;
 
 
@@ -55,7 +54,7 @@ public class OutputRemainingCharsRenderer extends OutputRemainingCharsRendererBa
 
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
 		OutputRemainingChars outputRemainingChars = (OutputRemainingChars) uiComponent;
-		String clientVarName = ComponentUtil.getClientVarName(facesContext, outputRemainingChars);
+		String clientVarName = getClientVarName(facesContext, outputRemainingChars);
 		String clientKey = outputRemainingChars.getClientKey();
 
 		if (clientKey == null) {

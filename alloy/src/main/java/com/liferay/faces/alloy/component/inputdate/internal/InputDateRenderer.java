@@ -36,7 +36,6 @@ import com.liferay.faces.alloy.component.inputdatetime.internal.InputDateTimeRes
 import com.liferay.faces.alloy.render.internal.JavaScriptFragment;
 import com.liferay.faces.util.client.BrowserSniffer;
 import com.liferay.faces.util.client.BrowserSnifferFactory;
-import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.lang.StringPool;
 
@@ -100,7 +99,7 @@ public class InputDateRenderer extends InputDateRendererBase {
 
 		if ((browserSniffer.isMobile() && inputDate.isResponsive()) || "button".equals(showOn)) {
 
-			String clientVarName = ComponentUtil.getClientVarName(facesContext, inputDate);
+			String clientVarName = getClientVarName(facesContext, inputDate);
 			String clientKey = inputDate.getClientKey();
 
 			if (clientKey == null) {

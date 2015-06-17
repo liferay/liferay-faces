@@ -18,7 +18,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import javax.faces.component.UIComponent;
-import javax.faces.component.UINamingContainer;
 import javax.faces.component.UIViewRoot;
 import javax.faces.component.html.HtmlOutputLabel;
 import javax.faces.context.FacesContext;
@@ -156,16 +155,6 @@ public class ComponentUtil {
 		}
 
 		return uiComponent;
-	}
-
-	public static String getClientVarName(FacesContext facesContext, ClientComponent clientComponent) {
-
-		char separatorChar = UINamingContainer.getSeparatorChar(facesContext);
-		String clientId = clientComponent.getClientId();
-		String regex = StringPool.OPEN_BRACKET + separatorChar + StringPool.CLOSE_BRACKET;
-		String clientVarName = clientId.replaceAll(regex, StringPool.UNDERLINE);
-
-		return clientVarName;
 	}
 
 	public static String getComponentLabel(UIComponent uiComponent) {
