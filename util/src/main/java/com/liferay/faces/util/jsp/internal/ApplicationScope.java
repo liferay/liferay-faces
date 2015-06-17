@@ -11,11 +11,11 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.util.jsp;
+package com.liferay.faces.util.jsp.internal;
 
 import java.util.Enumeration;
 
-import javax.servlet.http.HttpServletRequest;
+import javax.servlet.ServletContext;
 
 import com.liferay.faces.util.map.AbstractPropertyMap;
 import com.liferay.faces.util.map.AbstractPropertyMapEntry;
@@ -24,38 +24,38 @@ import com.liferay.faces.util.map.AbstractPropertyMapEntry;
 /**
  * @author  Neil Griffin
  */
-public class RequestScope extends AbstractPropertyMap<Object> {
+public class ApplicationScope extends AbstractPropertyMap<Object> {
 
 	// Private Data Members
-	private HttpServletRequest httpServletRequest;
+	private ServletContext servletContext;
 
-	public RequestScope(HttpServletRequest httpServletRequest) {
-		this.httpServletRequest = httpServletRequest;
+	public ApplicationScope(ServletContext servletContext) {
+		this.servletContext = servletContext;
 	}
 
 	@Override
 	protected AbstractPropertyMapEntry<Object> createPropertyMapEntry(String name) {
-		return new RequestScopeEntry(httpServletRequest, name);
+		return new ApplicationScopeEntry(servletContext, name);
 	}
 
 	@Override
 	protected void removeProperty(String name) {
-		httpServletRequest.removeAttribute(name);
+		servletContext.removeAttribute(name);
 	}
 
 	@Override
 	protected Object getProperty(String name) {
-		return httpServletRequest.getAttribute(name);
+		return servletContext.getAttribute(name);
 	}
 
 	@Override
 	protected void setProperty(String name, Object value) {
-		httpServletRequest.setAttribute(name, value);
+		servletContext.setAttribute(name, value);
 	}
 
 	@Override
 	protected Enumeration<String> getPropertyNames() {
-		return (Enumeration<String>) httpServletRequest.getAttributeNames();
+		return (Enumeration<String>) servletContext.getAttributeNames();
 	}
 
 }

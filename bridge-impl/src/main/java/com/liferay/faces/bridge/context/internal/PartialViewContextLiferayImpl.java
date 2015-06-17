@@ -28,6 +28,7 @@ import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.PageContext;
 
 import com.liferay.faces.bridge.client.internal.ScriptDataUtil;
@@ -36,8 +37,7 @@ import com.liferay.faces.util.context.FacesRequestContext;
 import com.liferay.faces.util.context.PartialResponseWriterWrapper;
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.jsp.JspAdapterFactory;
-import com.liferay.faces.util.jsp.StringJspWriter;
-import com.liferay.faces.util.jsp.StringJspWriterWrapper;
+import com.liferay.faces.util.jsp.JspWriterWrapper;
 
 import com.liferay.portal.kernel.servlet.taglib.aui.ScriptData;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -46,8 +46,8 @@ import com.liferay.portal.util.PortalUtil;
 
 /**
  * This class is a wrapper around the {@link PartialViewContext}. Its purpose is to wrap the {@link
- * PartialResponseWriter} with a {@link PartialResponseWriterAlloyImpl} which writes {@link Script}s from {@link
- * FacesRequestContext} to the &lt;eval&gt; section of the partial response.
+ * PartialResponseWriter} with one that writes {@link Script}s from {@link FacesRequestContext} to the &lt;eval&gt;
+ * section of the partial response.
  *
  * @author  Neil Griffin
  */
@@ -156,21 +156,21 @@ public class PartialViewContextLiferayImpl extends PartialViewContextWrapper {
 			ELContext elContext = facesContext.getELContext();
 			JspAdapterFactory jspAdapterFactory = (JspAdapterFactory) FactoryExtensionFinder.getFactory(
 					JspAdapterFactory.class);
-			StringJspWriter stringJspWriter = jspAdapterFactory.getStringJspWriter();
+			JspWriter stringJspWriter = jspAdapterFactory.getStringJspWriter();
 			ScriptDataWriter scriptDataWriter = new ScriptDataWriter(stringJspWriter);
-			PageContext pageContext = jspAdapterFactory.getPageContext(httpServletRequest, httpServletResponse,
+			PageContext stringPageContext = jspAdapterFactory.getStringPageContext(httpServletRequest, httpServletResponse,
 					elContext, scriptDataWriter);
-			ScriptTagUtil.flushScriptData(pageContext);
+			ScriptTagUtil.flushScriptData(stringPageContext);
 			requestMap.put(WebKeys.AUI_SCRIPT_DATA, savedScriptData);
 			responseWriter.write(scriptDataWriter.toString());
 		}
 
-		private class ScriptDataWriter extends StringJspWriterWrapper {
+		private class ScriptDataWriter extends JspWriterWrapper {
 
 			// Private Data Members
-			private StringJspWriter wrappedStringJspWriter;
+			private JspWriter wrappedStringJspWriter;
 
-			public ScriptDataWriter(StringJspWriter stringJspWriter) {
+			public ScriptDataWriter(JspWriter stringJspWriter) {
 				super(0, true);
 				this.wrappedStringJspWriter = stringJspWriter;
 			}
@@ -184,7 +184,7 @@ public class PartialViewContextLiferayImpl extends PartialViewContextWrapper {
 			}
 
 			@Override
-			public StringJspWriter getWrapped() {
+			public JspWriter getWrapped() {
 				return wrappedStringJspWriter;
 			}
 		}

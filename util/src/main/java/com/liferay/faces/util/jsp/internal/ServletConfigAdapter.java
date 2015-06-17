@@ -11,36 +11,39 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.util.jsp;
+package com.liferay.faces.util.jsp.internal;
 
+import java.util.Enumeration;
+
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
-
-import com.liferay.faces.util.map.AbstractPropertyMapEntry;
 
 
 /**
  * @author  Neil Griffin
  */
-public class ApplicationScopeEntry extends AbstractPropertyMapEntry<Object> {
+public class ServletConfigAdapter implements ServletConfig {
 
 	// Private Data Members
 	private ServletContext servletContext;
 
-	public ApplicationScopeEntry(ServletContext servletContext, String key) {
-		super(key);
+	public ServletConfigAdapter(ServletContext servletContext) {
 		this.servletContext = servletContext;
 	}
 
-	public Object getValue() {
-		return servletContext.getAttribute(getKey());
+	public String getInitParameter(String name) {
+		return servletContext.getInitParameter(name);
 	}
 
-	public Object setValue(Object value) {
-
-		Object oldValue = getValue();
-		servletContext.setAttribute(getKey(), value);
-
-		return oldValue;
+	public Enumeration<String> getInitParameterNames() {
+		return (Enumeration<String>) servletContext.getInitParameterNames();
 	}
 
+	public ServletContext getServletContext() {
+		return servletContext;
+	}
+
+	public String getServletName() {
+		return ServletConfigAdapter.class.getName();
+	}
 }
