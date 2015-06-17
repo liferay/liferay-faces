@@ -21,8 +21,6 @@ import java.io.Writer;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.BodyContent;
 
-import com.liferay.faces.util.jsp.StringJspWriter;
-
 
 /**
  * This class serves as an implementation of {@link BodyContent} that utilizes a {@link StringJspWriter} instead of a
@@ -32,134 +30,134 @@ import com.liferay.faces.util.jsp.StringJspWriter;
  *
  * @author  Neil Griffin
  */
-public class StringBodyContentImpl extends BodyContent {
+public class BodyContentStringImpl extends BodyContent {
 
 	// Private Data Members
-	private StringJspWriter facesStringWriter;
+	private JspWriter stringJspWriter;
 
-	public StringBodyContentImpl(StringJspWriter facesStringWriter) {
-		super(facesStringWriter);
-		this.facesStringWriter = facesStringWriter;
+	public BodyContentStringImpl(JspWriter stringJspWriter) {
+		super(stringJspWriter);
+		this.stringJspWriter = stringJspWriter;
 	}
 
 	@Override
 	public void clear() throws IOException {
-		facesStringWriter.clear();
+		stringJspWriter.clear();
 	}
 
 	@Override
 	public void clearBuffer() throws IOException {
-		facesStringWriter.clearBuffer();
+		stringJspWriter.clearBuffer();
 	}
 
 	@Override
 	public void close() throws IOException {
-		facesStringWriter.close();
+		stringJspWriter.close();
 	}
 
 	@Override
 	public void newLine() throws IOException {
-		facesStringWriter.newLine();
+		stringJspWriter.newLine();
 	}
 
 	@Override
 	public void print(boolean b) throws IOException {
-		facesStringWriter.print(b);
+		stringJspWriter.print(b);
 	}
 
 	@Override
 	public void print(char c) throws IOException {
-		facesStringWriter.print(c);
+		stringJspWriter.print(c);
 	}
 
 	@Override
 	public void print(int i) throws IOException {
-		facesStringWriter.print(i);
+		stringJspWriter.print(i);
 	}
 
 	@Override
 	public void print(long l) throws IOException {
-		facesStringWriter.print(l);
+		stringJspWriter.print(l);
 	}
 
 	@Override
 	public void print(float f) throws IOException {
-		facesStringWriter.print(f);
+		stringJspWriter.print(f);
 	}
 
 	@Override
 	public void print(double d) throws IOException {
-		facesStringWriter.print(d);
+		stringJspWriter.print(d);
 	}
 
 	@Override
 	public void print(char[] s) throws IOException {
-		facesStringWriter.print(s);
+		stringJspWriter.print(s);
 	}
 
 	@Override
 	public void print(String s) throws IOException {
-		facesStringWriter.print(s);
+		stringJspWriter.print(s);
 	}
 
 	@Override
 	public void print(Object o) throws IOException {
-		facesStringWriter.print(o);
+		stringJspWriter.print(o);
 	}
 
 	@Override
 	public void println() throws IOException {
-		facesStringWriter.println();
+		stringJspWriter.println();
 	}
 
 	@Override
 	public void println(boolean b) throws IOException {
-		facesStringWriter.println(b);
+		stringJspWriter.println(b);
 	}
 
 	@Override
 	public void println(char c) throws IOException {
-		facesStringWriter.println(c);
+		stringJspWriter.println(c);
 	}
 
 	@Override
 	public void println(int i) throws IOException {
-		facesStringWriter.println(i);
+		stringJspWriter.println(i);
 	}
 
 	@Override
 	public void println(long l) throws IOException {
-		facesStringWriter.println(l);
+		stringJspWriter.println(l);
 	}
 
 	@Override
 	public void println(float f) throws IOException {
-		facesStringWriter.println(f);
+		stringJspWriter.println(f);
 	}
 
 	@Override
 	public void println(double d) throws IOException {
-		facesStringWriter.println(d);
+		stringJspWriter.println(d);
 	}
 
 	@Override
 	public void println(char[] s) throws IOException {
-		facesStringWriter.println(s);
+		stringJspWriter.println(s);
 	}
 
 	@Override
 	public void println(String s) throws IOException {
-		facesStringWriter.println(s);
+		stringJspWriter.println(s);
 	}
 
 	@Override
 	public void println(Object o) throws IOException {
-		facesStringWriter.println(o);
+		stringJspWriter.println(o);
 	}
 
 	@Override
 	public void write(char[] buf, int off, int len) throws IOException {
-		facesStringWriter.write(buf, off, len);
+		stringJspWriter.write(buf, off, len);
 	}
 
 	@Override
@@ -174,12 +172,12 @@ public class StringBodyContentImpl extends BodyContent {
 
 	@Override
 	public int getRemaining() {
-		return facesStringWriter.getRemaining();
+		return stringJspWriter.getRemaining();
 	}
 
 	@Override
 	public String getString() {
-		return facesStringWriter.toString();
+		return stringJspWriter.toString();
 	}
 
 }

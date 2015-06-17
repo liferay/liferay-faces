@@ -16,6 +16,7 @@ package com.liferay.faces.util.jsp;
 import javax.el.ELContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.BodyContent;
 
@@ -23,14 +24,18 @@ import com.liferay.faces.util.helper.Wrapper;
 
 
 /**
+ * This factory provides methods for creating instances of classes associated with the JavaServer Pages (JSP) API that
+ * operate with Strings rather than JSPs. This provides the ability to run the lifecycle of a JSP tag so that the JSP
+ * tag markup is captured in a String rather than written as output from a JSP.
+ *
  * @author  Kyle Stiemann
  */
 public abstract class JspAdapterFactory implements Wrapper<JspAdapterFactory> {
 
-	public abstract BodyContent getBodyContent(StringJspWriter stringJspWriter);
+	public abstract BodyContent getStringBodyContent(JspWriter stringJspWriter);
 
-	public abstract PageContext getPageContext(HttpServletRequest httpServletRequest,
-		HttpServletResponse httpServletResponse, ELContext elContext, StringJspWriter stringJspWriter);
+	public abstract JspWriter getStringJspWriter();
 
-	public abstract StringJspWriter getStringJspWriter();
+	public abstract PageContext getStringPageContext(HttpServletRequest httpServletRequest,
+		HttpServletResponse httpServletResponse, ELContext elContext, JspWriter stringJspWriter);
 }
