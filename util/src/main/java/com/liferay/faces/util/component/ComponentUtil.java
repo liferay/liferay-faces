@@ -34,6 +34,10 @@ public class ComponentUtil {
 	private static final String DOUBLE_BACKSLASH_COLON = "\\\\\\\\:";
 	private static final String REGEX_COLON = "[:]";
 
+	/**
+	 * @deprecated  No replacement available.
+	 */
+	@Deprecated
 	public static String appendToCssClasses(String cssClass, String suffix) {
 
 		String value = cssClass;
@@ -165,7 +169,7 @@ public class ComponentUtil {
 	public static UIComponent matchComponentInViewRoot(FacesContext facesContext, String partialClientId) {
 		return matchComponentInHierarchy(facesContext, facesContext.getViewRoot(), partialClientId);
 	}
-	
+
 	public static String getComponentLabel(UIComponent uiComponent) {
 
 		String componentLabel = null;
