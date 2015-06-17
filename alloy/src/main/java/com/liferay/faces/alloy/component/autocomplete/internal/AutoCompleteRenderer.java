@@ -36,7 +36,6 @@ import javax.faces.render.FacesRenderer;
 import com.liferay.faces.alloy.component.autocomplete.AutoComplete;
 import com.liferay.faces.alloy.render.internal.JavaScriptFragment;
 import com.liferay.faces.util.component.ClientComponent;
-import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.component.Styleable;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.render.RendererUtil;
@@ -81,7 +80,7 @@ public class AutoCompleteRenderer extends AutoCompleteRendererBase {
 
 			ResponseWriter responseWriter = facesContext.getResponseWriter();
 			ClientComponent clientComponent = (ClientComponent) uiComponent;
-			String clientVarName = ComponentUtil.getClientVarName(facesContext, clientComponent);
+			String clientVarName = getClientVarName(facesContext, clientComponent);
 			String clientKey = clientComponent.getClientKey();
 
 			if (clientKey == null) {
@@ -306,7 +305,7 @@ public class AutoCompleteRenderer extends AutoCompleteRendererBase {
 
 				// Build up a fragment of JavaScript that gets the client-side component.
 				ClientComponent clientComponent = (ClientComponent) uiComponent;
-				String clientVarName = ComponentUtil.getClientVarName(facesContext, clientComponent);
+				String clientVarName = getClientVarName(facesContext, clientComponent);
 				String clientKey = clientComponent.getClientKey();
 
 				if (clientKey == null) {

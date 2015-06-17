@@ -26,7 +26,6 @@ import javax.faces.render.FacesRenderer;
 
 import com.liferay.faces.alloy.component.outputtooltip.OutputTooltip;
 import com.liferay.faces.util.component.ClientComponent;
-import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.component.Styleable;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
@@ -82,7 +81,7 @@ public class OutputTooltipRenderer extends OutputTooltipRendererBase {
 		}
 
 		ClientComponent clientComponent = (ClientComponent) uiComponent;
-		String clientVarName = ComponentUtil.getClientVarName(facesContext, clientComponent);
+		String clientVarName = getClientVarName(facesContext, clientComponent);
 		String clientKey = clientComponent.getClientKey();
 
 		if (clientKey == null) {

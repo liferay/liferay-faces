@@ -36,7 +36,6 @@ import com.liferay.faces.alloy.component.inputdatetime.InputDateTime;
 import com.liferay.faces.util.client.BrowserSniffer;
 import com.liferay.faces.util.client.BrowserSnifferFactory;
 import com.liferay.faces.util.component.ClientComponent;
-import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.component.Styleable;
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.lang.StringPool;
@@ -225,7 +224,7 @@ public abstract class InputDateTimeRenderer extends InputDateTimeRendererBase {
 		// button's clientId and ensure that it is unique. However, UIComponent.setId() throws an
 		// IllegalArgumentException if the id contains colons. To workaround this, the colons must be
 		// replaced by underscores using ComponentUtil.getClientVarName().
-		String inputDateClientVarName = ComponentUtil.getClientVarName(facesContext, clientComponent);
+		String inputDateClientVarName = getClientVarName(facesContext, clientComponent);
 
 		// The JSF runtime's renderer does not write ids which are prefixed with
 		// UIViewRoot.UNIQUE_ID_PREFIX ("j_id"). Therefore, prefix the id with an underscore in order to

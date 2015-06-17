@@ -25,7 +25,6 @@ import javax.faces.render.FacesRenderer;
 
 import com.liferay.faces.alloy.component.inputsourcecode.InputSourceCode;
 import com.liferay.faces.util.component.ClientComponent;
-import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.render.internal.DelegationResponseWriter;
 import com.liferay.faces.util.render.internal.HiddenTextResponseWriter;
@@ -55,7 +54,7 @@ public class InputSourceCodeRenderer extends InputSourceCodeRendererBase {
 		Boolean readOnly = inputSourceCode.getReadOnly();
 
 		ClientComponent clientComponent = (ClientComponent) uiComponent;
-		String clientVarName = ComponentUtil.getClientVarName(facesContext, clientComponent);
+		String clientVarName = getClientVarName(facesContext, clientComponent);
 		String clientKey = clientComponent.getClientKey();
 
 		if (clientKey == null) {

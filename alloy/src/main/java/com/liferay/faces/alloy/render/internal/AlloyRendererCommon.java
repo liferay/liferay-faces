@@ -16,13 +16,13 @@ package com.liferay.faces.alloy.render.internal;
 import java.io.IOException;
 
 import javax.faces.component.UIComponent;
+import javax.faces.component.UINamingContainer;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 
 import com.liferay.faces.util.client.BrowserSniffer;
 import com.liferay.faces.util.client.BrowserSnifferFactory;
 import com.liferay.faces.util.component.ClientComponent;
-import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.lang.StringPool;
 
@@ -147,7 +147,7 @@ import com.liferay.faces.util.lang.StringPool;
 		if (ajax && (uiComponent instanceof ClientComponent)) {
 
 			ClientComponent clientComponent = (ClientComponent) uiComponent;
-			String clientVarName = ComponentUtil.getClientVarName(facesContext, clientComponent);
+			String clientVarName = getClientVarName(facesContext, clientComponent);
 			String clientKey = clientComponent.getClientKey();
 
 			if (clientKey == null) {
@@ -210,7 +210,7 @@ import com.liferay.faces.util.lang.StringPool;
 		String clientKey = clientComponent.getClientKey();
 
 		if (clientKey == null) {
-			clientKey = ComponentUtil.getClientVarName(facesContext, clientComponent);
+			clientKey = getClientVarName(facesContext, clientComponent);
 		}
 
 		// Begin encoding JavaScript to create the Alloy JavaScript component and put it in the Liferay.component map.
@@ -396,4 +396,13 @@ import com.liferay.faces.util.lang.StringPool;
 		return new String(buffer, index, 8 - index);
 	}
 
+	/* package-private */ static String getClientVarName(FacesContext facesContext, ClientComponent clientComponent) {
+
+		char separatorChar = UINamingContainer.getSeparatorChar(facesContext);
+		String clientId = clientComponent.getClientId();
+		String regex = StringPool.OPEN_BRACKET + separatorChar + StringPool.CLOSE_BRACKET;
+		String clientVarName = clientId.replaceAll(regex, StringPool.UNDERLINE);
+
+		return clientVarName;
+	}
 }
