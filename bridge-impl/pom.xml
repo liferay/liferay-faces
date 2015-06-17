@@ -80,7 +80,7 @@
 			<properties>
 				<component.namespace>bridge</component.namespace>
 				<!-- To generate portlet components, run:
-					mvn generate-source -P generate-components -Dnamespace=portlet -Dnamespace.URI=http://java.sun.com/portlet_2_0
+					mvn generate-sources -P generate-components -Dcomponent.namespace=portlet -Dcomponent.namespace.URI=http://java.sun.com/portlet_2_0
 				-->
 				<component.api.output.dir>../bridge-api/src/main/java</component.api.output.dir>
 			</properties>

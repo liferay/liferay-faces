@@ -26,7 +26,7 @@ public abstract class ResourceURLBase extends BaseURL {
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.portlet.component.resourceurl.ResourceURL";
-	public static final String RENDERER_TYPE = "com.liferay.faces.portlet.component.resourceurl.internal.ResourceURLRenderer";
+	public static final String RENDERER_TYPE = "com.liferay.faces.portlet.component.resourceurl.ResourceURLRenderer";
 
 	// Protected Enumerations
 	protected enum ResourceURLPropertyKeys {
