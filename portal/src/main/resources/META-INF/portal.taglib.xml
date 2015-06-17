@@ -22,7 +22,7 @@
 		<tag-name>captcha</tag-name>
 		<component>
 			<component-type>com.liferay.faces.portal.component.captcha.Captcha</component-type>
-			<renderer-type>com.liferay.faces.portal.component.captcha.internal.CaptchaRenderer</renderer-type>
+			<renderer-type>com.liferay.faces.portal.component.captcha.CaptchaRenderer</renderer-type>
 		</component>
 		<attribute>
 			<description><![CDATA[An EL expression that binds the Java reference to this component in the component tree to a bean property.]]></description>
@@ -130,7 +130,7 @@ java.lang.Object)</method-signature>
 		<tag-name>header</tag-name>
 		<component>
 			<component-type>com.liferay.faces.portal.component.header.Header</component-type>
-			<renderer-type>com.liferay.faces.portal.component.header.internal.HeaderRenderer</renderer-type>
+			<renderer-type>com.liferay.faces.portal.component.header.HeaderRenderer</renderer-type>
 		</component>
 		<attribute>
 			<description><![CDATA[TODO.]]></description>
@@ -183,7 +183,7 @@ java.lang.Object)</method-signature>
 		<tag-name>inputRichText</tag-name>
 		<component>
 			<component-type>com.liferay.faces.portal.component.inputrichtext.InputRichText</component-type>
-			<renderer-type>com.liferay.faces.portal.component.inputrichtext.internal.InputRichTextRenderer</renderer-type>
+			<renderer-type>com.liferay.faces.portal.component.inputrichtext.InputRichTextRenderer</renderer-type>
 		</component>
 		<attribute>
 			<description><![CDATA[An EL expression that binds the Java reference to this component in the component tree to a bean property.]]></description>
@@ -357,7 +357,7 @@ java.lang.Object)</method-signature>
 		<tag-name>inputSearch</tag-name>
 		<component>
 			<component-type>com.liferay.faces.portal.component.inputsearch.InputSearch</component-type>
-			<renderer-type>com.liferay.faces.portal.component.inputsearch.internal.InputSearchRenderer</renderer-type>
+			<renderer-type>com.liferay.faces.portal.component.inputsearch.InputSearchRenderer</renderer-type>
 			<handler-class>com.liferay.faces.portal.component.inputsearch.internal.InputSearchHandler</handler-class>
 		</component>
 		<attribute>
@@ -441,7 +441,7 @@ java.lang.Object)</method-signature>
 		<tag-name>nav</tag-name>
 		<component>
 			<component-type>com.liferay.faces.portal.component.nav.Nav</component-type>
-			<renderer-type>com.liferay.faces.portal.component.nav.internal.NavRenderer</renderer-type>
+			<renderer-type>com.liferay.faces.portal.component.nav.NavRenderer</renderer-type>
 		</component>
 		<attribute>
 			<description><![CDATA[The WAI-ARIA label which can help users with disabilities when a text label is not visible.]]></description>
@@ -512,7 +512,7 @@ java.lang.Object)</method-signature>
 		<tag-name>navBar</tag-name>
 		<component>
 			<component-type>com.liferay.faces.portal.component.navbar.NavBar</component-type>
-			<renderer-type>com.liferay.faces.portal.component.navbar.internal.NavBarRenderer</renderer-type>
+			<renderer-type>com.liferay.faces.portal.component.navbar.NavBarRenderer</renderer-type>
 		</component>
 		<attribute>
 			<description><![CDATA[An EL expression that binds the Java reference to this component in the component tree to a bean property.]]></description>
@@ -553,7 +553,7 @@ java.lang.Object)</method-signature>
 		<tag-name>navBarSearch</tag-name>
 		<component>
 			<component-type>com.liferay.faces.portal.component.navbarsearch.NavBarSearch</component-type>
-			<renderer-type>com.liferay.faces.portal.component.navbarsearch.internal.NavBarSearchRenderer</renderer-type>
+			<renderer-type>com.liferay.faces.portal.component.navbarsearch.NavBarSearchRenderer</renderer-type>
 		</component>
 		<attribute>
 			<description><![CDATA[An EL expression that binds the Java reference to this component in the component tree to a bean property.]]></description>
@@ -594,7 +594,7 @@ java.lang.Object)</method-signature>
 		<tag-name>navItem</tag-name>
 		<component>
 			<component-type>com.liferay.faces.portal.component.navitem.NavItem</component-type>
-			<renderer-type>com.liferay.faces.portal.component.navitem.internal.NavItemRenderer</renderer-type>
+			<renderer-type>com.liferay.faces.portal.component.navitem.NavItemRenderer</renderer-type>
 		</component>
 		<attribute>
 			<description><![CDATA[If the href attribute has a value, then this is the value of the "class" attribute for the anchor tag rendered inside the list item element.]]></description>
@@ -707,7 +707,7 @@ java.lang.Object)</method-signature>
 		<tag-name>permissionsURL</tag-name>
 		<component>
 			<component-type>com.liferay.faces.portal.component.permissionsurl.PermissionsURL</component-type>
-			<renderer-type>com.liferay.faces.portal.component.permissionsurl.internal.PermissionsURLRenderer</renderer-type>
+			<renderer-type>com.liferay.faces.portal.component.permissionsurl.PermissionsURLRenderer</renderer-type>
 		</component>
 		<attribute>
 			<description><![CDATA[The Fully-Qualified Class Name (FQCN) of the ServiceBuilder model.]]></description>
@@ -766,7 +766,7 @@ java.lang.Object)</method-signature>
 		<tag-name>runtime</tag-name>
 		<component>
 			<component-type>com.liferay.faces.portal.component.runtime.Runtime</component-type>
-			<renderer-type>com.liferay.faces.portal.component.runtime.internal.RuntimeRenderer</renderer-type>
+			<renderer-type>com.liferay.faces.portal.component.runtime.RuntimeRenderer</renderer-type>
 		</component>
 		<attribute>
 			<description><![CDATA[An EL expression that binds the Java reference to this component in the component tree to a bean property.]]></description>

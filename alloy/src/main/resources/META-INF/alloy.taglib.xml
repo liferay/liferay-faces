@@ -22,7 +22,7 @@
 		<tag-name>accordion</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.component.accordion.Accordion</component-type>
-			<renderer-type>com.liferay.faces.alloy.component.accordion.internal.AccordionRenderer</renderer-type>
+			<renderer-type>com.liferay.faces.alloy.component.accordion.AccordionRenderer</renderer-type>
 			<handler-class>com.liferay.faces.alloy.component.accordion.internal.AccordionHandler</handler-class>
 		</component>
 		<attribute>
@@ -106,7 +106,7 @@
 		<tag-name>audio</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.component.audio.Audio</component-type>
-			<renderer-type>com.liferay.faces.alloy.component.audio.internal.AudioRenderer</renderer-type>
+			<renderer-type>com.liferay.faces.alloy.component.audio.AudioRenderer</renderer-type>
 		</component>
 		<attribute>
 			<description><![CDATA[HTML5 passthrough attribute specifying whether the media will begin playing automatically. Defaults to false.]]></description>
@@ -411,7 +411,7 @@
 		<tag-name>autoComplete</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.component.autocomplete.AutoComplete</component-type>
-			<renderer-type>com.liferay.faces.alloy.component.autocomplete.internal.AutoCompleteRenderer</renderer-type>
+			<renderer-type>com.liferay.faces.alloy.component.autocomplete.AutoCompleteRenderer</renderer-type>
 			<handler-class>com.liferay.faces.alloy.component.autocomplete.internal.AutoCompleteHandler</handler-class>
 		</component>
 		<attribute>
@@ -778,7 +778,7 @@ java.lang.Object)</method-signature>
 		<tag-name>body</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.component.body.Body</component-type>
-			<renderer-type>com.liferay.faces.alloy.component.body.internal.BodyRenderer</renderer-type>
+			<renderer-type>com.liferay.faces.alloy.component.body.BodyRenderer</renderer-type>
 		</component>
 		<attribute>
 			<description><![CDATA[HTML passthrough attribute specifying the css style of the element.]]></description>
@@ -801,7 +801,7 @@ java.lang.Object)</method-signature>
 		<tag-name>button</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.component.button.Button</component-type>
-			<renderer-type>com.liferay.faces.alloy.component.button.internal.ButtonRenderer</renderer-type>
+			<renderer-type>com.liferay.faces.alloy.component.button.ButtonRenderer</renderer-type>
 		</component>
 		<attribute>
 			<description><![CDATA[HTML passthrough attribute specifying a hot key character for the element.]]></description>
@@ -1010,7 +1010,7 @@ java.lang.Object)</method-signature>
 		<tag-name>buttonRow</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.component.buttonrow.ButtonRow</component-type>
-			<renderer-type>com.liferay.faces.alloy.component.buttonrow.internal.ButtonRowRenderer</renderer-type>
+			<renderer-type>com.liferay.faces.alloy.component.buttonrow.ButtonRowRenderer</renderer-type>
 		</component>
 		<attribute>
 			<description><![CDATA[An EL expression that binds the Java reference to this component in the component tree to a bean property.]]></description>
@@ -1111,7 +1111,7 @@ java.lang.Object)</method-signature>
 		<tag-name>column</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.component.column.Column</component-type>
-			<renderer-type>com.liferay.faces.alloy.component.column.internal.ColumnRenderer</renderer-type>
+			<renderer-type>com.liferay.faces.alloy.component.column.ColumnRenderer</renderer-type>
 		</component>
 		<attribute>
 			<description><![CDATA[When this flag is true, clicking on the button will cause the form to be submitted via XmlHttpRequest. The default is true.]]></description>
@@ -1248,7 +1248,7 @@ java.lang.Object)</method-signature>
 		<tag-name>commandButton</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.component.commandbutton.CommandButton</component-type>
-			<renderer-type>com.liferay.faces.alloy.component.commandbutton.internal.CommandButtonRenderer</renderer-type>
+			<renderer-type>com.liferay.faces.alloy.component.commandbutton.CommandButtonRenderer</renderer-type>
 		</component>
 		<attribute>
 			<description><![CDATA[HTML passthrough attribute specifying a hot key character for the element.]]></description>
@@ -1505,7 +1505,7 @@ java.lang.Object)</method-signature>
 		<tag-name>commandLink</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.component.commandlink.CommandLink</component-type>
-			<renderer-type>com.liferay.faces.alloy.component.commandlink.internal.CommandLinkRenderer</renderer-type>
+			<renderer-type>com.liferay.faces.alloy.component.commandlink.CommandLinkRenderer</renderer-type>
 		</component>
 		<attribute>
 			<description><![CDATA[HTML passthrough attribute specifying a hot key character for the element.]]></description>
@@ -1762,7 +1762,7 @@ java.lang.Object)</method-signature>
 		<tag-name>dataItem</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.component.dataitem.DataItem</component-type>
-			<renderer-type>com.liferay.faces.alloy.component.dataitem.internal.DataItemRenderer</renderer-type>
+			<renderer-type>com.liferay.faces.alloy.component.dataitem.DataItemRenderer</renderer-type>
 		</component>
 		<attribute>
 			<description><![CDATA[An EL expression that binds the Java reference to this component in the component tree to a bean property.]]></description>
@@ -1803,7 +1803,7 @@ java.lang.Object)</method-signature>
 		<tag-name>dataList</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.component.datalist.DataList</component-type>
-			<renderer-type>com.liferay.faces.alloy.component.datalist.internal.DataListRenderer</renderer-type>
+			<renderer-type>com.liferay.faces.alloy.component.datalist.DataListRenderer</renderer-type>
 		</component>
 		<attribute>
 			<description><![CDATA[An EL expression that binds the Java reference to this component in the component tree to a bean property.]]></description>
@@ -1862,7 +1862,7 @@ java.lang.Object)</method-signature>
 		<tag-name>dataTable</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.component.datatable.DataTable</component-type>
-			<renderer-type>com.liferay.faces.alloy.component.datatable.internal.DataTableRenderer</renderer-type>
+			<renderer-type>com.liferay.faces.alloy.component.datatable.DataTableRenderer</renderer-type>
 			<handler-class>com.liferay.faces.alloy.component.datatable.internal.DataTableHandler</handler-class>
 		</component>
 		<attribute>
@@ -2150,7 +2150,7 @@ java.lang.Object)</method-signature>
 		<tag-name>dialog</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.component.dialog.Dialog</component-type>
-			<renderer-type>com.liferay.faces.alloy.component.dialog.internal.DialogRenderer</renderer-type>
+			<renderer-type>com.liferay.faces.alloy.component.dialog.DialogRenderer</renderer-type>
 		</component>
 		<attribute>
 			<description><![CDATA[When true, the component is visible initially. The default is false.]]></description>
@@ -2305,7 +2305,7 @@ java.lang.Object)</method-signature>
 		<tag-name>field</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.component.field.Field</component-type>
-			<renderer-type>com.liferay.faces.alloy.component.field.internal.FieldRenderer</renderer-type>
+			<renderer-type>com.liferay.faces.alloy.component.field.FieldRenderer</renderer-type>
 		</component>
 		<attribute>
 			<description><![CDATA[An EL expression that binds the Java reference to this component in the component tree to a bean property.]]></description>
@@ -2424,7 +2424,7 @@ java.lang.Object)</method-signature>
 		<tag-name>fieldset</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.component.fieldset.Fieldset</component-type>
-			<renderer-type>com.liferay.faces.alloy.component.fieldset.internal.FieldsetRenderer</renderer-type>
+			<renderer-type>com.liferay.faces.alloy.component.fieldset.FieldsetRenderer</renderer-type>
 		</component>
 		<attribute>
 			<description><![CDATA[An EL expression that binds the Java reference to this component in the component tree to a bean property.]]></description>
@@ -2537,7 +2537,7 @@ java.lang.Object)</method-signature>
 		<tag-name>form</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.component.form.Form</component-type>
-			<renderer-type>com.liferay.faces.alloy.component.form.internal.FormRenderer</renderer-type>
+			<renderer-type>com.liferay.faces.alloy.component.form.FormRenderer</renderer-type>
 		</component>
 		<attribute>
 			<description><![CDATA[HTML4 legacy passthrough attribute that has been made obsolete in HTML5 and is not supported by most browsers. The value can be a comma-delimited list of mime-types that the server accepts during file upload.]]></description>
@@ -2698,7 +2698,7 @@ java.lang.Object)</method-signature>
 		<tag-name>head</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.component.head.Head</component-type>
-			<renderer-type>com.liferay.faces.alloy.component.head.internal.HeadRenderer</renderer-type>
+			<renderer-type>com.liferay.faces.alloy.component.head.HeadRenderer</renderer-type>
 		</component>
 		<attribute>
 			<description><![CDATA[An EL expression that binds the Java reference to this component in the component tree to a bean property.]]></description>
@@ -2769,7 +2769,7 @@ java.lang.Object)</method-signature>
 		<tag-name>icon</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.component.icon.Icon</component-type>
-			<renderer-type>com.liferay.faces.alloy.component.icon.internal.IconRenderer</renderer-type>
+			<renderer-type>com.liferay.faces.alloy.component.icon.IconRenderer</renderer-type>
 		</component>
 		<attribute>
 			<description><![CDATA[An EL expression that binds the Java reference to this component in the component tree to a bean property.]]></description>
@@ -2822,7 +2822,7 @@ java.lang.Object)</method-signature>
 		<tag-name>image</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.component.image.Image</component-type>
-			<renderer-type>com.liferay.faces.alloy.component.image.internal.ImageRenderer</renderer-type>
+			<renderer-type>com.liferay.faces.alloy.component.image.ImageRenderer</renderer-type>
 		</component>
 		<attribute>
 			<description><![CDATA[HTML passthrough attribute specifying alternative information about the rendered HTML element.]]></description>
@@ -3007,7 +3007,7 @@ java.lang.Object)</method-signature>
 		<tag-name>inputDate</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.component.inputdate.InputDate</component-type>
-			<renderer-type>com.liferay.faces.alloy.component.inputdate.internal.InputDateRenderer</renderer-type>
+			<renderer-type>com.liferay.faces.alloy.component.inputdate.InputDateRenderer</renderer-type>
 		</component>
 		<attribute>
 			<description><![CDATA[HTML passthrough attribute specifying a hot key character for the element.]]></description>
@@ -3331,7 +3331,7 @@ java.lang.Object)</method-signature>
 		<tag-name>inputFile</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.component.inputfile.InputFile</component-type>
-			<renderer-type>com.liferay.faces.alloy.component.inputfile.internal.InputFileRenderer</renderer-type>
+			<renderer-type>com.liferay.faces.alloy.component.inputfile.InputFileRenderer</renderer-type>
 			<handler-class>com.liferay.faces.alloy.component.inputfile.internal.InputFileHandler</handler-class>
 		</component>
 		<attribute>
@@ -3638,7 +3638,7 @@ java.lang.Object)</method-signature>
 		<tag-name>inputHidden</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.component.inputhidden.InputHidden</component-type>
-			<renderer-type>com.liferay.faces.alloy.component.inputhidden.internal.InputHiddenRenderer</renderer-type>
+			<renderer-type>com.liferay.faces.alloy.component.inputhidden.InputHiddenRenderer</renderer-type>
 		</component>
 		<attribute>
 			<description><![CDATA[An EL expression that binds the Java reference to this component in the component tree to a bean property.]]></description>
@@ -3722,7 +3722,7 @@ java.lang.Object)</method-signature>
 		<tag-name>inputSecret</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.component.inputsecret.InputSecret</component-type>
-			<renderer-type>com.liferay.faces.alloy.component.inputsecret.internal.InputSecretRenderer</renderer-type>
+			<renderer-type>com.liferay.faces.alloy.component.inputsecret.InputSecretRenderer</renderer-type>
 		</component>
 		<attribute>
 			<description><![CDATA[HTML passthrough attribute specifying a hot key character for the element.]]></description>
@@ -3986,7 +3986,7 @@ java.lang.Object)</method-signature>
 		<tag-name>inputSourceCode</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.component.inputsourcecode.InputSourceCode</component-type>
-			<renderer-type>com.liferay.faces.alloy.component.inputsourcecode.internal.InputSourceCodeRenderer</renderer-type>
+			<renderer-type>com.liferay.faces.alloy.component.inputsourcecode.InputSourceCodeRenderer</renderer-type>
 		</component>
 		<attribute>
 			<description><![CDATA[An EL expression that binds the Java reference to this component in the component tree to a bean property.]]></description>
@@ -4166,7 +4166,7 @@ java.lang.Object)</method-signature>
 		<tag-name>inputText</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.component.inputtext.InputText</component-type>
-			<renderer-type>com.liferay.faces.alloy.component.inputtext.internal.InputTextRenderer</renderer-type>
+			<renderer-type>com.liferay.faces.alloy.component.inputtext.InputTextRenderer</renderer-type>
 		</component>
 		<attribute>
 			<description><![CDATA[HTML passthrough attribute specifying a hot key character for the element.]]></description>
@@ -4424,7 +4424,7 @@ java.lang.Object)</method-signature>
 		<tag-name>inputTextarea</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.component.inputtextarea.InputTextarea</component-type>
-			<renderer-type>com.liferay.faces.alloy.component.inputtextarea.internal.InputTextareaRenderer</renderer-type>
+			<renderer-type>com.liferay.faces.alloy.component.inputtextarea.InputTextareaRenderer</renderer-type>
 		</component>
 		<attribute>
 			<description><![CDATA[HTML passthrough attribute specifying a hot key character for the element.]]></description>
@@ -4676,7 +4676,7 @@ java.lang.Object)</method-signature>
 		<tag-name>inputTime</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.component.inputtime.InputTime</component-type>
-			<renderer-type>com.liferay.faces.alloy.component.inputtime.internal.InputTimeRenderer</renderer-type>
+			<renderer-type>com.liferay.faces.alloy.component.inputtime.InputTimeRenderer</renderer-type>
 		</component>
 		<attribute>
 			<description><![CDATA[HTML passthrough attribute specifying a hot key character for the element.]]></description>
@@ -5048,7 +5048,7 @@ java.lang.Object)</method-signature>
 		<tag-name>link</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.component.link.Link</component-type>
-			<renderer-type>com.liferay.faces.alloy.component.link.internal.LinkRenderer</renderer-type>
+			<renderer-type>com.liferay.faces.alloy.component.link.LinkRenderer</renderer-type>
 		</component>
 		<attribute>
 			<description><![CDATA[HTML passthrough attribute specifying a hot key character for the element.]]></description>
@@ -5353,7 +5353,7 @@ java.lang.Object)</method-signature>
 		<tag-name>message</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.component.message.Message</component-type>
-			<renderer-type>com.liferay.faces.alloy.component.message.internal.MessageRenderer</renderer-type>
+			<renderer-type>com.liferay.faces.alloy.component.message.MessageRenderer</renderer-type>
 		</component>
 		<attribute>
 			<description><![CDATA[An EL expression that binds the Java reference to this component in the component tree to a bean property.]]></description>
@@ -5490,7 +5490,7 @@ java.lang.Object)</method-signature>
 		<tag-name>messages</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.component.messages.Messages</component-type>
-			<renderer-type>com.liferay.faces.alloy.component.messages.internal.MessagesRenderer</renderer-type>
+			<renderer-type>com.liferay.faces.alloy.component.messages.MessagesRenderer</renderer-type>
 		</component>
 		<attribute>
 			<description><![CDATA[An EL expression that binds the Java reference to this component in the component tree to a bean property.]]></description>
@@ -5639,7 +5639,7 @@ java.lang.Object)</method-signature>
 		<tag-name>outputFormat</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.component.outputformat.OutputFormat</component-type>
-			<renderer-type>com.liferay.faces.alloy.component.outputformat.internal.OutputFormatRenderer</renderer-type>
+			<renderer-type>com.liferay.faces.alloy.component.outputformat.OutputFormatRenderer</renderer-type>
 		</component>
 		<attribute>
 			<description><![CDATA[An EL expression that binds the Java reference to this component in the component tree to a bean property.]]></description>
@@ -5722,7 +5722,7 @@ java.lang.Object)</method-signature>
 		<tag-name>outputLabel</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.component.outputlabel.OutputLabel</component-type>
-			<renderer-type>com.liferay.faces.alloy.component.outputlabel.internal.OutputLabelRenderer</renderer-type>
+			<renderer-type>com.liferay.faces.alloy.component.outputlabel.OutputLabelRenderer</renderer-type>
 		</component>
 		<attribute>
 			<description><![CDATA[HTML passthrough attribute specifying a hot key character for the element.]]></description>
@@ -5895,7 +5895,7 @@ java.lang.Object)</method-signature>
 		<tag-name>outputLink</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.component.outputlink.OutputLink</component-type>
-			<renderer-type>com.liferay.faces.alloy.component.outputlink.internal.OutputLinkRenderer</renderer-type>
+			<renderer-type>com.liferay.faces.alloy.component.outputlink.OutputLinkRenderer</renderer-type>
 		</component>
 		<attribute>
 			<description><![CDATA[HTML passthrough attribute specifying a hot key character for the element.]]></description>
@@ -6110,7 +6110,7 @@ java.lang.Object)</method-signature>
 		<tag-name>outputRemainingChars</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.component.outputremainingchars.OutputRemainingChars</component-type>
-			<renderer-type>com.liferay.faces.alloy.component.outputremainingchars.internal.OutputRemainingCharsRenderer</renderer-type>
+			<renderer-type>com.liferay.faces.alloy.component.outputremainingchars.OutputRemainingCharsRenderer</renderer-type>
 		</component>
 		<attribute>
 			<description><![CDATA[An EL expression that binds the Java reference to this component in the component tree to a bean property.]]></description>
@@ -6223,7 +6223,7 @@ java.lang.Object)</method-signature>
 		<tag-name>outputScript</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.component.outputscript.OutputScript</component-type>
-			<renderer-type>com.liferay.faces.alloy.component.outputscript.internal.OutputScriptRenderer</renderer-type>
+			<renderer-type>com.liferay.faces.alloy.component.outputscript.OutputScriptRenderer</renderer-type>
 		</component>
 		<attribute>
 			<description><![CDATA[An EL expression that binds the Java reference to this component in the component tree to a bean property.]]></description>
@@ -6288,7 +6288,7 @@ java.lang.Object)</method-signature>
 		<tag-name>outputStylesheet</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.component.outputstylesheet.OutputStylesheet</component-type>
-			<renderer-type>com.liferay.faces.alloy.component.outputstylesheet.internal.OutputStylesheetRenderer</renderer-type>
+			<renderer-type>com.liferay.faces.alloy.component.outputstylesheet.OutputStylesheetRenderer</renderer-type>
 		</component>
 		<attribute>
 			<description><![CDATA[An EL expression that binds the Java reference to this component in the component tree to a bean property.]]></description>
@@ -6347,7 +6347,7 @@ java.lang.Object)</method-signature>
 		<tag-name>outputText</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.component.outputtext.OutputText</component-type>
-			<renderer-type>com.liferay.faces.alloy.component.outputtext.internal.OutputTextRenderer</renderer-type>
+			<renderer-type>com.liferay.faces.alloy.component.outputtext.OutputTextRenderer</renderer-type>
 		</component>
 		<attribute>
 			<description><![CDATA[An EL expression that binds the Java reference to this component in the component tree to a bean property.]]></description>
@@ -6430,7 +6430,7 @@ java.lang.Object)</method-signature>
 		<tag-name>outputTooltip</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.component.outputtooltip.OutputTooltip</component-type>
-			<renderer-type>com.liferay.faces.alloy.component.outputtooltip.internal.OutputTooltipRenderer</renderer-type>
+			<renderer-type>com.liferay.faces.alloy.component.outputtooltip.OutputTooltipRenderer</renderer-type>
 		</component>
 		<attribute>
 			<description><![CDATA[When true, the component is visible initially. The default is false.]]></description>
@@ -6555,7 +6555,7 @@ java.lang.Object)</method-signature>
 		<tag-name>paginator</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.component.paginator.Paginator</component-type>
-			<renderer-type>com.liferay.faces.alloy.component.paginator.internal.PaginatorRenderer</renderer-type>
+			<renderer-type>com.liferay.faces.alloy.component.paginator.PaginatorRenderer</renderer-type>
 		</component>
 		<attribute>
 			<description><![CDATA[When this flag is true, clicking on the button will cause the form to be submitted via XmlHttpRequest. The default is true.]]></description>
@@ -6710,7 +6710,7 @@ java.lang.Object)</method-signature>
 		<tag-name>panel</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.component.panel.Panel</component-type>
-			<renderer-type>com.liferay.faces.alloy.component.panel.internal.PanelRenderer</renderer-type>
+			<renderer-type>com.liferay.faces.alloy.component.panel.PanelRenderer</renderer-type>
 		</component>
 		<attribute>
 			<description><![CDATA[An EL expression that binds the Java reference to this component in the component tree to a bean property.]]></description>
@@ -6829,7 +6829,7 @@ java.lang.Object)</method-signature>
 		<tag-name>panelGrid</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.component.panelgrid.PanelGrid</component-type>
-			<renderer-type>com.liferay.faces.alloy.component.panelgrid.internal.PanelGridRenderer</renderer-type>
+			<renderer-type>com.liferay.faces.alloy.component.panelgrid.PanelGridRenderer</renderer-type>
 		</component>
 		<attribute>
 			<description><![CDATA[HTML passthrough attribute specifying the background color for the <code>&lt;table&gt;</code> element.]]></description>
@@ -7050,7 +7050,7 @@ java.lang.Object)</method-signature>
 		<tag-name>panelGroup</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.component.panelgroup.PanelGroup</component-type>
-			<renderer-type>com.liferay.faces.alloy.component.panelgroup.internal.PanelGroupRenderer</renderer-type>
+			<renderer-type>com.liferay.faces.alloy.component.panelgroup.PanelGroupRenderer</renderer-type>
 		</component>
 		<attribute>
 			<description><![CDATA[An EL expression that binds the Java reference to this component in the component tree to a bean property.]]></description>
@@ -7157,7 +7157,7 @@ java.lang.Object)</method-signature>
 		<tag-name>popover</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.component.popover.Popover</component-type>
-			<renderer-type>com.liferay.faces.alloy.component.popover.internal.PopoverRenderer</renderer-type>
+			<renderer-type>com.liferay.faces.alloy.component.popover.PopoverRenderer</renderer-type>
 		</component>
 		<attribute>
 			<description><![CDATA[When true, the component is visible initially. The default is false.]]></description>
@@ -7318,7 +7318,7 @@ java.lang.Object)</method-signature>
 		<tag-name>progressBar</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.component.progressbar.ProgressBar</component-type>
-			<renderer-type>com.liferay.faces.alloy.component.progressbar.internal.ProgressBarRenderer</renderer-type>
+			<renderer-type>com.liferay.faces.alloy.component.progressbar.ProgressBarRenderer</renderer-type>
 			<handler-class>com.liferay.faces.alloy.component.progressbar.internal.ProgressBarHandler</handler-class>
 		</component>
 		<attribute>
@@ -7454,7 +7454,7 @@ java.lang.Object)</method-signature>
 		<tag-name>row</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.component.row.Row</component-type>
-			<renderer-type>com.liferay.faces.alloy.component.row.internal.RowRenderer</renderer-type>
+			<renderer-type>com.liferay.faces.alloy.component.row.RowRenderer</renderer-type>
 		</component>
 		<attribute>
 			<description><![CDATA[An EL expression that binds the Java reference to this component in the component tree to a bean property.]]></description>
@@ -7501,7 +7501,7 @@ java.lang.Object)</method-signature>
 		<tag-name>selectBooleanCheckbox</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.component.selectbooleancheckbox.SelectBooleanCheckbox</component-type>
-			<renderer-type>com.liferay.faces.alloy.component.selectbooleancheckbox.internal.SelectBooleanCheckboxRenderer</renderer-type>
+			<renderer-type>com.liferay.faces.alloy.component.selectbooleancheckbox.SelectBooleanCheckboxRenderer</renderer-type>
 		</component>
 		<attribute>
 			<description><![CDATA[HTML passthrough attribute specifying a hot key character for the element.]]></description>
@@ -7735,7 +7735,7 @@ java.lang.Object)</method-signature>
 		<tag-name>selectManyCheckbox</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.component.selectmanycheckbox.SelectManyCheckbox</component-type>
-			<renderer-type>com.liferay.faces.alloy.component.selectmanycheckbox.internal.SelectManyCheckboxRenderer</renderer-type>
+			<renderer-type>com.liferay.faces.alloy.component.selectmanycheckbox.SelectManyCheckboxRenderer</renderer-type>
 		</component>
 		<attribute>
 			<description><![CDATA[HTML passthrough attribute specifying a hot key character for the element.]]></description>
@@ -8005,7 +8005,7 @@ java.lang.Object)</method-signature>
 		<tag-name>selectManyListbox</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.component.selectmanylistbox.SelectManyListbox</component-type>
-			<renderer-type>com.liferay.faces.alloy.component.selectmanylistbox.internal.SelectManyListboxRenderer</renderer-type>
+			<renderer-type>com.liferay.faces.alloy.component.selectmanylistbox.SelectManyListboxRenderer</renderer-type>
 		</component>
 		<attribute>
 			<description><![CDATA[HTML passthrough attribute specifying a hot key character for the element.]]></description>
@@ -8269,7 +8269,7 @@ java.lang.Object)</method-signature>
 		<tag-name>selectManyMenu</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.component.selectmanymenu.SelectManyMenu</component-type>
-			<renderer-type>com.liferay.faces.alloy.component.selectmanymenu.internal.SelectManyMenuRenderer</renderer-type>
+			<renderer-type>com.liferay.faces.alloy.component.selectmanymenu.SelectManyMenuRenderer</renderer-type>
 		</component>
 		<attribute>
 			<description><![CDATA[HTML passthrough attribute specifying a hot key character for the element.]]></description>
@@ -8527,7 +8527,7 @@ java.lang.Object)</method-signature>
 		<tag-name>selectOneListbox</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.component.selectonelistbox.SelectOneListbox</component-type>
-			<renderer-type>com.liferay.faces.alloy.component.selectonelistbox.internal.SelectOneListboxRenderer</renderer-type>
+			<renderer-type>com.liferay.faces.alloy.component.selectonelistbox.SelectOneListboxRenderer</renderer-type>
 		</component>
 		<attribute>
 			<description><![CDATA[HTML passthrough attribute specifying a hot key character for the element.]]></description>
@@ -8785,7 +8785,7 @@ java.lang.Object)</method-signature>
 		<tag-name>selectOneMenu</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.component.selectonemenu.SelectOneMenu</component-type>
-			<renderer-type>com.liferay.faces.alloy.component.selectonemenu.internal.SelectOneMenuRenderer</renderer-type>
+			<renderer-type>com.liferay.faces.alloy.component.selectonemenu.SelectOneMenuRenderer</renderer-type>
 		</component>
 		<attribute>
 			<description><![CDATA[HTML passthrough attribute specifying a hot key character for the element.]]></description>
@@ -9037,7 +9037,7 @@ java.lang.Object)</method-signature>
 		<tag-name>selectOneRadio</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.component.selectoneradio.SelectOneRadio</component-type>
-			<renderer-type>com.liferay.faces.alloy.component.selectoneradio.internal.SelectOneRadioRenderer</renderer-type>
+			<renderer-type>com.liferay.faces.alloy.component.selectoneradio.SelectOneRadioRenderer</renderer-type>
 		</component>
 		<attribute>
 			<description><![CDATA[HTML passthrough attribute specifying a hot key character for the element.]]></description>
@@ -9289,7 +9289,7 @@ java.lang.Object)</method-signature>
 		<tag-name>selectStarRating</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.component.selectstarrating.SelectStarRating</component-type>
-			<renderer-type>com.liferay.faces.alloy.component.selectstarrating.internal.SelectStarRatingRenderer</renderer-type>
+			<renderer-type>com.liferay.faces.alloy.component.selectstarrating.SelectStarRatingRenderer</renderer-type>
 		</component>
 		<attribute>
 			<description><![CDATA[An EL expression that binds the Java reference to this component in the component tree to a bean property.]]></description>
@@ -9421,7 +9421,7 @@ java.lang.Object)</method-signature>
 		<tag-name>selectThumbRating</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.component.selectthumbrating.SelectThumbRating</component-type>
-			<renderer-type>com.liferay.faces.alloy.component.selectthumbrating.internal.SelectThumbRatingRenderer</renderer-type>
+			<renderer-type>com.liferay.faces.alloy.component.selectthumbrating.SelectThumbRatingRenderer</renderer-type>
 		</component>
 		<attribute>
 			<description><![CDATA[An EL expression that binds the Java reference to this component in the component tree to a bean property.]]></description>
@@ -9553,7 +9553,7 @@ java.lang.Object)</method-signature>
 		<tag-name>tab</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.component.tab.Tab</component-type>
-			<renderer-type>com.liferay.faces.alloy.component.tab.internal.TabRenderer</renderer-type>
+			<renderer-type>com.liferay.faces.alloy.component.tab.TabRenderer</renderer-type>
 			<handler-class>com.liferay.faces.alloy.component.tab.internal.TabHandler</handler-class>
 		</component>
 		<attribute>
@@ -9619,7 +9619,7 @@ java.lang.Object)</method-signature>
 		<tag-name>tabView</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.component.tabview.TabView</component-type>
-			<renderer-type>com.liferay.faces.alloy.component.tabview.internal.TabViewRenderer</renderer-type>
+			<renderer-type>com.liferay.faces.alloy.component.tabview.TabViewRenderer</renderer-type>
 			<handler-class>com.liferay.faces.alloy.component.tabview.internal.TabViewHandler</handler-class>
 		</component>
 		<attribute>
@@ -9731,7 +9731,7 @@ java.lang.Object)</method-signature>
 		<tag-name>video</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.component.video.Video</component-type>
-			<renderer-type>com.liferay.faces.alloy.component.video.internal.VideoRenderer</renderer-type>
+			<renderer-type>com.liferay.faces.alloy.component.video.VideoRenderer</renderer-type>
 		</component>
 		<attribute>
 			<description><![CDATA[HTML5 passthrough attribute specifying whether the media will begin playing automatically. Defaults to false.]]></description>
