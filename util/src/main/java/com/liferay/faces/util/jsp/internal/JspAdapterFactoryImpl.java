@@ -16,11 +16,11 @@ package com.liferay.faces.util.jsp.internal;
 import javax.el.ELContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.BodyContent;
 
 import com.liferay.faces.util.jsp.JspAdapterFactory;
-import com.liferay.faces.util.jsp.StringJspWriter;
 
 
 /**
@@ -29,19 +29,19 @@ import com.liferay.faces.util.jsp.StringJspWriter;
 public class JspAdapterFactoryImpl extends JspAdapterFactory {
 
 	@Override
-	public BodyContent getBodyContent(StringJspWriter stringJspWriter) {
-		return new StringBodyContentImpl(stringJspWriter);
+	public BodyContent getStringBodyContent(JspWriter stringJspWriter) {
+		return new BodyContentStringImpl(stringJspWriter);
 	}
 
 	@Override
-	public PageContext getPageContext(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse,
-		ELContext elContext, StringJspWriter stringJspWriter) {
-		return new PageContextAdapterImpl(httpServletRequest, httpServletResponse, elContext, stringJspWriter);
+	public JspWriter getStringJspWriter() {
+		return new JspWriterStringImpl();
 	}
 
 	@Override
-	public StringJspWriter getStringJspWriter() {
-		return new StringJspWriterImpl();
+	public PageContext getStringPageContext(HttpServletRequest httpServletRequest,
+		HttpServletResponse httpServletResponse, ELContext elContext, JspWriter stringJspWriter) {
+		return new PageContextStringImpl(httpServletRequest, httpServletResponse, elContext, stringJspWriter);
 	}
 
 	@Override
