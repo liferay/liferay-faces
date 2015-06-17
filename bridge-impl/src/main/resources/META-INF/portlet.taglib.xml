@@ -6,7 +6,7 @@
 		<tag-name>actionURL</tag-name>
 		<component>
 			<component-type>com.liferay.faces.portlet.component.actionurl.ActionURL</component-type>
-			<renderer-type>com.liferay.faces.portlet.component.actionurl.internal.ActionURLRenderer</renderer-type>
+			<renderer-type>com.liferay.faces.portlet.component.actionurl.ActionURLRenderer</renderer-type>
 		</component>
 	</tag>
 	<tag>
@@ -19,7 +19,7 @@
 		<tag-name>namespace</tag-name>
 		<component>
 			<component-type>com.liferay.faces.portlet.component.namespace.Namespace</component-type>
-			<renderer-type>com.liferay.faces.portlet.component.namespace.internal.NameSpaceRenderer</renderer-type>
+			<renderer-type>com.liferay.faces.portlet.component.namespace.NameSpaceRenderer</renderer-type>
 		</component>
 	</tag>
 	<tag>
@@ -38,14 +38,14 @@
 		<tag-name>renderURL</tag-name>
 		<component>
 			<component-type>com.liferay.faces.portlet.component.renderurl.RenderURL</component-type>
-			<renderer-type>com.liferay.faces.portlet.component.renderurl.internal.RenderURLRenderer</renderer-type>
+			<renderer-type>com.liferay.faces.portlet.component.renderurl.RenderURLRenderer</renderer-type>
 		</component>
 	</tag>
 	<tag>
 		<tag-name>resourceURL</tag-name>
 		<component>
 			<component-type>com.liferay.faces.portlet.component.resourceurl.ResourceURL</component-type>
-			<renderer-type>com.liferay.faces.portlet.component.resourceurl.internal.ResourceURLRenderer</renderer-type>
+			<renderer-type>com.liferay.faces.portlet.component.resourceurl.ResourceURLRenderer</renderer-type>
 		</component>
 	</tag>
 </facelet-taglib>
