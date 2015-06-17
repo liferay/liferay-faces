@@ -24,11 +24,11 @@ import javax.portlet.PortalContext;
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletRequest;
 
-import com.liferay.faces.bridge.context.BridgePortalContext;
 import com.liferay.faces.bridge.config.internal.PortletConfigParam;
 import com.liferay.faces.bridge.context.BridgeContext;
-import com.liferay.faces.util.application.ResourceConstants;
+import com.liferay.faces.bridge.context.BridgePortalContext;
 import com.liferay.faces.util.application.ResourceHandlerWrapperBase;
+import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -77,7 +77,7 @@ public class ResourceHandlerBridgeImpl extends ResourceHandlerWrapperBase {
 	 */
 	public static boolean isFacesResourceURL(String url) {
 
-		if ((url != null) && (url.indexOf(ResourceConstants.JAVAX_FACES_RESOURCE) >= 0)) {
+		if ((url != null) && (url.indexOf("javax.faces.resource") >= 0)) {
 			return true;
 		}
 		else {
@@ -129,7 +129,7 @@ public class ResourceHandlerBridgeImpl extends ResourceHandlerWrapperBase {
 
 		ExternalContext externalContext = facesContext.getExternalContext();
 		Map<String, String> requestParameterMap = externalContext.getRequestParameterMap();
-		String resourceName = requestParameterMap.get(ResourceConstants.JAVAX_FACES_RESOURCE);
+		String resourceName = requestParameterMap.get("javax.faces.resource");
 
 		// Assume that the resource  ExternalContext.encodeResourceURL(String) was properly called, and that
 		// which adds the "javax.faces.resource" request parameter.
@@ -137,7 +137,7 @@ public class ResourceHandlerBridgeImpl extends ResourceHandlerWrapperBase {
 		// assume that calling resource.getInputStream() will provide the ability to send the contents of the
 		// resource to the response.
 		if (resourceName != null) {
-			String libraryName = requestParameterMap.get(ResourceConstants.LN);
+			String libraryName = requestParameterMap.get(StringPool.LN);
 
 			if (logger.isTraceEnabled()) {
 
@@ -163,7 +163,7 @@ public class ResourceHandlerBridgeImpl extends ResourceHandlerWrapperBase {
 		}
 		else {
 			logger.debug("NOT HANDLED - Missing request parameter {0} so delegating handleResourceRequest to chain",
-				ResourceConstants.JAVAX_FACES_RESOURCE);
+				"javax.faces.resource");
 			getWrapped().handleResourceRequest(facesContext);
 		}
 	}
@@ -203,17 +203,17 @@ public class ResourceHandlerBridgeImpl extends ResourceHandlerWrapperBase {
 		// properly created with the ExternalContext.encodeResourceURL(String) method.
 		ExternalContext externalContext = facesContext.getExternalContext();
 		Map<String, String> requestParameterMap = externalContext.getRequestParameterMap();
-		String resourceId = requestParameterMap.get(ResourceConstants.JAVAX_FACES_RESOURCE);
+		String resourceId = requestParameterMap.get("javax.faces.resource");
 
 		if (resourceId != null) {
 			logger.debug("Found {0} request parameter and recognized resourceId=[{1}] as a resource",
-				new Object[] { ResourceConstants.JAVAX_FACES_RESOURCE, resourceId });
+				new Object[] { "javax.faces.resource", resourceId });
 
 			return true;
 		}
 		else {
 			logger.debug("Did not find the {0} request parameter so delegating isResourceRequest to chain",
-				ResourceConstants.JAVAX_FACES_RESOURCE);
+				"javax.faces.resource");
 
 			return getWrapped().isResourceRequest(facesContext);
 		}

@@ -20,7 +20,7 @@ import javax.faces.component.UIComponent;
 import com.liferay.faces.util.application.ComponentResource;
 import com.liferay.faces.util.application.ComponentResourceFactory;
 import com.liferay.faces.util.application.ComponentResourceUtil;
-import com.liferay.faces.util.application.ResourceConstants;
+import com.liferay.faces.util.lang.StringPool;
 
 
 /**
@@ -32,8 +32,8 @@ public class ComponentResourceFactoryImpl extends ComponentResourceFactory {
 	public ComponentResource getComponentResource(UIComponent uiComponentResource) {
 
 		Map<String, Object> attributes = uiComponentResource.getAttributes();
-		String library = (String) attributes.get(ResourceConstants.LIBRARY);
-		String name = (String) attributes.get(ResourceConstants.NAME);
+		String library = (String) attributes.get(StringPool.LIBRARY);
+		String name = (String) attributes.get(StringPool.NAME);
 		String id = ComponentResourceUtil.getId(library, name);
 		boolean renderable = true;
 
