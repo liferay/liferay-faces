@@ -271,6 +271,11 @@ public class FacesContextHelperImpl implements FacesContextHelper, Serializable 
 		return FacesContext.getCurrentInstance();
 	}
 
+	/**
+	 * @deprecated  Call {@link FacesRequestContext#addScript(com.liferay.faces.util.client.Script)} or {@link
+	 *              FacesRequestContext#getScripts()} instead.
+	 */
+	@Deprecated
 	public Map<String, String> getJavaScriptMap() {
 
 		if (javaScriptMap == null) {
