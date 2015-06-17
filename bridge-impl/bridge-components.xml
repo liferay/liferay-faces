@@ -5,7 +5,7 @@
 		<![CDATA[The Liferay Faces Bridge facelet component tags with the <code>bridge:</code> tag name prefix.]]>
 	</description>
 	<component name="InputFile" delegateRendererType="javax.faces.File"
-		extendsTags="AltInherited AutocompleteInherited DisabledInherited FacesMessageLabelInherited HTMLAccessibilityEvents HTMLInputEvents SizeInherited"
+		extendsTags="AltInherited AutocompleteInherited DisabledInherited FacesMessageLabelInheritedGenerateJavaFalse HTMLAccessibilityEvents HTMLInputEvents SizeInherited"
 		handlerClass="com.liferay.faces.bridge.component.inputfile.internal.InputFileHandler"
 		module="uploader" parentClass="javax.faces.component.html.HtmlInputFile"
 		rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase"
