@@ -18,7 +18,6 @@ import java.io.StringWriter;
 
 import javax.servlet.jsp.JspWriter;
 
-import com.liferay.faces.util.jsp.StringJspWriter;
 import com.liferay.faces.util.lang.StringPool;
 
 
@@ -27,7 +26,7 @@ import com.liferay.faces.util.lang.StringPool;
  *
  * @author  Neil Griffin
  */
-public class StringJspWriterImpl extends StringJspWriter {
+public class JspWriterStringImpl extends JspWriter {
 
 	// Public Constants
 	public static final boolean DEFAULT_AUTO_FLUSH = true;
@@ -36,7 +35,7 @@ public class StringJspWriterImpl extends StringJspWriter {
 	// Private Data Members
 	private StringWriter stringWriter;
 
-	public StringJspWriterImpl() {
+	public JspWriterStringImpl() {
 		super(DEFAULT_BUFFER_SIZE, DEFAULT_AUTO_FLUSH);
 		this.stringWriter = new StringWriter(DEFAULT_BUFFER_SIZE);
 	}
