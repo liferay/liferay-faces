@@ -26,7 +26,7 @@ public abstract class NamespaceBase extends UIComponentBase {
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.portlet.component.namespace.Namespace";
-	public static final String RENDERER_TYPE = "com.liferay.faces.portlet.component.namespace.internal.NamespaceRenderer";
+	public static final String RENDERER_TYPE = "com.liferay.faces.portlet.component.namespace.NamespaceRenderer";
 
 	// Protected Enumerations
 	protected enum NamespacePropertyKeys {
