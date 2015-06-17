@@ -34,6 +34,10 @@ public class ComponentUtil {
 	private static final String DOUBLE_BACKSLASH_COLON = "\\\\\\\\:";
 	private static final String REGEX_COLON = "[:]";
 
+	/**
+	 * @deprecated  No replacement available.
+	 */
+	@Deprecated
 	public static String appendToCssClasses(String cssClass, String suffix) {
 
 		String value = cssClass;
