@@ -33,12 +33,6 @@ import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.Tag;
 
-import com.liferay.faces.util.jsp.ApplicationScope;
-import com.liferay.faces.util.jsp.PageAdapter;
-import com.liferay.faces.util.jsp.RequestScope;
-import com.liferay.faces.util.jsp.ServletConfigAdapter;
-import com.liferay.faces.util.jsp.SessionScope;
-import com.liferay.faces.util.jsp.StringJspWriter;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -49,10 +43,10 @@ import com.liferay.faces.util.logging.LoggerFactory;
  *
  * @author  Neil Griffin
  */
-public class PageContextAdapterImpl extends PageContext {
+public class PageContextStringImpl extends PageContext {
 
 	// Logger
-	private static final Logger logger = LoggerFactory.getLogger(PageContextAdapterImpl.class);
+	private static final Logger logger = LoggerFactory.getLogger(PageContextStringImpl.class);
 
 	// Private Data Members
 	private ApplicationScope applicationScope;
@@ -66,10 +60,10 @@ public class PageContextAdapterImpl extends PageContext {
 	private ServletConfig servletConfig;
 	private ServletContext servletContext;
 	private SessionScope sessionScope;
-	private StringJspWriter stringJspWriter;
+	private JspWriter stringJspWriter;
 
-	public PageContextAdapterImpl(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse,
-		ELContext elContext, StringJspWriter stringJspWriter) {
+	public PageContextStringImpl(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse,
+								 ELContext elContext, JspWriter stringJspWriter) {
 
 		this.httpServletRequest = httpServletRequest;
 		this.httpServletResponse = httpServletResponse;

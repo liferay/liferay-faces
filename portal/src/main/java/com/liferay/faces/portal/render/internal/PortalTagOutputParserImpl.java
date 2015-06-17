@@ -13,8 +13,9 @@
  */
 package com.liferay.faces.portal.render.internal;
 
+import javax.servlet.jsp.JspWriter;
+
 import com.liferay.faces.util.ContentTypes;
-import com.liferay.faces.util.jsp.StringJspWriter;
 import com.liferay.faces.util.lang.StringPool;
 
 
@@ -28,7 +29,7 @@ public class PortalTagOutputParserImpl implements PortalTagOutputParser {
 	private static final String SCRIPT_TAG_BEGIN_TYPE_JS = "<script type=\"" + ContentTypes.TEXT_JAVASCRIPT + "\">";
 
 	@Override
-	public PortalTagOutput parse(StringJspWriter stringJspWriter) {
+	public PortalTagOutput parse(JspWriter stringJspWriter) {
 
 		String markup = stringJspWriter.toString();
 		String scriptText = null;
