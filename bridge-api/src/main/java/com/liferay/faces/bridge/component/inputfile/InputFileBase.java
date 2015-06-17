@@ -26,7 +26,7 @@ public abstract class InputFileBase extends HtmlInputFile {
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.bridge.component.inputfile.InputFile";
-	public static final String RENDERER_TYPE = "com.liferay.faces.bridge.component.inputfile.internal.InputFileRenderer";
+	public static final String RENDERER_TYPE = "com.liferay.faces.bridge.component.inputfile.InputFileRenderer";
 
 	// Protected Enumerations
 	protected enum InputFilePropertyKeys {

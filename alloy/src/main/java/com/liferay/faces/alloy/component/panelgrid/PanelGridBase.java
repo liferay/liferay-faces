@@ -28,7 +28,7 @@ public abstract class PanelGridBase extends HtmlPanelGrid implements Styleable {
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.panelgrid.PanelGrid";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.panelgrid.internal.PanelGridRenderer";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.panelgrid.PanelGridRenderer";
 
 	// Protected Enumerations
 	protected enum PanelGridPropertyKeys {

@@ -28,7 +28,7 @@ public abstract class AudioBase extends Media implements Styleable {
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.audio.Audio";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.audio.internal.AudioRenderer";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.audio.AudioRenderer";
 
 	// Protected Enumerations
 	protected enum AudioPropertyKeys {

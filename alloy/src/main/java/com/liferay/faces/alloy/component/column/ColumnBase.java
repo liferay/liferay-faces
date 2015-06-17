@@ -28,7 +28,7 @@ public abstract class ColumnBase extends HtmlColumn implements Styleable {
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.column.Column";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.column.internal.ColumnRenderer";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.column.ColumnRenderer";
 
 	// Protected Enumerations
 	protected enum ColumnPropertyKeys {

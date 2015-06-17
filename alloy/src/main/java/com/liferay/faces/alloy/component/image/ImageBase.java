@@ -28,7 +28,7 @@ public abstract class ImageBase extends HtmlGraphicImage implements Styleable {
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.image.Image";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.image.internal.ImageRenderer";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.image.ImageRenderer";
 
 	// Protected Enumerations
 	protected enum ImagePropertyKeys {

@@ -28,7 +28,7 @@ public abstract class SelectManyListboxBase extends HtmlSelectManyListbox implem
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.selectmanylistbox.SelectManyListbox";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.selectmanylistbox.internal.SelectManyListboxRenderer";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.selectmanylistbox.SelectManyListboxRenderer";
 
 	// Protected Enumerations
 	protected enum SelectManyListboxPropertyKeys {

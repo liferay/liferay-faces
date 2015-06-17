@@ -28,7 +28,7 @@ public abstract class SelectThumbRatingBase extends SelectRating implements Styl
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.selectthumbrating.SelectThumbRating";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.selectthumbrating.internal.SelectThumbRatingRenderer";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.selectthumbrating.SelectThumbRatingRenderer";
 
 	// Protected Enumerations
 	protected enum SelectThumbRatingPropertyKeys {

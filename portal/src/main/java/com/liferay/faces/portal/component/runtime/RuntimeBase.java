@@ -27,7 +27,7 @@ public abstract class RuntimeBase extends UIPanel implements Styleable {
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.portal.component.runtime.Runtime";
-	public static final String RENDERER_TYPE = "com.liferay.faces.portal.component.runtime.internal.RuntimeRenderer";
+	public static final String RENDERER_TYPE = "com.liferay.faces.portal.component.runtime.RuntimeRenderer";
 
 	// Protected Enumerations
 	protected enum RuntimePropertyKeys {

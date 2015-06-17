@@ -27,7 +27,7 @@ public abstract class InputHiddenBase extends HtmlInputHidden {
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.inputhidden.InputHidden";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.inputhidden.internal.InputHiddenRenderer";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.inputhidden.InputHiddenRenderer";
 
 	public InputHiddenBase() {
 		super();

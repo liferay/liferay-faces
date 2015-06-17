@@ -28,7 +28,7 @@ public abstract class SelectManyCheckboxBase extends HtmlSelectManyCheckbox impl
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.selectmanycheckbox.SelectManyCheckbox";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.selectmanycheckbox.internal.SelectManyCheckboxRenderer";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.selectmanycheckbox.SelectManyCheckboxRenderer";
 
 	// Protected Enumerations
 	protected enum SelectManyCheckboxPropertyKeys {

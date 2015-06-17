@@ -28,7 +28,7 @@ public abstract class DataItemBase extends UIColumn implements Styleable {
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.dataitem.DataItem";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.dataitem.internal.DataItemRenderer";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.dataitem.DataItemRenderer";
 
 	// Protected Enumerations
 	protected enum DataItemPropertyKeys {

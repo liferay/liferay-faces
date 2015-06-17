@@ -28,7 +28,7 @@ public abstract class LinkBase extends HtmlOutcomeTargetLink implements Styleabl
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.link.Link";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.link.internal.LinkRenderer";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.link.LinkRenderer";
 
 	// Protected Enumerations
 	protected enum LinkPropertyKeys {

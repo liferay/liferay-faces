@@ -29,7 +29,7 @@ public abstract class AutoCompleteBase extends InputTextBase implements Styleabl
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.autocomplete.AutoComplete";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.autocomplete.internal.AutoCompleteRenderer";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.autocomplete.AutoCompleteRenderer";
 
 	// Protected Enumerations
 	protected enum AutoCompletePropertyKeys {

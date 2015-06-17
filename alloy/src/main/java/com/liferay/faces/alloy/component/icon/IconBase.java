@@ -28,7 +28,7 @@ public abstract class IconBase extends UIComponentBase implements Styleable {
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.icon.Icon";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.icon.internal.IconRenderer";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.icon.IconRenderer";
 
 	// Protected Enumerations
 	protected enum IconPropertyKeys {

@@ -29,7 +29,7 @@ public abstract class InputDateBase extends InputDateTime implements Styleable, 
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.inputdate.InputDate";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.inputdate.internal.InputDateRenderer";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.inputdate.InputDateRenderer";
 
 	// Protected Enumerations
 	protected enum InputDatePropertyKeys {

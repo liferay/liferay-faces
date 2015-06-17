@@ -28,7 +28,7 @@ public abstract class OutputLinkBase extends HtmlOutputLink implements Styleable
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.outputlink.OutputLink";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.outputlink.internal.OutputLinkRenderer";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.outputlink.OutputLinkRenderer";
 
 	// Protected Enumerations
 	protected enum OutputLinkPropertyKeys {

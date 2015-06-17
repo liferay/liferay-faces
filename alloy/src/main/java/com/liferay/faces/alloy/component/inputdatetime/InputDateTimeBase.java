@@ -28,7 +28,7 @@ public abstract class InputDateTimeBase extends InputTextBase implements Styleab
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.inputdatetime.InputDateTime";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.inputdatetime.internal.InputDateTimeRenderer";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.inputdatetime.InputDateTimeRenderer";
 
 	// Protected Enumerations
 	protected enum InputDateTimePropertyKeys {

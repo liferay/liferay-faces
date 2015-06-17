@@ -28,7 +28,7 @@ public abstract class DataListBase extends UIData implements Styleable {
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.datalist.DataList";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.datalist.internal.DataListRenderer";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.datalist.DataListRenderer";
 
 	// Protected Enumerations
 	protected enum DataListPropertyKeys {

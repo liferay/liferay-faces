@@ -27,7 +27,7 @@ public abstract class HeaderBase extends HtmlPanelGroup implements Styleable {
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.portal.component.header.Header";
-	public static final String RENDERER_TYPE = "com.liferay.faces.portal.component.header.internal.HeaderRenderer";
+	public static final String RENDERER_TYPE = "com.liferay.faces.portal.component.header.HeaderRenderer";
 
 	// Protected Enumerations
 	protected enum HeaderPropertyKeys {

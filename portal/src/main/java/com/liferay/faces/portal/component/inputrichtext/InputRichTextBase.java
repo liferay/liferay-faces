@@ -27,7 +27,7 @@ public abstract class InputRichTextBase extends UIInput implements Styleable {
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.portal.component.inputrichtext.InputRichText";
-	public static final String RENDERER_TYPE = "com.liferay.faces.portal.component.inputrichtext.internal.InputRichTextRenderer";
+	public static final String RENDERER_TYPE = "com.liferay.faces.portal.component.inputrichtext.InputRichTextRenderer";
 
 	// Protected Enumerations
 	protected enum InputRichTextPropertyKeys {
