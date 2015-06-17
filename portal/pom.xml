@@ -28,7 +28,7 @@
 				<version>2.7</version>
 				<executions>
 					<execution>
-						<phase>generate-sources</phase>
+						<phase>process-sources</phase>
 						<goals>
 							<goal>copy-resources</goal>
 						</goals>

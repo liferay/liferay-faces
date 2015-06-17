@@ -26,7 +26,7 @@ public abstract class BaseURLBase extends UIComponentBase {
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.portlet.component.baseurl.BaseURL";
-	public static final String RENDERER_TYPE = "com.liferay.faces.portlet.component.baseurl.internal.BaseURLRenderer";
+	public static final String RENDERER_TYPE = "com.liferay.faces.portlet.component.baseurl.BaseURLRenderer";
 
 	// Protected Enumerations
 	protected enum BaseURLPropertyKeys {

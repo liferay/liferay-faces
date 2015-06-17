@@ -24,11 +24,20 @@ import javax.faces.component.html.HtmlInputText;
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
 public abstract class InputFileBase extends HtmlInputText {
 
+	// Public Constants
+	public static final String COMPONENT_TYPE = "com.liferay.faces.bridge.component.inputfile.InputFile";
+	public static final String RENDERER_TYPE = "com.liferay.faces.bridge.component.inputfile.InputFileRenderer";
+
 	// Protected Enumerations
 	protected enum InputFilePropertyKeys {
 		auto,
 		fileUploadListener,
 		multiple
+	}
+
+	public InputFileBase() {
+		super();
+		setRendererType(RENDERER_TYPE);
 	}
 
 	public boolean isAuto() {
