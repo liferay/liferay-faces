@@ -30,16 +30,16 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.PageContext;
 
 import com.liferay.faces.portal.component.InputEditorInternal;
+import com.liferay.faces.portal.render.internal.JspIncludeResponse;
 import com.liferay.faces.portal.render.internal.ScriptTagUtil;
 import com.liferay.faces.portal.servlet.ScriptCapturingHttpServletRequest;
 import com.liferay.faces.util.context.FacesRequestContext;
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.jsp.JspAdapterFactory;
-import com.liferay.faces.util.jsp.JspIncludeResponse;
-import com.liferay.faces.util.jsp.StringJspWriter;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
@@ -235,8 +235,8 @@ public class InputEditorInternalRenderer extends Renderer {
 				// Capture the scripts into a String.
 				JspAdapterFactory jspAdapterFactory = (JspAdapterFactory) FactoryExtensionFinder.getFactory(
 						JspAdapterFactory.class);
-				StringJspWriter stringJspWriter = jspAdapterFactory.getStringJspWriter();
-				PageContext pageContext = jspAdapterFactory.getPageContext(scriptCapturingHttpServletRequest,
+				JspWriter stringJspWriter = jspAdapterFactory.getStringJspWriter();
+				PageContext pageContext = jspAdapterFactory.getStringPageContext(scriptCapturingHttpServletRequest,
 						httpServletResponse, facesContext.getELContext(), stringJspWriter);
 
 				// Note that flushing the ScriptData will only flush and write the scripts that were added by the
