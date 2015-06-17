@@ -22,7 +22,6 @@ import javax.faces.context.ResponseWriter;
 
 import com.liferay.faces.alloy.component.selectrating.SelectRating;
 import com.liferay.faces.util.component.ClientComponent;
-import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.component.Styleable;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.render.RendererUtil;
@@ -50,7 +49,7 @@ public class SelectRatingRenderer extends SelectRatingRendererBase {
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
 
 		ClientComponent clientComponent = (ClientComponent) uiComponent;
-		String clientVarName = ComponentUtil.getClientVarName(facesContext, clientComponent);
+		String clientVarName = getClientVarName(facesContext, clientComponent);
 		String clientKey = clientComponent.getClientKey();
 
 		if (clientKey == null) {

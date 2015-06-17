@@ -36,7 +36,6 @@ import com.liferay.faces.alloy.component.inputfile.FileUploadEvent;
 import com.liferay.faces.alloy.component.inputfile.InputFile;
 import com.liferay.faces.alloy.component.inputfile.InputFileValidator;
 import com.liferay.faces.alloy.render.internal.JavaScriptFragment;
-import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.component.Styleable;
 import com.liferay.faces.util.context.MessageContext;
 import com.liferay.faces.util.context.MessageContextFactory;
@@ -127,7 +126,7 @@ public class InputFileRenderer extends InputFileRendererBase {
 		// If the component should render the upload progress table, then initialize the YUI progress uploader widget.
 		if (inputFile.isShowProgress()) {
 
-			String clientVarName = ComponentUtil.getClientVarName(facesContext, inputFile);
+			String clientVarName = getClientVarName(facesContext, inputFile);
 			String clientKey = inputFile.getClientKey();
 
 			if (clientKey == null) {

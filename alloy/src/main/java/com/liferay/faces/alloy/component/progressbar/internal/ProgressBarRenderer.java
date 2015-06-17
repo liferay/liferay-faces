@@ -30,7 +30,6 @@ import javax.faces.render.FacesRenderer;
 
 import com.liferay.faces.alloy.component.progressbar.ProgressBar;
 import com.liferay.faces.alloy.render.internal.JavaScriptFragment;
-import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.component.Styleable;
 import com.liferay.faces.util.context.FacesRequestContext;
 import com.liferay.faces.util.lang.StringPool;
@@ -68,7 +67,7 @@ public class ProgressBarRenderer extends ProgressBarRendererBase {
 
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
 		ProgressBar progressBar = (ProgressBar) uiComponent;
-		String clientVarName = ComponentUtil.getClientVarName(facesContext, progressBar);
+		String clientVarName = getClientVarName(facesContext, progressBar);
 		String clientKey = progressBar.getClientKey();
 
 		if (clientKey == null) {
@@ -318,7 +317,7 @@ public class ProgressBarRenderer extends ProgressBarRendererBase {
 		if (isAjaxPolling(facesContext, uiComponent)) {
 
 			ProgressBar progressBar = (ProgressBar) uiComponent;
-			String clientVarName = ComponentUtil.getClientVarName(facesContext, progressBar);
+			String clientVarName = getClientVarName(facesContext, progressBar);
 			String clientKey = progressBar.getClientKey();
 
 			if (clientKey == null) {

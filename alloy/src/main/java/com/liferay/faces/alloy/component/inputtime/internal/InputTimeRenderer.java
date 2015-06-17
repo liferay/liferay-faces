@@ -39,7 +39,6 @@ import com.liferay.faces.alloy.component.inputtime.InputTime;
 import com.liferay.faces.alloy.render.internal.JavaScriptFragment;
 import com.liferay.faces.util.client.BrowserSniffer;
 import com.liferay.faces.util.client.BrowserSnifferFactory;
-import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.lang.StringPool;
 
@@ -130,7 +129,7 @@ public class InputTimeRenderer extends InputTimeRendererBase {
 	public void encodeJavaScriptCustom(FacesContext facesContext, UIComponent uiComponent) throws IOException {
 
 		InputTime inputTime = (InputTime) uiComponent;
-		String clientVarName = ComponentUtil.getClientVarName(facesContext, inputTime);
+		String clientVarName = getClientVarName(facesContext, inputTime);
 		String clientKey = inputTime.getClientKey();
 
 		if (clientKey == null) {

@@ -23,9 +23,7 @@ import javax.faces.context.ResponseWriter;
 import javax.faces.render.FacesRenderer;
 
 import com.liferay.faces.alloy.component.dialog.Dialog;
-import com.liferay.faces.alloy.component.popover.Popover;
 import com.liferay.faces.util.component.ClientComponent;
-import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.lang.StringPool;
 
 
@@ -52,7 +50,7 @@ public class DialogRenderer extends DialogRendererBase {
 
 		Dialog dialog = (Dialog) uiComponent;
 		ClientComponent clientComponent = (ClientComponent) uiComponent;
-		String clientVarName = ComponentUtil.getClientVarName(facesContext, clientComponent);
+		String clientVarName = getClientVarName(facesContext, clientComponent);
 		String clientKey = clientComponent.getClientKey();
 
 		if (clientKey == null) {

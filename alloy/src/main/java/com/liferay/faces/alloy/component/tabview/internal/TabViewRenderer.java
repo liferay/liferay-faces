@@ -34,7 +34,6 @@ import com.liferay.faces.alloy.component.tab.Tab;
 import com.liferay.faces.alloy.component.tab.TabSelectEvent;
 import com.liferay.faces.alloy.component.tab.TabUtil;
 import com.liferay.faces.alloy.component.tabview.TabView;
-import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.component.Styleable;
 import com.liferay.faces.util.helper.IntegerHelper;
 import com.liferay.faces.util.lang.StringPool;
@@ -220,7 +219,7 @@ public class TabViewRenderer extends TabViewRendererBase {
 		TabView tabView = (TabView) uiComponent;
 
 		// var clientVarName = Liferay.component('clientKey');
-		String clientVarName = ComponentUtil.getClientVarName(facesContext, tabView);
+		String clientVarName = getClientVarName(facesContext, tabView);
 		String clientKey = tabView.getClientKey();
 
 		if (clientKey == null) {
