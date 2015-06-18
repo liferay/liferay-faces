@@ -191,6 +191,10 @@ public class ApplicantBackingBean implements Serializable {
 		this.applicantViewBean = applicantViewBean;
 	}
 
+	public String getFileUploadAbsolutePath() {
+		return System.getProperty("java.io.tmpdir");
+	}
+
 	public void setListModelBean(ListModelBean listModelBean) {
 
 		// Injected via WEB-INF/faces-config.xml managed-property
