@@ -30,5 +30,5 @@ import com.liferay.faces.util.helper.Wrapper;
  */
 public abstract class BridgeRequestScopeManagerFactory implements Wrapper<BridgeRequestScopeManagerFactory> {
 
-	public abstract BridgeRequestScopeManager getBridgeRequestScopeManager() throws FacesException;
+	public abstract BridgeRequestScopeManager getBridgeRequestScopeManager();
 }

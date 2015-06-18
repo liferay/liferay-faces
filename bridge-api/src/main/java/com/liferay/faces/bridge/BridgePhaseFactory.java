@@ -41,15 +41,14 @@ import com.liferay.faces.util.helper.Wrapper;
 public abstract class BridgePhaseFactory implements Wrapper<BridgePhaseFactory> {
 
 	public abstract BridgePhase getBridgeActionPhase(ActionRequest actionRequest, ActionResponse actionResponse,
-		PortletConfig portletConfig, BridgeConfig bridgeConfig) throws FacesException;
+		PortletConfig portletConfig, BridgeConfig bridgeConfig);
 
 	public abstract BridgePhase getBridgeEventPhase(EventRequest eventRequest, EventResponse eventResponse,
-		PortletConfig portletConfig, BridgeConfig bridgeConfig) throws FacesException;
+		PortletConfig portletConfig, BridgeConfig bridgeConfig);
 
 	public abstract BridgePhase getBridgeRenderPhase(RenderRequest renderRequest, RenderResponse renderResponse,
-		PortletConfig portletConfig, BridgeConfig bridgeConfig) throws FacesException;
+		PortletConfig portletConfig, BridgeConfig bridgeConfig);
 
 	public abstract BridgePhase getBridgeResourcePhase(ResourceRequest resourceRequest,
-		ResourceResponse resourceResponse, PortletConfig portletConfig, BridgeConfig bridgeConfig)
-		throws FacesException;
+		ResourceResponse resourceResponse, PortletConfig portletConfig, BridgeConfig bridgeConfig);
 }

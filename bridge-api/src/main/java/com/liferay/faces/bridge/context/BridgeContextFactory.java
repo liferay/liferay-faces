@@ -39,6 +39,5 @@ public abstract class BridgeContextFactory implements Wrapper<BridgeContextFacto
 
 	public abstract BridgeContext getBridgeContext(BridgeConfig bridgeConfig, BridgeRequestScope bridgeRequestScope,
 		PortletConfig portletConfig, PortletContext portletContext, PortletRequest portletRequest,
-		PortletResponse portletResponse, Bridge.PortletPhase portletPhase, IncongruityContext incongruityContext)
-		throws FacesException;
+		PortletResponse portletResponse, Bridge.PortletPhase portletPhase, IncongruityContext incongruityContext);
 }

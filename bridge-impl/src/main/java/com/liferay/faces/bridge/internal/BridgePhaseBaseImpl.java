@@ -348,7 +348,7 @@ public abstract class BridgePhaseBaseImpl implements BridgePhase {
 	}
 
 	protected FacesContext getFacesContext(PortletRequest portletRequest, PortletResponse portletResponse,
-		Lifecycle lifecycle) throws FacesException {
+		Lifecycle lifecycle) {
 
 		FacesContext newFacesContext = getFacesContextFactory().getFacesContext(portletContext, portletRequest,
 				portletResponse, lifecycle);
@@ -360,7 +360,7 @@ public abstract class BridgePhaseBaseImpl implements BridgePhase {
 		return newFacesContext;
 	}
 
-	protected FacesContextFactory getFacesContextFactory() throws FacesException {
+	protected FacesContextFactory getFacesContextFactory() {
 
 		if (facesContextFactory == null) {
 			facesContextFactory = (FacesContextFactory) FactoryFinder.getFactory(FactoryFinder.FACES_CONTEXT_FACTORY);

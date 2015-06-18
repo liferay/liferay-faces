@@ -23,5 +23,5 @@ import com.liferay.faces.util.helper.Wrapper;
  */
 public abstract class MessageContextFactory implements Wrapper<MessageContextFactory> {
 
-	public abstract MessageContext getMessageContext() throws FacesException;
+	public abstract MessageContext getMessageContext();
 }
