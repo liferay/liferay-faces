@@ -27,7 +27,7 @@ public class MessageContextFactoryImpl extends MessageContextFactory {
 	private static final MessageContext messageContext = new MessageContextImpl();
 
 	@Override
-	public MessageContext getMessageContext() throws FacesException {
+	public MessageContext getMessageContext() {
 		return messageContext;
 	}
 

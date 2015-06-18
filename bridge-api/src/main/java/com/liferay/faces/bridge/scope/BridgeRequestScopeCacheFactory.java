@@ -30,6 +30,5 @@ import javax.portlet.PortletContext;
  */
 public abstract class BridgeRequestScopeCacheFactory implements FacesWrapper<BridgeRequestScopeCacheFactory> {
 
-	public abstract BridgeRequestScopeCache getBridgeRequestScopeCache(PortletContext portletContext)
-		throws FacesException;
+	public abstract BridgeRequestScopeCache getBridgeRequestScopeCache(PortletContext portletContext);
 }

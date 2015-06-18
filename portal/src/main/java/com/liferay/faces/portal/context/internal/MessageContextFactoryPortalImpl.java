@@ -35,7 +35,7 @@ public class MessageContextFactoryPortalImpl extends MessageContextFactory {
 	}
 
 	@Override
-	public MessageContext getMessageContext() throws FacesException {
+	public MessageContext getMessageContext() {
 		return messageContext;
 	}
 
