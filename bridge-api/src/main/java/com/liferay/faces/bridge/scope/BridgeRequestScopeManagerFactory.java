@@ -29,5 +29,5 @@ import javax.faces.FacesWrapper;
  */
 public abstract class BridgeRequestScopeManagerFactory implements FacesWrapper<BridgeRequestScopeManagerFactory> {
 
-	public abstract BridgeRequestScopeManager getBridgeRequestScopeManager() throws FacesException;
+	public abstract BridgeRequestScopeManager getBridgeRequestScopeManager();
 }

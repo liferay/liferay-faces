@@ -35,7 +35,7 @@ public class BridgeConfigFactoryImpl extends BridgeConfigFactory {
 	private static final boolean LIFERAY_PORTAL_DETECTED = LIFERAY_PORTAL.isDetected();
 
 	@Override
-	public BridgeConfig getBridgeConfig(PortletConfig portletConfig) throws FacesException {
+	public BridgeConfig getBridgeConfig(PortletConfig portletConfig) {
 
 		PortletContext portletContext = portletConfig.getPortletContext();
 		BridgeConfig bridgeConfig = (BridgeConfig) portletContext.getAttribute(BRIDGE_CONFIG);
