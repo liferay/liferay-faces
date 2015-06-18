@@ -27,7 +27,7 @@ import com.liferay.faces.util.client.BrowserSnifferFactory;
 public class BrowserSnifferFactoryImpl extends BrowserSnifferFactory {
 
 	@Override
-	public BrowserSniffer getBrowserSniffer(ExternalContext externalContext) throws FacesException {
+	public BrowserSniffer getBrowserSniffer(ExternalContext externalContext) {
 
 		HttpServletRequest httpServletRequest = (HttpServletRequest) externalContext.getRequest();
 
