@@ -30,7 +30,7 @@ public class BridgeConfigFactoryImpl extends BridgeConfigFactory {
 	private static final String BRIDGE_CONFIG = BridgeConfig.class.getName();
 
 	@Override
-	public BridgeConfig getBridgeConfig(PortletConfig portletConfig) throws FacesException {
+	public BridgeConfig getBridgeConfig(PortletConfig portletConfig) {
 
 		PortletContext portletContext = portletConfig.getPortletContext();
 		BridgeConfig bridgeConfig = (BridgeConfig) portletContext.getAttribute(BRIDGE_CONFIG);
@@ -44,7 +44,7 @@ public class BridgeConfigFactoryImpl extends BridgeConfigFactory {
 	}
 
 	@Override
-	public PortletConfig getPortletConfig(PortletConfig portletConfig) throws FacesException {
+	public PortletConfig getPortletConfig(PortletConfig portletConfig) {
 		return portletConfig;
 	}
 

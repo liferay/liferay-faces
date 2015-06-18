@@ -47,7 +47,7 @@ public class ExceptionHandlerAjaxImpl extends ExceptionHandlerWrapper {
 	}
 
 	@Override
-	public void handle() throws FacesException {
+	public void handle() {
 
 		// Before delegating, log all exceptions to the console.
 		Iterable<ExceptionQueuedEvent> unhandledExceptionQueuedEvents = getUnhandledExceptionQueuedEvents();
