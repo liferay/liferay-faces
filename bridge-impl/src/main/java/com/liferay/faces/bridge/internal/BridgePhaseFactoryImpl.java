@@ -36,26 +36,26 @@ public class BridgePhaseFactoryImpl extends BridgePhaseFactory {
 
 	@Override
 	public BridgePhase getBridgeActionPhase(ActionRequest actionRequest, ActionResponse actionResponse,
-		PortletConfig portletConfig, BridgeConfig bridgeConfig) throws FacesException {
+		PortletConfig portletConfig, BridgeConfig bridgeConfig) {
 
 		return new BridgePhaseActionImpl(actionRequest, actionResponse, portletConfig, bridgeConfig);
 	}
 
 	@Override
 	public BridgePhase getBridgeEventPhase(EventRequest eventRequest, EventResponse eventResponse,
-		PortletConfig portletConfig, BridgeConfig bridgeConfig) throws FacesException {
+		PortletConfig portletConfig, BridgeConfig bridgeConfig) {
 		return new BridgePhaseEventImpl(eventRequest, eventResponse, portletConfig, bridgeConfig);
 	}
 
 	@Override
 	public BridgePhase getBridgeRenderPhase(RenderRequest renderRequest, RenderResponse renderResponse,
-		PortletConfig portletConfig, BridgeConfig bridgeConfig) throws FacesException {
+		PortletConfig portletConfig, BridgeConfig bridgeConfig) {
 		return new BridgePhaseRenderImpl(renderRequest, renderResponse, portletConfig, bridgeConfig);
 	}
 
 	@Override
 	public BridgePhase getBridgeResourcePhase(ResourceRequest resourceRequest, ResourceResponse resourceResponse,
-		PortletConfig portletConfig, BridgeConfig bridgeConfig) throws FacesException {
+		PortletConfig portletConfig, BridgeConfig bridgeConfig) {
 		return new BridgePhaseResourceImpl(resourceRequest, resourceResponse, portletConfig, bridgeConfig);
 	}
 

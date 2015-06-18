@@ -26,7 +26,7 @@ import javax.portlet.PortletConfig;
  */
 public abstract class BridgeConfigFactory implements FacesWrapper<BridgeConfigFactory> {
 
-	public abstract BridgeConfig getBridgeConfig(PortletConfig portletConfig) throws FacesException;
+	public abstract BridgeConfig getBridgeConfig(PortletConfig portletConfig);
 
-	public abstract PortletConfig getPortletConfig(PortletConfig portletConfig) throws FacesException;
+	public abstract PortletConfig getPortletConfig(PortletConfig portletConfig);
 }

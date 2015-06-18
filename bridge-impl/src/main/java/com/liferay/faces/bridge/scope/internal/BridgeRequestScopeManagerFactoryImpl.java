@@ -25,7 +25,7 @@ import com.liferay.faces.bridge.scope.BridgeRequestScopeManagerFactory;
 public class BridgeRequestScopeManagerFactoryImpl extends BridgeRequestScopeManagerFactory {
 
 	@Override
-	public BridgeRequestScopeManager getBridgeRequestScopeManager() throws FacesException {
+	public BridgeRequestScopeManager getBridgeRequestScopeManager() {
 
 		BridgeRequestScopeManager bridgeRequestScopeManager = null;
 
