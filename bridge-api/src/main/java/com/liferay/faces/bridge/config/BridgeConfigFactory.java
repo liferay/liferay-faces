@@ -27,7 +27,7 @@ import com.liferay.faces.util.helper.Wrapper;
  */
 public abstract class BridgeConfigFactory implements Wrapper<BridgeConfigFactory> {
 
-	public abstract BridgeConfig getBridgeConfig(PortletConfig portletConfig) throws FacesException;
+	public abstract BridgeConfig getBridgeConfig(PortletConfig portletConfig);
 
-	public abstract PortletConfig getPortletConfig(PortletConfig portletConfig) throws FacesException;
+	public abstract PortletConfig getPortletConfig(PortletConfig portletConfig);
 }

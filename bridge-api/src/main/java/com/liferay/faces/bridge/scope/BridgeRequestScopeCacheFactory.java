@@ -31,6 +31,5 @@ import com.liferay.faces.util.helper.Wrapper;
  */
 public abstract class BridgeRequestScopeCacheFactory implements Wrapper<BridgeRequestScopeCacheFactory> {
 
-	public abstract BridgeRequestScopeCache getBridgeRequestScopeCache(PortletContext portletContext)
-		throws FacesException;
+	public abstract BridgeRequestScopeCache getBridgeRequestScopeCache(PortletContext portletContext);
 }

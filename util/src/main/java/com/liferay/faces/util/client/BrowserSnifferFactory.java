@@ -24,5 +24,5 @@ import com.liferay.faces.util.helper.Wrapper;
  */
 public abstract class BrowserSnifferFactory implements Wrapper<BrowserSnifferFactory> {
 
-	public abstract BrowserSniffer getBrowserSniffer(ExternalContext externalContext) throws FacesException;
+	public abstract BrowserSniffer getBrowserSniffer(ExternalContext externalContext);
 }
