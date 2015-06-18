@@ -257,11 +257,6 @@ public interface FacesContextHelper {
 	public abstract FacesContext getFacesContext();
 
 	/**
-	 * Returns the map of JavaScript strings that need to be included at the end of a response.
-	 */
-	public abstract Map<String, String> getJavaScriptMap();
-
-	/**
 	 * Returns the locale of the viewRoot of the current JSF FacesContext
 	 */
 	public abstract Locale getLocale();

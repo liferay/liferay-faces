@@ -39,7 +39,6 @@ import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.context.FacesContextHelper;
 import com.liferay.faces.util.context.MessageContext;
 import com.liferay.faces.util.context.MessageContextFactory;
-import com.liferay.faces.util.context.map.JavaScriptMap;
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.helper.BooleanHelper;
 import com.liferay.faces.util.helper.IntegerHelper;
@@ -57,9 +56,6 @@ public class FacesContextHelperImpl implements FacesContextHelper, Serializable 
 	// Private Constants
 	private static final String UNEXPECTED_ERROR_MSG_ID = "an-unexpected-error-occurred";
 	private static final String SUCCESS_INFO_MSG_ID = "your-request-processed-successfully";
-
-	// Private Data Members
-	private transient Map<String, String> javaScriptMap;
 
 	public void addComponentErrorMessage(String clientId, String messageId) {
 
@@ -269,15 +265,6 @@ public class FacesContextHelperImpl implements FacesContextHelper, Serializable 
 
 	public FacesContext getFacesContext() {
 		return FacesContext.getCurrentInstance();
-	}
-
-	public Map<String, String> getJavaScriptMap() {
-
-		if (javaScriptMap == null) {
-			javaScriptMap = new JavaScriptMap();
-		}
-
-		return javaScriptMap;
 	}
 
 	public Locale getLocale() {
