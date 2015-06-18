@@ -17,7 +17,6 @@ import java.util.Map;
 
 import javax.xml.parsers.SAXParser;
 
-import org.xml.sax.Parser;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXNotRecognizedException;
 import org.xml.sax.SAXNotSupportedException;
@@ -30,7 +29,6 @@ import org.xml.sax.XMLReader;
  *
  * @author  Neil Griffin
  */
-@SuppressWarnings("deprecation")
 public class SAXParserImpl extends SAXParser {
 
 	// Private Data Members
@@ -62,7 +60,8 @@ public class SAXParserImpl extends SAXParser {
 	}
 
 	@Override
-	public Parser getParser() throws SAXException {
+	@SuppressWarnings("deprecation")
+	public org.xml.sax.Parser getParser() throws SAXException {
 		throw new UnsupportedOperationException();
 	}
 
