@@ -127,9 +127,12 @@
 							<ice:outputText value="#{uploadedFile.size}" />
 						</ice:column>
 					</ice:dataTable>
-					<ice:inputFile id="fileEntryComp" progressListener="#{applicantViewBean.fileUploadProgressListener}"
-						actionListener="#{applicantBackingBean.fileUploadActionListener}" />
-					<ice:outputProgress value="#{applicantViewBean.percentComplete}" labelComplete="0%" />
+					<ice:inputFile id="fileEntryComp"
+						actionListener="#{applicantBackingBean.fileUploadActionListener}"
+						progressListener="#{applicantViewBean.fileUploadProgressListener}" uniqueFolder="true"
+						uploadDirectory="#{applicantBackingBean.fileUploadAbsolutePath}" uploadDirectoryAbsolute="true" />
+					<ice:outputProgress value="#{applicantViewBean.percentComplete}"
+						labelComplete="0%" />
 				</aui:column>
 			</ice:form>
 		</aui:column>
