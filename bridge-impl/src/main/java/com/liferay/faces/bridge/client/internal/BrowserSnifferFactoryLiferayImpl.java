@@ -43,7 +43,7 @@ public class BrowserSnifferFactoryLiferayImpl extends BrowserSnifferFactory {
 	}
 
 	@Override
-	public BrowserSniffer getBrowserSniffer(ExternalContext externalContext) throws FacesException {
+	public BrowserSniffer getBrowserSniffer(ExternalContext externalContext) {
 
 		if (LIFERAY_PORTAL_DETECTED) {
 
