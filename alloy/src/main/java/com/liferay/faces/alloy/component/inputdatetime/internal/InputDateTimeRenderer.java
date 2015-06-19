@@ -80,7 +80,7 @@ public abstract class InputDateTimeRenderer extends InputDateTimeRendererBase {
 		BrowserSniffer browserSniffer = browserSnifferFactory.getBrowserSniffer(facesContext.getExternalContext());
 		InputDateTime inputDateTime = (InputDateTime) uiComponent;
 		InputDateTimeResponseWriter inputDateTimeResponseWriter = getInputDateTimeResponseWriter(responseWriter,
-				inputClientId, browserSniffer.isMobile(), inputDateTime.isResponsive());
+				inputClientId, browserSniffer.isMobile(), inputDateTime.isNativeWhenMobile());
 		super.encodeMarkupBegin(facesContext, uiComponent, inputDateTimeResponseWriter);
 	}
 
@@ -95,7 +95,7 @@ public abstract class InputDateTimeRenderer extends InputDateTimeRendererBase {
 		BrowserSniffer browserSniffer = browserSnifferFactory.getBrowserSniffer(facesContext.getExternalContext());
 		InputDateTime inputDateTime = (InputDateTime) uiComponent;
 		boolean mobile = browserSniffer.isMobile();
-		boolean responsive = inputDateTime.isResponsive();
+		boolean responsive = inputDateTime.isNativeWhenMobile();
 		InputDateTimeResponseWriter inputDateTimeResponseWriter = getInputDateTimeResponseWriter(responseWriter,
 				inputClientId, mobile, responsive);
 		super.encodeMarkupEnd(facesContext, uiComponent, inputDateTimeResponseWriter);
@@ -261,7 +261,7 @@ public abstract class InputDateTimeRenderer extends InputDateTimeRendererBase {
 				BrowserSnifferFactory.class);
 		BrowserSniffer browserSniffer = browserSnifferFactory.getBrowserSniffer(facesContext.getExternalContext());
 		InputDateTime inputDateTime = (InputDateTime) uiComponent;
-		boolean responsive = inputDateTime.isResponsive();
+		boolean responsive = inputDateTime.isNativeWhenMobile();
 
 		if (browserSniffer.isMobile() && responsive) {
 			String nativeAlloyModuleName = defaultModules[0].concat("-native");

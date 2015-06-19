@@ -31,7 +31,7 @@ public abstract class InputDateTimeRendererBase extends DelegatingAlloyRendererB
 	protected static final String AUTO_HIDE = "autoHide";
 	protected static final String CLIENT_KEY = "clientKey";
 	protected static final String LOCALE = "locale";
-	protected static final String RESPONSIVE = "responsive";
+	protected static final String NATIVE_WHEN_MOBILE = "nativeWhenMobile";
 	protected static final String SHOW_ON = "showOn";
 	protected static final String STYLE_CLASS = "styleClass";
 	protected static final String TIME_ZONE = "timeZone";

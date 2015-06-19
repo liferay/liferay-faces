@@ -36,9 +36,9 @@ public abstract class InputDateBase extends InputDateTime implements Styleable, 
 		dateSelectListener,
 		maxDate,
 		minDate,
+		nativeWhenMobile,
 		panes,
 		pattern,
-		responsive,
 		styleClass
 	}
 
@@ -71,6 +71,14 @@ public abstract class InputDateBase extends InputDateTime implements Styleable, 
 		getStateHelper().put(InputDatePropertyKeys.minDate, minDate);
 	}
 
+	public boolean isNativeWhenMobile() {
+		return (Boolean) getStateHelper().eval(InputDatePropertyKeys.nativeWhenMobile, true);
+	}
+
+	public void setNativeWhenMobile(boolean nativeWhenMobile) {
+		getStateHelper().put(InputDatePropertyKeys.nativeWhenMobile, nativeWhenMobile);
+	}
+
 	public Integer getPanes() {
 		return (Integer) getStateHelper().eval(InputDatePropertyKeys.panes, null);
 	}
@@ -85,14 +93,6 @@ public abstract class InputDateBase extends InputDateTime implements Styleable, 
 
 	public void setPattern(String pattern) {
 		getStateHelper().put(InputDatePropertyKeys.pattern, pattern);
-	}
-
-	public boolean isResponsive() {
-		return (Boolean) getStateHelper().eval(InputDatePropertyKeys.responsive, true);
-	}
-
-	public void setResponsive(boolean responsive) {
-		getStateHelper().put(InputDatePropertyKeys.responsive, responsive);
 	}
 
 	@Override

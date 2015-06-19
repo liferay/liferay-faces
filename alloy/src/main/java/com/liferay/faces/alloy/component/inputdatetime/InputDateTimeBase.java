@@ -35,7 +35,7 @@ public abstract class InputDateTimeBase extends InputTextBase implements Styleab
 		autoHide,
 		clientKey,
 		locale,
-		responsive,
+		nativeWhenMobile,
 		showOn,
 		styleClass,
 		timeZone,
@@ -71,12 +71,12 @@ public abstract class InputDateTimeBase extends InputTextBase implements Styleab
 		getStateHelper().put(InputDateTimePropertyKeys.locale, locale);
 	}
 
-	public boolean isResponsive() {
-		return (Boolean) getStateHelper().eval(InputDateTimePropertyKeys.responsive, true);
+	public boolean isNativeWhenMobile() {
+		return (Boolean) getStateHelper().eval(InputDateTimePropertyKeys.nativeWhenMobile, true);
 	}
 
-	public void setResponsive(boolean responsive) {
-		getStateHelper().put(InputDateTimePropertyKeys.responsive, responsive);
+	public void setNativeWhenMobile(boolean nativeWhenMobile) {
+		getStateHelper().put(InputDateTimePropertyKeys.nativeWhenMobile, nativeWhenMobile);
 	}
 
 	public String getShowOn() {

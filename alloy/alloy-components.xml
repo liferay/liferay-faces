@@ -643,7 +643,7 @@
 				<description>
 					<![CDATA[When true, the component will render an HTML5 <code>&lt;input type="date" /&gt;</code> element on small/mobile displays in order to enable selection of a date with the mobile device's native UI. The default is true.]]>
 				</description>
-				<name>responsive</name>
+				<name>nativeWhenMobile</name>
 				<type>boolean</type>
 			</attribute>
 			<attribute>
@@ -2027,7 +2027,7 @@
 				<description>
 					<![CDATA[When true, the component will render an HTML5 <code>&lt;input type="time" /&gt;</code> element on small/mobile displays in order to enable selection of a time with the mobile device's native UI. The default is true.]]>
 				</description>
-				<name>responsive</name>
+				<name>nativeWhenMobile</name>
 				<type>boolean</type>
 			</attribute>
 			<attribute>

@@ -3118,6 +3118,12 @@ java.lang.Object)</method-signature>
 			<type>java.lang.Object</type>
 		</attribute>
 		<attribute>
+			<description><![CDATA[When true, the component will render an HTML5 <code>&lt;input type="date" /&gt;</code> element on small/mobile displays in order to enable selection of a date with the mobile device's native UI. The default is true.]]></description>
+			<name>nativeWhenMobile</name>
+			<required>false</required>
+			<type>boolean</type>
+		</attribute>
+		<attribute>
 			<description><![CDATA[Javascript to execute after this component loses focus.]]></description>
 			<name>onblur</name>
 			<required>false</required>
@@ -3236,12 +3242,6 @@ java.lang.Object)</method-signature>
 			<name>requiredMessage</name>
 			<required>false</required>
 			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[When true, the component will render an HTML5 <code>&lt;input type="date" /&gt;</code> element on small/mobile displays in order to enable selection of a date with the mobile device's native UI. The default is true.]]></description>
-			<name>responsive</name>
-			<required>false</required>
-			<type>boolean</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[HTML passthrough attribute specifying the various WAI-ARIA roles that the element is used for.]]></description>
@@ -4817,6 +4817,12 @@ java.lang.Object)</method-signature>
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
+			<description><![CDATA[When true, the component will render an HTML5 <code>&lt;input type="time" /&gt;</code> element on small/mobile displays in order to enable selection of a time with the mobile device's native UI. The default is true.]]></description>
+			<name>nativeWhenMobile</name>
+			<required>false</required>
+			<type>boolean</type>
+		</attribute>
+		<attribute>
 			<description><![CDATA[Javascript to execute after this component loses focus.]]></description>
 			<name>onblur</name>
 			<required>false</required>
@@ -4935,12 +4941,6 @@ java.lang.Object)</method-signature>
 			<name>requiredMessage</name>
 			<required>false</required>
 			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[When true, the component will render an HTML5 <code>&lt;input type="time" /&gt;</code> element on small/mobile displays in order to enable selection of a time with the mobile device's native UI. The default is true.]]></description>
-			<name>responsive</name>
-			<required>false</required>
-			<type>boolean</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[HTML passthrough attribute specifying the various WAI-ARIA roles that the element is used for.]]></description>

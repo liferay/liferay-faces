@@ -101,7 +101,7 @@ public class InputDate extends InputDateBase {
 
 		String datePattern;
 
-		if (isResponsiveMobile()) {
+		if (isNative()) {
 			datePattern = DEFAULT_HTML5_DATE_PATTERN;
 		}
 		else {

@@ -119,16 +119,16 @@ public abstract class InputDateTime extends InputDateTimeBase implements ClientC
 	}
 
 	@Override
-	public abstract boolean isResponsive();
+	public abstract boolean isNativeWhenMobile();
 
-	protected boolean isResponsiveMobile() {
+	protected boolean isNative() {
 
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		BrowserSnifferFactory browserSnifferFactory = (BrowserSnifferFactory) FactoryExtensionFinder.getFactory(
 				BrowserSnifferFactory.class);
 		BrowserSniffer browserSniffer = browserSnifferFactory.getBrowserSniffer(facesContext.getExternalContext());
 
-		return browserSniffer.isMobile() && isResponsive();
+		return browserSniffer.isMobile() && isNativeWhenMobile();
 	}
 
 	@Override
