@@ -41,9 +41,9 @@ public abstract class InputTimeBase extends InputDateTime implements Styleable, 
 		maxResults,
 		maxTime,
 		minTime,
+		nativeWhenMobile,
 		pattern,
 		queryDelay,
-		responsive,
 		scrollIntoView,
 		step,
 		styleClass,
@@ -119,6 +119,14 @@ public abstract class InputTimeBase extends InputDateTime implements Styleable, 
 		getStateHelper().put(InputTimePropertyKeys.minTime, minTime);
 	}
 
+	public boolean isNativeWhenMobile() {
+		return (Boolean) getStateHelper().eval(InputTimePropertyKeys.nativeWhenMobile, true);
+	}
+
+	public void setNativeWhenMobile(boolean nativeWhenMobile) {
+		getStateHelper().put(InputTimePropertyKeys.nativeWhenMobile, nativeWhenMobile);
+	}
+
 	public String getPattern() {
 		return (String) getStateHelper().eval(InputTimePropertyKeys.pattern, "hh:mm a");
 	}
@@ -133,14 +141,6 @@ public abstract class InputTimeBase extends InputDateTime implements Styleable, 
 
 	public void setQueryDelay(Integer queryDelay) {
 		getStateHelper().put(InputTimePropertyKeys.queryDelay, queryDelay);
-	}
-
-	public boolean isResponsive() {
-		return (Boolean) getStateHelper().eval(InputTimePropertyKeys.responsive, true);
-	}
-
-	public void setResponsive(boolean responsive) {
-		getStateHelper().put(InputTimePropertyKeys.responsive, responsive);
 	}
 
 	public Boolean getScrollIntoView() {
