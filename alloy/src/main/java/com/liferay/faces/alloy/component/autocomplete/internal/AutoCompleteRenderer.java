@@ -49,6 +49,7 @@ import com.liferay.faces.util.render.internal.BufferedScriptResponseWriter;
 @FacesRenderer(componentFamily = AutoComplete.COMPONENT_FAMILY, rendererType = AutoComplete.RENDERER_TYPE)
 @ResourceDependencies(
 	{
+		@ResourceDependency(library = "javax.faces", name = "jsf.js"),
 		@ResourceDependency(library = "liferay-faces-alloy", name = "alloy.js"),
 		@ResourceDependency(library = "liferay-faces-reslib", name = "build/aui-css/css/bootstrap.min.css"),
 		@ResourceDependency(library = "liferay-faces-reslib", name = "build/aui/aui-min.js"),
