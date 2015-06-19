@@ -70,7 +70,7 @@ public class InputTime extends InputTimeBase {
 
 		String timePattern;
 
-		if (isResponsiveMobile()) {
+		if (isNative()) {
 			timePattern = DEFAULT_HTML5_TIME_PATTERN;
 		}
 		else {

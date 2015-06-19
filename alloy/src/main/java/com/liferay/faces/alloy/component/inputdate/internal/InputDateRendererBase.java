@@ -38,8 +38,8 @@ public abstract class InputDateRendererBase extends InputDateTimeRenderer {
 	protected static final String MASK = "mask";
 	protected static final String MAX_DATE = "maxDate";
 	protected static final String MIN_DATE = "minDate";
+	protected static final String NATIVE_WHEN_MOBILE = "nativeWhenMobile";
 	protected static final String PANES = "panes";
-	protected static final String RESPONSIVE = "responsive";
 	protected static final String STYLE_CLASS = "styleClass";
 
 	// Private Constants
