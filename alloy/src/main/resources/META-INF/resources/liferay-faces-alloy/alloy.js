@@ -217,7 +217,7 @@ LFAI = {
 		var dataTable = A.one('#' + escapedDataTableId),
 		selectAllCheckbox = A.one('#' + escapedSelectAllCheckboxId);
 
-		selectAllCheckbox.on('change', function() {
+		selectAllCheckbox.on('change', function(event) {
 
 			var checkboxes = dataTable.one('tbody').all('input[type=checkbox]'),
 				rowIndexRange = null;
@@ -238,7 +238,7 @@ LFAI = {
 						checkbox.removeClass('preventClientBehavior');
 					}
 				});
-				rowSelectRangeClientBehavior(rowIndexRange);
+				rowSelectRangeClientBehavior(rowIndexRange, event);
 			}
 			else {
 				checkboxes.each(function(checkbox) {
@@ -256,7 +256,7 @@ LFAI = {
 						checkbox.removeClass('preventClientBehavior');
 					}
 				});
-				rowDeselectRangeClientBehavior(rowIndexRange);
+				rowDeselectRangeClientBehavior(rowIndexRange, event);
 			}
 		});
 	},
@@ -269,7 +269,7 @@ LFAI = {
 
 		checkboxes.each(
 			function(checkbox) {
-				checkbox.on('click', function(e) {
+				checkbox.on('click', function(event) {
 					var found = false,
 						hiddenField = A.one('#' + escapedHiddenFieldClientId),
 						hiddenFieldValue = hiddenField.get('value'),
@@ -310,13 +310,13 @@ LFAI = {
 					if (checkbox.get('checked')) {
 						checkbox.ancestor("tr").addClass('info');
 						if (!checkbox.hasClass('preventClientBehavior')) {
-							rowSelectClientBehavior(rowIndex);
+							rowSelectClientBehavior(rowIndex, event);
 						}
 					}
 					else {
 						checkbox.ancestor("tr").removeClass('info');
 						if (!checkbox.hasClass('preventClientBehavior')) {
-							rowDeselectClientBehavior(rowIndex);
+							rowDeselectClientBehavior(rowIndex, event);
 						}
 					}
 				});

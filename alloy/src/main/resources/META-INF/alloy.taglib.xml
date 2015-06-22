@@ -23,7 +23,6 @@
 		<component>
 			<component-type>com.liferay.faces.alloy.component.accordion.Accordion</component-type>
 			<renderer-type>com.liferay.faces.alloy.component.accordion.AccordionRenderer</renderer-type>
-			<handler-class>com.liferay.faces.alloy.component.accordion.internal.AccordionHandler</handler-class>
 		</component>
 		<attribute>
 			<description><![CDATA[An EL expression that binds the Java reference to this component in the component tree to a bean property.]]></description>
@@ -72,18 +71,6 @@
 			<name>styleClass</name>
 			<required>false</required>
 			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[A method that is executed when a tab is clicked. The method must be <code>public</code>, return <code>void</code>, and take a <code>TabCollapseEvent</code> argument.]]></description>
-			<name>tabCollapseListener</name>
-			<required>false</required>
-			<method-signature>void tabCollapseListener(com.liferay.faces.alloy.component.tab.TabCollapseEvent)</method-signature>
-		</attribute>
-		<attribute>
-			<description><![CDATA[A method that is executed when a tab is clicked. The method must be <code>public</code>, return <code>void</code>, and take a <code>TabExpandEvent</code> argument.]]></description>
-			<name>tabExpandListener</name>
-			<required>false</required>
-			<method-signature>void tabExpandListener(com.liferay.faces.alloy.component.tab.TabExpandEvent)</method-signature>
 		</attribute>
 		<attribute>
 			<description><![CDATA[The value of this component, which is typically bound via EL to a model bean property. The value can be any of the following types:<ul><li>Any concrete subclass of <a href="http://docs.oracle.com/javaee/7/api/javax/faces/model/DataModel.html" target="_blank"><code>DataModel</code></a></li><li>Array (automatically wrapped with <a href="http://docs.oracle.com/javaee/7/api/javax/faces/model/ArrayDataModel.html" target="_blank"><code>ArrayDataModel</code></a>)</li><li>java.util.Collection (automatically wrapped with <a href="http://docs.oracle.com/javaee/7/api/javax/faces/model/CollectionDataModel.html" target="_blank"><code>CollectionDataModel</code></a>)</li><li>java.util.List (automatically wrapped with <a href="http://docs.oracle.com/javaee/7/api/javax/faces/model/ListDataModel.html" target="_blank"><code>ListDataModel</code></a>)</li><li>java.sql.ResultSet (automatically wrapped with <a href="http://docs.oracle.com/javaee/7/api/javax/faces/model/ResultSetDataModel.html" target="_blank"><code>ResultSetDataModel</code></a>)</li></ul>]]></description>
@@ -533,12 +520,6 @@
 			<name>immediate</name>
 			<required>false</required>
 			<type>java.lang.Boolean</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[A method that is executed when an autoComplete item is selected. The method must be <code>public</code>, return <code>void</code>, and take an <code>com.liferay.faces.alloy.component.autocomplete.ItemSelectEvent</code> argument.]]></description>
-			<name>itemSelectListener</name>
-			<required>false</required>
-			<method-signature>void itemSelectListener(com.liferay.faces.alloy.component.autocomplete.ItemSelectEvent)</method-signature>
 		</attribute>
 		<attribute>
 			<description><![CDATA[A localized label for this component that is typically only rendered in a FacesMessage when validation fails.]]></description>
@@ -1863,7 +1844,6 @@ java.lang.Object)</method-signature>
 		<component>
 			<component-type>com.liferay.faces.alloy.component.datatable.DataTable</component-type>
 			<renderer-type>com.liferay.faces.alloy.component.datatable.DataTableRenderer</renderer-type>
-			<handler-class>com.liferay.faces.alloy.component.datatable.internal.DataTableHandler</handler-class>
 		</component>
 		<attribute>
 			<description><![CDATA[HTML passthrough attribute specifying the background color for the <code>&lt;table&gt;</code> element.]]></description>
@@ -2052,34 +2032,10 @@ java.lang.Object)</method-signature>
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[A method that is executed when a row is deselected. The method must be <code>public</code>, return <code>void</code>, and take an <code>RowDeselectEvent</code> argument.]]></description>
-			<name>rowDeselectListener</name>
-			<required>false</required>
-			<method-signature>void rowDeselectListener(com.liferay.faces.alloy.component.datatable.RowDeselectEvent)</method-signature>
-		</attribute>
-		<attribute>
-			<description><![CDATA[A method that is executed when a range of rows is deselected. The method must be <code>public</code>, return <code>void</code>, and take an <code>RowDeselectRangeEvent</code> argument.]]></description>
-			<name>rowDeselectRangeListener</name>
-			<required>false</required>
-			<method-signature>void rowDeselectRangeListener(com.liferay.faces.alloy.component.datatable.RowDeselectRangeEvent)</method-signature>
-		</attribute>
-		<attribute>
 			<description><![CDATA[The total number of rows that are to be displayed. If not set, then all rows are displayed.]]></description>
 			<name>rows</name>
 			<required>false</required>
 			<type>int</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[A method that is executed when a row is selected. The method must be <code>public</code>, return <code>void</code>, and take an <code>RowSelectEvent</code> argument.]]></description>
-			<name>rowSelectListener</name>
-			<required>false</required>
-			<method-signature>void rowSelectListener(com.liferay.faces.alloy.component.datatable.RowSelectEvent)</method-signature>
-		</attribute>
-		<attribute>
-			<description><![CDATA[A method that is executed when a range of rows is selected. The method must be <code>public</code>, return <code>void</code>, and take an <code>RowSelectRangeEvent</code> argument.]]></description>
-			<name>rowSelectRangeListener</name>
-			<required>false</required>
-			<method-signature>void rowSelectRangeListener(com.liferay.faces.alloy.component.datatable.RowSelectRangeEvent)</method-signature>
 		</attribute>
 		<attribute>
 			<description><![CDATA[HTML passthrough attribute specifying the rules for the <code>&lt;table&gt;</code> element. Valid values: none, groups, rows, cols, all.]]></description>
@@ -3050,12 +3006,6 @@ java.lang.Object)</method-signature>
 			<name>converterMessage</name>
 			<required>false</required>
 			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[A method that is executed when an date is clicked. The method must be <code>public</code>, return <code>void</code>, and take an <code>com.liferay.faces.alloy.component.inputdate.InputDateEvent</code> argument.]]></description>
-			<name>dateSelectListener</name>
-			<required>false</required>
-			<method-signature>void dateSelectListener(com.liferay.faces.alloy.component.inputdate.DateSelectEvent)</method-signature>
 		</attribute>
 		<attribute>
 			<description><![CDATA[HTML passthrough attribute specifying the reading direction for the element For example, right to left (RTL), or left to right (LTR).]]></description>
@@ -4989,12 +4939,6 @@ java.lang.Object)</method-signature>
 			<name>tabindex</name>
 			<required>false</required>
 			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[A method that is executed when an date is clicked. The method must be <code>public</code>, return <code>void</code>, and take an <code>com.liferay.faces.alloy.component.inputtime.TimeSelectEvent</code> argument.]]></description>
-			<name>timeSelectListener</name>
-			<required>false</required>
-			<method-signature>void timeSelectListener(com.liferay.faces.alloy.component.inputtime.TimeSelectEvent)</method-signature>
 		</attribute>
 		<attribute>
 			<description><![CDATA[The time zone for the built-in DateTimeConverter.]]></description>
@@ -7319,7 +7263,6 @@ java.lang.Object)</method-signature>
 		<component>
 			<component-type>com.liferay.faces.alloy.component.progressbar.ProgressBar</component-type>
 			<renderer-type>com.liferay.faces.alloy.component.progressbar.ProgressBarRenderer</renderer-type>
-			<handler-class>com.liferay.faces.alloy.component.progressbar.internal.ProgressBarHandler</handler-class>
 		</component>
 		<attribute>
 			<description><![CDATA[An EL expression that binds the Java reference to this component in the component tree to a bean property.]]></description>
@@ -7380,12 +7323,6 @@ java.lang.Object)</method-signature>
 			<name>pollingDelay</name>
 			<required>false</required>
 			<type>java.lang.Integer</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[A method that is executed when an progress has completed. The method must be <code>public</code>, return <code>void</code>, and take an <code>com.liferay.faces.alloy.component.progressbar.ProgressCompleteEvent</code> argument.]]></description>
-			<name>progressCompleteListener</name>
-			<required>false</required>
-			<method-signature>void progressCompleteListener(com.liferay.faces.alloy.component.progressbar.ProgressCompleteEvent)</method-signature>
 		</attribute>
 		<attribute>
 			<description><![CDATA[When this flag is true, this component will be rendered to there response. When false, it will not be rendered to the response. The default value of this attribute is true.]]></description>
@@ -9620,7 +9557,6 @@ java.lang.Object)</method-signature>
 		<component>
 			<component-type>com.liferay.faces.alloy.component.tabview.TabView</component-type>
 			<renderer-type>com.liferay.faces.alloy.component.tabview.TabViewRenderer</renderer-type>
-			<handler-class>com.liferay.faces.alloy.component.tabview.internal.TabViewHandler</handler-class>
 		</component>
 		<attribute>
 			<description><![CDATA[An EL expression that binds the Java reference to this component in the component tree to a bean property.]]></description>
@@ -9675,12 +9611,6 @@ java.lang.Object)</method-signature>
 			<name>styleClass</name>
 			<required>false</required>
 			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[A method that is executed when a tab is clicked. The method must be <code>public</code>, return <code>void</code>, and take an <code>TabSelectEvent</code> argument.]]></description>
-			<name>tabSelectListener</name>
-			<required>false</required>
-			<method-signature>void tabSelectListener(com.liferay.faces.alloy.component.tab.TabSelectEvent)</method-signature>
 		</attribute>
 		<attribute>
 			<description><![CDATA[The value of this component, which is typically bound via EL to a model bean property. The value can be any of the following types:<ul><li>Any concrete subclass of <a href="http://docs.oracle.com/javaee/7/api/javax/faces/model/DataModel.html" target="_blank"><code>DataModel</code></a></li><li>Array (automatically wrapped with <a href="http://docs.oracle.com/javaee/7/api/javax/faces/model/ArrayDataModel.html" target="_blank"><code>ArrayDataModel</code></a>)</li><li>java.util.Collection (automatically wrapped with <a href="http://docs.oracle.com/javaee/7/api/javax/faces/model/CollectionDataModel.html" target="_blank"><code>CollectionDataModel</code></a>)</li><li>java.util.List (automatically wrapped with <a href="http://docs.oracle.com/javaee/7/api/javax/faces/model/ListDataModel.html" target="_blank"><code>ListDataModel</code></a>)</li><li>java.sql.ResultSet (automatically wrapped with <a href="http://docs.oracle.com/javaee/7/api/javax/faces/model/ResultSetDataModel.html" target="_blank"><code>ResultSetDataModel</code></a>)</li></ul>]]></description>

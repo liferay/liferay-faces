@@ -41,7 +41,6 @@ public abstract class ProgressBarBase extends UIComponentBase implements Styleab
 		minProgress,
 		oncomplete,
 		pollingDelay,
-		progressCompleteListener,
 		style,
 		styleClass,
 		value,
@@ -117,14 +116,6 @@ public abstract class ProgressBarBase extends UIComponentBase implements Styleab
 
 	public void setPollingDelay(Integer pollingDelay) {
 		getStateHelper().put(ProgressBarPropertyKeys.pollingDelay, pollingDelay);
-	}
-
-	public javax.el.MethodExpression getProgressCompleteListener() {
-		return (javax.el.MethodExpression) getStateHelper().eval(ProgressBarPropertyKeys.progressCompleteListener, null);
-	}
-
-	public void setProgressCompleteListener(javax.el.MethodExpression progressCompleteListener) {
-		getStateHelper().put(ProgressBarPropertyKeys.progressCompleteListener, progressCompleteListener);
 	}
 
 	@Override

@@ -37,9 +37,7 @@ public abstract class AccordionBase extends UIData implements Styleable, ClientC
 		multiple,
 		selectedIndex,
 		style,
-		styleClass,
-		tabCollapseListener,
-		tabExpandListener
+		styleClass
 	}
 
 	public AccordionBase() {
@@ -95,22 +93,6 @@ public abstract class AccordionBase extends UIData implements Styleable, ClientC
 	@Override
 	public void setStyleClass(String styleClass) {
 		getStateHelper().put(AccordionPropertyKeys.styleClass, styleClass);
-	}
-
-	public javax.el.MethodExpression getTabCollapseListener() {
-		return (javax.el.MethodExpression) getStateHelper().eval(AccordionPropertyKeys.tabCollapseListener, null);
-	}
-
-	public void setTabCollapseListener(javax.el.MethodExpression tabCollapseListener) {
-		getStateHelper().put(AccordionPropertyKeys.tabCollapseListener, tabCollapseListener);
-	}
-
-	public javax.el.MethodExpression getTabExpandListener() {
-		return (javax.el.MethodExpression) getStateHelper().eval(AccordionPropertyKeys.tabExpandListener, null);
-	}
-
-	public void setTabExpandListener(javax.el.MethodExpression tabExpandListener) {
-		getStateHelper().put(AccordionPropertyKeys.tabExpandListener, tabExpandListener);
 	}
 }
 //J+

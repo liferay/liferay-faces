@@ -39,8 +39,6 @@ public abstract class AccordionRendererBase extends AlloyRendererBase {
 	protected static final String SELECTED_INDEX = "selectedIndex";
 	protected static final String STYLE = "style";
 	protected static final String STYLE_CLASS = "styleClass";
-	protected static final String TAB_COLLAPSE_LISTENER = "tabCollapseListener";
-	protected static final String TAB_EXPAND_LISTENER = "tabExpandListener";
 
 	// Private Constants
 	private static final String ALLOY_CLASS_NAME = "TogglerDelegate";
