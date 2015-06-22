@@ -23,6 +23,7 @@ import javax.faces.context.FacesContext;
 import com.liferay.faces.alloy.component.accordion.Accordion;
 import com.liferay.faces.alloy.component.tab.TabCollapseEvent;
 import com.liferay.faces.alloy.component.tab.TabExpandEvent;
+import javax.faces.event.AjaxBehaviorEvent;
 
 
 /**
@@ -59,7 +60,9 @@ public class AccordionBackingBean {
 		}
 	}
 
-	public void tabCollapseListener(TabCollapseEvent tabCollapseEvent) {
+	public void tabCollapseListener(AjaxBehaviorEvent ajaxBehaviorEvent) {
+
+		TabCollapseEvent tabCollapseEvent = (TabCollapseEvent) ajaxBehaviorEvent;
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		FacesMessage facesMessage = new FacesMessage("Received 'tabCollapseEvent' for tab with header '" +
 				tabCollapseEvent.getTab().getHeaderText() + "' in the " + tabCollapseEvent.getPhaseId().getName() +
@@ -67,7 +70,9 @@ public class AccordionBackingBean {
 		facesContext.addMessage(null, facesMessage);
 	}
 
-	public void tabExpandListener(TabExpandEvent tabExpandEvent) {
+	public void tabExpandListener(AjaxBehaviorEvent ajaxBehaviorEvent) {
+
+		TabExpandEvent tabExpandEvent = (TabExpandEvent) ajaxBehaviorEvent;
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		FacesMessage facesMessage = new FacesMessage("Received 'tabExpandEvent' for tab with header '" +
 				tabExpandEvent.getTab().getHeaderText() + "' in the " + tabExpandEvent.getPhaseId().getName() +

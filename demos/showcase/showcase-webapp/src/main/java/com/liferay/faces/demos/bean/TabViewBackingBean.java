@@ -22,6 +22,7 @@ import javax.faces.context.FacesContext;
 
 import com.liferay.faces.alloy.component.tab.TabSelectEvent;
 import com.liferay.faces.alloy.component.tabview.TabView;
+import javax.faces.event.AjaxBehaviorEvent;
 
 
 /**
@@ -58,7 +59,9 @@ public class TabViewBackingBean {
 		}
 	}
 
-	public void tabSelectListener(TabSelectEvent tabSelectEvent) {
+	public void tabSelectListener(AjaxBehaviorEvent ajaxBehaviorEvent) {
+
+		TabSelectEvent tabSelectEvent = (TabSelectEvent) ajaxBehaviorEvent;
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		FacesMessage facesMessage = new FacesMessage("Received 'tabSelectEvent' for tab with header '" +
 				tabSelectEvent.getTab().getHeaderText() + "' in the " + tabSelectEvent.getPhaseId().getName() +

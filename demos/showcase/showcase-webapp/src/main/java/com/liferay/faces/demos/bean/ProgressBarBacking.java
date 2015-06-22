@@ -24,6 +24,7 @@ import javax.faces.event.PhaseId;
 import com.liferay.faces.alloy.component.progressbar.ProgressCompleteEvent;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
+import javax.faces.event.AjaxBehaviorEvent;
 
 
 /**
@@ -43,8 +44,9 @@ public class ProgressBarBacking implements Serializable {
 		progress = progress + 10;
 	}
 
-	public void progressCompleteListener(ProgressCompleteEvent progressCompleteEvent) {
+	public void progressCompleteListener(AjaxBehaviorEvent ajaxBehaviorEvent) {
 
+		ProgressCompleteEvent progressCompleteEvent = (ProgressCompleteEvent) ajaxBehaviorEvent;
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		PhaseId phaseId = facesContext.getCurrentPhaseId();
 		logger.debug("progressCompleteListener: phaseId=[{0}]", phaseId.toString());
