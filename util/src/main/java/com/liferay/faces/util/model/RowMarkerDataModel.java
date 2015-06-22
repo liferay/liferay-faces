@@ -29,8 +29,10 @@ import javax.faces.model.DataModel;
  * This class extends the {@link javax.faces.model.DataModel} class and provides a convenient base implementation of the
  * {@link RowMarker} interface.
  *
- * @author  Neil Griffin
+ * @author      Neil Griffin
+ * @deprecated  No replacement available.
  */
+@Deprecated
 public abstract class RowMarkerDataModel<E> extends DataModel<E> implements RowMarker {
 
 	// Private Data Members

@@ -20,8 +20,10 @@ import java.io.IOException;
  * This interface defines a contract for marking and deleting rows, intended to be implemented by a class that extends
  * {@link javax.faces.model.DataModel}
  *
- * @author  Neil Griffin
+ * @author      Neil Griffin
+ * @deprecated  No replacement available.
  */
+@Deprecated
 public interface RowMarker {
 
 	/**

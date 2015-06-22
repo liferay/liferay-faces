@@ -26,8 +26,12 @@ import java.util.Set;
  * extends the {@link java.util.Observable} class so that observers can be notified when the map has changed, according
  * to the {@link NotificationEvent} enumeration.
  *
- * @author  Neil Griffin
+ * @author      Neil Griffin
+ * @deprecated  No replacement available in Liferay Faces Util. Please consider using the Liferay Faces Alloy's <a
+ *              href="http://www.liferayfaces.org/doc/faces/3.2/vdldoc/alloy/dataTable.html">alloy:dataTable
+ *              component</a>.
  */
+@Deprecated
 public class RowMarks extends Observable implements Map<Object, Boolean> {
 
 	/**

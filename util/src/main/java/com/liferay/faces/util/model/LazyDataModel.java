@@ -23,8 +23,10 @@ import com.liferay.faces.util.logging.LoggerFactory;
  * This abstract class provides the ability to supply JSF UI components with a {@link javax.faces.model.DataModel} that
  * loads data in a lazy (on-demand) manner. It also provides for the ability to mark underlying rows for deletion.
  *
- * @author  Neil Griffin
+ * @author      Neil Griffin
+ * @deprecated  Please use {@link com.liferay.faces.util.model.OnDemandDataModel} instead.
  */
+@Deprecated
 public abstract class LazyDataModel<E> extends RowMarkerDataModel<E> implements Paginated {
 
 	// Logger
