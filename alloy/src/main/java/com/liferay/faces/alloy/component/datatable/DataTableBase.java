@@ -35,10 +35,6 @@ public abstract class DataTableBase extends HtmlDataTable implements Styleable, 
 	protected enum DataTablePropertyKeys {
 		clientKey,
 		multiColumnSort,
-		rowDeselectListener,
-		rowDeselectRangeListener,
-		rowSelectListener,
-		rowSelectRangeListener,
 		selectedRowIndexes,
 		selectionMode,
 		styleClass
@@ -65,38 +61,6 @@ public abstract class DataTableBase extends HtmlDataTable implements Styleable, 
 
 	public void setMultiColumnSort(boolean multiColumnSort) {
 		getStateHelper().put(DataTablePropertyKeys.multiColumnSort, multiColumnSort);
-	}
-
-	public javax.el.MethodExpression getRowDeselectListener() {
-		return (javax.el.MethodExpression) getStateHelper().eval(DataTablePropertyKeys.rowDeselectListener, null);
-	}
-
-	public void setRowDeselectListener(javax.el.MethodExpression rowDeselectListener) {
-		getStateHelper().put(DataTablePropertyKeys.rowDeselectListener, rowDeselectListener);
-	}
-
-	public javax.el.MethodExpression getRowDeselectRangeListener() {
-		return (javax.el.MethodExpression) getStateHelper().eval(DataTablePropertyKeys.rowDeselectRangeListener, null);
-	}
-
-	public void setRowDeselectRangeListener(javax.el.MethodExpression rowDeselectRangeListener) {
-		getStateHelper().put(DataTablePropertyKeys.rowDeselectRangeListener, rowDeselectRangeListener);
-	}
-
-	public javax.el.MethodExpression getRowSelectListener() {
-		return (javax.el.MethodExpression) getStateHelper().eval(DataTablePropertyKeys.rowSelectListener, null);
-	}
-
-	public void setRowSelectListener(javax.el.MethodExpression rowSelectListener) {
-		getStateHelper().put(DataTablePropertyKeys.rowSelectListener, rowSelectListener);
-	}
-
-	public javax.el.MethodExpression getRowSelectRangeListener() {
-		return (javax.el.MethodExpression) getStateHelper().eval(DataTablePropertyKeys.rowSelectRangeListener, null);
-	}
-
-	public void setRowSelectRangeListener(javax.el.MethodExpression rowSelectRangeListener) {
-		getStateHelper().put(DataTablePropertyKeys.rowSelectRangeListener, rowSelectRangeListener);
 	}
 
 	public String getSelectedRowIndexes() {

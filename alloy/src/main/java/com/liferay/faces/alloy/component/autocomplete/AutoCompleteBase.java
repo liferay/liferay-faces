@@ -43,7 +43,6 @@ public abstract class AutoCompleteBase extends InputTextBase implements Styleabl
 		delimiter,
 		height,
 		highlighterType,
-		itemSelectListener,
 		listItemRequired,
 		maxItems,
 		minChars,
@@ -139,14 +138,6 @@ public abstract class AutoCompleteBase extends InputTextBase implements Styleabl
 
 	public void setHighlighterType(String highlighterType) {
 		getStateHelper().put(AutoCompletePropertyKeys.highlighterType, highlighterType);
-	}
-
-	public javax.el.MethodExpression getItemSelectListener() {
-		return (javax.el.MethodExpression) getStateHelper().eval(AutoCompletePropertyKeys.itemSelectListener, null);
-	}
-
-	public void setItemSelectListener(javax.el.MethodExpression itemSelectListener) {
-		getStateHelper().put(AutoCompletePropertyKeys.itemSelectListener, itemSelectListener);
 	}
 
 	public boolean isListItemRequired() {

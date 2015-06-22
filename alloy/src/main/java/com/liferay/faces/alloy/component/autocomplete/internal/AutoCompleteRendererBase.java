@@ -39,7 +39,6 @@ public abstract class AutoCompleteRendererBase extends DelegatingAlloyRendererBa
 	protected static final String CLIENT_FILTER_TYPE = "clientFilterType";
 	protected static final String CLIENT_KEY = "clientKey";
 	protected static final String HEIGHT = "height";
-	protected static final String ITEM_SELECT_LISTENER = "itemSelectListener";
 	protected static final String LIST_ITEM_REQUIRED = "listItemRequired";
 	protected static final String MAX_RESULTS = "maxResults";
 	protected static final String MIN_QUERY_LENGTH = "minQueryLength";
