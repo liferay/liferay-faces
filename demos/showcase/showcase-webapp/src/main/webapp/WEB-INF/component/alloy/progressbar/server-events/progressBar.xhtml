@@ -6,10 +6,10 @@
 		<alloy:form>
 			<showcase:example>
 				<alloy:messages id="feedback" globalOnly="true" layout="table" />
-				<alloy:progressBar id="progressBar" clientKey="progressBar"
-					progressCompleteListener="#{progressBarBacking.progressCompleteListener}" label="{0}%"
-					pollingDelay="1000" value="#{progressBarBacking.progress}">
-					<f:ajax event="progressComplete" render="feedback" />
+				<alloy:progressBar id="progressBar" clientKey="progressBar" label="{0}%" pollingDelay="1000"
+					value="#{progressBarBacking.progress}">
+					<f:ajax event="progressComplete" listener="#{progressBarBacking.progressCompleteListener}"
+						render=":example:exampleForm:feedback" />
 					<f:ajax event="poll" listener="#{progressBarBacking.incrementProgress}" />
 				</alloy:progressBar>
 				<alloy:button value="#{i18n['start-progress']}"

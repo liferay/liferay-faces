@@ -15,16 +15,16 @@
 					</alloy:selectOneMenu>
 				</alloy:field>
 				<alloy:dataTable id="customers" rendered="#{showcaseModelBean.selectedComponent.rendered}" rows="10"
-					rowDeselectListener="#{dataTableBacking.rowDeselectListener}"
-					rowDeselectRangeListener="#{dataTableBacking.rowDeselectRangeListener}"
-					rowSelectListener="#{dataTableBacking.rowSelectListener}"
-					rowSelectRangeListener="#{dataTableBacking.rowSelectRangeListener}"
 					selectionMode="#{dataTableBacking.selectionMode}" value="#{dataTableBacking.customerDataModel}"
 					var="customer">
-					<f:ajax event="rowDeselect" render=":exampleForm:example:feedback" />
-					<f:ajax event="rowDeselectRange" render=":exampleForm:example:feedback" />
-					<f:ajax event="rowSelect" render=":exampleForm:example:feedback" />
-					<f:ajax event="rowSelectRange" render=":exampleForm:example:feedback" />
+					<f:ajax event="rowDeselect" listener="#{dataTableBacking.rowDeselectListener}"
+						render=":exampleForm:example:feedback" />
+					<f:ajax event="rowDeselectRange" listener="#{dataTableBacking.rowDeselectRangeListener}"
+						render=":exampleForm:example:feedback" />
+					<f:ajax event="rowSelect" listener="#{dataTableBacking.rowSelectListener}"
+						render=":exampleForm:example:feedback" />
+					<f:ajax event="rowSelectRange" listener="#{dataTableBacking.rowSelectRangeListener}"
+						render=":exampleForm:example:feedback" />
 					<f:facet name="header">
 						<alloy:outputText value="#{i18n['customers']}" />
 						<alloy:paginator />

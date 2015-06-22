@@ -40,6 +40,7 @@ import com.liferay.faces.demos.dto.Customer;
 import com.liferay.faces.demos.service.CustomerService;
 import com.liferay.faces.util.model.OnDemandDataModel;
 import com.liferay.faces.util.model.SortCriterion;
+import javax.faces.event.AjaxBehaviorEvent;
 
 
 /**
@@ -117,20 +118,28 @@ public class DataTableBacking implements Serializable {
 		customerDataTable.setSelectedRowIndexes(null);
 	}
 
-	public void rowDeselectListener(RowDeselectEvent rowDeselectEvent) {
+	public void rowDeselectListener(AjaxBehaviorEvent ajaxBehaviorEvent) {
+
+		RowDeselectEvent rowDeselectEvent = (RowDeselectEvent) ajaxBehaviorEvent;
 		addFacesMessage(rowDeselectEvent, rowDeselectEvent.getRowIndex(), (Customer) rowDeselectEvent.getRowData());
 	}
 
-	public void rowDeselectRangeListener(RowDeselectRangeEvent rowDeselectRangeEvent) {
+	public void rowDeselectRangeListener(AjaxBehaviorEvent ajaxBehaviorEvent) {
+
+		RowDeselectRangeEvent rowDeselectRangeEvent = (RowDeselectRangeEvent) ajaxBehaviorEvent;
 		addFacesMessage(rowDeselectRangeEvent, rowDeselectRangeEvent.getRowIndexes(),
 			rowDeselectRangeEvent.getRowDataList());
 	}
 
-	public void rowSelectListener(RowSelectEvent rowSelectEvent) {
+	public void rowSelectListener(AjaxBehaviorEvent ajaxBehaviorEvent) {
+
+		RowSelectEvent rowSelectEvent = (RowSelectEvent) ajaxBehaviorEvent;
 		addFacesMessage(rowSelectEvent, rowSelectEvent.getRowIndex(), (Customer) rowSelectEvent.getRowData());
 	}
 
-	public void rowSelectRangeListener(RowSelectRangeEvent rowSelectRangeEvent) {
+	public void rowSelectRangeListener(AjaxBehaviorEvent ajaxBehaviorEvent) {
+
+		RowSelectRangeEvent rowSelectRangeEvent = (RowSelectRangeEvent) ajaxBehaviorEvent;
 		addFacesMessage(rowSelectRangeEvent, rowSelectRangeEvent.getRowIndexes(), rowSelectRangeEvent.getRowDataList());
 	}
 
