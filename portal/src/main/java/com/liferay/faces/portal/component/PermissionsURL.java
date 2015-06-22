@@ -21,7 +21,8 @@ import com.liferay.portal.kernel.util.Validator;
 
 
 /**
- * @author  Ed Shin
+ * @author      Ed Shin
+ * @deprecated  Please use {@link com.liferay.faces.portal.component.permissionsurl.PermissionsURL} instead.
  */
 public class PermissionsURL extends UIOutput {
 

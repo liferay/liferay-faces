@@ -23,8 +23,10 @@ import com.liferay.portal.kernel.util.WebKeys;
  * PortletRequest} implementation. It provides the ability to intercept get/set/remove calls the {@link
  * WebKeys#AUI_SCRIPT_DATA} request attribute.
  *
- * @author  Neil Griffin
+ * @author      Neil Griffin
+ * @deprecated  No replacement available.
  */
+@Deprecated
 public class ScriptCapturingHttpServletRequest extends NonNamespacedHttpServletRequest {
 
 	// Private Data Members

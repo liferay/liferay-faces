@@ -30,8 +30,10 @@ import com.liferay.taglib.ui.InputEditorTag;
  * Portal JSP tag classes will be able to set request attributes that can be picked up by JSPs. For example, the {@link
  * InputEditorTag} sets attributes that are picked up by the portal-web/docroot/html/js/editor/ckeditor.jsp page.
  *
- * @author  Neil Griffin
+ * @author      Neil Griffin
+ * @deprecated  No replacement available.
  */
+@Deprecated
 public class NonNamespacedHttpServletRequest extends HttpServletRequestWrapper {
 
 	// Logger
