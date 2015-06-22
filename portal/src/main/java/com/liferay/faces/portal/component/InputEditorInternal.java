@@ -20,8 +20,10 @@ import javax.faces.context.FacesContext;
 
 
 /**
- * @author  Neil Griffin
+ * @author      Neil Griffin
+ * @deprecated  Please use {@link com.liferay.faces.portal.component.inputrichtext.InputRichText} instead.
  */
+@Deprecated
 public class InputEditorInternal extends UIOutput {
 
 	// Private Constants

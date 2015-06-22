@@ -22,8 +22,10 @@ import com.liferay.faces.util.lang.StringPool;
 /**
  * Utility methods that operate against UIComponent instances.
  *
- * @author  Neil Griffin
+ * @author      Neil Griffin
+ * @deprecated  No replacement available.
  */
+@Deprecated
 public class UIComponentHelper {
 
 	public static Object getLabel(FacesContext facesContext, UIComponent uiComponent) {
