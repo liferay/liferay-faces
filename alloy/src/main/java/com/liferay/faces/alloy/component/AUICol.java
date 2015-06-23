@@ -17,8 +17,6 @@ import javax.el.ValueExpression;
 import javax.faces.component.NamingContainer;
 import javax.faces.context.FacesContext;
 
-import com.liferay.faces.util.lang.StringPool;
-
 
 /**
  * @author  Neil Griffin
@@ -116,7 +114,7 @@ public class AUICol extends AUIPanel implements NamingContainer {
 	public Integer getSpan() {
 
 		if (span == null) {
-			ValueExpression valueExpression = getValueExpression(StringPool.SPAN);
+			ValueExpression valueExpression = getValueExpression("span");
 
 			if (valueExpression != null) {
 				span = (Integer) valueExpression.getValue(FacesContext.getCurrentInstance().getELContext());

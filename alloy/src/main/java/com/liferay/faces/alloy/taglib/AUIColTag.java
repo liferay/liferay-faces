@@ -17,7 +17,6 @@ import javax.el.ValueExpression;
 import javax.faces.component.UIComponent;
 
 import com.liferay.faces.alloy.component.AUICol;
-import com.liferay.faces.util.lang.StringPool;
 
 
 /**
@@ -77,7 +76,7 @@ public class AUIColTag extends AUIComponentELTag {
 		}
 
 		if (span != null) {
-			uiComponent.setValueExpression(StringPool.SPAN, span);
+			uiComponent.setValueExpression("span", span);
 		}
 
 		if (width != null) {

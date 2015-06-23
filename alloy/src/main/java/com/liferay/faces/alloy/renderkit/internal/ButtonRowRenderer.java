@@ -36,7 +36,7 @@ public class ButtonRowRenderer extends Renderer {
 		Map<String, Object> attributes = uiComponent.getAttributes();
 
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
-		responseWriter.startElement(StringPool.SPAN, uiComponent);
+		responseWriter.startElement("span", uiComponent);
 
 		String id = uiComponent.getClientId(facesContext);
 		responseWriter.writeAttribute(StringPool.ID, id, StringPool.ID);
@@ -68,7 +68,7 @@ public class ButtonRowRenderer extends Renderer {
 		super.encodeEnd(facesContext, uiComponent);
 
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
-		responseWriter.endElement(StringPool.SPAN);
+		responseWriter.endElement("span");
 	}
 
 }

@@ -106,7 +106,7 @@ public class Column extends UIPanel {
 	public Integer getSpan() {
 
 		if (span == null) {
-			ValueExpression valueExpression = getValueExpression(StringPool.SPAN);
+			ValueExpression valueExpression = getValueExpression("span");
 
 			if (valueExpression != null) {
 				span = (Integer) valueExpression.getValue(FacesContext.getCurrentInstance().getELContext());

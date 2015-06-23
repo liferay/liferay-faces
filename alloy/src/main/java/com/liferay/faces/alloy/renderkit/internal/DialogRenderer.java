@@ -42,7 +42,7 @@ public class DialogRenderer extends Renderer {
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
 
 		responseWriter.startElement(StringPool.SCRIPT, uiComponent);
-		responseWriter.writeAttribute(StringPool.TYPE, "text/javascript", null);
+		responseWriter.writeAttribute("type", "text/javascript", null);
 
 		responseWriter.write("AUI().use('aui-dialog', function(A) {");
 		responseWriter.write("A.on(\"domready\", function() {");
@@ -97,7 +97,7 @@ public class DialogRenderer extends Renderer {
 		responseWriter.write("',");
 
 		// Write the remaining attributes.
-		writeBooleanAttribute(responseWriter, attributes, StringPool.CENTERED, true, false);
+		writeBooleanAttribute(responseWriter, attributes, "centered", true, false);
 		writeBooleanAttribute(responseWriter, attributes, "close", true, false);
 		writeBooleanAttribute(responseWriter, attributes, "constrain2view", true, false);
 		writeBooleanAttribute(responseWriter, attributes, "destroyOnClose", true, false);
@@ -106,7 +106,7 @@ public class DialogRenderer extends Renderer {
 		writeBooleanAttribute(responseWriter, attributes, "modal", false, false);
 		writeBooleanAttribute(responseWriter, attributes, "resizable", false, false);
 		writeBooleanAttribute(responseWriter, attributes, "stack", true, false);
-		writeStringAttribute(responseWriter, attributes, StringPool.TITLE, null, false, true);
+		writeStringAttribute(responseWriter, attributes, "title", null, false, true);
 		writeStringAttribute(responseWriter, attributes, "width", null, true, false);
 		responseWriter.write("}).render();");
 		responseWriter.write("});");
