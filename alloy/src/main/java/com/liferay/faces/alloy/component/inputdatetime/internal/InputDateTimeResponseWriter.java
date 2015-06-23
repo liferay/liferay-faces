@@ -29,13 +29,13 @@ public class InputDateTimeResponseWriter extends IdDelegationResponseWriter {
 
 	// Private Data Members
 	private boolean mobile;
-	private boolean responsive;
+	private boolean nativeWhenMobile;
 
 	public InputDateTimeResponseWriter(ResponseWriter responseWriter, String idElement, String idValue, boolean mobile,
-		boolean responsive) {
+		boolean nativeWhenMobile) {
 		super(responseWriter, idElement, idValue);
 		this.mobile = mobile;
-		this.responsive = responsive;
+		this.nativeWhenMobile = nativeWhenMobile;
 	}
 
 	@Override
@@ -56,7 +56,7 @@ public class InputDateTimeResponseWriter extends IdDelegationResponseWriter {
 		return mobile;
 	}
 
-	public boolean isResponsive() {
-		return responsive;
+	public boolean isNativeWhenMobile() {
+		return nativeWhenMobile;
 	}
 }
