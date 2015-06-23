@@ -129,10 +129,10 @@ public class InputEditorInternalRenderer extends Renderer implements CleanupRend
 		queryString.append(StringPool.EQUAL);
 		queryString.append(attributes.get("initMethod"));
 		queryString.append(StringPool.AMPERSAND);
-		queryString.append(StringPool.NAME);
+		queryString.append("name");
 		queryString.append(StringPool.EQUAL);
 
-		String editorName = (String) attributes.get(StringPool.NAME);
+		String editorName = (String) attributes.get("name");
 		queryString.append(editorName);
 		queryString.append(StringPool.AMPERSAND);
 		queryString.append("onChangeMethod");

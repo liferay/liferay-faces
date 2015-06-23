@@ -20,11 +20,11 @@ import java.util.EmptyStackException;
 import javax.faces.component.UIComponent;
 import javax.faces.context.ResponseWriter;
 
+import org.w3c.dom.Element;
+
 import com.liferay.faces.bridge.context.HeadResponseWriter;
 import com.liferay.faces.bridge.renderkit.html_basic.internal.ElementWriter;
 import com.liferay.faces.bridge.renderkit.html_basic.internal.ElementWriterStack;
-import org.w3c.dom.Element;
-
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
@@ -133,7 +133,7 @@ public abstract class HeadResponseWriterBase extends HeadResponseWriter {
 				String nodeName = element.getNodeName();
 				logger.trace("POPPED element name=[{0}]", nodeName);
 
-				if (!StringPool.HEAD.equals(nodeName)) {
+				if (!"head".equals(nodeName)) {
 					addResourceToHeadSection(element, nodeName);
 				}
 			}

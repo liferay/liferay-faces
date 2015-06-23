@@ -124,7 +124,7 @@ public class ResponseWriterBridgeImpl extends ResponseWriterBridgeCompat_2_2_Imp
 		else if (ELEMENT_UPDATE.equals(elementName)) {
 			insideUpdate = false;
 		}
-		else if (StringPool.INPUT.equals(elementName)) {
+		else if ("input".equals(elementName)) {
 			insideInput = false;
 		}
 
@@ -182,7 +182,7 @@ public class ResponseWriterBridgeImpl extends ResponseWriterBridgeCompat_2_2_Imp
 		else if (ELEMENT_UPDATE.equals(elementName)) {
 			insideUpdate = true;
 		}
-		else if (StringPool.INPUT.equals(elementName)) {
+		else if ("input".equals(elementName)) {
 			insideInput = true;
 		}
 
