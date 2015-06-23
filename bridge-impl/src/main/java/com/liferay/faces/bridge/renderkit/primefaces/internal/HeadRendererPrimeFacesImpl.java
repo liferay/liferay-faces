@@ -111,7 +111,7 @@ public class HeadRendererPrimeFacesImpl extends HeadRendererBridgeImpl {
 			PortletResponse portletResponse = (PortletResponse) externalContext.getResponse();
 			String namespace = portletResponse.getNamespace();
 			String resourceNameParam = namespace + "javax.faces.resource";
-			String libraryNameParam = namespace + StringPool.LN;
+			String libraryNameParam = namespace + "ln";
 
 			for (String externalScriptURL : externalScriptURLs) {
 
@@ -203,7 +203,7 @@ public class HeadRendererPrimeFacesImpl extends HeadRendererBridgeImpl {
 
 			String resourceLibrary = PRIMEFACES_THEME_PREFIX + primeFacesThemeName;
 			ResourceComponent primeFacesStyleSheet = new ResourceComponent(facesContext, PRIMEFACES_THEME_RESOURCE_NAME,
-					resourceLibrary, StringPool.HEAD);
+					resourceLibrary, "head");
 			resources.add(primeFacesStyleSheet);
 		}
 

@@ -39,7 +39,6 @@ import com.liferay.faces.util.application.ComponentResource;
 import com.liferay.faces.util.application.ComponentResourceFactory;
 import com.liferay.faces.util.application.ComponentResourceUtil;
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
-import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -86,13 +85,12 @@ public class HeadRendererBridgeImpl extends BridgeRenderer {
 		}
 
 		// Sort the components that are in the view root into stylesheets and scripts.
-		List<UIComponent> uiViewRootComponentResources = uiViewRoot.getComponentResources(facesContext,
-				StringPool.HEAD);
+		List<UIComponent> uiViewRootComponentResources = uiViewRoot.getComponentResources(facesContext, "head");
 		List<UIComponent> uiViewRootStyleSheetResources = null;
 		List<UIComponent> uiViewRootScriptResources = null;
 
 		for (UIComponent curComponent : uiViewRootComponentResources) {
-			String resourceName = (String) curComponent.getAttributes().get(StringPool.NAME);
+			String resourceName = (String) curComponent.getAttributes().get("name");
 
 			if ((resourceName != null) && resourceName.endsWith(EXTENSION_CSS)) {
 
@@ -307,9 +305,9 @@ public class HeadRendererBridgeImpl extends BridgeRenderer {
 		// in order to prevent events from firing during the relocation process.
 		for (UIComponent uiComponentResource : resourcesForRelocatingToBody) {
 
-			uiComponentResource.getAttributes().put(ORIGINAL_TARGET, StringPool.HEAD);
+			uiComponentResource.getAttributes().put(ORIGINAL_TARGET, "head");
 			uiComponentResource.getAttributes().put(ADDED, Boolean.TRUE);
-			uiViewRoot.addComponentResource(facesContext, uiComponentResource, StringPool.BODY);
+			uiViewRoot.addComponentResource(facesContext, uiComponentResource, "body");
 
 			if (logger.isDebugEnabled()) {
 				ComponentResource componentResource = componentResourceFactory.getComponentResource(

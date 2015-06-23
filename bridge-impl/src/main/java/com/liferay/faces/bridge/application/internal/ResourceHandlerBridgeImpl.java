@@ -28,7 +28,6 @@ import com.liferay.faces.bridge.config.internal.PortletConfigParam;
 import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.bridge.context.BridgePortalContext;
 import com.liferay.faces.util.application.ResourceHandlerWrapperBase;
-import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -137,7 +136,7 @@ public class ResourceHandlerBridgeImpl extends ResourceHandlerWrapperBase {
 		// assume that calling resource.getInputStream() will provide the ability to send the contents of the
 		// resource to the response.
 		if (resourceName != null) {
-			String libraryName = requestParameterMap.get(StringPool.LN);
+			String libraryName = requestParameterMap.get("ln");
 
 			if (logger.isTraceEnabled()) {
 

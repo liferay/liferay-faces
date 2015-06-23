@@ -38,7 +38,7 @@ public class FieldRenderer extends Renderer {
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
 
 		// Outer <span>
-		responseWriter.startElement(StringPool.SPAN, uiComponent);
+		responseWriter.startElement("span", uiComponent);
 
 		String id = uiComponent.getClientId(facesContext);
 		responseWriter.writeAttribute(StringPool.ID, id, StringPool.ID);
@@ -46,7 +46,7 @@ public class FieldRenderer extends Renderer {
 		StringBuilder classNames = new StringBuilder();
 		classNames.append("aui-field");
 
-		String type = (String) attributes.get(StringPool.TYPE);
+		String type = (String) attributes.get("type");
 
 		if (type != null) {
 			String lowerCaseType = type.trim().toLowerCase();
@@ -79,7 +79,7 @@ public class FieldRenderer extends Renderer {
 		responseWriter.writeAttribute(StringPool.CLASS, classNames.toString(), null);
 
 		// Inner <span>
-		responseWriter.startElement(StringPool.SPAN, null);
+		responseWriter.startElement("span", null);
 		responseWriter.writeAttribute(StringPool.CLASS, "aui-field-content", null);
 
 		String lowerCaseInlineLabel = "left";
@@ -91,24 +91,24 @@ public class FieldRenderer extends Renderer {
 
 		// Left-aligned <label>
 		if (lowerCaseInlineLabel.equals("left")) {
-			responseWriter.startElement(StringPool.LABEL, null);
+			responseWriter.startElement("label", null);
 			responseWriter.writeAttribute(StringPool.CLASS, "aui-field-label", null);
 
-			String label = (String) attributes.get(StringPool.LABEL);
+			String label = (String) attributes.get("label");
 
 			if (label != null) {
-				responseWriter.writeText(label, uiComponent, StringPool.LABEL);
+				responseWriter.writeText(label, uiComponent, "label");
 			}
 
-			responseWriter.endElement(StringPool.LABEL);
+			responseWriter.endElement("label");
 		}
 
 		// Inner-inner <span>
-		responseWriter.startElement(StringPool.SPAN, null);
+		responseWriter.startElement("span", null);
 		classNames = new StringBuilder();
 		classNames.append("aui-field-element");
 
-		if (lowerCaseInlineLabel.equalsIgnoreCase(StringPool.RIGHT)) {
+		if (lowerCaseInlineLabel.equalsIgnoreCase("right")) {
 			classNames.append(" aui-field-label-right");
 		}
 
@@ -123,7 +123,7 @@ public class FieldRenderer extends Renderer {
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
 
 		// Inner-inner </span>
-		responseWriter.endElement(StringPool.SPAN);
+		responseWriter.endElement("span");
 
 		String lowerCaseInlineLabel = "";
 		Map<String, Object> attributes = uiComponent.getAttributes();
@@ -134,24 +134,24 @@ public class FieldRenderer extends Renderer {
 		}
 
 		// Right-aligned <label>
-		if (lowerCaseInlineLabel.equals(StringPool.RIGHT)) {
-			responseWriter.startElement(StringPool.LABEL, null);
+		if (lowerCaseInlineLabel.equals("right")) {
+			responseWriter.startElement("label", null);
 			responseWriter.writeAttribute(StringPool.CLASS, "aui-field-label", null);
 
-			String label = (String) attributes.get(StringPool.LABEL);
+			String label = (String) attributes.get("label");
 
 			if (label != null) {
-				responseWriter.writeText(label, uiComponent, StringPool.LABEL);
+				responseWriter.writeText(label, uiComponent, "label");
 			}
 
-			responseWriter.endElement(StringPool.LABEL);
+			responseWriter.endElement("label");
 		}
 
 		// Inner </span>
-		responseWriter.endElement(StringPool.SPAN);
+		responseWriter.endElement("span");
 
 		// Outer </span>
-		responseWriter.endElement(StringPool.SPAN);
+		responseWriter.endElement("span");
 	}
 
 }

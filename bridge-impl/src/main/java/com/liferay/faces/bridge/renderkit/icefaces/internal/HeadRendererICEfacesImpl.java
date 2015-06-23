@@ -87,7 +87,7 @@ public class HeadRendererICEfacesImpl extends HeadRendererBridgeImpl {
 			}
 
 			ResourceComponent iceFacesStyleSheet = new ResourceComponent(facesContext, resourceName, resourceLibrary,
-					StringPool.HEAD);
+					"head");
 			resources.add(iceFacesStyleSheet);
 		}
 
