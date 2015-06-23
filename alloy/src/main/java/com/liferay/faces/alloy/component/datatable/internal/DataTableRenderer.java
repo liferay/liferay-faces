@@ -190,12 +190,12 @@ public class DataTableRenderer extends DataTableRendererBase {
 
 		// Encode the hidden field that contains the client-side state of the selected index.
 		String hiddenFieldName = dataTable.getClientId(facesContext).concat("_selectedRowIndexes");
-		responseWriter.startElement(StringPool.INPUT, dataTable);
+		responseWriter.startElement("input", dataTable);
 		responseWriter.writeAttribute(StringPool.ID, hiddenFieldName, null);
-		responseWriter.writeAttribute(StringPool.NAME, hiddenFieldName, null);
-		responseWriter.writeAttribute(StringPool.TYPE, StringPool.HIDDEN, null);
-		responseWriter.writeAttribute(StringPool.VALUE, dataTable.getSelectedRowIndexes(), null);
-		responseWriter.endElement(StringPool.INPUT);
+		responseWriter.writeAttribute("name", hiddenFieldName, null);
+		responseWriter.writeAttribute("type", "hidden", null);
+		responseWriter.writeAttribute("value", dataTable.getSelectedRowIndexes(), null);
+		responseWriter.endElement("input");
 	}
 
 	@Override

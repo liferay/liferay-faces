@@ -15,8 +15,6 @@ package com.liferay.faces.alloy.component.button;
 
 import javax.faces.component.FacesComponent;
 
-import com.liferay.faces.util.lang.StringPool;
-
 
 /**
  * @author  Kyle Stiemann
@@ -26,6 +24,6 @@ public class Button extends ButtonBase {
 
 	@Override
 	public String getType() {
-		return (String) getStateHelper().eval(StringPool.TYPE, "button");
+		return (String) getStateHelper().eval("type", "button");
 	}
 }

@@ -155,14 +155,14 @@ public class AccordionRenderer extends AccordionRendererBase {
 
 		// Encode the hidden field that contains the client-side state of the selected index.
 		Accordion accordion = (Accordion) uiComponent;
-		responseWriter.startElement(StringPool.INPUT, accordion);
+		responseWriter.startElement("input", accordion);
 
 		String hiddenFieldName = accordion.getClientId(facesContext) + "selectedIndex";
 		responseWriter.writeAttribute(StringPool.ID, hiddenFieldName, null);
-		responseWriter.writeAttribute(StringPool.NAME, hiddenFieldName, null);
-		responseWriter.writeAttribute(StringPool.TYPE, StringPool.HIDDEN, null);
-		responseWriter.writeAttribute(StringPool.VALUE, accordion.getSelectedIndex(), null);
-		responseWriter.endElement(StringPool.INPUT);
+		responseWriter.writeAttribute("name", hiddenFieldName, null);
+		responseWriter.writeAttribute("type", "hidden", null);
+		responseWriter.writeAttribute("value", accordion.getSelectedIndex(), null);
+		responseWriter.endElement("input");
 	}
 
 	@Override
@@ -197,7 +197,7 @@ public class AccordionRenderer extends AccordionRendererBase {
 		encodeLiferayComponentVar(responseWriter, clientVarName, clientKey);
 
 		// var toggglers = clientVarName.items;
-		responseWriter.write(StringPool.VAR);
+		responseWriter.write("var");
 		responseWriter.write(StringPool.SPACE);
 		responseWriter.write("togglers");
 		responseWriter.write(StringPool.EQUAL);
@@ -207,7 +207,7 @@ public class AccordionRenderer extends AccordionRendererBase {
 		responseWriter.write(StringPool.SEMICOLON);
 
 		// var totalTogglers = togglers.length;
-		responseWriter.write(StringPool.VAR);
+		responseWriter.write("var");
 		responseWriter.write(StringPool.SPACE);
 		responseWriter.write("totalTogglers");
 		responseWriter.write(StringPool.EQUAL);
@@ -314,8 +314,7 @@ public class AccordionRenderer extends AccordionRendererBase {
 			}
 		}
 
-		encodeEventCallback(responseWriter, "togglers[i]", StringPool.AFTER, EXPANDED_CHANGE,
-			behaviorCallback.toString());
+		encodeEventCallback(responseWriter, "togglers[i]", "after", EXPANDED_CHANGE, behaviorCallback.toString());
 
 		responseWriter.write(StringPool.CLOSE_CURLY_BRACE);
 	}
@@ -390,7 +389,7 @@ public class AccordionRenderer extends AccordionRendererBase {
 		responseWriter.writeAttribute(StringPool.CLASS, headerClass, Styleable.STYLE_CLASS);
 
 		// If the header facet exists for the specified tab, then encode the header facet.
-		UIComponent headerFacet = tab.getFacet(StringPool.HEADER);
+		UIComponent headerFacet = tab.getFacet("header");
 
 		if (headerFacet != null) {
 			headerFacet.encodeAll(facesContext);
@@ -428,10 +427,10 @@ public class AccordionRenderer extends AccordionRendererBase {
 		encodeBoolean(responseWriter, CLOSE_ALL_ON_EXPAND, !multiple, first);
 
 		// content
-		encodeString(responseWriter, StringPool.CONTENT, DOT_CONTENT, first);
+		encodeString(responseWriter, "content", DOT_CONTENT, first);
 
 		// header
-		encodeString(responseWriter, StringPool.HEADER, DOT_HEADER, first);
+		encodeString(responseWriter, "header", DOT_HEADER, first);
 
 		// expanded: false
 		encodeBoolean(responseWriter, EXPANDED, false, first);

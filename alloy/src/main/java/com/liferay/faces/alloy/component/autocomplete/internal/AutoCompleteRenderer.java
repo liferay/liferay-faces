@@ -134,7 +134,7 @@ public class AutoCompleteRenderer extends AutoCompleteRendererBase {
 
 			// Encode the text input by delegating to the renderer from the JSF runtime.
 			AutoCompleteInputResponseWriter autoCompleteInputResponseWriter = new AutoCompleteInputResponseWriter(
-					responseWriter, StringPool.INPUT, clientId + INPUT_SUFFIX);
+					responseWriter, "input", clientId + INPUT_SUFFIX);
 			super.encodeAll(facesContext, uiComponent, autoCompleteInputResponseWriter);
 
 			// Encode the contentBox of the autoComplete.
@@ -147,12 +147,12 @@ public class AutoCompleteRenderer extends AutoCompleteRendererBase {
 			if (isServerFilteringEnabled(uiComponent)) {
 
 				// Encode the hidden input which will be used to submit the query to the server.
-				responseWriter.startElement(StringPool.INPUT, uiComponent);
+				responseWriter.startElement("input", uiComponent);
 				responseWriter.writeAttribute(StringPool.ID, clientId + HIDDEN_SUFFIX, null);
-				responseWriter.writeAttribute(StringPool.NAME, clientId + HIDDEN_SUFFIX, null);
-				responseWriter.writeAttribute(StringPool.TYPE, StringPool.HIDDEN, null);
-				responseWriter.writeAttribute(StringPool.VALUE, StringPool.BLANK, null);
-				responseWriter.endElement(StringPool.INPUT);
+				responseWriter.writeAttribute("name", clientId + HIDDEN_SUFFIX, null);
+				responseWriter.writeAttribute("type", "hidden", null);
+				responseWriter.writeAttribute("value", StringPool.BLANK, null);
+				responseWriter.endElement("input");
 			}
 		}
 	}
@@ -200,7 +200,7 @@ public class AutoCompleteRenderer extends AutoCompleteRendererBase {
 
 		String autocompleteAttr = autoComplete.getAutocomplete();
 
-		if (StringPool.ON.equals(autocompleteAttr)) {
+		if ("on".equals(autocompleteAttr)) {
 
 			encodeBoolean(responseWriter, ALLOW_BROWSER_AUTOCOMPLETE, true, first);
 			first = false;
@@ -213,7 +213,7 @@ public class AutoCompleteRenderer extends AutoCompleteRendererBase {
 
 		if ((valueChangeClientBehaviors != null) && !valueChangeClientBehaviors.isEmpty()) {
 
-			encodeNonEscapedObject(responseWriter, StringPool.AFTER, VALUE_CHANGE_SCRIPT, first);
+			encodeNonEscapedObject(responseWriter, "after", VALUE_CHANGE_SCRIPT, first);
 			first = false;
 		}
 	}

@@ -113,11 +113,11 @@ public abstract class AbstractButtonRenderer extends ButtonRendererBase {
 
 			// Do not delegate the writing of the disabled attribute because the JSF runtime may disable the button
 			// programmatically based on navigation case matching.
-			responseWriter.writeAttribute(StringPool.DISABLED, disabled, StringPool.DISABLED);
+			responseWriter.writeAttribute("disabled", disabled, "disabled");
 
 			// Do not delegate the writing of the type attribute because the JSF runtime hard codes the type for button.
-			String type = (String) attributes.get(StringPool.TYPE);
-			responseWriter.writeAttribute(StringPool.TYPE, type, StringPool.TYPE);
+			String type = (String) attributes.get("type");
+			responseWriter.writeAttribute("type", type, "type");
 
 			// Determine if we should delegate the rendering of onclick or render it ourselves.
 			Boolean delegateOnclick = Boolean.TRUE;
@@ -136,7 +136,7 @@ public abstract class AbstractButtonRenderer extends ButtonRendererBase {
 
 						// Do not delegate the writing of the onclick attribute because the JSF runtime assumes that it
 						// should include navigation, and we do not need to navigate in this case.
-						responseWriter.writeAttribute(StringPool.ONCLICK, onclick, StringPool.ONCLICK);
+						responseWriter.writeAttribute("onclick", onclick, "onclick");
 					}
 				}
 			}
@@ -168,10 +168,10 @@ public abstract class AbstractButtonRenderer extends ButtonRendererBase {
 			responseWriter.writeAttribute(ONBLUR, onblurBuilder.toString(), ONBLUR);
 
 			// Do not delegate the writing of the value attribute because the JSF runtime may not render value
-			Object value = (Object) attributes.get(StringPool.VALUE);
+			Object value = (Object) attributes.get("value");
 
 			if (value != null) {
-				responseWriter.writeAttribute(StringPool.VALUE, value.toString(), StringPool.VALUE);
+				responseWriter.writeAttribute("value", value.toString(), "value");
 			}
 
 			// Delegate to the JSF implementation's renderer while using our own ButtonResponseWriter to control the
@@ -204,9 +204,9 @@ public abstract class AbstractButtonRenderer extends ButtonRendererBase {
 				String src = (String) facesContext.getAttributes().remove(FACES_RUNTIME_SRC);
 
 				if (src != null) {
-					responseWriter.startElement(StringPool.IMG, uiComponent);
-					responseWriter.writeAttribute(StringPool.SRC, src, IMAGE);
-					responseWriter.endElement(StringPool.IMG);
+					responseWriter.startElement("img", uiComponent);
+					responseWriter.writeAttribute("src", src, IMAGE);
+					responseWriter.endElement("img");
 				}
 			}
 			else {
@@ -215,10 +215,10 @@ public abstract class AbstractButtonRenderer extends ButtonRendererBase {
 
 					// Do not delegate the writing of the value attribute because the value needs to be a child rather
 					// than an attribute of the button.
-					Object value = (String) attributes.get(StringPool.VALUE);
+					Object value = (String) attributes.get("value");
 
 					if (value != null) {
-						responseWriter.writeText(value.toString(), StringPool.VALUE);
+						responseWriter.writeText(value.toString(), "value");
 					}
 				}
 			}

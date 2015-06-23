@@ -174,7 +174,7 @@ public class SAXParserTest {
 				Assert.assertEquals("provinceId", attributes.getValue(0));
 				Assert.assertEquals("required", attributes.getLocalName(1));
 				Assert.assertEquals("true", attributes.getValue(1));
-				Assert.assertEquals(StringPool.VALUE, attributes.getLocalName(2));
+				Assert.assertEquals("value", attributes.getLocalName(2));
 				Assert.assertEquals("#{applicantModelBean.provinceId}", attributes.getValue(2));
 			}
 

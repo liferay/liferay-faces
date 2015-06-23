@@ -39,7 +39,7 @@ public class OutputTooltipResponseWriter extends DelegationResponseWriterBase {
 
 		// Prevent the JSF runtime from closing the </span> tag since the
 		// OutputToolTipRenderer.encodeMarkupEnd(FacesContext, UIComponent) method will write a closing </div> tag.
-		if (!StringPool.SPAN.equals(name)) {
+		if (!"span".equals(name)) {
 			super.endElement(name);
 		}
 	}
@@ -50,7 +50,7 @@ public class OutputTooltipResponseWriter extends DelegationResponseWriterBase {
 		// Prevent the JSF runtime from opening the <span> tag since the
 		// OutputToolTipRenderer.encodeMarkupBegin(FacesContext, UIComponent) method has already written an opening
 		// <div> tag.
-		if (!StringPool.SPAN.equals(name)) {
+		if (!"span".equals(name)) {
 			super.startElement(name, component);
 		}
 	}

@@ -25,8 +25,6 @@ import javax.faces.context.FacesContext;
 import javax.faces.view.ViewDeclarationLanguage;
 import javax.faces.view.ViewDeclarationLanguageWrapper;
 
-import com.liferay.faces.util.lang.StringPool;
-
 
 /**
  * @author  Neil Griffin
@@ -57,9 +55,9 @@ public class ViewDeclarationLanguageJspTCKImpl extends ViewDeclarationLanguageWr
 			// Add the "jsf.js" script resource to the h:head component.
 			UIOutput uiOutput = new UIOutput();
 			uiOutput.setRendererType("javax.faces.resource.Script");
-			uiOutput.getAttributes().put(StringPool.NAME, "jsf.js");
-			uiOutput.getAttributes().put(StringPool.LIBRARY, "javax.faces");
-			uiViewRoot.addComponentResource(facesContext, uiOutput, StringPool.HEAD);
+			uiOutput.getAttributes().put("name", "jsf.js");
+			uiOutput.getAttributes().put("library", "javax.faces");
+			uiViewRoot.addComponentResource(facesContext, uiOutput, "head");
 
 			// Due to a bug in the Trinidad tr:form renderer, need to add the javax.faces.encodedURL hidden field
 			// dynamically. See: https://issues.apache.org/jira/browse/TRINIDAD-2284

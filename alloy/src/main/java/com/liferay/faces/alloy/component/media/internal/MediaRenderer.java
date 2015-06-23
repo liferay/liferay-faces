@@ -68,7 +68,7 @@ public abstract class MediaRenderer extends MediaRendererCompat {
 		String clientId = uiComponent.getClientId(facesContext);
 
 		responseWriter.writeAttribute(StringPool.ID, clientId, StringPool.ID);
-		responseWriter.writeAttribute(StringPool.NAME, clientId, null);
+		responseWriter.writeAttribute("name", clientId, null);
 
 		Media media = (Media) uiComponent;
 		RendererUtil.encodeStyleable(responseWriter, media);

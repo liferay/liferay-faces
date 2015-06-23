@@ -101,7 +101,7 @@ public class ResLibResourceHandler extends ResourceHandlerWrapperBase {
 		else {
 			ExternalContext externalContext = facesContext.getExternalContext();
 			Map<String, String> requestParameterMap = externalContext.getRequestParameterMap();
-			String libraryName = requestParameterMap.get(StringPool.LN);
+			String libraryName = requestParameterMap.get("ln");
 
 			if (LIBRARY_NAME.equals(libraryName)) {
 

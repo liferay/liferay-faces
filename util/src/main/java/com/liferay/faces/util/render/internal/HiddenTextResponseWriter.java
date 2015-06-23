@@ -42,7 +42,7 @@ public class HiddenTextResponseWriter extends DelegationResponseWriterBase {
 	@Override
 	public void endElement(String name) throws IOException {
 
-		if (StringPool.INPUT.equals(name)) {
+		if ("input".equals(name)) {
 
 			if (!wroteId) {
 				super.writeAttribute(StringPool.ID, id, StringPool.ID);
@@ -58,8 +58,8 @@ public class HiddenTextResponseWriter extends DelegationResponseWriterBase {
 		if (StringPool.ID.equals(name)) {
 			super.writeAttribute(name, id, property);
 		}
-		else if (StringPool.TYPE.equals(name)) {
-			super.writeAttribute(name, StringPool.HIDDEN, property);
+		else if ("type".equals(name)) {
+			super.writeAttribute(name, "hidden", property);
 		}
 		else {
 			super.writeAttribute(name, value, property);

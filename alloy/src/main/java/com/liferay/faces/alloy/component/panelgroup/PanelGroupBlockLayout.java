@@ -13,9 +13,6 @@
  */
 package com.liferay.faces.alloy.component.panelgroup;
 
-import com.liferay.faces.util.lang.StringPool;
-
-
 /**
  * @author  Neil Griffin
  */
@@ -23,6 +20,6 @@ public class PanelGroupBlockLayout extends PanelGroupBase {
 
 	@Override
 	public String getLayout() {
-		return (String) getStateHelper().eval(PropertyKeys.layout, StringPool.BLOCK);
+		return (String) getStateHelper().eval(PropertyKeys.layout, "block");
 	}
 }

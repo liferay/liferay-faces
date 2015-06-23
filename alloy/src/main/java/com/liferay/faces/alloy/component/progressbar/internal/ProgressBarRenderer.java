@@ -197,12 +197,12 @@ public class ProgressBarRenderer extends ProgressBarRendererBase {
 			if (isServerPollingEnabled(uiComponent)) {
 
 				String hiddenClientId = clientId.concat(HIDDEN_SUFFIX);
-				responseWriter.startElement(StringPool.INPUT, null);
+				responseWriter.startElement("input", null);
 				responseWriter.writeAttribute(StringPool.ID, hiddenClientId, null);
-				responseWriter.writeAttribute(StringPool.NAME, hiddenClientId, null);
-				responseWriter.writeAttribute(StringPool.TYPE, StringPool.HIDDEN, null);
-				responseWriter.writeAttribute(StringPool.VALUE, StringPool.BLANK, null);
-				responseWriter.endElement(StringPool.INPUT);
+				responseWriter.writeAttribute("name", hiddenClientId, null);
+				responseWriter.writeAttribute("type", "hidden", null);
+				responseWriter.writeAttribute("value", StringPool.BLANK, null);
+				responseWriter.endElement("input");
 			}
 
 			// Encode the contentBox of the progressBar.
@@ -240,7 +240,7 @@ public class ProgressBarRenderer extends ProgressBarRendererBase {
 		encodeClientId(responseWriter, CONTENT_BOX, contentBoxClientId, first);
 
 		// Begin encoding event listeners that occur on the event.
-		encodeNonEscapedObject(responseWriter, StringPool.ON, StringPool.BLANK, first);
+		encodeNonEscapedObject(responseWriter, "on", StringPool.BLANK, first);
 		responseWriter.write(StringPool.OPEN_CURLY_BRACE);
 
 		// complete

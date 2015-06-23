@@ -44,14 +44,14 @@ public class FieldsetRenderer extends FieldsetRendererBase {
 
 		String clientId = uiComponent.getClientId(facesContext);
 		responseWriter.writeAttribute(StringPool.ID, clientId, StringPool.ID);
-		responseWriter.writeAttribute(StringPool.NAME, clientId, StringPool.ID);
+		responseWriter.writeAttribute("name", clientId, StringPool.ID);
 
 		Fieldset fieldset = (Fieldset) uiComponent;
 
 		boolean disabled = fieldset.isDisabled();
 
 		if (disabled) {
-			responseWriter.writeAttribute(StringPool.DISABLED, Boolean.toString(disabled), StringPool.DISABLED);
+			responseWriter.writeAttribute("disabled", Boolean.toString(disabled), "disabled");
 		}
 
 		RendererUtil.encodeStyleable(responseWriter, fieldset);

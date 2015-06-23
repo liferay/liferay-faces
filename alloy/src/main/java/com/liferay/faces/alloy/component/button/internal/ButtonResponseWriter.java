@@ -40,7 +40,7 @@ public class ButtonResponseWriter extends DelegationResponseWriterBase {
 	@Override
 	public void endElement(String name) throws IOException {
 
-		if (StringPool.INPUT.equalsIgnoreCase(name)) {
+		if ("input".equalsIgnoreCase(name)) {
 			// no-op Becuase the button needs to be a button element and endElement must be called in encodeEnd.
 		}
 		else {
@@ -51,7 +51,7 @@ public class ButtonResponseWriter extends DelegationResponseWriterBase {
 	@Override
 	public void startElement(String name, UIComponent uiComponent) throws IOException {
 
-		if (StringPool.INPUT.equalsIgnoreCase(name)) {
+		if ("input".equalsIgnoreCase(name)) {
 			// no-op Becuase the button needs to be a button element.
 		}
 		else {
@@ -62,11 +62,10 @@ public class ButtonResponseWriter extends DelegationResponseWriterBase {
 	@Override
 	public void writeAttribute(String name, Object value, String property) throws IOException {
 
-		if (StringPool.DISABLED.equalsIgnoreCase(name) || StringPool.TYPE.equalsIgnoreCase(name) ||
-				(StringPool.ONCLICK.equalsIgnoreCase(name) && !writeOnclick) ||
-				StringPool.CLASS.equalsIgnoreCase(name) || ButtonRenderer.ONBLUR.equals(name) ||
-				ButtonRenderer.ONFOCUS.equals(name) || StringPool.VALUE.equalsIgnoreCase(name) ||
-				Styleable.STYLE.equals(name)) {
+		if ("disabled".equalsIgnoreCase(name) || "type".equalsIgnoreCase(name) ||
+				("onclick".equalsIgnoreCase(name) && !writeOnclick) || StringPool.CLASS.equalsIgnoreCase(name) ||
+				ButtonRenderer.ONBLUR.equals(name) || ButtonRenderer.ONFOCUS.equals(name) ||
+				"value".equalsIgnoreCase(name) || Styleable.STYLE.equals(name)) {
 			// no-op Because writing of these attributes need to be controlled directly by ButtonRender.
 		}
 		else {
@@ -77,7 +76,7 @@ public class ButtonResponseWriter extends DelegationResponseWriterBase {
 	@Override
 	public void writeURIAttribute(String name, Object value, String property) throws IOException {
 
-		if (StringPool.SRC.equalsIgnoreCase(name)) {
+		if ("src".equalsIgnoreCase(name)) {
 
 			// Save the value of the "src" attribute to write it to the response later.
 			if (value != null) {

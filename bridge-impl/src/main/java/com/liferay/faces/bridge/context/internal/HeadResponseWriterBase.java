@@ -133,7 +133,7 @@ public abstract class HeadResponseWriterBase extends HeadResponseWriter {
 				String nodeName = element.getNodeName();
 				logger.trace("POPPED element name=[{0}]", nodeName);
 
-				if (!StringPool.HEAD.equals(nodeName)) {
+				if (!"head".equals(nodeName)) {
 					addResourceToHeadSection(element, nodeName);
 				}
 			}

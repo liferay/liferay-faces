@@ -109,22 +109,22 @@ public abstract class NodeMenuNavRendererBase extends DelegatingAlloyRendererBas
 	public void encodeLabel(UIComponent uiComponent, ResponseWriter responseWriter, FacesContext facesContext,
 		int depth) throws IOException {
 
-		UIComponent facet = uiComponent.getFacet(StringPool.LABEL);
+		UIComponent facet = uiComponent.getFacet("label");
 
 		if (facet == null) {
-			String label = (String) uiComponent.getAttributes().get(StringPool.LABEL);
+			String label = (String) uiComponent.getAttributes().get("label");
 
 			if (label == null) {
 
 				if (depth == 0) {
-					responseWriter.startElement(StringPool.SPAN, uiComponent);
+					responseWriter.startElement("span", uiComponent);
 					responseWriter.writeAttribute(StringPool.CLASS, "caret", StringPool.CLASS);
-					responseWriter.endElement(StringPool.SPAN);
+					responseWriter.endElement("span");
 				}
 				else {
-					responseWriter.startElement(StringPool.SPAN, uiComponent);
+					responseWriter.startElement("span", uiComponent);
 					responseWriter.write(StringPool.NBSP);
-					responseWriter.endElement(StringPool.SPAN);
+					responseWriter.endElement("span");
 				}
 			}
 			else {
@@ -157,7 +157,7 @@ public abstract class NodeMenuNavRendererBase extends DelegatingAlloyRendererBas
 		responseWriter.startElement(StringPool.LI, uiComponent);
 
 		// Start the span containing the btn-group
-		responseWriter.startElement(StringPool.SPAN, uiComponent);
+		responseWriter.startElement("span", uiComponent);
 		responseWriter.writeAttribute(StringPool.CLASS, "yui3-menu-label btn-group", StringPool.CLASS);
 
 		// ResponseWriter blocks the text value and blocks writing of URIAttributes, if necessary
@@ -218,7 +218,7 @@ public abstract class NodeMenuNavRendererBase extends DelegatingAlloyRendererBas
 				responseWriter.endElement("a");
 
 				// End the span containing the btn-group
-				responseWriter.endElement(StringPool.SPAN);
+				responseWriter.endElement("span");
 
 				// Recurse over (first and only expected) menu
 				encodeMenuRecurse(child, responseWriter, disabled, styleClass, defaultOptionsDivId, depth,

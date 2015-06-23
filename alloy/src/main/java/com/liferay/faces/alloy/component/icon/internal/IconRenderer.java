@@ -38,7 +38,7 @@ public class IconRenderer extends IconRendererBase {
 	public void encodeBegin(FacesContext facesContext, UIComponent uiComponent) throws IOException {
 
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
-		responseWriter.startElement(StringPool.SPAN, uiComponent);
+		responseWriter.startElement("span", uiComponent);
 
 		String clientId = uiComponent.getClientId(facesContext);
 		responseWriter.writeAttribute(StringPool.ID, clientId, StringPool.ID);
@@ -64,6 +64,6 @@ public class IconRenderer extends IconRendererBase {
 	public void encodeEnd(FacesContext facesContext, UIComponent uiComponent) throws IOException {
 
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
-		responseWriter.endElement(StringPool.SPAN);
+		responseWriter.endElement("span");
 	}
 }

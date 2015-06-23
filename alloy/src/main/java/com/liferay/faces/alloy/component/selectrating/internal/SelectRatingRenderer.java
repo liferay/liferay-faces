@@ -224,7 +224,7 @@ public class SelectRatingRenderer extends SelectRatingRendererBase {
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
 
 		// Start the encoding of the outermost <span> element.
-		responseWriter.startElement(StringPool.SPAN, uiComponent);
+		responseWriter.startElement("span", uiComponent);
 		responseWriter.writeAttribute(StringPool.ID, uiComponent.getClientId(facesContext), StringPool.ID);
 		RendererUtil.encodeStyleable(responseWriter, (Styleable) uiComponent);
 
@@ -248,7 +248,7 @@ public class SelectRatingRenderer extends SelectRatingRendererBase {
 
 		// Finish the encoding of the outermost </span> element.
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
-		responseWriter.endElement(StringPool.SPAN);
+		responseWriter.endElement("span");
 	}
 
 	@Override

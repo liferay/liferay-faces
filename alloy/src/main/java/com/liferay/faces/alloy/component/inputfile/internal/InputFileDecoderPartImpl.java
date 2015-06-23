@@ -97,7 +97,7 @@ public class InputFileDecoderPartImpl extends InputFileDecoderBase {
 							fileName = trimmedKeyValuePair.substring(equalsPos + 2, trimmedKeyValuePair.length() - 1);
 							safeFileName = stripIllegalCharacters(fileName);
 						}
-						else if (trimmedKeyValuePair.startsWith(StringPool.NAME)) {
+						else if (trimmedKeyValuePair.startsWith("name")) {
 							int equalsPos = trimmedKeyValuePair.indexOf(StringPool.EQUAL);
 							fieldName = trimmedKeyValuePair.substring(equalsPos + 2, trimmedKeyValuePair.length() - 1);
 						}

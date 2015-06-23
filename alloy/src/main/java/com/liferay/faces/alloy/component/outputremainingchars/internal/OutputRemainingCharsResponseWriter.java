@@ -52,7 +52,7 @@ public class OutputRemainingCharsResponseWriter extends DelegationResponseWriter
 	@Override
 	public void writeText(Object text, UIComponent uiComponent, String property) throws IOException {
 
-		if (StringPool.VALUE.equals(property) && (text != null)) {
+		if ("value".equals(property) && (text != null)) {
 			writeValue(text, uiComponent, true);
 		}
 		else {
@@ -92,7 +92,7 @@ public class OutputRemainingCharsResponseWriter extends DelegationResponseWriter
 		}
 
 		// Write out the remaining span.
-		super.startElement(StringPool.SPAN, uiComponent);
+		super.startElement("span", uiComponent);
 		super.writeAttribute(StringPool.ID, counterInnerSpanId, null);
 
 		if (escape) {
@@ -102,7 +102,7 @@ public class OutputRemainingCharsResponseWriter extends DelegationResponseWriter
 			super.write(remainingChars.toCharArray());
 		}
 
-		super.endElement(StringPool.SPAN);
+		super.endElement("span");
 
 		// Write out the characters after the remaining span.
 		if (escape) {

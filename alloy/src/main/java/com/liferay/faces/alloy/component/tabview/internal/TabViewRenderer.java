@@ -185,14 +185,14 @@ public class TabViewRenderer extends TabViewRendererBase {
 
 		// Encode the hidden field that contains the client-side state of the selected index.
 		TabView tabView = (TabView) uiComponent;
-		responseWriter.startElement(StringPool.INPUT, tabView);
+		responseWriter.startElement("input", tabView);
 
 		String hiddenFieldName = tabView.getClientId(facesContext) + "selectedIndex";
 		responseWriter.writeAttribute(StringPool.ID, hiddenFieldName, null);
-		responseWriter.writeAttribute(StringPool.NAME, hiddenFieldName, null);
-		responseWriter.writeAttribute(StringPool.TYPE, StringPool.HIDDEN, null);
-		responseWriter.writeAttribute(StringPool.VALUE, tabView.getSelectedIndex(), null);
-		responseWriter.endElement(StringPool.INPUT);
+		responseWriter.writeAttribute("name", hiddenFieldName, null);
+		responseWriter.writeAttribute("type", "hidden", null);
+		responseWriter.writeAttribute("value", tabView.getSelectedIndex(), null);
+		responseWriter.endElement("input");
 
 	}
 
@@ -236,7 +236,7 @@ public class TabViewRenderer extends TabViewRendererBase {
 		// tabViewExample_tabViewForm_j_idt73.after('selectionChange', function(event){
 		responseWriter.write(clientVarName);
 		responseWriter.write(StringPool.PERIOD);
-		responseWriter.write(StringPool.AFTER);
+		responseWriter.write("after");
 		responseWriter.write(StringPool.OPEN_PARENTHESIS); // begin call to "after" method
 		responseWriter.write(StringPool.APOSTROPHE);
 		responseWriter.write(SELECTION_CHANGE);
@@ -381,13 +381,13 @@ public class TabViewRenderer extends TabViewRendererBase {
 		responseWriter.startElement("a", tab);
 
 		if (tab.isDisabled()) {
-			responseWriter.writeAttribute(StringPool.DISABLED, StringPool.DISABLED, null);
+			responseWriter.writeAttribute("disabled", "disabled", null);
 		}
 
 		responseWriter.writeAttribute(StringPool.HREF, StringPool.POUND + tab.getClientId(facesContext), null);
 
 		// If the header facet exists for the specified tab, then encode the header facet.
-		UIComponent headerFacet = tab.getFacet(StringPool.HEADER);
+		UIComponent headerFacet = tab.getFacet("header");
 
 		if (headerFacet != null) {
 			headerFacet.encodeAll(facesContext);

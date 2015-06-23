@@ -51,8 +51,8 @@ public abstract class ResponseWriterBridgeCompat_2_2_Impl extends ResponseWriter
 
 	protected void writeClientWindowHiddenField() throws IOException {
 
-		startElement(StringPool.INPUT, null);
-		writeAttribute(StringPool.TYPE, StringPool.HIDDEN, null);
+		startElement("input", null);
+		writeAttribute("type", "hidden", null);
 
 		String clientWindowName = CLIENT_WINDOW_PARAM;
 
@@ -63,7 +63,7 @@ public abstract class ResponseWriterBridgeCompat_2_2_Impl extends ResponseWriter
 			clientWindowName = namingContainerId + clientWindowName;
 		}
 
-		writeAttribute(StringPool.NAME, clientWindowName, null);
+		writeAttribute("name", clientWindowName, null);
 
 		// TODO: The following line is a workaround and needs to be fixed in FACES-1798.
 		writeAttribute(StringPool.ID, clientWindowName, null);
@@ -74,10 +74,10 @@ public abstract class ResponseWriterBridgeCompat_2_2_Impl extends ResponseWriter
 
 		if (clientWindow != null) {
 			String clientWindowId = clientWindow.getId();
-			writeAttribute(StringPool.VALUE, clientWindowId, null);
+			writeAttribute("value", clientWindowId, null);
 		}
 
 		writeAttribute(ATTRIBUTE_AUTOCOMPLETE, VALUE_OFF, null);
-		endElement(StringPool.INPUT);
+		endElement("input");
 	}
 }

@@ -148,6 +148,6 @@ public class InputSourceCodeRenderer extends InputSourceCodeRendererBase {
 	protected String getHiddenInputClientId(FacesContext facesContext, UIComponent uiComponent) {
 		char separatorChar = UINamingContainer.getSeparatorChar(facesContext);
 
-		return uiComponent.getClientId(facesContext) + separatorChar + StringPool.HIDDEN;
+		return uiComponent.getClientId(facesContext) + separatorChar + "hidden";
 	}
 }
