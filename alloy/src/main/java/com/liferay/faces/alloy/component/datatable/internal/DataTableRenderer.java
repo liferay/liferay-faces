@@ -951,7 +951,7 @@ public class DataTableRenderer extends DataTableRendererBase {
 		StringBuilder scriptBuilder = new StringBuilder();
 		scriptBuilder.append("function(");
 		scriptBuilder.append(parameterName);
-		scriptBuilder.append("){");
+		scriptBuilder.append(", event){");
 
 		Map<String, List<ClientBehavior>> clientBehaviorMap = dataTable.getClientBehaviors();
 		List<ClientBehavior> clientBehaviorsForEvent = clientBehaviorMap.get(eventName);

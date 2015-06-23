@@ -33,7 +33,6 @@ public abstract class InputDateBase extends InputDateTime implements Styleable, 
 
 	// Protected Enumerations
 	protected enum InputDatePropertyKeys {
-		dateSelectListener,
 		maxDate,
 		minDate,
 		nativeWhenMobile,
@@ -45,14 +44,6 @@ public abstract class InputDateBase extends InputDateTime implements Styleable, 
 	public InputDateBase() {
 		super();
 		setRendererType(RENDERER_TYPE);
-	}
-
-	public javax.el.MethodExpression getDateSelectListener() {
-		return (javax.el.MethodExpression) getStateHelper().eval(InputDatePropertyKeys.dateSelectListener, null);
-	}
-
-	public void setDateSelectListener(javax.el.MethodExpression dateSelectListener) {
-		getStateHelper().put(InputDatePropertyKeys.dateSelectListener, dateSelectListener);
 	}
 
 	public Object getMaxDate() {

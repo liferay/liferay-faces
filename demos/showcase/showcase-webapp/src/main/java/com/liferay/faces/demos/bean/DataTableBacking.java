@@ -40,6 +40,7 @@ import com.liferay.faces.demos.dto.Customer;
 import com.liferay.faces.demos.service.CustomerService;
 import com.liferay.faces.util.model.OnDemandDataModel;
 import com.liferay.faces.util.model.SortCriterion;
+import javax.faces.event.AjaxBehaviorEvent;
 
 
 /**

@@ -48,7 +48,6 @@ public abstract class InputTimeRendererBase extends InputDateTimeRenderer {
 	protected static final String SCROLL_INTO_VIEW = "scrollIntoView";
 	protected static final String STEP = "step";
 	protected static final String STYLE_CLASS = "styleClass";
-	protected static final String TIME_SELECT_LISTENER = "timeSelectListener";
 
 	// Private Constants
 	private static final String ALLOY_CLASS_NAME = "TimePicker";

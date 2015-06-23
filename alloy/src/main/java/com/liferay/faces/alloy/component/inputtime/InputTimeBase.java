@@ -46,8 +46,7 @@ public abstract class InputTimeBase extends InputDateTime implements Styleable, 
 		queryDelay,
 		scrollIntoView,
 		step,
-		styleClass,
-		timeSelectListener
+		styleClass
 	}
 
 	public InputTimeBase() {
@@ -171,14 +170,6 @@ public abstract class InputTimeBase extends InputDateTime implements Styleable, 
 	@Override
 	public void setStyleClass(String styleClass) {
 		getStateHelper().put(InputTimePropertyKeys.styleClass, styleClass);
-	}
-
-	public javax.el.MethodExpression getTimeSelectListener() {
-		return (javax.el.MethodExpression) getStateHelper().eval(InputTimePropertyKeys.timeSelectListener, null);
-	}
-
-	public void setTimeSelectListener(javax.el.MethodExpression timeSelectListener) {
-		getStateHelper().put(InputTimePropertyKeys.timeSelectListener, timeSelectListener);
 	}
 }
 //J+
