@@ -25,7 +25,6 @@ import javax.xml.parsers.SAXParser;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
-import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.util.xml.internal.SAXHandlerBase;
@@ -48,7 +47,6 @@ public class FacesConfigDescriptorParserImpl extends SAXHandlerBase implements F
 
 	private static final String ABSOLUTE_ORDERING = "absolute-ordering";
 
-	// TODO StringPool or Private Constants?
 	// private static final String NAME = "name";
 	private static final String OTHERS = "others";
 
@@ -116,6 +114,7 @@ public class FacesConfigDescriptorParserImpl extends SAXHandlerBase implements F
 				if (parsingBefore) {
 
 					String beforeName = null;
+
 					if (parsingName || parsingOthers) {
 
 						if (parsingOthers) {
@@ -140,6 +139,7 @@ public class FacesConfigDescriptorParserImpl extends SAXHandlerBase implements F
 							parsingBefore = false;
 
 							if (content != null) {
+
 								// TODO add {0} parameterization to warn
 								logger.warn("Stray content found when parsing FacesConfig named " + facesConfigName +
 									". -> Ordering -> before -> content found: " + content +
@@ -155,6 +155,7 @@ public class FacesConfigDescriptorParserImpl extends SAXHandlerBase implements F
 				if (parsingAfter) {
 
 					String afterName = null;
+
 					if (parsingName || parsingOthers) {
 
 						if (parsingOthers) {
@@ -179,6 +180,7 @@ public class FacesConfigDescriptorParserImpl extends SAXHandlerBase implements F
 							parsingAfter = false;
 
 							if (content != null) {
+
 								// TODO add {0} parameterization to warn
 								logger.warn("Stray content found when parsing FacesConfig named " + facesConfigName +
 									". -> Ordering -> after -> content found: " + content +
@@ -318,9 +320,7 @@ public class FacesConfigDescriptorParserImpl extends SAXHandlerBase implements F
 				this.beforeNames = new ArrayList<String>();
 			}
 		}
-
-		// TODO StringPool for all for these?
-		else if (localName.equals(StringPool.NAME)) {
+		else if (localName.equals("name")) {
 			parsingName = true;
 		}
 		else if (localName.equals(ABSOLUTE_ORDERING)) {

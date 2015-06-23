@@ -26,7 +26,6 @@ import javax.faces.view.facelets.TagAttribute;
 import javax.faces.view.facelets.TagConfig;
 import javax.faces.view.facelets.TagHandler;
 
-import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -61,7 +60,7 @@ public class ImportConstantsTagHandler extends TagHandler {
 		super(config);
 
 		TagAttribute classTypeAttr = getAttribute(ATTRIBUTE_NAME_CLASS_TYPE);
-		TagAttribute varAttr = getAttribute(StringPool.VAR);
+		TagAttribute varAttr = getAttribute("var");
 
 		if (varAttr == null) {
 			throw new IllegalArgumentException("var must have a value");

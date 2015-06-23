@@ -68,7 +68,7 @@ public class HeadResource {
 			}
 		}
 
-		if (StringPool.LINK.equals(type)) {
+		if ("link".equals(type)) {
 			url = attributes.getValue(StringPool.HREF);
 		}
 		else if (StringPool.SCRIPT.equals(type)) {
@@ -87,8 +87,7 @@ public class HeadResource {
 		if ((url != null) && url.equals(otherHeadResource.getURL())) {
 			equal = true;
 		}
-		else if ((StringPool.LINK.equals(type) || StringPool.SCRIPT.equals(type)) &&
-				type.equals(otherHeadResource.getType())) {
+		else if (("link".equals(type) || StringPool.SCRIPT.equals(type)) && type.equals(otherHeadResource.getType())) {
 
 			String facesResource2 = otherHeadResource.getFacesResource();
 			String facesLibrary2 = otherHeadResource.getFacesLibrary();
@@ -156,7 +155,7 @@ public class HeadResource {
 						if (name.endsWith("javax.faces.resource")) {
 							facesResource = nameValuePair.substring(equalsPos + 1);
 						}
-						else if (name.endsWith(StringPool.LN)) {
+						else if (name.endsWith("ln")) {
 							facesLibrary = nameValuePair.substring(equalsPos + 1);
 						}
 					}
