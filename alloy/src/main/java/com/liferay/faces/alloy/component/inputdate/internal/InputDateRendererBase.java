@@ -34,7 +34,6 @@ import com.liferay.faces.alloy.component.inputdatetime.internal.InputDateTimeRen
 public abstract class InputDateRendererBase extends InputDateTimeRenderer {
 
 	// Protected Constants
-	protected static final String DATE_SELECT_LISTENER = "dateSelectListener";
 	protected static final String MASK = "mask";
 	protected static final String MAX_DATE = "maxDate";
 	protected static final String MIN_DATE = "minDate";

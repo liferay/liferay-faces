@@ -45,20 +45,6 @@ public class TabView extends TabViewBase implements ClientBehaviorHolder {
 				TabSelectEvent.TAB_SELECT));
 
 	@Override
-	public void addClientBehavior(String eventName, ClientBehavior clientBehavior) {
-
-		// If the specified client behavior is an Ajax behavior, then the alloy:tabView component tag has an f:ajax
-		// child tag. Register a listener that can respond to the Ajax behavior by invoking the tabSelectListener that
-		// may have been specified.
-		if (clientBehavior instanceof AjaxBehavior) {
-			AjaxBehavior ajaxBehavior = (AjaxBehavior) clientBehavior;
-			ajaxBehavior.addAjaxBehaviorListener(new TabViewBehaviorListener());
-		}
-
-		super.addClientBehavior(eventName, clientBehavior);
-	}
-
-	@Override
 	public void queueEvent(FacesEvent facesEvent) {
 
 		// This method is called by the AjaxBehavior renderer's decode() method. If the specified event is an ajax

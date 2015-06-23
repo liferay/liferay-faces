@@ -42,7 +42,6 @@ public abstract class ProgressBarRendererBase extends AlloyRendererBase {
 	protected static final String ONCOMPLETE = "oncomplete";
 	protected static final String ORIENTATION = "orientation";
 	protected static final String POLLING_DELAY = "pollingDelay";
-	protected static final String PROGRESS_COMPLETE_LISTENER = "progressCompleteListener";
 	protected static final String STYLE = "style";
 	protected static final String STYLE_CLASS = "styleClass";
 	protected static final String VALUE = "value";

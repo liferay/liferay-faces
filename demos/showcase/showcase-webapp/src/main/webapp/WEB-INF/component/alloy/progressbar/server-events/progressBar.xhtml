@@ -3,13 +3,13 @@
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets" template="/WEB-INF/templates/component-2col.xhtml">
 
 	<ui:define name="col1">
-		<alloy:form>
-			<showcase:example>
+		<showcase:example id="example">
+			<alloy:form id="exampleForm">
 				<alloy:messages id="feedback" globalOnly="true" layout="table" />
-				<alloy:progressBar id="progressBar" clientKey="progressBar"
-					progressCompleteListener="#{progressBarBacking.progressCompleteListener}" label="{0}%"
-					pollingDelay="1000" value="#{progressBarBacking.progress}">
-					<f:ajax event="progressComplete" render="feedback" />
+				<alloy:progressBar id="progressBar" clientKey="progressBar" label="{0}%" pollingDelay="1000"
+					value="#{progressBarBacking.progress}">
+					<f:ajax event="progressComplete" listener="#{progressBarBacking.progressCompleteListener}"
+						render=":example:exampleForm:feedback" />
 					<f:ajax event="poll" listener="#{progressBarBacking.incrementProgress}" />
 				</alloy:progressBar>
 				<alloy:button value="#{i18n['start-progress']}"
@@ -19,8 +19,8 @@
 				<alloy:commandButton actionListener="#{progressBarBacking.resetProgress}"
 					onclick="Liferay.component('progressBar').stopPolling();" render="progressBar"
 					value="#{i18n['reset-progress']}" />
-			</showcase:example>
-		</alloy:form>
+			</alloy:form>
+		</showcase:example>
 	</ui:define>
 
 </ui:composition>

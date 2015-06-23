@@ -6,9 +6,9 @@
 		<alloy:form id="exampleForm">
 			<alloy:messages id="feedback" globalOnly="true" layout="table" />
 			<br />
-			<alloy:tabView selectedIndex="#{tabViewBackingBean.defaultSelectedIndex}"
-				tabSelectListener="#{tabViewBackingBean.tabSelectListener}">
-				<f:ajax event="tabSelect" render=":example:exampleForm:feedback" />
+			<alloy:tabView selectedIndex="#{tabViewBackingBean.defaultSelectedIndex}">
+				<f:ajax event="tabSelect" listener="#{tabViewBackingBean.tabSelectListener}"
+					render=":example:exampleForm:feedback" />
 				<alloy:tab headerText="Compatible">
 					<alloy:image library="images" name="icon-compatible.png" />
 					<span>Liferay lets you reuse the enterprise software and skills you already have in-house.</span>

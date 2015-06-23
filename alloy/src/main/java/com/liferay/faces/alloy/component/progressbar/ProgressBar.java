@@ -43,17 +43,6 @@ public class ProgressBar extends ProgressBarBase implements ClientBehaviorHolder
 				"progressComplete", "poll"));
 
 	@Override
-	public void addClientBehavior(String eventName, ClientBehavior clientBehavior) {
-
-		if (clientBehavior instanceof AjaxBehavior) {
-			AjaxBehavior ajaxBehavior = (AjaxBehavior) clientBehavior;
-			ajaxBehavior.addAjaxBehaviorListener(new ProgressBarBehaviorListener());
-		}
-
-		super.addClientBehavior(eventName, clientBehavior);
-	}
-
-	@Override
 	public void queueEvent(FacesEvent facesEvent) {
 
 		if (facesEvent instanceof AjaxBehaviorEvent) {

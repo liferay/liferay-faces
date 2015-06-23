@@ -36,10 +36,6 @@ public abstract class DataTableRendererBase extends AlloyRendererBase {
 	// Protected Constants
 	protected static final String CLIENT_KEY = "clientKey";
 	protected static final String MULTI_COLUMN_SORT = "multiColumnSort";
-	protected static final String ROW_DESELECT_LISTENER = "rowDeselectListener";
-	protected static final String ROW_DESELECT_RANGE_LISTENER = "rowDeselectRangeListener";
-	protected static final String ROW_SELECT_LISTENER = "rowSelectListener";
-	protected static final String ROW_SELECT_RANGE_LISTENER = "rowSelectRangeListener";
 	protected static final String SELECTED_ROW_INDEXES = "selectedRowIndexes";
 	protected static final String SELECTION_MODE = "selectionMode";
 	protected static final String STYLE_CLASS = "styleClass";
