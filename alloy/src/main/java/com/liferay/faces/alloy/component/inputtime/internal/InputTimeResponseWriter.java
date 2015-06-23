@@ -33,7 +33,7 @@ public class InputTimeResponseWriter extends InputDateTimeResponseWriter {
 	@Override
 	public void writeAttribute(String name, Object value, String property) throws IOException {
 
-		if ("type".equalsIgnoreCase(name) && (isMobile() & isResponsive())) {
+		if ("type".equalsIgnoreCase(name) && (isMobile() & isNativeWhenMobile())) {
 			super.writeAttribute(name, "time", property);
 		}
 		else {

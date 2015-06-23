@@ -95,9 +95,9 @@ public abstract class InputDateTimeRenderer extends InputDateTimeRendererBase {
 		BrowserSniffer browserSniffer = browserSnifferFactory.getBrowserSniffer(facesContext.getExternalContext());
 		InputDateTime inputDateTime = (InputDateTime) uiComponent;
 		boolean mobile = browserSniffer.isMobile();
-		boolean responsive = inputDateTime.isNativeWhenMobile();
+		boolean nativeWhenMobile = inputDateTime.isNativeWhenMobile();
 		InputDateTimeResponseWriter inputDateTimeResponseWriter = getInputDateTimeResponseWriter(responseWriter,
-				inputClientId, mobile, responsive);
+				inputClientId, mobile, nativeWhenMobile);
 		super.encodeMarkupEnd(facesContext, uiComponent, inputDateTimeResponseWriter);
 
 		// Determine whether or not the text input is enabled.
@@ -107,7 +107,7 @@ public abstract class InputDateTimeRenderer extends InputDateTimeRendererBase {
 		// for a mobile browser, then render the button.
 		String showOn = inputDateTime.getShowOn();
 
-		if (("both".equals(showOn) || "button".equals(showOn)) && !(mobile && responsive)) {
+		if (("both".equals(showOn) || "button".equals(showOn)) && !(mobile && nativeWhenMobile)) {
 			ApplicationFactory applicationFactory = (ApplicationFactory) FactoryFinder.getFactory(
 					FactoryFinder.APPLICATION_FACTORY);
 			Application application = applicationFactory.getApplication();

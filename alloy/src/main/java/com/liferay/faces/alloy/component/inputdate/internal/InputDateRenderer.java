@@ -287,8 +287,8 @@ public class InputDateRenderer extends InputDateRendererBase {
 
 	@Override
 	protected InputDateTimeResponseWriter getInputDateTimeResponseWriter(ResponseWriter responseWriter,
-		String inputClientId, boolean mobile, boolean responsive) {
-		return new InputDateResponseWriter(responseWriter, "input", inputClientId, mobile, responsive);
+		String inputClientId, boolean mobile, boolean nativeWhenMobile) {
+		return new InputDateResponseWriter(responseWriter, "input", inputClientId, mobile, nativeWhenMobile);
 	}
 
 	@Override
