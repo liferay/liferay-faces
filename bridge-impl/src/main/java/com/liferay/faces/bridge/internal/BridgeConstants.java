@@ -13,9 +13,6 @@
  */
 package com.liferay.faces.bridge.internal;
 
-import com.liferay.portal.model.ResourceConstants;
-
-
 /**
  * @author  Neil Griffin
  */
@@ -39,13 +36,13 @@ public class BridgeConstants {
 	public static final String SRC = "src";
 
 	/**
-	 * @deprecated  Replaced by {@link ResourceConstants#JAVAX_FACES_RESOURCE}
+	 * @deprecated  Use "javax.faces.resource" instead.
 	 */
 	@Deprecated
 	public static final String JAVAX_FACES_RESOURCE = "javax.faces.resource";
 
 	/**
-	 * @deprecated  Replaced by {@link ResourceConstants#LN}
+	 * @deprecated  Use "ln" instead.
 	 */
 	@Deprecated
 	public static final String LN = "ln";
