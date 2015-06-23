@@ -15,8 +15,6 @@ package com.liferay.faces.alloy.taglib;
 
 import javax.faces.component.UIComponent;
 
-import com.liferay.faces.util.lang.StringPool;
-
 
 /**
  * @author      Neil Griffin
@@ -49,7 +47,7 @@ public class AUIFieldTag extends AUIComponentELTag {
 	@Override
 	protected void setProperties(UIComponent uiComponent) {
 		super.setProperties(uiComponent);
-		uiComponent.setValueExpression(StringPool.LABEL, label);
+		uiComponent.setValueExpression("label", label);
 	}
 
 	@Override

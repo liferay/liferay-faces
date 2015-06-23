@@ -55,10 +55,10 @@ public class PanelRenderer extends PanelRendererBase {
 				headerFacet.encodeAll(facesContext);
 			}
 			else {
-				responseWriter.startElement(StringPool.SPAN, null);
+				responseWriter.startElement("span", null);
 				responseWriter.writeAttribute(StringPool.CLASS, "alloy-panel-title", null);
 				responseWriter.writeText(headerText, null);
-				responseWriter.endElement(StringPool.SPAN);
+				responseWriter.endElement("span");
 			}
 
 			responseWriter.endElement(StringPool.DIV);
@@ -89,9 +89,9 @@ public class PanelRenderer extends PanelRendererBase {
 				footerFacet.encodeAll(facesContext);
 			}
 			else {
-				responseWriter.startElement(StringPool.SPAN, null);
+				responseWriter.startElement("span", null);
 				responseWriter.writeText(footerText, null);
-				responseWriter.endElement(StringPool.SPAN);
+				responseWriter.endElement("span");
 			}
 
 			responseWriter.endElement(StringPool.DIV);

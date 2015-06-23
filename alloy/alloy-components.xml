@@ -676,7 +676,7 @@
 		generateTaglibXML="false">
 		<attributes>
 			<attribute>
-				<defaultValue>com.liferay.faces.util.lang.StringPool.RIGHT</defaultValue>
+				<defaultValue>"right"</defaultValue>
 				<description>
 					<![CDATA[Indicates the side of the associated component where the tooltip should appear ("right", "left", "top", "bottom"). Default is "right".]]>
 				</description>

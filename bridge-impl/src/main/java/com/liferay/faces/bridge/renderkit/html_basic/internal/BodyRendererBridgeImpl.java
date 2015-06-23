@@ -49,7 +49,7 @@ public class BodyRendererBridgeImpl extends BodyRendererBridgeCompatImpl {
 	private static final String ELEMENT_DIV = StringPool.DIV;
 	private static final String[] BODY_PASS_THRU_ATTRIBUTES = new String[] {
 			"onclick", "ondblclick", "onkeydown", "onkeypress", "onkeyup", "onload", "onmousedown", "onmousemove",
-			"onmouseout", "onmouseover", "onmouseup", "onunload", ATTR_STYLE_CLASS, StringPool.TITLE
+			"onmouseout", "onmouseover", "onmouseup", "onunload", ATTR_STYLE_CLASS, "title"
 		};
 	private static final String STYLE_CLASS_PORTLET_BODY = "liferay-faces-bridge-body";
 
@@ -96,7 +96,7 @@ public class BodyRendererBridgeImpl extends BodyRendererBridgeCompatImpl {
 
 		// Render all of the stylesheet resources, since they often need to be loaded as close to the top as possible.
 		UIViewRoot uiViewRoot = facesContext.getViewRoot();
-		List<UIComponent> uiComponentResources = uiViewRoot.getComponentResources(facesContext, StringPool.BODY);
+		List<UIComponent> uiComponentResources = uiViewRoot.getComponentResources(facesContext, "body");
 
 		if (uiComponentResources != null) {
 
@@ -107,7 +107,7 @@ public class BodyRendererBridgeImpl extends BodyRendererBridgeCompatImpl {
 
 				String originalTarget = (String) uiComponentResource.getAttributes().get(ORIGINAL_TARGET);
 
-				if (StringPool.HEAD.equals(originalTarget)) {
+				if ("head".equals(originalTarget)) {
 
 					ComponentResource componentResource = componentResourceFactory.getComponentResource(
 							uiComponentResource);
@@ -143,7 +143,7 @@ public class BodyRendererBridgeImpl extends BodyRendererBridgeCompatImpl {
 
 		// Render all of the non-stylesheet resources.
 		UIViewRoot uiViewRoot = facesContext.getViewRoot();
-		List<UIComponent> uiComponentResources = uiViewRoot.getComponentResources(facesContext, StringPool.BODY);
+		List<UIComponent> uiComponentResources = uiViewRoot.getComponentResources(facesContext, "body");
 
 		if (uiComponentResources != null) {
 
@@ -154,7 +154,7 @@ public class BodyRendererBridgeImpl extends BodyRendererBridgeCompatImpl {
 
 				String originalTarget = (String) uiComponentResource.getAttributes().get(ORIGINAL_TARGET);
 
-				if (!StringPool.HEAD.equals(originalTarget)) {
+				if (!"head".equals(originalTarget)) {
 
 					ComponentResource componentResource = componentResourceFactory.getComponentResource(
 							uiComponentResource);

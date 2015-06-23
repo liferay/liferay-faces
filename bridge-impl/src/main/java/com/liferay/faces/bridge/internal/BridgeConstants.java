@@ -13,8 +13,6 @@
  */
 package com.liferay.faces.bridge.internal;
 
-import com.liferay.faces.util.lang.StringPool;
-
 import com.liferay.portal.model.ResourceConstants;
 
 
@@ -50,6 +48,6 @@ public class BridgeConstants {
 	 * @deprecated  Replaced by {@link ResourceConstants#LN}
 	 */
 	@Deprecated
-	public static final String LN = StringPool.LN;
+	public static final String LN = "ln";
 
 }

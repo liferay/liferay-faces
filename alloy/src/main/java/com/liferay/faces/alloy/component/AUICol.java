@@ -15,8 +15,6 @@ package com.liferay.faces.alloy.component;
 
 import javax.faces.component.NamingContainer;
 
-import com.liferay.faces.util.lang.StringPool;
-
 
 /**
  * @author      Neil Griffin
@@ -77,11 +75,11 @@ public class AUICol extends AUIPanel implements NamingContainer {
 	}
 
 	public Integer getSpan() {
-		return (Integer) getStateHelper().eval(StringPool.SPAN, COLUMNS);
+		return (Integer) getStateHelper().eval("span", COLUMNS);
 	}
 
 	public void setSpan(Integer span) {
-		getStateHelper().put(StringPool.SPAN, span);
+		getStateHelper().put("span", span);
 	}
 
 	public String getStyleClass() {

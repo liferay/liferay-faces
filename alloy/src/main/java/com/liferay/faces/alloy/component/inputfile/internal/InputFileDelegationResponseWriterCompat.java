@@ -17,7 +17,6 @@ import java.io.IOException;
 
 import javax.faces.context.ResponseWriter;
 
-import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.render.internal.DelegationResponseWriterBase;
 
 
@@ -35,7 +34,7 @@ public abstract class InputFileDelegationResponseWriterCompat extends Delegation
 	@Override
 	public void writeAttribute(String name, Object value, String property) throws IOException {
 
-		if (StringPool.TYPE.equals(name)) {
+		if ("type".equals(name)) {
 			value = "file";
 		}
 

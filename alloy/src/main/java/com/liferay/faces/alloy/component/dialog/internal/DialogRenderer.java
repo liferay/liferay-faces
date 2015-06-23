@@ -24,7 +24,6 @@ import javax.faces.render.FacesRenderer;
 
 import com.liferay.faces.alloy.component.dialog.Dialog;
 import com.liferay.faces.util.component.ClientComponent;
-import com.liferay.faces.util.lang.StringPool;
 
 
 /**
@@ -127,7 +126,7 @@ public class DialogRenderer extends DialogRendererBase {
 		boolean first) throws IOException {
 
 		// Encode the "centered: true" Alloy attribute.
-		encodeBoolean(responseWriter, StringPool.CENTERED, true, first);
+		encodeBoolean(responseWriter, "centered", true, first);
 
 		first = false;
 

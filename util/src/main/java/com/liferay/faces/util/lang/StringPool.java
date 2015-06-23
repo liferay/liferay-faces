@@ -11,16 +11,25 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
+/**
+ * Copyright (c) 2000-2014 Liferay, Inc. All rights reserved.
+ *
+ * This library is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU Lesser General Public License as published by the Free
+ * Software Foundation; either version 2.1 of the License, or (at your option)
+ * any later version.
+ *
+ * This library is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+ * details.
+ */
 package com.liferay.faces.util.lang;
 
 /**
  * @author  Neil Griffin
  */
 public class StringPool {
-
-	public static final String ACTION = "action";
-
-	public static final String AFTER = "after";
 
 	public static final String AMPERSAND = "&";
 
@@ -34,15 +43,9 @@ public class StringPool {
 
 	public static final String BACK_SLASH = "\\";
 
-	public static final String BEFORE = "before";
-
 	public static final String BETWEEN = "BETWEEN";
 
 	public static final String BLANK = "";
-
-	public static final String BLOCK = "block";
-
-	public static final String BODY = "body";
 
 	public static final String CARET = "^";
 
@@ -50,13 +53,7 @@ public class StringPool {
 
 	public static final String CDATA_OPEN = "<![CDATA[";
 
-	public static final String CENTERED = "centered";
-
-	public static final String CHECKED = "checked";
-
 	public static final String CLASS = "class";
-
-	public static final String CLICK = "click";
 
 	public static final String CLOSE_BRACKET = "]";
 
@@ -70,11 +67,7 @@ public class StringPool {
 
 	public static final String COMMA_AND_SPACE = ", ";
 
-	public static final String CONTENT = "content";
-
 	public static final String DASH = "-";
-
-	public static final String DISABLED = "disabled";
 
 	public static final String DIV = "div";
 
@@ -120,19 +113,9 @@ public class StringPool {
 
 	public static final String GREATER_THAN_OR_EQUAL = ">=";
 
-	public static final String HEAD = "head";
-
-	public static final String HEADER = "header";
-
-	public static final String HIDDEN = "hidden";
-
 	public static final String HREF = "href";
 
 	public static final String ID = "id";
-
-	public static final String IMG = "img";
-
-	public static final String INPUT = "input";
 
 	public static final String INVERTED_EXCLAMATION = "\u00A1";
 
@@ -144,25 +127,15 @@ public class StringPool {
 
 	public static final String ISO_8859_1 = "ISO-8859-1";
 
-	public static final String LABEL = "label";
-
 	public static final String LESS_THAN = "<";
 
 	public static final String LESS_THAN_OR_EQUAL = "<=";
 
 	public static final String LI = "li";
 
-	public static final String LINK = "link";
-
-	public static final String LIBRARY = "library";
-
 	public static final String LIKE = "LIKE";
 
-	public static final String LN = "ln";
-
 	public static final String MINUS = "-";
-
-	public static final String NAME = "name";
 
 	public static final String NBSP = "&nbsp;";
 
@@ -173,12 +146,6 @@ public class StringPool {
 	public static final String NOT_LIKE = "NOT LIKE";
 
 	public static final String NULL = "null";
-
-	public static final String ON = "on";
-
-	public static final String ONCE = "once";
-
-	public static final String ONCLICK = "onclick";
 
 	public static final String OPEN_BRACKET = "[";
 
@@ -206,8 +173,6 @@ public class StringPool {
 
 	public static final String RETURN_NEW_LINE = "\r\n";
 
-	public static final String RIGHT = "right";
-
 	public static final String SEMICOLON = ";";
 
 	public static final String SCRIPT = "script";
@@ -216,25 +181,15 @@ public class StringPool {
 
 	public static final String SPACE = " ";
 
-	public static final String SPAN = "span";
-
-	public static final String SRC = "src";
-
 	public static final String STAR = "*";
 
 	public static final String TAB = "\t";
-
-	public static final String TARGET = "target";
 
 	public static final String THREE_SPACES = "   ";
 
 	public static final String TILDE = "~";
 
-	public static final String TITLE = "title";
-
 	public static final String TRUE = "true";
-
-	public static final String TYPE = "type";
 
 	public static final String UL = "ul";
 
@@ -243,10 +198,6 @@ public class StringPool {
 	public static final String UTC = "UTC";
 
 	public static final String UTF8 = "UTF-8";
-
-	public static final String VALUE = "value";
-
-	public static final String VAR = "var";
 
 	// Tags
 	public static final String SCRIPT_TAG_BEGIN = "<script>";

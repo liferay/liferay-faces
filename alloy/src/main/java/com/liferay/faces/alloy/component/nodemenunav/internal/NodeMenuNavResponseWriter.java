@@ -47,7 +47,7 @@ public class NodeMenuNavResponseWriter extends DelegationResponseWriterBase {
 			value = styleClass;
 		}
 
-		if (StringPool.ONCLICK.equals(name)) {
+		if ("onclick".equals(name)) {
 			value = value.toString().replace("this", "document.getElementById('" + clientId + "')");
 		}
 

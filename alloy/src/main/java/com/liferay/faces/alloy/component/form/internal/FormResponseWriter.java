@@ -17,7 +17,6 @@ import java.io.IOException;
 
 import javax.faces.context.ResponseWriter;
 
-import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.render.internal.DelegationResponseWriterBase;
 
 
@@ -37,7 +36,7 @@ public class FormResponseWriter extends DelegationResponseWriterBase {
 	@Override
 	public void writeAttribute(String name, Object value, String property) throws IOException {
 
-		if (StringPool.ACTION.equals(name)) {
+		if ("action".equals(name)) {
 			value = encodedActionURL;
 		}
 

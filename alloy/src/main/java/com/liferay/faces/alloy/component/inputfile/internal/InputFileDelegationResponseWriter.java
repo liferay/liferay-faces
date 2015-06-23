@@ -19,7 +19,6 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.ResponseWriter;
 
 import com.liferay.faces.alloy.component.inputfile.InputFile;
-import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.render.internal.DelegationResponseWriter;
 
 
@@ -47,7 +46,7 @@ public class InputFileDelegationResponseWriter extends InputFileDelegationRespon
 
 		super.startElement(name, uiComponent);
 
-		if (StringPool.INPUT.equals(name)) {
+		if ("input".equals(name)) {
 
 			InputFile inputFile = (InputFile) uiComponent;
 

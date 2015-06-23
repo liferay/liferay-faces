@@ -254,7 +254,7 @@ import com.liferay.faces.util.lang.StringPool;
 	/* package-private */ static void encodeLiferayComponentVar(ResponseWriter responseWriter, String clientVarName, String clientKey)
 		throws IOException {
 
-		responseWriter.write(StringPool.VAR);
+		responseWriter.write("var");
 		responseWriter.write(StringPool.SPACE);
 		responseWriter.write(clientVarName);
 		responseWriter.write(StringPool.EQUAL);

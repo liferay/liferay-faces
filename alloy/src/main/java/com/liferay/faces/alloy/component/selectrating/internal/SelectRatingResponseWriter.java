@@ -65,29 +65,29 @@ public class SelectRatingResponseWriter extends DelegationResponseWriterBase {
 	@Override
 	public void endElement(String name) throws IOException {
 
-		if (StringPool.INPUT.equalsIgnoreCase(name)) {
+		if ("input".equalsIgnoreCase(name)) {
 			inputElement = false;
 		}
 
-		if (StringPool.LABEL.equalsIgnoreCase(name)) {
+		if ("label".equalsIgnoreCase(name)) {
 			labelElement = false;
 
-			super.writeAttribute(StringPool.TITLE, title, StringPool.TITLE);
+			super.writeAttribute("title", title, "title");
 			super.writeAttribute(Styleable.STYLE, "display:none;", null);
-			super.endElement(StringPool.INPUT);
+			super.endElement("input");
 		}
 	}
 
 	@Override
 	public void startElement(String name, UIComponent component) throws IOException {
 
-		if (StringPool.INPUT.equalsIgnoreCase(name)) {
+		if ("input".equalsIgnoreCase(name)) {
 			inputElement = true;
 			title = null;
 			index += 1;
 			super.startElement(name, component);
 		}
-		else if (StringPool.LABEL.equalsIgnoreCase(name)) {
+		else if ("label".equalsIgnoreCase(name)) {
 			labelElement = true;
 		}
 	}
@@ -107,7 +107,7 @@ public class SelectRatingResponseWriter extends DelegationResponseWriterBase {
 
 		if (inputElement) {
 
-			if (StringPool.CHECKED.equals(name)) {
+			if ("checked".equals(name)) {
 
 				// We have found the input that is "checked"
 				setSelectedIndex(this.index);

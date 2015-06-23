@@ -13,12 +13,9 @@
  */
 package com.liferay.faces.util.application;
 
-import com.liferay.faces.util.lang.StringPool;
-
-
 /**
  * @author      Neil Griffin
- * @deprecated  Use {@link StringPool} instead.
+ * @deprecated  No replacement.
  */
 @Deprecated
 public class ResourceConstants {
@@ -30,20 +27,20 @@ public class ResourceConstants {
 	public static final String JAVAX_FACES_RESOURCE = "javax.faces.resource";
 
 	/**
-	 * @deprecated  Use {@link StringPool#LIBRARY} instead.
+	 * @deprecated  No replacement. Use "library" instead.
 	 */
 	@Deprecated
-	public static final String LIBRARY = StringPool.LIBRARY;
+	public static final String LIBRARY = "library";
 
 	/**
-	 * @deprecated  Use {@link StringPool#LN} instead.
+	 * @deprecated  No replacement. Use "ln" instead.
 	 */
 	@Deprecated
-	public static final String LN = StringPool.LN;
+	public static final String LN = "ln";
 
 	/**
-	 * @deprecated  Use {@link StringPool#NAME} instead.
+	 * @deprecated  No replacement. Use "name" instead.
 	 */
 	@Deprecated
-	public static final String NAME = StringPool.NAME;
+	public static final String NAME = "name";
 }

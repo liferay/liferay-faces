@@ -62,7 +62,7 @@ public class OutputScriptRenderer extends OutputScriptRendererBase {
 			String use = outputScript.getUse();
 			String target = outputScript.getTarget();
 
-			if (StringPool.BODY.equals(target) && !facesContext.getPartialViewContext().isAjaxRequest()) {
+			if ("body".equals(target) && !facesContext.getPartialViewContext().isAjaxRequest()) {
 
 				ResponseWriter responseWriter = facesContext.getResponseWriter();
 				BufferedScriptResponseWriter bufferedScriptResponseWriter = new BufferedScriptResponseWriter();

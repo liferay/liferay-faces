@@ -27,8 +27,6 @@ import org.w3c.dom.NodeList;
 import org.w3c.dom.TypeInfo;
 import org.w3c.dom.UserDataHandler;
 
-import com.liferay.faces.util.lang.StringPool;
-
 
 /**
  * @author  Neil Griffin
@@ -131,7 +129,7 @@ public class ElementImpl implements Element {
 			}
 		}
 
-		if (StringPool.LINK.equalsIgnoreCase(nodeName)) {
+		if ("link".equalsIgnoreCase(nodeName)) {
 
 			buf.append(" />");
 		}

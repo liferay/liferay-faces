@@ -91,7 +91,7 @@ public abstract class OutputTooltipBase extends OutputTextBase implements Stylea
 	}
 
 	public String getPosition() {
-		return (String) getStateHelper().eval(OutputTooltipPropertyKeys.position, com.liferay.faces.util.lang.StringPool.RIGHT);
+		return (String) getStateHelper().eval(OutputTooltipPropertyKeys.position, "right");
 	}
 
 	public void setPosition(String position) {

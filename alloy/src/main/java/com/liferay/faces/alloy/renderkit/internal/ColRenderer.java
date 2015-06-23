@@ -66,7 +66,7 @@ public class ColRenderer extends Renderer {
 			span = getColumnUnitSize(width);
 		}
 
-		classNames.append(StringPool.SPAN);
+		classNames.append("span");
 		classNames.append(span);
 
 		Integer offsetWidth = auiCol.getOffsetWidth();

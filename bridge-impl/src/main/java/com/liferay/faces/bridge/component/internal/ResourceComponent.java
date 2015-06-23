@@ -19,8 +19,6 @@ import javax.faces.application.ResourceHandler;
 import javax.faces.component.UIOutput;
 import javax.faces.context.FacesContext;
 
-import com.liferay.faces.util.lang.StringPool;
-
 
 /**
  * This class represents a JSF 2 component with a resource dependency. For example, if the <code>resourceName</code>
@@ -36,8 +34,8 @@ public class ResourceComponent extends UIOutput {
 		setRendererType(resourceHandler.getRendererTypeForResourceName(resourceName));
 
 		Map<String, Object> attributes = this.getAttributes();
-		attributes.put(StringPool.NAME, resourceName);
-		attributes.put(StringPool.LIBRARY, resourceLibrary);
-		attributes.put(StringPool.TARGET, target);
+		attributes.put("name", resourceName);
+		attributes.put("library", resourceLibrary);
+		attributes.put("target", target);
 	}
 }

@@ -15,8 +15,6 @@ package com.liferay.faces.alloy.component.buttonrow;
 
 import javax.faces.component.FacesComponent;
 
-import com.liferay.faces.util.lang.StringPool;
-
 
 /**
  * @author  Vernon Singleton
@@ -26,6 +24,6 @@ public class ButtonRow extends ButtonRowBase {
 
 	@Override
 	public String getLayout() {
-		return (String) getStateHelper().eval(PropertyKeys.layout, StringPool.BLOCK);
+		return (String) getStateHelper().eval(PropertyKeys.layout, "block");
 	}
 }

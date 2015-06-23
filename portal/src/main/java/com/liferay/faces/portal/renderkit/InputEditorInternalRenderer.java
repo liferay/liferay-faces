@@ -107,10 +107,10 @@ public class InputEditorInternalRenderer extends Renderer {
 		queryString.append(StringPool.EQUAL);
 		queryString.append(attributes.get("initMethod"));
 		queryString.append(StringPool.AMPERSAND);
-		queryString.append(StringPool.NAME);
+		queryString.append("name");
 		queryString.append(StringPool.EQUAL);
 
-		String editorName = (String) attributes.get(StringPool.NAME);
+		String editorName = (String) attributes.get("name");
 		char separatorChar = UINamingContainer.getSeparatorChar(facesContext);
 		editorName = editorName.replace(separatorChar, '_').concat("_jsptag");
 

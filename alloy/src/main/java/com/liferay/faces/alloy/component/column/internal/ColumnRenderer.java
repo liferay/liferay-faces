@@ -92,7 +92,7 @@ public class ColumnRenderer extends ColumnRendererBase implements ComponentSyste
 				span = getColumnUnitSize(width);
 			}
 
-			classNames.append(StringPool.SPAN);
+			classNames.append("span");
 			classNames.append(span);
 
 			Integer offset = column.getOffset();

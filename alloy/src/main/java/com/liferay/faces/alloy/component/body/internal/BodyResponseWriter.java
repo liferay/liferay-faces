@@ -47,10 +47,10 @@ public class BodyResponseWriter extends DelegationResponseWriterBase {
 	@Override
 	public void endElement(String name) throws IOException {
 
-		if (StringPool.BODY.equals(name) && !ajaxRequest) {
+		if ("body".equals(name) && !ajaxRequest) {
 
 			super.startElement(StringPool.SCRIPT, uiComponent);
-			super.writeAttribute(StringPool.TYPE, ContentTypes.TEXT_JAVASCRIPT, null);
+			super.writeAttribute("type", ContentTypes.TEXT_JAVASCRIPT, null);
 
 			FacesRequestContext facesRequestContext = FacesRequestContext.getCurrentInstance();
 			List<Script> scripts = facesRequestContext.getScripts();

@@ -16,8 +16,6 @@ package com.liferay.faces.portal.component;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 
-import com.liferay.faces.util.lang.StringPool;
-
 
 /**
  * Utility methods that operate against UIComponent instances.
@@ -34,10 +32,10 @@ public class UIComponentHelper {
 
 		if (uiComponent != null) {
 
-			label = uiComponent.getAttributes().get(StringPool.LABEL);
+			label = uiComponent.getAttributes().get("label");
 
 			if (label == null) {
-				label = uiComponent.getValueExpression(StringPool.LABEL);
+				label = uiComponent.getValueExpression("label");
 			}
 
 			if (label == null) {

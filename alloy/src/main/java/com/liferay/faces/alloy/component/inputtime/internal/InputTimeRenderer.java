@@ -369,7 +369,7 @@ public class InputTimeRenderer extends InputTimeRendererBase {
 	@Override
 	protected InputDateTimeResponseWriter getInputDateTimeResponseWriter(ResponseWriter responseWriter,
 		String inputClientId, boolean mobile, boolean responsive) {
-		return new InputTimeResponseWriter(responseWriter, StringPool.INPUT, inputClientId, mobile, responsive);
+		return new InputTimeResponseWriter(responseWriter, "input", inputClientId, mobile, responsive);
 	}
 
 	@Override

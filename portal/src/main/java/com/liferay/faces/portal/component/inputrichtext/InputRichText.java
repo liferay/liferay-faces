@@ -27,7 +27,6 @@ import javax.faces.validator.LengthValidator;
 import com.liferay.faces.util.context.MessageContext;
 import com.liferay.faces.util.context.MessageContextFactory;
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
-import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.util.text.RichText;
@@ -86,7 +85,7 @@ public class InputRichText extends InputRichTextBase implements ClientBehaviorHo
 
 			if ((minimum > 0) && (length < minimum)) {
 
-				Object label = getAttributes().get(StringPool.LABEL);
+				Object label = getAttributes().get("label");
 				Locale locale = facesContext.getViewRoot().getLocale();
 				FacesMessage facesMessage = getMessageContext().newFacesMessage(locale, FacesMessage.SEVERITY_ERROR,
 						LengthValidator.MINIMUM_MESSAGE_ID, minimum, label);
@@ -96,7 +95,7 @@ public class InputRichText extends InputRichTextBase implements ClientBehaviorHo
 
 			if ((maximum > 0) && (length > maximum)) {
 
-				Object label = getAttributes().get(StringPool.LABEL);
+				Object label = getAttributes().get("label");
 				Locale locale = facesContext.getViewRoot().getLocale();
 				FacesMessage facesMessage = getMessageContext().newFacesMessage(locale, FacesMessage.SEVERITY_ERROR,
 						LengthValidator.MAXIMUM_MESSAGE_ID, maximum, label);
