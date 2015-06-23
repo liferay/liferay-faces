@@ -93,7 +93,7 @@ public class ScriptRenderer extends ScriptRendererCompat {
 
 			ResponseWriter responseWriter = facesContext.getResponseWriter();
 			responseWriter.startElement(StringPool.SCRIPT, uiComponent);
-			responseWriter.writeAttribute(StringPool.TYPE, ContentTypes.TEXT_JAVASCRIPT, null);
+			responseWriter.writeAttribute("type", ContentTypes.TEXT_JAVASCRIPT, null);
 			responseWriter.write(StringPool.FORWARD_SLASH);
 			responseWriter.write(StringPool.FORWARD_SLASH);
 			responseWriter.write(StringPool.SPACE);

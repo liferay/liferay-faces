@@ -77,17 +77,17 @@ public class FieldSetRenderer extends Renderer {
 		responseWriter.writeAttribute(StringPool.CLASS, classNames.toString(), null);
 
 		// <legend>
-		String label = (String) attributes.get(StringPool.LABEL);
+		String label = (String) attributes.get("label");
 
 		if ((label != null) && (label.length() > 0)) {
 			responseWriter.startElement("legend", uiComponent);
 			responseWriter.writeAttribute(StringPool.CLASS, "aui-fieldset-legend", null);
 
 			// <span> inside the <legend>
-			responseWriter.startElement(StringPool.SPAN, uiComponent);
+			responseWriter.startElement("span", uiComponent);
 			responseWriter.writeAttribute(StringPool.CLASS, "aui-legend", null);
-			responseWriter.writeText(label, uiComponent, StringPool.LABEL);
-			responseWriter.endElement(StringPool.SPAN);
+			responseWriter.writeText(label, uiComponent, "label");
+			responseWriter.endElement("span");
 			responseWriter.endElement("legend");
 		}
 
