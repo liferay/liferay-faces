@@ -40,14 +40,11 @@ public class FacesConfigDescriptorParserImpl extends SAXHandlerBase implements F
 	private static final Logger logger = LoggerFactory.getLogger(FacesConfigDescriptorParserImpl.class);
 
 	// Private Constants
+	private static final String ABSOLUTE_ORDERING = "absolute-ordering";
 	private static final String AFTER = "after";
 	private static final String BEFORE = "before";
 	private static final String FACES_CONFIG = "faces-config";
 	private static final String ORDERING = "ordering";
-
-	private static final String ABSOLUTE_ORDERING = "absolute-ordering";
-
-	// private static final String NAME = "name";
 	private static final String OTHERS = "others";
 
 	// Private Data Members
