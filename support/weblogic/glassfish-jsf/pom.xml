@@ -14,19 +14,24 @@
 	<name>WebLogic GlassFish JSF</name>
 
 	<!--
-		This pom.xml file is designed to upgrade mojarra in Oracle Weblogic 12c. It's goal is to:
-			- Back up Weblogic's built in jsf jar with a .bak extension.
-			- Repackage a current version of jsf with the Weblogic's jsf MANIFEST.MF (with updated versions).
-			- Copy the new jar into Weblogic's modules folder.
+		The purpose of this POM is to upgrade the version of Mojarra that ships with WebLogic 12c using the	following
+		procedure:
 
-		If you are using the current version of weblogic (specified in the parent-most pom.xml as
-		liferay.weblogic.version), specify your MW_HOME, and then run the following command:
+		- Backup the monolithic Mojarra JAR that ships in the WebLogic modules folder
+		- Download a current monolithic Mojarra JAR from Maven Central and replace the META-INF/MANIFEST.MF with the
+		  one that ships with WebLogic (updating version info as appropriate)
+		- Copy the new JAR into the WebLogic modules folder
 
-			mvn clean install -P weblogic
+		If you are using the same version of WebLogic as the one specified by the liferay.weblogic.version property in
+		the parent-most Liferay Faces pom.xml descriptor, then you can perform the upgrade by executing shell commands
+		such as	the following:
 
-		Otherwise, you must specify the weblogic.mojarra.pom which should be similar to the following:
+		  export MW_HOME=$HOME/Oracle/Middleware
+		  mvn clean install -P weblogic
 
-			mvn clean install -P weblogic -Dweblogic.mojarra.pom=$MW_HOME/wlserver/plugins/maven/com/oracle/weblogic/glassfish.jsf_2.0.0.0_2-1-20/12.1.3/glassfish.jsf_2.0.0.0_2-1-20.12.1.3.pom
+		Otherwise, you must specify a different value for the weblogic.mojarra.pom property. For example:
+
+		  mvn clean install -P weblogic -Dweblogic.mojarra.pom=$MW_HOME/wlserver/plugins/maven/com/oracle/weblogic/glassfish.jsf_2.0.0.0_2-1-20/12.1.3/glassfish.jsf_2.0.0.0_2-1-20.12.1.3.pom
 	-->
 
 	<properties>
@@ -46,7 +51,9 @@
 						</goals>
 						<configuration>
 							<tasks>
-								<echo message="Upgrading mojarra for Oracle Weblogic ${liferay.weblogic.version}.${line.separator}If you are not using ${liferay.weblogic.version}, please specify the path to Weblogic's JSF2 pom file similar to the below command:${line.separator}${line.separator}mvn clean install -P weblogic -Dweblogic.mojarra.pom=${weblogic.mojarra.pom}" />
+								<echo message="Upgrading Mojarra for WebLogic ${liferay.weblogic.version}" />
+								<echo message="If you are not using ${liferay.weblogic.version}, then specify the path to WebLogic's JSF2 pom.xml descriptor using a shell command such as:" />
+								<echo message="    mvn clean install -P weblogic -Dweblogic.mojarra.pom=${weblogic.mojarra.pom}" />
 								<xmlproperty file="${weblogic.mojarra.pom}" keeproot="false"
 									prefix="weblogic.mojarra.pom" />
 								<taskdef resource="net/sf/antcontrib/antlib.xml" />
