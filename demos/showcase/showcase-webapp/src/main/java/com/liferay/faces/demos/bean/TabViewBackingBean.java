@@ -19,10 +19,10 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.event.AjaxBehaviorEvent;
 
 import com.liferay.faces.alloy.component.tab.TabSelectEvent;
 import com.liferay.faces.alloy.component.tabview.TabView;
-import javax.faces.event.AjaxBehaviorEvent;
 
 
 /**
@@ -59,8 +59,10 @@ public class TabViewBackingBean {
 		}
 	}
 
-	public void tabSelectListener(TabSelectEvent tabSelectEvent) {
+	public void tabSelectListener(AjaxBehaviorEvent ajaxBehaviorEvent) {
 
+		// When using JSF 2.2, this cast is unnecessary, and the method can take the TabSelectEvent directly.
+		TabSelectEvent tabSelectEvent = (TabSelectEvent) ajaxBehaviorEvent;
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		FacesMessage facesMessage = new FacesMessage("Received 'tabSelectEvent' for tab with header '" +
 				tabSelectEvent.getTab().getHeaderText() + "' in the " + tabSelectEvent.getPhaseId().getName() +

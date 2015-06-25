@@ -19,12 +19,12 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.event.PhaseId;
 
 import com.liferay.faces.alloy.component.progressbar.ProgressCompleteEvent;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
-import javax.faces.event.AjaxBehaviorEvent;
 
 
 /**
@@ -44,8 +44,10 @@ public class ProgressBarBacking implements Serializable {
 		progress = progress + 10;
 	}
 
-	public void progressCompleteListener(ProgressCompleteEvent progressCompleteEvent) {
+	public void progressCompleteListener(AjaxBehaviorEvent ajaxBehaviorEvent) {
 
+		// When using JSF 2.2, this cast is unnecessary, and the method can take the ProgressCompleteEvent directly.
+		ProgressCompleteEvent progressCompleteEvent = (ProgressCompleteEvent) ajaxBehaviorEvent;
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		PhaseId phaseId = facesContext.getCurrentPhaseId();
 		logger.debug("progressCompleteListener: phaseId=[{0}]", phaseId.toString());

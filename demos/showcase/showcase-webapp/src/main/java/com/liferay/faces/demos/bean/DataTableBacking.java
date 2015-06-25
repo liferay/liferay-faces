@@ -26,6 +26,7 @@ import javax.faces.component.UICommand;
 import javax.faces.component.UISelectOne;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
+import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.event.FacesEvent;
 import javax.faces.event.ValueChangeEvent;
 import javax.faces.model.DataModel;
@@ -40,7 +41,6 @@ import com.liferay.faces.demos.dto.Customer;
 import com.liferay.faces.demos.service.CustomerService;
 import com.liferay.faces.util.model.OnDemandDataModel;
 import com.liferay.faces.util.model.SortCriterion;
-import javax.faces.event.AjaxBehaviorEvent;
 
 
 /**
@@ -118,20 +118,32 @@ public class DataTableBacking implements Serializable {
 		customerDataTable.setSelectedRowIndexes(null);
 	}
 
-	public void rowDeselectListener(RowDeselectEvent rowDeselectEvent) {
+	public void rowDeselectListener(AjaxBehaviorEvent ajaxBehaviorEvent) {
+
+		// When using JSF 2.2, this cast is unnecessary, and the method can take the RowDeselectEvent directly.
+		RowDeselectEvent rowDeselectEvent = (RowDeselectEvent) ajaxBehaviorEvent;
 		addFacesMessage(rowDeselectEvent, rowDeselectEvent.getRowIndex(), (Customer) rowDeselectEvent.getRowData());
 	}
 
-	public void rowDeselectRangeListener(RowDeselectRangeEvent rowDeselectRangeEvent) {
+	public void rowDeselectRangeListener(AjaxBehaviorEvent ajaxBehaviorEvent) {
+
+		// When using JSF 2.2, this cast is unnecessary, and the method can take the RowDeselectRangeEvent directly.
+		RowDeselectRangeEvent rowDeselectRangeEvent = (RowDeselectRangeEvent) ajaxBehaviorEvent;
 		addFacesMessage(rowDeselectRangeEvent, rowDeselectRangeEvent.getRowIndexes(),
 			rowDeselectRangeEvent.getRowDataList());
 	}
 
-	public void rowSelectListener(RowSelectEvent rowSelectEvent) {
+	public void rowSelectListener(AjaxBehaviorEvent ajaxBehaviorEvent) {
+
+		// When using JSF 2.2, this cast is unnecessary, and the method can take the RowSelectEvent directly.
+		RowSelectEvent rowSelectEvent = (RowSelectEvent) ajaxBehaviorEvent;
 		addFacesMessage(rowSelectEvent, rowSelectEvent.getRowIndex(), (Customer) rowSelectEvent.getRowData());
 	}
 
-	public void rowSelectRangeListener(RowSelectRangeEvent rowSelectRangeEvent) {
+	public void rowSelectRangeListener(AjaxBehaviorEvent ajaxBehaviorEvent) {
+
+		// When using JSF 2.2, this cast is unnecessary, and the method can take the RowSelectRangeEvent directly.
+		RowSelectRangeEvent rowSelectRangeEvent = (RowSelectRangeEvent) ajaxBehaviorEvent;
 		addFacesMessage(rowSelectRangeEvent, rowSelectRangeEvent.getRowIndexes(), rowSelectRangeEvent.getRowDataList());
 	}
 
