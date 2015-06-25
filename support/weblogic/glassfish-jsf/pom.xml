@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.oracle.weblogic</groupId>
 	<artifactId>upgraded.glassfish.jsf</artifactId>
-	<version>4.2.5-rc1-SNAPSHOT</version>
+	<version>3.2.5-rc1-SNAPSHOT</version>
 	<name>WebLogic GlassFish JSF</name>
 
 	<!--
