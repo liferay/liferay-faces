@@ -19,11 +19,11 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.event.AjaxBehaviorEvent;
 
 import com.liferay.faces.alloy.component.accordion.Accordion;
 import com.liferay.faces.alloy.component.tab.TabCollapseEvent;
 import com.liferay.faces.alloy.component.tab.TabExpandEvent;
-import javax.faces.event.AjaxBehaviorEvent;
 
 
 /**
@@ -60,8 +60,10 @@ public class AccordionBackingBean {
 		}
 	}
 
-	public void tabCollapseListener(TabCollapseEvent tabCollapseEvent) {
+	public void tabCollapseListener(AjaxBehaviorEvent ajaxBehaviorEvent) {
 
+		// When using JSF 2.2, this cast is unnecessary, and the method can take the TabCollapseEvent directly.
+		TabCollapseEvent tabCollapseEvent = (TabCollapseEvent) ajaxBehaviorEvent;
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		FacesMessage facesMessage = new FacesMessage("Received 'tabCollapseEvent' for tab with header '" +
 				tabCollapseEvent.getTab().getHeaderText() + "' in the " + tabCollapseEvent.getPhaseId().toString() +
@@ -69,8 +71,10 @@ public class AccordionBackingBean {
 		facesContext.addMessage(null, facesMessage);
 	}
 
-	public void tabExpandListener(TabExpandEvent tabExpandEvent) {
+	public void tabExpandListener(AjaxBehaviorEvent ajaxBehaviorEvent) {
 
+		// When using JSF 2.2, this cast is unnecessary, and the method can take the TabExpandEvent directly.
+		TabExpandEvent tabExpandEvent = (TabExpandEvent) ajaxBehaviorEvent;
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		FacesMessage facesMessage = new FacesMessage("Received 'tabExpandEvent' for tab with header '" +
 				tabExpandEvent.getTab().getHeaderText() + "' in the " + tabExpandEvent.getPhaseId().toString() +
