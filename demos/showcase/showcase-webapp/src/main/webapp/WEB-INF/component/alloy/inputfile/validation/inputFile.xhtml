@@ -6,10 +6,9 @@
 		<alloy:form enctype="multipart/form-data">
 			<showcase:example description="#{i18n['alloy-inputfile-validation-example']}">
 				<alloy:messages layout="table" />
-				<alloy:inputFile fileUploadListener="#{inputFileBackingBean.handleFileUpload}" multiple="multiple"
-					showPreview="true">
-					<alloy:validateFile contentTypes="application/pdf,image/png" maxFileSize="600000" />
-				</alloy:inputFile>
+				<alloy:inputFile contentTypes="application/pdf,image/png"
+					fileUploadListener="#{inputFileBackingBean.handleFileUpload}" maxFileSize="600000"
+					multiple="multiple" showPreview="true" />
 				<hr />
 				<alloy:commandButton render="@form" value="#{i18n['submit']}" />
 			</showcase:example>

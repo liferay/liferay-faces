@@ -3327,6 +3327,12 @@ java.lang.Object)</method-signature>
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
+			<description><![CDATA[Comma-delimited list of uploaded file MIME types that are valid. If not specified, then all MIME types are assumed to be valid.]]></description>
+			<name>contentTypes</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
 			<description><![CDATA[The class name of the converter instance that is to be used by this component.]]></description>
 			<name>converter</name>
 			<required>false</required>
@@ -3385,6 +3391,12 @@ java.lang.Object)</method-signature>
 			<name>location</name>
 			<required>false</required>
 			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Maximum length (in bytes) permitted for each individual uploaded file. If not specified, then files of any length are assumed to be valid.]]></description>
+			<name>maxFileSize</name>
+			<required>false</required>
+			<type>java.lang.Long</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[HTML passthrough attribute specifying the maximum length of characters allowed in the element.]]></description>
@@ -9629,28 +9641,6 @@ java.lang.Object)</method-signature>
 			<name>width</name>
 			<required>false</required>
 			<type>java.lang.String</type>
-		</attribute>
-		<tag-extension>
-			<vdldoc:since>4.2.0</vdldoc:since>
-		</tag-extension>
-	</tag>
-	<tag>
-		<description><![CDATA[Validator that is meant to be used in conjunction with the <code>alloy:inputFile</code> component.]]></description>
-		<tag-name>validateFile</tag-name>
-		<validator>
-			<validator-id>com.liferay.faces.alloy.component.inputfile.InputFileValidator</validator-id>
-		</validator>
-		<attribute>
-			<description><![CDATA[Comma-delimited list of uploaded file MIME types that are valid. If not specified, then all MIME types are assumed to be valid.]]></description>
-			<name>contentTypes</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Maximum length (in bytes) permitted for each individual uploaded file. If not specified, then files of any length are assumed to be valid.]]></description>
-			<name>maxFileSize</name>
-			<required>false</required>
-			<type>java.lang.Long</type>
 		</attribute>
 		<tag-extension>
 			<vdldoc:since>4.2.0</vdldoc:since>
