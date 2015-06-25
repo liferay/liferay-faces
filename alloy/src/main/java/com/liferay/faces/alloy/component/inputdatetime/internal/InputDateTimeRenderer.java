@@ -80,7 +80,7 @@ public abstract class InputDateTimeRenderer extends InputDateTimeRendererBase {
 		BrowserSniffer browserSniffer = browserSnifferFactory.getBrowserSniffer(facesContext.getExternalContext());
 		InputDateTime inputDateTime = (InputDateTime) uiComponent;
 		InputDateTimeResponseWriter inputDateTimeResponseWriter = getInputDateTimeResponseWriter(responseWriter,
-				inputClientId, browserSniffer.isMobile(), inputDateTime.isNativeWhenMobile());
+				inputClientId, isNative(browserSniffer, inputDateTime));
 		super.encodeMarkupBegin(facesContext, uiComponent, inputDateTimeResponseWriter);
 	}
 
@@ -94,10 +94,8 @@ public abstract class InputDateTimeRenderer extends InputDateTimeRendererBase {
 				BrowserSnifferFactory.class);
 		BrowserSniffer browserSniffer = browserSnifferFactory.getBrowserSniffer(facesContext.getExternalContext());
 		InputDateTime inputDateTime = (InputDateTime) uiComponent;
-		boolean mobile = browserSniffer.isMobile();
-		boolean nativeWhenMobile = inputDateTime.isNativeWhenMobile();
 		InputDateTimeResponseWriter inputDateTimeResponseWriter = getInputDateTimeResponseWriter(responseWriter,
-				inputClientId, mobile, nativeWhenMobile);
+				inputClientId, isNative(browserSniffer, inputDateTime));
 		super.encodeMarkupEnd(facesContext, uiComponent, inputDateTimeResponseWriter);
 
 		// Determine whether or not the text input is enabled.
@@ -107,7 +105,7 @@ public abstract class InputDateTimeRenderer extends InputDateTimeRendererBase {
 		// for a mobile browser, then render the button.
 		String showOn = inputDateTime.getShowOn();
 
-		if (("both".equals(showOn) || "button".equals(showOn)) && !(mobile && nativeWhenMobile)) {
+		if (("both".equals(showOn) || "button".equals(showOn)) && !isNative(browserSniffer, inputDateTime)) {
 			ApplicationFactory applicationFactory = (ApplicationFactory) FactoryFinder.getFactory(
 					FactoryFinder.APPLICATION_FACTORY);
 			Application application = applicationFactory.getApplication();
@@ -248,8 +246,12 @@ public abstract class InputDateTimeRenderer extends InputDateTimeRendererBase {
 		return !locale.equals(viewRootLocale);
 	}
 
+	protected boolean isNative(BrowserSniffer browserSniffer, InputDateTime inputDateTime) {
+		return browserSniffer.isMobile() && inputDateTime.isNativeWhenMobile();
+	}
+
 	protected abstract InputDateTimeResponseWriter getInputDateTimeResponseWriter(ResponseWriter responseWriter,
-		String inputClientId, boolean mobile, boolean responsive);
+		String inputClientId, boolean nativeInputDateTime);
 
 	protected abstract List<String> getModules(List<String> modules, FacesContext facesContext,
 		InputDateTime inputDateTime);
@@ -261,9 +263,8 @@ public abstract class InputDateTimeRenderer extends InputDateTimeRendererBase {
 				BrowserSnifferFactory.class);
 		BrowserSniffer browserSniffer = browserSnifferFactory.getBrowserSniffer(facesContext.getExternalContext());
 		InputDateTime inputDateTime = (InputDateTime) uiComponent;
-		boolean responsive = inputDateTime.isNativeWhenMobile();
 
-		if (browserSniffer.isMobile() && responsive) {
+		if (isNative(browserSniffer, inputDateTime)) {
 			String nativeAlloyModuleName = defaultModules[0].concat("-native");
 			modules.add(nativeAlloyModuleName);
 		}

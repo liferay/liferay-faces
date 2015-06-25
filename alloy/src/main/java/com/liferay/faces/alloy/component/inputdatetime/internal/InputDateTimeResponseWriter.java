@@ -28,14 +28,12 @@ import com.liferay.faces.util.render.internal.IdDelegationResponseWriter;
 public class InputDateTimeResponseWriter extends IdDelegationResponseWriter {
 
 	// Private Data Members
-	private boolean mobile;
-	private boolean nativeWhenMobile;
+	private boolean nativeInputDateTime;
 
-	public InputDateTimeResponseWriter(ResponseWriter responseWriter, String idElement, String idValue, boolean mobile,
-		boolean nativeWhenMobile) {
-		super(responseWriter, idElement, idValue);
-		this.mobile = mobile;
-		this.nativeWhenMobile = nativeWhenMobile;
+	public InputDateTimeResponseWriter(ResponseWriter responseWriter, String inputClientId,
+		boolean nativeInputDateTime) {
+		super(responseWriter, "input", inputClientId);
+		this.nativeInputDateTime = nativeInputDateTime;
 	}
 
 	@Override
@@ -52,11 +50,7 @@ public class InputDateTimeResponseWriter extends IdDelegationResponseWriter {
 		}
 	}
 
-	public boolean isMobile() {
-		return mobile;
-	}
-
-	public boolean isNativeWhenMobile() {
-		return nativeWhenMobile;
+	public boolean isNative() {
+		return nativeInputDateTime;
 	}
 }
