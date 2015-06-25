@@ -97,7 +97,7 @@ public class InputDateRenderer extends InputDateRendererBase {
 		InputDate inputDate = (InputDate) uiComponent;
 		String showOn = inputDate.getShowOn();
 
-		if ((browserSniffer.isMobile() && inputDate.isNativeWhenMobile()) || "button".equals(showOn)) {
+		if (isNative(browserSniffer, inputDate) || "button".equals(showOn)) {
 
 			String clientVarName = getClientVarName(facesContext, inputDate);
 			String clientKey = inputDate.getClientKey();
@@ -109,7 +109,7 @@ public class InputDateRenderer extends InputDateRendererBase {
 			JavaScriptFragment liferayComponent = new JavaScriptFragment("Liferay.component('" + clientKey + "')");
 			ResponseWriter responseWriter = facesContext.getResponseWriter();
 
-			if (browserSniffer.isMobile() && inputDate.isNativeWhenMobile()) {
+			if (isNative(browserSniffer, inputDate)) {
 
 				String clientId = uiComponent.getClientId(facesContext);
 				String inputClientId = clientId.concat(INPUT_SUFFIX);
@@ -245,7 +245,7 @@ public class InputDateRenderer extends InputDateRendererBase {
 				BrowserSnifferFactory.class);
 		BrowserSniffer browserSniffer = browserSnifferFactory.getBrowserSniffer(facesContext.getExternalContext());
 
-		if (!(browserSniffer.isMobile() && inputDate.isNativeWhenMobile())) {
+		if (!isNative(browserSniffer, inputDate)) {
 
 			encodeCalendar(facesContext, responseWriter, inputDate, first);
 			first = false;
@@ -273,7 +273,7 @@ public class InputDateRenderer extends InputDateRendererBase {
 		BrowserSniffer browserSniffer = browserSnifferFactory.getBrowserSniffer(facesContext.getExternalContext());
 		InputDate inputDate = (InputDate) uiComponent;
 
-		if (browserSniffer.isMobile() && inputDate.isNativeWhenMobile()) {
+		if (isNative(browserSniffer, inputDate)) {
 			alloyClassName = alloyClassName.concat("Native");
 		}
 
@@ -287,8 +287,8 @@ public class InputDateRenderer extends InputDateRendererBase {
 
 	@Override
 	protected InputDateTimeResponseWriter getInputDateTimeResponseWriter(ResponseWriter responseWriter,
-		String inputClientId, boolean mobile, boolean nativeWhenMobile) {
-		return new InputDateResponseWriter(responseWriter, "input", inputClientId, mobile, nativeWhenMobile);
+		String inputClientId, boolean nativeInputDate) {
+		return new InputDateResponseWriter(responseWriter, inputClientId, nativeInputDate);
 	}
 
 	@Override

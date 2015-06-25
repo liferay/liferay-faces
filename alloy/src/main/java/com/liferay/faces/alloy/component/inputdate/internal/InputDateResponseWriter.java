@@ -25,15 +25,14 @@ import com.liferay.faces.alloy.component.inputdatetime.internal.InputDateTimeRes
  */
 public class InputDateResponseWriter extends InputDateTimeResponseWriter {
 
-	public InputDateResponseWriter(ResponseWriter responseWriter, String idElement, String idValue, boolean mobile,
-		boolean nativeWhenMobile) {
-		super(responseWriter, idElement, idValue, mobile, nativeWhenMobile);
+	public InputDateResponseWriter(ResponseWriter responseWriter, String inputClientId, boolean nativeInputDate) {
+		super(responseWriter, inputClientId, nativeInputDate);
 	}
 
 	@Override
 	public void writeAttribute(String name, Object value, String property) throws IOException {
 
-		if ("type".equals(name) && isMobile() && isNativeWhenMobile()) {
+		if ("type".equals(name) && isNative()) {
 			super.writeAttribute(name, "date", property);
 		}
 		else {
