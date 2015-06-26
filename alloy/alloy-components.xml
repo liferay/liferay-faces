@@ -1631,6 +1631,13 @@
 			</attribute>
 			<attribute>
 				<description>
+					<![CDATA[Comma-delimited list of uploaded file MIME types that are valid. If not specified, then all MIME types are assumed to be valid.]]>
+				</description>
+				<name>contentTypes</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
 					<![CDATA[A method that is executed when a file is uploaded. The method must be <code>public</code>, return <code>void</code>, and take a <code>FileUploadEvent</code> argument.]]>
 				</description>
 				<name>fileUploadListener</name>
@@ -1644,6 +1651,13 @@
 				</description>
 				<type>java.lang.String</type>
 				<name>location</name>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Maximum length (in bytes) permitted for each individual uploaded file. If not specified, then files of any length are assumed to be valid.]]>
+				</description>
+				<name>maxFileSize</name>
+				<type>java.lang.Long</type>
 			</attribute>
 			<attribute>
 				<description>
@@ -3068,27 +3082,6 @@
 				<name>width</name>
 				<type>java.lang.String</type>
 				<yui>true</yui>
-			</attribute>
-		</attributes>
-	</component>
-	<component name="ValidateFile" generateJava="false" validatorId="com.liferay.faces.alloy.component.inputfile.InputFileValidator">
-		<description>
-			<![CDATA[Validator that is meant to be used in conjunction with the <code>alloy:inputFile</code> component.]]>
-		</description>
-		<attributes>
-			<attribute>
-				<description>
-					<![CDATA[Comma-delimited list of uploaded file MIME types that are valid. If not specified, then all MIME types are assumed to be valid.]]>
-				</description>
-				<name>contentTypes</name>
-				<type>java.lang.String</type>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[Maximum length (in bytes) permitted for each individual uploaded file. If not specified, then files of any length are assumed to be valid.]]>
-				</description>
-				<name>maxFileSize</name>
-				<type>java.lang.Long</type>
 			</attribute>
 		</attributes>
 	</component>

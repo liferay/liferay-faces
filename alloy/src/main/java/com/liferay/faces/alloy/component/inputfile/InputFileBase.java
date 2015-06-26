@@ -36,8 +36,10 @@ public abstract class InputFileBase extends HtmlInputText implements Styleable, 
 		appendNewFiles,
 		auto,
 		clientKey,
+		contentTypes,
 		fileUploadListener,
 		location,
+		maxFileSize,
 		multiple,
 		showPreview,
 		showProgress,
@@ -75,6 +77,14 @@ public abstract class InputFileBase extends HtmlInputText implements Styleable, 
 		getStateHelper().put(InputFilePropertyKeys.clientKey, clientKey);
 	}
 
+	public String getContentTypes() {
+		return (String) getStateHelper().eval(InputFilePropertyKeys.contentTypes, null);
+	}
+
+	public void setContentTypes(String contentTypes) {
+		getStateHelper().put(InputFilePropertyKeys.contentTypes, contentTypes);
+	}
+
 	public javax.el.MethodExpression getFileUploadListener() {
 		return (javax.el.MethodExpression) getStateHelper().eval(InputFilePropertyKeys.fileUploadListener, null);
 	}
@@ -106,6 +116,14 @@ public abstract class InputFileBase extends HtmlInputText implements Styleable, 
 
 	public void setLocation(String location) {
 		getStateHelper().put(InputFilePropertyKeys.location, location);
+	}
+
+	public Long getMaxFileSize() {
+		return (Long) getStateHelper().eval(InputFilePropertyKeys.maxFileSize, null);
+	}
+
+	public void setMaxFileSize(Long maxFileSize) {
+		getStateHelper().put(InputFilePropertyKeys.maxFileSize, maxFileSize);
 	}
 
 	public String getMultiple() {

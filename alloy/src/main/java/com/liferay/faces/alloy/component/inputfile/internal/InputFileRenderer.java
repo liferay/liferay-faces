@@ -30,11 +30,9 @@ import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 import javax.faces.convert.ConverterException;
 import javax.faces.render.FacesRenderer;
-import javax.faces.validator.Validator;
 
 import com.liferay.faces.alloy.component.inputfile.FileUploadEvent;
 import com.liferay.faces.alloy.component.inputfile.InputFile;
-import com.liferay.faces.alloy.component.inputfile.InputFileValidator;
 import com.liferay.faces.alloy.render.internal.JavaScriptFragment;
 import com.liferay.faces.util.component.Styleable;
 import com.liferay.faces.util.context.MessageContext;
@@ -105,22 +103,21 @@ public class InputFileRenderer extends InputFileRendererBase {
 
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
 		InputFile inputFile = (InputFile) uiComponent;
-		String clientId = inputFile.getClientId(facesContext);
+		JavaScriptFragment alloyNamespace = new JavaScriptFragment("A");
 
 		// Determine the valid content-types and maximum file size from the validator (if specified).
 		JavaScriptFragment contentTypes = new JavaScriptFragment("[]");
-		JavaScriptFragment alloyNamespace = new JavaScriptFragment("A");
-		long maxFileSize = Long.MAX_VALUE;
-		InputFileValidator inputFileValidator = getInputFileValidator(inputFile);
+		String validContentTypes = inputFile.getContentTypes();
 
-		if (inputFileValidator != null) {
-			String validContentTypes = inputFileValidator.getContentTypes();
+		if (validContentTypes != null) {
+			contentTypes = toJavaScriptArray(validContentTypes.split(","));
+		}
 
-			if (validContentTypes != null) {
-				contentTypes = toJavaScriptArray(validContentTypes.split(","));
-			}
+		String clientId = inputFile.getClientId(facesContext);
+		Long maxFileSize = inputFile.getMaxFileSize();
 
-			maxFileSize = inputFileValidator.getMaxFileSize();
+		if (maxFileSize == null) {
+			maxFileSize = Long.MAX_VALUE;
 		}
 
 		// If the component should render the upload progress table, then initialize the YUI progress uploader widget.
@@ -414,23 +411,6 @@ public class InputFileRenderer extends InputFileRendererBase {
 	public Object getConvertedValue(FacesContext facesContext, UIComponent uiComponent, Object submittedValue)
 		throws ConverterException {
 		return submittedValue;
-	}
-
-	protected InputFileValidator getInputFileValidator(InputFile inputFile) {
-
-		InputFileValidator inputFileValidator = null;
-		Validator[] validators = inputFile.getValidators();
-
-		for (Validator validator : validators) {
-
-			if (validator instanceof InputFileValidator) {
-				inputFileValidator = (InputFileValidator) validator;
-
-				break;
-			}
-		}
-
-		return inputFileValidator;
 	}
 
 	protected MessageContext getMessageContext() {
