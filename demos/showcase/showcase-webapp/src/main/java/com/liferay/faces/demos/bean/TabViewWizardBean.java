@@ -36,17 +36,6 @@ public class TabViewWizardBean implements Serializable {
 	private String firstName;
 	private String lastName;
 
-	public void tabSelectListener(AjaxBehaviorEvent ajaxBehaviorEvent) {
-
-		// When using JSF 2.2, this cast is unnecessary, and the method can take the TabSelectEvent directly.
-		TabSelectEvent tabSelectEvent = (TabSelectEvent) ajaxBehaviorEvent;
-
-		// When the user clicks on a tab, skip the PROCESS_VALIDATIONS, UPDATE_MODEL_VAUES, and INVOKE_APPLICATION
-		// phases of the JSF lifecycle and jump immediately to RENDER_RESPONSE.
-		FacesContext facesContext = FacesContext.getCurrentInstance();
-		facesContext.renderResponse();
-	}
-
 	public String getFirstName() {
 		return firstName;
 	}

@@ -3008,7 +3008,8 @@
 			<![CDATA[SelectThumbRating is a UISelectOne component that renders a pair of thumb icons that a user can select to indicate their favor. The user can click on a thumb to select their favor and click on the same thumb a second time to de-select their favor. Since it extends <a href="http://docs.oracle.com/javaee/7/api/javax/faces/component/html/HtmlSelectOneRadio.html" target="_blank"><code>HtmlSelectOneRadio</code></a>, it accepts f:selectItem or f:selectItems as children.]]>
 		</description>
 	</component>
-	<component name="Tab" extendsTags="Styleable UIComponentBase" handlerClass="com.liferay.faces.alloy.component.tab.internal.TabHandler"
+	<component name="Tab" extendsTags="Styleable UIComponentBase"
+		handlerClass="com.liferay.faces.alloy.component.tab.internal.TabHandler"
 		parentClass="javax.faces.component.UIColumn">
 		<description>
 			<![CDATA[Tab is a panel component that renders nested/child tags as content within itself.]]>
