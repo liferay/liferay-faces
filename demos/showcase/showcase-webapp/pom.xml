@@ -93,11 +93,6 @@
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>com.liferay.faces.support</groupId>
-			<artifactId>liferay-faces-mojarra-compat</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>showcase-common</artifactId>
 			<version>${project.version}</version>
