@@ -19,7 +19,6 @@ import java.util.Map;
 import javax.portlet.BaseURL;
 
 import com.liferay.faces.bridge.context.BridgeContext;
-import com.liferay.faces.util.lang.StringPool;
 
 
 /**
@@ -50,7 +49,7 @@ public class BaseURLRelativeStringImpl extends BaseURLNonEncodedStringImpl {
 			if (toStringValue.startsWith(BridgeURLBase.RELATIVE_PATH_PREFIX)) {
 				StringBuilder buf = new StringBuilder();
 				buf.append(contextPath);
-				buf.append(StringPool.FORWARD_SLASH);
+				buf.append("/");
 				buf.append(toStringValue.substring(BridgeURLBase.RELATIVE_PATH_PREFIX.length()));
 				toStringValue = buf.toString();
 			}

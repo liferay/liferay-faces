@@ -14,7 +14,6 @@
 package com.liferay.faces.bridge.internal;
 
 import javax.el.ELContext;
-import javax.faces.FacesException;
 import javax.faces.FactoryFinder;
 import javax.faces.component.UIViewRoot;
 import javax.faces.context.FacesContext;
@@ -46,7 +45,6 @@ import com.liferay.faces.bridge.scope.BridgeRequestScopeCache;
 import com.liferay.faces.bridge.scope.BridgeRequestScopeCacheFactory;
 import com.liferay.faces.bridge.scope.BridgeRequestScopeFactory;
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
-import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -199,7 +197,7 @@ public abstract class BridgePhaseBaseImpl implements BridgePhase {
 		// If not set by a previous request, then set the default viewIdHistory for the portlet modes.
 		for (String portletMode : PortletModeHelper.PORTLET_MODE_NAMES) {
 
-			String attributeName = Bridge.VIEWID_HISTORY + StringPool.PERIOD + portletMode;
+			String attributeName = Bridge.VIEWID_HISTORY + "." + portletMode;
 			PortletSession portletSession = portletRequest.getPortletSession();
 
 			if (portletSession.getAttribute(attributeName) == null) {

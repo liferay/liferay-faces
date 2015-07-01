@@ -20,10 +20,9 @@ import java.util.Map;
 import javax.portlet.PortletSecurityException;
 
 import com.liferay.faces.bridge.filter.internal.BaseURLWrapper;
-import com.liferay.faces.bridge.filter.liferay.LiferayURLGenerator;
 import com.liferay.faces.bridge.filter.liferay.LiferayBaseURL;
+import com.liferay.faces.bridge.filter.liferay.LiferayURLGenerator;
 import com.liferay.faces.bridge.util.internal.FacesURLEncoder;
-import com.liferay.faces.util.lang.StringPool;
 
 
 /**
@@ -62,7 +61,7 @@ public abstract class LiferayBaseURLFriendlyImpl extends BaseURLWrapper implemen
 		String valueAsString = toString();
 
 		if (escapeXML) {
-			valueAsString = FacesURLEncoder.encode(valueAsString, StringPool.UTF8);
+			valueAsString = FacesURLEncoder.encode(valueAsString, "UTF-8");
 		}
 
 		writer.write(valueAsString);

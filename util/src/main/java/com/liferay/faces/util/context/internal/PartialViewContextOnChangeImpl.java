@@ -35,7 +35,6 @@ import javax.faces.context.PartialViewContext;
 import javax.faces.context.PartialViewContextWrapper;
 import javax.faces.event.PhaseId;
 
-import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -157,7 +156,7 @@ public class PartialViewContextOnChangeImpl extends PartialViewContextWrapper {
 					String clientId = uiComponent.getClientId();
 					Object previousValue = valueMap.get(clientId);
 					Object submittedValue = editableValueHolder.getSubmittedValue();
-					boolean submittedValueEmpty = ((submittedValue == null) || StringPool.BLANK.equals(submittedValue));
+					boolean submittedValueEmpty = ((submittedValue == null) || "".equals(submittedValue));
 					boolean previouslyValid = validMap.get(clientId);
 					logger.debug(
 						"previousValue=[{0}] submittedValue=[{1}] submittedValueEmpty=[{2}] previouslyValid=[{3}]",

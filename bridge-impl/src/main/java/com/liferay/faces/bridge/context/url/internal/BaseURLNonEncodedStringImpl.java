@@ -25,7 +25,6 @@ import javax.portlet.PortletSecurityException;
 import javax.portlet.faces.Bridge;
 
 import com.liferay.faces.bridge.internal.BridgeConstants;
-import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -68,7 +67,7 @@ public class BaseURLNonEncodedStringImpl implements BaseURL {
 		if (toStringValue == null) {
 
 			StringBuilder buf = new StringBuilder();
-			int queryPos = url.indexOf(StringPool.QUESTION);
+			int queryPos = url.indexOf("?");
 
 			if (queryPos >= 0) {
 
@@ -81,7 +80,7 @@ public class BaseURLNonEncodedStringImpl implements BaseURL {
 					String queryString = getQuery();
 
 					if (queryString.length() > 0) {
-						buf.append(StringPool.QUESTION);
+						buf.append("?");
 						buf.append(queryString);
 					}
 				}
@@ -136,15 +135,15 @@ public class BaseURLNonEncodedStringImpl implements BaseURL {
 			StringBuilder buf = new StringBuilder();
 
 			// Get the original query-string from the URL.
-			String originalQuery = StringPool.BLANK;
+			String originalQuery = "";
 			boolean firstParam = true;
-			int pos = url.indexOf(StringPool.QUESTION);
+			int pos = url.indexOf("?");
 
 			if (pos >= 0) {
 				originalQuery = url.substring(pos + 1);
 			}
 
-			pos = originalQuery.indexOf(StringPool.POUND);
+			pos = originalQuery.indexOf("#");
 
 			String fragmentId = null;
 
@@ -174,7 +173,7 @@ public class BaseURLNonEncodedStringImpl implements BaseURL {
 
 					if (nameValueArray.length == 1) {
 						name = nameValueArray[0];
-						values = new String[] { StringPool.BLANK };
+						values = new String[] { "" };
 					}
 					else if (nameValueArray.length == 2) {
 						name = nameValueArray[0];
@@ -191,11 +190,11 @@ public class BaseURLNonEncodedStringImpl implements BaseURL {
 							firstParam = false;
 						}
 						else {
-							buf.append(StringPool.AMPERSAND);
+							buf.append("&");
 						}
 
 						buf.append(name);
-						buf.append(StringPool.EQUAL);
+						buf.append("=");
 
 						Integer parameterOccurrences = parameterOccurrenceMap.get(name);
 
@@ -238,11 +237,11 @@ public class BaseURLNonEncodedStringImpl implements BaseURL {
 							firstParam = false;
 						}
 						else {
-							buf.append(StringPool.AMPERSAND);
+							buf.append("&");
 						}
 
 						buf.append(name);
-						buf.append(StringPool.EQUAL);
+						buf.append("=");
 						buf.append(values[0]);
 					}
 				}
