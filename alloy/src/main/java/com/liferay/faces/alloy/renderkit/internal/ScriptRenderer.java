@@ -27,7 +27,6 @@ import com.liferay.faces.util.client.BrowserSnifferFactory;
 import com.liferay.faces.util.client.Script;
 import com.liferay.faces.util.client.ScriptFactory;
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
-import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.util.render.internal.BufferedScriptResponseWriter;
@@ -92,13 +91,9 @@ public class ScriptRenderer extends ScriptRendererCompat {
 		if (inline) {
 
 			ResponseWriter responseWriter = facesContext.getResponseWriter();
-			responseWriter.startElement(StringPool.SCRIPT, uiComponent);
+			responseWriter.startElement("script", uiComponent);
 			responseWriter.writeAttribute("type", ContentTypes.TEXT_JAVASCRIPT, null);
-			responseWriter.write(StringPool.FORWARD_SLASH);
-			responseWriter.write(StringPool.FORWARD_SLASH);
-			responseWriter.write(StringPool.SPACE);
-			responseWriter.write(StringPool.CDATA_OPEN);
-			responseWriter.write(StringPool.NEW_LINE);
+			responseWriter.write("// <![CDATA[\n");
 
 			inlineUse = (String) attributes.get(USE);
 
@@ -161,12 +156,8 @@ public class ScriptRenderer extends ScriptRendererCompat {
 				responseWriter.write("});");
 			}
 
-			responseWriter.write(StringPool.FORWARD_SLASH);
-			responseWriter.write(StringPool.FORWARD_SLASH);
-			responseWriter.write(StringPool.SPACE);
-			responseWriter.write(StringPool.CDATA_CLOSE);
-			responseWriter.write(StringPool.NEW_LINE);
-			responseWriter.endElement(StringPool.SCRIPT);
+			responseWriter.write("// ]]>\n");
+			responseWriter.endElement("script");
 		}
 	}
 

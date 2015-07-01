@@ -83,7 +83,7 @@ public class MultiPartFormDataProcessorImpl implements MultiPartFormDataProcesso
 
 		// FACES-1452: Non-alpha-numeric characters must be removed order to ensure that the folder will be
 		// created properly.
-		sessionId = sessionId.replaceAll("[^A-Za-z0-9]", StringPool.BLANK);
+		sessionId = sessionId.replaceAll("[^A-Za-z0-9]", "");
 
 		File uploadedFilesPath = new File(uploadedFilesDir, sessionId);
 
@@ -312,11 +312,11 @@ public class MultiPartFormDataProcessorImpl implements MultiPartFormDataProcesso
 
 		if (fileName != null) {
 
-			int pos = fileName.lastIndexOf(StringPool.PERIOD);
-			strippedFileName = fileName.replaceAll("[\\\\/\\[\\]:|<>+;=.?\"]", StringPool.DASH);
+			int pos = fileName.lastIndexOf(".");
+			strippedFileName = fileName.replaceAll("[\\\\/\\[\\]:|<>+;=.?\"]", "-");
 
 			if (pos > 0) {
-				strippedFileName = strippedFileName.substring(0, pos) + StringPool.PERIOD +
+				strippedFileName = strippedFileName.substring(0, pos) + "." +
 					strippedFileName.substring(pos + 1);
 			}
 		}

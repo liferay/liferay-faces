@@ -22,7 +22,6 @@ import javax.faces.context.ResponseWriter;
 import javax.faces.render.Renderer;
 
 import com.liferay.faces.util.component.ComponentUtil;
-import com.liferay.faces.util.lang.StringPool;
 
 
 /**
@@ -38,10 +37,10 @@ public class LayoutRenderer extends Renderer {
 
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
 
-		responseWriter.startElement(StringPool.DIV, uiComponent);
+		responseWriter.startElement("div", uiComponent);
 
 		String id = uiComponent.getClientId(facesContext);
-		responseWriter.writeAttribute(StringPool.ID, id, StringPool.ID);
+		responseWriter.writeAttribute("id", id, "id");
 
 		StringBuilder classNames = new StringBuilder();
 		classNames.append("aui-layout");
@@ -49,33 +48,33 @@ public class LayoutRenderer extends Renderer {
 		String cssClass = (String) attributes.get("cssClass");
 
 		if ((cssClass != null) && (cssClass.length() > 0)) {
-			classNames.append(StringPool.SPACE);
+			classNames.append(" ");
 			classNames.append(cssClass);
 		}
 
 		String styleClass = (String) attributes.get("styleClass");
 
 		if ((styleClass != null) && (styleClass.length() > 0)) {
-			classNames.append(StringPool.SPACE);
+			classNames.append(" ");
 			classNames.append(styleClass);
 		}
 
-		responseWriter.writeAttribute(StringPool.CLASS, classNames.toString(), null);
-		responseWriter.startElement(StringPool.DIV, null);
+		responseWriter.writeAttribute("class", classNames.toString(), null);
+		responseWriter.startElement("div", null);
 		classNames = new StringBuilder();
 		classNames.append("aui-layout-content");
 
 		if ((cssClass != null) && (cssClass.length() > 0)) {
-			classNames.append(StringPool.SPACE);
+			classNames.append(" ");
 			classNames.append(ComponentUtil.appendToCssClasses(cssClass, "-content"));
 		}
 
 		if ((styleClass != null) && (styleClass.length() > 0)) {
-			classNames.append(StringPool.SPACE);
+			classNames.append(" ");
 			classNames.append(ComponentUtil.appendToCssClasses(styleClass, "-content"));
 		}
 
-		responseWriter.writeAttribute(StringPool.CLASS, classNames.toString(), null);
+		responseWriter.writeAttribute("class", classNames.toString(), null);
 	}
 
 	@Override
@@ -83,8 +82,8 @@ public class LayoutRenderer extends Renderer {
 		super.encodeEnd(facesContext, uiComponent);
 
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
-		responseWriter.endElement(StringPool.DIV);
-		responseWriter.endElement(StringPool.DIV);
+		responseWriter.endElement("div");
+		responseWriter.endElement("div");
 	}
 
 }

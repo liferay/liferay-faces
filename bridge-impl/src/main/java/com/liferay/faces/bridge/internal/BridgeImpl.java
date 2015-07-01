@@ -41,7 +41,6 @@ import com.liferay.faces.bridge.config.BridgeConfig;
 import com.liferay.faces.bridge.config.BridgeConfigFactory;
 import com.liferay.faces.bridge.scope.BridgeRequestScopeManager;
 import com.liferay.faces.bridge.scope.BridgeRequestScopeManagerFactory;
-import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -169,14 +168,9 @@ public class BridgeImpl implements Bridge {
 		Calendar calendar = new GregorianCalendar();
 		String timestamp = dateFormat.format(calendar.getTime());
 		logMessage.append(timestamp);
-		logMessage.append(StringPool.SPACE);
-		logMessage.append("INFO");
-		logMessage.append(StringPool.SPACE);
-		logMessage.append(StringPool.SPACE);
-		logMessage.append("[BridgeImpl] Initializing");
-		logMessage.append(StringPool.SPACE);
+		logMessage.append(" INFO  [BridgeImpl] Initializing ");
 		logMessage.append(getTitle());
-		logMessage.append(StringPool.SPACE);
+		logMessage.append(" ");
 		logMessage.append(getVersion());
 		System.out.println(logMessage.toString());
 		this.initialized = true;

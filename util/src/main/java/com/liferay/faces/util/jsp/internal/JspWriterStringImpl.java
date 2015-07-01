@@ -18,8 +18,6 @@ import java.io.StringWriter;
 
 import javax.servlet.jsp.JspWriter;
 
-import com.liferay.faces.util.lang.StringPool;
-
 
 /**
  * This class is an implementation of {@link JspWriter} that writes to an underlying String instead of JSP.
@@ -62,7 +60,7 @@ public class JspWriterStringImpl extends JspWriter {
 
 	@Override
 	public void newLine() throws IOException {
-		stringWriter.write(StringPool.NEW_LINE);
+		stringWriter.write("\n");
 	}
 
 	@Override
@@ -118,7 +116,7 @@ public class JspWriterStringImpl extends JspWriter {
 
 	@Override
 	public void println() throws IOException {
-		stringWriter.write(StringPool.NEW_LINE);
+		stringWriter.write("\n");
 	}
 
 	@Override

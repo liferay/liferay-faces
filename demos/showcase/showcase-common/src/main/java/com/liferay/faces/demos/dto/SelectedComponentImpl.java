@@ -16,8 +16,6 @@ package com.liferay.faces.demos.dto;
 import java.io.Serializable;
 import java.util.List;
 
-import com.liferay.faces.util.lang.StringPool;
-
 
 /**
  * @author  Neil Griffin
@@ -53,7 +51,7 @@ public class SelectedComponentImpl extends ShowcaseComponentWrapper implements S
 			}
 		}
 
-		this.useCaseKey = showcaseComponent.getKey() + StringPool.DASH + useCaseName;
+		this.useCaseKey = showcaseComponent.getKey() + "-" + useCaseName;
 	}
 
 	@Override
