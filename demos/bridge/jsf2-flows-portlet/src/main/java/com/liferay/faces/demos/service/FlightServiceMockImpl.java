@@ -99,28 +99,17 @@ public class FlightServiceMockImpl implements FlightService {
 			StringBuilder description = new StringBuilder();
 			description.append("Flight#");
 			description.append(flightNumber);
-			description.append(" ");
-			description.append("departing from");
-			description.append(" ");
+			description.append(" departing from ");
 			description.append(departureAirport.getCity());
-			description.append(" ");
-			description.append("(");
+			description.append(" (");
 			description.append(departureAirport.getCode());
-			description.append(")");
-			description.append(" ");
-			description.append("on");
-			description.append(" ");
+			description.append(") on ");
 			description.append(dateFormat.format(flightDepartureDate));
-			description.append(" ");
-			description.append("arriving at");
-			description.append(" ");
+			description.append(" arriving at ");
 			description.append(arrivalAirport.getCity());
 			description.append("(");
 			description.append(arrivalAirport.getCode());
-			description.append(")");
-			description.append(" ");
-			description.append("on");
-			description.append(" ");
+			description.append(") on ");
 			description.append(dateFormat.format(flightArrivalDate));
 			flight.setDescription(description.toString());
 
@@ -139,7 +128,6 @@ public class FlightServiceMockImpl implements FlightService {
 	public int getTimeZoneOffset(double latitude, double longitude) {
 
 		String url = "http://www.earthtools.org/timezone/" + latitude + "/" + longitude;
-		System.err.println("!@#$ url=" + url);
 
 		return 10;
 	}

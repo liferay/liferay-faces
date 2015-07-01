@@ -37,7 +37,7 @@ public class Popover extends PopoverBase {
 			style = "display:none;";
 		}
 		else {
-			style = style + ";" + "display:none;";
+			style = style + ";display:none;";
 		}
 
 		return style;

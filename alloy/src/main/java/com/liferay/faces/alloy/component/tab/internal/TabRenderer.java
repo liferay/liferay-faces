@@ -48,7 +48,11 @@ public class TabRenderer extends TabRendererBase {
 	public void encodeChildren(FacesContext facesContext, UIComponent uiComponent) throws IOException {
 
 		UIComponent implicitPanelGroup = uiComponent.getFacet(TabHandler.IMPLICIT_FACET_NAME);
-		implicitPanelGroup.encodeAll(facesContext);
+
+		// For more information, see TabHandler.
+		if (implicitPanelGroup != null) {
+			implicitPanelGroup.encodeAll(facesContext);
+		}
 
 		super.encodeChildren(facesContext, uiComponent);
 	}
