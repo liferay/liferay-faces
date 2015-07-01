@@ -34,10 +34,7 @@ public abstract class NodeMenuNavRendererBase extends DelegatingAlloyRendererBas
 
 	// Private constants
 	private static final String ALLOY_MODULE_NAME = "node-menunav"; // Needed when yui="false"
-
-	// Public constants
-	public static final String COLON_OPTIONS = ":options";
-	public static final String IMAGE = "image";
+	private static final String COLON_OPTIONS = ":options";
 
 	// Needed when yui="false"
 	// Modules
@@ -75,8 +72,7 @@ public abstract class NodeMenuNavRendererBase extends DelegatingAlloyRendererBas
 
 		if (!disabled) {
 
-			String escapedOptionsDivId = escapeClientId(getDefaultOptionsId(facesContext, uiComponent) +
-					":" + "0");
+			String escapedOptionsDivId = escapeClientId(getDefaultOptionsId(facesContext, uiComponent) + ":0");
 
 			// AlloyRendererUtil.LIFERAY_Z_INDEX_OVERLAY
 			responseWriter.write("A.one('#");

@@ -29,9 +29,10 @@ import javax.faces.view.facelets.FaceletContext;
 
 
 /**
- * This class provides alloy:tab with the ability to implicitly wrap children inside of a {@link UIPanel} facet. This is
- * necessary because {@link UIData#visitTree(javax.faces.component.visit.VisitContext,
- * javax.faces.component.visit.VisitCallback)} only visits facets (and not children).
+ * This class provides alloy:tab with the ability to implicitly wrap the tab's children inside of a {@link UIPanel}
+ * facet. This is necessary because {@link UIData#visitTree(javax.faces.component.visit.VisitContext,
+ * javax.faces.component.visit.VisitCallback)} will visit facets but not children when it is not iterating over data
+ * (i.e. when the value and var attributes are unused).
  *
  * @author  Neil Griffin
  */
@@ -54,23 +55,31 @@ public class TabHandler extends ComponentHandler {
 
 		super.onComponentPopulated(faceletContext, uiComponent, parent);
 
-		// If an implicit panel group doesn't yet exist, then create one.
-		FacesContext facesContext = faceletContext.getFacesContext();
-		UIComponent implicitPanelGroup = (UIComponent) uiComponent.getFacet(IMPLICIT_FACET_NAME);
+		Map<String, Object> attributes = parent.getAttributes();
+		Object value = attributes.get("value");
+		Object var = attributes.get("var");
 
-		if (implicitPanelGroup == null) {
-			implicitPanelGroup = createImplicitPanelGroup(facesContext, uiComponent.getId());
-			uiComponent.getFacets().put(IMPLICIT_FACET_NAME, implicitPanelGroup);
-		}
+		// If not iterating over a DataModel, then
+		if ((value == null) || (var == null)) {
 
-		// Re-parent each child of the tab by adding it as a child of the implicit panel group.
-		List<UIComponent> implicitPanelGroupChildren = implicitPanelGroup.getChildren();
-		Iterator<UIComponent> childIterator = uiComponent.getChildren().iterator();
+			// If an implicit panel group doesn't yet exist, then create one.
+			FacesContext facesContext = faceletContext.getFacesContext();
+			UIComponent implicitPanelGroup = uiComponent.getFacet(IMPLICIT_FACET_NAME);
 
-		while (childIterator.hasNext()) {
-			UIComponent child = childIterator.next();
-			childIterator.remove();
-			implicitPanelGroupChildren.add(child);
+			if (implicitPanelGroup == null) {
+				implicitPanelGroup = createImplicitPanelGroup(facesContext, uiComponent.getId());
+				uiComponent.getFacets().put(IMPLICIT_FACET_NAME, implicitPanelGroup);
+			}
+
+			// Re-parent each child of the tab by adding it as a child of the implicit panel group.
+			List<UIComponent> implicitPanelGroupChildren = implicitPanelGroup.getChildren();
+			Iterator<UIComponent> childIterator = uiComponent.getChildren().iterator();
+
+			while (childIterator.hasNext()) {
+				UIComponent child = childIterator.next();
+				childIterator.remove();
+				implicitPanelGroupChildren.add(child);
+			}
 		}
 	}
 
