@@ -29,7 +29,7 @@ public class ConfiguredServletMappingImpl implements ConfiguredServletMapping {
 	private static final Logger logger = LoggerFactory.getLogger(ConfiguredServletMappingImpl.class);
 
 	// Private Strings
-	private static final String EXTENSION_WILDCARD = "*" + ".";
+	private static final String EXTENSION_WILDCARD = "*.";
 
 	// Private Data Members
 	private String extension;
