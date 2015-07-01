@@ -23,7 +23,6 @@ import javax.faces.context.FacesContext;
 
 import com.liferay.faces.util.io.Filterable;
 import com.liferay.faces.util.io.ResourceOutputStream;
-import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -129,7 +128,7 @@ public class ResourceOutputStreamRichFacesImpl extends ResourceOutputStream impl
 
 					int fileNameStartPos = urlStartPos + pathPrefix.length();
 
-					int dotPos = cssText.indexOf(StringPool.PERIOD, fileNameStartPos);
+					int dotPos = cssText.indexOf(".", fileNameStartPos);
 
 					if (dotPos > 0) {
 						boolean doneFindingExtension = false;

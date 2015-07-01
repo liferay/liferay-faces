@@ -19,7 +19,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.liferay.portal.NoSuchUserException;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.Layout;
@@ -45,8 +44,7 @@ public class ServiceUtil {
 
 		boolean active = true;
 		String description = name;
-		String friendlyURL = StringPool.FORWARD_SLASH +
-			name.toLowerCase().replaceAll(StringPool.SPACE, StringPool.DASH);
+		String friendlyURL = "/" + name.toLowerCase().replaceAll(" ", "-");
 		int type = GroupConstants.TYPE_COMMUNITY_OPEN;
 
 		return GroupLocalServiceUtil.addGroup(userId, (String) null, 0L, name, description, type, friendlyURL, active,
@@ -69,19 +67,19 @@ public class ServiceUtil {
 		String password1 = "test";
 		String password2 = password1;
 		boolean autoScreenName = false;
-		String screenName = firstName.toLowerCase() + StringPool.PERIOD + lastName.toLowerCase();
-		String emailAddress = screenName + StringPool.AT + "liferay.com";
+		String screenName = firstName.toLowerCase() + "." + lastName.toLowerCase();
+		String emailAddress = screenName + "@liferay.com";
 		long facebookId = 0L;
-		String openId = StringPool.BLANK;
+		String openId = "";
 		Locale locale = Locale.ENGLISH;
-		String middleName = StringPool.BLANK;
+		String middleName = "";
 		int prefixId = 0;
 		int suffixId = 0;
 		boolean male = true;
 		int birthdayMonth = 1;
 		int birthdayDay = 1;
 		int birthdayYear = 1970;
-		String jobTitle = StringPool.BLANK;
+		String jobTitle = "";
 		long[] groupIds = new long[] {};
 		long[] organizationIds = new long[] {};
 		long[] roleIds = new long[] {};

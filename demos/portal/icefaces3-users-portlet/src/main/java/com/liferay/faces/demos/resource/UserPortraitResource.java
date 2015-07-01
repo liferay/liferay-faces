@@ -26,7 +26,6 @@ import javax.faces.application.ResourceHandler;
 import javax.faces.context.FacesContext;
 
 import com.liferay.faces.demos.util.UploadedFileUtil;
-import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -193,22 +192,22 @@ public class UserPortraitResource extends Resource {
 			else {
 
 				buf.append(ResourceHandler.RESOURCE_IDENTIFIER);
-				buf.append(StringPool.FORWARD_SLASH);
+				buf.append("/");
 				buf.append(getResourceName());
-				buf.append(StringPool.QUESTION);
+				buf.append("?");
 				buf.append(PARAM_LIBRARY_NAME);
-				buf.append(StringPool.EQUAL);
+				buf.append("=");
 				buf.append(getLibraryName());
-				buf.append(StringPool.AMPERSAND);
+				buf.append("&");
 				buf.append(UserPortraitResourceHandler.PARAM_NAME_USER_ID);
-				buf.append(StringPool.EQUAL);
+				buf.append("=");
 				buf.append(user.getUserId());
 
 				if (uploadedFileId != null) {
 
-					buf.append(StringPool.AMPERSAND);
+					buf.append("&");
 					buf.append(UserPortraitResourceHandler.PARAM_NAME_UPLOADED_FILE_ID);
-					buf.append(StringPool.EQUAL);
+					buf.append("=");
 					buf.append(uploadedFileId);
 				}
 

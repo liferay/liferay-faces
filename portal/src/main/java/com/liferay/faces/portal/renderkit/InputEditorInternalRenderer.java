@@ -41,7 +41,6 @@ import com.liferay.faces.util.client.ScriptFactory;
 import com.liferay.faces.util.context.FacesRequestContext;
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.jsp.JspAdapterFactory;
-import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.util.render.internal.CleanupRenderer;
@@ -67,7 +66,7 @@ public class InputEditorInternalRenderer extends Renderer implements CleanupRend
 	private static final String EDITOR_NAME_TOKEN = "%EDITOR_NAME%";
 	private static final String ONBLUR_JS;
 	private static final String ONBLUR_METHOD_NAME_TOKEN = "%ONBLUR_METHOD_NAME%";
-	private static final String COMMENT_CDATA_CLOSE = "// " + StringPool.CDATA_CLOSE;
+	private static final String COMMENT_CDATA_CLOSE = "// ]]>";
 	private static final String CKEDITOR = "ckeditor";
 	private static final String CKEDITOR_REPLACE = "CKEDITOR.replace(";
 	private static final String CDPL_INITIALIZE_FALSE = "var customDataProcessorLoaded = false;";
@@ -75,16 +74,11 @@ public class InputEditorInternalRenderer extends Renderer implements CleanupRend
 
 	static {
 		StringBuilder onBlurJS = new StringBuilder();
-		onBlurJS.append("(function() {");
-		onBlurJS.append("var ckEditor = CKEDITOR.instances['");
+		onBlurJS.append("(function() {var ckEditor = CKEDITOR.instances['");
 		onBlurJS.append(EDITOR_NAME_TOKEN);
-		onBlurJS.append("'];");
-		onBlurJS.append("ckEditor.on('blur',");
-		onBlurJS.append("function () {");
+		onBlurJS.append("'];ckEditor.on('blur',function () {");
 		onBlurJS.append(ONBLUR_METHOD_NAME_TOKEN);
-		onBlurJS.append("();");
-		onBlurJS.append("});");
-		onBlurJS.append("})();");
+		onBlurJS.append("();});})();");
 		ONBLUR_JS = onBlurJS.toString();
 	}
 
@@ -116,31 +110,19 @@ public class InputEditorInternalRenderer extends Renderer implements CleanupRend
 		// Build up a URL that can be used to invoke the liferay-ui:input-editor JSP tag.
 		String url = "/resources/liferay-ui/jsp/input-editor.jsp";
 		StringBuilder queryString = new StringBuilder();
-		queryString.append(StringPool.QUESTION);
-		queryString.append("editorImpl");
-		queryString.append(StringPool.EQUAL);
+		queryString.append("?editorImpl=");
 		queryString.append(editorImpl);
-		queryString.append(StringPool.AMPERSAND);
-		queryString.append("height");
-		queryString.append(StringPool.EQUAL);
+		queryString.append("&height=");
 		queryString.append(attributes.get("height"));
-		queryString.append(StringPool.AMPERSAND);
-		queryString.append("initMethod");
-		queryString.append(StringPool.EQUAL);
+		queryString.append("&initMethod=");
 		queryString.append(attributes.get("initMethod"));
-		queryString.append(StringPool.AMPERSAND);
-		queryString.append("name");
-		queryString.append(StringPool.EQUAL);
+		queryString.append("&name=");
 
 		String editorName = (String) attributes.get("name");
 		queryString.append(editorName);
-		queryString.append(StringPool.AMPERSAND);
-		queryString.append("onChangeMethod");
-		queryString.append(StringPool.EQUAL);
+		queryString.append("&onChangeMethod=");
 		queryString.append(attributes.get("onChangeMethod"));
-		queryString.append(StringPool.AMPERSAND);
-		queryString.append("skipEditorLoading");
-		queryString.append(StringPool.EQUAL);
+		queryString.append("&skipEditorLoading=");
 
 		if (resourcePhase) {
 
@@ -152,13 +134,9 @@ public class InputEditorInternalRenderer extends Renderer implements CleanupRend
 			queryString.append(Boolean.FALSE.toString());
 		}
 
-		queryString.append(StringPool.AMPERSAND);
-		queryString.append("toolbarSet");
-		queryString.append(StringPool.EQUAL);
+		queryString.append("&toolbarSet=");
 		queryString.append(attributes.get("toolbarSet"));
-		queryString.append(StringPool.AMPERSAND);
-		queryString.append("width");
-		queryString.append(StringPool.EQUAL);
+		queryString.append("&width=");
 		queryString.append(attributes.get("width"));
 		url = url + queryString.toString();
 
@@ -207,14 +185,9 @@ public class InputEditorInternalRenderer extends Renderer implements CleanupRend
 				// parital-response.
 				if (resourcePhase) {
 					StringBuilder scriptMarkup = new StringBuilder();
-					scriptMarkup.append(StringPool.LESS_THAN);
-					scriptMarkup.append(StringPool.SCRIPT);
-					scriptMarkup.append(StringPool.GREATER_THAN);
+					scriptMarkup.append("<script>");
 					scriptMarkup.append(onBlurScript);
-					scriptMarkup.append(StringPool.LESS_THAN);
-					scriptMarkup.append(StringPool.FORWARD_SLASH);
-					scriptMarkup.append(StringPool.SCRIPT);
-					scriptMarkup.append(StringPool.GREATER_THAN);
+					scriptMarkup.append("</script>");
 					bufferedResponse = bufferedResponse.concat(scriptMarkup.toString());
 				}
 
@@ -290,7 +263,7 @@ public class InputEditorInternalRenderer extends Renderer implements CleanupRend
 
 				// Remove all the "<![CDATA[" and "]]>" tokens since they will interfere with the JSF
 				// partial-response.
-				String[] tokensToRemove = new String[] { StringPool.CDATA_OPEN, StringPool.CDATA_CLOSE };
+				String[] tokensToRemove = new String[] { "<![CDATA[", "]]>" };
 
 				for (String token : tokensToRemove) {
 					int pos = javaScriptFromRequestDispatcher.indexOf(token);
@@ -308,15 +281,9 @@ public class InputEditorInternalRenderer extends Renderer implements CleanupRend
 				StringBuilder javaScriptFragment = new StringBuilder();
 				javaScriptFragment.append("var oldEditor = CKEDITOR.instances['");
 				javaScriptFragment.append(editorName);
-				javaScriptFragment.append("']; if (oldEditor) {");
-				javaScriptFragment.append("oldEditor.destroy(true);");
-				javaScriptFragment.append("delete window['");
+				javaScriptFragment.append("']; if (oldEditor) {oldEditor.destroy(true);delete window['");
 				javaScriptFragment.append(editorName);
-				javaScriptFragment.append("'];");
-				javaScriptFragment.append("}");
-				javaScriptFragment.append(StringPool.NEW_LINE);
-				javaScriptFragment.append(StringPool.TAB);
-				javaScriptFragment.append(StringPool.TAB);
+				javaScriptFragment.append("'];}\n\t\t");
 
 				// Insert the JavaScript fragment into the JavaScript code at the appropriate location.
 				int pos = javaScriptFromRequestDispatcher.indexOf(CKEDITOR_REPLACE);
@@ -326,7 +293,7 @@ public class InputEditorInternalRenderer extends Renderer implements CleanupRend
 						javaScriptFragment.toString() + javaScriptFromRequestDispatcher.substring(pos);
 				}
 				else {
-					javaScriptFromRequestDispatcher = javaScriptFromRequestDispatcher + StringPool.NEW_LINE +
+					javaScriptFromRequestDispatcher = javaScriptFromRequestDispatcher + "\n" +
 						javaScriptFragment.toString();
 				}
 
@@ -336,14 +303,11 @@ public class InputEditorInternalRenderer extends Renderer implements CleanupRend
 				// new CKEditor in the DOM will have its setData() method called with the value from the
 				// hidden field.
 				javaScriptFragment = new StringBuilder();
-				javaScriptFragment.append("if (oldEditor)");
-				javaScriptFragment.append(StringPool.OPEN_CURLY_BRACE);
+				javaScriptFragment.append("if (oldEditor){");
 				javaScriptFragment.append(CDPL_INITIALIZE_TRUE);
-				javaScriptFragment.append(StringPool.CLOSE_CURLY_BRACE);
-				javaScriptFragment.append("else");
-				javaScriptFragment.append(StringPool.OPEN_CURLY_BRACE);
+				javaScriptFragment.append("}else{");
 				javaScriptFragment.append(CDPL_INITIALIZE_FALSE);
-				javaScriptFragment.append(StringPool.CLOSE_CURLY_BRACE);
+				javaScriptFragment.append("}");
 
 				// Insert the JavaScript fragment into the JavaScript code at the appropriate location.
 				pos = javaScriptFromRequestDispatcher.indexOf(CDPL_INITIALIZE_FALSE);
@@ -354,7 +318,7 @@ public class InputEditorInternalRenderer extends Renderer implements CleanupRend
 						javaScriptFromRequestDispatcher.substring(pos + CDPL_INITIALIZE_FALSE.length());
 				}
 				else {
-					javaScriptFromRequestDispatcher = javaScriptFromRequestDispatcher + StringPool.NEW_LINE +
+					javaScriptFromRequestDispatcher = javaScriptFromRequestDispatcher + "\n" +
 						javaScriptFragment.toString();
 				}
 
@@ -375,12 +339,9 @@ public class InputEditorInternalRenderer extends Renderer implements CleanupRend
 		// Build up a JavaScript fragment that will cleanup the DOM.
 		scriptBuilder.append("var oldEditor = CKEDITOR.instances['");
 		scriptBuilder.append(editorName);
-		scriptBuilder.append("']; if (oldEditor) {");
-		scriptBuilder.append("oldEditor.destroy(true);");
-		scriptBuilder.append("delete window['");
+		scriptBuilder.append("']; if (oldEditor) {oldEditor.destroy(true);delete window['");
 		scriptBuilder.append(editorName);
-		scriptBuilder.append("'];");
-		scriptBuilder.append("}");
+		scriptBuilder.append("'];}");
 
 		FacesRequestContext facesRequestContext = FacesRequestContext.getCurrentInstance();
 		String script = scriptBuilder.toString();
@@ -424,7 +385,7 @@ public class InputEditorInternalRenderer extends Renderer implements CleanupRend
 	}
 
 	protected String getPortletId(PortletRequest portletRequest) {
-		String portletId = StringPool.BLANK;
+		String portletId = "";
 		Portlet portlet = (Portlet) portletRequest.getAttribute(WebKeys.RENDER_PORTLET);
 
 		if (portlet != null) {
@@ -446,19 +407,19 @@ public class InputEditorInternalRenderer extends Renderer implements CleanupRend
 			boolean done1 = false;
 
 			while (!done1) {
-				int beginPos = response.indexOf(StringPool.SCRIPT_TAG_BEGIN);
-				int endPos = response.indexOf(StringPool.SCRIPT_TAG_END, beginPos);
+				int beginPos = response.indexOf("<script>");
+				int endPos = response.indexOf("</script>", beginPos);
 
 				if ((beginPos >= 0) && (endPos > beginPos)) {
-					String script = response.substring(beginPos, endPos + StringPool.SCRIPT_TAG_END.length());
+					String script = response.substring(beginPos, endPos + "</script>".length());
 
 					boolean done2 = false;
 
 					while (!done2) {
-						int cdataOpenPos = script.indexOf(StringPool.CDATA_OPEN);
+						int cdataOpenPos = script.indexOf("<![CDATA[");
 
 						if (cdataOpenPos > 0) {
-							script = script.substring(cdataOpenPos + StringPool.CDATA_OPEN.length());
+							script = script.substring(cdataOpenPos + "<![CDATA[".length());
 
 							int cdataClosePos = script.indexOf(COMMENT_CDATA_CLOSE);
 
@@ -466,7 +427,7 @@ public class InputEditorInternalRenderer extends Renderer implements CleanupRend
 								script = script.substring(0, cdataClosePos);
 							}
 							else {
-								cdataClosePos = script.indexOf(StringPool.CDATA_CLOSE);
+								cdataClosePos = script.indexOf("]]>");
 
 								if (cdataClosePos > 0) {
 									script = script.substring(0, cdataClosePos);
@@ -479,8 +440,7 @@ public class InputEditorInternalRenderer extends Renderer implements CleanupRend
 					}
 
 					scriptBuilder.append(script);
-					response = response.substring(0, beginPos) +
-						response.substring(endPos + StringPool.SCRIPT_TAG_END.length());
+					response = response.substring(0, beginPos) + response.substring(endPos + "</script>".length());
 				}
 				else {
 					done1 = true;

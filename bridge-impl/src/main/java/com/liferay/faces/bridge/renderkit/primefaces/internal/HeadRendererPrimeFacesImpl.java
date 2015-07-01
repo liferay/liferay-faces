@@ -36,7 +36,6 @@ import javax.portlet.PortletResponse;
 import com.liferay.faces.bridge.component.internal.ResourceComponent;
 import com.liferay.faces.bridge.renderkit.html_basic.internal.HeadRendererBridgeImpl;
 import com.liferay.faces.bridge.util.internal.URLUtil;
-import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -118,7 +117,7 @@ public class HeadRendererPrimeFacesImpl extends HeadRendererBridgeImpl {
 				// Determine the value of the "javax.faces.resource" and "ln" parameters from the URL.
 				String resourceName = null;
 				String libraryName = null;
-				String decodedExternalScriptURL = URLDecoder.decode(externalScriptURL, StringPool.UTF8);
+				String decodedExternalScriptURL = URLDecoder.decode(externalScriptURL, "UTF-8");
 				Map<String, String[]> parsedParameterMapValuesArray = URLUtil.parseParameterMapValuesArray(
 						decodedExternalScriptURL);
 

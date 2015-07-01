@@ -13,10 +13,6 @@
  */
 package com.liferay.faces.util.config.internal;
 
-import com.liferay.faces.util.config.ConfiguredServlet;
-import com.liferay.faces.util.config.ConfiguredServletMapping;
-import com.liferay.faces.util.config.FacesConfig;
-import com.liferay.faces.util.config.WebConfig;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -29,7 +25,10 @@ import javax.faces.application.ViewHandler;
 import javax.faces.webapp.FacesServlet;
 import javax.xml.parsers.SAXParser;
 
-import com.liferay.faces.util.lang.StringPool;
+import com.liferay.faces.util.config.ConfiguredServlet;
+import com.liferay.faces.util.config.ConfiguredServletMapping;
+import com.liferay.faces.util.config.FacesConfig;
+import com.liferay.faces.util.config.WebConfig;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -107,7 +106,7 @@ public class FacesConfigScannerImpl implements FacesConfigScanner {
 			defaultSuffixParam = ViewHandler.DEFAULT_SUFFIX;
 		}
 
-		List<String> configuredSuffixes = Arrays.asList(defaultSuffixParam.split(StringPool.SPACE));
+		List<String> configuredSuffixes = Arrays.asList(defaultSuffixParam.split(" "));
 
 		// If they don't exist explicitly in web.xml, then setup implicit servlet-mapping entries to the default
 		// suffixes.
@@ -126,7 +125,7 @@ public class FacesConfigScannerImpl implements FacesConfigScanner {
 			}
 
 			if (!found) {
-				String urlPattern = StringPool.STAR + configuredSuffix;
+				String urlPattern = "*" + configuredSuffix;
 				ConfiguredServletMapping implicitFacesServletMapping = new ConfiguredServletMappingImpl(FACES_SERVLET,
 						urlPattern);
 				facesServletMappings.add(implicitFacesServletMapping);

@@ -26,7 +26,6 @@ import javax.faces.render.Renderer;
 
 import com.liferay.faces.util.helper.BooleanHelper;
 import com.liferay.faces.util.helper.StringHelper;
-import com.liferay.faces.util.lang.StringPool;
 
 
 /**
@@ -41,7 +40,7 @@ public class DialogRenderer extends Renderer {
 
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
 
-		responseWriter.startElement(StringPool.SCRIPT, uiComponent);
+		responseWriter.startElement("script", uiComponent);
 		responseWriter.writeAttribute("type", "text/javascript", null);
 
 		responseWriter.write("AUI().use('aui-dialog', function(A) {");
@@ -111,7 +110,7 @@ public class DialogRenderer extends Renderer {
 		responseWriter.write("}).render();");
 		responseWriter.write("});");
 		responseWriter.write("});");
-		responseWriter.endElement(StringPool.SCRIPT);
+		responseWriter.endElement("script");
 	}
 
 	protected void writeBooleanAttribute(ResponseWriter responseWriter, Map<String, Object> attributes, String name,
@@ -128,17 +127,17 @@ public class DialogRenderer extends Renderer {
 			responseWriter.write(" : ");
 
 			if (quote) {
-				responseWriter.write(StringPool.QUOTE);
+				responseWriter.write("\"");
 			}
 
 			responseWriter.write(value);
 
 			if (quote) {
-				responseWriter.write(StringPool.QUOTE);
+				responseWriter.write("\"");
 			}
 
 			if (!lastAttribute) {
-				responseWriter.write(StringPool.COMMA);
+				responseWriter.write(",");
 			}
 		}
 	}

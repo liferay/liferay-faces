@@ -13,10 +13,9 @@
  */
 package com.liferay.faces.util.product.internal;
 
-import com.liferay.faces.util.product.ProductConstants;
 import java.lang.reflect.Method;
 
-import com.liferay.faces.util.lang.StringPool;
+import com.liferay.faces.util.product.ProductConstants;
 
 
 /**
@@ -36,7 +35,7 @@ public class ProductRichFacesImpl extends ProductBaseImpl {
 				String version = (String) method.invoke(versionObj, (Object[]) null);
 
 				if (version != null) {
-					version = version.replaceFirst("[^0-9]*", StringPool.BLANK);
+					version = version.replaceFirst("[^0-9]*", "");
 					initVersionInfo(version);
 				}
 

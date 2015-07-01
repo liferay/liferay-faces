@@ -22,8 +22,6 @@ import javax.faces.component.UIViewRoot;
 import javax.faces.component.html.HtmlOutputLabel;
 import javax.faces.context.FacesContext;
 
-import com.liferay.faces.util.lang.StringPool;
-
 
 /**
  * @author  Neil Griffin
@@ -47,7 +45,7 @@ public class ComponentUtil {
 
 			if (value.length() > 0) {
 				StringBuilder buf = new StringBuilder();
-				String[] cssClasses = cssClass.trim().split(StringPool.SPACE);
+				String[] cssClasses = cssClass.trim().split(" ");
 				boolean firstClass = true;
 
 				for (String curCssClass : cssClasses) {
@@ -56,7 +54,7 @@ public class ComponentUtil {
 						firstClass = false;
 					}
 					else {
-						buf.append(StringPool.SPACE);
+						buf.append(" ");
 					}
 
 					buf.append(curCssClass);
@@ -80,7 +78,7 @@ public class ComponentUtil {
 			if (className != null) {
 
 				if (!first) {
-					cssClassBuilder.append(StringPool.SPACE);
+					cssClassBuilder.append(" ");
 				}
 
 				cssClassBuilder.append(className);

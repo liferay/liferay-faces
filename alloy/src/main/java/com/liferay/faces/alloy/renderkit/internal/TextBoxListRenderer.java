@@ -22,7 +22,6 @@ import javax.faces.context.ResponseWriter;
 import javax.faces.render.Renderer;
 
 import com.liferay.faces.util.component.ComponentUtil;
-import com.liferay.faces.util.lang.StringPool;
 
 
 /**
@@ -41,10 +40,10 @@ public class TextBoxListRenderer extends Renderer {
 		Map<String, Object> attributes = uiComponent.getAttributes();
 
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
-		responseWriter.startElement(StringPool.DIV, uiComponent);
+		responseWriter.startElement("div", uiComponent);
 
 		String id = uiComponent.getClientId(facesContext);
-		responseWriter.writeAttribute(StringPool.ID, id, StringPool.ID);
+		responseWriter.writeAttribute("id", id, "id");
 
 		StringBuilder outerDivClassNames = new StringBuilder();
 		outerDivClassNames.append("aui-widget aui-component aui-textboxlist ");
@@ -52,21 +51,21 @@ public class TextBoxListRenderer extends Renderer {
 		String cssClass = (String) attributes.get(CSS_CLASS);
 
 		if ((cssClass != null) && (cssClass.length() > 0)) {
-			outerDivClassNames.append(StringPool.SPACE);
+			outerDivClassNames.append(" ");
 			outerDivClassNames.append(cssClass);
 		}
 
 		String styleClass = (String) attributes.get(STYLE_CLASS);
 
 		if ((styleClass != null) && (styleClass.length() > 0)) {
-			outerDivClassNames.append(StringPool.SPACE);
+			outerDivClassNames.append(" ");
 			outerDivClassNames.append(styleClass);
 		}
 
 		String autoComplete = (String) attributes.get("autoComplete");
 
 		if (autoComplete == null) {
-			autoComplete = StringPool.FALSE;
+			autoComplete = "false";
 		}
 		else {
 			autoComplete = autoComplete.trim().toLowerCase();
@@ -74,8 +73,8 @@ public class TextBoxListRenderer extends Renderer {
 
 		if (autoComplete.length() > 0) {
 
-			if (autoComplete.equals(StringPool.TRUE)) {
-				outerDivClassNames.append(StringPool.SPACE);
+			if (autoComplete.equals("true")) {
+				outerDivClassNames.append(" ");
 				outerDivClassNames.append("aui-autocomplete");
 			}
 
@@ -84,7 +83,7 @@ public class TextBoxListRenderer extends Renderer {
 		String tagSelector = (String) attributes.get("tagSelector");
 
 		if (tagSelector == null) {
-			tagSelector = StringPool.TRUE;
+			tagSelector = "true";
 		}
 		else {
 			tagSelector = tagSelector.trim().toLowerCase();
@@ -92,48 +91,48 @@ public class TextBoxListRenderer extends Renderer {
 
 		if (tagSelector.length() > 0) {
 
-			if (tagSelector.equals(StringPool.TRUE)) {
-				outerDivClassNames.append(StringPool.SPACE);
+			if (tagSelector.equals("true")) {
+				outerDivClassNames.append(" ");
 				outerDivClassNames.append("aui-tagselector aui-tagselector-focused");
 			}
 		}
 
-		responseWriter.writeAttribute(StringPool.CLASS, outerDivClassNames.toString(), null);
-		responseWriter.startElement(StringPool.DIV, uiComponent);
+		responseWriter.writeAttribute("class", outerDivClassNames.toString(), null);
+		responseWriter.startElement("div", uiComponent);
 
 		StringBuilder innerDivClassNames = new StringBuilder();
 		innerDivClassNames.append("lfr-tags-selector-content  aui-textboxlist-content");
 
 		if ((cssClass != null) && (cssClass.length() > 0)) {
-			innerDivClassNames.append(StringPool.SPACE);
+			innerDivClassNames.append(" ");
 			innerDivClassNames.append(ComponentUtil.appendToCssClasses(cssClass, "-content"));
 		}
 
 		if ((styleClass != null) && (styleClass.length() > 0)) {
-			innerDivClassNames.append(StringPool.SPACE);
+			innerDivClassNames.append(" ");
 			innerDivClassNames.append(ComponentUtil.appendToCssClasses(styleClass, "-content"));
 		}
 
 		if (autoComplete.length() > 0) {
 
-			if (autoComplete.equals(StringPool.TRUE)) {
-				innerDivClassNames.append(StringPool.SPACE);
+			if (autoComplete.equals("true")) {
+				innerDivClassNames.append(" ");
 				innerDivClassNames.append("aui-autocomplete-content");
 			}
 		}
 
 		if (tagSelector.length() > 0) {
 
-			if (tagSelector.equals(StringPool.TRUE)) {
-				innerDivClassNames.append(StringPool.SPACE);
+			if (tagSelector.equals("true")) {
+				innerDivClassNames.append(" ");
 				innerDivClassNames.append("aui-tagselector-content");
 			}
 		}
 
-		responseWriter.writeAttribute(StringPool.CLASS, innerDivClassNames.toString(), null);
-		responseWriter.startElement(StringPool.UL, uiComponent);
+		responseWriter.writeAttribute("class", innerDivClassNames.toString(), null);
+		responseWriter.startElement("ul", uiComponent);
 
-		responseWriter.writeAttribute(StringPool.CLASS, "aui-helper-clearfix aui-textboxlistentry-holder", null);
+		responseWriter.writeAttribute("class", "aui-helper-clearfix aui-textboxlistentry-holder", null);
 
 	}
 
@@ -142,9 +141,9 @@ public class TextBoxListRenderer extends Renderer {
 		super.encodeEnd(facesContext, uiComponent);
 
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
-		responseWriter.endElement(StringPool.UL);
-		responseWriter.endElement(StringPool.DIV);
-		responseWriter.endElement(StringPool.DIV);
+		responseWriter.endElement("ul");
+		responseWriter.endElement("div");
+		responseWriter.endElement("div");
 	}
 
 }

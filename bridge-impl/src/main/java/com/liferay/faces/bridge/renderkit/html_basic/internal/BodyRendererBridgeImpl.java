@@ -27,7 +27,6 @@ import com.liferay.faces.util.application.ComponentResource;
 import com.liferay.faces.util.application.ComponentResourceFactory;
 import com.liferay.faces.util.application.ComponentResourceUtil;
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
-import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -46,7 +45,7 @@ public class BodyRendererBridgeImpl extends BodyRendererBridgeCompatImpl {
 
 	// Private Constants
 	private static final String ATTR_STYLE_CLASS = "styleClass";
-	private static final String ELEMENT_DIV = StringPool.DIV;
+	private static final String ELEMENT_DIV = "div";
 	private static final String[] BODY_PASS_THRU_ATTRIBUTES = new String[] {
 			"onclick", "ondblclick", "onkeydown", "onkeypress", "onkeyup", "onload", "onmousedown", "onmousemove",
 			"onmouseout", "onmouseover", "onmouseup", "onunload", ATTR_STYLE_CLASS, "title"
@@ -68,7 +67,7 @@ public class BodyRendererBridgeImpl extends BodyRendererBridgeCompatImpl {
 
 		PortletNamingContainerUIViewRoot viewRoot = (PortletNamingContainerUIViewRoot) facesContext.getViewRoot();
 		String id = viewRoot.getContainerClientId(facesContext);
-		responseWriter.writeAttribute(StringPool.ID, id, null);
+		responseWriter.writeAttribute("id", id, null);
 
 		// Render the HTML "pass-thru" attributes on the <div> tag.
 		for (int i = 0; i < BODY_PASS_THRU_ATTRIBUTES.length; i++) {
@@ -77,7 +76,7 @@ public class BodyRendererBridgeImpl extends BodyRendererBridgeCompatImpl {
 			Object attributeValue = uiComponent.getAttributes().get(attributeName);
 
 			if (attributeName.equals(ATTR_STYLE_CLASS)) {
-				renderedName = StringPool.CLASS;
+				renderedName = "class";
 
 				// Add a special CSS class name in order to clue-in the developer who might be examining the rendered
 				// markup that a <div> was rendered instead of <body>.

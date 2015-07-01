@@ -20,7 +20,6 @@ import javax.faces.context.ResponseWriter;
 import javax.faces.context.ResponseWriterWrapper;
 
 import com.liferay.faces.bridge.util.internal.FacesURLEncoder;
-import com.liferay.faces.util.lang.StringPool;
 
 
 /**
@@ -44,16 +43,14 @@ public class ResponseWriterResourceImpl extends ResponseWriterWrapper {
 
 	@Override
 	public void endElement(String name) throws IOException {
-		write(StringPool.GREATER_THAN);
-		write(StringPool.LESS_THAN);
-		write(StringPool.FORWARD_SLASH);
+		write("></");
 		write(name);
-		write(StringPool.GREATER_THAN);
+		write(">");
 	}
 
 	@Override
 	public void startElement(String name, UIComponent component) throws IOException {
-		write(StringPool.LESS_THAN);
+		write("<");
 		write(name);
 	}
 
@@ -64,12 +61,11 @@ public class ResponseWriterResourceImpl extends ResponseWriterWrapper {
 
 	@Override
 	public void writeAttribute(String name, Object value, String property) throws IOException {
-		write(StringPool.SPACE);
+		write(" ");
 		write(name);
-		write(StringPool.EQUAL);
-		write(StringPool.QUOTE);
+		write("=\"");
 		write((String) value);
-		write(StringPool.QUOTE);
+		write("\"");
 	}
 
 	@Override
@@ -82,7 +78,7 @@ public class ResponseWriterResourceImpl extends ResponseWriterWrapper {
 			if (encodedURI != null) {
 
 				// Remove all the encoded ampersands. See: http://issues.liferay.com/browse/FACES-1236
-				encodedURI = encodedURI.replaceAll(REGEX_AMPERSAND, StringPool.AMPERSAND);
+				encodedURI = encodedURI.replaceAll(REGEX_AMPERSAND, "&");
 			}
 
 			writeAttribute(name, encodedURI, property);

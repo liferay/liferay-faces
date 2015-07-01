@@ -21,8 +21,6 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.portlet.PortletRequest;
 
-import com.liferay.faces.util.lang.StringPool;
-
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
@@ -54,7 +52,7 @@ public class TestBean implements Serializable {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay) portletRequest.getAttribute(WebKeys.THEME_DISPLAY);
 		String portalURL = PortalUtil.getPortalURL(portletRequest);
-		this.requestedURL = portalURL + StringPool.FORWARD_SLASH + themeDisplay.getURLCurrent();
+		this.requestedURL = portalURL + "/" + themeDisplay.getURLCurrent();
 	}
 
 	public String getAlpha() {
