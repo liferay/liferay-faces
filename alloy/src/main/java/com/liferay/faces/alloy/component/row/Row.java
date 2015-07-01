@@ -17,8 +17,6 @@ import javax.el.ValueExpression;
 import javax.faces.component.UIPanel;
 import javax.faces.context.FacesContext;
 
-import com.liferay.faces.util.lang.StringPool;
-
 
 /**
  * @author  Juan Gonzalez
@@ -86,7 +84,7 @@ public class Row extends UIPanel {
 		if (styleClass == null) {
 			ValueExpression valueExpression = getValueExpression(STYLE_CLASS);
 
-			styleClass = StringPool.BLANK;
+			styleClass = "";
 
 			if (valueExpression != null) {
 				styleClass = (String) valueExpression.getValue(FacesContext.getCurrentInstance().getELContext());

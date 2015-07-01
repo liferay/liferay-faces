@@ -21,7 +21,6 @@ import javax.faces.context.ResponseWriter;
 import javax.faces.render.Renderer;
 
 import com.liferay.faces.alloy.component.row.Row;
-import com.liferay.faces.util.lang.StringPool;
 
 
 /**
@@ -39,10 +38,10 @@ public class RowRenderer extends Renderer {
 		Row row = (Row) uiComponent;
 
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
-		responseWriter.startElement(StringPool.DIV, uiComponent);
+		responseWriter.startElement("div", uiComponent);
 
 		String id = uiComponent.getClientId(facesContext);
-		responseWriter.writeAttribute(StringPool.ID, id, null);
+		responseWriter.writeAttribute("id", id, null);
 
 		StringBuilder classNames = new StringBuilder();
 
@@ -56,24 +55,24 @@ public class RowRenderer extends Renderer {
 		String cssClass = row.getCssClass();
 
 		if ((cssClass != null) && (cssClass.length() > 0)) {
-			classNames.append(StringPool.SPACE);
+			classNames.append(" ");
 			classNames.append(cssClass);
 		}
 
 		String styleClass = row.getStyleClass();
 
 		if ((styleClass != null) && (styleClass.length() > 0)) {
-			classNames.append(StringPool.SPACE);
+			classNames.append(" ");
 			classNames.append(styleClass);
 		}
 
-		responseWriter.writeAttribute(StringPool.CLASS, classNames.toString(), null);
+		responseWriter.writeAttribute("class", classNames.toString(), null);
 	}
 
 	@Override
 	public void encodeEnd(FacesContext facesContext, UIComponent uiComponent) throws IOException {
 
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
-		responseWriter.endElement(StringPool.DIV);
+		responseWriter.endElement("div");
 	}
 }

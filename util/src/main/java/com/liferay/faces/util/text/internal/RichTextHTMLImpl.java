@@ -16,8 +16,6 @@ package com.liferay.faces.util.text.internal;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.liferay.faces.util.lang.StringPool;
-
 
 /**
  * @author  Neil Griffin
@@ -51,9 +49,9 @@ public class RichTextHTMLImpl extends RichTextBaseImpl {
 
 			Matcher tagMatcher = TAG_PATTERN.matcher(cleanString);
 
-			cleanString = tagMatcher.replaceAll(StringPool.BLANK);
-			cleanString = cleanString.replaceAll("&nbsp;", StringPool.SPACE);
-			cleanString = WHITESPACE_PATTERN.matcher(cleanString).replaceAll(StringPool.SPACE);
+			cleanString = tagMatcher.replaceAll("");
+			cleanString = cleanString.replaceAll("&nbsp;", " ");
+			cleanString = WHITESPACE_PATTERN.matcher(cleanString).replaceAll(" ");
 			cleanString = cleanString.trim();
 			count = cleanString.length();
 		}

@@ -22,7 +22,6 @@ import javax.faces.render.Renderer;
 
 import com.liferay.faces.alloy.component.AUICol;
 import com.liferay.faces.alloy.component.column.Column;
-import com.liferay.faces.util.lang.StringPool;
 
 
 /**
@@ -31,21 +30,16 @@ import com.liferay.faces.util.lang.StringPool;
 public class ColumnRenderer extends Renderer {
 
 	protected static final String OFFSET = "offset";
-	protected static final String OFFSET_WIDTH = "offsetWidth";
-	protected static final String SPAN = "span";
-	protected static final String STYLE = "style";
-	protected static final String STYLE_CLASS = "styleClass";
-	protected static final String WIDTH = "width";
 
 	@Override
 	public void encodeBegin(FacesContext facesContext, UIComponent uiComponent) throws IOException {
 		super.encodeBegin(facesContext, uiComponent);
 
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
-		responseWriter.startElement(StringPool.DIV, uiComponent);
+		responseWriter.startElement("div", uiComponent);
 
 		String clientId = uiComponent.getClientId(facesContext);
-		responseWriter.writeAttribute(StringPool.ID, clientId, null);
+		responseWriter.writeAttribute("id", clientId, null);
 
 		Column column = (Column) uiComponent;
 		StringBuilder classNames = new StringBuilder();
@@ -94,7 +88,7 @@ public class ColumnRenderer extends Renderer {
 		}
 
 		if (offset != null) {
-			classNames.append(StringPool.SPACE);
+			classNames.append(" ");
 			classNames.append(OFFSET);
 			classNames.append(offset);
 		}
@@ -102,18 +96,18 @@ public class ColumnRenderer extends Renderer {
 		String cssClass = column.getCssClass();
 
 		if ((cssClass != null) && (cssClass.length() > 0)) {
-			classNames.append(StringPool.SPACE);
+			classNames.append(" ");
 			classNames.append(cssClass);
 		}
 
 		String styleClass = column.getStyleClass();
 
 		if ((styleClass != null) && (styleClass.length() > 0)) {
-			classNames.append(StringPool.SPACE);
+			classNames.append(" ");
 			classNames.append(styleClass);
 		}
 
-		responseWriter.writeAttribute(StringPool.CLASS, classNames.toString(), null);
+		responseWriter.writeAttribute("class", classNames.toString(), null);
 	}
 
 	@Override
@@ -122,7 +116,7 @@ public class ColumnRenderer extends Renderer {
 		super.encodeEnd(facesContext, uiComponent);
 
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
-		responseWriter.endElement(StringPool.DIV);
+		responseWriter.endElement("div");
 	}
 
 	protected Integer getColumnUnitSize(Integer width) {

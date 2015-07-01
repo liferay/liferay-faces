@@ -16,7 +16,6 @@ package com.liferay.faces.bridge.context.internal;
 import java.util.List;
 
 import com.liferay.faces.util.config.ConfiguredServletMapping;
-import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -94,7 +93,7 @@ public class FacesViewImpl implements FacesView {
 							if (EXTENSION_JSP.equals(this.extension)) {
 
 								// TCK TestPage159: getRequestServletPathTest
-								int pos = viewId.lastIndexOf(StringPool.PERIOD);
+								int pos = viewId.lastIndexOf(".");
 
 								if (pos > 0) {
 									this.extension = configuredFacesServletMappings.get(0).getExtension();

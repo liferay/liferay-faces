@@ -46,7 +46,6 @@ import com.liferay.faces.bridge.helper.internal.WindowStateHelper;
 import com.liferay.faces.bridge.internal.BridgeConstants;
 import com.liferay.faces.bridge.util.internal.RequestParameter;
 import com.liferay.faces.util.helper.BooleanHelper;
-import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -146,7 +145,7 @@ public abstract class BridgeURLBase implements BridgeURL {
 
 		String uri = bridgeURI.toString();
 
-		int endPos = uri.indexOf(StringPool.QUESTION);
+		int endPos = uri.indexOf("?");
 
 		if (endPos < 0) {
 			endPos = uri.length();
@@ -171,7 +170,7 @@ public abstract class BridgeURLBase implements BridgeURL {
 
 		boolean firstParam = true;
 
-		buf.append(StringPool.QUESTION);
+		buf.append("?");
 
 		Set<String> parameterNames = getParameterMap().keySet();
 		boolean foundFacesViewIdParam = false;
@@ -216,11 +215,11 @@ public abstract class BridgeURLBase implements BridgeURL {
 					firstParam = false;
 				}
 				else {
-					buf.append(StringPool.AMPERSAND);
+					buf.append("&");
 				}
 
 				buf.append(parameterName);
-				buf.append(StringPool.EQUAL);
+				buf.append("=");
 				buf.append(parameterValue);
 			}
 		}
@@ -236,11 +235,11 @@ public abstract class BridgeURLBase implements BridgeURL {
 				if (!modeChanged) {
 
 					if (!firstParam) {
-						buf.append(StringPool.AMPERSAND);
+						buf.append("&");
 					}
 
 					buf.append(getViewIdParameterName());
-					buf.append(StringPool.EQUAL);
+					buf.append("=");
 
 					String contextPath = bridgeContext.getPortletRequest().getContextPath();
 					String contextRelativePath = bridgeURI.getContextRelativePath(contextPath);
@@ -384,14 +383,14 @@ public abstract class BridgeURLBase implements BridgeURL {
 		boolean match = false;
 
 		String path1 = null;
-		int lastSlashPos = file1.lastIndexOf(StringPool.FORWARD_SLASH);
+		int lastSlashPos = file1.lastIndexOf("/");
 
 		if (lastSlashPos > 0) {
 			path1 = file1.substring(0, lastSlashPos);
 		}
 
 		String path2 = null;
-		lastSlashPos = file2.lastIndexOf(StringPool.FORWARD_SLASH);
+		lastSlashPos = file2.lastIndexOf("/");
 
 		if (lastSlashPos > 0) {
 			path2 = file2.substring(0, lastSlashPos);
@@ -400,14 +399,14 @@ public abstract class BridgeURLBase implements BridgeURL {
 		if (((path1 == null) && (path2 == null)) || ((path1 != null) && (path2 != null) && path1.equals(path2))) {
 
 			String ext1 = null;
-			int lastDotPos = file1.indexOf(StringPool.PERIOD);
+			int lastDotPos = file1.indexOf(".");
 
 			if (lastDotPos > 0) {
 				ext1 = file1.substring(lastDotPos);
 			}
 
 			String ext2 = null;
-			lastDotPos = file2.indexOf(StringPool.PERIOD);
+			lastDotPos = file2.indexOf(".");
 
 			if (lastDotPos > 0) {
 				ext2 = file2.substring(lastDotPos);

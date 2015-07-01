@@ -21,8 +21,6 @@ import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 import javax.faces.render.Renderer;
 
-import com.liferay.faces.util.lang.StringPool;
-
 
 /**
  * @author  Neil Griffin
@@ -41,10 +39,10 @@ public class TextBoxListItemRenderer extends Renderer {
 
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
 
-		responseWriter.startElement(StringPool.LI, uiComponent);
+		responseWriter.startElement("li", uiComponent);
 
 		String id = uiComponent.getClientId(facesContext);
-		responseWriter.writeAttribute(StringPool.ID, id, StringPool.ID);
+		responseWriter.writeAttribute("id", id, "id");
 
 		StringBuilder classNames = new StringBuilder();
 
@@ -56,18 +54,18 @@ public class TextBoxListItemRenderer extends Renderer {
 		String cssClass = (String) attributes.get(CSS_CLASS);
 
 		if ((cssClass != null) && (cssClass.length() > 0)) {
-			classNames.append(StringPool.SPACE);
+			classNames.append(" ");
 			classNames.append(cssClass);
 		}
 
 		String styleClass = (String) attributes.get(STYLE_CLASS);
 
 		if ((styleClass != null) && (styleClass.length() > 0)) {
-			classNames.append(StringPool.SPACE);
+			classNames.append(" ");
 			classNames.append(styleClass);
 		}
 
-		responseWriter.writeAttribute(StringPool.CLASS, classNames.toString(), null);
+		responseWriter.writeAttribute("class", classNames.toString(), null);
 	}
 
 	@Override
@@ -75,7 +73,7 @@ public class TextBoxListItemRenderer extends Renderer {
 		super.encodeEnd(facesContext, uiComponent);
 
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
-		responseWriter.endElement(StringPool.LI);
+		responseWriter.endElement("li");
 	}
 
 }

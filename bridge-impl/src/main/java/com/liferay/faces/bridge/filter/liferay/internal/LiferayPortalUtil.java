@@ -18,7 +18,6 @@ import java.lang.reflect.Method;
 import javax.portlet.PortletRequest;
 
 import com.liferay.faces.bridge.internal.BridgeConstants;
-import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -48,7 +47,7 @@ public class LiferayPortalUtil {
 
 				// For some reason, when running as a WSRP producer, the underscores are missing from the beginning
 				// and end...
-				portletId = StringPool.UNDERLINE + portletId + StringPool.UNDERLINE;
+				portletId = "_" + portletId + "_";
 			}
 		}
 		catch (Exception e) {

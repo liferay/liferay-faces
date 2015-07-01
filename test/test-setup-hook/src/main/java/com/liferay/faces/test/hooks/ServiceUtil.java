@@ -45,8 +45,8 @@ public class ServiceUtil {
 
 		boolean active = true;
 		String description = name;
-		String friendlyURL = StringPool.FORWARD_SLASH +
-			name.toLowerCase().replaceAll(StringPool.SPACE, StringPool.DASH);
+		String friendlyURL = "/" +
+			name.toLowerCase().replaceAll(" ", "-");
 		boolean siteFlag = true;
 		int type = GroupConstants.TYPE_SITE_OPEN;
 		boolean manualMembership = false;
@@ -73,19 +73,19 @@ public class ServiceUtil {
 		String password1 = "test";
 		String password2 = password1;
 		boolean autoScreenName = false;
-		String screenName = firstName.toLowerCase() + StringPool.PERIOD + lastName.toLowerCase();
-		String emailAddress = screenName + StringPool.AT + "liferay.com";
+		String screenName = firstName.toLowerCase() + "." + lastName.toLowerCase();
+		String emailAddress = screenName + "@" + "liferay.com";
 		long facebookId = 0L;
-		String openId = StringPool.BLANK;
+		String openId = "";
 		Locale locale = Locale.ENGLISH;
-		String middleName = StringPool.BLANK;
+		String middleName = "";
 		int prefixId = 0;
 		int suffixId = 0;
 		boolean male = true;
 		int birthdayMonth = 1;
 		int birthdayDay = 1;
 		int birthdayYear = 1970;
-		String jobTitle = StringPool.BLANK;
+		String jobTitle = "";
 		long[] groupIds = new long[] {};
 		long[] organizationIds = new long[] {};
 		long[] roleIds = new long[] {};

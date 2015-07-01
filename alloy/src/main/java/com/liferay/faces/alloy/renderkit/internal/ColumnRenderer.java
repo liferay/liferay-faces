@@ -22,7 +22,6 @@ import javax.faces.context.ResponseWriter;
 import javax.faces.render.Renderer;
 
 import com.liferay.faces.util.component.ComponentUtil;
-import com.liferay.faces.util.lang.StringPool;
 
 
 /**
@@ -37,10 +36,10 @@ public class ColumnRenderer extends Renderer {
 		Map<String, Object> attributes = uiComponent.getAttributes();
 
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
-		responseWriter.startElement(StringPool.DIV, uiComponent);
+		responseWriter.startElement("div", uiComponent);
 
 		String id = uiComponent.getClientId(facesContext);
-		responseWriter.writeAttribute(StringPool.ID, id, StringPool.ID);
+		responseWriter.writeAttribute("id", id, "id");
 
 		StringBuilder classNames = new StringBuilder();
 		classNames.append("aui-column");
@@ -94,8 +93,8 @@ public class ColumnRenderer extends Renderer {
 			classNames.append(" aui-column-last");
 		}
 
-		responseWriter.writeAttribute(StringPool.CLASS, classNames.toString(), null);
-		responseWriter.startElement(StringPool.DIV, null);
+		responseWriter.writeAttribute("class", classNames.toString(), null);
+		responseWriter.startElement("div", null);
 		classNames = new StringBuilder();
 		classNames.append("aui-column-content");
 
@@ -109,7 +108,7 @@ public class ColumnRenderer extends Renderer {
 			classNames.append(ComponentUtil.appendToCssClasses(styleClass, "-content"));
 		}
 
-		responseWriter.writeAttribute(StringPool.CLASS, classNames.toString(), null);
+		responseWriter.writeAttribute("class", classNames.toString(), null);
 	}
 
 	@Override
@@ -117,8 +116,8 @@ public class ColumnRenderer extends Renderer {
 		super.encodeEnd(facesContext, uiComponent);
 
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
-		responseWriter.endElement(StringPool.DIV);
-		responseWriter.endElement(StringPool.DIV);
+		responseWriter.endElement("div");
+		responseWriter.endElement("div");
 	}
 
 }

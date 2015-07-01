@@ -18,7 +18,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.LogRecord;
 
-import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 
 
@@ -183,8 +182,8 @@ public class LoggerDefaultImpl implements Logger {
 			try {
 
 				// MessageFormat requires single quote (apostrophe characters) to be escaped.
-				if (message.indexOf(StringPool.APOSTROPHE) >= 0) {
-					message = message.replaceAll(StringPool.APOSTROPHE, StringPool.DOUBLE_APOSTROPHE);
+				if (message.indexOf("'") >= 0) {
+					message = message.replaceAll("'", "''");
 				}
 
 				formattedMessage = MessageFormat.format(message, argumentList.toArray(new Object[] {}));

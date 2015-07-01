@@ -13,7 +13,6 @@
  */
 package com.liferay.faces.util.product.internal;
 
-import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.product.Product;
 
 
@@ -43,7 +42,7 @@ public class ProductBaseImpl implements Product {
 
 			if (title != null) {
 				buf.append(title);
-				buf.append(StringPool.SPACE);
+				buf.append(" ");
 			}
 
 			if (version != null) {

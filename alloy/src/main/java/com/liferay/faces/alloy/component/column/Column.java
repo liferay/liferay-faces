@@ -17,8 +17,6 @@ import javax.el.ValueExpression;
 import javax.faces.component.UIPanel;
 import javax.faces.context.FacesContext;
 
-import com.liferay.faces.util.lang.StringPool;
-
 
 /**
  * @author  Juan Gonzalez
@@ -27,8 +25,6 @@ public class Column extends UIPanel {
 
 	// Public Constants
 	public static final int COLUMNS = 12;
-	public static final String FIRST = "first";
-	public static final String LAST = "last";
 	public static final String OFFSET = "offset";
 	public static final String OFFSET_WIDTH = "offsetWidth";
 	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.column.internal.ColumnRenderer";
@@ -128,7 +124,7 @@ public class Column extends UIPanel {
 		if (styleClass == null) {
 			ValueExpression valueExpression = getValueExpression(STYLE_CLASS);
 
-			styleClass = StringPool.BLANK;
+			styleClass = "";
 
 			if (valueExpression != null) {
 				styleClass = (String) valueExpression.getValue(FacesContext.getCurrentInstance().getELContext());

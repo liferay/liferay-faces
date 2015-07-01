@@ -139,7 +139,7 @@ public class TestSetupAction extends TestSetupCompatAction {
 			nameAttribute = portletElement.attribute("name");
 
 			String portletName = nameAttribute.getValue();
-			String liferayPortletName = portletName.replaceAll(StringPool.DASH, StringPool.BLANK);
+			String liferayPortletName = portletName.replaceAll("-", "");
 			String liferayPortletId = liferayPortletName + "_WAR_bridgetckmainportlet";
 			PortalPage portalPage = new PortalPage(pageName, liferayPortletId);
 			setupPrivatePage(companyId, userId, groupId, portalPage);

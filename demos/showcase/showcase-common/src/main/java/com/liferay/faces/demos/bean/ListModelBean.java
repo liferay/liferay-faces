@@ -38,7 +38,6 @@ import com.liferay.faces.demos.dto.ShowcaseComponentComparator;
 import com.liferay.faces.demos.dto.ShowcaseComponentImpl;
 import com.liferay.faces.demos.dto.UseCase;
 import com.liferay.faces.demos.util.CodeExampleUtil;
-import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.util.product.Product;
@@ -158,7 +157,7 @@ public class ListModelBean {
 					for (Map.Entry<Object, Object> mapEntry : entrySet) {
 						String key = (String) mapEntry.getKey();
 
-						String[] keyParts = key.split(StringPool.UNDERLINE);
+						String[] keyParts = key.split("_");
 						String category = keyParts[0];
 
 						String prefix = keyParts[1];
@@ -166,14 +165,14 @@ public class ListModelBean {
 						String lowerCaseName = camelCaseName.toLowerCase();
 
 						String value = (String) mapEntry.getValue();
-						String[] useCaseArray = value.split(StringPool.OPEN_BRACKET + StringPool.PIPE +
-								StringPool.CLOSE_BRACKET);
+						String[] useCaseArray = value.split("[" + "|" +
+								"]");
 						List<UseCase> useCases = new ArrayList<UseCase>(useCaseArray.length);
 
 						for (String useCaseInfo : useCaseArray) {
-							String[] useCaseParts = useCaseInfo.split(StringPool.COLON);
+							String[] useCaseParts = useCaseInfo.split(":");
 							String useCaseName = useCaseParts[0];
-							String[] sourceFileNames = useCaseParts[1].split(StringPool.COMMA);
+							String[] sourceFileNames = useCaseParts[1].split(",");
 							List<CodeExample> codeExamples = new ArrayList<CodeExample>();
 
 							for (String sourceFileName : sourceFileNames) {
@@ -219,7 +218,7 @@ public class ListModelBean {
 									for (int i = 0; ((i < PACKAGE_NAMES.length) && (sourceFileURL == null)); i++) {
 
 										int pos = sourceFileName.lastIndexOf(".java");
-										String fqcn = PACKAGE_NAMES[i] + StringPool.PERIOD +
+										String fqcn = PACKAGE_NAMES[i] + "." +
 											sourceFileName.substring(0, pos);
 
 										try {
@@ -252,7 +251,7 @@ public class ListModelBean {
 						int categoryIndex = showcaseCategoryList.indexOf(category);
 						ShowcaseComponent showcaseComponent = new ShowcaseComponentImpl(categoryIndex, prefix,
 								camelCaseName, lowerCaseName, useCases);
-						String lookupKey = prefix + StringPool.UNDERLINE + lowerCaseName;
+						String lookupKey = prefix + "_" + lowerCaseName;
 						this.showcaseComponentMap.put(lookupKey, showcaseComponent);
 						this.showcaseComponents.add(showcaseComponent);
 					}
@@ -286,7 +285,7 @@ public class ListModelBean {
 	}
 
 	public ShowcaseComponent findShowcaseComponent(String prefix, String name) {
-		String key = prefix + StringPool.UNDERLINE + name;
+		String key = prefix + "_" + name;
 
 		return showcaseComponentMap.get(key);
 	}
@@ -300,7 +299,7 @@ public class ListModelBean {
 
 			Product liferayFacesAlloy = productMap.get(ProductConstants.LIFERAY_FACES_ALLOY);
 			String version = liferayFacesAlloy.getVersion();
-			int pos = version.indexOf(StringPool.SPACE);
+			int pos = version.indexOf(" ");
 
 			if (pos > 0) {
 				version = version.substring(0, pos);
