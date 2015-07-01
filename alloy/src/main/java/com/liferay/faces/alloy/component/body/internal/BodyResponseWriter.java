@@ -24,7 +24,6 @@ import com.liferay.faces.util.ContentTypes;
 import com.liferay.faces.util.client.BrowserSniffer;
 import com.liferay.faces.util.client.Script;
 import com.liferay.faces.util.context.FacesRequestContext;
-import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.render.internal.DelegationResponseWriterBase;
 
 
@@ -49,13 +48,13 @@ public class BodyResponseWriter extends DelegationResponseWriterBase {
 
 		if ("body".equals(name) && !ajaxRequest) {
 
-			super.startElement(StringPool.SCRIPT, uiComponent);
+			super.startElement("script", uiComponent);
 			super.writeAttribute("type", ContentTypes.TEXT_JAVASCRIPT, null);
 
 			FacesRequestContext facesRequestContext = FacesRequestContext.getCurrentInstance();
 			List<Script> scripts = facesRequestContext.getScripts();
 			AlloyRendererUtil.writeScripts(this, scripts, browserSniffer);
-			super.endElement(StringPool.SCRIPT);
+			super.endElement("script");
 		}
 
 		super.endElement(name);

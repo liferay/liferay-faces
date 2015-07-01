@@ -13,12 +13,11 @@
  */
 package com.liferay.faces.alloy.component.inputfile.internal;
 
+import junit.framework.Assert;
+
 import org.junit.Test;
 
 import com.liferay.faces.alloy.component.inputfile.InputFile;
-import com.liferay.faces.util.lang.StringPool;
-
-import junit.framework.Assert;
 
 
 /**
@@ -34,15 +33,15 @@ public class AjaxParametersTest {
 		String clientId = "j_1234:myForm:myInputFile";
 
 		// Test that an empty value for execute maps to the clientId
-		AjaxParameters ajaxParameters = newAjaxParameters(clientId, formClientId, StringPool.BLANK, StringPool.BLANK);
+		AjaxParameters ajaxParameters = newAjaxParameters(clientId, formClientId, "", "");
 		Assert.assertTrue(clientId.equals(ajaxParameters.getExecute()));
 
 		// Test that an empty value for render maps to an empty value.
-		Assert.assertTrue(StringPool.BLANK.equals(ajaxParameters.getRender()));
+		Assert.assertTrue("".equals(ajaxParameters.getRender()));
 
 		// Test that @form maps to the clientId of the form
 		ajaxParameters = newAjaxParameters(clientId, formClientId, "@form", "@form");
-		Assert.assertTrue(ajaxParameters.getExecute().equals(clientId + StringPool.SPACE + formClientId));
+		Assert.assertTrue(ajaxParameters.getExecute().equals(clientId + " " + formClientId));
 		Assert.assertTrue(ajaxParameters.getRender().equals(formClientId));
 
 		// Test that @all maps to @all
@@ -57,13 +56,13 @@ public class AjaxParametersTest {
 
 		// Test that @none maps to an empty value.
 		ajaxParameters = newAjaxParameters(clientId, formClientId, "@none", "@none");
-		Assert.assertTrue(ajaxParameters.getExecute().equals(StringPool.BLANK));
-		Assert.assertTrue(ajaxParameters.getRender().equals(StringPool.BLANK));
+		Assert.assertTrue(ajaxParameters.getExecute().equals(""));
+		Assert.assertTrue(ajaxParameters.getRender().equals(""));
 
 		// Test that the presence of @non removes all others.
 		ajaxParameters = newAjaxParameters(clientId, formClientId, "@this @none @form", "@this @none @form");
-		Assert.assertTrue(ajaxParameters.getExecute().equals(StringPool.BLANK));
-		Assert.assertTrue(ajaxParameters.getRender().equals(StringPool.BLANK));
+		Assert.assertTrue(ajaxParameters.getExecute().equals(""));
+		Assert.assertTrue(ajaxParameters.getRender().equals(""));
 	}
 
 	protected AjaxParameters newAjaxParameters(String clientId, String formClientId, String execute, String render) {

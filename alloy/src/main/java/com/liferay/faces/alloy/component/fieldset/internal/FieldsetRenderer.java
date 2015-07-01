@@ -22,7 +22,6 @@ import javax.faces.context.ResponseWriter;
 import javax.faces.render.FacesRenderer;
 
 import com.liferay.faces.alloy.component.fieldset.Fieldset;
-import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.render.RendererUtil;
 
 
@@ -43,8 +42,8 @@ public class FieldsetRenderer extends FieldsetRendererBase {
 		responseWriter.startElement(FIELDSET, uiComponent);
 
 		String clientId = uiComponent.getClientId(facesContext);
-		responseWriter.writeAttribute(StringPool.ID, clientId, StringPool.ID);
-		responseWriter.writeAttribute("name", clientId, StringPool.ID);
+		responseWriter.writeAttribute("id", clientId, "id");
+		responseWriter.writeAttribute("name", clientId, "id");
 
 		Fieldset fieldset = (Fieldset) uiComponent;
 
@@ -69,7 +68,7 @@ public class FieldsetRenderer extends FieldsetRendererBase {
 		if (legend != null) {
 
 			responseWriter.startElement(LEGEND, uiComponent);
-			responseWriter.writeAttribute(StringPool.CLASS, LEGEND, null);
+			responseWriter.writeAttribute("class", LEGEND, null);
 			responseWriter.writeText(legend, LEGEND);
 			responseWriter.endElement(LEGEND);
 		}

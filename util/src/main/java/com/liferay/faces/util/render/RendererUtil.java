@@ -25,7 +25,6 @@ import javax.faces.context.ResponseWriter;
 
 import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.component.Styleable;
-import com.liferay.faces.util.lang.StringPool;
 
 
 /**
@@ -73,7 +72,7 @@ public class RendererUtil {
 
 		if (cssClasses != null) {
 			allCssClasses.append(cssClasses);
-			allCssClasses.append(StringPool.SPACE);
+			allCssClasses.append(" ");
 		}
 
 		String styleClass = styleable.getStyleClass();
@@ -83,7 +82,7 @@ public class RendererUtil {
 		}
 
 		if (allCssClasses.length() > 0) {
-			responseWriter.writeAttribute(StringPool.CLASS, allCssClasses.toString(), Styleable.STYLE_CLASS);
+			responseWriter.writeAttribute("class", allCssClasses.toString(), Styleable.STYLE_CLASS);
 		}
 
 		String style = styleable.getStyle();

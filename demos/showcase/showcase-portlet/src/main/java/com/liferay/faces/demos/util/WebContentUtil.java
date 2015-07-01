@@ -66,7 +66,7 @@ public class WebContentUtil {
 				serviceContext.setAddGuestPermissions(true);
 
 				String defaultLanguageId = "";
-				content = LocalizationUtil.updateLocalization(StringPool.BLANK, "static-content", content,
+				content = LocalizationUtil.updateLocalization("", "static-content", content,
 						defaultLanguageId, defaultLanguageId, true, false);
 
 				journalArticle = JournalArticleLocalServiceUtil.addArticle(userId, groupId, folderId, titleMap,

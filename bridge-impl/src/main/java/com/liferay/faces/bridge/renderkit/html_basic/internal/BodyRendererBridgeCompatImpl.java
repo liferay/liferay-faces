@@ -29,7 +29,6 @@ import com.liferay.faces.util.client.Script;
 import com.liferay.faces.util.context.FacesRequestContext;
 import com.liferay.faces.util.product.ProductConstants;
 import com.liferay.faces.util.product.ProductMap;
-
 import com.liferay.portal.kernel.servlet.taglib.aui.ScriptData;
 import com.liferay.portal.kernel.util.WebKeys;
 

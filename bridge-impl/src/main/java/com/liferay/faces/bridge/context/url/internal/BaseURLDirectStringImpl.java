@@ -19,8 +19,6 @@ import java.util.Map;
 import javax.portlet.BaseURL;
 import javax.portlet.PortletRequest;
 
-import com.liferay.faces.util.lang.StringPool;
-
 
 /**
  * This class represents a simple "direct" {@link BaseURL}, meaning an implementation that wraps a path and constructs
@@ -48,18 +46,16 @@ public class BaseURLDirectStringImpl extends BaseURLNonEncodedStringImpl {
 
 		StringBuilder buf = new StringBuilder();
 		buf.append(portletRequest.getScheme());
-		buf.append(StringPool.COLON);
-		buf.append(StringPool.FORWARD_SLASH);
-		buf.append(StringPool.FORWARD_SLASH);
+		buf.append("://");
 		buf.append(portletRequest.getServerName());
-		buf.append(StringPool.COLON);
+		buf.append(":");
 		buf.append(portletRequest.getServerPort());
 		buf.append(path);
 
 		String queryString = getQuery();
 
 		if (queryString.length() > 0) {
-			buf.append(StringPool.QUESTION);
+			buf.append("?");
 			buf.append(queryString);
 		}
 

@@ -17,7 +17,6 @@ import javax.faces.context.FacesContext;
 
 import com.liferay.faces.alloy.component.selectoneradio.SelectOneRadioBase;
 import com.liferay.faces.util.component.ClientComponent;
-import com.liferay.faces.util.lang.StringPool;
 
 
 /**
@@ -35,7 +34,7 @@ public abstract class SelectRating extends SelectOneRadioBase implements ClientC
 		if (value instanceof String) {
 			String valueString = (String) value;
 
-			if (StringPool.BLANK.equals(valueString)) {
+			if ("".equals(valueString)) {
 				value = null;
 			}
 		}

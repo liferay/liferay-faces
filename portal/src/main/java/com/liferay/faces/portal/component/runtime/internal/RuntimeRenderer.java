@@ -21,7 +21,6 @@ import javax.faces.context.ResponseWriter;
 import javax.faces.render.FacesRenderer;
 
 import com.liferay.faces.portal.component.runtime.Runtime;
-import com.liferay.faces.util.lang.StringPool;
 import com.liferay.taglib.portletext.RuntimeTag;
 
 
@@ -63,8 +62,8 @@ public class RuntimeRenderer extends RuntimeRendererBase {
 		// This is needed as it is possible to not render the portlet boundaries
 		
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
-		responseWriter.startElement(StringPool.DIV, uiComponent);
-		responseWriter.writeAttribute(StringPool.ID, uiComponent.getClientId(), StringPool.ID);
+		responseWriter.startElement("div", uiComponent);
+		responseWriter.writeAttribute("id", uiComponent.getClientId(), "id");
 
 		// Delegate to PortalTagRenderer so that the JSP tag output will get encoded.
 		super.encodeBegin(facesContext, uiComponent);
@@ -78,7 +77,7 @@ public class RuntimeRenderer extends RuntimeRendererBase {
 
 		// Encode the closing </div> element for the navBar.
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
-		responseWriter.endElement(StringPool.DIV);
+		responseWriter.endElement("div");
 	}
 	
 	@Override

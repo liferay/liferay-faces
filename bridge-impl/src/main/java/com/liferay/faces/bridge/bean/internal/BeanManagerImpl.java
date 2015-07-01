@@ -22,7 +22,6 @@ import java.util.Map;
 import javax.portlet.faces.annotation.BridgePreDestroy;
 
 import com.liferay.faces.util.config.ConfiguredManagedBean;
-import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -180,7 +179,7 @@ public class BeanManagerImpl extends BeanManagerCompatImpl {
 					// "javax.portlet.p.<ID>?" pattern. In order to determine if the specified name is a SessionScoped
 					// managed-bean, it is necessary to first strip the pattern from it.
 					if (name.startsWith(JAVAX_PORTLET_P)) {
-						int pos = name.indexOf(StringPool.QUESTION);
+						int pos = name.indexOf("?");
 
 						if (pos > 0) {
 							name = name.substring(pos + 1);

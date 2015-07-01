@@ -22,7 +22,6 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import com.liferay.faces.bridge.internal.BridgeConstants;
-import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -39,15 +38,15 @@ public class URLUtil {
 		Map<String, String[]> parameterMapValuesArray = new LinkedHashMap<String, String[]>();
 
 		if (url != null) {
-			int pos = url.indexOf(StringPool.QUESTION);
+			int pos = url.indexOf("?");
 
 			if (pos > 0) {
 				String queryString = url.substring(pos + 1);
-				queryString = queryString.replaceAll(StringPool.AMPERSAND_ENCODED, StringPool.AMPERSAND);
+				queryString = queryString.replaceAll("&amp;", "&");
 
 				if ((queryString != null) && (queryString.length() > 0)) {
 
-					pos = queryString.indexOf(StringPool.POUND);
+					pos = queryString.indexOf("#");
 
 					if (pos > 0) {
 						queryString = queryString.substring(0, pos);
@@ -67,11 +66,11 @@ public class URLUtil {
 								String[] newValues = null;
 
 								if (existingValues == null) {
-									newValues = new String[] { StringPool.BLANK };
+									newValues = new String[] { "" };
 								}
 								else {
 									newValues = Arrays.copyOf(existingValues, existingValues.length + 1);
-									newValues[existingValues.length] = StringPool.BLANK;
+									newValues[existingValues.length] = "";
 								}
 
 								parameterMapValuesArray.put(name, newValues);

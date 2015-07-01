@@ -21,12 +21,10 @@ import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 import javax.faces.render.Renderer;
 
-import com.liferay.faces.util.lang.StringPool;
-
 
 /**
  * @author      Neil Griffin
- * @deprecated  Replaced by {@link com.liferay.faces.alloy.component.fieldset.FieldSetRenderer}.
+ * @deprecated  Replaced by {@link com.liferay.faces.alloy.component.field.internal.FieldRenderer}.
  */
 @Deprecated
 public class FieldRenderer extends Renderer {
@@ -43,7 +41,7 @@ public class FieldRenderer extends Renderer {
 		responseWriter.startElement("span", uiComponent);
 
 		String id = uiComponent.getClientId(facesContext);
-		responseWriter.writeAttribute(StringPool.ID, id, StringPool.ID);
+		responseWriter.writeAttribute("id", id, "id");
 
 		StringBuilder classNames = new StringBuilder();
 
@@ -75,24 +73,24 @@ public class FieldRenderer extends Renderer {
 		String cssClass = (String) attributes.get("cssClass");
 
 		if ((cssClass != null) && (cssClass.length() > 0)) {
-			classNames.append(StringPool.SPACE);
+			classNames.append(" ");
 			classNames.append(cssClass);
 		}
 
 		String styleClass = (String) attributes.get("styleClass");
 
 		if ((styleClass != null) && (styleClass.length() > 0)) {
-			classNames.append(StringPool.SPACE);
+			classNames.append(" ");
 			classNames.append(styleClass);
 		}
 
-		responseWriter.writeAttribute(StringPool.CLASS, classNames.toString(), null);
+		responseWriter.writeAttribute("class", classNames.toString(), null);
 
 		// Inner <span>
 		responseWriter.startElement("span", null);
 
 		// aui_deprecated.css: field-content
-		responseWriter.writeAttribute(StringPool.CLASS, "field-content", null);
+		responseWriter.writeAttribute("class", "field-content", null);
 
 		String lowerCaseInlineLabel = "left";
 		String inlineLabel = (String) attributes.get("inlineLabel");
@@ -106,7 +104,7 @@ public class FieldRenderer extends Renderer {
 			responseWriter.startElement("label", null);
 
 			// aui_deprecated.css: field-label
-			responseWriter.writeAttribute(StringPool.CLASS, "field-label", null);
+			responseWriter.writeAttribute("class", "field-label", null);
 
 			String label = (String) attributes.get("label");
 
@@ -128,7 +126,7 @@ public class FieldRenderer extends Renderer {
 			classNames.append(" aui-field-label-right");
 		}
 
-		responseWriter.writeAttribute(StringPool.CLASS, classNames.toString(), null);
+		responseWriter.writeAttribute("class", classNames.toString(), null);
 
 	}
 
@@ -154,7 +152,7 @@ public class FieldRenderer extends Renderer {
 			responseWriter.startElement("label", null);
 
 			// aui_deprecated.css: field-label
-			responseWriter.writeAttribute(StringPool.CLASS, "field-label", null);
+			responseWriter.writeAttribute("class", "field-label", null);
 
 			String label = (String) attributes.get("label");
 

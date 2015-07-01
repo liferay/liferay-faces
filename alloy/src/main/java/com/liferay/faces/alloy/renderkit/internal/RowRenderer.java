@@ -21,13 +21,12 @@ import javax.faces.context.ResponseWriter;
 import javax.faces.render.Renderer;
 
 import com.liferay.faces.alloy.component.AUIRow;
-import com.liferay.faces.util.lang.StringPool;
 
 
 /**
  * @author      Neil Griffin
  * @author      Kyle Stiemann
- * @deprecated  Replaced by {@link com.liferay.faces.alloy.component.row.RowRenderer}.
+ * @deprecated  Replaced by {@link com.liferay.faces.alloy.component.row.internal.RowRenderer}.
  */
 @Deprecated
 public class RowRenderer extends Renderer {
@@ -40,10 +39,10 @@ public class RowRenderer extends Renderer {
 		AUIRow auiRow = (AUIRow) uiComponent;
 
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
-		responseWriter.startElement(StringPool.DIV, uiComponent);
+		responseWriter.startElement("div", uiComponent);
 
 		String id = uiComponent.getClientId(facesContext);
-		responseWriter.writeAttribute(StringPool.ID, id, null);
+		responseWriter.writeAttribute("id", id, null);
 
 		StringBuilder classNames = new StringBuilder();
 
@@ -56,18 +55,18 @@ public class RowRenderer extends Renderer {
 		String cssClass = auiRow.getCssClass();
 
 		if ((cssClass != null) && (cssClass.length() > 0)) {
-			classNames.append(StringPool.SPACE);
+			classNames.append(" ");
 			classNames.append(cssClass);
 		}
 
 		String styleClass = auiRow.getStyleClass();
 
 		if ((styleClass != null) && (styleClass.length() > 0)) {
-			classNames.append(StringPool.SPACE);
+			classNames.append(" ");
 			classNames.append(styleClass);
 		}
 
-		responseWriter.writeAttribute(StringPool.CLASS, classNames.toString(), null);
+		responseWriter.writeAttribute("class", classNames.toString(), null);
 	}
 
 	@Override
@@ -76,6 +75,6 @@ public class RowRenderer extends Renderer {
 		super.encodeEnd(facesContext, uiComponent);
 
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
-		responseWriter.endElement(StringPool.DIV);
+		responseWriter.endElement("div");
 	}
 }

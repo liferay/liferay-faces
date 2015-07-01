@@ -66,7 +66,6 @@ import com.liferay.faces.bridge.internal.BridgeExt;
 import com.liferay.faces.bridge.scope.BridgeRequestScope;
 import com.liferay.faces.util.config.ConfiguredServletMapping;
 import com.liferay.faces.util.helper.BooleanHelper;
-import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -225,7 +224,7 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 						configuredFacesServletMappings);
 
 				if (!bridgeURI.isAbsolute() && !targetFacesView.isExtensionMapped() &&
-						!targetFacesView.isPathMapped() && !url.startsWith(StringPool.POUND)) {
+						!targetFacesView.isPathMapped() && !url.startsWith("#")) {
 					bridgeActionURL.setParameter(Bridge.NONFACES_TARGET_PATH_PARAMETER, contextRelativeViewPath);
 				}
 
@@ -446,7 +445,7 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 					boolean directLink = (queryString != null) && queryString.contains(DIRECT_LINK_EQUALS_TRUE);
 
 					if ((portletPhase == Bridge.PortletPhase.ACTION_PHASE) &&
-							(url.startsWith(StringPool.POUND) || bridgeURI.isExternal() || directLink)) {
+							(url.startsWith("#") || bridgeURI.isExternal() || directLink)) {
 
 						bridgeRequestScope.setRedirectOccurred(true);
 
@@ -558,7 +557,7 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 									// TCK TestPage 179: redirectRenderPRP1Test
 									renderRedirect = true;
 									viewIdRenderParameterValue = URLDecoder.decode(viewIdRenderParameterValue,
-											StringPool.UTF8);
+											"UTF-8");
 
 									BridgeURI redirectURI = bridgeURIFactory.getBridgeURI(viewIdRenderParameterValue);
 									UIViewRoot viewRoot = facesContext.getViewRoot();
@@ -675,7 +674,7 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 	public String getDefaultRenderKitId() {
 
 		if (defaultRenderKitId == null) {
-			String attributeName = Bridge.BRIDGE_PACKAGE_PREFIX + portletConfig.getPortletName() + StringPool.PERIOD +
+			String attributeName = Bridge.BRIDGE_PACKAGE_PREFIX + portletConfig.getPortletName() + "." +
 				Bridge.DEFAULT_RENDERKIT_ID;
 			defaultRenderKitId = (String) portletContext.getAttribute(attributeName);
 		}
@@ -715,7 +714,7 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 			String navigationQueryString = null;
 
 			if (fullViewId != null) {
-				int pos = fullViewId.indexOf(StringPool.QUESTION);
+				int pos = fullViewId.indexOf("?");
 
 				if (pos > 0) {
 					navigationQueryString = fullViewId.substring(pos + 1);
@@ -780,7 +779,7 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 				if (viewPath != null) {
 
 					// If present, remove the query string from the specified viewPath.
-					int pos = viewPath.indexOf(StringPool.QUESTION);
+					int pos = viewPath.indexOf("?");
 
 					if (pos > 0) {
 						viewPath = viewPath.substring(0, pos);
@@ -882,7 +881,7 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 					// within the filesystem of this context.
 					for (String defaultSuffix : configuredSuffixes) {
 
-						int pos = viewPath.lastIndexOf(StringPool.PERIOD);
+						int pos = viewPath.lastIndexOf(".");
 
 						if (pos > 0) {
 
@@ -937,7 +936,7 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 
 		String value = (String) getPortletRequest().getAttribute(name);
 
-		if ((value != null) && (value.contains(StringPool.COLON))) {
+		if ((value != null) && (value.contains(":"))) {
 
 			logger.warn("Invalid character in request attribute {0}=[{1}]", name, value);
 			value = null;
@@ -950,7 +949,7 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 
 		String value = getPortletRequest().getParameter(name);
 
-		if ((value != null) && (value.contains(StringPool.COLON))) {
+		if ((value != null) && (value.contains(":"))) {
 
 			logger.warn("Invalid character in request parameter {0}=[{1}]", name, value);
 			value = null;
@@ -1206,7 +1205,7 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 			else if (facesView.isPathMapped()) {
 				requestServletPath = facesView.getViewId();
 
-				int pos = requestServletPath.lastIndexOf(StringPool.FORWARD_SLASH + StringPool.STAR);
+				int pos = requestServletPath.lastIndexOf("/" + "*");
 
 				if (pos >= 0) {
 					requestServletPath = requestServletPath.substring(0, pos);
@@ -1219,7 +1218,7 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 			// Otherwise, since there is no servlet-mapping, return an empty string. This is not required by the spec
 			// but seems to work in a Facelets environment where there is no servlet-mapping.
 			else {
-				requestServletPath = StringPool.BLANK;
+				requestServletPath = "";
 				logger.debug("requestServletPath=[{0}] servletMapping=[NONE] viewId=[{1}]", requestServletPath, viewId);
 			}
 
@@ -1236,14 +1235,12 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 			StringBuilder buf = new StringBuilder();
 			PortletRequest portletRequest = getPortletRequest();
 			buf.append(portletRequest.getScheme());
-			buf.append(StringPool.COLON);
-			buf.append(StringPool.FORWARD_SLASH);
-			buf.append(StringPool.FORWARD_SLASH);
+			buf.append("://");
 			buf.append(portletRequest.getServerName());
-			buf.append(StringPool.COLON);
+			buf.append(":");
 			buf.append(portletRequest.getServerPort());
 			buf.append(portletRequest.getContextPath());
-			buf.append(StringPool.QUESTION);
+			buf.append("?");
 			buf.append(getRequestQueryString(portletRequest));
 			requestURL = buf.toString();
 		}
@@ -1285,7 +1282,7 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 	public boolean isPreserveActionParams() {
 
 		if (preserveActionParams == null) {
-			String initParamName = Bridge.BRIDGE_PACKAGE_PREFIX + portletConfig.getPortletName() + StringPool.PERIOD +
+			String initParamName = Bridge.BRIDGE_PACKAGE_PREFIX + portletConfig.getPortletName() + "." +
 				Bridge.PRESERVE_ACTION_PARAMS;
 			Object initParamValue = portletContext.getAttribute(initParamName);
 

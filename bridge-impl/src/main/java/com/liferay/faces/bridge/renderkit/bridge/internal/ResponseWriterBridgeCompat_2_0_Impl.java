@@ -25,7 +25,6 @@ import javax.portlet.PortletRequest;
 
 import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.bridge.context.BridgePortalContext;
-import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.util.product.Product;
@@ -116,7 +115,7 @@ public abstract class ResponseWriterBridgeCompat_2_0_Impl extends ResponseWriter
 
 				logger.trace("filtering marker");
 
-				int greaterThanPos = data.indexOf(StringPool.GREATER_THAN);
+				int greaterThanPos = data.indexOf(">");
 
 				if (greaterThanPos > 0) {
 					len -= (greaterThanPos + 1);
@@ -151,7 +150,7 @@ public abstract class ResponseWriterBridgeCompat_2_0_Impl extends ResponseWriter
 		}
 
 		writeAttribute("name", viewStateName, null);
-		writeAttribute(StringPool.ID, viewStateName, null);
+		writeAttribute("id", viewStateName, null);
 
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		String viewState = facesContext.getApplication().getStateManager().getViewState(facesContext);

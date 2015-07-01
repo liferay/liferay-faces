@@ -25,7 +25,6 @@ import javax.faces.render.FacesRenderer;
 
 import com.liferay.faces.alloy.component.inputsourcecode.InputSourceCode;
 import com.liferay.faces.util.component.ClientComponent;
-import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.render.internal.DelegationResponseWriter;
 import com.liferay.faces.util.render.internal.HiddenTextResponseWriter;
 
@@ -66,7 +65,7 @@ public class InputSourceCodeRenderer extends InputSourceCodeRendererBase {
 		if ((readOnly == null) || (!readOnly)) {
 
 			String hiddenInputClientId = getHiddenInputClientId(facesContext, uiComponent);
-			String escapedHiddenInputClientId = StringPool.POUND + escapeClientId(hiddenInputClientId);
+			String escapedHiddenInputClientId = "#" + escapeClientId(hiddenInputClientId);
 
 			responseWriter.write(clientVarName);
 			responseWriter.write(".getSession().on('change', function() {A.one('");
@@ -92,14 +91,14 @@ public class InputSourceCodeRenderer extends InputSourceCodeRendererBase {
 
 		// Start the encoding of the outermost <div> element.
 		String clientId = uiComponent.getClientId(facesContext);
-		responseWriter.startElement(StringPool.DIV, uiComponent);
-		responseWriter.writeAttribute(StringPool.ID, clientId, StringPool.ID);
+		responseWriter.startElement("div", uiComponent);
+		responseWriter.writeAttribute("id", clientId, "id");
 
 		// Encode the entire boundingbox <div>...<div> element.
 		String defaultBoundingBoxClientId = getDefaultBoundingBoxClientId(facesContext, uiComponent);
-		responseWriter.startElement(StringPool.DIV, uiComponent);
-		responseWriter.writeAttribute(StringPool.ID, defaultBoundingBoxClientId, StringPool.ID);
-		responseWriter.endElement(StringPool.DIV);
+		responseWriter.startElement("div", uiComponent);
+		responseWriter.writeAttribute("id", defaultBoundingBoxClientId, "id");
+		responseWriter.endElement("div");
 
 		// Start the encoding of the hidden text input by delegating to the renderer from the JSF runtime.
 		DelegationResponseWriter delegationResponseWriter = getDelegationResponseWriter(facesContext, uiComponent);
@@ -115,7 +114,7 @@ public class InputSourceCodeRenderer extends InputSourceCodeRendererBase {
 
 		// Finish the encoding of the outermost </div> element.
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
-		responseWriter.endElement(StringPool.DIV);
+		responseWriter.endElement("div");
 	}
 
 	@Override

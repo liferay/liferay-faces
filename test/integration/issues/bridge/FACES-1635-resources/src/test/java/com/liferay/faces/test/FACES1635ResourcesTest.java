@@ -104,7 +104,7 @@ public class FACES1635ResourcesTest extends TesterBase {
 							}
 						}
 					}
-					else { // "script".equals(type)
+					else { // SCRIPT.equals(type)
 
 						if (url.contains("jsf.js")) {
 							logger.log(Level.INFO, "convertToHeadResources: type = " + type + " url = " + url);

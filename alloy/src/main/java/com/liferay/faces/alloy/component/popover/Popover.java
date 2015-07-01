@@ -15,8 +15,6 @@ package com.liferay.faces.alloy.component.popover;
 
 import javax.faces.component.FacesComponent;
 
-import com.liferay.faces.util.lang.StringPool;
-
 
 /**
  * @author  Vernon Singleton
@@ -26,7 +24,7 @@ public class Popover extends PopoverBase {
 
 	@Override
 	public String getHeaderText() {
-		return (String) getStateHelper().eval(PopoverPropertyKeys.headerText, StringPool.NBSP);
+		return (String) getStateHelper().eval(PopoverPropertyKeys.headerText, "&nbsp;");
 	}
 
 	@Override
@@ -39,7 +37,7 @@ public class Popover extends PopoverBase {
 			style = "display:none;";
 		}
 		else {
-			style = style + StringPool.SEMICOLON + "display:none;";
+			style = style + ";" + "display:none;";
 		}
 
 		return style;

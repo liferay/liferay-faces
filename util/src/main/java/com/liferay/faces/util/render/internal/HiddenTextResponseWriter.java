@@ -18,8 +18,6 @@ import java.io.IOException;
 import javax.faces.component.html.HtmlInputText;
 import javax.faces.context.ResponseWriter;
 
-import com.liferay.faces.util.lang.StringPool;
-
 
 /**
  * This class is a {@link DelegationResponseWriter} that is designed to intercept the encoding of a {@link
@@ -45,7 +43,7 @@ public class HiddenTextResponseWriter extends DelegationResponseWriterBase {
 		if ("input".equals(name)) {
 
 			if (!wroteId) {
-				super.writeAttribute(StringPool.ID, id, StringPool.ID);
+				super.writeAttribute("id", id, "id");
 			}
 		}
 
@@ -55,7 +53,7 @@ public class HiddenTextResponseWriter extends DelegationResponseWriterBase {
 	@Override
 	public void writeAttribute(String name, Object value, String property) throws IOException {
 
-		if (StringPool.ID.equals(name)) {
+		if ("id".equals(name)) {
 			super.writeAttribute(name, id, property);
 		}
 		else if ("type".equals(name)) {

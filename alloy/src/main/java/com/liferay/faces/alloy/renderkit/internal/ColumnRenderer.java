@@ -22,13 +22,12 @@ import javax.faces.context.ResponseWriter;
 import javax.faces.render.Renderer;
 
 import com.liferay.faces.util.component.ComponentUtil;
-import com.liferay.faces.util.lang.StringPool;
 
 
 /**
  * @author      Neil Griffin
- * @deprecated  Replaced by {@link com.liferay.faces.alloy.component.row.RowRenderer} and {@link
- *              com.liferay.faces.alloy.component.column.ColumnRenderer}.
+ * @deprecated  Replaced by {@link com.liferay.faces.alloy.component.row.internal.RowRenderer} and {@link
+ *              com.liferay.faces.alloy.component.column.internal.ColumnRenderer}.
  */
 @Deprecated
 public class ColumnRenderer extends Renderer {
@@ -40,10 +39,10 @@ public class ColumnRenderer extends Renderer {
 		Map<String, Object> attributes = uiComponent.getAttributes();
 
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
-		responseWriter.startElement(StringPool.DIV, uiComponent);
+		responseWriter.startElement("div", uiComponent);
 
 		String id = uiComponent.getClientId(facesContext);
-		responseWriter.writeAttribute(StringPool.ID, id, StringPool.ID);
+		responseWriter.writeAttribute("id", id, "id");
 
 		StringBuilder classNames = new StringBuilder();
 
@@ -62,14 +61,14 @@ public class ColumnRenderer extends Renderer {
 		String cssClass = (String) attributes.get("cssClass");
 
 		if ((cssClass != null) && (cssClass.length() > 0)) {
-			classNames.append(StringPool.SPACE);
+			classNames.append(" ");
 			classNames.append(cssClass);
 		}
 
 		String styleClass = (String) attributes.get("styleClass");
 
 		if ((styleClass != null) && (styleClass.length() > 0)) {
-			classNames.append(StringPool.SPACE);
+			classNames.append(" ");
 			classNames.append(styleClass);
 		}
 
@@ -105,28 +104,28 @@ public class ColumnRenderer extends Renderer {
 			classNames.append(" column-last");
 		}
 
-		responseWriter.writeAttribute(StringPool.CLASS, classNames.toString(), null);
-		responseWriter.startElement(StringPool.DIV, null);
+		responseWriter.writeAttribute("class", classNames.toString(), null);
+		responseWriter.startElement("div", null);
 		classNames = new StringBuilder();
 
 		// Used to be aui-column-content, but has been replaced by non-deprecated column-content
 		classNames.append("column-content");
 
 		if ((cssClass != null) && (cssClass.length() > 0)) {
-			classNames.append(StringPool.SPACE);
+			classNames.append(" ");
 
 			// "-content" classes may be deprecated
 			classNames.append(ComponentUtil.appendToCssClasses(cssClass, "-content"));
 		}
 
 		if ((styleClass != null) && (styleClass.length() > 0)) {
-			classNames.append(StringPool.SPACE);
+			classNames.append(" ");
 
 			// "-content" classes may be deprecated
 			classNames.append(ComponentUtil.appendToCssClasses(styleClass, "-content"));
 		}
 
-		responseWriter.writeAttribute(StringPool.CLASS, classNames.toString(), null);
+		responseWriter.writeAttribute("class", classNames.toString(), null);
 	}
 
 	@Override
@@ -134,8 +133,8 @@ public class ColumnRenderer extends Renderer {
 		super.encodeEnd(facesContext, uiComponent);
 
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
-		responseWriter.endElement(StringPool.DIV);
-		responseWriter.endElement(StringPool.DIV);
+		responseWriter.endElement("div");
+		responseWriter.endElement("div");
 	}
 
 }

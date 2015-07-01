@@ -31,7 +31,6 @@ import com.liferay.faces.alloy.component.commandbutton.CommandButton;
 import com.liferay.faces.alloy.component.commandbutton.SplitCommandButton;
 import com.liferay.faces.alloy.component.menu.Menu;
 import com.liferay.faces.util.component.Styleable;
-import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.render.RendererUtil;
 
 
@@ -105,7 +104,7 @@ public abstract class AbstractButtonRenderer extends ButtonRendererBase {
 
 			if (disabled) {
 
-				classNames.append(StringPool.SPACE);
+				classNames.append(" ");
 				classNames.append(DISABLED_BUTTON_CSS_CLASSES);
 			}
 

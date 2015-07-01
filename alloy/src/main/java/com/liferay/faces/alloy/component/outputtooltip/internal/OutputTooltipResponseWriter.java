@@ -19,7 +19,6 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.ResponseWriter;
 
 import com.liferay.faces.util.component.Styleable;
-import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.render.internal.DelegationResponseWriterBase;
 
 
@@ -60,7 +59,7 @@ public class OutputTooltipResponseWriter extends DelegationResponseWriterBase {
 
 		// Prevent the JSF runtime writing the "id", "style", and "class" attributes since the
 		// OutputToolTipRenderer.encodeMarkupBegin(FacesContext, UIComponent) method has already written them.
-		if (!StringPool.ID.equals(name) && !Styleable.STYLE.equals(name) && !Styleable.STYLE_CLASS.equals(name)) {
+		if (!"id".equals(name) && !Styleable.STYLE.equals(name) && !Styleable.STYLE_CLASS.equals(name)) {
 			super.writeAttribute(name, value, property);
 		}
 	}

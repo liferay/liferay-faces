@@ -38,7 +38,6 @@ import org.apache.commons.io.FileUtils;
 
 import com.liferay.faces.util.config.WebConfigParam;
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
-import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.util.model.UploadedFile;
@@ -65,7 +64,7 @@ public class InputFileDecoderCommonsImpl extends InputFileDecoderBase {
 
 		// FACES-1452: Non-alpha-numeric characters must be removed order to ensure that the folder will be
 		// created properly.
-		sessionId = sessionId.replaceAll("[^A-Za-z0-9]", StringPool.BLANK);
+		sessionId = sessionId.replaceAll("[^A-Za-z0-9]", " ");
 
 		File uploadedFilesPath = new File(uploadedFilesFolder, sessionId);
 

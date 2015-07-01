@@ -39,17 +39,14 @@ import javax.faces.render.FacesRenderer;
 import com.liferay.faces.portal.component.inputsearch.InputSearch;
 import com.liferay.faces.portal.render.internal.DelayedPortalTagRenderer;
 import com.liferay.faces.util.event.PreRenderComponentEventListener;
-import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.util.render.RendererUtil;
-
 import com.liferay.portal.kernel.xml.Attribute;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.Node;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
-
 import com.liferay.taglib.ui.InputSearchTag;
 
 
@@ -91,8 +88,8 @@ public class InputSearchRenderer extends DelayedPortalTagRenderer<InputSearch, I
 	public void encodeBegin(FacesContext facesContext, UIComponent uiComponent) throws IOException {
 
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
-		responseWriter.startElement(StringPool.DIV, uiComponent);
-		responseWriter.writeAttribute(StringPool.CLASS, "form-search", StringPool.CLASS);
+		responseWriter.startElement("div", uiComponent);
+		responseWriter.writeAttribute("class", "form-search", "class");
 
 		// Delegate to PortalTagRenderer so that the JSP tag output will get encoded.
 		super.encodeBegin(facesContext, uiComponent);
@@ -106,7 +103,7 @@ public class InputSearchRenderer extends DelayedPortalTagRenderer<InputSearch, I
 
 		// Encode the closing </div> element
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
-		responseWriter.endElement(StringPool.DIV);
+		responseWriter.endElement("div");
 	}
 
 	@Override

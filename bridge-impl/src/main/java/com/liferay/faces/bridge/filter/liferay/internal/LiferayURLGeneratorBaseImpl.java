@@ -31,12 +31,10 @@ import com.liferay.faces.bridge.filter.liferay.LiferayURLGenerator;
 import com.liferay.faces.bridge.internal.BridgeConstants;
 import com.liferay.faces.bridge.util.internal.URLParameter;
 import com.liferay.faces.util.helper.StringHelper;
-import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.util.product.ProductConstants;
 import com.liferay.faces.util.product.ProductMap;
-
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.Portlet;
@@ -242,11 +240,11 @@ public abstract class LiferayURLGeneratorBaseImpl implements LiferayURLGenerator
 			// Always add the p_p_id parameter
 			String parameterValue = StringHelper.toString(additionalParameterMap.get(P_P_ID), responseNamespace);
 
-			if (parameterValue.startsWith(StringPool.UNDERLINE)) {
+			if (parameterValue.startsWith("_")) {
 				parameterValue = parameterValue.substring(1);
 			}
 
-			if (parameterValue.endsWith(StringPool.UNDERLINE)) {
+			if (parameterValue.endsWith("_")) {
 				parameterValue = parameterValue.substring(0, parameterValue.length() - 1);
 			}
 
@@ -487,7 +485,7 @@ public abstract class LiferayURLGeneratorBaseImpl implements LiferayURLGenerator
 		String parameterValue, StringBuilder url) {
 
 		if (!firstParameter) {
-			url.append(StringPool.AMPERSAND);
+			url.append("&");
 		}
 
 		if (namespaced) {
@@ -495,7 +493,7 @@ public abstract class LiferayURLGeneratorBaseImpl implements LiferayURLGenerator
 		}
 
 		url.append(parameterName);
-		url.append(StringPool.EQUAL);
+		url.append("=");
 		url.append(parameterValue);
 
 		logger.debug("Appended param to URL name=[{0}] parameterValue=[{1}]", parameterName, parameterValue);
@@ -503,21 +501,21 @@ public abstract class LiferayURLGeneratorBaseImpl implements LiferayURLGenerator
 
 	protected String encode(String value) {
 
-		String encodedValue = StringPool.BLANK;
+		String encodedValue = "";
 
 		if (value != null) {
 
 			if (value.length() == 0) {
-				encodedValue = StringPool.SPACE;
+				encodedValue = " ";
 			}
 			else {
 
 				try {
-					encodedValue = URLEncoder.encode(value, StringPool.UTF8);
+					encodedValue = URLEncoder.encode(value, "UTF-8");
 				}
 				catch (UnsupportedEncodingException e) {
 					logger.error(e);
-					encodedValue = StringPool.SPACE;
+					encodedValue = " ";
 				}
 			}
 		}
@@ -531,7 +529,7 @@ public abstract class LiferayURLGeneratorBaseImpl implements LiferayURLGenerator
 		wsrpParameters = new ArrayList<URLParameter>();
 
 		String queryString = baseURL;
-		int queryPos = baseURL.indexOf(StringPool.QUESTION);
+		int queryPos = baseURL.indexOf("?");
 
 		if (queryPos > 0) {
 			prefix = baseURL.substring(0, queryPos + 1);
@@ -544,7 +542,7 @@ public abstract class LiferayURLGeneratorBaseImpl implements LiferayURLGenerator
 
 			for (String nameValuePair : nameValuePairs) {
 
-				int equalsPos = nameValuePair.indexOf(StringPool.EQUAL);
+				int equalsPos = nameValuePair.indexOf("=");
 
 				if (equalsPos > 0) {
 
@@ -562,7 +560,7 @@ public abstract class LiferayURLGeneratorBaseImpl implements LiferayURLGenerator
 			}
 		}
 
-		int pos = baseURL.indexOf(StringPool.POUND);
+		int pos = baseURL.indexOf("#");
 
 		if (pos > 0) {
 			portletURLAnchor = baseURL.substring(pos);

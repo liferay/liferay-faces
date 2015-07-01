@@ -21,8 +21,6 @@ import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 import javax.faces.render.Renderer;
 
-import com.liferay.faces.util.lang.StringPool;
-
 
 /**
  * @author      Neil Griffin
@@ -41,7 +39,7 @@ public class ButtonRowRenderer extends Renderer {
 		responseWriter.startElement("span", uiComponent);
 
 		String id = uiComponent.getClientId(facesContext);
-		responseWriter.writeAttribute(StringPool.ID, id, StringPool.ID);
+		responseWriter.writeAttribute("id", id, "id");
 
 		StringBuilder classNames = new StringBuilder();
 
@@ -51,18 +49,18 @@ public class ButtonRowRenderer extends Renderer {
 		String cssClass = (String) attributes.get("cssClass");
 
 		if ((cssClass != null) && (cssClass.length() > 0)) {
-			classNames.append(StringPool.SPACE);
+			classNames.append(" ");
 			classNames.append(cssClass);
 		}
 
 		String styleClass = (String) attributes.get("styleClass");
 
 		if ((styleClass != null) && (styleClass.length() > 0)) {
-			classNames.append(StringPool.SPACE);
+			classNames.append(" ");
 			classNames.append(styleClass);
 		}
 
-		responseWriter.writeAttribute(StringPool.CLASS, classNames.toString(), null);
+		responseWriter.writeAttribute("class", classNames.toString(), null);
 	}
 
 	@Override

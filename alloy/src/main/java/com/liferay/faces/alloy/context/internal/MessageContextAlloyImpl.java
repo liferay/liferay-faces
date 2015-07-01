@@ -22,7 +22,6 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import com.liferay.faces.util.context.MessageContext;
 import com.liferay.faces.util.context.MessageContextWrapper;
-import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -60,7 +59,7 @@ public class MessageContextAlloyImpl extends MessageContextWrapper {
 		if (messageMap.containsKey(key)) {
 			message = messageMap.get(key);
 
-			if (StringPool.BLANK.equals(message)) {
+			if ("".equals(message)) {
 				message = null;
 			}
 		}
@@ -87,7 +86,7 @@ public class MessageContextAlloyImpl extends MessageContextWrapper {
 					messageMap.put(key, message);
 				}
 				catch (MissingResourceException e) {
-					messageMap.put(key, StringPool.BLANK);
+					messageMap.put(key, "");
 				}
 			}
 		}

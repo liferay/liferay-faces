@@ -21,7 +21,6 @@ import javax.faces.component.behavior.AjaxBehavior;
 import javax.faces.component.behavior.ClientBehavior;
 
 import com.liferay.faces.alloy.component.inputfile.InputFile;
-import com.liferay.faces.util.lang.StringPool;
 
 
 /**
@@ -36,10 +35,10 @@ public class AjaxParameters {
 	public AjaxParameters(InputFile inputFile, String clientId, String formClientId) {
 
 		// Default value of execute is "@this" which maps to name and id of the rendered input element.
-		this.execute = clientId.concat(StringPool.SPACE).concat(clientId);
+		this.execute = clientId.concat(" ").concat(clientId);
 
 		// Default value of render is "@none" which maps to an empty string.
-		this.render = StringPool.BLANK;
+		this.render = "";
 
 		// For each Ajax behavior associated with the specified component:
 		Map<String, List<ClientBehavior>> clientBehaviorMap = inputFile.getClientBehaviors();
@@ -68,13 +67,13 @@ public class AjaxParameters {
 						}
 						else if ("@none".equals(executeId)) {
 							foundNoneKeyword = true;
-							this.execute = StringPool.BLANK;
+							this.execute = "";
 
 							break;
 						}
 						else if (executeId.length() > 0) {
 
-							buf.append(StringPool.SPACE);
+							buf.append(" ");
 							buf.append(executeId);
 						}
 					}
@@ -90,7 +89,7 @@ public class AjaxParameters {
 							this.execute = this.execute.replace("@this", clientId);
 
 							boolean foundClientId = false;
-							String[] executeIdArray = this.execute.split(StringPool.SPACE);
+							String[] executeIdArray = this.execute.split(" ");
 
 							for (String executeId : executeIdArray) {
 
@@ -102,7 +101,7 @@ public class AjaxParameters {
 							}
 
 							if (!foundClientId) {
-								this.execute = clientId.concat(StringPool.SPACE).concat(this.execute);
+								this.execute = clientId.concat(" ").concat(this.execute);
 							}
 						}
 					}
@@ -127,7 +126,7 @@ public class AjaxParameters {
 						}
 						else if ("@none".equals(renderId)) {
 							foundNoneKeyword = true;
-							this.render = StringPool.BLANK;
+							this.render = "";
 
 							break;
 						}
@@ -139,7 +138,7 @@ public class AjaxParameters {
 									first = false;
 								}
 								else {
-									buf.append(StringPool.SPACE);
+									buf.append(" ");
 								}
 
 								buf.append(renderId);

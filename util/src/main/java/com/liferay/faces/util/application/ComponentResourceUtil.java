@@ -16,8 +16,6 @@ package com.liferay.faces.util.application;
 import javax.faces.component.UIComponent;
 import javax.faces.component.ValueHolder;
 
-import com.liferay.faces.util.lang.StringPool;
-
 
 /**
  * @author  Neil Griffin
@@ -51,7 +49,7 @@ public class ComponentResourceUtil {
 				id = library;
 			}
 			else {
-				id = library + StringPool.COLON + name;
+				id = library + ":" + name;
 			}
 		}
 

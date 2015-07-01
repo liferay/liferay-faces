@@ -37,7 +37,6 @@ import com.liferay.faces.alloy.component.autocomplete.AutoComplete;
 import com.liferay.faces.alloy.render.internal.JavaScriptFragment;
 import com.liferay.faces.util.component.ClientComponent;
 import com.liferay.faces.util.component.Styleable;
-import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.render.RendererUtil;
 import com.liferay.faces.util.render.internal.BufferedScriptResponseWriter;
 
@@ -122,11 +121,11 @@ public class AutoCompleteRenderer extends AutoCompleteRendererBase {
 
 			// Start the encoding of the outermost <div> element.
 			ResponseWriter responseWriter = facesContext.getResponseWriter();
-			responseWriter.startElement(StringPool.DIV, uiComponent);
+			responseWriter.startElement("div", uiComponent);
 
 			// Encode the "id" attribute on the outermost <div> element.
 			String clientId = uiComponent.getClientId(facesContext);
-			responseWriter.writeAttribute(StringPool.ID, clientId, StringPool.ID);
+			responseWriter.writeAttribute("id", clientId, "id");
 
 			// Encode the "class" and "style" attributes on the outermost <div> element.
 			Styleable styleable = (Styleable) uiComponent;
@@ -138,9 +137,9 @@ public class AutoCompleteRenderer extends AutoCompleteRendererBase {
 			super.encodeAll(facesContext, uiComponent, autoCompleteInputResponseWriter);
 
 			// Encode the contentBox of the autoComplete.
-			responseWriter.startElement(StringPool.DIV, uiComponent);
-			responseWriter.writeAttribute(StringPool.ID, clientId + CONTENT_BOX_SUFFIX, null);
-			responseWriter.endElement(StringPool.DIV);
+			responseWriter.startElement("div", uiComponent);
+			responseWriter.writeAttribute("id", clientId + CONTENT_BOX_SUFFIX, null);
+			responseWriter.endElement("div");
 
 			// If the developer has specified a server-side filtering, then render the hidden input which is used to
 			// submit the query for server-side filtering.
@@ -148,10 +147,10 @@ public class AutoCompleteRenderer extends AutoCompleteRendererBase {
 
 				// Encode the hidden input which will be used to submit the query to the server.
 				responseWriter.startElement("input", uiComponent);
-				responseWriter.writeAttribute(StringPool.ID, clientId + HIDDEN_SUFFIX, null);
+				responseWriter.writeAttribute("id", clientId + HIDDEN_SUFFIX, null);
 				responseWriter.writeAttribute("name", clientId + HIDDEN_SUFFIX, null);
 				responseWriter.writeAttribute("type", "hidden", null);
-				responseWriter.writeAttribute("value", StringPool.BLANK, null);
+				responseWriter.writeAttribute("value", "", null);
 				responseWriter.endElement("input");
 			}
 		}
@@ -166,7 +165,7 @@ public class AutoCompleteRenderer extends AutoCompleteRendererBase {
 
 			// Finish the encoding of the outermost </div> element.
 			ResponseWriter responseWriter = facesContext.getResponseWriter();
-			responseWriter.endElement(StringPool.DIV);
+			responseWriter.endElement("div");
 		}
 	}
 
@@ -227,25 +226,25 @@ public class AutoCompleteRenderer extends AutoCompleteRendererBase {
 			//J-
 			// source: ['item1', 'item2', 'item3', ... 'itemN']
 			//J+
-			encodeNonEscapedObject(responseWriter, SOURCE, StringPool.BLANK, first);
+			encodeNonEscapedObject(responseWriter, SOURCE, "", first);
 
 			List<String> results = new ArrayList<String>();
 			results.addAll(autoComplete.getAllItems(facesContext));
 
-			responseWriter.write(StringPool.OPEN_BRACKET);
+			responseWriter.write("[");
 
 			for (int i = 0; i < results.size(); i++) {
 
 				if (i > 0) {
-					responseWriter.write(StringPool.COMMA);
+					responseWriter.write(",");
 				}
 
-				responseWriter.write(StringPool.APOSTROPHE);
+				responseWriter.write("'");
 				responseWriter.write(results.get(i));
-				responseWriter.write(StringPool.APOSTROPHE);
+				responseWriter.write("'");
 			}
 
-			responseWriter.write(StringPool.CLOSE_BRACKET);
+			responseWriter.write("]");
 		}
 	}
 
@@ -326,20 +325,20 @@ public class AutoCompleteRenderer extends AutoCompleteRendererBase {
 				//J+
 				StringBuilder resultArrayStringBuilder = new StringBuilder();
 
-				resultArrayStringBuilder.append(StringPool.OPEN_BRACKET);
+				resultArrayStringBuilder.append("[");
 
 				for (int i = 0; i < items.size(); i++) {
 
 					if (i > 0) {
-						resultArrayStringBuilder.append(StringPool.COMMA);
+						resultArrayStringBuilder.append(",");
 					}
 
-					resultArrayStringBuilder.append(StringPool.APOSTROPHE);
+					resultArrayStringBuilder.append("'");
 					resultArrayStringBuilder.append(items.get(i));
-					resultArrayStringBuilder.append(StringPool.APOSTROPHE);
+					resultArrayStringBuilder.append("'");
 				}
 
-				resultArrayStringBuilder.append(StringPool.CLOSE_BRACKET);
+				resultArrayStringBuilder.append("]");
 
 				// Buffer all JavaScript so that it is rendered in the <eval> section of the partial response.
 				BufferedScriptResponseWriter bufferedScriptResponseWriter = new BufferedScriptResponseWriter();

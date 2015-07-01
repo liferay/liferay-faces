@@ -26,7 +26,6 @@ import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.bridge.context.url.BridgeURI;
 import com.liferay.faces.bridge.context.url.BridgeURL;
 import com.liferay.faces.util.helper.BooleanHelper;
-import com.liferay.faces.util.lang.StringPool;
 
 
 /**
@@ -71,7 +70,7 @@ public class BridgeActionURLImpl extends BridgeURLBase implements BridgeURL {
 
 			// Otherwise, if the URL string starts with a "#" character, or it's an absolute URL that is external to
 			// this portlet, then simply return the URL string as required by the Bridge Spec.
-			else if (uri.startsWith(StringPool.POUND) || (bridgeURI.isAbsolute() && bridgeURI.isExternal())) {
+			else if (uri.startsWith("#") || (bridgeURI.isAbsolute() && bridgeURI.isExternal())) {
 
 				// TCK TestPage084: encodeActionURLPoundCharTest
 				baseURL = new BaseURLNonEncodedStringImpl(uri, getParameterMap());
