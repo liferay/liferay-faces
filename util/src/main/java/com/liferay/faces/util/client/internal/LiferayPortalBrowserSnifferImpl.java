@@ -16,7 +16,6 @@ package com.liferay.faces.util.client.internal;
 import javax.servlet.http.HttpServletRequest;
 
 import com.liferay.faces.util.HttpHeaders;
-import com.liferay.faces.util.lang.StringPool;
 
 //J-
 /**
@@ -445,14 +444,14 @@ public class LiferayPortalBrowserSnifferImpl extends LiferayPortalBrowserSniffer
 
 			String minor = userAgent.substring(minorStart, minorEnd);
 
-			return major.concat(StringPool.PERIOD).concat(minor);
+			return major.concat(".").concat(minor);
 		}
 
-		return StringPool.BLANK;
+		return "";
 	}
 
 	protected String getAccept(HttpServletRequest request) {
-		String accept = StringPool.BLANK;
+		String accept = "";
 
 		if (request == null) {
 			return accept;
@@ -470,7 +469,7 @@ public class LiferayPortalBrowserSnifferImpl extends LiferayPortalBrowserSniffer
 			accept = StringUtil.toLowerCase(accept);
 		}
 		else {
-			accept = StringPool.BLANK;
+			accept = "";
 		}
 
 		request.setAttribute(HttpHeaders.ACCEPT, accept);
@@ -479,7 +478,7 @@ public class LiferayPortalBrowserSnifferImpl extends LiferayPortalBrowserSniffer
 	}
 
 	protected String getUserAgent(HttpServletRequest request) {
-		String userAgent = StringPool.BLANK;
+		String userAgent = "";
 
 		if (request == null) {
 			return userAgent;
@@ -498,7 +497,7 @@ public class LiferayPortalBrowserSnifferImpl extends LiferayPortalBrowserSniffer
 			userAgent = StringUtil.toLowerCase(userAgent);
 		}
 		else {
-			userAgent = StringPool.BLANK;
+			userAgent = "";
 		}
 
 		request.setAttribute(HttpHeaders.USER_AGENT, userAgent);

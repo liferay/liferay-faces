@@ -25,7 +25,6 @@ import org.w3c.dom.Element;
 import com.liferay.faces.bridge.context.HeadResponseWriter;
 import com.liferay.faces.bridge.renderkit.html_basic.internal.ElementWriter;
 import com.liferay.faces.bridge.renderkit.html_basic.internal.ElementWriterStack;
-import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -107,7 +106,7 @@ public abstract class HeadResponseWriterBase extends HeadResponseWriter {
 	public void endCDATA() throws IOException {
 
 		try {
-			elementWriterStack.safePeek().write(StringPool.CDATA_CLOSE);
+			elementWriterStack.safePeek().write("]]>");
 		}
 		catch (EmptyStackException e) {
 			throw new IOException(EmptyStackException.class.getSimpleName());
@@ -158,7 +157,7 @@ public abstract class HeadResponseWriterBase extends HeadResponseWriter {
 	public void startCDATA() throws IOException {
 
 		try {
-			elementWriterStack.safePeek().write(StringPool.CDATA_OPEN);
+			elementWriterStack.safePeek().write("<![CDATA[");
 		}
 		catch (EmptyStackException e) {
 			throw new IOException(EmptyStackException.class.getSimpleName());
@@ -342,7 +341,7 @@ public abstract class HeadResponseWriterBase extends HeadResponseWriter {
 	protected String escapeURI(String uri) {
 
 		if (uri.length() == 0) {
-			return StringPool.BLANK;
+			return "";
 		}
 
 		// Escape using XSS recommendations from

@@ -55,7 +55,6 @@ import com.liferay.faces.bridge.config.BridgeConfig;
 import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.bridge.context.IncongruityContext;
 import com.liferay.faces.bridge.util.internal.FacesMessageWrapper;
-import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -129,7 +128,7 @@ public class BridgeRequestScopeImpl extends BridgeRequestScopeCompat_2_2_Impl im
 		PortletContext portletContext = portletConfig.getPortletContext();
 		@SuppressWarnings("unchecked")
 		List<String> portletContextExcludedAttributeNames = (List<String>) portletContext.getAttribute(
-				Bridge.BRIDGE_PACKAGE_PREFIX + portletName + StringPool.PERIOD + Bridge.EXCLUDED_REQUEST_ATTRIBUTES);
+				Bridge.BRIDGE_PACKAGE_PREFIX + portletName + "." + Bridge.EXCLUDED_REQUEST_ATTRIBUTES);
 
 		// Combine the two lists into a single list of excluded BridgeRequestScope attributes.
 		Set<String> facesConfigExcludedAttributeNames = bridgeConfig.getExcludedRequestAttributes();
@@ -562,7 +561,7 @@ public class BridgeRequestScopeImpl extends BridgeRequestScopeCompat_2_2_Impl im
 	public String toString() {
 		StringBuilder buf = new StringBuilder();
 		buf.append(getClass().getName());
-		buf.append(StringPool.AT);
+		buf.append("@");
 		buf.append(Integer.toHexString(hashCode()));
 
 		return buf.toString();
@@ -636,10 +635,10 @@ public class BridgeRequestScopeImpl extends BridgeRequestScopeCompat_2_2_Impl im
 
 					break;
 				}
-				else if (excludedAttribute.endsWith(StringPool.STAR)) {
+				else if (excludedAttribute.endsWith("*")) {
 
 					String wildcardNamespace = excludedAttribute;
-					int dotPos = wildcardNamespace.lastIndexOf(StringPool.PERIOD);
+					int dotPos = wildcardNamespace.lastIndexOf(".");
 
 					if (dotPos > 0) {
 						wildcardNamespace = wildcardNamespace.substring(0, dotPos);
@@ -666,7 +665,7 @@ public class BridgeRequestScopeImpl extends BridgeRequestScopeCompat_2_2_Impl im
 		boolean match = false;
 
 		String attributeNamespace = attributeName;
-		int dotPos = attributeNamespace.lastIndexOf(StringPool.PERIOD);
+		int dotPos = attributeNamespace.lastIndexOf(".");
 
 		if (dotPos > 0) {
 			attributeNamespace = attributeNamespace.substring(0, dotPos);

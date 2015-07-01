@@ -32,8 +32,6 @@ import org.xml.sax.SAXNotSupportedException;
 import org.xml.sax.XMLReader;
 import org.xml.sax.ext.LexicalHandler;
 
-import com.liferay.faces.util.lang.StringPool;
-
 
 /**
  * This class is a thread-safe implementation of {@link XMLReader}. However, it does not fully implement all of the
@@ -182,7 +180,7 @@ public class XMLReaderImpl implements XMLReader {
 				else {
 
 					// Assume that this is the completion of an element name. i.e.: <form>
-					String uri = StringPool.BLANK;
+					String uri = "";
 					String qName = elementName.toString();
 					boolean startElement = true;
 					boolean endElement = false;
@@ -211,7 +209,7 @@ public class XMLReaderImpl implements XMLReader {
 						uri = uriMap.get(prefix);
 
 						if (uri == null) {
-							uri = StringPool.BLANK;
+							uri = "";
 						}
 
 						localName = qName.substring(colonPos + 1);
@@ -292,7 +290,7 @@ public class XMLReaderImpl implements XMLReader {
 						if (!openQuote) {
 							parsingAttributeValue = false;
 
-							String uri = StringPool.BLANK;
+							String uri = "";
 							String qName = attributeName.toString().trim();
 							String localName = qName;
 							String prefix = null;
@@ -303,7 +301,7 @@ public class XMLReaderImpl implements XMLReader {
 								uri = uriMap.get(prefix);
 
 								if (uri == null) {
-									uri = StringPool.BLANK;
+									uri = "";
 								}
 
 								localName = qName.substring(colonPos + 1);
@@ -313,7 +311,7 @@ public class XMLReaderImpl implements XMLReader {
 
 							// Substitute all occurrences of "&amp;" with "&" (which is what the JRE parser does).
 							StringBuilder buf = null;
-							int ampersandPos = attributeValue.indexOf(StringPool.AMPERSAND_ENCODED);
+							int ampersandPos = attributeValue.indexOf("&amp;");
 
 							if (ampersandPos > 0) {
 
@@ -323,11 +321,11 @@ public class XMLReaderImpl implements XMLReader {
 								while (ampersandPos > 0) {
 
 									buf.append(attributeValue.substring(startPos, ampersandPos));
-									buf.append(StringPool.AMPERSAND);
+									buf.append("&");
 
-									startPos = ampersandPos + StringPool.AMPERSAND_ENCODED.length();
+									startPos = ampersandPos + "&amp;".length();
 
-									ampersandPos = attributeValue.indexOf(StringPool.AMPERSAND_ENCODED, startPos);
+									ampersandPos = attributeValue.indexOf("&amp;", startPos);
 								}
 
 								if (startPos < attributeValue.length()) {
@@ -344,7 +342,7 @@ public class XMLReaderImpl implements XMLReader {
 							if (qName.toLowerCase().startsWith(XMLNS)) {
 
 								if (localName.equals(XMLNS)) {
-									localName = StringPool.BLANK;
+									localName = "";
 								}
 
 								uriMap.put(localName, value);

@@ -23,7 +23,6 @@ import java.io.UnsupportedEncodingException;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileItemHeaders;
 
-import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.util.model.UploadedFile;
@@ -135,7 +134,7 @@ public class PrimeFacesFileItem implements FileItem {
 	}
 
 	public String getString() {
-		return getString(StringPool.UTF8);
+		return getString("UTF-8");
 	}
 
 	public String getString(String encoding) {
