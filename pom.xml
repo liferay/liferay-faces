@@ -78,7 +78,7 @@
 		<faces.api.scope>compile</faces.api.scope>
 		<faces.api.version>${faces.spec.version}</faces.api.version>
 		<faces.impl.artifact.id>jsf-impl</faces.impl.artifact.id>
-		<faces.impl.scope>compile</faces.impl.scope>
+		<faces.impl.scope>runtime</faces.impl.scope>
 		<faces.spec.version>2.2</faces.spec.version>
 		<faces.version>${mojarra.version}</faces.version>
 		<full.version>${project.version} (${codename} / ${timestamp} AD)</full.version>
