@@ -26,7 +26,6 @@ import javax.faces.render.FacesRenderer;
 import com.liferay.faces.alloy.component.button.Button;
 import com.liferay.faces.alloy.component.popover.Popover;
 import com.liferay.faces.util.component.ClientComponent;
-import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -73,16 +72,12 @@ public class PopoverRenderer extends PopoverRendererBase {
 
 			// Add an "x" toolbar icon so that the popover can be hidden just like alloy:dialog can.
 			responseWriter.write(LIFERAY_COMPONENT);
-			responseWriter.write(StringPool.OPEN_PARENTHESIS);
-			responseWriter.write(StringPool.APOSTROPHE);
+			responseWriter.write("('");
 			responseWriter.write(clientKey);
-			responseWriter.write(StringPool.APOSTROPHE);
-			responseWriter.write(StringPool.CLOSE_PARENTHESIS);
 			responseWriter.write(
-				".addToolbar([{cssClass:'close',label:'\u00D7',on:{click:function(event){Liferay.component('");
+				"').addToolbar([{cssClass:'close',label:'\u00D7',on:{click:function(event){Liferay.component('");
 			responseWriter.write(clientKey);
-			responseWriter.write("').hide();}},render:true}],'header')");
-			responseWriter.write(StringPool.SEMICOLON);
+			responseWriter.write("').hide();}},render:true}],'header');");
 		}
 
 		// Move the overlayBody div into the popover-content div.
@@ -112,12 +107,12 @@ public class PopoverRenderer extends PopoverRendererBase {
 
 	protected void encodeAlign(ResponseWriter responseWriter, Popover popover, boolean first) throws IOException {
 
-		encodeNonEscapedObject(responseWriter, ALIGN, StringPool.BLANK, first);
-		responseWriter.write(StringPool.OPEN_CURLY_BRACE);
+		encodeNonEscapedObject(responseWriter, ALIGN, "", first);
+		responseWriter.write("{");
 
 		String for_ = popover.getFor();
 		encodeClientId(responseWriter, NODE, for_, popover, true);
-		responseWriter.write(StringPool.CLOSE_CURLY_BRACE);
+		responseWriter.write("}");
 
 		UIComponent forComponent = popover.findComponent(for_);
 

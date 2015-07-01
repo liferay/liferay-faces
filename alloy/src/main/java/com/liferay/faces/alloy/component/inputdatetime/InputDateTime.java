@@ -32,7 +32,6 @@ import com.liferay.faces.util.component.ClientComponent;
 import com.liferay.faces.util.context.MessageContext;
 import com.liferay.faces.util.context.MessageContextFactory;
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
-import com.liferay.faces.util.lang.StringPool;
 
 
 /**
@@ -211,7 +210,7 @@ public abstract class InputDateTime extends InputDateTimeBase implements ClientC
 				String localeAsString = (String) localeAsObject;
 
 				if (localeAsString.length() > 0) {
-					String[] locales = localeAsString.split(StringPool.DASH);
+					String[] locales = localeAsString.split("-");
 
 					if (locales.length > 1) {
 						locale = new Locale(locales[0], locales[1]);

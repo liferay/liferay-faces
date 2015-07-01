@@ -23,7 +23,6 @@ import javax.faces.render.FacesRenderer;
 
 import com.liferay.faces.alloy.component.field.Field;
 import com.liferay.faces.alloy.component.selectbooleancheckbox.SelectBooleanCheckbox;
-import com.liferay.faces.util.lang.StringPool;
 
 
 /**
@@ -85,7 +84,7 @@ public class FieldRenderer extends FieldRendererBase {
 	protected void encodeCheckboxLabelInnerHTML(ResponseWriter responseWriter, String label, String checkboxClientId)
 		throws IOException {
 
-		responseWriter.writeAttribute(StringPool.CLASS, "checkbox", null);
+		responseWriter.writeAttribute("class", "checkbox", null);
 		responseWriter.writeAttribute("for", checkboxClientId, null);
 		responseWriter.writeText(label, LABEL);
 	}
@@ -93,7 +92,7 @@ public class FieldRenderer extends FieldRendererBase {
 	protected void encodeLabel(ResponseWriter responseWriter, Field field, String label) throws IOException {
 
 		responseWriter.startElement(LABEL, field);
-		responseWriter.writeAttribute(StringPool.CLASS, "control-label", null);
+		responseWriter.writeAttribute("class", "control-label", null);
 		responseWriter.writeText(label, LABEL);
 		responseWriter.endElement(LABEL);
 	}

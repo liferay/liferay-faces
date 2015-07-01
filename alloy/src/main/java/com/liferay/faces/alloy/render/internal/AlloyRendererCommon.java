@@ -24,7 +24,6 @@ import com.liferay.faces.util.client.BrowserSniffer;
 import com.liferay.faces.util.client.BrowserSnifferFactory;
 import com.liferay.faces.util.component.ClientComponent;
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
-import com.liferay.faces.util.lang.StringPool;
 
 
 /**
@@ -48,18 +47,18 @@ import com.liferay.faces.util.lang.StringPool;
 		boolean first) throws IOException {
 
 		if (!first) {
-			responseWriter.write(StringPool.COMMA);
+			responseWriter.write(",");
 		}
 
 		responseWriter.write(attributeName);
-		responseWriter.write(StringPool.COLON);
+		responseWriter.write(":");
 		responseWriter.write(attributeValue.toString());
 	}
 
 	/* package-private */ static void encodeClientId(ResponseWriter responseWriter, String attributeName, String clientId, boolean first)
 		throws IOException {
 
-		String escapedClientId = StringPool.POUND + clientId.replaceAll(REGEX_COLON, BACKSLASH_COLON);
+		String escapedClientId = "#" + clientId.replaceAll(REGEX_COLON, BACKSLASH_COLON);
 		encodeString(responseWriter, attributeName, escapedClientId, first);
 	}
 
@@ -79,19 +78,13 @@ import com.liferay.faces.util.lang.StringPool;
 	/* package-private */ static void encodeEventCallback(ResponseWriter responseWriter, String varName, String methodName,
 		String eventName, String callback) throws IOException {
 		responseWriter.write(varName);
-		responseWriter.write(StringPool.PERIOD);
+		responseWriter.write(".");
 		responseWriter.write(methodName);
-		responseWriter.write(StringPool.OPEN_PARENTHESIS);
-		responseWriter.write(StringPool.APOSTROPHE);
+		responseWriter.write("('");
 		responseWriter.write(eventName);
-		responseWriter.write(StringPool.APOSTROPHE);
-		responseWriter.write(StringPool.COMMA);
-		responseWriter.write("function(event)");
-		responseWriter.write(StringPool.OPEN_CURLY_BRACE);
+		responseWriter.write("',function(event){");
 		responseWriter.write(callback);
-		responseWriter.write(StringPool.CLOSE_CURLY_BRACE);
-		responseWriter.write(StringPool.CLOSE_PARENTHESIS);
-		responseWriter.write(StringPool.SEMICOLON);
+		responseWriter.write("});");
 	}
 
 	/* package-private */ static void encodeFunctionCall(ResponseWriter responseWriter, String functionName, Object... parameters)
@@ -121,11 +114,11 @@ import com.liferay.faces.util.lang.StringPool;
 		boolean first) throws IOException {
 
 		if (!first) {
-			responseWriter.write(StringPool.COMMA);
+			responseWriter.write(",");
 		}
 
 		responseWriter.write(attributeName);
-		responseWriter.write(StringPool.COLON);
+		responseWriter.write(":");
 		responseWriter.write(attributeValue.toString());
 	}
 
@@ -156,17 +149,13 @@ import com.liferay.faces.util.lang.StringPool;
 
 			encodeLiferayComponentVar(responseWriter, clientVarName, clientKey);
 			responseWriter.write(IF);
-			responseWriter.write(StringPool.OPEN_PARENTHESIS);
+			responseWriter.write("(");
 			responseWriter.write(clientVarName);
-			responseWriter.write(StringPool.CLOSE_PARENTHESIS);
-			responseWriter.write(StringPool.OPEN_CURLY_BRACE);
+			responseWriter.write("){");
 			responseWriter.write(clientVarName);
-			responseWriter.write(StringPool.PERIOD);
+			responseWriter.write(".");
 			responseWriter.write(DESTROY);
-			responseWriter.write(StringPool.OPEN_PARENTHESIS);
-			responseWriter.write(StringPool.CLOSE_PARENTHESIS);
-			responseWriter.write(StringPool.SEMICOLON);
-			responseWriter.write(StringPool.CLOSE_CURLY_BRACE);
+			responseWriter.write("();}");
 		}
 	}
 
@@ -177,9 +166,7 @@ import com.liferay.faces.util.lang.StringPool;
 
 		if (sandboxed) {
 
-			responseWriter.write(StringPool.CLOSE_CURLY_BRACE);
-			responseWriter.write(StringPool.CLOSE_PARENTHESIS);
-			responseWriter.write(StringPool.SEMICOLON);
+			responseWriter.write("});");
 		}
 	}
 
@@ -215,62 +202,54 @@ import com.liferay.faces.util.lang.StringPool;
 
 		// Begin encoding JavaScript to create the Alloy JavaScript component and put it in the Liferay.component map.
 		responseWriter.write(AlloyRenderer.LIFERAY_COMPONENT);
-		responseWriter.write(StringPool.OPEN_PARENTHESIS);
-		responseWriter.write(StringPool.APOSTROPHE);
+		responseWriter.write("('");
 
 		String escapedClientKey = escapeJavaScript(clientKey);
 		responseWriter.write(escapedClientKey);
-		responseWriter.write(StringPool.APOSTROPHE);
-		responseWriter.write(StringPool.COMMA);
+		responseWriter.write("',");
 
 		// Write Alloy JavaScript component.
 		responseWriter.write(NEW);
-		responseWriter.write(StringPool.SPACE);
+		responseWriter.write(" ");
 		responseWriter.write(A_DOT);
 		responseWriter.write(alloyClassName);
-		responseWriter.write(StringPool.OPEN_PARENTHESIS);
-		responseWriter.write(StringPool.OPEN_CURLY_BRACE);
+		responseWriter.write("({");
 		alloyRenderer.encodeAlloyAttributes(facesContext, responseWriter, uiComponent);
-		responseWriter.write(StringPool.CLOSE_CURLY_BRACE);
-		responseWriter.write(StringPool.CLOSE_PARENTHESIS);
+		responseWriter.write("})");
 
 		// Close Liferay.component parenthesis.
-		responseWriter.write(StringPool.CLOSE_PARENTHESIS);
-		responseWriter.write(StringPool.SEMICOLON);
+		responseWriter.write(");");
 	}
 
 	/* package-private */ static void encodeLiferayComponent(ResponseWriter responseWriter, String clientKey) throws IOException {
 
 		responseWriter.write(AlloyRenderer.LIFERAY_COMPONENT);
-		responseWriter.write(StringPool.OPEN_PARENTHESIS);
-		responseWriter.write(StringPool.APOSTROPHE);
+		responseWriter.write("('");
 
 		String escapedClientKey = escapeJavaScript(clientKey);
 		responseWriter.write(escapedClientKey);
-		responseWriter.write(StringPool.APOSTROPHE);
-		responseWriter.write(StringPool.CLOSE_PARENTHESIS);
+		responseWriter.write("')");
 	}
 
 	/* package-private */ static void encodeLiferayComponentVar(ResponseWriter responseWriter, String clientVarName, String clientKey)
 		throws IOException {
 
-		responseWriter.write("var");
-		responseWriter.write(StringPool.SPACE);
+		responseWriter.write("var ");
 		responseWriter.write(clientVarName);
-		responseWriter.write(StringPool.EQUAL);
+		responseWriter.write("=");
 		encodeLiferayComponent(responseWriter, clientKey);
-		responseWriter.write(StringPool.SEMICOLON);
+		responseWriter.write(";");
 	}
 
 	/* package-private */ static void encodeNonEscapedObject(ResponseWriter responseWriter, String attributeName, Object attributeValue,
 		boolean first) throws IOException {
 
 		if (!first) {
-			responseWriter.write(StringPool.COMMA);
+			responseWriter.write(",");
 		}
 
 		responseWriter.write(attributeName);
-		responseWriter.write(StringPool.COLON);
+		responseWriter.write(":");
 		responseWriter.write(attributeValue.toString());
 	}
 
@@ -280,14 +259,13 @@ import com.liferay.faces.util.lang.StringPool;
 		String escapedAttributeValue = escapeJavaScript(attributeValue.toString());
 
 		if (!first) {
-			responseWriter.write(StringPool.COMMA);
+			responseWriter.write(",");
 		}
 
 		responseWriter.write(attributeName);
-		responseWriter.write(StringPool.COLON);
-		responseWriter.write(StringPool.APOSTROPHE);
+		responseWriter.write(":'");
 		responseWriter.write(escapedAttributeValue);
-		responseWriter.write(StringPool.APOSTROPHE);
+		responseWriter.write("'");
 	}
 
 	/* package-private */ static void encodeWidgetRender(ResponseWriter responseWriter, boolean first) throws IOException {
@@ -325,7 +303,7 @@ import com.liferay.faces.util.lang.StringPool;
 				String hexString = toHexString(character);
 
 				if (hexString.length() == 1) {
-					stringBuilder.append(StringPool.ASCII_TABLE[48]);
+					stringBuilder.append("0");
 				}
 
 				stringBuilder.append(hexString);
@@ -400,8 +378,8 @@ import com.liferay.faces.util.lang.StringPool;
 
 		char separatorChar = UINamingContainer.getSeparatorChar(facesContext);
 		String clientId = clientComponent.getClientId();
-		String regex = StringPool.OPEN_BRACKET + separatorChar + StringPool.CLOSE_BRACKET;
-		String clientVarName = clientId.replaceAll(regex, StringPool.UNDERLINE);
+		String regex = "[" + separatorChar + "]";
+		String clientVarName = clientId.replaceAll(regex, "_");
 
 		return clientVarName;
 	}

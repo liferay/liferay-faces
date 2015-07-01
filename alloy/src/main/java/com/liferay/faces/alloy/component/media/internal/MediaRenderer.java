@@ -32,7 +32,6 @@ import com.liferay.faces.util.application.FacesResource;
 import com.liferay.faces.util.client.BrowserSniffer;
 import com.liferay.faces.util.client.BrowserSnifferFactory;
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
-import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.util.render.RendererUtil;
@@ -67,7 +66,7 @@ public abstract class MediaRenderer extends MediaRendererCompat {
 
 		String clientId = uiComponent.getClientId(facesContext);
 
-		responseWriter.writeAttribute(StringPool.ID, clientId, StringPool.ID);
+		responseWriter.writeAttribute("id", clientId, "id");
 		responseWriter.writeAttribute("name", clientId, null);
 
 		Media media = (Media) uiComponent;

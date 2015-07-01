@@ -20,9 +20,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.faces.component.FacesComponent;
-import javax.faces.component.behavior.AjaxBehavior;
 import javax.faces.component.behavior.Behavior;
-import javax.faces.component.behavior.ClientBehavior;
 import javax.faces.component.behavior.ClientBehaviorHolder;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
@@ -33,7 +31,6 @@ import com.liferay.faces.alloy.component.tab.TabCollapseEvent;
 import com.liferay.faces.alloy.component.tab.TabExpandEvent;
 import com.liferay.faces.alloy.component.tab.TabUtil;
 import com.liferay.faces.util.helper.IntegerHelper;
-import com.liferay.faces.util.lang.StringPool;
 
 
 /**
@@ -123,7 +120,7 @@ public class Accordion extends AccordionBase implements ClientBehaviorHolder {
 			style = "display:none;";
 		}
 		else {
-			style = style + StringPool.SEMICOLON + "display:none;";
+			style = style + ";" + "display:none;";
 		}
 
 		return style;

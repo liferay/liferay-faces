@@ -32,7 +32,6 @@ import com.javadocmd.simplelatlng.util.LengthUnit;
 
 import com.liferay.faces.demos.dto.Airport;
 import com.liferay.faces.demos.dto.Booking;
-import com.liferay.faces.util.lang.StringPool;
 
 
 /**
@@ -100,28 +99,28 @@ public class FlightServiceMockImpl implements FlightService {
 			StringBuilder description = new StringBuilder();
 			description.append("Flight#");
 			description.append(flightNumber);
-			description.append(StringPool.SPACE);
+			description.append(" ");
 			description.append("departing from");
-			description.append(StringPool.SPACE);
+			description.append(" ");
 			description.append(departureAirport.getCity());
-			description.append(StringPool.SPACE);
-			description.append(StringPool.OPEN_PARENTHESIS);
+			description.append(" ");
+			description.append("(");
 			description.append(departureAirport.getCode());
-			description.append(StringPool.CLOSE_PARENTHESIS);
-			description.append(StringPool.SPACE);
+			description.append(")");
+			description.append(" ");
 			description.append("on");
-			description.append(StringPool.SPACE);
+			description.append(" ");
 			description.append(dateFormat.format(flightDepartureDate));
-			description.append(StringPool.SPACE);
+			description.append(" ");
 			description.append("arriving at");
-			description.append(StringPool.SPACE);
+			description.append(" ");
 			description.append(arrivalAirport.getCity());
-			description.append(StringPool.OPEN_PARENTHESIS);
+			description.append("(");
 			description.append(arrivalAirport.getCode());
-			description.append(StringPool.CLOSE_PARENTHESIS);
-			description.append(StringPool.SPACE);
+			description.append(")");
+			description.append(" ");
 			description.append("on");
-			description.append(StringPool.SPACE);
+			description.append(" ");
 			description.append(dateFormat.format(flightArrivalDate));
 			flight.setDescription(description.toString());
 

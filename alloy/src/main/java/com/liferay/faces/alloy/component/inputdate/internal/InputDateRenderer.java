@@ -37,7 +37,6 @@ import com.liferay.faces.alloy.render.internal.JavaScriptFragment;
 import com.liferay.faces.util.client.BrowserSniffer;
 import com.liferay.faces.util.client.BrowserSnifferFactory;
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
-import com.liferay.faces.util.lang.StringPool;
 
 
 /**
@@ -65,8 +64,8 @@ public class InputDateRenderer extends InputDateRendererBase {
 		String mask = datePattern;
 
 		mask = mask.replaceAll("%", "%%");
-		mask = mask.replaceAll(StringPool.NEW_LINE, "%n");
-		mask = mask.replaceAll(StringPool.TAB, "%t");
+		mask = mask.replaceAll("\n", "%n");
+		mask = mask.replaceAll("\t", "%t");
 
 		mask = mask.replaceAll("yyyy", "%Y");
 		mask = mask.replaceAll("yy", "%y");
@@ -160,8 +159,8 @@ public class InputDateRenderer extends InputDateRendererBase {
 		// key:value pairs via JSON syntax. For example: "calendar: {minDate: new Date(2015,1,1,0,0,0,0)}"
 		boolean calendarFirst = true;
 
-		encodeNonEscapedObject(responseWriter, "calendar", StringPool.BLANK, first);
-		responseWriter.write(StringPool.OPEN_CURLY_BRACE);
+		encodeNonEscapedObject(responseWriter, "calendar", "", first);
+		responseWriter.write("{");
 
 		Object maxDateObject = inputDate.getMaxDate();
 
@@ -188,10 +187,10 @@ public class InputDateRenderer extends InputDateRendererBase {
 
 		if (showOnButton || valueChangeClientBehaviorsNotEmpty) {
 
-			encodeNonEscapedObject(responseWriter, "on", StringPool.BLANK, calendarFirst);
-			responseWriter.write(StringPool.OPEN_CURLY_BRACE);
+			encodeNonEscapedObject(responseWriter, "on", "", calendarFirst);
+			responseWriter.write("{");
 
-			encodeNonEscapedObject(responseWriter, "dateClick", StringPool.BLANK, true);
+			encodeNonEscapedObject(responseWriter, "dateClick", "", true);
 			responseWriter.write("function(event){");
 
 			String clientId = inputDate.getClientId(facesContext);
@@ -213,11 +212,11 @@ public class InputDateRenderer extends InputDateRendererBase {
 			encodeFunctionCall(responseWriter, "LFAI.inputDateTimePickerSelect", 'A', escapedInputClientId, selectable,
 				date, valueChangeClientBehaviorsNotEmpty);
 			responseWriter.append(";}");
-			responseWriter.write(StringPool.CLOSE_CURLY_BRACE);
+			responseWriter.write("}");
 			calendarFirst = false;
 		}
 
-		responseWriter.write(StringPool.CLOSE_CURLY_BRACE);
+		responseWriter.write("}");
 	}
 
 	protected void encodeDate(ResponseWriter responseWriter, InputDate inputDate, String attributeName,

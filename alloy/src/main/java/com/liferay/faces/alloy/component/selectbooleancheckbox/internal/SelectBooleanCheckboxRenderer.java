@@ -25,7 +25,6 @@ import javax.faces.render.FacesRenderer;
 
 import com.liferay.faces.alloy.component.field.Field;
 import com.liferay.faces.alloy.component.selectbooleancheckbox.SelectBooleanCheckbox;
-import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.render.internal.IdDelegationResponseWriter;
 
 
@@ -55,7 +54,7 @@ public class SelectBooleanCheckboxRenderer extends SelectBooleanCheckboxRenderer
 
 		if (selectBooleanCheckbox.isRequired() && submittedValue.getClass().equals(Boolean.class) &&
 				Boolean.FALSE.equals(submittedValue)) {
-			selectBooleanCheckbox.setSubmittedValue(StringPool.BLANK);
+			selectBooleanCheckbox.setSubmittedValue("");
 		}
 	}
 
@@ -86,7 +85,7 @@ public class SelectBooleanCheckboxRenderer extends SelectBooleanCheckboxRenderer
 
 		SelectBooleanCheckbox selectBooleanCheckbox = (SelectBooleanCheckbox) uiComponent;
 
-		if (selectBooleanCheckbox.isRequired() && StringPool.BLANK.equals(submittedValue)) {
+		if (selectBooleanCheckbox.isRequired() && "".equals(submittedValue)) {
 			convertedValue = submittedValue;
 		}
 

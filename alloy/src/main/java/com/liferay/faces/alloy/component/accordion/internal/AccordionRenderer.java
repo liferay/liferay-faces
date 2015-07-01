@@ -37,7 +37,6 @@ import com.liferay.faces.alloy.component.tab.TabExpandEvent;
 import com.liferay.faces.alloy.component.tab.TabUtil;
 import com.liferay.faces.util.component.Styleable;
 import com.liferay.faces.util.helper.IntegerHelper;
-import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.util.render.RendererUtil;
@@ -158,7 +157,7 @@ public class AccordionRenderer extends AccordionRendererBase {
 		responseWriter.startElement("input", accordion);
 
 		String hiddenFieldName = accordion.getClientId(facesContext) + "selectedIndex";
-		responseWriter.writeAttribute(StringPool.ID, hiddenFieldName, null);
+		responseWriter.writeAttribute("id", hiddenFieldName, null);
 		responseWriter.writeAttribute("name", hiddenFieldName, null);
 		responseWriter.writeAttribute("type", "hidden", null);
 		responseWriter.writeAttribute("value", accordion.getSelectedIndex(), null);
@@ -173,11 +172,10 @@ public class AccordionRenderer extends AccordionRendererBase {
 		// DOM and it is necessary to set the style back to "display:block;" so that the component will be visible.
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
 		responseWriter.write(A_DOT_ONE);
-		responseWriter.write(StringPool.OPEN_PARENTHESIS);
-		responseWriter.write(StringPool.APOSTROPHE);
+		responseWriter.write("('");
 
 		String clientId = uiComponent.getClientId(facesContext);
-		String escapedClientId = StringPool.POUND + escapeClientId(clientId);
+		String escapedClientId = "#" + escapeClientId(clientId);
 		responseWriter.write(escapedClientId);
 		responseWriter.write("')._node['style'].display='block';");
 
@@ -196,26 +194,13 @@ public class AccordionRenderer extends AccordionRendererBase {
 		// var clientVar = Liferay.component('clientVarName');
 		encodeLiferayComponentVar(responseWriter, clientVarName, clientKey);
 
-		// var toggglers = clientVarName.items;
-		responseWriter.write("var");
-		responseWriter.write(StringPool.SPACE);
-		responseWriter.write("togglers");
-		responseWriter.write(StringPool.EQUAL);
+		responseWriter.write("var togglers=");
 		responseWriter.write(clientVarName);
-		responseWriter.write(StringPool.PERIOD);
-		responseWriter.write("items");
-		responseWriter.write(StringPool.SEMICOLON);
+		responseWriter.write(".items;");
 
-		// var totalTogglers = togglers.length;
-		responseWriter.write("var");
-		responseWriter.write(StringPool.SPACE);
-		responseWriter.write("totalTogglers");
-		responseWriter.write(StringPool.EQUAL);
-		responseWriter.write("togglers.length;");
-
-		// for (var i=0; i < totalTogglers ;i++) {
-		responseWriter.write("for(var i=0;i<totalTogglers;i++)");
-		responseWriter.write(StringPool.OPEN_CURLY_BRACE);
+		responseWriter.write("var totalTogglers=togglers.length;");
+		
+		responseWriter.write("for(var i=0;i<totalTogglers;i++){");
 
 		StringBuilder behaviorCallback = new StringBuilder();
 
@@ -230,16 +215,13 @@ public class AccordionRenderer extends AccordionRendererBase {
 
 		behaviorCallback.append("var eventTabIndex=0,togglers=");
 		behaviorCallback.append(clientVarName);
-		behaviorCallback.append(".items,total=togglers.length,i=0;");
-		behaviorCallback.append("for(i=0;i<total;i++){if(togglers[i]==event.target){eventTabIndex=i;}};");
+		behaviorCallback.append(".items,total=togglers.length,i=0;for(i=0;i<total;i++){if(togglers[i]==event.target){eventTabIndex=i;}};");
 
 		// var hidden = document.getElementById('clientId:selectedIndex');
 		String hiddenFieldId = clientId + "selectedIndex";
 		behaviorCallback.append("var hidden=document.getElementById('");
 		behaviorCallback.append(hiddenFieldId);
-		behaviorCallback.append(StringPool.APOSTROPHE);
-		behaviorCallback.append(StringPool.CLOSE_PARENTHESIS);
-		behaviorCallback.append(StringPool.SEMICOLON);
+		behaviorCallback.append("');");
 
 		// var prevTabIndex = hidden.value;
 		behaviorCallback.append("var prevTabIndex=hidden.value;");
@@ -290,10 +272,9 @@ public class AccordionRenderer extends AccordionRendererBase {
 						//	   jsf.ajax.request(this, event, {'javax.faces.behavior.event': 'tabExpand'});
 						// }
 						//J+
-						behaviorCallback.append("if(event.newVal)");
-						behaviorCallback.append(StringPool.OPEN_CURLY_BRACE);
+						behaviorCallback.append("if(event.newVal){");
 						behaviorCallback.append(clientBehaviorScript);
-						behaviorCallback.append(StringPool.CLOSE_CURLY_BRACE);
+						behaviorCallback.append("}");
 					}
 
 					// Similarly, if <f:ajax event="tabCollapsed" /> is specified in the view, then render a script
@@ -305,10 +286,9 @@ public class AccordionRenderer extends AccordionRendererBase {
 						//	   jsf.ajax.request(this, event, {'javax.faces.behavior.event': 'tabCollapse'});
 						// }
 						//J+
-						behaviorCallback.append("if((!event.newVal)&&(prevTabIndex==eventTabIndex))");
-						behaviorCallback.append(StringPool.OPEN_CURLY_BRACE);
+						behaviorCallback.append("if((!event.newVal)&&(prevTabIndex==eventTabIndex)){");
 						behaviorCallback.append(clientBehaviorScript);
-						behaviorCallback.append(StringPool.CLOSE_CURLY_BRACE);
+						behaviorCallback.append("}");
 					}
 				}
 			}
@@ -316,7 +296,7 @@ public class AccordionRenderer extends AccordionRendererBase {
 
 		encodeEventCallback(responseWriter, "togglers[i]", "after", EXPANDED_CHANGE, behaviorCallback.toString());
 
-		responseWriter.write(StringPool.CLOSE_CURLY_BRACE);
+		responseWriter.write("}");
 	}
 
 	@Override
@@ -324,8 +304,8 @@ public class AccordionRenderer extends AccordionRendererBase {
 
 		// Encode the starting <div> element that represents the accordion.
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
-		responseWriter.startElement(StringPool.DIV, uiComponent);
-		responseWriter.writeAttribute(StringPool.ID, uiComponent.getClientId(facesContext), StringPool.ID);
+		responseWriter.startElement("div", uiComponent);
+		responseWriter.writeAttribute("id", uiComponent.getClientId(facesContext), "id");
 		RendererUtil.encodeStyleable(responseWriter, (Styleable) uiComponent);
 	}
 
@@ -334,14 +314,14 @@ public class AccordionRenderer extends AccordionRendererBase {
 
 		// Encode the closing </div> element for the accordion.
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
-		responseWriter.endElement(StringPool.DIV);
+		responseWriter.endElement("div");
 	}
 
 	protected void encodeContent(FacesContext facesContext, ResponseWriter responseWriter, UIComponent uiComponent,
 		Tab tab, boolean selected) throws IOException {
 
 		// Encode the starting <div> element that represents the specified tab's content.
-		responseWriter.startElement(StringPool.DIV, tab);
+		responseWriter.startElement("div", tab);
 
 		// Encode the div's class attribute according to the specified tab's collapsed/expanded state.
 		String contentClass = CONTENT_COLLAPSED_CLASSES;
@@ -354,23 +334,23 @@ public class AccordionRenderer extends AccordionRendererBase {
 		String tabContentClass = tab.getContentClass();
 
 		if (tabContentClass != null) {
-			contentClass += StringPool.SPACE + tabContentClass;
+			contentClass += " " + tabContentClass;
 		}
 
-		responseWriter.writeAttribute(StringPool.CLASS, contentClass, Styleable.STYLE_CLASS);
+		responseWriter.writeAttribute("class", contentClass, Styleable.STYLE_CLASS);
 
 		// Encode the children of the specified tab as the actual content.
 		tab.encodeAll(facesContext);
 
 		// Encode the closing </div> element for the specified tab.
-		responseWriter.endElement(StringPool.DIV);
+		responseWriter.endElement("div");
 	}
 
 	protected void encodeHeader(FacesContext facesContext, ResponseWriter responseWriter, UIComponent uiComponent,
 		Tab tab, boolean selected) throws IOException {
 
 		// Encode the starting <div> element that represents the specified tab's header.
-		responseWriter.startElement(StringPool.DIV, tab);
+		responseWriter.startElement("div", tab);
 
 		// Encode the div's class attribute according to the specified tab's collapsed/expanded state.
 		String headerClass = HEADER_COLLAPSED_CLASSES;
@@ -383,10 +363,10 @@ public class AccordionRenderer extends AccordionRendererBase {
 		String tabHeaderClass = tab.getHeaderClass();
 
 		if (tabHeaderClass != null) {
-			headerClass += StringPool.SPACE + tabHeaderClass;
+			headerClass += " " + tabHeaderClass;
 		}
 
-		responseWriter.writeAttribute(StringPool.CLASS, headerClass, Styleable.STYLE_CLASS);
+		responseWriter.writeAttribute("class", headerClass, Styleable.STYLE_CLASS);
 
 		// If the header facet exists for the specified tab, then encode the header facet.
 		UIComponent headerFacet = tab.getFacet("header");
@@ -405,7 +385,7 @@ public class AccordionRenderer extends AccordionRendererBase {
 		}
 
 		// Encode the closing </div> element for the specified tab.
-		responseWriter.endElement(StringPool.DIV);
+		responseWriter.endElement("div");
 	}
 
 	@Override

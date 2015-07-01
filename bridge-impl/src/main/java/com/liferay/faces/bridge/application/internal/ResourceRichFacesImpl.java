@@ -18,8 +18,6 @@ import javax.faces.application.ResourceWrapper;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
-import com.liferay.faces.util.lang.StringPool;
-
 
 /**
  * @author  Neil Griffin
@@ -93,17 +91,15 @@ public class ResourceRichFacesImpl extends ResourceWrapper {
 
 				// Some resources like fileUploadProgress will have an extension like ".xhtml" appended to them which
 				// must be removed.
-				requestPath = requestPath.replaceAll("[.]faces", StringPool.BLANK);
-				requestPath = requestPath.replaceAll("[.]jsf", StringPool.BLANK);
-				requestPath = requestPath.replaceAll("[.]xhtml", StringPool.BLANK);
+				requestPath = requestPath.replaceAll("[.]faces", "");
+				requestPath = requestPath.replaceAll("[.]jsf", "");
+				requestPath = requestPath.replaceAll("[.]xhtml", "");
 
 				// Encode the request path as a portlet ResourceURL.
 				FacesContext facesContext = FacesContext.getCurrentInstance();
 				ExternalContext externalContext = facesContext.getExternalContext();
 				StringBuilder buf = new StringBuilder();
-				buf.append(StringPool.FORWARD_SLASH);
-				buf.append("javax.faces.resource");
-				buf.append(StringPool.FORWARD_SLASH);
+				buf.append("/javax.faces.resource/");
 				buf.append(requestPath.substring(pos + RICHFACES_PATH_TOKEN.length()));
 				requestPath = externalContext.encodeResourceURL(buf.toString());
 			}

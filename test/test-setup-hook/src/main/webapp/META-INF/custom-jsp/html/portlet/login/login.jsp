@@ -35,7 +35,7 @@
 		String redirect = ParamUtil.getString(request, "redirect", currentURL);
 
 		String login = LoginUtil.getLogin(request, "login", company);
-		String password = StringPool.BLANK;
+		String password = "";
 		boolean rememberMe = ParamUtil.getBoolean(request, "rememberMe");
 
 		if (Validator.isNull(authType)) {

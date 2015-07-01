@@ -27,7 +27,6 @@ import javax.faces.context.FacesContext;
 import javax.faces.context.PartialViewContext;
 
 import com.liferay.faces.util.component.ComponentUtil;
-import com.liferay.faces.util.lang.StringPool;
 
 
 /**
@@ -189,19 +188,19 @@ public class Field extends FieldBase {
 			PartialViewContext partialViewContext = facesContext.getPartialViewContext();
 
 			if (editableValueHoldersExist && editableValueHoldersValid && partialViewContext.isAjaxRequest()) {
-				controlGroupCssClass = controlGroupCssClass + StringPool.SPACE + SUCCESS;
+				controlGroupCssClass = controlGroupCssClass + " " + SUCCESS;
 			}
 		}
 		else {
 
 			if ((severity == FacesMessage.SEVERITY_FATAL) || (severity == FacesMessage.SEVERITY_ERROR)) {
-				controlGroupCssClass = controlGroupCssClass + StringPool.SPACE + ERROR;
+				controlGroupCssClass = controlGroupCssClass + " " + ERROR;
 			}
 			else if (severity == FacesMessage.SEVERITY_WARN) {
-				controlGroupCssClass = controlGroupCssClass + StringPool.SPACE + WARNING;
+				controlGroupCssClass = controlGroupCssClass + " " + WARNING;
 			}
 			else if (severity == FacesMessage.SEVERITY_INFO) {
-				controlGroupCssClass = controlGroupCssClass + StringPool.SPACE + INFO;
+				controlGroupCssClass = controlGroupCssClass + " " + INFO;
 			}
 		}
 

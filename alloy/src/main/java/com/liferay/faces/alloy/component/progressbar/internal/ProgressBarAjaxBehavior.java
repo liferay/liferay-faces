@@ -22,8 +22,6 @@ import javax.faces.component.behavior.ClientBehaviorContext;
 import javax.faces.context.FacesContext;
 import javax.faces.render.ClientBehaviorRenderer;
 
-import com.liferay.faces.util.lang.StringPool;
-
 
 /**
  * @author  Kyle Stiemann
@@ -69,7 +67,7 @@ public class ProgressBarAjaxBehavior extends AjaxBehaviorWrapper {
 		String onevent = super.getOnevent();
 
 		if (onevent == null) {
-			onevent = StringPool.BLANK;
+			onevent = "";
 		}
 
 		// Otherwise, append "()" so that the developer specified function is executed.

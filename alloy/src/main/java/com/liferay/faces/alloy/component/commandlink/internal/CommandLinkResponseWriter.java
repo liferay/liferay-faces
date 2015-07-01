@@ -18,7 +18,6 @@ import java.io.IOException;
 import javax.faces.component.UIComponent;
 import javax.faces.context.ResponseWriter;
 
-import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.render.internal.DelegationResponseWriter;
 import com.liferay.faces.util.render.internal.DelegationResponseWriterBase;
 
@@ -44,7 +43,7 @@ public class CommandLinkResponseWriter extends DelegationResponseWriterBase {
 	@Override
 	public void endElement(String name) throws IOException {
 
-		if (StringPool.ASCII_TABLE[97].equals(name)) {
+		if ("a".equals(name)) {
 			anchorCount--;
 		}
 
@@ -54,7 +53,7 @@ public class CommandLinkResponseWriter extends DelegationResponseWriterBase {
 	@Override
 	public void startElement(String name, UIComponent component) throws IOException {
 
-		if (StringPool.ASCII_TABLE[97].equals(name)) {
+		if ("a".equals(name)) {
 			anchorCount++;
 		}
 

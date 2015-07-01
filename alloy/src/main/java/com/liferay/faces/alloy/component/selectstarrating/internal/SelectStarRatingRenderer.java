@@ -13,22 +13,11 @@
  */
 package com.liferay.faces.alloy.component.selectstarrating.internal;
 
-import java.io.IOException;
-
 import javax.faces.application.ResourceDependencies;
 import javax.faces.application.ResourceDependency;
-import javax.faces.component.UIComponent;
-import javax.faces.component.ValueHolder;
-import javax.faces.context.FacesContext;
-import javax.faces.context.ResponseWriter;
 import javax.faces.render.FacesRenderer;
 
 import com.liferay.faces.alloy.component.selectstarrating.SelectStarRating;
-import com.liferay.faces.util.component.ClientComponent;
-import com.liferay.faces.util.component.ComponentUtil;
-import com.liferay.faces.util.component.Styleable;
-import com.liferay.faces.util.lang.StringPool;
-import com.liferay.faces.util.render.RendererUtil;
 
 
 /**

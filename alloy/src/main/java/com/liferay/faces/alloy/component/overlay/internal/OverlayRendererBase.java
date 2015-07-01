@@ -22,7 +22,6 @@ import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 
 import com.liferay.faces.alloy.render.internal.DelegatingAlloyRendererBase;
-import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.render.internal.DelegationResponseWriter;
 import com.liferay.faces.util.render.internal.IdDelegationResponseWriter;
 
@@ -47,18 +46,18 @@ public abstract class OverlayRendererBase extends DelegatingAlloyRendererBase im
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
 		String clientId = uiComponent.getClientId(facesContext);
 		DelegationResponseWriter idDelegationResponseWriter = new IdDelegationResponseWriter(responseWriter,
-				StringPool.DIV, clientId);
+				"div", clientId);
 		super.encodeMarkupBegin(facesContext, uiComponent, idDelegationResponseWriter);
 
 		// Encode the opening contentBox <div> tag with a unique id.
 		String contentBoxClientId = clientId.concat(CONTENT_BOX_SUFFIX);
-		responseWriter.startElement(StringPool.DIV, null);
-		responseWriter.writeAttribute(StringPool.ID, contentBoxClientId, null);
+		responseWriter.startElement("div", null);
+		responseWriter.writeAttribute("id", contentBoxClientId, null);
 
 		// Encode the opening overlayBody <div> tag with a unique id.
 		String overlayBodyClientId = clientId.concat(OVERLAY_BODY_SUFFIX);
-		responseWriter.startElement(StringPool.DIV, null);
-		responseWriter.writeAttribute(StringPool.ID, overlayBodyClientId, null);
+		responseWriter.startElement("div", null);
+		responseWriter.writeAttribute("id", overlayBodyClientId, null);
 	}
 
 	@Override
@@ -68,11 +67,11 @@ public abstract class OverlayRendererBase extends DelegatingAlloyRendererBase im
 
 		// Encode the closing overlayBody </div> tag.
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
-		responseWriter.endElement(StringPool.DIV);
+		responseWriter.endElement("div");
 
 		// Encode the closing contentBox </div> tag.
 		responseWriter = facesContext.getResponseWriter();
-		responseWriter.endElement(StringPool.DIV);
+		responseWriter.endElement("div");
 
 		// Encode the closing boundingBox </div> tag via delegation.
 		super.encodeMarkupEnd(facesContext, uiComponent);

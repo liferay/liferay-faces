@@ -30,7 +30,6 @@ import com.liferay.faces.util.client.Script;
 import com.liferay.faces.util.client.ScriptFactory;
 import com.liferay.faces.util.context.FacesRequestContext;
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
-import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.render.internal.BufferedScriptResponseWriter;
 
 
@@ -96,7 +95,7 @@ public class OutputScriptRenderer extends OutputScriptRendererBase {
 
 				// In order to determine the exact YUI sandbox string to write, the modules and browser information
 				// must be passed to RendererUtil.getAlloyBeginScript().
-				String[] modules = use.split(StringPool.COMMA);
+				String[] modules = use.split(",");
 				BrowserSnifferFactory browserSnifferFactory = (BrowserSnifferFactory) FactoryExtensionFinder.getFactory(
 						BrowserSnifferFactory.class);
 				BrowserSniffer browserSniffer = browserSnifferFactory.getBrowserSniffer(

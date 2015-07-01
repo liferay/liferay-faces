@@ -30,7 +30,6 @@ import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.bridge.context.url.BridgeResourceURL;
 import com.liferay.faces.bridge.context.url.BridgeURI;
 import com.liferay.faces.util.helper.BooleanHelper;
-import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -67,11 +66,11 @@ public class BridgeResourceURLImpl extends BridgeURLBase implements BridgeResour
 
 		String backLinkViewId = facesContext.getViewRoot().getViewId();
 		String backLinkURL = facesContext.getApplication().getViewHandler().getActionURL(facesContext, backLinkViewId);
-		String backLinkEncodedActionURL = StringPool.BLANK;
+		String backLinkEncodedActionURL = "";
 
 		try {
 			ExternalContext externalContext = facesContext.getExternalContext();
-			backLinkEncodedActionURL = URLEncoder.encode(externalContext.encodeActionURL(backLinkURL), StringPool.UTF8);
+			backLinkEncodedActionURL = URLEncoder.encode(externalContext.encodeActionURL(backLinkURL), "UTF-8");
 		}
 		catch (UnsupportedEncodingException e) {
 			logger.error(e.getMessage());

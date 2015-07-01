@@ -25,7 +25,6 @@ import javax.portlet.ResourceRequest;
 import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.bridge.internal.BridgeExt;
 import com.liferay.faces.util.helper.BooleanHelper;
-import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -77,7 +76,7 @@ public class RequestHeaderValuesMap extends RequestHeaderValuesMapCompat {
 						for (int i = 0; locales.hasMoreElements(); i++) {
 
 							if (i > 0) {
-								buf.append(StringPool.COMMA);
+								buf.append(",");
 							}
 
 							Locale locale = locales.nextElement();
@@ -86,7 +85,7 @@ public class RequestHeaderValuesMap extends RequestHeaderValuesMapCompat {
 							String country = locale.getCountry();
 
 							if ((country != null) && (country.length() > 0)) {
-								buf.append(StringPool.DASH);
+								buf.append("-");
 								buf.append(country);
 							}
 						}
@@ -105,7 +104,7 @@ public class RequestHeaderValuesMap extends RequestHeaderValuesMapCompat {
 						for (int i = 0; properties.hasMoreElements(); i++) {
 
 							if (i > 0) {
-								buf.append(StringPool.COMMA);
+								buf.append(",");
 							}
 
 							buf.append(properties.nextElement());
@@ -218,15 +217,13 @@ public class RequestHeaderValuesMap extends RequestHeaderValuesMapCompat {
 
 			StringBuilder header = new StringBuilder();
 			header.append(HEADER_CONTENT_TYPE);
-			header.append(StringPool.COLON);
-			header.append(StringPool.SPACE);
+			header.append(": ");
 			header.append(contentType);
 
 			if (characterSetEncoding != null) {
-				header.append(StringPool.SEMICOLON);
-				header.append(StringPool.SPACE);
+				header.append("; ");
 				header.append(CHARSET);
-				header.append(StringPool.EQUAL);
+				header.append("=");
 				header.append(characterSetEncoding);
 			}
 

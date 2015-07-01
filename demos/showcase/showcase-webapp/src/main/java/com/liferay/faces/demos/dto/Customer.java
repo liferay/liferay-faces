@@ -16,8 +16,6 @@ package com.liferay.faces.demos.dto;
 import java.io.Serializable;
 import java.util.Date;
 
-import com.liferay.faces.util.lang.StringPool;
-
 
 /**
  * @author  Neil Griffin
@@ -43,7 +41,7 @@ public class Customer implements Serializable {
 	}
 
 	public String getFullName() {
-		return firstName + StringPool.SPACE + lastName;
+		return firstName + " " + lastName;
 	}
 
 	public long getCountryId() {

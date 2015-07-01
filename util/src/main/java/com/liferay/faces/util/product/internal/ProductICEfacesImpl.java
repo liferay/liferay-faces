@@ -13,7 +13,6 @@
  */
 package com.liferay.faces.util.product.internal;
 
-import com.liferay.faces.util.lang.StringPool;
 
 
 /**
@@ -41,9 +40,9 @@ public class ProductICEfacesImpl extends ProductBaseImpl {
 
 			StringBuilder buf = new StringBuilder();
 			buf.append(this.majorVersion);
-			buf.append(StringPool.PERIOD);
+			buf.append(".");
 			buf.append(this.minorVersion);
-			buf.append(StringPool.PERIOD);
+			buf.append(".");
 			buf.append(this.revisionVersion);
 			this.version = buf.toString();
 

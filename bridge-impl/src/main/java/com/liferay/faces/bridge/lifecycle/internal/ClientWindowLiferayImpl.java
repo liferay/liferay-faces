@@ -22,8 +22,6 @@ import javax.faces.lifecycle.ClientWindow;
 import javax.faces.lifecycle.ClientWindowWrapper;
 import javax.faces.render.ResponseStateManager;
 
-import com.liferay.faces.util.lang.StringPool;
-
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.theme.PortletDisplay;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -73,7 +71,7 @@ public class ClientWindowLiferayImpl extends ClientWindowWrapper {
 
 			FacesContext facesContext = FacesContext.getCurrentInstance();
 			ExternalContext externalContext = facesContext.getExternalContext();
-			String portletNamespace = StringPool.BLANK;
+			String portletNamespace = "";
 			ThemeDisplay themeDisplay = (ThemeDisplay) externalContext.getRequestMap().get(WebKeys.THEME_DISPLAY);
 
 			if (themeDisplay != null) {
