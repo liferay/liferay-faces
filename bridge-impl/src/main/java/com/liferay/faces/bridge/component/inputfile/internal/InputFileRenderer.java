@@ -77,16 +77,6 @@ public class InputFileRenderer extends InputFileRendererCompat {
 		super.encodeEnd(facesContext, uiComponent, delegationResponseWriter);
 	}
 
-	@Override
-	public String getDelegateComponentFamily() {
-		return InputFile.DELEGATE_COMPONENT_FAMILY;
-	}
-
-	@Override
-	public String getDelegateRendererType() {
-		return InputFile.DELEGATE_RENDERER_TYPE;
-	}
-
 	protected Map<String, List<UploadedFile>> getUploadedFileMap(FacesContext facesContext) {
 
 		ContextMapFactory contextMapFactory = (ContextMapFactory) BridgeFactoryFinder.getFactory(

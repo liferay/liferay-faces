@@ -1,0 +1,917 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE components>
+<components defaultSince="3.0.5-ga6">
+	<!-- generateTaglibXML="false" tags for common attributes -->
+	<!-- 1. Interfaces -->
+	<component name="AltInherited" generateJava="false" generateTaglibXML="false">
+		<attributes>
+			<attribute>
+				<description>
+					<![CDATA[HTML passthrough attribute specifying alternative information about the rendered HTML element.]]>
+				</description>
+				<inherited>true</inherited>
+				<name>alt</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+		</attributes>
+	</component>
+	<component name="AutocompleteInherited" generateJava="false" generateTaglibXML="false">
+		<attributes>
+			<attribute>
+				<description>
+					<![CDATA[HTML passthrough attribute specifying whether autocomplete is turned on or off for the rendered HTML element. Valid values include <code>on</code> (default) and <code>off</code>.]]>
+				</description>
+				<inherited>true</inherited>
+				<name>autocomplete</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+		</attributes>
+	</component>
+	<component name="ClientComponent" generateJava="false" generateTaglibXML="false">
+		<attributes>
+			<attribute>
+				<description>
+					<![CDATA[The key name that can be used to reference the component on the client.]]>
+				</description>
+				<name>clientKey</name>
+				<type>java.lang.String</type>
+				<override>true</override>
+			</attribute>
+		</attributes>
+	</component>
+	<component name="DisabledInherited" generateJava="false" generateTaglibXML="false">
+		<attributes>
+			<attribute>
+				<description>
+					<![CDATA[When this flag is true, the component will be disabled, and the user will be unable to interact with the component.]]>
+				</description>
+				<defaultValue>false</defaultValue>
+				<generateJava>false</generateJava>
+				<inherited>true</inherited>
+				<name>disabled</name>
+				<type>boolean</type>
+			</attribute>
+		</attributes>
+	</component>
+	<component name="EscapeInherited" generateJava="false" generateTaglibXML="false">
+		<attributes>
+			<attribute>
+				<description>
+		<![CDATA[When false, markup will not be escaped. This is true by default.]]>
+				</description>
+				<generateJava>false</generateJava>
+				<inherited>true</inherited>
+				<name>escape</name>
+				<type>java.lang.String</type>
+			</attribute>
+		</attributes>
+	</component>
+	<component name="SizeInherited" generateJava="false" generateTaglibXML="false">
+		<attributes>
+			<attribute>
+				<description>
+					<![CDATA[HTML passthrough attribute specifying the visual length of the element.]]>
+				</description>
+				<inherited>true</inherited>
+				<name>size</name>
+				<type>int</type>
+				<generateJava>false</generateJava>
+			</attribute>
+		</attributes>
+	</component>
+	<component name="Styleable" generateJava="false" generateTaglibXML="false">
+		<attributes>
+			<attribute>
+				<description>
+					<![CDATA[HTML passthrough attribute specifying the css style of the element.]]>
+				</description>
+				<name>style</name>
+				<type>java.lang.String</type>
+				<override>true</override>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[List of CSS class names (separated by spaces) that are to be rendered within the class attribute.]]>
+				</description>
+				<name>styleClass</name>
+				<type>java.lang.String</type>
+				<override>true</override>
+			</attribute>
+		</attributes>
+	</component>
+	<component name="StyleableInherited" generateJava="false" generateTaglibXML="false">
+		<attributes>
+			<attribute>
+				<description>
+					<![CDATA[HTML passthrough attribute specifying the css style of the element.]]>
+				</description>
+				<name>style</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[List of CSS class names (separated by spaces) that are to be rendered within the class attribute.]]>
+				</description>
+				<name>styleClass</name>
+				<type>java.lang.String</type>
+				<override>true</override>
+			</attribute>
+		</attributes>
+	</component>
+	<component name="ValueInherited" generateJava="false" generateTaglibXML="false">
+		<attributes>
+			<attribute>
+				<description>
+					<![CDATA[The value of this component, which is typically bound via EL to a model bean property.]]>
+				</description>
+				<generateJava>false</generateJava>
+				<inherited>true</inherited>
+				<name>value</name>
+				<type>java.lang.Object</type>
+			</attribute>
+		</attributes>
+	</component>
+	<!-- /Interfaces -->
+	<!-- 2. JSF Custom Component Heirarchy -->
+	<component name="UICommand" extendsTags="HTMLAccessibilityEvents UIComponentBase" generateJava="false"
+		generateTaglibXML="false">
+		<attributes>
+			<attribute>
+				<description>
+					<![CDATA[A method that is executed when this component is clicked. The method must be <code>public</code>, return an <code>Object</code>, and take no arguments. The <code>toString()</code> method of the returned object is used to determine where to navigate (if at all) after the action has been performed.]]>
+				</description>
+				<name>action</name>
+				<method-signature>java.lang.Object action()</method-signature>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[A method that is executed when this component is clicked. The method must be <code>public</code>, return <code>void</code>, and take either no arguments or one <code>ActionEvent</code> argument.]]>
+				</description>
+				<name>actionListener</name>
+				<method-signature>
+					void actionListener(javax.faces.event.ActionEvent)
+				</method-signature>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[When this flag is true, this component's value must be converted and validated (immediately) during the Apply Request Values phase, instead of (later) during the PROCESS_VALIDATIONS phase.]]>
+				</description>
+				<name>immediate</name>
+				<type>java.lang.Boolean</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The value of this component, which is typically bound via EL to a model bean property.]]>
+				</description>
+				<name>value</name>
+				<type>java.lang.Object</type>
+				<generateJava>false</generateJava>
+			</attribute>
+		</attributes>
+	</component>
+	<component name="UIData" generateJava="false" generateTaglibXML="false">
+		<attributes>
+			<attribute>
+				<description>
+					<![CDATA[The value of this component, which is typically bound via EL to a model bean property. The value can be any of the following types:<ul><li>Any concrete subclass of <a href="http://docs.oracle.com/javaee/7/api/javax/faces/model/DataModel.html" target="_blank"><code>DataModel</code></a></li><li>Array (automatically wrapped with <a href="http://docs.oracle.com/javaee/7/api/javax/faces/model/ArrayDataModel.html" target="_blank"><code>ArrayDataModel</code></a>)</li><li>java.util.Collection (automatically wrapped with <a href="http://docs.oracle.com/javaee/7/api/javax/faces/model/CollectionDataModel.html" target="_blank"><code>CollectionDataModel</code></a>)</li><li>java.util.List (automatically wrapped with <a href="http://docs.oracle.com/javaee/7/api/javax/faces/model/ListDataModel.html" target="_blank"><code>ListDataModel</code></a>)</li><li>java.sql.ResultSet (automatically wrapped with <a href="http://docs.oracle.com/javaee/7/api/javax/faces/model/ResultSetDataModel.html" target="_blank"><code>ResultSetDataModel</code></a>)</li></ul>]]>
+				</description>
+				<inherited>true</inherited>
+				<name>value</name>
+				<type>java.lang.Object</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The name of the variable that is to be introduced into the EL representing the current iteration.]]>
+				</description>
+				<inherited>true</inherited>
+				<name>var</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+		</attributes>
+	</component>
+	<component name="UIComponentBase" generateJava="false" generateTaglibXML="false">
+		<attributes>
+			<attribute>
+				<description>
+					<![CDATA[An EL expression that binds the Java reference to this component in the component tree to a bean property.]]>
+				</description>
+				<name>binding</name>
+				<type>javax.faces.component.UIComponent</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[A unique identifier for this component.]]>
+				</description>
+				<name>id</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[When this flag is true, this component will be rendered to there response. When false, it will not be rendered to the response. The default value of this attribute is true.]]>
+				</description>
+				<name>rendered</name>
+				<type>boolean</type>
+				<generateJava>false</generateJava>
+			</attribute>
+		</attributes>
+	</component>
+	<component name="UIInput" extendsTags="UIOutput" generateJava="false" generateTaglibXML="false">
+		<attributes>
+			<attribute>
+				<description>
+					<![CDATA[This message or the result of the specified expression, will be used as the text of the converter message instead of any message that comes from the registered converter for this component.]]>
+				</description>
+				<name>converterMessage</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[When this flag is true, this component's value must be converted and validated (immediately) during the Apply Request Values phase, instead of (later) during the PROCESS_VALIDATIONS phase.]]>
+				</description>
+				<name>immediate</name>
+				<type>java.lang.Boolean</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[When this flag is true, and a value has not been specified for this component, then the PROCESS_VALIDATIONS phase will fail and a FacesMessage will be added to the FacesContext for this component.]]>
+				</description>
+				<name>required</name>
+				<type>java.lang.Boolean</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[This message or the result of the specified expression, will be used as the text of the validation error message instead of any message that comes from the resulting validation error for this component when required="true" and no value is selected by the user.]]>
+				</description>
+				<name>requiredMessage</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[A method that is executed in the PROCESS_VALIDATIONS phase of the lifecycle. The method must be <code>public</code>, return <code>void</code>, and take three arguments of <code>FacesContext</code>, <code>UIComponent</code>, and <code>Object</code>.]]>
+				</description>
+				<name>validator</name>
+				<method-signature>
+					void validate(javax.faces.context.FacesContext, javax.faces.component.UIComponent,
+					java.lang.Object)
+				</method-signature>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[This message or the result of the specified expression, will be used as the text of the validation error message instead of any message that comes from the resulting validation error for this component.]]>
+				</description>
+				<name>validatorMessage</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[A method that is executed when the value of this component changes. The method must be <code>public</code>, return <code>void</code>, and take no arguments or one argument of <code>ValueChangeEvent</code>.]]>
+				</description>
+				<name>valueChangeListener</name>
+				<method-signature>
+					void valueChange(javax.faces.event.ValueChangeEvent)
+				</method-signature>
+				<generateJava>false</generateJava>
+			</attribute>
+		</attributes>
+	</component>
+	<component name="UIOutcomeTarget" extendsTags="HTMLAccessibilityEvents" generateJava="false"
+		generateTaglibXML="false">
+		<attributes>
+			<attribute>
+				<description>
+					<![CDATA[When this flag is true, the client window param will not be inlcuded on the navigation URL. <b>Note:</b> the <code>ClientWindow</code> feature is disabled by default, so this attribute will have no effect unless <code>ClientWindow</code> is enabled.]]>
+				</description>
+				<name>disableClientWindow</name>
+				<type>java.lang.Boolean</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[A fragment to be appended to the navigation URL.]]>
+				</description>
+				<name>fragment</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[When this flag is true, view parameters (specified via <code>f:viewParam</code> tags) will be included on the navigation URL]]>
+				</description>
+				<name>includeViewParams</name>
+				<type>boolean</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[A string which potentially matches the value of <code>from-outcome</code> key in a navigation-case.]]>
+				</description>
+				<name>outcome</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+		</attributes>
+	</component>
+	<component name="UIOutput" extendsTags="UIComponentBase" generateJava="false" generateTaglibXML="false">
+		<attributes>
+			<attribute>
+				<description>
+					<![CDATA[The class name of the converter instance that is to be used by this component.]]>
+				</description>
+				<name>converter</name>
+				<type>javax.faces.convert.Converter</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The value of this component, which is typically bound via EL to a model bean property.]]>
+				</description>
+				<name>value</name>
+				<type>java.lang.Object</type>
+				<generateJava>false</generateJava>
+			</attribute>
+		</attributes>
+	</component>
+	<component name="UISelect" extendsTags="UIInput" generateJava="false" generateTaglibXML="false">
+		<attributes>
+			<attribute>
+				<description>
+					<![CDATA[A CSS class name to apply to the label of a disabled selectItems.]]>
+				</description>
+				<name>disabledClass</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[A CSS class name to apply to the label of an enabled selectItems.]]>
+				</description>
+				<name>enabledClass</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[When true, any child selectItem with a noSelectOption attribute (which is set to true) will be hidden from the user.]]>
+				</description>
+				<name>hideNoSelectionOption</name>
+				<type>java.lang.Boolean</type>
+				<generateJava>false</generateJava>
+			</attribute>
+		</attributes>
+	</component>
+	<component name="UISelectMany" extendsTags="UISelect" generateJava="false" generateTaglibXML="false">
+		<attributes>
+			<attribute>
+				<description>
+					<![CDATA[An optional attribute that can contain a value like <code>java.util.ArrayList</code> or <code>java.util.HashSet</code> that indicates the type of <code>java.util.Collection</code> for the component's value.]]>
+				</description>
+				<name>collectionType</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+		</attributes>
+	</component>
+	<!-- /JSF Custom Component Heirarchy -->
+	<!-- 3. HTML Component Heirarchy -->
+	<component name="FacesMessageLabel" generateJava="false" generateTaglibXML="false">
+		<attributes>
+			<attribute>
+				<description>
+					<![CDATA[A localized label for this component that is typically only rendered in a FacesMessage when validation fails.]]>
+				</description>
+				<name>label</name>
+				<type>java.lang.String</type>
+			</attribute>
+		</attributes>
+	</component>
+	<component name="FacesMessageLabelInherited" generateJava="false" generateTaglibXML="false">
+		<attributes>
+			<attribute>
+				<description>
+					<![CDATA[A localized label for this component that is typically only rendered in a FacesMessage when validation fails.]]>
+				</description>
+				<name>label</name>
+				<type>java.lang.String</type>
+				<inherited>true</inherited>
+			</attribute>
+		</attributes>
+	</component>
+	<component name="FacesMessageLabelInheritedGenerateJavaFalse" generateJava="false" generateTaglibXML="false">
+		<attributes>
+			<attribute>
+				<description>
+					<![CDATA[A localized label for this component that is typically only rendered in a FacesMessage when validation fails.]]>
+				</description>
+				<name>label</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+				<inherited>true</inherited>
+			</attribute>
+		</attributes>
+	</component>
+	<component name="HTMLAccessibility" extendsTags="HTMLCommonEvents HTMLPassthrough" generateJava="false"
+		generateTaglibXML="false">
+		<attributes>
+			<attribute>
+				<description>
+					<![CDATA[HTML passthrough attribute specifying a hot key character for the element.]]>
+				</description>
+				<name>accesskey</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[HTML passthrough attribute specifying where the element is located in the tabbing progression.]]>
+				</description>
+				<name>tabindex</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+		</attributes>
+	</component>
+	<component name="HTMLAccessibilityEvents" extendsTags="HTMLAccessibility" generateJava="false"
+		generateTaglibXML="false">
+		<attributes>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute after this component loses focus.]]>
+				</description>
+				<name>onblur</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when this component gets focus.]]>
+				</description>
+				<name>onfocus</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+		</attributes>
+	</component>
+	<component name="HTMLCommonEvents" extendsTags="StyleableInherited UIComponentBase" generateJava="false"
+		generateTaglibXML="false">
+		<attributes>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when this component is clicked.]]>
+				</description>
+				<name>onclick</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a double click event occurs.]]>
+				</description>
+				<name>ondblclick</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a keydown event occurs.]]>
+				</description>
+				<name>onkeydown</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a keypress event occurs.]]>
+				</description>
+				<name>onkeypress</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a keyup event occurs.]]>
+				</description>
+				<name>onkeyup</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a mousedown event occurs.]]>
+				</description>
+				<name>onmousedown</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a mousemove event occurs.]]>
+				</description>
+				<name>onmousemove</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a mouseout event occurs.]]>
+				</description>
+				<name>onmouseout</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a mouseover event occurs.]]>
+				</description>
+				<name>onmouseover</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a mouseup event occurs.]]>
+				</description>
+				<name>onmouseup</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+		</attributes>
+	</component>
+	<component name="HTMLInput" extendsTags="UIInput" generateJava="false" generateTaglibXML="false">
+		<attributes>
+			<attribute>
+				<description>
+					<![CDATA[When true, this causes an attribute to be rendered as readonly="readonly", and prevents the user from changing the value of this component.]]>
+				</description>
+				<name>readonly</name>
+				<type>java.lang.Boolean</type>
+				<generateJava>false</generateJava>
+			</attribute>
+		</attributes>
+	</component>
+	<component name="HTMLInputEvents" extendsTags="HTMLInput" generateJava="false" generateTaglibXML="false">
+		<attributes>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute after this component's value has changed, and then it loses focus.]]>
+				</description>
+				<name>onchange</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when the user selects this component.]]>
+				</description>
+				<name>onselect</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+		</attributes>
+	</component>
+	<component name="HTMLPassthrough" extendsTags="StyleableInherited UIComponentBase" generateJava="false"
+		generateTaglibXML="false">
+		<attributes>
+			<attribute>
+				<description>
+					<![CDATA[HTML passthrough attribute specifying the reading direction for the element For example, right to left (RTL), or left to right (LTR).]]>
+				</description>
+				<name>dir</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[HTML passthrough attribute specifying the language code used in the element.]]>
+				</description>
+				<name>lang</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[HTML passthrough attribute specifying the various WAI-ARIA roles that the element is used for.]]>
+				</description>
+				<name>role</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[HTML passthrough attribute specifying the title of the element.]]>
+				</description>
+				<name>title</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+		</attributes>
+	</component>
+	<component name="HTMLTable" extendsTags="HTMLCommonEvents HTMLPassthrough" generateJava="false"
+		generateTaglibXML="false">
+		<attributes>
+			<attribute>
+				<description>
+					<![CDATA[HTML passthrough attribute specifying the background color for the <code>&lt;table&gt;</code> element.]]>
+				</description>
+				<name>bgcolor</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Comma-delimited list of of row indexes. Each row index in the list will cause a previous <code>&lt;tbody&gt;</code> element to be closed, and a new <code>&lt;tbody&gt;</code> element to be opened.]]>
+				</description>
+				<name>bodyrows</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The width of the table border (measured in pixels).]]>
+				</description>
+				<name>border</name>
+				<type>int</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[List of CSS class names (separated by spaces) that are to be rendered within the class attribute of the table's <code>&lt;caption&gt;</code> element.]]>
+				</description>
+				<name>captionClass</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Specifies the css style of the caption element.]]>
+				</description>
+				<name>captionStyle</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[HTML passthrough attribute specifying the cell padding for the <code>&lt;table&gt;</code> element.]]>
+				</description>
+				<name>cellpadding</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[HTML passthrough attribute specifying the cell spacing for the <code>&lt;table&gt;</code> element.]]>
+				</description>
+				<name>cellspacing</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[List of CSS class names (separated by commas) that are to be rendered within the class attribute of the table's <code>&lt;td&gt;</code> elements.]]>
+				</description>
+				<name>columnClasses</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[List of CSS class names (separated by spaces) that are to be rendered within the class attribute of the table's <code>&lt;tfoot&gt;</code> element.]]>
+				</description>
+				<name>footerClass</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Specifies which side(s) of the surrounding frame are visible. Value values: none, above, below, hsides, vsides, lhs, rhs, box, border.]]>
+				</description>
+				<name>frame</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[List of CSS class names (separated by spaces) that are to be rendered within the class attribute of the table's <code>&lt;thead&gt;</code> element.]]>
+				</description>
+				<name>headerClass</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[List of CSS class names (separated by commas) that are to be rendered within the class attribute of the table's <code>&lt;tr&gt;</code> elements.]]>
+				</description>
+				<name>rowClasses</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[HTML passthrough attribute specifying the rules for the <code>&lt;table&gt;</code> element. Valid values: none, groups, rows, cols, all.]]>
+				</description>
+				<name>rules</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[HTML passthrough attribute specifying the summary for the <code>&lt;table&gt;</code> element.]]>
+				</description>
+				<name>summary</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[HTML passthrough attribute specifying the width for the <code>&lt;table&gt;</code> element.]]>
+				</description>
+				<name>width</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+		</attributes>
+	</component>
+	<component name="KeyboardDOMEvents" generateJava="false" generateTaglibXML="false">
+		<attributes>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a keydown event occurs.]]>
+				</description>
+				<name>onkeydown</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a keypress event occurs.]]>
+				</description>
+				<name>onkeypress</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a keyup event occurs.]]>
+				</description>
+				<name>onkeyup</name>
+				<type>java.lang.String</type>
+			</attribute>
+		</attributes>
+	</component>
+	<component name="KeyboardDOMEventsInherited" generateJava="false" generateTaglibXML="false">
+		<attributes>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a keydown event occurs.]]>
+				</description>
+				<generateJava>false</generateJava>
+				<name>onkeydown</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a keypress event occurs.]]>
+				</description>
+				<generateJava>false</generateJava>
+				<name>onkeypress</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a keyup event occurs.]]>
+				</description>
+				<generateJava>false</generateJava>
+				<name>onkeyup</name>
+				<type>java.lang.String</type>
+			</attribute>
+		</attributes>
+	</component>
+	<component name="MouseDOMEvents" generateJava="false" generateTaglibXML="false">
+		<attributes>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when this component is clicked.]]>
+				</description>
+				<name>onclick</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a double click event occurs.]]>
+				</description>
+				<name>ondblclick</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a mousedown event occurs.]]>
+				</description>
+				<name>onmousedown</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a mousemove event occurs.]]>
+				</description>
+				<name>onmousemove</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a mouseout event occurs.]]>
+				</description>
+				<name>onmouseout</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a mouseover event occurs.]]>
+				</description>
+				<name>onmouseover</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a mouseup event occurs.]]>
+				</description>
+				<name>onmouseup</name>
+				<type>java.lang.String</type>
+			</attribute>
+		</attributes>
+	</component>
+	<component name="MouseDOMEventsInherited" generateJava="false" generateTaglibXML="false">
+		<attributes>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when this component is clicked.]]>
+				</description>
+				<generateJava>false</generateJava>
+				<name>onclick</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a double click event occurs.]]>
+				</description>
+				<generateJava>false</generateJava>
+				<name>ondblclick</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a mousedown event occurs.]]>
+				</description>
+				<generateJava>false</generateJava>
+				<name>onmousedown</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a mousemove event occurs.]]>
+				</description>
+				<generateJava>false</generateJava>
+				<name>onmousemove</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a mouseout event occurs.]]>
+				</description>
+				<generateJava>false</generateJava>
+				<name>onmouseout</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a mouseover event occurs.]]>
+				</description>
+				<generateJava>false</generateJava>
+				<name>onmouseover</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a mouseup event occurs.]]>
+				</description>
+				<generateJava>false</generateJava>
+				<name>onmouseup</name>
+				<type>java.lang.String</type>
+			</attribute>
+		</attributes>
+	</component>
+	<!-- /HTML Component Heirarchy -->
+	<!-- /generateTaglibXML="false" tags for common attributes -->
+</components>
