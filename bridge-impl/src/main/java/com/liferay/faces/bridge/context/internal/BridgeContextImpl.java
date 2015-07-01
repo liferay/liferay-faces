@@ -1205,7 +1205,7 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 			else if (facesView.isPathMapped()) {
 				requestServletPath = facesView.getViewId();
 
-				int pos = requestServletPath.lastIndexOf("/" + "*");
+				int pos = requestServletPath.lastIndexOf("/*");
 
 				if (pos >= 0) {
 					requestServletPath = requestServletPath.substring(0, pos);
