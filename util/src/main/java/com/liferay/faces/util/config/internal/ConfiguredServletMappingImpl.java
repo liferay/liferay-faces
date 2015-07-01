@@ -14,7 +14,6 @@
 package com.liferay.faces.util.config.internal;
 
 import com.liferay.faces.util.config.ConfiguredServletMapping;
-import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -30,7 +29,7 @@ public class ConfiguredServletMappingImpl implements ConfiguredServletMapping {
 	private static final Logger logger = LoggerFactory.getLogger(ConfiguredServletMappingImpl.class);
 
 	// Private Strings
-	private static final String EXTENSION_WILDCARD = StringPool.STAR + StringPool.PERIOD;
+	private static final String EXTENSION_WILDCARD = "*" + ".";
 
 	// Private Data Members
 	private String extension;
@@ -49,10 +48,10 @@ public class ConfiguredServletMappingImpl implements ConfiguredServletMapping {
 
 			// If the specified urlPattern is path-mapped (like /views/foo/bar/*), then set a flag and remember the
 			// path (/views/foo/bar).
-			if (urlPattern.startsWith(StringPool.FORWARD_SLASH) && urlPattern.endsWith(StringPool.STAR)) {
+			if (urlPattern.startsWith("/") && urlPattern.endsWith("*")) {
 				pathMapped = true;
 				path = urlPattern.substring(0,
-						urlPattern.length() - StringPool.FORWARD_SLASH.length() - StringPool.STAR.length());
+						urlPattern.length() - "/".length() - "*".length());
 			}
 
 			// Otherwise, if the specified urlPattern is extension-mapped (like *.faces), then set a flag and remember
@@ -61,7 +60,7 @@ public class ConfiguredServletMappingImpl implements ConfiguredServletMapping {
 
 				if (urlPattern.startsWith(EXTENSION_WILDCARD)) {
 					extensionMapped = true;
-					extension = urlPattern.substring(StringPool.STAR.length());
+					extension = urlPattern.substring("*".length());
 				}
 			}
 		}
@@ -98,7 +97,7 @@ public class ConfiguredServletMappingImpl implements ConfiguredServletMapping {
 					urlPattern, extension, uri, match);
 			}
 			else if (pathMapped) {
-				int pos = uri.lastIndexOf(StringPool.FORWARD_SLASH);
+				int pos = uri.lastIndexOf("/");
 				String uriPath = uri;
 
 				if (pos > 0) {

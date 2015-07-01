@@ -39,7 +39,6 @@ import com.liferay.faces.util.context.MessageContext;
 import com.liferay.faces.util.context.MessageContextFactory;
 import com.liferay.faces.util.context.map.MultiPartFormData;
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
-import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.model.UploadedFile;
 import com.liferay.faces.util.product.ProductConstants;
 import com.liferay.faces.util.product.ProductMap;
@@ -137,7 +136,7 @@ public class InputFileRenderer extends InputFileRendererBase {
 			ViewHandler viewHandler = application.getViewHandler();
 			String actionURL = viewHandler.getActionURL(facesContext, viewRoot.getViewId());
 			String partialActionURL = facesContext.getExternalContext().encodePartialActionURL(actionURL);
-			String namingContainerId = StringPool.BLANK;
+			String namingContainerId = "";
 
 			if (viewRoot instanceof NamingContainer) {
 				namingContainerId = viewRoot.getContainerClientId(facesContext);
@@ -173,10 +172,10 @@ public class InputFileRenderer extends InputFileRendererBase {
 		if (inputFile.isShowPreview() || inputFile.isShowProgress()) {
 
 			// Start encoding the outermost <div> element.
-			responseWriter.startElement(StringPool.DIV, uiComponent);
+			responseWriter.startElement("div", uiComponent);
 
 			String clientId = uiComponent.getClientId(facesContext);
-			responseWriter.writeAttribute(StringPool.ID, clientId, StringPool.ID);
+			responseWriter.writeAttribute("id", clientId, "id");
 			RendererUtil.encodeStyleable(responseWriter, (Styleable) uiComponent);
 
 			// If the component should render the upload progress table, then format the progress-table.html template
@@ -212,7 +211,7 @@ public class InputFileRenderer extends InputFileRendererBase {
 
 			// Finish encoding of the outermost <div> element. Since the template contains its own "Select Files"
 			// button, delegation must not occur.
-			responseWriter.endElement(StringPool.DIV);
+			responseWriter.endElement("div");
 		}
 
 		// Otherwise, if the component should show the preview table, then
@@ -221,7 +220,7 @@ public class InputFileRenderer extends InputFileRendererBase {
 			encodePreview(facesContext, responseWriter, inputFile);
 
 			// Finish encoding of the outermost <div> element.
-			responseWriter.endElement(StringPool.DIV);
+			responseWriter.endElement("div");
 		}
 
 		// Otherwise, delegate writing of the entire <input type="file"...> ... </input> element to the delegate
@@ -386,23 +385,23 @@ public class InputFileRenderer extends InputFileRendererBase {
 
 	protected JavaScriptFragment toJavaScriptArray(String[] items) {
 
-		StringBuilder buf = new StringBuilder(StringPool.OPEN_BRACKET);
+		StringBuilder buf = new StringBuilder("[");
 
 		if (items != null) {
 
 			for (int i = 0; i < items.length; i++) {
 
 				if (i > 0) {
-					buf.append(StringPool.COMMA);
+					buf.append(",");
 				}
 
-				buf.append(StringPool.APOSTROPHE);
+				buf.append("'");
 				buf.append(items[i].trim());
-				buf.append(StringPool.APOSTROPHE);
+				buf.append("'");
 			}
 		}
 
-		buf.append(StringPool.CLOSE_BRACKET);
+		buf.append("]");
 
 		return new JavaScriptFragment(buf.toString());
 	}

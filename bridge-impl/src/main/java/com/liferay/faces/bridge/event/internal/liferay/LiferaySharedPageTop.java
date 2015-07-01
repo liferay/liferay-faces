@@ -25,10 +25,8 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 import com.liferay.faces.bridge.renderkit.html_basic.internal.HeadResource;
-import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
-
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.WebKeys;
 
@@ -64,14 +62,13 @@ public class LiferaySharedPageTop {
 			SharedPageTopHandler sharedPageTopHandler = new SharedPageTopHandler();
 			StringBundler xmlDocument = new StringBundler();
 			xmlDocument.append(XML_DOCUMENT_DECLARATION);
-			xmlDocument.append(StringPool.LESS_THAN);
+			xmlDocument.append("<");
 			xmlDocument.append(WebKeys.PAGE_TOP);
-			xmlDocument.append(StringPool.GREATER_THAN);
+			xmlDocument.append(">");
 			xmlDocument.append(stringBundler);
-			xmlDocument.append(StringPool.LESS_THAN);
-			xmlDocument.append(StringPool.FORWARD_SLASH);
+			xmlDocument.append("</");
 			xmlDocument.append(WebKeys.PAGE_TOP);
-			xmlDocument.append(StringPool.GREATER_THAN);
+			xmlDocument.append(">");
 
 			String xmlDocumentAsString = xmlDocument.toString();
 
@@ -141,7 +138,7 @@ public class LiferaySharedPageTop {
 
 		String encodedValue = value;
 
-		int ampersandPos = value.indexOf(StringPool.AMPERSAND);
+		int ampersandPos = value.indexOf("&");
 
 		if (ampersandPos > 0) {
 
@@ -151,11 +148,11 @@ public class LiferaySharedPageTop {
 			while (ampersandPos > 0) {
 
 				buf.append(value.substring(startPos, ampersandPos));
-				buf.append(StringPool.AMPERSAND_ENCODED);
+				buf.append("&amp;");
 
 				startPos = ampersandPos + 1;
 
-				ampersandPos = value.indexOf(StringPool.AMPERSAND, startPos);
+				ampersandPos = value.indexOf("&", startPos);
 			}
 
 			if (startPos < value.length()) {

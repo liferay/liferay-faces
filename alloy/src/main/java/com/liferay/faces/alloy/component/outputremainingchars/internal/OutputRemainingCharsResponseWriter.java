@@ -18,7 +18,6 @@ import java.io.IOException;
 import javax.faces.component.UIComponent;
 import javax.faces.context.ResponseWriter;
 
-import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.render.internal.DelegationResponseWriterBase;
 
 
@@ -66,18 +65,18 @@ public class OutputRemainingCharsResponseWriter extends DelegationResponseWriter
 		String valueAsString = value.toString();
 
 		// Figure out the characters before the remaining span, if any.
-		int firstCurly = valueAsString.indexOf(StringPool.OPEN_CURLY_BRACE);
+		int firstCurly = valueAsString.indexOf("{");
 
-		String pre = StringPool.BLANK;
+		String pre = "";
 
 		if (firstCurly > 0) {
 			pre = valueAsString.substring(0, firstCurly);
 		}
 
 		// Figure out the characters after the remaining span, if any.
-		int lastCurly = valueAsString.indexOf(StringPool.CLOSE_CURLY_BRACE);
+		int lastCurly = valueAsString.indexOf("}");
 
-		String post = StringPool.BLANK;
+		String post = "";
 
 		if (lastCurly > 0) {
 			post = valueAsString.substring(lastCurly + 1, valueAsString.length());
@@ -93,7 +92,7 @@ public class OutputRemainingCharsResponseWriter extends DelegationResponseWriter
 
 		// Write out the remaining span.
 		super.startElement("span", uiComponent);
-		super.writeAttribute(StringPool.ID, counterInnerSpanId, null);
+		super.writeAttribute("id", counterInnerSpanId, null);
 
 		if (escape) {
 			super.writeText(remainingChars.toCharArray(), 0, remainingChars.length());

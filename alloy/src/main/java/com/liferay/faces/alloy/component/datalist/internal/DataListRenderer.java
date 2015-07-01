@@ -26,7 +26,6 @@ import javax.faces.render.FacesRenderer;
 import com.liferay.faces.alloy.component.dataitem.DataItem;
 import com.liferay.faces.alloy.component.datalist.DataList;
 import com.liferay.faces.util.component.Styleable;
-import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.util.render.RendererUtil;
@@ -60,7 +59,7 @@ public class DataListRenderer extends DataListRendererBase {
 		String type = dataList.getType();
 
 		if (UNORDERED.equals(type)) {
-			responseWriter.startElement(StringPool.UL, uiComponent);
+			responseWriter.startElement("ul", uiComponent);
 		}
 		else if (ORDERED.equals(type)) {
 			responseWriter.startElement("ol", uiComponent);
@@ -69,7 +68,7 @@ public class DataListRenderer extends DataListRendererBase {
 			responseWriter.startElement("dl", uiComponent);
 		}
 
-		responseWriter.writeAttribute(StringPool.ID, clientId, StringPool.ID);
+		responseWriter.writeAttribute("id", clientId, "id");
 		RendererUtil.encodeStyleable(responseWriter, (Styleable) uiComponent);
 	}
 
@@ -86,7 +85,7 @@ public class DataListRenderer extends DataListRendererBase {
 		boolean iterateOverDataModel = ((value != null) && (var != null));
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
 
-		String itemTag = StringPool.LI;
+		String itemTag = "li";
 
 		if (DESCRIPTION.equals(type)) {
 			itemTag = "dt";
@@ -119,8 +118,8 @@ public class DataListRenderer extends DataListRendererBase {
 
 					if (facet != null) {
 						responseWriter.startElement("dd", uiComponent);
-						responseWriter.writeAttribute(StringPool.CLASS, styleClass + StringPool.DASH + DESCRIPTION,
-							StringPool.CLASS);
+						responseWriter.writeAttribute("class", styleClass + "-" + DESCRIPTION,
+							"class");
 						facet.encodeAll(facesContext);
 						responseWriter.endElement("dd");
 					}
@@ -170,7 +169,7 @@ public class DataListRenderer extends DataListRendererBase {
 		String type = dataList.getType();
 
 		if (UNORDERED.equals(type)) {
-			responseWriter.endElement(StringPool.UL);
+			responseWriter.endElement("ul");
 		}
 		else if (ORDERED.equals(type)) {
 			responseWriter.endElement("ol");

@@ -40,7 +40,6 @@ import com.liferay.faces.alloy.render.internal.JavaScriptFragment;
 import com.liferay.faces.util.client.BrowserSniffer;
 import com.liferay.faces.util.client.BrowserSnifferFactory;
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
-import com.liferay.faces.util.lang.StringPool;
 
 
 /**
@@ -71,8 +70,8 @@ public class InputTimeRenderer extends InputTimeRendererBase {
 		String mask = timePattern;
 
 		mask = mask.replaceAll("%", "%%");
-		mask = mask.replaceAll(StringPool.NEW_LINE, "%n");
-		mask = mask.replaceAll(StringPool.TAB, "%t");
+		mask = mask.replaceAll("\n", "%n");
+		mask = mask.replaceAll("\t", "%t");
 
 		mask = mask.replaceAll("HH", TOKEN_REGEX);
 		mask = mask.replaceAll("H", "%k");
@@ -117,7 +116,7 @@ public class InputTimeRenderer extends InputTimeRendererBase {
 			throw new ParseException("TimeStamp must be of the form \"HH:mm:ss\".", errorOffset);
 		}
 
-		String[] timeStampArray = timeStamp.split(StringPool.COLON);
+		String[] timeStampArray = timeStamp.split(":");
 		int hours = Integer.parseInt(timeStampArray[0]);
 		int minutes = Integer.parseInt(timeStampArray[1]);
 		int seconds = Integer.parseInt(timeStampArray[2]);
@@ -205,7 +204,7 @@ public class InputTimeRenderer extends InputTimeRendererBase {
 			for (long milliseconds = minTime; milliseconds <= maxTime; milliseconds = milliseconds + millisecondStep) {
 
 				if (!firstTimeStamp) {
-					responseWriter.write(StringPool.COMMA);
+					responseWriter.write(",");
 				}
 				else {
 					firstTimeStamp = false;
@@ -215,9 +214,9 @@ public class InputTimeRenderer extends InputTimeRendererBase {
 				String dateString = simpleDateFormat.format(time);
 				String escapedDateString = escapeJavaScript(dateString);
 
-				responseWriter.write(StringPool.APOSTROPHE);
+				responseWriter.write("'");
 				responseWriter.write(escapedDateString);
-				responseWriter.write(StringPool.APOSTROPHE);
+				responseWriter.write("'");
 			}
 
 			responseWriter.write("]);");
@@ -227,8 +226,8 @@ public class InputTimeRenderer extends InputTimeRendererBase {
 	protected void encodeAutocomplete(FacesContext facesContext, ResponseWriter responseWriter, InputTime inputTime,
 		boolean first) throws IOException {
 
-		encodeNonEscapedObject(responseWriter, "autocomplete", StringPool.BLANK, first);
-		responseWriter.write(StringPool.OPEN_CURLY_BRACE);
+		encodeNonEscapedObject(responseWriter, "autocomplete", "", first);
+		responseWriter.write("{");
 
 		boolean autoCompleteFirst = true;
 		boolean activateFirstItem = inputTime.isActivateFirstItem();
@@ -293,10 +292,10 @@ public class InputTimeRenderer extends InputTimeRendererBase {
 
 		if (showOnButton || valueChangeClientBehaviorsNotEmpty) {
 
-			encodeNonEscapedObject(responseWriter, "after", StringPool.BLANK, autoCompleteFirst);
-			responseWriter.write(StringPool.OPEN_CURLY_BRACE);
+			encodeNonEscapedObject(responseWriter, "after", "", autoCompleteFirst);
+			responseWriter.write("{");
 
-			encodeNonEscapedObject(responseWriter, "select", StringPool.BLANK, true);
+			encodeNonEscapedObject(responseWriter, "select", "", true);
 			responseWriter.write("function(event){");
 
 			String clientId = inputTime.getClientId(facesContext);
@@ -312,11 +311,11 @@ public class InputTimeRenderer extends InputTimeRendererBase {
 			encodeFunctionCall(responseWriter, "LFAI.inputDateTimePickerSelect", 'A', escapedInputClientId, selectable,
 				time, valueChangeClientBehaviorsNotEmpty);
 			responseWriter.append(";}");
-			responseWriter.write(StringPool.CLOSE_CURLY_BRACE);
+			responseWriter.write("}");
 			autoCompleteFirst = false;
 		}
 
-		responseWriter.write(StringPool.CLOSE_CURLY_BRACE);
+		responseWriter.write("}");
 	}
 
 	@Override

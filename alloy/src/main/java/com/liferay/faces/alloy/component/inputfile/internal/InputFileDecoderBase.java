@@ -26,7 +26,6 @@ import com.liferay.faces.util.config.ConfiguredServlet;
 import com.liferay.faces.util.config.MultiPartConfig;
 import com.liferay.faces.util.config.WebConfig;
 import com.liferay.faces.util.config.WebConfigParam;
-import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.model.UploadedFile;
 
 
@@ -61,11 +60,11 @@ public abstract class InputFileDecoderBase implements InputFileDecoder {
 
 		if (fileName != null) {
 
-			int pos = fileName.lastIndexOf(StringPool.PERIOD);
-			strippedFileName = fileName.replaceAll("[\\\\/\\[\\]:|<>+;=.?\"]", StringPool.DASH);
+			int pos = fileName.lastIndexOf(".");
+			strippedFileName = fileName.replaceAll("[\\\\/\\[\\]:|<>+;=.?\"]", "-");
 
 			if (pos > 0) {
-				strippedFileName = strippedFileName.substring(0, pos) + StringPool.PERIOD +
+				strippedFileName = strippedFileName.substring(0, pos) + "." +
 					strippedFileName.substring(pos + 1);
 			}
 		}

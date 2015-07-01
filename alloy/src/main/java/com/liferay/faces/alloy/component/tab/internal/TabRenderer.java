@@ -22,7 +22,6 @@ import javax.faces.render.FacesRenderer;
 
 import com.liferay.faces.alloy.component.tab.Tab;
 import com.liferay.faces.util.component.Styleable;
-import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.render.RendererUtil;
 
 
@@ -40,8 +39,8 @@ public class TabRenderer extends TabRendererBase {
 
 		// Encode the starting <div> element that represents the component.
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
-		responseWriter.startElement(StringPool.DIV, uiComponent);
-		responseWriter.writeAttribute(StringPool.ID, uiComponent.getClientId(facesContext), StringPool.ID);
+		responseWriter.startElement("div", uiComponent);
+		responseWriter.writeAttribute("id", uiComponent.getClientId(facesContext), "id");
 		RendererUtil.encodeStyleable(responseWriter, (Styleable) uiComponent, TAB_PANE);
 	}
 
@@ -49,11 +48,7 @@ public class TabRenderer extends TabRendererBase {
 	public void encodeChildren(FacesContext facesContext, UIComponent uiComponent) throws IOException {
 
 		UIComponent implicitPanelGroup = uiComponent.getFacet(TabHandler.IMPLICIT_FACET_NAME);
-
-		// For more information, see TabHandler.
-		if (implicitPanelGroup != null) {
-			implicitPanelGroup.encodeAll(facesContext);
-		}
+		implicitPanelGroup.encodeAll(facesContext);
 
 		super.encodeChildren(facesContext, uiComponent);
 	}
@@ -63,7 +58,7 @@ public class TabRenderer extends TabRendererBase {
 
 		// Encode the closing </div> element.
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
-		responseWriter.endElement(StringPool.DIV);
+		responseWriter.endElement("div");
 	}
 
 	@Override

@@ -18,8 +18,6 @@ import java.util.Collection;
 
 import javax.faces.component.behavior.AjaxBehavior;
 
-import com.liferay.faces.util.lang.StringPool;
-
 
 /**
  * @author  Neil Griffin
@@ -31,8 +29,8 @@ public class AjaxBehaviorMockImpl extends AjaxBehavior {
 	private Collection<String> execute;
 
 	public AjaxBehaviorMockImpl(String execute, String render) {
-		this.execute = Arrays.asList(execute.split(StringPool.SPACE));
-		this.render = Arrays.asList(render.split(StringPool.SPACE));
+		this.execute = Arrays.asList(execute.split(" "));
+		this.render = Arrays.asList(render.split(" "));
 	}
 
 	@Override

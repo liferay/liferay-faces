@@ -23,7 +23,6 @@ import javax.faces.context.ResponseWriter;
 import com.liferay.faces.alloy.component.selectrating.SelectRating;
 import com.liferay.faces.util.component.ClientComponent;
 import com.liferay.faces.util.component.Styleable;
-import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.render.RendererUtil;
 
 
@@ -80,7 +79,7 @@ public class SelectRatingRenderer extends SelectRatingRendererBase {
 		//J+
 
 		// 2. JSF
-		String hiddenInputValue = StringPool.BLANK;
+		String hiddenInputValue = "";
 
 		//J-
 		// 3. Developer attribute
@@ -108,8 +107,7 @@ public class SelectRatingRenderer extends SelectRatingRendererBase {
 
 		String escapedHiddenInputValue = escapeJavaScript(hiddenInputValue);
 		responseWriter.write(escapedHiddenInputValue);
-		responseWriter.write(StringPool.APOSTROPHE);
-		responseWriter.write(StringPool.SEMICOLON);
+		responseWriter.write("';");
 
 		// Make sure that the rendered rating is correct (i.e. how many stars are filled). The only way that the
 		// client-side LiferayComponent would have a selectedIndex at this point is if the defaultSelected attribute
@@ -154,17 +152,14 @@ public class SelectRatingRenderer extends SelectRatingRendererBase {
 
 			responseWriter.write("var alloySelectedIndex=");
 			responseWriter.write(clientVarName);
-			responseWriter.write(".get('selectedIndex');");
+			responseWriter.write(".get('selectedIndex');if(");
 
-			responseWriter.write("if(");
 			responseWriter.write(indexSelectedByJSF);
 			responseWriter.write("!=alloySelectedIndex){");
 			responseWriter.write(clientVarName);
 			responseWriter.write(".select(");
 			responseWriter.write(indexSelectedByJSF);
-			responseWriter.write(StringPool.CLOSE_PARENTHESIS);
-			responseWriter.write(StringPool.SEMICOLON);
-			responseWriter.write(StringPool.CLOSE_CURLY_BRACE);
+			responseWriter.write(");}");
 		}
 
 		//J-
@@ -207,15 +202,13 @@ public class SelectRatingRenderer extends SelectRatingRendererBase {
 
 			// Escape the escapedClientId's backslashes since it is passed as a argument to the JavaScript
 			// replaceFirst function below, which expects a regex.
-			String backslashEscapedClientId = escapedClientId.replace(StringPool.BACK_SLASH, DOUBLE_BACKSLASH);
+			String backslashEscapedClientId = escapedClientId.replace("\\", DOUBLE_BACKSLASH);
 			String hiddenInputNodeJs = "document.getElementsByName('" + backslashEscapedClientId + "')[0]";
 			responseWriter.write(onClick.replaceFirst("this", hiddenInputNodeJs));
 		}
 
 		// Finish encoding the onclick event.
-		responseWriter.write(StringPool.CLOSE_CURLY_BRACE);
-		responseWriter.write(StringPool.CLOSE_PARENTHESIS);
-		responseWriter.write(StringPool.SEMICOLON);
+		responseWriter.write("});");
 	}
 
 	@Override
@@ -225,7 +218,7 @@ public class SelectRatingRenderer extends SelectRatingRendererBase {
 
 		// Start the encoding of the outermost <span> element.
 		responseWriter.startElement("span", uiComponent);
-		responseWriter.writeAttribute(StringPool.ID, uiComponent.getClientId(facesContext), StringPool.ID);
+		responseWriter.writeAttribute("id", uiComponent.getClientId(facesContext), "id");
 		RendererUtil.encodeStyleable(responseWriter, (Styleable) uiComponent);
 
 		// Encode the child radio inputs by delegating to the renderer from the JSF runtime using our own

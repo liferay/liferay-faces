@@ -18,8 +18,6 @@ import java.io.IOException;
 import javax.faces.component.UIComponent;
 import javax.faces.context.ResponseWriter;
 
-import com.liferay.faces.util.lang.StringPool;
-
 
 /**
  * This class is a {@link DelegationResponseWriter} that ensures the "id" attribute is always written to a particular
@@ -58,14 +56,14 @@ public class IdDelegationResponseWriter extends DelegationResponseWriterBase {
 
 		if ((!writingIdElement) && (idElement != null) && idElement.equals(name)) {
 			writingIdElement = true;
-			super.writeAttribute(StringPool.ID, idValue, StringPool.ID);
+			super.writeAttribute("id", idValue, "id");
 		}
 	}
 
 	@Override
 	public void writeAttribute(String name, Object value, String property) throws IOException {
 
-		if (StringPool.ID.equals(name)) {
+		if ("id".equals(name)) {
 
 			if (!writingIdElement) {
 				super.writeAttribute(name, value, property);

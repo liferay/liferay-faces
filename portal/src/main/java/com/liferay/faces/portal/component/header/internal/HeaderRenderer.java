@@ -22,9 +22,7 @@ import javax.faces.render.FacesRenderer;
 
 import com.liferay.faces.portal.component.header.Header;
 import com.liferay.faces.util.component.Styleable;
-import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.render.RendererUtil;
-
 import com.liferay.taglib.ui.HeaderTag;
 
 
@@ -41,10 +39,10 @@ public class HeaderRenderer extends HeaderRendererBase {
 
 		// Encode the starting <div> element that represents the rich text editor.
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
-		responseWriter.startElement(StringPool.DIV, uiComponent);
+		responseWriter.startElement("div", uiComponent);
 
 		String clientId = uiComponent.getClientId();
-		responseWriter.writeAttribute(StringPool.ID, clientId, null);
+		responseWriter.writeAttribute("id", clientId, null);
 		RendererUtil.encodeStyleable(responseWriter, (Styleable) uiComponent);
 
 		// Begin the JSP tag lifecycle and write the output to the response.
@@ -59,7 +57,7 @@ public class HeaderRenderer extends HeaderRendererBase {
 
 		// Encode the ending <div> element that represents the rich text editor.
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
-		responseWriter.endElement(StringPool.DIV);
+		responseWriter.endElement("div");
 	}
 
 	@Override

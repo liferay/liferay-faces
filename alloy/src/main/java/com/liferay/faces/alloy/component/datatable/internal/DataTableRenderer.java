@@ -49,7 +49,6 @@ import com.liferay.faces.alloy.component.datatable.RowSelectRangeEvent;
 import com.liferay.faces.alloy.component.outputtext.OutputText;
 import com.liferay.faces.alloy.render.internal.JavaScriptFragment;
 import com.liferay.faces.util.helper.BooleanHelper;
-import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.util.model.SortCriterion;
@@ -191,7 +190,7 @@ public class DataTableRenderer extends DataTableRendererBase {
 		// Encode the hidden field that contains the client-side state of the selected index.
 		String hiddenFieldName = dataTable.getClientId(facesContext).concat("_selectedRowIndexes");
 		responseWriter.startElement("input", dataTable);
-		responseWriter.writeAttribute(StringPool.ID, hiddenFieldName, null);
+		responseWriter.writeAttribute("id", hiddenFieldName, null);
 		responseWriter.writeAttribute("name", hiddenFieldName, null);
 		responseWriter.writeAttribute("type", "hidden", null);
 		responseWriter.writeAttribute("value", dataTable.getSelectedRowIndexes(), null);

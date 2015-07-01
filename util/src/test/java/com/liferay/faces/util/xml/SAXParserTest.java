@@ -20,13 +20,11 @@ import javax.xml.parsers.SAXParserFactory;
 
 import org.junit.Assert;
 import org.junit.Test;
-
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.ext.LexicalHandler;
 import org.xml.sax.helpers.DefaultHandler;
 
-import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.util.xml.internal.SAXParserImpl;
@@ -170,7 +168,7 @@ public class SAXParserTest {
 
 			if (localName.equals("selectOneMenu")) {
 				Assert.assertEquals(attributes.getLength(), 3);
-				Assert.assertEquals(StringPool.ID, attributes.getLocalName(0));
+				Assert.assertEquals("id", attributes.getLocalName(0));
 				Assert.assertEquals("provinceId", attributes.getValue(0));
 				Assert.assertEquals("required", attributes.getLocalName(1));
 				Assert.assertEquals("true", attributes.getValue(1));
@@ -216,7 +214,7 @@ public class SAXParserTest {
 				Assert.assertEquals(uri, "http://liferay.com/faces/bridge");
 			}
 			else if (localName.equals("hr")) {
-				Assert.assertEquals(uri, StringPool.BLANK);
+				Assert.assertEquals(uri, "");
 			}
 		}
 

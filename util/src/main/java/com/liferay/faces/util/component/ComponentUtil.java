@@ -22,8 +22,6 @@ import javax.faces.component.UIViewRoot;
 import javax.faces.component.html.HtmlOutputLabel;
 import javax.faces.context.FacesContext;
 
-import com.liferay.faces.util.lang.StringPool;
-
 
 /**
  * @author  Neil Griffin
@@ -44,7 +42,7 @@ public class ComponentUtil {
 			if (className != null) {
 
 				if (!first) {
-					cssClassBuilder.append(StringPool.SPACE);
+					cssClassBuilder.append(" ");
 				}
 
 				cssClassBuilder.append(className);

@@ -21,7 +21,6 @@ import javax.faces.context.ResponseWriter;
 import javax.faces.render.FacesRenderer;
 
 import com.liferay.faces.alloy.component.icon.Icon;
-import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.render.RendererUtil;
 
 
@@ -41,7 +40,7 @@ public class IconRenderer extends IconRendererBase {
 		responseWriter.startElement("span", uiComponent);
 
 		String clientId = uiComponent.getClientId(facesContext);
-		responseWriter.writeAttribute(StringPool.ID, clientId, StringPool.ID);
+		responseWriter.writeAttribute("id", clientId, "id");
 
 		Icon icon = (Icon) uiComponent;
 

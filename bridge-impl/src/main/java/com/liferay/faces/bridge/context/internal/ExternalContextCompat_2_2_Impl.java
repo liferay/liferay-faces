@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2015 Liferay, Inc. All rights reserved.
+o * Copyright (c) 2000-2015 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -29,7 +29,6 @@ import javax.portlet.PortletSession;
 import javax.servlet.http.Cookie;
 
 import com.liferay.faces.util.config.ApplicationConfig;
-import com.liferay.faces.util.lang.StringPool;
 
 
 /**
@@ -135,17 +134,17 @@ public abstract class ExternalContextCompat_2_2_Impl extends ExternalContextComp
 
 				StringBuilder urlBuilder = new StringBuilder(url);
 
-				int queryPos = url.indexOf(StringPool.QUESTION);
+				int queryPos = url.indexOf("?");
 
 				if (queryPos > 0) {
-					urlBuilder.append(StringPool.AMPERSAND);
+					urlBuilder.append("&");
 				}
 				else {
-					urlBuilder.append(StringPool.QUESTION);
+					urlBuilder.append("?");
 				}
 
 				urlBuilder.append(ResponseStateManager.CLIENT_WINDOW_PARAM);
-				urlBuilder.append(StringPool.EQUAL);
+				urlBuilder.append("=");
 				urlBuilder.append(clientWindow.getId());
 
 				Map<String, String> queryURLParameters = clientWindow.getQueryURLParameters(facesContext);
@@ -157,7 +156,7 @@ public abstract class ExternalContextCompat_2_2_Impl extends ExternalContextComp
 					for (Map.Entry<String, String> mapEntry : entrySet) {
 
 						urlBuilder.append(mapEntry.getKey());
-						urlBuilder.append(StringPool.EQUAL);
+						urlBuilder.append("=");
 						urlBuilder.append(mapEntry.getValue());
 					}
 				}
@@ -216,7 +215,7 @@ public abstract class ExternalContextCompat_2_2_Impl extends ExternalContextComp
 		if ((portletSession == null) && (!create)) {
 
 			// JSF 2.2 requires the empty string to be returned in this case.
-			sessionId = StringPool.BLANK;
+			sessionId = "";
 		}
 		else {
 			sessionId = portletSession.getId();

@@ -15,8 +15,6 @@ package com.liferay.faces.alloy.component.outputtooltip;
 
 import javax.faces.component.FacesComponent;
 
-import com.liferay.faces.util.lang.StringPool;
-
 
 /**
  * @author  Vernon Singleton
@@ -34,7 +32,7 @@ public class OutputTooltip extends OutputTooltipBase {
 			style = "display:none;";
 		}
 		else {
-			style = style + StringPool.SEMICOLON + "display:none;";
+			style = style + ";" + "display:none;";
 		}
 
 		return style;

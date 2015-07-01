@@ -26,7 +26,6 @@ import javax.portlet.faces.Bridge.PortletPhase;
 import javax.portlet.faces.BridgeUtil;
 
 import com.liferay.faces.bridge.context.BridgeContext;
-import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.product.ProductConstants;
 import com.liferay.faces.util.product.ProductMap;
 
@@ -82,7 +81,7 @@ public abstract class ViewHandlerCompatImpl extends ViewHandlerWrapper {
 				(portletRequestPhase == Bridge.PortletPhase.EVENT_PHASE));
 
 		if (workaroundMojarra) {
-			bridgeContext.getAttributes().put(RESPONSE_CHARACTER_ENCODING, StringPool.UTF8);
+			bridgeContext.getAttributes().put(RESPONSE_CHARACTER_ENCODING, "UTF-8");
 		}
 
 		String redirectURL = super.getRedirectURL(facesContext, viewId, parameters, includeViewParams);

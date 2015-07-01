@@ -21,7 +21,6 @@ import javax.faces.context.FacesContext;
 
 import com.liferay.faces.util.io.Filterable;
 import com.liferay.faces.util.io.ResourceOutputStream;
-import com.liferay.faces.util.lang.StringPool;
 
 
 /**
@@ -49,8 +48,8 @@ public class ExpressionResourceOutputStream extends ResourceOutputStream impleme
 			if (finishPos > 0) {
 				String resourcePair = text.substring(startPos + RESOURCE_TOKEN_BEGIN.length(), finishPos);
 
-				if (resourcePair.indexOf(StringPool.COLON) > 0) {
-					String[] resourceTokens = resourcePair.split(StringPool.COLON);
+				if (resourcePair.indexOf(":") > 0) {
+					String[] resourceTokens = resourcePair.split(":");
 					String libraryName = resourceTokens[0];
 					String resourceName = resourceTokens[1];
 					FacesContext facesContext = FacesContext.getCurrentInstance();

@@ -35,7 +35,6 @@ import com.liferay.faces.util.config.ApplicationConfig;
 import com.liferay.faces.util.config.ConfiguredServletMapping;
 import com.liferay.faces.util.config.FacesConfig;
 import com.liferay.faces.util.io.ResourceOutputStream;
-import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.product.ProductConstants;
 import com.liferay.faces.util.product.ProductMap;
 
@@ -166,7 +165,7 @@ public class ResLibResourceHandler extends ResourceHandlerWrapperBase {
 
 	protected boolean validateModulePathExtensions(ExternalContext externalContext, List<String> modulePaths) {
 		String[] comboAllowedFileExtensions = ResLibConfigParam.ComboAllowedFileExtensions.getStringValue(
-				externalContext).split(StringPool.COMMA);
+				externalContext).split(",");
 
 		boolean modulePathExtensionsValid = true;
 

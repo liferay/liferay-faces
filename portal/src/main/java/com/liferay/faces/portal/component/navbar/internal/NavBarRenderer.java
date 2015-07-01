@@ -22,8 +22,6 @@ import javax.faces.context.ResponseWriter;
 import javax.faces.render.FacesRenderer;
 
 import com.liferay.faces.portal.component.navbar.NavBar;
-import com.liferay.faces.util.lang.StringPool;
-
 import com.liferay.taglib.aui.NavBarTag;
 
 
@@ -61,8 +59,8 @@ public class NavBarRenderer extends NavBarRendererBase {
 		// necessary because portal-web/docroot/html/taglib/aui/nav_bar/page.jsp encodes a <div> element that needs an
 		// id attribute that does not contain colons (which is the default JSF NamingContainer separator character).
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
-		responseWriter.startElement(StringPool.DIV, uiComponent);
-		responseWriter.writeAttribute(StringPool.ID, uiComponent.getClientId(), StringPool.ID);
+		responseWriter.startElement("div", uiComponent);
+		responseWriter.writeAttribute("id", uiComponent.getClientId(), "id");
 
 		// Delegate to PortalTagRenderer so that the JSP tag output will get encoded.
 		super.encodeBegin(facesContext, uiComponent);
@@ -76,7 +74,7 @@ public class NavBarRenderer extends NavBarRendererBase {
 
 		// Encode the closing </div> element for the navBar.
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
-		responseWriter.endElement(StringPool.DIV);
+		responseWriter.endElement("div");
 	}
 
 	@Override

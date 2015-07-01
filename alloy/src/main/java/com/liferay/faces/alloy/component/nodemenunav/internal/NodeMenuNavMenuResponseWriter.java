@@ -18,7 +18,6 @@ import java.io.IOException;
 import javax.faces.component.UIComponent;
 import javax.faces.context.ResponseWriter;
 
-import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.render.internal.DelegationResponseWriterBase;
 
 
@@ -46,7 +45,7 @@ public class NodeMenuNavMenuResponseWriter extends DelegationResponseWriterBase 
 			// com.sun.faces.renderkit.RenderKitUtils.renderJsfJs(FacesContext) decided that it was necessary write the
 			// jsf.js resource since it doesn't appear in the <head> element. In this case, assume that a subsequent
 			// call to this method will be the parent.
-			if (!StringPool.SCRIPT.equals(name)) {
+			if (!"<script>".equals(name)) {
 				parentName = name;
 				parentComponent = component;
 				parent = true;
@@ -56,7 +55,7 @@ public class NodeMenuNavMenuResponseWriter extends DelegationResponseWriterBase 
 
 			// Catch cases where no class was written to a piece of menu item content
 			if ((parent) && (parentName != null) && (!wroteClass)) {
-				super.writeAttribute(StringPool.CLASS, "yui3-menuitem-content", StringPool.CLASS);
+				super.writeAttribute("class", "yui3-menuitem-content", "class");
 				wroteClass = true;
 			}
 
@@ -69,10 +68,10 @@ public class NodeMenuNavMenuResponseWriter extends DelegationResponseWriterBase 
 	@Override
 	public void writeAttribute(String name, Object value, String property) throws IOException {
 
-		if (name.equals(StringPool.CLASS)) {
+		if (name.equals("class")) {
 			wroteClass = true;
 
-			if ((parent) && (parentName != null) && (name.equals(StringPool.CLASS))) {
+			if ((parent) && (parentName != null) && (name.equals("class"))) {
 				value = "yui3-menuitem-content " + value;
 			}
 		}
@@ -85,7 +84,7 @@ public class NodeMenuNavMenuResponseWriter extends DelegationResponseWriterBase 
 
 		// Catch cases where no class was written to a piece of menu item content
 		if ((parent) && (parentName != null) && (!wroteClass)) {
-			super.writeAttribute(StringPool.CLASS, "yui3-menuitem-content", StringPool.CLASS);
+			super.writeAttribute("class", "yui3-menuitem-content", "class");
 			wroteClass = true;
 		}
 

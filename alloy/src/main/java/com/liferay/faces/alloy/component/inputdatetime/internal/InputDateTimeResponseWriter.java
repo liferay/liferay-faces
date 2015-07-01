@@ -18,7 +18,6 @@ import java.io.IOException;
 import javax.faces.context.ResponseWriter;
 
 import com.liferay.faces.util.component.Styleable;
-import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.render.internal.IdDelegationResponseWriter;
 
 
@@ -39,7 +38,7 @@ public class InputDateTimeResponseWriter extends IdDelegationResponseWriter {
 	@Override
 	public void writeAttribute(String name, Object value, String property) throws IOException {
 
-		if (StringPool.CLASS.equalsIgnoreCase(name)) {
+		if ("class".equalsIgnoreCase(name)) {
 			super.writeAttribute(name, "input-medium field", property);
 		}
 		else if (Styleable.STYLE.equalsIgnoreCase(name)) {

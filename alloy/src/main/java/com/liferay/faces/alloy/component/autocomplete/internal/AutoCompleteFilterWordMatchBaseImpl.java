@@ -22,8 +22,6 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
-import com.liferay.faces.util.lang.StringPool;
-
 
 /**
  * @author  Kyle Stiemann
@@ -31,7 +29,7 @@ import com.liferay.faces.util.lang.StringPool;
 abstract class AutoCompleteFilterWordMatchBaseImpl implements AutoCompleteFilter {
 
 	private static final Map<PATTERN_KEYS, Pattern> patterns = new EnumMap<PATTERN_KEYS, Pattern>(PATTERN_KEYS.class);
-	private static final Pattern SINGLE_QUOTE_PATTERN = Pattern.compile(StringPool.APOSTROPHE);
+	private static final Pattern SINGLE_QUOTE_PATTERN = Pattern.compile("'");
 	private static final Pattern WHITESPACE = Pattern.compile("\\s");
 
 	static {
@@ -49,8 +47,8 @@ abstract class AutoCompleteFilterWordMatchBaseImpl implements AutoCompleteFilter
 
 			if (beginLinePattern.matcher(nextLine).find()) {
 
-				String regex = beginLinePattern.matcher(nextLine).replaceFirst(StringPool.BLANK);
-				regex = endLinePattern.matcher(regex).replaceFirst(StringPool.BLANK);
+				String regex = beginLinePattern.matcher(nextLine).replaceFirst("");
+				regex = endLinePattern.matcher(regex).replaceFirst("");
 
 				Pattern pattern;
 

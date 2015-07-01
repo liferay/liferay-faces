@@ -32,7 +32,6 @@ import javax.faces.render.FacesRenderer;
 import com.liferay.faces.alloy.component.column.Column;
 import com.liferay.faces.alloy.component.datatable.DataTable;
 import com.liferay.faces.alloy.render.internal.AlloyRendererUtil;
-import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.render.RendererUtil;
 
 
@@ -64,10 +63,10 @@ public class ColumnRenderer extends ColumnRendererBase implements ComponentSyste
 
 		if (!((parent instanceof HtmlDataTable) || (parent instanceof HtmlPanelGrid))) {
 
-			responseWriter.startElement(StringPool.DIV, uiComponent);
+			responseWriter.startElement("div", uiComponent);
 
 			String clientId = uiComponent.getClientId(facesContext);
-			responseWriter.writeAttribute(StringPool.ID, clientId, null);
+			responseWriter.writeAttribute("id", clientId, null);
 
 			Column column = (Column) uiComponent;
 			StringBuilder classNames = new StringBuilder();
@@ -116,7 +115,7 @@ public class ColumnRenderer extends ColumnRendererBase implements ComponentSyste
 			}
 
 			if (offset != null) {
-				classNames.append(StringPool.SPACE);
+				classNames.append(" ");
 				classNames.append(OFFSET);
 				classNames.append(offset);
 			}
@@ -133,7 +132,7 @@ public class ColumnRenderer extends ColumnRendererBase implements ComponentSyste
 		UIComponent parent = uiComponent.getParent();
 
 		if (!((parent instanceof HtmlDataTable) || (parent instanceof HtmlPanelGrid))) {
-			responseWriter.endElement(StringPool.DIV);
+			responseWriter.endElement("div");
 		}
 	}
 

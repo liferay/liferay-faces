@@ -32,7 +32,6 @@ import com.liferay.faces.alloy.component.progressbar.ProgressBar;
 import com.liferay.faces.alloy.render.internal.JavaScriptFragment;
 import com.liferay.faces.util.component.Styleable;
 import com.liferay.faces.util.context.FacesRequestContext;
-import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.render.RendererUtil;
 import com.liferay.faces.util.render.internal.BufferedScriptResponseWriter;
 
@@ -184,10 +183,10 @@ public class ProgressBarRenderer extends ProgressBarRendererBase {
 
 			// Start the encoding of the outermost <div> element.
 			ResponseWriter responseWriter = facesContext.getResponseWriter();
-			responseWriter.startElement(StringPool.DIV, uiComponent);
+			responseWriter.startElement("div", uiComponent);
 
 			String clientId = uiComponent.getClientId(facesContext);
-			responseWriter.writeAttribute(StringPool.ID, clientId, StringPool.ID);
+			responseWriter.writeAttribute("id", clientId, "id");
 
 			Styleable styleable = (Styleable) uiComponent;
 			RendererUtil.encodeStyleable(responseWriter, styleable);
@@ -198,18 +197,18 @@ public class ProgressBarRenderer extends ProgressBarRendererBase {
 
 				String hiddenClientId = clientId.concat(HIDDEN_SUFFIX);
 				responseWriter.startElement("input", null);
-				responseWriter.writeAttribute(StringPool.ID, hiddenClientId, null);
+				responseWriter.writeAttribute("id", hiddenClientId, null);
 				responseWriter.writeAttribute("name", hiddenClientId, null);
 				responseWriter.writeAttribute("type", "hidden", null);
-				responseWriter.writeAttribute("value", StringPool.BLANK, null);
+				responseWriter.writeAttribute("value", "", null);
 				responseWriter.endElement("input");
 			}
 
 			// Encode the contentBox of the progressBar.
 			String contentBoxClientId = clientId.concat(CONTENT_BOX_SUFFIX);
-			responseWriter.startElement(StringPool.DIV, null);
-			responseWriter.writeAttribute(StringPool.ID, contentBoxClientId, null);
-			responseWriter.endElement(StringPool.DIV);
+			responseWriter.startElement("div", null);
+			responseWriter.writeAttribute("id", contentBoxClientId, null);
+			responseWriter.endElement("div");
 		}
 	}
 
@@ -222,7 +221,7 @@ public class ProgressBarRenderer extends ProgressBarRendererBase {
 
 			// Finish the encoding of the outermost </div> element.
 			ResponseWriter responseWriter = facesContext.getResponseWriter();
-			responseWriter.endElement(StringPool.DIV);
+			responseWriter.endElement("div");
 		}
 	}
 
@@ -240,8 +239,8 @@ public class ProgressBarRenderer extends ProgressBarRendererBase {
 		encodeClientId(responseWriter, CONTENT_BOX, contentBoxClientId, first);
 
 		// Begin encoding event listeners that occur on the event.
-		encodeNonEscapedObject(responseWriter, "on", StringPool.BLANK, first);
-		responseWriter.write(StringPool.OPEN_CURLY_BRACE);
+		encodeNonEscapedObject(responseWriter, "on", "", first);
+		responseWriter.write("{");
 
 		// complete
 		boolean onFirst = true;
@@ -304,7 +303,7 @@ public class ProgressBarRenderer extends ProgressBarRendererBase {
 		}
 
 		// Finish encoding event listeners that occur on the event.
-		responseWriter.write(StringPool.CLOSE_CURLY_BRACE);
+		responseWriter.write("}");
 	}
 
 	/**

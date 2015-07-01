@@ -25,7 +25,6 @@ import javax.faces.context.FacesContext;
 
 import com.liferay.faces.bridge.component.internal.ResourceComponent;
 import com.liferay.faces.bridge.renderkit.html_basic.internal.HeadRendererBridgeImpl;
-import com.liferay.faces.util.lang.StringPool;
 
 
 /**
@@ -78,9 +77,9 @@ public class HeadRendererICEfacesImpl extends HeadRendererBridgeImpl {
 					iceFacesThemeName.equals(ICEFACES_THEME_NAME_RIME)) {
 				StringBuilder buf = new StringBuilder();
 				buf.append(ICEFACES_THEME_DIR);
-				buf.append(StringPool.FORWARD_SLASH);
+				buf.append("/");
 				buf.append(iceFacesThemeName);
-				buf.append(StringPool.FORWARD_SLASH);
+				buf.append("/");
 				buf.append(ICEFACES_THEME_RESOURCE_NAME);
 				resourceName = buf.toString();
 				resourceLibrary = ICEFACES_LIBRARY_NAME_ACE;

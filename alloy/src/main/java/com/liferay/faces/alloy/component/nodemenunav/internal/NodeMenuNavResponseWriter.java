@@ -18,7 +18,6 @@ import java.io.IOException;
 import javax.faces.component.UIComponent;
 import javax.faces.context.ResponseWriter;
 
-import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.render.internal.DelegationResponseWriterBase;
 
 
@@ -43,7 +42,7 @@ public class NodeMenuNavResponseWriter extends DelegationResponseWriterBase {
 	@Override
 	public void writeAttribute(String name, Object value, String property) throws IOException {
 
-		if (StringPool.CLASS.equals(name)) {
+		if ("class".equals(name)) {
 			value = styleClass;
 		}
 
@@ -51,7 +50,7 @@ public class NodeMenuNavResponseWriter extends DelegationResponseWriterBase {
 			value = value.toString().replace("this", "document.getElementById('" + clientId + "')");
 		}
 
-		if (!StringPool.ID.equals(name)) {
+		if (!"id".equals(name)) {
 			super.writeAttribute(name, value, property);
 		}
 	}

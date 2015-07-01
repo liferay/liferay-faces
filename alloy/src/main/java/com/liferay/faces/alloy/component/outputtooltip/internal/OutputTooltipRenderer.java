@@ -27,7 +27,6 @@ import javax.faces.render.FacesRenderer;
 import com.liferay.faces.alloy.component.outputtooltip.OutputTooltip;
 import com.liferay.faces.util.component.ClientComponent;
 import com.liferay.faces.util.component.Styleable;
-import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.util.render.RendererUtil;
@@ -104,8 +103,8 @@ public class OutputTooltipRenderer extends OutputTooltipRendererBase {
 		// that Alloy's JavaScript will be able to locate the boundingBox in the DOM.
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
 		String clientId = uiComponent.getClientId(facesContext);
-		responseWriter.startElement(StringPool.DIV, uiComponent);
-		responseWriter.writeAttribute(StringPool.ID, clientId, StringPool.ID);
+		responseWriter.startElement("div", uiComponent);
+		responseWriter.writeAttribute("id", clientId, "id");
 
 		// Encode the "style" and "class" attributes on the boundingBox <div> tag.
 		Styleable styleable = (Styleable) uiComponent;
@@ -113,8 +112,8 @@ public class OutputTooltipRenderer extends OutputTooltipRendererBase {
 
 		// Encode the opening contentBox <div> tag with a unique id.
 		String contentBoxClientId = clientId.concat(CONTENT_BOX_SUFFIX);
-		responseWriter.startElement(StringPool.DIV, null);
-		responseWriter.writeAttribute(StringPool.ID, contentBoxClientId, null);
+		responseWriter.startElement("div", null);
+		responseWriter.writeAttribute("id", contentBoxClientId, null);
 
 		// Create a response writer that will ignore the opening and closing "span" element tags along with the "id",
 		// "style", and "class" attributes.
@@ -131,10 +130,10 @@ public class OutputTooltipRenderer extends OutputTooltipRendererBase {
 
 		// Encode the closing contentBox </div> tag.
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
-		responseWriter.endElement(StringPool.DIV);
+		responseWriter.endElement("div");
 
 		// Encode the closing boundingBox </div> tag.
-		responseWriter.endElement(StringPool.DIV);
+		responseWriter.endElement("div");
 	}
 
 	@Override

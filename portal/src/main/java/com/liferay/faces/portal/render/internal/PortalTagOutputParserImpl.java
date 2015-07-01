@@ -16,7 +16,6 @@ package com.liferay.faces.portal.render.internal;
 import javax.servlet.jsp.JspWriter;
 
 import com.liferay.faces.util.ContentTypes;
-import com.liferay.faces.util.lang.StringPool;
 
 
 /**
@@ -25,7 +24,7 @@ import com.liferay.faces.util.lang.StringPool;
 public class PortalTagOutputParserImpl implements PortalTagOutputParser {
 
 	// Private Constants
-	private static final String COMMENT_CDATA_CLOSE = "// " + StringPool.CDATA_CLOSE;
+	private static final String COMMENT_CDATA_CLOSE = "// " + "]]>";
 	private static final String SCRIPT_TAG_BEGIN_TYPE_JS = "<script type=\"" + ContentTypes.TEXT_JAVASCRIPT + "\">";
 
 	@Override
@@ -46,24 +45,24 @@ public class PortalTagOutputParserImpl implements PortalTagOutputParser {
 		boolean done1 = (scriptText == null);
 
 		while (!done1) {
-			int beginPos = scriptText.indexOf(StringPool.SCRIPT_TAG_BEGIN);
+			int beginPos = scriptText.indexOf("<script>");
 
 			if (beginPos < 0) {
 				beginPos = scriptText.indexOf(SCRIPT_TAG_BEGIN_TYPE_JS);
 			}
 
-			int endPos = scriptText.indexOf(StringPool.SCRIPT_TAG_END, beginPos);
+			int endPos = scriptText.indexOf("</script>", beginPos);
 
 			if ((beginPos >= 0) && (endPos > beginPos)) {
-				String script = scriptText.substring(beginPos, endPos + StringPool.SCRIPT_TAG_END.length());
+				String script = scriptText.substring(beginPos, endPos + "</script>".length());
 
 				boolean done2 = false;
 
 				while (!done2) {
-					int cdataOpenPos = script.indexOf(StringPool.CDATA_OPEN);
+					int cdataOpenPos = script.indexOf("<![CDATA[");
 
 					if (cdataOpenPos > 0) {
-						script = script.substring(cdataOpenPos + StringPool.CDATA_OPEN.length());
+						script = script.substring(cdataOpenPos + "<![CDATA[".length());
 
 						int cdataClosePos = script.indexOf(COMMENT_CDATA_CLOSE);
 
@@ -71,7 +70,7 @@ public class PortalTagOutputParserImpl implements PortalTagOutputParser {
 							script = script.substring(0, cdataClosePos);
 						}
 						else {
-							cdataClosePos = script.indexOf(StringPool.CDATA_CLOSE);
+							cdataClosePos = script.indexOf("]]>");
 
 							if (cdataClosePos > 0) {
 								script = script.substring(0, cdataClosePos);
@@ -85,7 +84,7 @@ public class PortalTagOutputParserImpl implements PortalTagOutputParser {
 
 				// Remove all the "<![CDATA[" and "]]>" tokens since they will interfere with the JSF
 				// partial-response.
-				String[] tokensToRemove = new String[] { StringPool.CDATA_OPEN, StringPool.CDATA_CLOSE };
+				String[] tokensToRemove = new String[] { "<![CDATA[", "]]>" };
 
 				for (String token : tokensToRemove) {
 					int pos = script.indexOf(token);
@@ -98,7 +97,7 @@ public class PortalTagOutputParserImpl implements PortalTagOutputParser {
 
 				scriptBuilder.append(script.trim());
 				scriptText = scriptText.substring(0, beginPos) +
-					scriptText.substring(endPos + StringPool.SCRIPT_TAG_END.length());
+					scriptText.substring(endPos + "</script>".length());
 			}
 			else {
 				done1 = true;

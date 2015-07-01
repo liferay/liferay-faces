@@ -13,7 +13,6 @@
  */
 package com.liferay.faces.bridge.renderkit.html_basic.internal;
 
-import com.liferay.faces.util.lang.StringPool;
 
 
 /**
@@ -25,7 +24,7 @@ import com.liferay.faces.util.lang.StringPool;
 public class ElementBlankImpl extends ElementImpl {
 
 	public ElementBlankImpl() {
-		super(StringPool.BLANK);
+		super("");
 	}
 
 	@Override

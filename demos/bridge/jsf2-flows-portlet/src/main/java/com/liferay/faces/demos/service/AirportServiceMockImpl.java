@@ -32,7 +32,6 @@ import javax.inject.Named;
 
 import com.liferay.faces.demos.dto.Airport;
 import com.liferay.faces.util.helper.LongHelper;
-import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -103,10 +102,10 @@ public class AirportServiceMockImpl implements AirportService {
 			while ((csvLine = bufferedReader.readLine()) != null) {
 
 				if (csvLine != null) {
-					csvLine = csvLine.replaceAll(", ", StringPool.SPACE);
-					csvLine = csvLine.replaceAll(StringPool.QUOTE, StringPool.BLANK);
+					csvLine = csvLine.replaceAll(", ", " ");
+					csvLine = csvLine.replaceAll("\"", "");
 
-					String[] csvParts = csvLine.split(StringPool.COMMA);
+					String[] csvParts = csvLine.split(",");
 
 					String country = csvParts[3];
 

@@ -16,8 +16,6 @@ package com.liferay.faces.demos.dto;
 import java.io.Serializable;
 import java.util.List;
 
-import com.liferay.faces.util.lang.StringPool;
-
 
 /**
  * @author  Neil Griffin
@@ -45,8 +43,8 @@ public class ShowcaseComponentImpl implements Serializable, ShowcaseComponent {
 		this.camelCaseName = camelCaseName;
 		this.lowerCaseName = lowerCaseName;
 		this.useCases = useCases;
-		this.fullName = prefix + StringPool.COLON + camelCaseName;
-		this.key = prefix + StringPool.DASH + lowerCaseName;
+		this.fullName = prefix + ":" + camelCaseName;
+		this.key = prefix + "-" + lowerCaseName;
 	}
 
 	@Override
@@ -58,7 +56,7 @@ public class ShowcaseComponentImpl implements Serializable, ShowcaseComponent {
 
 			if ((prefix != null) && (camelCaseName != null)) {
 
-				return prefix + StringPool.COLON + camelCaseName;
+				return prefix + ":" + camelCaseName;
 			}
 		}
 

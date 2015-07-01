@@ -26,7 +26,6 @@ import javax.faces.render.Renderer;
 import javax.servlet.jsp.tagext.Tag;
 
 import com.liferay.faces.util.context.FacesRequestContext;
-import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -60,7 +59,7 @@ public abstract class DelayedPortalTagRenderer<U extends UIComponent, T extends 
 		RenderKit renderKit = facesContext.getRenderKit();
 		StringWriter bufferedChildrenMarkupWriter = new StringWriter();
 		ResponseWriter stringResponseWriter = renderKit.createResponseWriter(bufferedChildrenMarkupWriter, null,
-				StringPool.UTF8);
+				"UTF-8");
 		facesContext.setResponseWriter(stringResponseWriter);
 
 		List<UIComponent> children = uiComponent.getChildren();
