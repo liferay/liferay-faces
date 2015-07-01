@@ -60,13 +60,13 @@ public class TabHandler extends ComponentHandler {
 		Map<String, Object> attributes = parent.getAttributes();
 		Object value = attributes.get("value");
 		Object var = attributes.get("var");
-		boolean iterateOverDataModel = ((value != null) && (var != null));
 
-		if (!iterateOverDataModel) {
+		// If not iterating over a DataModel, then
+		if ((value == null) || (var == null)) {
 
 			// If an implicit panel group doesn't yet exist, then create one.
 			FacesContext facesContext = faceletContext.getFacesContext();
-			UIComponent implicitPanelGroup = (UIComponent) uiComponent.getFacet(IMPLICIT_FACET_NAME);
+			UIComponent implicitPanelGroup = uiComponent.getFacet(IMPLICIT_FACET_NAME);
 
 			if (implicitPanelGroup == null) {
 				implicitPanelGroup = createImplicitPanelGroup(facesContext, uiComponent.getId());

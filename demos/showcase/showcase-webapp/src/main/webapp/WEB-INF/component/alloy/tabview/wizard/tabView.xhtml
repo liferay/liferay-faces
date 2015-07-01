@@ -6,8 +6,9 @@
 		<showcase:example>
 			<alloy:form>
 				<alloy:tabView id="wizard" selectedIndex="#{tabViewWizardBean.selectedTabIndex}">
-					<alloy:tab id="step1" headerText="#{i18n['step-1']}">
-						<alloy:fieldset>
+					<f:ajax event="tabSelect" listener="#{tabViewWizardBean.tabSelectListener}"/>
+					<alloy:tab headerText="#{i18n['step-1']}">
+						<alloy:fieldset id="step1">
 							<alloy:field label="#{i18n['first-name']}">
 								<alloy:inputText id="firstName" required="true" value="#{tabViewWizardBean.firstName}" />
 								<alloy:message for="firstName" />
@@ -17,8 +18,8 @@
 							<f:setPropertyActionListener target="#{tabViewWizardBean.selectedTabIndex}" value="1" />
 						</alloy:commandButton>
 					</alloy:tab>
-					<alloy:tab id="step2" disabled="#{tabViewWizardBean.selectedTabIndex lt 1}" headerText="#{i18n['step-2']}">
-						<alloy:fieldset>
+					<alloy:tab disabled="#{tabViewWizardBean.selectedTabIndex lt 1}" headerText="#{i18n['step-2']}">
+						<alloy:fieldset id="step2">
 							<alloy:field label="#{i18n['last-name']}">
 								<alloy:inputText id="lastName" required="true" value="#{tabViewWizardBean.lastName}" />
 								<alloy:message for="lastName" />
