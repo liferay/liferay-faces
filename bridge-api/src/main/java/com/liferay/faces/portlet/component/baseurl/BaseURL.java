@@ -14,7 +14,7 @@
 package com.liferay.faces.portlet.component.baseurl;
 
 /**
- * @author	Neil Griffin
+ * @author  Neil Griffin
  */
 public class BaseURL extends BaseURLBase {
 

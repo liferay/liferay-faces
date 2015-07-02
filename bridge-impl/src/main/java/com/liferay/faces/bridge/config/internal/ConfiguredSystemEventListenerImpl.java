@@ -20,7 +20,8 @@ import com.liferay.faces.bridge.config.ConfiguredSystemEventListener;
  * @author  Neil Griffin
  */
 @Deprecated
-public class ConfiguredSystemEventListenerImpl extends com.liferay.faces.util.config.internal.ConfiguredSystemEventListenerImpl
+public class ConfiguredSystemEventListenerImpl
+	extends com.liferay.faces.util.config.internal.ConfiguredSystemEventListenerImpl
 	implements ConfiguredSystemEventListener {
 
 	public ConfiguredSystemEventListenerImpl(

@@ -13,16 +13,19 @@
  */
 package com.liferay.faces.test;
 
-import static org.junit.Assert.assertTrue;
-
 import java.util.logging.Level;
 
 import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.drone.api.annotation.Drone;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.junit.InSequence;
+
+import static org.junit.Assert.assertTrue;
+
 import org.junit.Test;
+
 import org.junit.runner.RunWith;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -50,7 +53,7 @@ public class FACES1478PortletTest extends TesterBase {
 	private WebElement formTag;
 	@FindBy(xpath = secondLinkXpath)
 	private WebElement secondLink;
-	
+
 	@Drone
 	WebDriver browser;
 

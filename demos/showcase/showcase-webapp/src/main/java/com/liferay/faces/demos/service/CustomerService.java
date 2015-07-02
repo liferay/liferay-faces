@@ -13,10 +13,10 @@
  */
 package com.liferay.faces.demos.service;
 
-import com.liferay.faces.demos.dto.Customer;
-
 import java.util.Comparator;
 import java.util.List;
+
+import com.liferay.faces.demos.dto.Customer;
 
 
 /**
@@ -24,9 +24,9 @@ import java.util.List;
  */
 public interface CustomerService {
 
-	public int getCustomerCount();
-
 	public List<Customer> getAllCustomers();
+
+	public int getCustomerCount();
 
 	public List<Customer> getCustomers(int start, int finish);
 

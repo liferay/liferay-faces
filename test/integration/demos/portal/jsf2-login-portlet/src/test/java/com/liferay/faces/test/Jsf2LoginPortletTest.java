@@ -13,8 +13,6 @@
  */
 package com.liferay.faces.test;
 
-import static org.junit.Assert.assertTrue;
-
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -22,9 +20,14 @@ import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.drone.api.annotation.Drone;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.junit.InSequence;
+
+import static org.junit.Assert.assertTrue;
+
 import org.junit.Before;
 import org.junit.Test;
+
 import org.junit.runner.RunWith;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -39,6 +42,8 @@ import com.liferay.faces.test.util.TesterBase;
 public class Jsf2LoginPortletTest extends TesterBase {
 
 	private static final Logger logger = Logger.getLogger(Jsf2LoginPortletTest.class.getName());
+
+	static final String url = baseUrl + "/web/guest/jsf2-sign-in";
 
 	@FindBy(xpath = "//div[@class='portlet-topper']/span")
 	private WebElement portletDisplayName;
@@ -57,23 +62,15 @@ public class Jsf2LoginPortletTest extends TesterBase {
 
 	@FindBy(xpath = "//div[contains(text(),'You are signed in as')]")
 	private WebElement portletBody;
-	
-	static final String url = baseUrl + "/web/guest/jsf2-sign-in";
-	
+
 	@Drone
 	WebDriver browser;
-
-	@Before
-	public void getNewSession() {
-		browser.manage().deleteAllCookies();
-		java.util.logging.Logger.getLogger("com.gargoylesoftware.htmlunit").setLevel(Level.OFF);
-	}
 
 	@Test
 	@RunAsClient
 	@InSequence(1)
 	public void failToSignIn() throws Exception {
-		
+
 		logger.log(Level.INFO, "url = " + url);
 
 		browser.get(url);
@@ -136,6 +133,12 @@ public class Jsf2LoginPortletTest extends TesterBase {
 		logger.log(Level.INFO, "portletBody.getText() = " + portletBody.getText());
 		assertTrue("portletBody is displayed", portletBody.isDisplayed());
 		assertTrue("You are signed in", portletBody.getText().contains("You are signed in"));
+	}
+
+	@Before
+	public void getNewSession() {
+		browser.manage().deleteAllCookies();
+		java.util.logging.Logger.getLogger("com.gargoylesoftware.htmlunit").setLevel(Level.OFF);
 	}
 
 }

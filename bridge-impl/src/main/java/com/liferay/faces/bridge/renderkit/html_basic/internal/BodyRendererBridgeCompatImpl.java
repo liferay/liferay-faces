@@ -13,11 +13,14 @@
  */
 package com.liferay.faces.bridge.renderkit.html_basic.internal;
 
-import com.liferay.faces.bridge.renderkit.bridge.internal.BridgeRenderer;
 import java.io.IOException;
+
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
+
+import com.liferay.faces.bridge.renderkit.bridge.internal.BridgeRenderer;
+
 
 /**
  * @author  Kyle Stiemann
