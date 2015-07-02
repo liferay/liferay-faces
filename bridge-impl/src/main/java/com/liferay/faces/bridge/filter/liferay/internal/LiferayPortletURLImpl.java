@@ -13,13 +13,13 @@
  */
 package com.liferay.faces.bridge.filter.liferay.internal;
 
-import com.liferay.faces.bridge.filter.liferay.LiferayURLGenerator;
-import com.liferay.faces.bridge.filter.liferay.LiferayPortletURL;
-
 import javax.portlet.PortletMode;
 import javax.portlet.PortletModeException;
 import javax.portlet.WindowState;
 import javax.portlet.WindowStateException;
+
+import com.liferay.faces.bridge.filter.liferay.LiferayPortletURL;
+import com.liferay.faces.bridge.filter.liferay.LiferayURLGenerator;
 
 
 /**

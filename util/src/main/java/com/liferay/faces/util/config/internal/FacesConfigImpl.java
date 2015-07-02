@@ -13,13 +13,14 @@
  */
 package com.liferay.faces.util.config.internal;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.liferay.faces.util.config.ConfiguredElement;
 import com.liferay.faces.util.config.ConfiguredManagedBean;
 import com.liferay.faces.util.config.ConfiguredServletMapping;
 import com.liferay.faces.util.config.ConfiguredSystemEventListener;
 import com.liferay.faces.util.config.FacesConfig;
-import java.util.ArrayList;
-import java.util.List;
 
 
 /**
@@ -69,12 +70,12 @@ public class FacesConfigImpl implements FacesConfig {
 		return configuredApplicationExtensions;
 	}
 
-	public List<ConfiguredElement> getConfiguredFactoryExtensions() {
-		return configuredFactoryExtensions;
-	}
-
 	public List<ConfiguredServletMapping> getConfiguredFacesServletMappings() {
 		return configuredFacesServletMappings;
+	}
+
+	public List<ConfiguredElement> getConfiguredFactoryExtensions() {
+		return configuredFactoryExtensions;
 	}
 
 	public List<ConfiguredManagedBean> getConfiguredManagedBeans() {

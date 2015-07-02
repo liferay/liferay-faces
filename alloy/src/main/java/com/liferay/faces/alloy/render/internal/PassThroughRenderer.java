@@ -15,9 +15,11 @@ package com.liferay.faces.alloy.render.internal;
 
 import java.io.IOException;
 import java.util.Map;
+
 import javax.faces.component.UIComponent;
 import javax.faces.context.ResponseWriter;
 import javax.faces.render.Renderer;
+
 
 /**
  * @author  Kyle Stiemann

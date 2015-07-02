@@ -13,7 +13,6 @@
  */
 package com.liferay.faces.bridge.client.internal;
 
-import javax.faces.FacesException;
 import javax.faces.context.ExternalContext;
 import javax.portlet.PortletRequest;
 import javax.servlet.http.HttpServletRequest;

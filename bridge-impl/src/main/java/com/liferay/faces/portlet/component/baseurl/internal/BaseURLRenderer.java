@@ -13,12 +13,11 @@
  */
 package com.liferay.faces.portlet.component.baseurl.internal;
 
-import com.liferay.faces.portlet.component.param.Param;
-import com.liferay.faces.portlet.component.property.Property;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import javax.faces.component.UIComponent;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
@@ -28,15 +27,18 @@ import javax.portlet.PortletSecurityException;
 import javax.portlet.faces.Bridge;
 import javax.portlet.faces.BridgeUtil;
 
+import com.liferay.faces.portlet.component.param.Param;
+import com.liferay.faces.portlet.component.property.Property;
+
 
 /**
- * @author	Kyle Stiemann
+ * @author  Kyle Stiemann
  */
 public abstract class BaseURLRenderer extends BaseURLRendererBase {
 
 	@Override
-	public boolean getRendersChildren() {
-		return true;
+	public void encodeBegin(FacesContext context, UIComponent component) throws IOException {
+		// no-op
 	}
 
 	@Override
@@ -45,14 +47,10 @@ public abstract class BaseURLRenderer extends BaseURLRendererBase {
 	}
 
 	@Override
-	public void encodeBegin(FacesContext context, UIComponent component) throws IOException {
-		// no-op
-	}
-
-	@Override
 	public void encodeEnd(FacesContext facesContext, UIComponent uiComponent) throws IOException {
 
-		com.liferay.faces.portlet.component.baseurl.BaseURL baseURLComponent = (com.liferay.faces.portlet.component.baseurl.BaseURL) uiComponent;
+		com.liferay.faces.portlet.component.baseurl.BaseURL baseURLComponent =
+			(com.liferay.faces.portlet.component.baseurl.BaseURL) uiComponent;
 		BaseURL baseURL = getBaseURL(facesContext, uiComponent);
 		Boolean secure = baseURLComponent.getSecure();
 
@@ -81,9 +79,8 @@ public abstract class BaseURLRenderer extends BaseURLRendererBase {
 
 				if (parameterMap.containsKey(name)) {
 
-
-					// According to the Java Portlet Specification (version 2.0 (2008-01-11)), when rendering a resource URL,
-					// parameters set by the portlet container should not be removed.
+					// According to the Java Portlet Specification (version 2.0 (2008-01-11)), when rendering a resource
+					// URL, parameters set by the portlet container should not be removed.
 					final boolean PARAM_SET_BY_PORTLET_CONTAINER = initialParameterMap.containsKey(name);
 					final boolean REMOVE_EMPTY_PARAMETER = (!RESOURCE_PHASE || !PARAM_SET_BY_PORTLET_CONTAINER);
 
@@ -118,6 +115,7 @@ public abstract class BaseURLRenderer extends BaseURLRendererBase {
 		}
 
 		baseURL.setParameters(parameterMap);
+
 		String varName = baseURLComponent.getVar();
 		String url = baseURL.toString();
 
@@ -125,7 +123,7 @@ public abstract class BaseURLRenderer extends BaseURLRendererBase {
 			url = escapeXML(url);
 		}
 
-		// If the user didn't specify a value for the "var" attribute, then write the URL to the response.		
+		// If the user didn't specify a value for the "var" attribute, then write the URL to the response.
 		if (varName == null) {
 			ResponseWriter responseWriter = facesContext.getResponseWriter();
 			responseWriter.write(url);
@@ -141,16 +139,15 @@ public abstract class BaseURLRenderer extends BaseURLRendererBase {
 		}
 	}
 
-	protected abstract BaseURL getBaseURL(FacesContext facesContext, UIComponent uiComponent) throws IOException;
-
 	/**
 	 * Escapes the text so that it is safe to use in an HTML context.
 	 *
-	 * @param  text the text to escape
-	 * @return the escaped HTML text, or <code>null</code> if the text is
-	 *         <code>null</code>
+	 * @param   text  the text to escape
+	 *
+	 * @return  the escaped HTML text, or <code>null</code> if the text is <code>null</code>
 	 */
 	private String escapeXML(String text) {
+
 		if (text == null) {
 			return null;
 		}
@@ -173,48 +170,59 @@ public abstract class BaseURLRenderer extends BaseURLRendererBase {
 			String replacement = null;
 
 			switch (c) {
-				case '<':
-					replacement = "&lt;";
 
-					break;
+			case '<': {
+				replacement = "&lt;";
 
-				case '>':
-					replacement = "&gt;";
+				break;
+			}
 
-					break;
+			case '>': {
+				replacement = "&gt;";
 
-				case '&':
-					replacement = "&amp;";
+				break;
+			}
 
-					break;
+			case '&': {
+				replacement = "&amp;";
 
-				case '"':
-					replacement = "&#034;";
+				break;
+			}
 
-					break;
+			case '"': {
+				replacement = "&#034;";
 
-				case '\'':
-					replacement = "&#039;";
+				break;
+			}
 
-					break;
+			case '\'': {
+				replacement = "&#039;";
 
-				case '\u00bb': // '�'
-					replacement = "&#187;";
+				break;
+			}
 
-					break;
+			case '\u00bb': {
+				// '�'
+				replacement = "&#187;";
 
-				case '\u2013':
-					replacement = "&#x2013;";
+				break;
+			}
 
-					break;
+			case '\u2013': {
+				replacement = "&#x2013;";
 
-				case '\u2014':
-					replacement = "&#x2014;";
+				break;
+			}
 
-					break;
+			case '\u2014': {
+				replacement = "&#x2014;";
+
+				break;
+			}
 			}
 
 			if (replacement != null) {
+
 				if (sb == null) {
 					sb = new StringBuilder();
 				}
@@ -238,5 +246,12 @@ public abstract class BaseURLRenderer extends BaseURLRendererBase {
 		}
 
 		return sb.toString();
+	}
+
+	protected abstract BaseURL getBaseURL(FacesContext facesContext, UIComponent uiComponent) throws IOException;
+
+	@Override
+	public boolean getRendersChildren() {
+		return true;
 	}
 }

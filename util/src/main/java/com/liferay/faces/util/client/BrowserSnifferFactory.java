@@ -13,7 +13,6 @@
  */
 package com.liferay.faces.util.client;
 
-import javax.faces.FacesException;
 import javax.faces.FacesWrapper;
 import javax.faces.context.ExternalContext;
 

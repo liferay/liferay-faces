@@ -13,7 +13,6 @@
  */
 package com.liferay.faces.bridge.config.internal;
 
-import javax.faces.FacesException;
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletContext;
 

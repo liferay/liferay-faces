@@ -13,8 +13,9 @@
  */
 package com.liferay.faces.util.product.internal;
 
-import com.liferay.faces.util.product.ProductConstants;
 import java.lang.reflect.Method;
+
+import com.liferay.faces.util.product.ProductConstants;
 
 
 /**

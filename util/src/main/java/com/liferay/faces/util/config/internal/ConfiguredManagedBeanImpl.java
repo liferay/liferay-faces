@@ -15,6 +15,7 @@ package com.liferay.faces.util.config.internal;
 
 import com.liferay.faces.util.config.ConfiguredManagedBean;
 
+
 /**
  * @author  Neil Griffin
  */
