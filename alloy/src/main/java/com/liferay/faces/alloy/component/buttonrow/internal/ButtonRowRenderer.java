@@ -21,7 +21,7 @@ import com.liferay.faces.alloy.component.buttonrow.ButtonRow;
 
 
 /**
- * @author	Vernon Singleton
+ * @author  Vernon Singleton
  */
 //J-
 @FacesRenderer(componentFamily = ButtonRow.COMPONENT_FAMILY, rendererType = ButtonRow.RENDERER_TYPE)

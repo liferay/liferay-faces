@@ -17,27 +17,28 @@ import com.liferay.faces.util.config.ApplicationConfig;
 import com.liferay.faces.util.config.FacesConfig;
 import com.liferay.faces.util.config.WebConfig;
 
+
 /**
  * @author  Neil Griffin
  */
 public class ApplicationConfigImpl implements ApplicationConfig {
 
 	// Private Data Members
-    private String contextPath;
+	private String contextPath;
 	private FacesConfig facesConfig;
 	private WebConfig webConfig;
 
 	public ApplicationConfigImpl(String contextPath, FacesConfig facesConfig, WebConfig webConfig) {
-        this.contextPath = contextPath;
+		this.contextPath = contextPath;
 		this.facesConfig = facesConfig;
 		this.webConfig = webConfig;
 	}
 
-    public String getContextPath() {
-        return contextPath;
-    }
+	public String getContextPath() {
+		return contextPath;
+	}
 
-    public FacesConfig getFacesConfig() {
+	public FacesConfig getFacesConfig() {
 		return facesConfig;
 	}
 

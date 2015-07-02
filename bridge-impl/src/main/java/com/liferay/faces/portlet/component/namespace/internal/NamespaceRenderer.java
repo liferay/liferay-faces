@@ -13,18 +13,19 @@
  */
 package com.liferay.faces.portlet.component.namespace.internal;
 
-import javax.faces.render.FacesRenderer;
-
-import com.liferay.faces.portlet.component.namespace.Namespace;
 import java.io.IOException;
+
 import javax.faces.component.UIComponent;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
+import javax.faces.render.FacesRenderer;
+
+import com.liferay.faces.portlet.component.namespace.Namespace;
 
 
 /**
- * @author	Neil Griffin
+ * @author  Neil Griffin
  */
 //J-
 @FacesRenderer(componentFamily = Namespace.COMPONENT_FAMILY, rendererType = Namespace.RENDERER_TYPE)
@@ -32,8 +33,13 @@ import javax.faces.context.ResponseWriter;
 public class NamespaceRenderer extends NamespaceRendererBase {
 
 	@Override
-	public boolean getRendersChildren() {
-		return true;
+	public void encodeBegin(FacesContext facesContext, UIComponent uiComponent) throws IOException {
+		// no-op
+	}
+
+	@Override
+	public void encodeChildren(FacesContext facesContext, UIComponent uiComponent) throws IOException {
+		// no-op
 	}
 
 	@Override
@@ -56,12 +62,7 @@ public class NamespaceRenderer extends NamespaceRendererBase {
 	}
 
 	@Override
-	public void encodeChildren(FacesContext facesContext, UIComponent uiComponent) throws IOException {
-		// no-op
-	}
-
-	@Override
-	public void encodeBegin(FacesContext facesContext, UIComponent uiComponent) throws IOException {
-		// no-op
+	public boolean getRendersChildren() {
+		return true;
 	}
 }

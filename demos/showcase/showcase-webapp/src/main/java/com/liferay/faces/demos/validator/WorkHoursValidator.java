@@ -11,13 +11,8 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-
 package com.liferay.faces.demos.validator;
 
-import com.liferay.faces.alloy.component.inputtime.InputTime;
-import com.liferay.faces.util.context.MessageContext;
-import com.liferay.faces.util.context.MessageContextFactory;
-import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -25,6 +20,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 import java.util.TimeZone;
+
 import javax.faces.FacesException;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
@@ -32,6 +28,11 @@ import javax.faces.context.FacesContext;
 import javax.faces.validator.FacesValidator;
 import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
+
+import com.liferay.faces.alloy.component.inputtime.InputTime;
+import com.liferay.faces.util.context.MessageContext;
+import com.liferay.faces.util.context.MessageContextFactory;
+import com.liferay.faces.util.factory.FactoryExtensionFinder;
 
 
 /**
@@ -73,10 +74,11 @@ public class WorkHoursValidator implements Validator {
 
 			Calendar calendar = new GregorianCalendar(timeZone);
 			calendar.setTime(date);
+
 			final int hourOfDay = calendar.get(Calendar.HOUR_OF_DAY);
 			int minOfHour = calendar.get(Calendar.MINUTE);
-			
-			if (hourOfDay == 12 || (hourOfDay == 13 && minOfHour == 0)) {
+
+			if ((hourOfDay == 12) || ((hourOfDay == 13) && (minOfHour == 0))) {
 
 				String message = getMessage(facesContext, inputTime, "lunchtime-is-not-valid");
 				FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_WARN, message, message);
@@ -88,10 +90,11 @@ public class WorkHoursValidator implements Validator {
 	private String getMessage(FacesContext facesContext, InputTime inputTime, String messageId) {
 
 		MessageContextFactory messageContextFactory = (MessageContextFactory) FactoryExtensionFinder.getFactory(
-			MessageContextFactory.class);
+				MessageContextFactory.class);
 		final MessageContext messageContext = messageContextFactory.getMessageContext();
 		final Object localeObject = inputTime.getLocale(facesContext);
 		Locale locale = getObjectAsLocale(localeObject);
+
 		return messageContext.getMessage(locale, messageId);
 	}
 

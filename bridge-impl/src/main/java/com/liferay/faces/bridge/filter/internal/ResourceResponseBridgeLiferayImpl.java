@@ -19,9 +19,9 @@ import javax.portlet.ResourceResponse;
 import javax.portlet.ResourceURL;
 
 import com.liferay.faces.bridge.BridgeFactoryFinder;
-import com.liferay.faces.bridge.filter.liferay.internal.LiferayPortalUtil;
-import com.liferay.faces.bridge.filter.liferay.LiferayURLFactory;
 import com.liferay.faces.bridge.context.BridgeContext;
+import com.liferay.faces.bridge.filter.liferay.LiferayURLFactory;
+import com.liferay.faces.bridge.filter.liferay.internal.LiferayPortalUtil;
 
 
 /**

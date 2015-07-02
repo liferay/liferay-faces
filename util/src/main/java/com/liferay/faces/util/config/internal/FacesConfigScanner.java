@@ -13,8 +13,9 @@
  */
 package com.liferay.faces.util.config.internal;
 
-import com.liferay.faces.util.config.FacesConfig;
 import java.io.IOException;
+
+import com.liferay.faces.util.config.FacesConfig;
 
 
 /**

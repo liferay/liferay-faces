@@ -50,8 +50,7 @@ public class ConfiguredServletMappingImpl implements ConfiguredServletMapping {
 			// path (/views/foo/bar).
 			if (urlPattern.startsWith("/") && urlPattern.endsWith("*")) {
 				pathMapped = true;
-				path = urlPattern.substring(0,
-						urlPattern.length() - "/".length() - "*".length());
+				path = urlPattern.substring(0, urlPattern.length() - "/".length() - "*".length());
 			}
 
 			// Otherwise, if the specified urlPattern is extension-mapped (like *.faces), then set a flag and remember

@@ -22,7 +22,6 @@ import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
 import com.liferay.portal.kernel.util.LocalizationUtil;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.service.ServiceContext;
 
 import com.liferay.portlet.journal.NoSuchArticleException;
@@ -66,8 +65,8 @@ public class WebContentUtil {
 				serviceContext.setAddGuestPermissions(true);
 
 				String defaultLanguageId = "";
-				content = LocalizationUtil.updateLocalization("", "static-content", content,
-						defaultLanguageId, defaultLanguageId, true, false);
+				content = LocalizationUtil.updateLocalization("", "static-content", content, defaultLanguageId,
+						defaultLanguageId, true, false);
 
 				journalArticle = JournalArticleLocalServiceUtil.addArticle(userId, groupId, folderId, titleMap,
 						descriptionMap, content, ddmStructureKey, ddmTemplateKey, serviceContext);

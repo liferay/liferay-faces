@@ -13,8 +13,6 @@
  */
 package com.liferay.faces.bridge.renderkit.html_basic.internal;
 
-
-
 /**
  * This implementation is a special case that is meant to be used when JSF component renderers do not properly call
  * startElement() first. It represents a pseudo-element that has has a blank (empty string) node name.

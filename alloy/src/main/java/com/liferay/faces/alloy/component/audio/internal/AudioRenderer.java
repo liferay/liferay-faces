@@ -13,7 +13,6 @@
  */
 package com.liferay.faces.alloy.component.audio.internal;
 
-import com.liferay.faces.alloy.component.audio.Audio;
 import java.io.IOException;
 import java.net.URLEncoder;
 
@@ -24,6 +23,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 import javax.faces.render.FacesRenderer;
 
+import com.liferay.faces.alloy.component.audio.Audio;
 import com.liferay.faces.alloy.component.media.Media;
 
 

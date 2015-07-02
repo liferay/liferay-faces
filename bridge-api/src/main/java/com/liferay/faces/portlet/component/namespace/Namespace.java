@@ -15,8 +15,9 @@ package com.liferay.faces.portlet.component.namespace;
 
 import javax.faces.component.FacesComponent;
 
+
 /**
- * @author	Neil Griffin
+ * @author  Neil Griffin
  */
 @FacesComponent(value = Namespace.COMPONENT_TYPE)
 public class Namespace extends NamespaceBase {

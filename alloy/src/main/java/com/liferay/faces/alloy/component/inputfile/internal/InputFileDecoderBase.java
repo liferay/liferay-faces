@@ -64,8 +64,7 @@ public abstract class InputFileDecoderBase implements InputFileDecoder {
 			strippedFileName = fileName.replaceAll("[\\\\/\\[\\]:|<>+;=.?\"]", "-");
 
 			if (pos > 0) {
-				strippedFileName = strippedFileName.substring(0, pos) + "." +
-					strippedFileName.substring(pos + 1);
+				strippedFileName = strippedFileName.substring(0, pos) + "." + strippedFileName.substring(pos + 1);
 			}
 		}
 

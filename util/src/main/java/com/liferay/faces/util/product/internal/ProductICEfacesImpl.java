@@ -13,8 +13,6 @@
  */
 package com.liferay.faces.util.product.internal;
 
-
-
 /**
  * @author  Neil Griffin
  */

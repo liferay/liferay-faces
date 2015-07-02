@@ -122,7 +122,7 @@ java.lang.Object)</method-signature>
 			<method-signature>void valueChange(javax.faces.event.ValueChangeEvent)</method-signature>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>4.2.0</vdldoc:since>
+			<vdldoc:since>4.2.5-ga6</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -175,7 +175,7 @@ java.lang.Object)</method-signature>
 			<type>String</type>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>4.2.0</vdldoc:since>
+			<vdldoc:since>4.2.5-ga6</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -349,7 +349,7 @@ java.lang.Object)</method-signature>
 			<method-signature>void valueChange(javax.faces.event.ValueChangeEvent)</method-signature>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>4.2.0</vdldoc:since>
+			<vdldoc:since>4.2.5-ga6</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -433,7 +433,7 @@ java.lang.Object)</method-signature>
 			<type>java.lang.String</type>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>4.2.0</vdldoc:since>
+			<vdldoc:since>4.2.5-ga6</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -504,7 +504,7 @@ java.lang.Object)</method-signature>
 			<type>java.lang.String</type>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>4.2.0</vdldoc:since>
+			<vdldoc:since>4.2.5-ga6</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -545,7 +545,7 @@ java.lang.Object)</method-signature>
 			<type>java.lang.String</type>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>4.2.0</vdldoc:since>
+			<vdldoc:since>4.2.5-ga6</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -586,7 +586,7 @@ java.lang.Object)</method-signature>
 			<type>java.lang.String</type>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>4.2.0</vdldoc:since>
+			<vdldoc:since>4.2.5-ga6</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -699,7 +699,7 @@ java.lang.Object)</method-signature>
 			<type>boolean</type>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>4.2.0</vdldoc:since>
+			<vdldoc:since>4.2.5-ga6</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -758,7 +758,7 @@ java.lang.Object)</method-signature>
 			<type>String</type>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>4.2.0</vdldoc:since>
+			<vdldoc:since>4.2.5-ga6</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -817,7 +817,7 @@ java.lang.Object)</method-signature>
 			<type>java.lang.String</type>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>4.2.0</vdldoc:since>
+			<vdldoc:since>4.2.5-ga6</vdldoc:since>
 		</tag-extension>
 	</tag>
 </facelet-taglib>
