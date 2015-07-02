@@ -35,6 +35,7 @@ import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.util.product.ProductConstants;
 import com.liferay.faces.util.product.ProductMap;
+
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.Portlet;
@@ -166,7 +167,8 @@ public abstract class LiferayURLGeneratorBaseImpl implements LiferayURLGenerator
 		return generateURL(additionalParameterMap, null, portletMode, null, windowState);
 	}
 
-	public String generateURL(Map<String, String[]> additionalParameterMap, String cacheability, PortletMode portletMode, String resourceId, WindowState windowState) {
+	public String generateURL(Map<String, String[]> additionalParameterMap, String cacheability,
+		PortletMode portletMode, String resourceId, WindowState windowState) {
 
 		String toStringValue;
 
@@ -318,7 +320,7 @@ public abstract class LiferayURLGeneratorBaseImpl implements LiferayURLGenerator
 
 				if (urlCacheability == null) {
 					urlCacheability = StringHelper.toString(additionalParameterMap.get(P_P_CACHEABILITY),
-						parameterMap.get(P_P_CACHEABILITY));
+							parameterMap.get(P_P_CACHEABILITY));
 				}
 
 				if (urlCacheability != null) {

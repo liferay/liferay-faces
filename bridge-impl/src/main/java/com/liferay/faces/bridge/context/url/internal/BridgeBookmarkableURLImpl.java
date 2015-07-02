@@ -40,8 +40,8 @@ public class BridgeBookmarkableURLImpl extends BridgeURLBase {
 	private String uri;
 	private String viewIdRenderParameterName;
 
-	public BridgeBookmarkableURLImpl(BridgeContext bridgeContext, BridgeURI bridgeURI, Map<String, List<String>> parameters,
-		String viewId) {
+	public BridgeBookmarkableURLImpl(BridgeContext bridgeContext, BridgeURI bridgeURI,
+		Map<String, List<String>> parameters, String viewId) {
 
 		super(bridgeContext, bridgeURI, viewId);
 		this.uri = bridgeURI.toString();

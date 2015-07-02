@@ -13,8 +13,6 @@
  */
 package com.liferay.faces.util.context;
 
-import javax.faces.FacesException;
-
 import com.liferay.faces.util.helper.Wrapper;
 
 

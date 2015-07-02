@@ -30,7 +30,6 @@ import javax.annotation.PostConstruct;
 
 import com.liferay.faces.demos.dto.Country;
 import com.liferay.faces.demos.dto.Customer;
-import com.liferay.faces.util.model.SortCriterion;
 
 
 /**
@@ -94,7 +93,8 @@ public class CustomerServiceMockImpl implements CustomerService, Serializable {
 		allCustomers.add(new Customer(userId++, unitedKingdomCountryId, "Miles", "Hawkins", getDate(12, 12, 1608)));
 		allCustomers.add(new Customer(userId++, unitedKingdomCountryId, "Robert", "Coverdale", getDate(2, 3, 1603)));
 		allCustomers.add(new Customer(userId++, unitedKingdomCountryId, "Andrew", "Colman", getDate(3, 4, 1600)));
-		allCustomers.add(new Customer(userId++, unitedKingdomCountryId, "Christopher", "Kingsmill", getDate(3, 29, 1602)));
+		allCustomers.add(new Customer(userId++, unitedKingdomCountryId, "Christopher", "Kingsmill",
+				getDate(3, 29, 1602)));
 		allCustomers.add(new Customer(userId++, unitedKingdomCountryId, "William", "Becon", getDate(4, 4, 1600)));
 		allCustomers.add(new Customer(userId++, unitedKingdomCountryId, "Thomas", "Axton", getDate(5, 5, 1587)));
 		allCustomers.add(new Customer(userId++, unitedKingdomCountryId, "William", "Bonham", getDate(8, 8, 1612)));
@@ -160,7 +160,8 @@ public class CustomerServiceMockImpl implements CustomerService, Serializable {
 		allCustomers.add(new Customer(userId++, unitedKingdomCountryId, "William", "Proudlove", getDate(10, 12, 1600)));
 		allCustomers.add(new Customer(userId++, unitedKingdomCountryId, "John", "More", getDate(4, 12, 1600)));
 		allCustomers.add(new Customer(userId++, unitedKingdomCountryId, "John", "Lyford", getDate(2, 22, 1600)));
-		allCustomers.add(new Customer(userId++, unitedKingdomCountryId, "Obadiah", "de la Marche", getDate(11, 11, 1599)));
+		allCustomers.add(new Customer(userId++, unitedKingdomCountryId, "Obadiah", "de la Marche",
+				getDate(11, 11, 1599)));
 		allCustomers.add(new Customer(userId++, unitedKingdomCountryId, "William", "Maynard", getDate(2, 19, 1597)));
 		allCustomers.add(new Customer(userId++, unitedKingdomCountryId, "Jean", "Sedgwick", getDate(2, 20, 1585)));
 		allCustomers.add(new Customer(userId++, unitedKingdomCountryId, "Stephen", "Hickes", getDate(2, 21, 1594)));
@@ -178,15 +179,13 @@ public class CustomerServiceMockImpl implements CustomerService, Serializable {
 		allCustomers.add(new Customer(userId++, unitedKingdomCountryId, "John", "Pickering", getDate(9, 25, 1585)));
 		allCustomers.add(new Customer(userId++, unitedKingdomCountryId, "Benjamin", "de la Place",
 				getDate(10, 24, 1620)));
-		allCustomers.add(new Customer(userId++, unitedKingdomCountryId, "Samuel", "Price",
-				getDate(11, 23, 1576)));
+		allCustomers.add(new Customer(userId++, unitedKingdomCountryId, "Samuel", "Price", getDate(11, 23, 1576)));
 		allCustomers.add(new Customer(userId++, unitedKingdomCountryId, "William", "Philip", getDate(12, 22, 1600)));
 		allCustomers.add(new Customer(userId++, unitedKingdomCountryId, "Nicholas", "Delme", getDate(1, 21, 1599)));
 		allCustomers.add(new Customer(userId++, unitedKingdomCountryId, "Philippe", "Prophet", getDate(12, 9, 1653)));
 		allCustomers.add(new Customer(userId++, unitedKingdomCountryId, "Calybute", "Mew", getDate(11, 8, 1606)));
 		allCustomers.add(new Customer(userId++, unitedKingdomCountryId, "William", "Downing", getDate(2, 23, 1602)));
-		allCustomers.add(new Customer(userId++, unitedKingdomCountryId, "Thomas", "Moreton",
-				getDate(2, 24, 1600)));
+		allCustomers.add(new Customer(userId++, unitedKingdomCountryId, "Thomas", "Moreton", getDate(2, 24, 1600)));
 		allCustomers.add(new Customer(userId++, unitedKingdomCountryId, "William", "Macklet", getDate(2, 25, 1600)));
 		allCustomers.add(new Customer(userId++, unitedKingdomCountryId, "John", "Whiddon", getDate(6, 7, 1602)));
 		allCustomers.add(new Customer(userId++, unitedKingdomCountryId, "George", "Newcomen", getDate(2, 26, 1598)));
@@ -235,11 +234,6 @@ public class CustomerServiceMockImpl implements CustomerService, Serializable {
 	}
 
 	@Override
-	public int getCustomerCount() {
-		return allCustomers.size();
-	}
-
-	@Override
 	public List<Customer> getAllCustomers() {
 		return allCustomers;
 	}
@@ -249,8 +243,13 @@ public class CustomerServiceMockImpl implements CustomerService, Serializable {
 	}
 
 	@Override
+	public int getCustomerCount() {
+		return allCustomers.size();
+	}
+
+	@Override
 	public List<Customer> getCustomers(int start, int finish) {
-		return allCustomers.subList(start, finish+1);
+		return allCustomers.subList(start, finish + 1);
 	}
 
 	@Override
@@ -258,7 +257,8 @@ public class CustomerServiceMockImpl implements CustomerService, Serializable {
 
 		List<Customer> customerList = new ArrayList<Customer>(getAllCustomers());
 		Collections.sort(customerList, comparator);
-		return customerList.subList(start, finish+1);
+
+		return customerList.subList(start, finish + 1);
 	}
 
 	public Date getDate(int month, int day, int year) {

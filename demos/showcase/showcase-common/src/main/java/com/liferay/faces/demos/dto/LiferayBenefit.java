@@ -38,13 +38,13 @@ public class LiferayBenefit implements Serializable {
 		this.description = description;
 		this.imageName = imageName;
 	}
-	
-	public long getId() {
-		return id;
-	}
 
 	public String getDescription() {
 		return description;
+	}
+
+	public long getId() {
+		return id;
 	}
 
 	public String getImageName() {

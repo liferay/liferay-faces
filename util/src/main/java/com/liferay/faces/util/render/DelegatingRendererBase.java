@@ -13,7 +13,6 @@
  */
 package com.liferay.faces.util.render;
 
-import com.liferay.faces.util.render.internal.DelegationResponseWriter;
 import java.io.IOException;
 
 import javax.faces.component.UIComponent;
@@ -22,6 +21,8 @@ import javax.faces.context.ResponseWriter;
 import javax.faces.convert.ConverterException;
 import javax.faces.render.RenderKit;
 import javax.faces.render.Renderer;
+
+import com.liferay.faces.util.render.internal.DelegationResponseWriter;
 
 
 /**
@@ -62,6 +63,7 @@ public abstract class DelegatingRendererBase extends Renderer implements Delegat
 
 		ResponseWriter originalResponseWriter = facesContext.getResponseWriter();
 		facesContext.setResponseWriter(delegationResponseWriter);
+
 		Renderer delegateRenderer = getDelegateRenderer(facesContext);
 		delegateRenderer.encodeBegin(facesContext, uiComponent);
 		delegateRenderer.encodeChildren(facesContext, uiComponent);

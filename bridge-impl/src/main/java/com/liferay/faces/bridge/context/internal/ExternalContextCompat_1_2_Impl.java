@@ -13,8 +13,6 @@
  */
 package com.liferay.faces.bridge.context.internal;
 
-import java.util.Map;
-
 import javax.faces.context.ExternalContext;
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletContext;

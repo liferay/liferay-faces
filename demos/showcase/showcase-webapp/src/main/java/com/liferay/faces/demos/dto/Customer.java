@@ -40,10 +40,6 @@ public class Customer implements Serializable {
 		this.lastName = lastName;
 	}
 
-	public String getFullName() {
-		return firstName + " " + lastName;
-	}
-
 	public long getCountryId() {
 		return countryId;
 	}
@@ -74,6 +70,10 @@ public class Customer implements Serializable {
 
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
+	}
+
+	public String getFullName() {
+		return firstName + " " + lastName;
 	}
 
 	public String getLastName() {

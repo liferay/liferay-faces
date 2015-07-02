@@ -15,10 +15,10 @@ package com.liferay.faces.demos.bean;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
+
 // JSF 2: import javax.faces.bean.ManagedBean;
 // JSF 2: import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
-import javax.faces.event.PhaseId;
 import javax.faces.event.ValueChangeEvent;
 
 import com.liferay.faces.demos.dto.Applicant;

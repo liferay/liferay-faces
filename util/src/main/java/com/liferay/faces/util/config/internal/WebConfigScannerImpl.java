@@ -13,9 +13,6 @@
  */
 package com.liferay.faces.util.config.internal;
 
-import com.liferay.faces.util.config.WebConfig;
-import com.liferay.faces.util.config.internal.WebConfigImpl;
-import com.liferay.faces.util.config.internal.ResourceReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -23,6 +20,9 @@ import java.util.Enumeration;
 
 import javax.xml.parsers.SAXParser;
 
+import com.liferay.faces.util.config.WebConfig;
+import com.liferay.faces.util.config.internal.ResourceReader;
+import com.liferay.faces.util.config.internal.WebConfigImpl;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -52,10 +52,6 @@ public class WebConfigScannerImpl implements WebConfigScanner {
 		this.resourceReader = resourceReader;
 		this.saxParser = saxParser;
 		this.resolveEntities = resolveEntities;
-	}
-
-	protected WebConfigParser newWebConfigParser() {
-		return new WebConfigParserImpl(saxParser, resolveEntities);
 	}
 
 	public WebConfig scan() throws IOException {
@@ -120,6 +116,10 @@ public class WebConfigScannerImpl implements WebConfigScanner {
 		}
 
 		return webConfig;
+	}
+
+	protected WebConfigParser newWebConfigParser() {
+		return new WebConfigParserImpl(saxParser, resolveEntities);
 	}
 
 }

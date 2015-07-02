@@ -13,9 +13,10 @@
  */
 package com.liferay.faces.util.config.internal;
 
-import com.liferay.faces.util.config.WebConfig;
 import java.io.IOException;
 import java.io.InputStream;
+
+import com.liferay.faces.util.config.WebConfig;
 
 
 /**
@@ -25,7 +26,7 @@ public interface WebConfigParser {
 
 	/**
 	 * Parses the specified InputStream and returns a new WebConfig that contains parsed data that has been appended to
-	 * the specified WebConfig. Closing the specified InputStream is the responsibility of the caller. 
+	 * the specified WebConfig. Closing the specified InputStream is the responsibility of the caller.
 	 */
 	public WebConfig parse(InputStream inputStream, WebConfig webConfig) throws IOException;
 }

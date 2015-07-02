@@ -11,12 +11,11 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-
 package com.liferay.faces.portlet.component.renderurl.internal;
 
-import com.liferay.faces.portlet.component.renderurl.RenderURLBase;
 import java.io.IOException;
 import java.util.Map;
+
 import javax.faces.component.UIComponent;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
@@ -28,6 +27,8 @@ import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
 import javax.portlet.WindowState;
 import javax.portlet.WindowStateException;
+
+import com.liferay.faces.portlet.component.renderurl.RenderURLBase;
 
 
 /**
@@ -44,7 +45,7 @@ public class AbstractRenderURLRenderer extends RenderURLRendererBase {
 		RenderURLBase renderURLcomponent = (RenderURLBase) uiComponent;
 		PortletRequest portletRequest = (PortletRequest) externalContext.getRequest();
 
-		if(renderURLcomponent.isCopyCurrentRenderParameters()) {
+		if (renderURLcomponent.isCopyCurrentRenderParameters()) {
 
 			Map<String, String[]> currentRenderParameters = portletRequest.getParameterMap();
 			String namespace = facesContext.getExternalContext().encodeNamespace("");
