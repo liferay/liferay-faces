@@ -63,7 +63,7 @@ public class PageContextStringImpl extends PageContext {
 	private JspWriter stringJspWriter;
 
 	public PageContextStringImpl(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse,
-								 ELContext elContext, JspWriter stringJspWriter) {
+		ELContext elContext, JspWriter stringJspWriter) {
 
 		this.httpServletRequest = httpServletRequest;
 		this.httpServletResponse = httpServletResponse;

@@ -79,7 +79,7 @@ public class HeadResponseWriterLiferayImpl extends HeadResponseWriterBase {
 		String elementAsString = element.toString();
 		HtmlTopTag htmlTopTag = new HtmlTopTag();
 		PageContext stringPageContext = jspAdapterFactory.getStringPageContext(httpServletRequest, httpServletResponse,
-			elContext, stringJspWriter);
+				elContext, stringJspWriter);
 		htmlTopTag.setPageContext(stringPageContext);
 		htmlTopTag.doStartTag();
 		stringBodyContent.print(elementAsString);

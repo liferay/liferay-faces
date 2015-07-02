@@ -176,8 +176,7 @@ public class BridgeURIImpl implements BridgeURI {
 				}
 				else {
 
-					if (!stringValue.startsWith("/") &&
-							!stringValue.startsWith(RELATIVE_PATH_PREFIX)) {
+					if (!stringValue.startsWith("/") && !stringValue.startsWith(RELATIVE_PATH_PREFIX)) {
 						external = Boolean.TRUE;
 					}
 				}

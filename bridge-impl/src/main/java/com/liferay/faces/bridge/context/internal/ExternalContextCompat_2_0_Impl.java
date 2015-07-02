@@ -19,7 +19,6 @@ import java.io.Writer;
 import java.util.List;
 import java.util.Map;
 
-import javax.faces.context.ExternalContext;
 import javax.portlet.ClientDataRequest;
 import javax.portlet.MimeResponse;
 import javax.portlet.PortalContext;

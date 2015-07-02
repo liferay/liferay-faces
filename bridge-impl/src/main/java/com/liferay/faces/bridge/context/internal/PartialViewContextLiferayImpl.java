@@ -158,8 +158,8 @@ public class PartialViewContextLiferayImpl extends PartialViewContextWrapper {
 					JspAdapterFactory.class);
 			JspWriter stringJspWriter = jspAdapterFactory.getStringJspWriter();
 			ScriptDataWriter scriptDataWriter = new ScriptDataWriter(stringJspWriter);
-			PageContext stringPageContext = jspAdapterFactory.getStringPageContext(httpServletRequest, httpServletResponse,
-					elContext, scriptDataWriter);
+			PageContext stringPageContext = jspAdapterFactory.getStringPageContext(httpServletRequest,
+					httpServletResponse, elContext, scriptDataWriter);
 			ScriptTagUtil.flushScriptData(stringPageContext);
 			requestMap.put(WebKeys.AUI_SCRIPT_DATA, savedScriptData);
 			responseWriter.write(scriptDataWriter.toString());

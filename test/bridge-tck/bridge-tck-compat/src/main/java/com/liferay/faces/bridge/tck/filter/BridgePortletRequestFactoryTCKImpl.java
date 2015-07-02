@@ -68,6 +68,7 @@ public class BridgePortletRequestFactoryTCKImpl extends BridgePortletRequestFact
 
 		if (PortletContainerDetector.isPlutoPortletRequest(resourceRequest)) {
 			resourceRequest = getWrapped().getResourceRequest(resourceRequest);
+
 			return new ResourceRequestPlutoTCKImpl(resourceRequest);
 		}
 		else {

@@ -13,10 +13,10 @@
  */
 package com.liferay.faces.bridge.context.url.internal;
 
+import java.net.URISyntaxException;
+
 import com.liferay.faces.bridge.context.url.BridgeURI;
 import com.liferay.faces.bridge.context.url.BridgeURIFactory;
-
-import java.net.URISyntaxException;
 
 
 /**

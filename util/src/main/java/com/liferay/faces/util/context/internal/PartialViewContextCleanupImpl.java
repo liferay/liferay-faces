@@ -41,9 +41,8 @@ import com.liferay.faces.util.logging.LoggerFactory;
  * for components to handle the situation of moving from rendered="true" to rendered="false", since JSF does not provide
  * a way for components to handle this special "cleanup" case during the RENDER_RESPONSE phase.</p>
  *
- * @author  Neil Griffin
- *
- * @deprecated No replacement provided.
+ * @author      Neil Griffin
+ * @deprecated  No replacement provided.
  */
 @Deprecated
 public class PartialViewContextCleanupImpl extends PartialViewContextWrapper {

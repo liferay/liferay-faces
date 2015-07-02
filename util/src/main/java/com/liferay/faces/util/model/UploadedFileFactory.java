@@ -13,9 +13,10 @@
  */
 package com.liferay.faces.util.model;
 
-import javax.faces.FacesWrapper;
 import java.util.List;
 import java.util.Map;
+
+import javax.faces.FacesWrapper;
 
 
 /**
