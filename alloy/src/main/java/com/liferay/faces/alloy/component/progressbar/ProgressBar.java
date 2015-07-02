@@ -19,13 +19,10 @@ import java.util.Collections;
 
 import javax.faces.component.FacesComponent;
 import javax.faces.component.UIComponent;
-import javax.faces.component.behavior.AjaxBehavior;
 import javax.faces.component.behavior.Behavior;
-import javax.faces.component.behavior.ClientBehavior;
 import javax.faces.component.behavior.ClientBehaviorHolder;
 import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.event.FacesEvent;
-
 
 
 /**

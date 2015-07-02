@@ -15,11 +15,13 @@ package com.liferay.faces.test;
 
 import java.util.logging.Logger;
 
-// import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.WebElement;
 
+// import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.FindBy;
+
 import com.liferay.faces.test.util.TesterBase;
+
 
 /**
  * @author  Liferay Faces Team
@@ -33,9 +35,13 @@ public class Primefaces3 extends TesterBase {
 
 	// portlet topper and menu elements
 	private static final String portletDisplayNameXpath = "//header[@class='portlet-topper']/h1/span";
-	// <a class="dropdown-toggle direction-down max-display-items-15" href="javascript:;" id="_1_WAR_jsf2portlet_INSTANCE_ABCD_kldx_menu" title="Options">
+
+	// <a class="dropdown-toggle direction-down max-display-items-15" href="javascript:;"
+	// id="_1_WAR_jsf2portlet_INSTANCE_ABCD_kldx_menu" title="Options">
 	private static final String menuButtonXpath = "//a[contains(@id,'_menu') and @title='Options']";
-	// <a href=... class="taglib-icon focus" id="_1_WAR_jsf2portlet_INSTANCE_ABCD_kldx_menu_preferences" role="menuitem" tabindex="0">
+
+	// <a href=... class="taglib-icon focus" id="_1_WAR_jsf2portlet_INSTANCE_ABCD_kldx_menu_preferences"
+	// role="menuitem" tabindex="0">
 	private static final String menuPreferencesXpath = "//a[contains(@id,'menu_preferences')]";
 
 	// preferences elements
@@ -46,28 +52,34 @@ public class Primefaces3 extends TesterBase {
 	private static final String logoXpath = "//img[contains(@src,'liferay-logo.png')]";
 
 	private static final String firstNameFieldXpath = "//input[contains(@id,':firstName')]";
-	private static final String firstNameFieldErrorXpath = "//input[contains(@id,':firstName')]/following-sibling::*[1]";
+	private static final String firstNameFieldErrorXpath =
+		"//input[contains(@id,':firstName')]/following-sibling::*[1]";
 
 	private static final String lastNameFieldXpath = "//input[contains(@id,':lastName')]";
 	private static final String lastNameFieldErrorXpath = "//input[contains(@id,':lastName')]/following-sibling::*[1]";
 
 	private static final String emailAddressFieldXpath = "//input[contains(@id,':emailAddress')]";
-	private static final String emailAddressFieldErrorXpath = "//input[contains(@id,':emailAddress')]/following-sibling::*[1]";
+	private static final String emailAddressFieldErrorXpath =
+		"//input[contains(@id,':emailAddress')]/following-sibling::*[1]";
 
 	private static final String phoneNumberFieldXpath = "//input[contains(@id,':phoneNumber')]";
-	private static final String phoneNumberFieldErrorXpath = "//input[contains(@id,':phoneNumber')]/following-sibling::*[1]";
+	private static final String phoneNumberFieldErrorXpath =
+		"//input[contains(@id,':phoneNumber')]/following-sibling::*[1]";
 
 	private static final String dateOfBirthFieldXpath = "//input[contains(@id,':dateOfBirth')]";
-	private static final String dateOfBirthFieldErrorXpath = "//input[contains(@id,':dateOfBirth')]/../following-sibling::*[1]";
+	private static final String dateOfBirthFieldErrorXpath =
+		"//input[contains(@id,':dateOfBirth')]/../following-sibling::*[1]";
 
 	private static final String cityFieldXpath = "//input[contains(@id,':city')]";
 	private static final String cityFieldErrorXpath = "//input[contains(@id,':city')]/following-sibling::*[1]";
 
 	private static final String provinceIdFieldXpath = "//select[contains(@id,':provinceId')]";
-	private static final String provinceIdFieldErrorXpath = "//select[contains(@id,':provinceId')]/following-sibling::*[1]";
+	private static final String provinceIdFieldErrorXpath =
+		"//select[contains(@id,':provinceId')]/following-sibling::*[1]";
 
 	private static final String postalCodeFieldXpath = "//input[contains(@id,':postalCode')]";
-	private static final String postalCodeFieldErrorXpath = "//input[contains(@id,':postalCode')]/following-sibling::*[1]/following-sibling::*[1]";
+	private static final String postalCodeFieldErrorXpath =
+		"//input[contains(@id,':postalCode')]/following-sibling::*[1]/following-sibling::*[1]";
 
 	private static final String postalCodeToolTipXpath = "//img[contains(@title,'Type any of these ZIP codes')]";
 
@@ -90,7 +102,8 @@ public class Primefaces3 extends TesterBase {
 	private static final String bridgeVersionXpath = "//*[contains(text(),'Liferay Faces Bridge')]";
 
 	// xpath for specific tests
-	protected static final String dateValidationXpath = "//input[contains(@id,':dateOfBirth')]/../following-sibling::*[1]/child::node()";
+	protected static final String dateValidationXpath =
+		"//input[contains(@id,':dateOfBirth')]/../following-sibling::*[1]/child::node()";
 
 	static final String url = baseUrl + webContext + "/prime3";
 
@@ -170,7 +183,7 @@ public class Primefaces3 extends TesterBase {
 	private WebElement alloyVersion;
 	@FindBy(xpath = bridgeVersionXpath)
 	private WebElement bridgeVersion;
-	
+
 	protected int dateValidationXpathModifier = 0;
 
 }

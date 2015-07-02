@@ -141,8 +141,7 @@ public abstract class NodeMenuNavRendererBase extends DelegatingAlloyRendererBas
 		// start yui3-menu div
 		responseWriter.startElement("div", uiComponent);
 		responseWriter.writeAttribute("id", clientId, "id");
-		responseWriter.writeAttribute("class", "yui3-menu yui3-menu-horizontal yui3-splitbuttonnav",
-			"class");
+		responseWriter.writeAttribute("class", "yui3-menu yui3-menu-horizontal yui3-splitbuttonnav", "class");
 
 		// start yui3-menu-content div
 		responseWriter.startElement("div", uiComponent);
@@ -198,8 +197,7 @@ public abstract class NodeMenuNavRendererBase extends DelegatingAlloyRendererBas
 		int depth = 0;
 
 		if (!disabled) {
-			responseWriter.writeAttribute("href",
-				"#" + defaultOptionsDivId + ":" + depth, "href");
+			responseWriter.writeAttribute("href", "#" + defaultOptionsDivId + ":" + depth, "href");
 		}
 
 		List<UIComponent> children = uiComponent.getChildren();

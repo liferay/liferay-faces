@@ -13,12 +13,13 @@
  */
 package com.liferay.faces.util.product.internal;
 
-import com.liferay.faces.util.product.ProductConstants;
 import java.util.List;
 
 import javax.management.MBeanServer;
 import javax.management.MBeanServerFactory;
 import javax.management.ObjectName;
+
+import com.liferay.faces.util.product.ProductConstants;
 
 
 /**

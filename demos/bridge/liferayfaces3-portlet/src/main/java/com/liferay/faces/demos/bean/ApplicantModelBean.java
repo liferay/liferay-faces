@@ -13,16 +13,17 @@
  */
 package com.liferay.faces.demos.bean;
 
-import com.liferay.faces.util.model.UploadedFile;
-
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
+
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
+
+import com.liferay.faces.util.model.UploadedFile;
 
 
 /**

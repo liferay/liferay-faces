@@ -42,11 +42,13 @@ import com.liferay.faces.util.event.PreRenderComponentEventListener;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.util.render.RendererUtil;
+
 import com.liferay.portal.kernel.xml.Attribute;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.Node;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
+
 import com.liferay.taglib.ui.InputSearchTag;
 
 

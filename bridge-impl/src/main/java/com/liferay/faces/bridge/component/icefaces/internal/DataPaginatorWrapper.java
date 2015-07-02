@@ -46,8 +46,8 @@ import javax.faces.event.SystemEventListener;
 /**
  * This class is part of a workaround for <a href="http://jira.icesoft.org/browse/ICE-6398">ICE-6398</a>.
  *
- * @author  Neil Griffin
- * @deprecated No replacement available.
+ * @author      Neil Griffin
+ * @deprecated  No replacement available.
  */
 @Deprecated
 public abstract class DataPaginatorWrapper extends DataPaginator implements FacesWrapper<Object> {

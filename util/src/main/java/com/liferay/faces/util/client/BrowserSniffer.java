@@ -36,11 +36,11 @@ public interface BrowserSniffer {
 
 	public boolean isAndroid();
 
+	public boolean isIpad();
+
 	public boolean isChrome();
 
 	public boolean isIe();
-
-	public boolean isIpad();
 
 	public boolean isIphone();
 

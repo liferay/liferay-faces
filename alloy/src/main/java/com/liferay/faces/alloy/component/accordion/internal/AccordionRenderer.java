@@ -199,7 +199,7 @@ public class AccordionRenderer extends AccordionRendererBase {
 		responseWriter.write(".items;");
 
 		responseWriter.write("var totalTogglers=togglers.length;");
-		
+
 		responseWriter.write("for(var i=0;i<totalTogglers;i++){");
 
 		StringBuilder behaviorCallback = new StringBuilder();
@@ -215,7 +215,8 @@ public class AccordionRenderer extends AccordionRendererBase {
 
 		behaviorCallback.append("var eventTabIndex=0,togglers=");
 		behaviorCallback.append(clientVarName);
-		behaviorCallback.append(".items,total=togglers.length,i=0;for(i=0;i<total;i++){if(togglers[i]==event.target){eventTabIndex=i;}};");
+		behaviorCallback.append(
+			".items,total=togglers.length,i=0;for(i=0;i<total;i++){if(togglers[i]==event.target){eventTabIndex=i;}};");
 
 		// var hidden = document.getElementById('clientId:selectedIndex');
 		String hiddenFieldId = clientId + "selectedIndex";

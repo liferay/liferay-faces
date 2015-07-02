@@ -13,8 +13,6 @@
  */
 package com.liferay.faces.test;
 
-import static org.junit.Assert.assertTrue;
-
 import java.util.HashMap;
 import java.util.logging.Level;
 
@@ -22,8 +20,13 @@ import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.drone.api.annotation.Drone;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.junit.InSequence;
+
+import static org.junit.Assert.assertTrue;
+
 import org.junit.Test;
+
 import org.junit.runner.RunWith;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -41,14 +44,15 @@ public class FACES1618PortletTest extends TesterBase {
 	private static final String portletDisplayNameXpath = "//header[@class='portlet-topper']/h1/span";
 
 	private static final String formTagXpath = "//form[@method='post']";
-	
+
 	// <span id="A3981:j_idt3:headResourceIds">
 	private static final String headResourceIdsSpanXpath = "//span[contains(@id,':headResourceIds')]";
-	
-	// <input id="A3981:j_idt3:_t11" name="A3981:j_idt3:_t11" type="submit" value="go to next view">
-	private static final String submitButtonXpath =	"//input[contains(@value,'go to ')]";
 
-	static final String url =  baseUrl + "/web/bridge-issues/faces-1618";
+	// <input id="A3981:j_idt3:_t11" name="A3981:j_idt3:_t11" type="submit" value="go to next view">
+	private static final String submitButtonXpath = "//input[contains(@value,'go to ')]";
+
+	static final String url = baseUrl + "/web/bridge-issues/faces-1618";
+	protected static HashMap<String, String> headResourceIdsMap = new HashMap<String, String>();
 
 	@FindBy(xpath = portletDisplayNameXpath)
 	private WebElement portletDisplayName;
@@ -58,11 +62,10 @@ public class FACES1618PortletTest extends TesterBase {
 	private WebElement headResourceIdsSpan;
 	@FindBy(xpath = submitButtonXpath)
 	private WebElement submitButton;
-	
+
 	protected StringBuilder headResourceIds;
 	protected String headResourceIdsString;
-	protected static HashMap<String, String> headResourceIdsMap = new HashMap<String, String>();
-	
+
 	@Drone
 	WebDriver browser;
 
@@ -76,27 +79,26 @@ public class FACES1618PortletTest extends TesterBase {
 		logger.log(Level.INFO, "browser.getTitle() = " + browser.getTitle());
 		logger.log(Level.INFO, "browser.getCurrentUrl() = " + browser.getCurrentUrl());
 		logger.log(Level.INFO, "portletDisplayName.getText() = " + portletDisplayName.getText());
-		
+
 		logger.log(Level.INFO, "headResourceIdsSpan.getText() = " + headResourceIdsSpan.getText());
 		headResourceIds = new StringBuilder();
 		headResourceIds.append(headResourceIdsSpan.getText());
-		headResourceIdsString = headResourceIds.toString().replaceAll("\\[", "").replaceAll("\\]", "").replaceAll(" ","");
+		headResourceIdsString = headResourceIds.toString().replaceAll("\\[", "").replaceAll("\\]", "").replaceAll(" ",
+				"");
 		logger.log(Level.INFO, "headResourceIdsString = " + headResourceIdsString);
-		
+
 		String[] resourceIds = headResourceIdsString.split(",");
 		logger.log(Level.INFO, "resourceIds.length = " + resourceIds.length);
-		
-		for (int i=0; i < resourceIds.length; i++) {
+
+		for (int i = 0; i < resourceIds.length; i++) {
 			headResourceIdsMap.put(resourceIds[i], "1");
 		}
 
 		logger.log(Level.INFO, "submitButton.isDisplayed() = " + submitButton.isDisplayed());
 
 		assertTrue("portletDisplayName.isDisplayed()", portletDisplayName.isDisplayed());
-		assertTrue(
-			"There should be more than 1 headResourceIds, but resourceIds.length == " + resourceIds.length, 
-			(resourceIds.length > 1)
-		);
+		assertTrue("There should be more than 1 headResourceIds, but resourceIds.length == " + resourceIds.length,
+			(resourceIds.length > 1));
 		assertTrue("submitButton should be displayed, but it is not", submitButton.isDisplayed());
 
 	}
@@ -105,46 +107,49 @@ public class FACES1618PortletTest extends TesterBase {
 	@RunAsClient
 	@InSequence(2000)
 	public void View2ViaAjax() throws Exception {
-		
+
 		boolean resourceIdsAreTheSame = false;
 
 		submitButton.click();
 		Thread.sleep(250);
 
 		logger.log(Level.INFO, "browser.getCurrentUrl() = " + browser.getCurrentUrl());
-		
+
 		logger.log(Level.INFO, "headResourceIdsSpan.getText() = " + headResourceIdsSpan.getText());
 		headResourceIds = new StringBuilder();
 		headResourceIds.append(headResourceIdsSpan.getText());
-		headResourceIdsString = headResourceIds.toString().replaceAll("\\[", "").replaceAll("\\]", "").replaceAll(" ","");
+		headResourceIdsString = headResourceIds.toString().replaceAll("\\[", "").replaceAll("\\]", "").replaceAll(" ",
+				"");
 		logger.log(Level.INFO, "headResourceIdsString = " + headResourceIdsString);
-		
+
 		String[] resourceIds = headResourceIdsString.split(",");
 		logger.log(Level.INFO, "resourceIds.length = " + resourceIds.length);
-		
+
 		// first check that the lengths are the same
-		assertTrue(
-			"previous number of resources ids and currnet number of resource ids should match, " +
-				"but the current headResourceIdsMap.size() = " + headResourceIdsMap.size() +
-				", while the previous resourceIds.length = " + resourceIds.length,
-			(headResourceIdsMap.size() == resourceIds.length)
-		);
-		
+		assertTrue("previous number of resources ids and currnet number of resource ids should match, " +
+			"but the current headResourceIdsMap.size() = " + headResourceIdsMap.size() +
+			", while the previous resourceIds.length = " + resourceIds.length,
+			(headResourceIdsMap.size() == resourceIds.length));
+
 		// check that none have changed
-		for (int i=0; i < resourceIds.length; i++) {
+		for (int i = 0; i < resourceIds.length; i++) {
+
 			// TODO check them
 			if (headResourceIdsMap.get(resourceIds[i]) == null) {
 				logger.log(Level.INFO, "never seen this resourceId before resourceIds[i] = " + resourceIds[i]);
 				resourceIdsAreTheSame = false;
+
 				break;
-			} else {
-				logger.log(Level.INFO, "headResourceIdsMap.get("+resourceIds[i]+") == " + headResourceIdsMap.get(resourceIds[i]));
+			}
+			else {
+				logger.log(Level.INFO,
+					"headResourceIdsMap.get(" + resourceIds[i] + ") == " + headResourceIdsMap.get(resourceIds[i]));
 				resourceIdsAreTheSame = true;
 			}
 		}
-		
+
 		logger.log(Level.INFO, "resourceIdsAreTheSame = " + resourceIdsAreTheSame);
-		
+
 		assertTrue("submitButton should be displayed, but it is not", submitButton.isDisplayed());
 
 	}

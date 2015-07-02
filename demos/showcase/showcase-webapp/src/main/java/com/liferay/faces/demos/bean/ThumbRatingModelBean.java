@@ -16,8 +16,9 @@ package com.liferay.faces.demos.bean;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
+
 /**
- * @author Vernon Singleton
+ * @author  Vernon Singleton
  */
 @ManagedBean
 @RequestScoped

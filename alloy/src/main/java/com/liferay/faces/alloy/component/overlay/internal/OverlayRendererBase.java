@@ -45,8 +45,8 @@ public abstract class OverlayRendererBase extends DelegatingAlloyRendererBase im
 		// that Alloy's JavaScript will be able to locate the boundingBox in the DOM.
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
 		String clientId = uiComponent.getClientId(facesContext);
-		DelegationResponseWriter idDelegationResponseWriter = new IdDelegationResponseWriter(responseWriter,
-				"div", clientId);
+		DelegationResponseWriter idDelegationResponseWriter = new IdDelegationResponseWriter(responseWriter, "div",
+				clientId);
 		super.encodeMarkupBegin(facesContext, uiComponent, idDelegationResponseWriter);
 
 		// Encode the opening contentBox <div> tag with a unique id.

@@ -21,5 +21,5 @@ import javax.faces.component.FacesComponent;
  */
 @FacesComponent(value = PanelGroup.COMPONENT_TYPE)
 public class PanelGroup extends PanelGroupBase {
-	// Initial Generation 
+	// Initial Generation
 }

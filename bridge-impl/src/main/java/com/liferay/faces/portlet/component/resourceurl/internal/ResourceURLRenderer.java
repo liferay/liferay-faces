@@ -13,19 +13,20 @@
  */
 package com.liferay.faces.portlet.component.resourceurl.internal;
 
-import javax.faces.render.FacesRenderer;
-
-import com.liferay.faces.portlet.component.resourceurl.ResourceURL;
 import java.io.IOException;
+
 import javax.faces.component.UIComponent;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.faces.render.FacesRenderer;
 import javax.portlet.BaseURL;
 import javax.portlet.MimeResponse;
 
+import com.liferay.faces.portlet.component.resourceurl.ResourceURL;
+
 
 /**
- * @author	Kyle Stiemann
+ * @author  Kyle Stiemann
  */
 //J-
 @FacesRenderer(componentFamily = ResourceURL.COMPONENT_FAMILY, rendererType = ResourceURL.RENDERER_TYPE)
@@ -41,6 +42,7 @@ public class ResourceURLRenderer extends ResourceURLRendererBase {
 		ResourceURL resourceURLComponent = (ResourceURL) uiComponent;
 		String cacheability = resourceURLComponent.getCacheability();
 		resourceURL.setCacheability(cacheability);
+
 		String id = resourceURLComponent.getId();
 
 		if (id != null) {
