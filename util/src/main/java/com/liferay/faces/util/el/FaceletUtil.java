@@ -27,8 +27,8 @@ import com.liferay.faces.util.logging.LoggerFactory;
  * Faces Portal project has a Facelet Composite Component named liferay-ui:ice-page-iterator that calls #{liferay-util:findDataModel(...)}
  * via EL.
  *
- * @author  Neil Griffin
- * @deprecated No replacement available.
+ * @author      Neil Griffin
+ * @deprecated  No replacement available.
  */
 @Deprecated
 public class FaceletUtil {

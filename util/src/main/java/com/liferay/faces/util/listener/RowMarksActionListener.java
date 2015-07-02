@@ -38,8 +38,8 @@ import com.liferay.faces.util.model.RowMarks;
  * This class serves as an ActionListener that is designed to listen for user clicks on dataTable tool bar buttons like
  * check-all, uncheck-all, and delete-checked.
  *
- * @author  Neil Griffin
- * @deprecated No replacement available.
+ * @author      Neil Griffin
+ * @deprecated  No replacement available.
  */
 @Deprecated
 public class RowMarksActionListener implements ActionListener {

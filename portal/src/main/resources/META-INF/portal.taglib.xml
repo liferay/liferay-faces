@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <facelet-taglib xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:vdldoc="http://vdldoc.omnifaces.org"
-	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facelettaglibrary_2_0.xsd http://vdldoc.omnifaces.org https://raw.githubusercontent.com/omnifaces/vdldoc/master/src/main/resources/org/omnifaces/vdldoc/resources/vdldoc.taglib.xml.xsd"
+	xmlns:vdldoc="http://vdldoc.org/vdldoc"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facelettaglibrary_2_0.xsd http://vdldoc.org/vdldoc https://raw.githubusercontent.com/omnifaces/vdldoc/master/src/main/resources/org/omnifaces/vdldoc/resources/vdldoc.taglib.xml.xsd"
 	version="2.0">
 	<description><![CDATA[The Liferay Faces Portal facelet component tags with the <code>portal:</code> tag name prefix.]]></description>
 	<namespace>http://liferay.com/faces/portal</namespace>
@@ -122,7 +122,7 @@ java.lang.Object)</method-signature>
 			<method-signature>void valueChange(javax.faces.event.ValueChangeEvent)</method-signature>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>3.2.0</vdldoc:since>
+			<vdldoc:since>3.2.5-ga6</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -175,7 +175,7 @@ java.lang.Object)</method-signature>
 			<type>String</type>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>3.2.0</vdldoc:since>
+			<vdldoc:since>3.2.5-ga6</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -349,7 +349,7 @@ java.lang.Object)</method-signature>
 			<method-signature>void valueChange(javax.faces.event.ValueChangeEvent)</method-signature>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>3.2.0</vdldoc:since>
+			<vdldoc:since>3.2.5-ga6</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -433,7 +433,7 @@ java.lang.Object)</method-signature>
 			<type>java.lang.String</type>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>3.2.0</vdldoc:since>
+			<vdldoc:since>3.2.5-ga6</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -504,7 +504,7 @@ java.lang.Object)</method-signature>
 			<type>java.lang.String</type>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>3.2.0</vdldoc:since>
+			<vdldoc:since>3.2.5-ga6</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -545,7 +545,7 @@ java.lang.Object)</method-signature>
 			<type>java.lang.String</type>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>3.2.0</vdldoc:since>
+			<vdldoc:since>3.2.5-ga6</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -586,7 +586,7 @@ java.lang.Object)</method-signature>
 			<type>java.lang.String</type>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>3.2.0</vdldoc:since>
+			<vdldoc:since>3.2.5-ga6</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -699,7 +699,7 @@ java.lang.Object)</method-signature>
 			<type>boolean</type>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>3.2.0</vdldoc:since>
+			<vdldoc:since>3.2.5-ga6</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -758,7 +758,7 @@ java.lang.Object)</method-signature>
 			<type>String</type>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>3.2.0</vdldoc:since>
+			<vdldoc:since>3.2.5-ga6</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -817,7 +817,7 @@ java.lang.Object)</method-signature>
 			<type>java.lang.String</type>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>3.2.0</vdldoc:since>
+			<vdldoc:since>3.2.5-ga6</vdldoc:since>
 		</tag-extension>
 	</tag>
 </facelet-taglib>

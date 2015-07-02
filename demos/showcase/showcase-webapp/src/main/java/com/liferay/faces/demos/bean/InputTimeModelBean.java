@@ -30,7 +30,7 @@ public class InputTimeModelBean {
 	private String highlighterType = "charMatch";
 	private Date time;
 	private Locale locale;
-	
+
 	public String getHighlighterType() {
 		return highlighterType;
 	}

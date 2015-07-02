@@ -13,12 +13,13 @@
  */
 package com.liferay.faces.alloy.render.internal;
 
-import com.liferay.faces.util.render.DelegatingRenderer;
-import com.liferay.faces.util.render.internal.DelegationResponseWriter;
 import java.io.IOException;
 
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
+
+import com.liferay.faces.util.render.DelegatingRenderer;
+import com.liferay.faces.util.render.internal.DelegationResponseWriter;
 
 
 /**

@@ -15,8 +15,9 @@ package com.liferay.faces.portlet.component.param;
 
 import javax.faces.component.FacesComponent;
 
+
 /**
- * @author	Neil Griffin
+ * @author  Neil Griffin
  */
 @FacesComponent(value = Param.COMPONENT_TYPE)
 public class Param extends ParamBase {

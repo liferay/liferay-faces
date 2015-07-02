@@ -59,22 +59,25 @@ public class CommandBackingBean {
 				" phase of the JSF lifecycle.");
 		facesContext.addMessage(null, facesMessage);
 	}
-	
+
 	public void feedbackListener(ActionEvent actionEvent) {
-			
-			String value = "";
-			
-			List<UIComponent> children = actionEvent.getComponent().getChildren();
-			for (UIComponent uiComponent : children) {
-				if (uiComponent instanceof UIOutput) {
-					value = (String) ((UIOutput) uiComponent).getValue();
-				}
+
+		String value = "";
+
+		List<UIComponent> children = actionEvent.getComponent().getChildren();
+
+		for (UIComponent uiComponent : children) {
+
+			if (uiComponent instanceof UIOutput) {
+				value = (String) ((UIOutput) uiComponent).getValue();
 			}
-			
-			FacesContext facesContext = FacesContext.getCurrentInstance();
-			logger.debug("feedbackListener: You selected the '" + value + "' menu item.");
-			FacesMessage facesMessage = new FacesMessage("You selected the '" + value + "' menu item.");
-			facesContext.addMessage(null, facesMessage);
+		}
+
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		logger.debug("feedbackListener: You selected the '" + value + "' menu item.");
+
+		FacesMessage facesMessage = new FacesMessage("You selected the '" + value + "' menu item.");
+		facesContext.addMessage(null, facesMessage);
 	}
 
 	public void selectionListener(ActionEvent actionEvent) {

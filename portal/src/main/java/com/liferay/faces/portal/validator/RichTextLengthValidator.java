@@ -37,9 +37,9 @@ import com.liferay.portal.kernel.util.StringPool;
  * Validator that is meant to be used in conjunction with the liferay-ui:input-editor component in order to validate
  * length on the server-side.
  *
- * @author  Neil Griffin
- * @author  Joe Ssemwogerere
- * @deprecated No replacement available.
+ * @author      Neil Griffin
+ * @author      Joe Ssemwogerere
+ * @deprecated  No replacement available.
  */
 @Deprecated
 public class RichTextLengthValidator extends LengthValidator {

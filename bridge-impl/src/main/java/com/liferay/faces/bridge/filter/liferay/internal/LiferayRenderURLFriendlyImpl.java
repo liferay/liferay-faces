@@ -13,11 +13,11 @@
  */
 package com.liferay.faces.bridge.filter.liferay.internal;
 
-import com.liferay.faces.bridge.filter.liferay.LiferayURLGenerator;
-import com.liferay.faces.bridge.filter.liferay.LiferayRenderURL;
-
 import javax.faces.FacesWrapper;
 import javax.portlet.PortletURL;
+
+import com.liferay.faces.bridge.filter.liferay.LiferayRenderURL;
+import com.liferay.faces.bridge.filter.liferay.LiferayURLGenerator;
 
 
 /**

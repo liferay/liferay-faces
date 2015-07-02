@@ -13,7 +13,6 @@
  */
 package com.liferay.faces.bridge.context;
 
-import javax.faces.FacesException;
 import javax.faces.FacesWrapper;
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletContext;

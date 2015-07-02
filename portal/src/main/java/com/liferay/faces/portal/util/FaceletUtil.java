@@ -22,8 +22,8 @@ import com.liferay.portal.util.PortalUtil;
 
 
 /**
- * @author  Neil Griffin
- * @deprecated No replacement available.
+ * @author      Neil Griffin
+ * @deprecated  No replacement available.
  */
 @Deprecated
 public class FaceletUtil {

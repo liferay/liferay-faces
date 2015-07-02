@@ -15,7 +15,6 @@ package com.liferay.faces.bridge.context.internal;
 
 import java.util.Iterator;
 
-import javax.faces.FacesException;
 import javax.faces.application.ProjectStage;
 import javax.faces.context.ExceptionHandler;
 import javax.faces.context.ExceptionHandlerWrapper;

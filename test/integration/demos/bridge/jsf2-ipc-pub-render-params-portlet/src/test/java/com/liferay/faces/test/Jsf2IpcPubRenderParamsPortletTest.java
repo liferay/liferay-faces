@@ -13,22 +13,26 @@
  */
 package com.liferay.faces.test;
 
-import static org.junit.Assert.assertTrue;
-
 import java.util.logging.Level;
 
 import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.drone.api.annotation.Drone;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.junit.InSequence;
+
+import static org.junit.Assert.assertTrue;
+
 import org.junit.Test;
+
 import org.junit.runner.RunWith;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import com.liferay.faces.test.util.TesterBase;
+
 
 /**
  * @author  Liferay Faces Team
@@ -38,7 +42,7 @@ public class Jsf2IpcPubRenderParamsPortletTest extends TesterBase {
 
 	// portlet topper for customer
 	// TODO clean up ...
-//	private static final String customerPortletDisplayNameXpath = "(//header[@class='portlet-topper']/h1/span)[1]";
+// private static final String customerPortletDisplayNameXpath = "(//header[@class='portlet-topper']/h1/span)[1]";
 	private static final String briansInputXpath =
 		"//input[@type='image']/../following-sibling::td[1][contains(text(),'1')]/../td[1]/input";
 	private static final String briansFirstNameXpath =
@@ -51,23 +55,25 @@ public class Jsf2IpcPubRenderParamsPortletTest extends TesterBase {
 		"//input[@type='image']/../following-sibling::td[1][contains(text(),'2')]/following-sibling::*[1]";
 	private static final String lizsLastNameXpath =
 		"//input[@type='image']/../following-sibling::td[1][contains(text(),'2')]/following-sibling::*[1]/following-sibling::*[1]";
-	
+
 	// portlet topper for bookings
-//	private static final String bookingsPortletDisplayNameXpath = "(//header[@class='portlet-topper']/h1/span)[2]";
+// private static final String bookingsPortletDisplayNameXpath = "(//header[@class='portlet-topper']/h1/span)[2]";
 	// <input id="A8622:f1:firstName" type="text" name="A8622:f1:firstName" value="Brian" class="focus">
 	private static final String firstNameXpath = "//input[contains(@id,':firstName')]";
+
 	// <input id="A8622:f1:firstName" type="text" name="A8622:f1:firstName" value="Brian" class="focus">
 	private static final String lastNameXpath = "//input[contains(@id,':lastName')]";
 	private static final String bookingTypeIdXpath = "(//select[contains(@id,':bookingTypeId')])[1]";
 	private static final String startDateXpath = "(//input[contains(@id,':startDate')])[1]";
 	private static final String finishDateXpath = "(//input[contains(@id,':finishDate')])[1]";
+
 	// <input type="submit" name="A8622:f1:j_idt28" value="Submit" id="aui_3_4_0_1_2331">
 	private static final String submitXpath = "//input[@type='submit' and @value='Submit']";
 
 	private static final String url = baseUrl + webContext + "/jsf2-prp?p_p_parallel=0";
 
-//	@FindBy(xpath = customerPortletDisplayNameXpath)
-//	private WebElement customerPortletDisplayName;
+//  @FindBy(xpath = customerPortletDisplayNameXpath)
+//  private WebElement customerPortletDisplayName;
 	@FindBy(xpath = briansInputXpath)
 	private WebElement briansInput;
 	@FindBy(xpath = briansFirstNameXpath)
@@ -80,8 +86,9 @@ public class Jsf2IpcPubRenderParamsPortletTest extends TesterBase {
 	private WebElement lizsFirstName;
 	@FindBy(xpath = lizsLastNameXpath)
 	private WebElement lizsLastName;
-//	@FindBy(xpath = bookingsPortletDisplayNameXpath)
-//	private WebElement bookingsPortletDisplayName;
+
+//  @FindBy(xpath = bookingsPortletDisplayNameXpath)
+//  private WebElement bookingsPortletDisplayName;
 	@FindBy(xpath = firstNameXpath)
 	private WebElement firstName;
 	@FindBy(xpath = lastNameXpath)
@@ -94,43 +101,69 @@ public class Jsf2IpcPubRenderParamsPortletTest extends TesterBase {
 	private WebElement finishDate;
 	@FindBy(xpath = submitXpath)
 	private WebElement submit;
-	
+
 	@Drone
 	WebDriver browser;
 
 	@Test
 	@RunAsClient
-	@InSequence(1000)
-	public void renderViewMode() throws Exception {
+	@InSequence(3000)
+	public void changeBriansBookings() throws Exception {
 
-		signIn(browser);
-		logger.log(Level.INFO, "browser.navigate().to(" + url + ")");
-		browser.navigate().to(url);
-		logger.log(Level.INFO, "browser.getTitle() = " + browser.getTitle());
-		logger.log(Level.INFO, "browser.getCurrentUrl() = " + browser.getCurrentUrl());
-		getPortletDisplayName();
-		logger.log(Level.INFO, "displayName.getText() = " + displayName.getText());
-//		logger.log(Level.INFO, "bookingsPortletDisplayName.getText() = " + bookingsPortletDisplayName.getText());
+		logger.log(Level.INFO, "lastName.clear() ...");
+		lastName.clear();
+		logger.log(Level.INFO, "lastName.sendKeys('Greeny') ...");
+		lastName.sendKeys("Greeny");
+		logger.log(Level.INFO, "finishDate.clear() ...");
+		finishDate.clear();
+		logger.log(Level.INFO, "finishDate.sendKeys('04/20/2099') ...");
+		finishDate.sendKeys("04/20/2099");
+		logger.log(Level.INFO, "submit.click() ...");
+		submit.click();
 
-		assertTrue("displayName.isDisplayed()", displayName.isDisplayed());
-//		assertTrue("bookingsPortletDisplayName.isDisplayed()", bookingsPortletDisplayName.isDisplayed());
+		waitForElement(browser, briansLastNameXpath);
 
-		logger.log(Level.INFO,
-			"browser.findElements(By.xpath(displayNameXpath)).size() = " +
-			browser.findElements(By.xpath(displayNameXpath)).size());
-		logger.log(Level.INFO,
-			"browser.findElements(By.xpath(briansInputXpath)).size() = " +
-			browser.findElements(By.xpath(briansInputXpath)).size());
-		logger.log(Level.INFO,
-			"browser.findElements(By.xpath(lizsInputXpath)).size() = " +
-			browser.findElements(By.xpath(lizsInputXpath)).size());
-
-		logger.log(Level.INFO, "briansFirstName.getText() = " + briansFirstName.getText());
 		logger.log(Level.INFO, "briansLastName.getText() = " + briansLastName.getText());
+		logger.log(Level.INFO, "lastName.getAttribute(value) = " + lastName.getAttribute("value"));
+		logger.log(Level.INFO, "finishDate.getAttribute(value) = " + finishDate.getAttribute("value"));
+
+		assertTrue("customer first name should be the same in the bookings but it is '" + briansLastName.getText() +
+			"' in the customer module," + " and '" + lastName.getAttribute("value") + "' in bookings",
+			lastName.getAttribute("value").contains(briansLastName.getText()));
+
+		assertTrue("Customer last name should contain 'Greeny', but it contains '" + briansLastName.getText() + "'",
+			briansLastName.getText().contains("Greeny"));
+		assertTrue("Bookings last name should contain 'Greeny', but it contains '" + lastName.getAttribute("value") +
+			"'", lastName.getAttribute("value").contains("Greeny"));
+	}
+
+	@Test
+	@RunAsClient
+	@InSequence(5000)
+	public void changeLizsBookings() throws Exception {
+
+		logger.log(Level.INFO, "firstName.clear() ...");
+		firstName.clear();
+		logger.log(Level.INFO, "firstName.sendKeys('Lizzy') ...");
+		firstName.sendKeys("Lizzy");
+		finishDate.clear();
+		finishDate.sendKeys("12/25/2999");
+		submit.click();
+
+		waitForElement(browser, lizsFirstNameXpath);
 
 		logger.log(Level.INFO, "lizsFirstName.getText() = " + lizsFirstName.getText());
-		logger.log(Level.INFO, "lizsLastName.getText() = " + lizsLastName.getText());
+		logger.log(Level.INFO, "firstName.getAttribute(value) = " + firstName.getAttribute("value"));
+		logger.log(Level.INFO, "finishDate.getAttribute(value) = " + finishDate.getAttribute("value"));
 
+		assertTrue("customer first name should be the same in the bookings but it is '" + lizsFirstName.getText() +
+			"' in the customer module," + " and '" + firstName.getAttribute("value") + "' in bookings",
+			firstName.getAttribute("value").contains(lizsFirstName.getText()));
+
+		assertTrue("Customer first name should contain 'Lizzy', but it contains '" + lizsFirstName.getText() + "'",
+			lizsFirstName.getText().contains("Lizzy"));
+		assertTrue("Bookings first name should contain 'Lizzy', but it contains '" + firstName.getAttribute("value") +
+			"'", firstName.getAttribute("value").contains("Lizzy"));
 	}
 
 	@Test
@@ -157,34 +190,28 @@ public class Jsf2IpcPubRenderParamsPortletTest extends TesterBase {
 
 	@Test
 	@RunAsClient
-	@InSequence(3000)
-	public void changeBriansBookings() throws Exception {
+	@InSequence(6000)
+	public void checkBriansBookingsAgain() throws Exception {
 
-		logger.log(Level.INFO, "lastName.clear() ...");
-		lastName.clear();
-		logger.log(Level.INFO, "lastName.sendKeys('Greeny') ...");
-		lastName.sendKeys("Greeny");
-		logger.log(Level.INFO, "finishDate.clear() ...");
-		finishDate.clear();
-		logger.log(Level.INFO, "finishDate.sendKeys('04/20/2099') ...");
-		finishDate.sendKeys("04/20/2099");
-		logger.log(Level.INFO, "submit.click() ...");
-		submit.click();
-		
-		waitForElement(browser, briansLastNameXpath);
-		
-		logger.log(Level.INFO, "briansLastName.getText() = " + briansLastName.getText());
+		briansInput.click();
+
+		waitForElement(browser, firstNameXpath);
+
+		logger.log(Level.INFO, "firstName.getAttribute(value) = " + firstName.getAttribute("value"));
 		logger.log(Level.INFO, "lastName.getAttribute(value) = " + lastName.getAttribute("value"));
+		logger.log(Level.INFO, "startDate.getAttribute(value) = " + startDate.getAttribute("value"));
 		logger.log(Level.INFO, "finishDate.getAttribute(value) = " + finishDate.getAttribute("value"));
 
-		assertTrue("customer first name should be the same in the bookings but it is '" + briansLastName.getText() +
+		assertTrue("customer first name should be the same in the bookings but it is '" + briansFirstName.getText() +
+			"' in the customer module," + " and '" + firstName.getAttribute("value") + "' in bookings",
+			firstName.getAttribute("value").contains(briansFirstName.getText()));
+		assertTrue("customer last name should be the same in the bookings but it is '" + briansLastName.getText() +
 			"' in the customer module," + " and '" + lastName.getAttribute("value") + "' in bookings",
 			lastName.getAttribute("value").contains(briansLastName.getText()));
 
-		assertTrue("Customer last name should contain 'Greeny', but it contains '" + briansLastName.getText() + "'",
-			briansLastName.getText().contains("Greeny"));
-		assertTrue("Bookings last name should contain 'Greeny', but it contains '" + lastName.getAttribute("value") +
-			"'", lastName.getAttribute("value").contains("Greeny"));
+		assertTrue("Brian's first finishDate should be '04/20/2099', but it is '" + finishDate.getAttribute("value") +
+			"'", finishDate.getAttribute("value").contains("04/20/2099"));
+
 	}
 
 	@Test
@@ -193,7 +220,7 @@ public class Jsf2IpcPubRenderParamsPortletTest extends TesterBase {
 	public void checkLizsBookings() throws Exception {
 
 		lizsInput.click();
-		
+
 		waitForElement(browser, lizsFirstNameXpath);
 
 		logger.log(Level.INFO, "firstName.getAttribute(value) = " + firstName.getAttribute("value"));
@@ -212,56 +239,36 @@ public class Jsf2IpcPubRenderParamsPortletTest extends TesterBase {
 
 	@Test
 	@RunAsClient
-	@InSequence(5000)
-	public void changeLizsBookings() throws Exception {
+	@InSequence(1000)
+	public void renderViewMode() throws Exception {
 
-		logger.log(Level.INFO, "firstName.clear() ...");
-		firstName.clear();
-		logger.log(Level.INFO, "firstName.sendKeys('Lizzy') ...");
-		firstName.sendKeys("Lizzy");
-		finishDate.clear();
-		finishDate.sendKeys("12/25/2999");
-		submit.click();
-		
-		waitForElement(browser, lizsFirstNameXpath);
-		
+		signIn(browser);
+		logger.log(Level.INFO, "browser.navigate().to(" + url + ")");
+		browser.navigate().to(url);
+		logger.log(Level.INFO, "browser.getTitle() = " + browser.getTitle());
+		logger.log(Level.INFO, "browser.getCurrentUrl() = " + browser.getCurrentUrl());
+		getPortletDisplayName();
+		logger.log(Level.INFO, "displayName.getText() = " + displayName.getText());
+//      logger.log(Level.INFO, "bookingsPortletDisplayName.getText() = " + bookingsPortletDisplayName.getText());
+
+		assertTrue("displayName.isDisplayed()", displayName.isDisplayed());
+//      assertTrue("bookingsPortletDisplayName.isDisplayed()", bookingsPortletDisplayName.isDisplayed());
+
+		logger.log(Level.INFO,
+			"browser.findElements(By.xpath(displayNameXpath)).size() = " +
+			browser.findElements(By.xpath(displayNameXpath)).size());
+		logger.log(Level.INFO,
+			"browser.findElements(By.xpath(briansInputXpath)).size() = " +
+			browser.findElements(By.xpath(briansInputXpath)).size());
+		logger.log(Level.INFO,
+			"browser.findElements(By.xpath(lizsInputXpath)).size() = " +
+			browser.findElements(By.xpath(lizsInputXpath)).size());
+
+		logger.log(Level.INFO, "briansFirstName.getText() = " + briansFirstName.getText());
+		logger.log(Level.INFO, "briansLastName.getText() = " + briansLastName.getText());
+
 		logger.log(Level.INFO, "lizsFirstName.getText() = " + lizsFirstName.getText());
-		logger.log(Level.INFO, "firstName.getAttribute(value) = " + firstName.getAttribute("value"));
-		logger.log(Level.INFO, "finishDate.getAttribute(value) = " + finishDate.getAttribute("value"));
-
-		assertTrue("customer first name should be the same in the bookings but it is '" + lizsFirstName.getText() +
-			"' in the customer module," + " and '" + firstName.getAttribute("value") + "' in bookings",
-			firstName.getAttribute("value").contains(lizsFirstName.getText()));
-
-		assertTrue("Customer first name should contain 'Lizzy', but it contains '" + lizsFirstName.getText() + "'",
-			lizsFirstName.getText().contains("Lizzy"));
-		assertTrue("Bookings first name should contain 'Lizzy', but it contains '" + firstName.getAttribute("value") +
-			"'", firstName.getAttribute("value").contains("Lizzy"));
-	}
-
-	@Test
-	@RunAsClient
-	@InSequence(6000)
-	public void checkBriansBookingsAgain() throws Exception {
-
-		briansInput.click();
-		
-		waitForElement(browser, firstNameXpath);
-
-		logger.log(Level.INFO, "firstName.getAttribute(value) = " + firstName.getAttribute("value"));
-		logger.log(Level.INFO, "lastName.getAttribute(value) = " + lastName.getAttribute("value"));
-		logger.log(Level.INFO, "startDate.getAttribute(value) = " + startDate.getAttribute("value"));
-		logger.log(Level.INFO, "finishDate.getAttribute(value) = " + finishDate.getAttribute("value"));
-
-		assertTrue("customer first name should be the same in the bookings but it is '" + briansFirstName.getText() +
-			"' in the customer module," + " and '" + firstName.getAttribute("value") + "' in bookings",
-			firstName.getAttribute("value").contains(briansFirstName.getText()));
-		assertTrue("customer last name should be the same in the bookings but it is '" + briansLastName.getText() +
-			"' in the customer module," + " and '" + lastName.getAttribute("value") + "' in bookings",
-			lastName.getAttribute("value").contains(briansLastName.getText()));
-
-		assertTrue("Brian's first finishDate should be '04/20/2099', but it is '" + finishDate.getAttribute("value") +
-			"'", finishDate.getAttribute("value").contains("04/20/2099"));
+		logger.log(Level.INFO, "lizsLastName.getText() = " + lizsLastName.getText());
 
 	}
 

@@ -556,8 +556,7 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 
 									// TCK TestPage 179: redirectRenderPRP1Test
 									renderRedirect = true;
-									viewIdRenderParameterValue = URLDecoder.decode(viewIdRenderParameterValue,
-											"UTF-8");
+									viewIdRenderParameterValue = URLDecoder.decode(viewIdRenderParameterValue, "UTF-8");
 
 									BridgeURI redirectURI = bridgeURIFactory.getBridgeURI(viewIdRenderParameterValue);
 									UIViewRoot viewRoot = facesContext.getViewRoot();

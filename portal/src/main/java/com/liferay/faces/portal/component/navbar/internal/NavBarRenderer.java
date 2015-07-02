@@ -22,6 +22,7 @@ import javax.faces.context.ResponseWriter;
 import javax.faces.render.FacesRenderer;
 
 import com.liferay.faces.portal.component.navbar.NavBar;
+
 import com.liferay.taglib.aui.NavBarTag;
 
 

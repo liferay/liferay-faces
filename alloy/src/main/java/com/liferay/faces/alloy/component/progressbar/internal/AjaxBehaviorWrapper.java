@@ -83,15 +83,15 @@ public abstract class AjaxBehaviorWrapper extends AjaxBehavior implements FacesW
 		return getWrapped().isDisabled();
 	}
 
-//	JSF 2.2+ @Override
-//	public String getDelay() {
-//		return getWrapped().getDelay();
-//	}
+//  JSF 2.2+ @Override
+//  public String getDelay() {
+//      return getWrapped().getDelay();
+//  }
 
-//	JSF 2.2+ @Override
-//	public void setDelay(String delay) {
-//		getWrapped().setDelay(delay);
-//	}
+//  JSF 2.2+ @Override
+//  public void setDelay(String delay) {
+//      getWrapped().setDelay(delay);
+//  }
 
 	@Override
 	public void setDisabled(boolean disabled) {
@@ -158,15 +158,15 @@ public abstract class AjaxBehaviorWrapper extends AjaxBehavior implements FacesW
 		return getWrapped().getRendererType();
 	}
 
-//	JSF 2.2+ @Override
-//	public void setResetValues(boolean resetValues) {
-//		getWrapped().setResetValues(resetValues);
-//	}
+//  JSF 2.2+ @Override
+//  public void setResetValues(boolean resetValues) {
+//      getWrapped().setResetValues(resetValues);
+//  }
 
-//	JSF 2.2_ @Override
-//	public boolean isResetValues() {
-//		return getWrapped().isResetValues();
-//	}
+//  JSF 2.2_ @Override
+//  public boolean isResetValues() {
+//      return getWrapped().isResetValues();
+//  }
 
 	@Override
 	public String getScript(ClientBehaviorContext behaviorContext) {
@@ -178,10 +178,10 @@ public abstract class AjaxBehaviorWrapper extends AjaxBehavior implements FacesW
 		return getWrapped().isImmediateSet();
 	}
 
-//	JSF 2.2+ @Override
-//	public boolean isResetValuesSet() {
-//		return getWrapped().isResetValuesSet();
-//	}
+//  JSF 2.2+ @Override
+//  public boolean isResetValuesSet() {
+//      return getWrapped().isResetValuesSet();
+//  }
 
 	@Override
 	public boolean isTransient() {

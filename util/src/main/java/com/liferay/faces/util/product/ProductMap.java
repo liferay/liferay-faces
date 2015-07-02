@@ -13,20 +13,21 @@
  */
 package com.liferay.faces.util.product;
 
-import com.liferay.faces.util.product.internal.ProductWildFlyImpl;
+import java.util.HashMap;
+
+import com.liferay.faces.util.product.internal.ProductCDIImpl;
 import com.liferay.faces.util.product.internal.ProductICEfacesImpl;
 import com.liferay.faces.util.product.internal.ProductJSFImpl;
-import com.liferay.faces.util.product.internal.ProductRichFacesImpl;
-import com.liferay.faces.util.product.internal.ProductResinImpl;
-import com.liferay.faces.util.product.internal.ProductLiferayPortalImpl;
+import com.liferay.faces.util.product.internal.ProductLiferayFacesAlloyImpl;
+import com.liferay.faces.util.product.internal.ProductLiferayFacesBridgeImpl;
 import com.liferay.faces.util.product.internal.ProductLiferayFacesPortalImpl;
 import com.liferay.faces.util.product.internal.ProductLiferayFacesUtilImpl;
-import com.liferay.faces.util.product.internal.ProductLiferayFacesAlloyImpl;
+import com.liferay.faces.util.product.internal.ProductLiferayPortalImpl;
 import com.liferay.faces.util.product.internal.ProductPrimeFacesImpl;
-import com.liferay.faces.util.product.internal.ProductLiferayFacesBridgeImpl;
-import com.liferay.faces.util.product.internal.ProductCDIImpl;
+import com.liferay.faces.util.product.internal.ProductResinImpl;
+import com.liferay.faces.util.product.internal.ProductRichFacesImpl;
 import com.liferay.faces.util.product.internal.ProductSpringFrameworkImpl;
-import java.util.HashMap;
+import com.liferay.faces.util.product.internal.ProductWildFlyImpl;
 
 
 /**
