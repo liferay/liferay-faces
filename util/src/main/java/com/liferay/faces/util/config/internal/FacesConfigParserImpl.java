@@ -13,14 +13,6 @@
  */
 package com.liferay.faces.util.config.internal;
 
-import com.liferay.faces.util.config.ConfiguredElement;
-import com.liferay.faces.util.config.ConfiguredManagedBean;
-import com.liferay.faces.util.config.ConfiguredServletMapping;
-import com.liferay.faces.util.config.ConfiguredSystemEventListener;
-import com.liferay.faces.util.config.FacesConfig;
-import com.liferay.faces.util.config.internal.ConfiguredSystemEventListenerImpl;
-import com.liferay.faces.util.config.internal.ConfiguredManagedBeanImpl;
-import com.liferay.faces.util.config.internal.ConfiguredElementImpl;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -31,6 +23,14 @@ import javax.xml.parsers.SAXParser;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
+import com.liferay.faces.util.config.ConfiguredElement;
+import com.liferay.faces.util.config.ConfiguredManagedBean;
+import com.liferay.faces.util.config.ConfiguredServletMapping;
+import com.liferay.faces.util.config.ConfiguredSystemEventListener;
+import com.liferay.faces.util.config.FacesConfig;
+import com.liferay.faces.util.config.internal.ConfiguredElementImpl;
+import com.liferay.faces.util.config.internal.ConfiguredManagedBeanImpl;
+import com.liferay.faces.util.config.internal.ConfiguredSystemEventListenerImpl;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.util.xml.internal.SAXHandlerBase;

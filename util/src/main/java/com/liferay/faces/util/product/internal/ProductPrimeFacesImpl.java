@@ -13,9 +13,10 @@
  */
 package com.liferay.faces.util.product.internal;
 
-import com.liferay.faces.util.product.ProductConstants;
 import java.io.InputStream;
 import java.util.Properties;
+
+import com.liferay.faces.util.product.ProductConstants;
 
 
 /**

@@ -13,11 +13,11 @@
  */
 package com.liferay.faces.alloy.component.inputfile.internal;
 
-import junit.framework.Assert;
-
 import org.junit.Test;
 
 import com.liferay.faces.alloy.component.inputfile.InputFile;
+
+import junit.framework.Assert;
 
 
 /**

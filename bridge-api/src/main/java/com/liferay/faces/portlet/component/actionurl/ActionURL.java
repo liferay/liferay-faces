@@ -15,8 +15,9 @@ package com.liferay.faces.portlet.component.actionurl;
 
 import javax.faces.component.FacesComponent;
 
+
 /**
- * @author	Neil Griffin
+ * @author  Neil Griffin
  */
 @FacesComponent(value = ActionURL.COMPONENT_TYPE)
 public class ActionURL extends ActionURLBase {

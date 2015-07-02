@@ -96,8 +96,7 @@ public class PortalTagOutputParserImpl implements PortalTagOutputParser {
 				}
 
 				scriptBuilder.append(script.trim());
-				scriptText = scriptText.substring(0, beginPos) +
-					scriptText.substring(endPos + "</script>".length());
+				scriptText = scriptText.substring(0, beginPos) + scriptText.substring(endPos + "</script>".length());
 			}
 			else {
 				done1 = true;

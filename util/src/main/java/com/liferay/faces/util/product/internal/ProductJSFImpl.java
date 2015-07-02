@@ -15,6 +15,7 @@ package com.liferay.faces.util.product.internal;
 
 import com.liferay.faces.util.product.ProductConstants;
 
+
 /**
  * @author  Neil Griffin
  */

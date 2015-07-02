@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE components>
-<components defaultSince="4.2.0">
+<components defaultSince="4.2.5-ga6">
 	<!-- generateTaglibXML="false" tags for common attributes -->
 	<!-- 1. Interfaces -->
 	<component name="AltInherited" generateJava="false" generateTaglibXML="false">

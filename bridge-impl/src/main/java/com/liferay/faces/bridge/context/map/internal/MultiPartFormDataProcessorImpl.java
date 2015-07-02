@@ -57,8 +57,6 @@ import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.util.model.UploadedFile;
 import com.liferay.faces.util.model.UploadedFileFactory;
 
-import com.liferay.portal.kernel.util.StringPool;
-
 
 /**
  * @author  Neil Griffin
@@ -316,8 +314,7 @@ public class MultiPartFormDataProcessorImpl implements MultiPartFormDataProcesso
 			strippedFileName = fileName.replaceAll("[\\\\/\\[\\]:|<>+;=.?\"]", "-");
 
 			if (pos > 0) {
-				strippedFileName = strippedFileName.substring(0, pos) + "." +
-					strippedFileName.substring(pos + 1);
+				strippedFileName = strippedFileName.substring(0, pos) + "." + strippedFileName.substring(pos + 1);
 			}
 		}
 

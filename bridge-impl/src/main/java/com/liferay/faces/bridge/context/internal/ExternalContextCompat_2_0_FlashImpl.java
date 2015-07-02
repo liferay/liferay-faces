@@ -14,7 +14,6 @@
 package com.liferay.faces.bridge.context.internal;
 
 import javax.faces.FactoryFinder;
-import javax.faces.context.ExternalContext;
 import javax.faces.context.Flash;
 import javax.faces.context.FlashFactory;
 import javax.portlet.PortletContext;

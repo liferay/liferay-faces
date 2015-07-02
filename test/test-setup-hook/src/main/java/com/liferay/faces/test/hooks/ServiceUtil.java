@@ -19,7 +19,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.liferay.portal.NoSuchUserException;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.Layout;
@@ -45,8 +44,7 @@ public class ServiceUtil {
 
 		boolean active = true;
 		String description = name;
-		String friendlyURL = "/" +
-			name.toLowerCase().replaceAll(" ", "-");
+		String friendlyURL = "/" + name.toLowerCase().replaceAll(" ", "-");
 		boolean siteFlag = true;
 		int type = GroupConstants.TYPE_SITE_OPEN;
 		boolean manualMembership = false;

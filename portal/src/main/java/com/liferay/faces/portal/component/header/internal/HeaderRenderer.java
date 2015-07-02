@@ -23,6 +23,7 @@ import javax.faces.render.FacesRenderer;
 import com.liferay.faces.portal.component.header.Header;
 import com.liferay.faces.util.component.Styleable;
 import com.liferay.faces.util.render.RendererUtil;
+
 import com.liferay.taglib.ui.HeaderTag;
 
 

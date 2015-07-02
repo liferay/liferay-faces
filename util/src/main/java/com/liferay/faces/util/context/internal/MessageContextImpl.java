@@ -13,8 +13,6 @@
  */
 package com.liferay.faces.util.context.internal;
 
-import com.liferay.faces.util.context.MessageContext;
-import com.liferay.faces.util.context.MessageContextFactory;
 import java.text.MessageFormat;
 import java.util.Locale;
 import java.util.Map;
@@ -26,6 +24,8 @@ import javax.faces.application.FacesMessage;
 import javax.faces.application.FacesMessage.Severity;
 import javax.faces.context.FacesContext;
 
+import com.liferay.faces.util.context.MessageContext;
+import com.liferay.faces.util.context.MessageContextFactory;
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
 
 

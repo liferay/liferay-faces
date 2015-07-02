@@ -54,7 +54,6 @@ public class Messages extends MessagesBase {
 		return ComponentUtil.concatCssClasses(infoClass, INFO_CLASS_NAME);
 	}
 
-
 	@Override
 	public String getWarnClass() {
 

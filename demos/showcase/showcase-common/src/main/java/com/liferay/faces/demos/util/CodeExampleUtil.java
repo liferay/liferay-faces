@@ -68,6 +68,7 @@ public class CodeExampleUtil {
 			if (sourceFileName.endsWith(JAVA_EXTENSION)) {
 
 				fileExtension = JAVA;
+
 				Matcher matcher = JAVA_MULTILINE_COMMENTS_PATTERN.matcher(sourceCodeText);
 				sourceCodeText = matcher.replaceAll("");
 			}

@@ -29,8 +29,7 @@ public interface MessageContext {
 
 	public FacesMessage newFacesMessage(FacesContext facesContext, Severity severity, String messageId);
 
-	public FacesMessage newFacesMessage(Locale locale, Severity severity, String messageId,
-		Object... arguments);
+	public FacesMessage newFacesMessage(Locale locale, Severity severity, String messageId, Object... arguments);
 
 	public FacesMessage newFacesMessage(FacesContext facesContext, Severity severity, String messageId,
 		Object... arguments);

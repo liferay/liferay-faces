@@ -118,8 +118,7 @@ public class DataListRenderer extends DataListRendererBase {
 
 					if (facet != null) {
 						responseWriter.startElement("dd", uiComponent);
-						responseWriter.writeAttribute("class", styleClass + "-" + DESCRIPTION,
-							"class");
+						responseWriter.writeAttribute("class", styleClass + "-" + DESCRIPTION, "class");
 						facet.encodeAll(facesContext);
 						responseWriter.endElement("dd");
 					}
