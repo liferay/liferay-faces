@@ -38,9 +38,11 @@ public class ViewParamsPhaseListener implements PhaseListener {
 		ExternalContext externalContext = facesContext.getExternalContext();
 		Map<String, String> requestParameterMap = externalContext.getRequestParameterMap();
 		String viewState = requestParameterMap.get("javax.faces.ViewState");
+
 		if (viewState == null) {
 			ShowcaseModelBean showcaseModelBean = getShowcaseModelBean(facesContext);
 			showcaseModelBean.setSelectedComponent(null);
+
 			ShowcaseModelBean.ViewParameters viewParameters = showcaseModelBean.getViewParameters();
 			viewParameters.setComponentPrefix(requestParameterMap.get("componentPrefix"));
 			viewParameters.setComponentName(requestParameterMap.get("componentName"));

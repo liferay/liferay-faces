@@ -72,7 +72,7 @@ public class ComponentStateHelper implements StateHelper {
 			Serializable[] keys = (Serializable[]) stateArray[0];
 
 			for (int i = 1; i < stateArray.length; i++) {
-				stateMap.put(keys[i-1], stateArray[i]);
+				stateMap.put(keys[i - 1], stateArray[i]);
 			}
 		}
 	}
@@ -83,12 +83,14 @@ public class ComponentStateHelper implements StateHelper {
 		Set<Map.Entry<Serializable, Object>> entrySet = stateMap.entrySet();
 		int entrySetSize = entrySet.size();
 		Serializable[] keys = new Serializable[entrySetSize];
-		Object[] state = new Object[entrySetSize+1];
+		Object[] state = new Object[entrySetSize + 1];
 		int i = 0;
+
 		for (Map.Entry<Serializable, Object> mapEntry : entrySet) {
 			keys[i++] = mapEntry.getKey();
 			state[i] = mapEntry.getValue();
 		}
+
 		state[0] = keys;
 
 		return state;

@@ -15,13 +15,14 @@ package com.liferay.faces.portlet.component.property;
 
 // JSF 2: import javax.faces.component.FacesComponent;
 
+import javax.faces.context.FacesContext;
+
 import com.liferay.faces.util.component.ComponentStateHelper;
 import com.liferay.faces.util.component.StateHelper;
 
-import javax.faces.context.FacesContext;
 
 /**
- * @author	Neil Griffin
+ * @author  Neil Griffin
  */
 // JSF 2: @FacesComponent(value = Property.COMPONENT_TYPE)
 public class Property extends PropertyBase {

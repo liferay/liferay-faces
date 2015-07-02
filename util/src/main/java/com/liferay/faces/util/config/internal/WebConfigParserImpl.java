@@ -13,14 +13,6 @@
  */
 package com.liferay.faces.util.config.internal;
 
-import com.liferay.faces.util.config.ConfiguredServlet;
-import com.liferay.faces.util.config.ConfiguredServletMapping;
-import com.liferay.faces.util.config.MultiPartConfig;
-import com.liferay.faces.util.config.WebConfig;
-import com.liferay.faces.util.config.internal.WebConfigImpl;
-import com.liferay.faces.util.config.internal.MultiPartConfigImpl;
-import com.liferay.faces.util.config.internal.ConfiguredServletMappingImpl;
-import com.liferay.faces.util.config.internal.ConfiguredServletImpl;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -33,6 +25,14 @@ import javax.xml.parsers.SAXParser;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
+import com.liferay.faces.util.config.ConfiguredServlet;
+import com.liferay.faces.util.config.ConfiguredServletMapping;
+import com.liferay.faces.util.config.MultiPartConfig;
+import com.liferay.faces.util.config.WebConfig;
+import com.liferay.faces.util.config.internal.ConfiguredServletImpl;
+import com.liferay.faces.util.config.internal.ConfiguredServletMappingImpl;
+import com.liferay.faces.util.config.internal.MultiPartConfigImpl;
+import com.liferay.faces.util.config.internal.WebConfigImpl;
 import com.liferay.faces.util.helper.LongHelper;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;

@@ -13,14 +13,13 @@
  */
 package com.liferay.faces.bridge.filter.liferay;
 
-import com.liferay.faces.bridge.filter.liferay.LiferayResourceURL;
-
 import java.io.IOException;
 import java.io.Writer;
 import java.util.Map;
 
 import javax.portlet.PortletSecurityException;
 
+import com.liferay.faces.bridge.filter.liferay.LiferayResourceURL;
 import com.liferay.faces.util.helper.Wrapper;
 
 

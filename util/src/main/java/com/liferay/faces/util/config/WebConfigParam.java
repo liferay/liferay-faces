@@ -13,10 +13,10 @@
  */
 package com.liferay.faces.util.config;
 
-import com.liferay.faces.util.config.WebConfigParamUtil;
-import com.liferay.faces.util.config.ConfigParam;
 import javax.faces.context.ExternalContext;
 
+import com.liferay.faces.util.config.ConfigParam;
+import com.liferay.faces.util.config.WebConfigParamUtil;
 import com.liferay.faces.util.helper.BooleanHelper;
 
 

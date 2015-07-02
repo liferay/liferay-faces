@@ -71,7 +71,8 @@ public class CodeExample implements Serializable {
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 
 		if (facesContext != null) {
-			developmentMode = "development".equalsIgnoreCase(facesContext.getExternalContext().getInitParameter("javax.faces.PROJECT_STAGE"));
+			developmentMode = "development".equalsIgnoreCase(facesContext.getExternalContext().getInitParameter(
+						"javax.faces.PROJECT_STAGE"));
 			productionMode = !developmentMode;
 		}
 

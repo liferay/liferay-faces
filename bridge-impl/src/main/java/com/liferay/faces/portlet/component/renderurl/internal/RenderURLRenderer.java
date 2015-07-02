@@ -17,9 +17,8 @@ package com.liferay.faces.portlet.component.renderurl.internal;
 
 // JSF 2: import com.liferay.faces.portlet.component.renderurl.RenderURL;
 
-
 /**
- * @author	Kyle Stiemann
+ * @author  Kyle Stiemann
  */
 //J-
 // JSF 2: @FacesRenderer(componentFamily = RenderURL.COMPONENT_FAMILY, rendererType = RenderURL.RENDERER_TYPE)

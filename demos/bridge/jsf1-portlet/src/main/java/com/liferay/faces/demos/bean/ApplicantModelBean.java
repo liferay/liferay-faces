@@ -51,6 +51,7 @@ public class ApplicantModelBean implements Serializable {
 
 	public ApplicantModelBean() {
 		clearProperties();
+
 		Calendar calendar = new GregorianCalendar();
 		this.dateOfBirth = calendar.getTime();
 	}

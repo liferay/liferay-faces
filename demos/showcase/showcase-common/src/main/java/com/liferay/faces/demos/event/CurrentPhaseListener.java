@@ -13,12 +13,13 @@
  */
 package com.liferay.faces.demos.event;
 
+import java.util.Map;
+
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.event.PhaseEvent;
 import javax.faces.event.PhaseId;
 import javax.faces.event.PhaseListener;
-import java.util.Map;
 
 
 /**

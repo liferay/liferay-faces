@@ -13,7 +13,6 @@
  */
 package com.liferay.faces.bridge;
 
-import javax.faces.FacesException;
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.EventRequest;

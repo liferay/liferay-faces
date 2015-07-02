@@ -165,8 +165,7 @@ public class ListModelBean {
 						String lowerCaseName = camelCaseName.toLowerCase();
 
 						String value = (String) mapEntry.getValue();
-						String[] useCaseArray = value.split("[" + "|" +
-								"]");
+						String[] useCaseArray = value.split("[" + "|" + "]");
 						List<UseCase> useCases = new ArrayList<UseCase>(useCaseArray.length);
 
 						for (String useCaseInfo : useCaseArray) {
@@ -195,8 +194,8 @@ public class ListModelBean {
 								}
 								else if (sourceFileName.endsWith(".xhtml")) {
 
-									String sourcePath = File.separator + "WEB-INF" + File.separator + "component" + File.separator + prefix +
-										File.separator + lowerCaseName + File.separator;
+									String sourcePath = File.separator + "WEB-INF" + File.separator + "component" +
+										File.separator + prefix + File.separator + lowerCaseName + File.separator;
 
 									if (!sourceFileName.toLowerCase().contains("common")) {
 										sourcePath = sourcePath + useCaseName + File.separator;
@@ -218,8 +217,7 @@ public class ListModelBean {
 									for (int i = 0; ((i < PACKAGE_NAMES.length) && (sourceFileURL == null)); i++) {
 
 										int pos = sourceFileName.lastIndexOf(".java");
-										String fqcn = PACKAGE_NAMES[i] + "." +
-											sourceFileName.substring(0, pos);
+										String fqcn = PACKAGE_NAMES[i] + "." + sourceFileName.substring(0, pos);
 
 										try {
 											Class<?> clazz = Class.forName(fqcn);
@@ -234,7 +232,8 @@ public class ListModelBean {
 								if (sourceFileURL != null) {
 
 									// startupFacesContext.getApplication().getProjectStage();
-									CodeExample codeExample = CodeExampleUtil.read(sourceFileURL, sourceFileName, productionMode);
+									CodeExample codeExample = CodeExampleUtil.read(sourceFileURL, sourceFileName,
+											productionMode);
 									codeExamples.add(codeExample);
 
 									logger.debug("Loaded source file=[{0}]", sourceFileName);

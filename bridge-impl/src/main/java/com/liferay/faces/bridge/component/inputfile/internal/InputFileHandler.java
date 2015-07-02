@@ -18,6 +18,7 @@ import java.lang.reflect.Method;
 import com.liferay.faces.bridge.component.inputfile.InputFile;
 import com.liferay.faces.bridge.event.FileUploadEvent;
 import com.liferay.faces.util.view.facelets.MethodMetadata;
+
 import com.sun.facelets.tag.MetaRule;
 import com.sun.facelets.tag.MetaRuleset;
 import com.sun.facelets.tag.Metadata;

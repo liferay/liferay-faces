@@ -13,8 +13,6 @@
  */
 package com.liferay.faces.util.context.internal;
 
-import com.liferay.faces.util.context.ExtFacesContext;
-import com.liferay.faces.util.context.FacesContextHelper;
 import java.util.Iterator;
 import java.util.Locale;
 import java.util.Map;
@@ -32,6 +30,9 @@ import javax.faces.context.ResponseStream;
 import javax.faces.context.ResponseWriter;
 import javax.faces.event.PhaseListener;
 import javax.faces.render.RenderKit;
+
+import com.liferay.faces.util.context.ExtFacesContext;
+import com.liferay.faces.util.context.FacesContextHelper;
 
 
 /**

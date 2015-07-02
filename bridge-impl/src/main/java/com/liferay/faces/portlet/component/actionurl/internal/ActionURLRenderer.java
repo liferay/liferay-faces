@@ -15,15 +15,16 @@ package com.liferay.faces.portlet.component.actionurl.internal;
 
 // JSF 2: import javax.faces.render.FacesRenderer;
 
-import com.liferay.faces.portlet.component.actionurl.ActionURL;
 import javax.faces.component.UIComponent;
 import javax.portlet.ActionRequest;
 import javax.portlet.MimeResponse;
 import javax.portlet.PortletURL;
 
+import com.liferay.faces.portlet.component.actionurl.ActionURL;
+
 
 /**
- * @author	Kyle Stiemann
+ * @author  Kyle Stiemann
  */
 //J-
 // JSF 2: @FacesRenderer(componentFamily = ActionURL.COMPONENT_FAMILY, rendererType = ActionURL.RENDERER_TYPE)

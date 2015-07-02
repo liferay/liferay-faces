@@ -13,8 +13,9 @@
  */
 package com.liferay.faces.util.config.internal;
 
-import com.liferay.faces.util.config.internal.FacesConfigDescriptor;
 import java.util.List;
+
+import com.liferay.faces.util.config.internal.FacesConfigDescriptor;
 
 
 /**
@@ -27,7 +28,7 @@ public class AbsoluteOrdering {
 
 	public static void checkForSpecExceptions(List<FacesConfigDescriptor> configs) throws Exception {
 	}
-	
+
 	public String getName() {
 		return name;
 	}
