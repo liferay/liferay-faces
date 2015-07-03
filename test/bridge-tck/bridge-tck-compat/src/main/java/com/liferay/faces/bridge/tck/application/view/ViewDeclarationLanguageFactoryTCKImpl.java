@@ -16,8 +16,6 @@ package com.liferay.faces.bridge.tck.application.view;
 import javax.faces.view.ViewDeclarationLanguage;
 import javax.faces.view.ViewDeclarationLanguageFactory;
 
-import com.liferay.faces.bridge.application.view.internal.ViewDeclarationLanguageJspImpl;
-
 
 /**
  * @author  Neil Griffin
@@ -35,7 +33,7 @@ public class ViewDeclarationLanguageFactoryTCKImpl extends ViewDeclarationLangua
 	public ViewDeclarationLanguage getViewDeclarationLanguage(String viewId) {
 		ViewDeclarationLanguage viewDeclarationLanguage = getWrapped().getViewDeclarationLanguage(viewId);
 
-		if (viewDeclarationLanguage instanceof ViewDeclarationLanguageJspImpl) {
+		if (viewDeclarationLanguage.getClass().getName().contains("ViewDeclarationLanguageJspImpl")) {
 			viewDeclarationLanguage = new ViewDeclarationLanguageJspTCKImpl(viewDeclarationLanguage);
 		}
 
