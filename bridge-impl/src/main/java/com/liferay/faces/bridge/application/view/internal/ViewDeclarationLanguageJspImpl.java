@@ -22,6 +22,7 @@ import javax.faces.view.ViewDeclarationLanguage;
 import javax.portlet.faces.Bridge;
 
 import com.liferay.faces.bridge.context.BridgeContext;
+import com.liferay.faces.util.application.view.ViewDeclarationLanguageWrapper;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
