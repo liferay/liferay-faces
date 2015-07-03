@@ -1039,6 +1039,7 @@ public class OrderingTest {
 
 		// some solutions:
 		// [B, C, E, F, A, D]
+		// [B, C, E, F, D, A]
 
 		String[] orderedNames = Ordering.extractNames(facesConfigDescriptors);
 
@@ -1046,9 +1047,10 @@ public class OrderingTest {
 		List<String> actually = Arrays.asList(orderedNames);
 
 		List<String> possibility1 = Arrays.asList("b", "c", "e", "f", "a", "d");
+		List<String> possibility2 = Arrays.asList("b", "c", "e", "f", "d", "a");
 
-		boolean assertion = (actually.equals(possibility1));
-		String message = "\n original: " + original + "\n expected: " + possibility1 + "\n actually: " + actually +
+		boolean assertion = (actually.equals(possibility1) || actually.equals(possibility2));
+		String message = "\n original: " + original + "\n expected: " + possibility1 + "\n       or: " + possibility1 + "\n actually: " + actually +
 			"\n";
 		Assert.assertTrue(message, assertion);
 		logger.info("test21_AafterOthers_BbeforeOthers_DafterOthers_EafterCbeforeOthers_startingWithABCDEF: Passed" +
