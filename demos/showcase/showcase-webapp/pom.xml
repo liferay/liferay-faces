@@ -90,6 +90,7 @@
 			<groupId>com.liferay.faces</groupId>
 			<artifactId>liferay-faces-alloy</artifactId>
 			<version>${project.version}</version>
+			<scope>compile</scope>
 		</dependency>
 		<!-- <dependency>
 			<groupId>com.liferay.faces</groupId>

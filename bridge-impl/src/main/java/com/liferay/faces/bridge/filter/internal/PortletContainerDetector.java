@@ -13,9 +13,7 @@
  */
 package com.liferay.faces.bridge.filter.internal;
 
-import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
-import javax.portlet.filter.PortletRequestWrapper;
 import javax.portlet.filter.PortletResponseWrapper;
 
 
@@ -23,9 +21,6 @@ import javax.portlet.filter.PortletResponseWrapper;
  * @author  Neil Griffin
  */
 public class PortletContainerDetector {
-
-	// Private Constants
-	private static final String PLUTO_PACKAGE_NAMESPACE = "org.apache.pluto";
 
 	/**
 	 * Determines whether or not the specified {@link javax.portlet.PortletResponse} is one created by Liferay Portal.
@@ -72,59 +67,7 @@ public class PortletContainerDetector {
 				portletResponse = portletResponseWrapper.getResponse();
 			}
 
-			return portletResponse.getClass().getName().startsWith(PLUTO_PACKAGE_NAMESPACE);
-		}
-		else {
-			return false;
-		}
-	}
-
-	/**
-	 * Determines whether or not the specified {@link javax.portlet.PortletRequest} is one created by Liferay Portal. If
-	 * the specified {@link javax.portlet.PortletRequest} is an instance of {@link
-	 * javax.portlet.filter.PortletRequestWrapper} then it will work with the wrapped {@link
-	 * javax.portlet.PortletRequest}.
-	 *
-	 * @param   portletRequest  The current {@link javax.portlet.PortletRequest}.
-	 *
-	 * @return  true if the specified portletRequest was created by Liferay Portal.
-	 */
-	public static boolean isLiferayPortletRequest(PortletRequest portletRequest) {
-
-		if (portletRequest != null) {
-
-			while (portletRequest instanceof PortletRequestWrapper) {
-				PortletRequestWrapper portletRequestWrapper = (PortletRequestWrapper) portletRequest;
-				portletRequest = portletRequestWrapper.getRequest();
-			}
-
-			return portletRequest.getClass().getName().startsWith("com.liferay");
-		}
-		else {
-			return false;
-		}
-	}
-
-	/**
-	 * Determines whether or not the specified {@link javax.portlet.PortletRequest} is one created by Liferay Portal. If
-	 * the specified {@link javax.portlet.PortletRequest} is an instance of {@link
-	 * javax.portlet.filter.PortletRequestWrapper} then it will work with the wrapped {@link
-	 * javax.portlet.PortletRequest}.
-	 *
-	 * @param   portletRequest  The current {@link javax.portlet.PortletRequest}.
-	 *
-	 * @return  true if the specified portletRequest was created by Pluto.
-	 */
-	public static boolean isPlutoPortletRequest(PortletRequest portletRequest) {
-
-		if (portletRequest != null) {
-
-			while (portletRequest instanceof PortletRequestWrapper) {
-				PortletRequestWrapper portletRequestWrapper = (PortletRequestWrapper) portletRequest;
-				portletRequest = portletRequestWrapper.getRequest();
-			}
-
-			return portletRequest.getClass().getName().startsWith(PLUTO_PACKAGE_NAMESPACE);
+			return portletResponse.getClass().getName().startsWith("org.apache.pluto");
 		}
 		else {
 			return false;
