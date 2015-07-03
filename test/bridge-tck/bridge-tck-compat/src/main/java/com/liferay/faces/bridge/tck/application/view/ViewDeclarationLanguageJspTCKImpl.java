@@ -24,7 +24,7 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewDeclarationLanguage;
 
-import com.liferay.faces.bridge.application.view.internal.ViewDeclarationLanguageWrapper;
+import com.liferay.faces.util.application.view.ViewDeclarationLanguageWrapper;
 
 
 /**
