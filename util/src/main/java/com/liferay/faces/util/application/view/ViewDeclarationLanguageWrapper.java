@@ -11,7 +11,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.bridge.application.view.internal;
+package com.liferay.faces.util.application.view;
 
 import java.beans.BeanInfo;
 import java.io.IOException;
