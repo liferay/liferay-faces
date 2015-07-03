@@ -32,7 +32,7 @@ public class Dialog extends DialogBase {
 			style = "display:none;";
 		}
 		else {
-			style = style + ";" + "display:none;";
+			style = style + ";display:none;";
 		}
 
 		return style;
