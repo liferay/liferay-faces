@@ -15,11 +15,12 @@ package com.liferay.faces.bridge.tck.filter;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.EventRequest;
+import javax.portlet.PortletRequest;
 import javax.portlet.RenderRequest;
 import javax.portlet.ResourceRequest;
+import javax.portlet.filter.PortletRequestWrapper;
 
 import com.liferay.faces.bridge.filter.BridgePortletRequestFactory;
-import com.liferay.faces.bridge.filter.internal.PortletContainerDetector;
 import com.liferay.faces.util.product.ProductConstants;
 import com.liferay.faces.util.product.ProductMap;
 
@@ -66,7 +67,7 @@ public class BridgePortletRequestFactoryTCKImpl extends BridgePortletRequestFact
 	@Override
 	public ResourceRequest getResourceRequest(ResourceRequest resourceRequest) {
 
-		if (PortletContainerDetector.isPlutoPortletRequest(resourceRequest)) {
+		if (isPlutoPortletRequest(resourceRequest)) {
 			resourceRequest = getWrapped().getResourceRequest(resourceRequest);
 
 			return new ResourceRequestPlutoTCKImpl(resourceRequest);
@@ -76,6 +77,32 @@ public class BridgePortletRequestFactoryTCKImpl extends BridgePortletRequestFact
 		}
 
 		return resourceRequest;
+	}
+
+	/**
+	 * Determines whether or not the specified {@link javax.portlet.PortletRequest} is one created by Liferay Portal. If
+	 * the specified {@link javax.portlet.PortletRequest} is an instance of {@link
+	 * javax.portlet.filter.PortletRequestWrapper} then it will work with the wrapped {@link
+	 * javax.portlet.PortletRequest}.
+	 *
+	 * @param   portletRequest  The current {@link javax.portlet.PortletRequest}.
+	 *
+	 * @return  true if the specified portletRequest was created by Pluto.
+	 */
+	protected boolean isPlutoPortletRequest(PortletRequest portletRequest) {
+
+		if (portletRequest != null) {
+
+			while (portletRequest instanceof PortletRequestWrapper) {
+				PortletRequestWrapper portletRequestWrapper = (PortletRequestWrapper) portletRequest;
+				portletRequest = portletRequestWrapper.getRequest();
+			}
+
+			return portletRequest.getClass().getName().startsWith("org.apache.pluto");
+		}
+		else {
+			return false;
+		}
 	}
 
 	@Override

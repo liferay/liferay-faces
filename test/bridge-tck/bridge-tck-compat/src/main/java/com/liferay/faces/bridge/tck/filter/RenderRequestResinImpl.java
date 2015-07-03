@@ -16,8 +16,6 @@ package com.liferay.faces.bridge.tck.filter;
 import javax.portlet.RenderRequest;
 import javax.portlet.filter.RenderRequestWrapper;
 
-import com.liferay.faces.bridge.internal.BridgeConstants;
-
 
 /**
  * This class implements a workaround for <a href="http://issues.liferay.com/browse/FACES-1629">FACES-1629</a> by
@@ -34,7 +32,7 @@ public class RenderRequestResinImpl extends RenderRequestWrapper {
 	@Override
 	public Object getAttribute(String name) {
 
-		if (BridgeConstants.REQ_ATTR_SERVLET_PATH.equals(name)) {
+		if ("javax.servlet.include.servlet_path".equals(name)) {
 
 			// Workaround for FACES-1629
 			return null;
