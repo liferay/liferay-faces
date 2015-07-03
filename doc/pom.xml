@@ -26,7 +26,7 @@
 							<taglibs>
 								<taglib>${project.basedir}/../alloy/src/main/resources/META-INF/alloy.taglib.xml</taglib>
 								<taglib>${project.basedir}/../bridge-impl/src/main/resources/META-INF/bridge.taglib.xml</taglib>
-								<taglib>${project.basedir}/../bridge-impl/src/main/resources/META-INF/resources/portlet.taglib.xml</taglib>
+								<taglib>${project.basedir}/../bridge-impl/src/main/resources/META-INF/portlet.taglib.xml</taglib>
 								<taglib>${project.basedir}/../portal/src/main/resources/META-INF/liferay.taglib.xml</taglib>
 								<taglib>${project.basedir}/../portal/src/main/resources/META-INF/portal.taglib.xml</taglib>
 							</taglibs>
