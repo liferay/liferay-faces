@@ -51,6 +51,7 @@
 			<groupId>com.liferay.faces</groupId>
 			<artifactId>liferay-faces-portal</artifactId>
 			<version>${project.version}</version>
+			<scope>compile</scope>
 		</dependency>
 
 	</dependencies>
