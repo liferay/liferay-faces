@@ -19,7 +19,6 @@ import javax.portlet.ResourceResponse;
 import javax.portlet.filter.ResourceResponseWrapper;
 
 import com.liferay.faces.bridge.context.BridgeContext;
-import com.liferay.faces.bridge.internal.BridgeConstants;
 
 
 /**
@@ -42,7 +41,7 @@ public class ResourceResponseBridgeImpl extends ResourceResponseWrapper {
 
 			namespace = super.getNamespace();
 
-			if (namespace.startsWith(BridgeConstants.WSRP_REWRITE)) {
+			if (namespace.startsWith("wsrp_rewrite")) {
 
 				BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
 				namespace = getNamespaceWSRP(bridgeContext);

@@ -20,7 +20,6 @@ import java.util.Set;
 
 import javax.portlet.faces.Bridge;
 
-import com.liferay.faces.bridge.internal.BridgeConstants;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -52,7 +51,7 @@ public class FacesViewParameterMap extends HashMap<String, String> implements Ma
 
 		if ((facesViewQueryString != null) && (facesViewQueryString.length() > 0)) {
 
-			String[] queryParameters = facesViewQueryString.split(BridgeConstants.REGEX_AMPERSAND_DELIMITER);
+			String[] queryParameters = facesViewQueryString.split("[&]");
 
 			for (String queryParameter : queryParameters) {
 				String[] nameValueArray = queryParameter.split("[=]");

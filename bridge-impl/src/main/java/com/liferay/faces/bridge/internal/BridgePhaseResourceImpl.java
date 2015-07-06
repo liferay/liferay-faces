@@ -77,8 +77,7 @@ public class BridgePhaseResourceImpl extends BridgePhaseCompat_2_2_Impl {
 				// Ask the Faces resource handler to copy the contents of the resource to the response.
 				handleJSF2ResourceRequest(facesContext);
 			}
-			else if ((resourceRequest.getResourceID() != null) &&
-					!resourceRequest.getResourceID().equals(BridgeConstants.WSRP)) {
+			else if ((resourceRequest.getResourceID() != null) && !resourceRequest.getResourceID().equals("wsrp")) {
 
 				logger.debug("Detected non-Faces resource");
 
