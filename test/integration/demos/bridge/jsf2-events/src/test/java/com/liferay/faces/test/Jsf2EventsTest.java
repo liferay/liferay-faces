@@ -12,6 +12,9 @@
  * details.
  */
 package com.liferay.faces.test;
+//J-
+
+import static org.junit.Assert.assertTrue;
 
 import java.util.logging.Level;
 
@@ -19,13 +22,8 @@ import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.drone.api.annotation.Drone;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.junit.InSequence;
-
-import static org.junit.Assert.assertTrue;
-
 import org.junit.Test;
-
 import org.junit.runner.RunWith;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -33,9 +31,8 @@ import org.openqa.selenium.support.FindBy;
 
 import com.liferay.faces.test.util.TesterBase;
 
-
 /**
- * @author  Liferay Faces Team
+ * @author	Liferay Faces Team
  */
 @RunWith(Arquillian.class)
 public class Jsf2EventsTest extends TesterBase {
@@ -57,16 +54,13 @@ public class Jsf2EventsTest extends TesterBase {
 
 	// portlet topper for bookings
 	private static final String bookingsPortletDisplayNameXpath = "(//header[@class='portlet-topper']/h1/span)[2]";
-
 	// <input id="A8622:f1:firstName" type="text" name="A8622:f1:firstName" value="Brian" class="focus">
 	private static final String firstNameXpath = "//input[contains(@id,':firstName')]";
-
 	// <input id="A8622:f1:firstName" type="text" name="A8622:f1:firstName" value="Brian" class="focus">
 	private static final String lastNameXpath = "//input[contains(@id,':lastName')]";
 	private static final String bookingTypeIdXpath = "(//select[contains(@id,':bookingTypeId')])[1]";
 	private static final String startDateXpath = "(//input[contains(@id,':startDate')])[1]";
 	private static final String finishDateXpath = "(//input[contains(@id,':finishDate')])[1]";
-
 	// <input type="submit" name="A8622:f1:j_idt28" value="Submit" id="aui_3_4_0_1_2331">
 	private static final String submitXpath = "//input[@type='submit' and @value='Submit']";
 
@@ -106,6 +100,62 @@ public class Jsf2EventsTest extends TesterBase {
 
 	@Test
 	@RunAsClient
+	@InSequence(1000)
+	public void renderViewMode() throws Exception {
+
+		signIn(browser);
+		logger.log(Level.INFO, "browser.navigate().to(" + url + ")");
+		browser.navigate().to(url);
+		logger.log(Level.INFO, "browser.getTitle() = " + browser.getTitle());
+		logger.log(Level.INFO, "browser.getCurrentUrl() = " + browser.getCurrentUrl());
+		logger.log(Level.INFO, "customerPortletDisplayName.getText() = " + customerPortletDisplayName.getText());
+		logger.log(Level.INFO, "bookingsPortletDisplayName.getText() = " + bookingsPortletDisplayName.getText());
+
+		assertTrue("customerPortletDisplayName.isDisplayed()", customerPortletDisplayName.isDisplayed());
+		assertTrue("bookingsPortletDisplayName.isDisplayed()", bookingsPortletDisplayName.isDisplayed());
+
+		logger.log(Level.INFO,
+			"browser.findElements(By.xpath(portletDisplayNameXpath)).size() = " +
+			browser.findElements(By.xpath(customerPortletDisplayNameXpath)).size());
+		logger.log(Level.INFO,
+			"browser.findElements(By.xpath(briansInputXpath)).size() = " +
+			browser.findElements(By.xpath(briansInputXpath)).size());
+		logger.log(Level.INFO,
+			"browser.findElements(By.xpath(lizsInputXpath)).size() = " +
+			browser.findElements(By.xpath(lizsInputXpath)).size());
+
+		logger.log(Level.INFO, "briansFirstName.getText() = " + briansFirstName.getText());
+		logger.log(Level.INFO, "briansLastName.getText() = " + briansLastName.getText());
+
+		logger.log(Level.INFO, "lizsFirstName.getText() = " + lizsFirstName.getText());
+		logger.log(Level.INFO, "lizsLastName.getText() = " + lizsLastName.getText());
+
+	}
+
+	@Test
+	@RunAsClient
+	@InSequence(2000)
+	public void checkBriansBookings() throws Exception {
+
+		briansInput.click();
+		Thread.sleep(500);
+
+		logger.log(Level.INFO, "firstName.getAttribute(value) = " + firstName.getAttribute("value"));
+		logger.log(Level.INFO, "lastName.getAttribute(value) = " + lastName.getAttribute("value"));
+		logger.log(Level.INFO, "startDate.getAttribute(value) = " + startDate.getAttribute("value"));
+		logger.log(Level.INFO, "finishDate.getAttribute(value) = " + finishDate.getAttribute("value"));
+
+		assertTrue("customer first name should be the same in the bookings but it is '" + briansFirstName.getText() +
+			"' in the customer module," + " and '" + firstName.getAttribute("value") + "' in bookings",
+			firstName.getAttribute("value").contains(briansFirstName.getText()));
+		assertTrue("customer last name should be the same in the bookings but it is '" + briansLastName.getText() +
+			"' in the customer module," + " and '" + lastName.getAttribute("value") + "' in bookings",
+			lastName.getAttribute("value").contains(briansLastName.getText()));
+
+	}
+
+	@Test
+	@RunAsClient
 	@InSequence(3000)
 	public void changeBriansBookings() throws Exception {
 
@@ -134,6 +184,29 @@ public class Jsf2EventsTest extends TesterBase {
 			briansLastName.getText().contains("Greeny"));
 		assertTrue("Bookings last name should contain 'Greeny', but it contains '" + lastName.getAttribute("value") +
 			"'", lastName.getAttribute("value").contains("Greeny"));
+	}
+
+	@Test
+	@RunAsClient
+	@InSequence(4000)
+	public void checkLizsBookings() throws Exception {
+
+		lizsInput.click();
+
+		waitForElement(browser, lizsFirstNameXpath);
+
+		logger.log(Level.INFO, "firstName.getAttribute(value) = " + firstName.getAttribute("value"));
+		logger.log(Level.INFO, "lastName.getAttribute(value) = " + lastName.getAttribute("value"));
+		logger.log(Level.INFO, "startDate.getAttribute(value) = " + startDate.getAttribute("value"));
+		logger.log(Level.INFO, "finishDate.getAttribute(value) = " + finishDate.getAttribute("value"));
+
+		assertTrue("customer first name should be the same in the bookings but it is '" + lizsFirstName.getText() +
+			"' in the customer module," + " and '" + firstName.getAttribute("value") + "' in bookings",
+			firstName.getAttribute("value").contains(lizsFirstName.getText()));
+		assertTrue("customer last name should be the same in the bookings but it is '" + lizsLastName.getText() +
+			"' in the customer module," + " and '" + lastName.getAttribute("value") + "' in bookings",
+			lastName.getAttribute("value").contains(lizsLastName.getText()));
+
 	}
 
 	@Test
@@ -167,28 +240,6 @@ public class Jsf2EventsTest extends TesterBase {
 
 	@Test
 	@RunAsClient
-	@InSequence(2000)
-	public void checkBriansBookings() throws Exception {
-
-		briansInput.click();
-		Thread.sleep(500);
-
-		logger.log(Level.INFO, "firstName.getAttribute(value) = " + firstName.getAttribute("value"));
-		logger.log(Level.INFO, "lastName.getAttribute(value) = " + lastName.getAttribute("value"));
-		logger.log(Level.INFO, "startDate.getAttribute(value) = " + startDate.getAttribute("value"));
-		logger.log(Level.INFO, "finishDate.getAttribute(value) = " + finishDate.getAttribute("value"));
-
-		assertTrue("customer first name should be the same in the bookings but it is '" + briansFirstName.getText() +
-			"' in the customer module," + " and '" + firstName.getAttribute("value") + "' in bookings",
-			firstName.getAttribute("value").contains(briansFirstName.getText()));
-		assertTrue("customer last name should be the same in the bookings but it is '" + briansLastName.getText() +
-			"' in the customer module," + " and '" + lastName.getAttribute("value") + "' in bookings",
-			lastName.getAttribute("value").contains(briansLastName.getText()));
-
-	}
-
-	@Test
-	@RunAsClient
 	@InSequence(6000)
 	public void checkBriansBookingsAgain() throws Exception {
 
@@ -213,61 +264,5 @@ public class Jsf2EventsTest extends TesterBase {
 
 	}
 
-	@Test
-	@RunAsClient
-	@InSequence(4000)
-	public void checkLizsBookings() throws Exception {
-
-		lizsInput.click();
-
-		waitForElement(browser, lizsFirstNameXpath);
-
-		logger.log(Level.INFO, "firstName.getAttribute(value) = " + firstName.getAttribute("value"));
-		logger.log(Level.INFO, "lastName.getAttribute(value) = " + lastName.getAttribute("value"));
-		logger.log(Level.INFO, "startDate.getAttribute(value) = " + startDate.getAttribute("value"));
-		logger.log(Level.INFO, "finishDate.getAttribute(value) = " + finishDate.getAttribute("value"));
-
-		assertTrue("customer first name should be the same in the bookings but it is '" + lizsFirstName.getText() +
-			"' in the customer module," + " and '" + firstName.getAttribute("value") + "' in bookings",
-			firstName.getAttribute("value").contains(lizsFirstName.getText()));
-		assertTrue("customer last name should be the same in the bookings but it is '" + lizsLastName.getText() +
-			"' in the customer module," + " and '" + lastName.getAttribute("value") + "' in bookings",
-			lastName.getAttribute("value").contains(lizsLastName.getText()));
-
-	}
-
-	@Test
-	@RunAsClient
-	@InSequence(1000)
-	public void renderViewMode() throws Exception {
-
-		signIn(browser);
-		logger.log(Level.INFO, "browser.navigate().to(" + url + ")");
-		browser.navigate().to(url);
-		logger.log(Level.INFO, "browser.getTitle() = " + browser.getTitle());
-		logger.log(Level.INFO, "browser.getCurrentUrl() = " + browser.getCurrentUrl());
-		logger.log(Level.INFO, "customerPortletDisplayName.getText() = " + customerPortletDisplayName.getText());
-		logger.log(Level.INFO, "bookingsPortletDisplayName.getText() = " + bookingsPortletDisplayName.getText());
-
-		assertTrue("customerPortletDisplayName.isDisplayed()", customerPortletDisplayName.isDisplayed());
-		assertTrue("bookingsPortletDisplayName.isDisplayed()", bookingsPortletDisplayName.isDisplayed());
-
-		logger.log(Level.INFO,
-			"browser.findElements(By.xpath(portletDisplayNameXpath)).size() = " +
-			browser.findElements(By.xpath(customerPortletDisplayNameXpath)).size());
-		logger.log(Level.INFO,
-			"browser.findElements(By.xpath(briansInputXpath)).size() = " +
-			browser.findElements(By.xpath(briansInputXpath)).size());
-		logger.log(Level.INFO,
-			"browser.findElements(By.xpath(lizsInputXpath)).size() = " +
-			browser.findElements(By.xpath(lizsInputXpath)).size());
-
-		logger.log(Level.INFO, "briansFirstName.getText() = " + briansFirstName.getText());
-		logger.log(Level.INFO, "briansLastName.getText() = " + briansLastName.getText());
-
-		logger.log(Level.INFO, "lizsFirstName.getText() = " + lizsFirstName.getText());
-		logger.log(Level.INFO, "lizsLastName.getText() = " + lizsLastName.getText());
-
-	}
-
 }
+//J+
