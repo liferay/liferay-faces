@@ -24,6 +24,9 @@ import javax.faces.event.PhaseId;
  */
 public class ProgressCompleteEvent extends AjaxBehaviorEvent {
 
+	// Public Constants
+	public static final String PROGRESS_COMPLETE = "progressComplete";
+
 	/// serialVersionUID
 	private static final long serialVersionUID = 7578789532730213902L;
 

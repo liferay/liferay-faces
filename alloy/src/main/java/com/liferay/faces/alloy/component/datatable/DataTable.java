@@ -47,21 +47,21 @@ public class DataTable extends DataTableBase implements ClientBehaviorHolder {
 	public void queueEvent(FacesEvent facesEvent) {
 
 		// This method is called by the AjaxBehavior renderer's decode() method. If the specified event is an ajax
-		// behavior event that indicates a row being selected/deselected, then
+		// behavior event, then
 		if (facesEvent instanceof AjaxBehaviorEvent) {
 
-			// Determine the client-side state of the selected tab index.
+			// Determine the client-side state of the selected row index.
 			FacesContext facesContext = FacesContext.getCurrentInstance();
 			Map<String, String> requestParameterMap = facesContext.getExternalContext().getRequestParameterMap();
-			String clientId = getClientId(facesContext);
-
-			// Queue an accordion tab event rather than the specified faces event.
-			AjaxBehaviorEvent behaviorEvent = (AjaxBehaviorEvent) facesEvent;
-			Behavior behavior = behaviorEvent.getBehavior();
 			String eventName = requestParameterMap.get("javax.faces.behavior.event");
 
+			// If the AjaxBehaviorEvent indicates a row being selected/deselected, then
 			if (RowSelectEvent.ROW_SELECT.equals(eventName) || RowDeselectEvent.ROW_DESELECT.equals(eventName)) {
 
+				// Queue a row selection/deselection event rather than the specified faces event.
+				AjaxBehaviorEvent behaviorEvent = (AjaxBehaviorEvent) facesEvent;
+				Behavior behavior = behaviorEvent.getBehavior();
+				String clientId = getClientId(facesContext);
 				int originalRowIndex = getRowIndex();
 				int selectedRowIndex = IntegerHelper.toInteger(requestParameterMap.get(clientId + "_rowIndex"));
 				setRowIndex(selectedRowIndex);
@@ -76,15 +76,22 @@ public class DataTable extends DataTableBase implements ClientBehaviorHolder {
 					facesEvent = new RowDeselectEvent(this, behavior, selectedRowIndex, rowData);
 				}
 			}
-			else {
 
+			// If the AjaxBehaviorEvent indicates a row range being selected/deselected, then
+			else if (RowSelectRangeEvent.ROW_SELECT_RANGE.equals(eventName) ||
+					RowDeselectRangeEvent.ROW_DESELECT_RANGE.equals(eventName)) {
+
+				// Queue a row range selection/deselection event rather than the specified faces event.
+				AjaxBehaviorEvent behaviorEvent = (AjaxBehaviorEvent) facesEvent;
+				Behavior behavior = behaviorEvent.getBehavior();
+				String clientId = getClientId(facesContext);
 				String rowIndexRange = requestParameterMap.get(clientId + "_rowIndexRange");
 				int[] rowIndexArray = toIntArray(rowIndexRange);
 
 				if (RowSelectRangeEvent.ROW_SELECT_RANGE.equals(eventName)) {
 					facesEvent = new RowSelectRangeEvent(this, behavior, rowIndexArray, getRowDataList(rowIndexArray));
 				}
-				else if (RowDeselectRangeEvent.ROW_DESELECT_RANGE.equals(eventName)) {
+				else {
 					facesEvent = new RowDeselectRangeEvent(this, behavior, rowIndexArray,
 							getRowDataList(rowIndexArray));
 				}
