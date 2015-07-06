@@ -43,7 +43,6 @@ import com.liferay.faces.bridge.context.internal.ExternalContextImpl;
 import com.liferay.faces.bridge.context.url.BridgeURI;
 import com.liferay.faces.bridge.context.url.BridgeURL;
 import com.liferay.faces.bridge.helper.internal.WindowStateHelper;
-import com.liferay.faces.bridge.internal.BridgeConstants;
 import com.liferay.faces.bridge.util.internal.RequestParameter;
 import com.liferay.faces.util.helper.BooleanHelper;
 import com.liferay.faces.util.logging.Logger;
@@ -442,7 +441,7 @@ public abstract class BridgeURLBase implements BridgeURL {
 				if (queryString.length() > 0) {
 					requestParameters = new ArrayList<RequestParameter>();
 
-					String[] queryParameters = queryString.split(BridgeConstants.REGEX_AMPERSAND_DELIMITER);
+					String[] queryParameters = queryString.split("[&]");
 
 					for (String queryParameter : queryParameters) {
 						String[] nameValueArray = queryParameter.split("[=]");

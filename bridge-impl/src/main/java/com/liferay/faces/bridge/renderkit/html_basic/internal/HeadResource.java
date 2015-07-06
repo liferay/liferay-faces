@@ -18,8 +18,6 @@ import java.util.List;
 
 import org.xml.sax.Attributes;
 
-import com.liferay.faces.bridge.internal.BridgeConstants;
-
 
 /**
  * @author  Neil Griffin
@@ -71,7 +69,7 @@ public class HeadResource {
 			url = attributes.getValue("href");
 		}
 		else if ("script".equals(type)) {
-			url = attributes.getValue(BridgeConstants.SRC);
+			url = attributes.getValue("src");
 		}
 
 		initialize();
@@ -141,7 +139,7 @@ public class HeadResource {
 
 			if (queryPos > 0) {
 				String parameters = url.substring(queryPos + 1);
-				String[] nameValuePairs = parameters.split(BridgeConstants.REGEX_AMPERSAND_DELIMITER);
+				String[] nameValuePairs = parameters.split("[&]");
 
 				for (String nameValuePair : nameValuePairs) {
 					int equalsPos = nameValuePair.indexOf("=");

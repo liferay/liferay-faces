@@ -129,8 +129,8 @@ public abstract class BridgePhaseBaseImpl implements BridgePhase {
 				portletRequest.removeAttribute(Bridge.PORTLET_LIFECYCLE_PHASE);
 
 				// Restore the cached attributes.
-				portletRequest.setAttribute(BridgeConstants.REQ_ATTR_PATH_INFO, pathInfo);
-				portletRequest.setAttribute(BridgeConstants.REQ_ATTR_SERVLET_PATH, servletPath);
+				portletRequest.setAttribute("javax.servlet.include.path_info", pathInfo);
+				portletRequest.setAttribute("javax.servlet.include.servlet_path", servletPath);
 			}
 
 			bridgeContext.release();
@@ -189,10 +189,10 @@ public abstract class BridgePhaseBaseImpl implements BridgePhase {
 		// implementations (like Mojarra) assume a servlet (non-portlet) environment and check for attributes. In order
 		// to prevent the JSF implementation from working with bad values, the attributes must be removed before the
 		// Faces lifecycle is run, and then restored afterwards.
-		pathInfo = (String) portletRequest.getAttribute(BridgeConstants.REQ_ATTR_PATH_INFO);
-		portletRequest.removeAttribute(BridgeConstants.REQ_ATTR_PATH_INFO);
-		servletPath = (String) portletRequest.getAttribute(BridgeConstants.REQ_ATTR_SERVLET_PATH);
-		portletRequest.removeAttribute(BridgeConstants.REQ_ATTR_SERVLET_PATH);
+		pathInfo = (String) portletRequest.getAttribute("javax.servlet.include.path_info");
+		portletRequest.removeAttribute("javax.servlet.include.path_info");
+		servletPath = (String) portletRequest.getAttribute("javax.servlet.include.servlet_path");
+		portletRequest.removeAttribute("javax.servlet.include.servlet_path");
 
 		// If not set by a previous request, then set the default viewIdHistory for the portlet modes.
 		for (String portletMode : PortletModeHelper.PORTLET_MODE_NAMES) {
