@@ -21,7 +21,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import com.liferay.faces.bridge.internal.BridgeConstants;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -52,7 +51,7 @@ public class URLUtil {
 						queryString = queryString.substring(0, pos);
 					}
 
-					String[] queryParameters = queryString.split(BridgeConstants.REGEX_AMPERSAND_DELIMITER);
+					String[] queryParameters = queryString.split("[&]");
 
 					for (String queryParameter : queryParameters) {
 						String[] nameValueArray = queryParameter.split("[=]");

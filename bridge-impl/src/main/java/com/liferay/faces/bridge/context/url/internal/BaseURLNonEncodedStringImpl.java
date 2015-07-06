@@ -24,7 +24,6 @@ import javax.portlet.BaseURL;
 import javax.portlet.PortletSecurityException;
 import javax.portlet.faces.Bridge;
 
-import com.liferay.faces.bridge.internal.BridgeConstants;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -158,7 +157,7 @@ public class BaseURLNonEncodedStringImpl implements BaseURL {
 			// The TCK expects query parameters to appear in exactly the same order as they do in the query-string of
 			// the original URL. For this reason, need to iterate over the parameters found in the original
 			// query-string.
-			String[] queryParameters = originalQuery.split(BridgeConstants.REGEX_AMPERSAND_DELIMITER);
+			String[] queryParameters = originalQuery.split("[&]");
 
 			// For each parameter found in the original query-string:
 			for (String queryParameter : queryParameters) {
