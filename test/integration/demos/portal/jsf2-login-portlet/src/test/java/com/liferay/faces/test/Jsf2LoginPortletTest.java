@@ -12,6 +12,9 @@
  * details.
  */
 package com.liferay.faces.test;
+//J-
+
+import static org.junit.Assert.assertTrue;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -20,14 +23,9 @@ import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.drone.api.annotation.Drone;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.junit.InSequence;
-
-import static org.junit.Assert.assertTrue;
-
 import org.junit.Before;
 import org.junit.Test;
-
 import org.junit.runner.RunWith;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -36,14 +34,12 @@ import com.liferay.faces.test.util.TesterBase;
 
 
 /**
- * @author  Liferay Faces Team
+ * @author	Liferay Faces Team
  */
 @RunWith(Arquillian.class)
 public class Jsf2LoginPortletTest extends TesterBase {
 
 	private static final Logger logger = Logger.getLogger(Jsf2LoginPortletTest.class.getName());
-
-	static final String url = baseUrl + "/web/guest/jsf2-sign-in";
 
 	@FindBy(xpath = "//div[@class='portlet-topper']/span")
 	private WebElement portletDisplayName;
@@ -63,8 +59,16 @@ public class Jsf2LoginPortletTest extends TesterBase {
 	@FindBy(xpath = "//div[contains(text(),'You are signed in as')]")
 	private WebElement portletBody;
 
+	static final String url = baseUrl + "/web/guest/jsf2-sign-in";
+
 	@Drone
 	WebDriver browser;
+
+	@Before
+	public void getNewSession() {
+		browser.manage().deleteAllCookies();
+		java.util.logging.Logger.getLogger("com.gargoylesoftware.htmlunit").setLevel(Level.OFF);
+	}
 
 	@Test
 	@RunAsClient
@@ -135,10 +139,5 @@ public class Jsf2LoginPortletTest extends TesterBase {
 		assertTrue("You are signed in", portletBody.getText().contains("You are signed in"));
 	}
 
-	@Before
-	public void getNewSession() {
-		browser.manage().deleteAllCookies();
-		java.util.logging.Logger.getLogger("com.gargoylesoftware.htmlunit").setLevel(Level.OFF);
-	}
-
 }
+//J+

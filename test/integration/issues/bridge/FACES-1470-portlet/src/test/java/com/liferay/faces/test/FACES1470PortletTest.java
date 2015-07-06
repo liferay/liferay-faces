@@ -12,6 +12,9 @@
  * details.
  */
 package com.liferay.faces.test;
+//J-
+
+import static org.junit.Assert.assertTrue;
 
 import java.util.logging.Level;
 
@@ -19,13 +22,8 @@ import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.drone.api.annotation.Drone;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.junit.InSequence;
-
-import static org.junit.Assert.assertTrue;
-
 import org.junit.Test;
-
 import org.junit.runner.RunWith;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -34,7 +32,7 @@ import com.liferay.faces.test.util.TesterBase;
 
 
 /**
- * @author  Liferay Faces Team
+ * @author	Liferay Faces Team
  */
 @RunWith(Arquillian.class)
 public class FACES1470PortletTest extends TesterBase {
@@ -100,19 +98,19 @@ public class FACES1470PortletTest extends TesterBase {
 
 	@Test
 	@RunAsClient
-	@InSequence(5000)
-	public void View1PostBack() throws Exception {
+	@InSequence(2000)
+	public void View2ViaAjax() throws Exception {
 
-		fullPostBackButton2.click();
+		ajaxButton.click();
 		Thread.sleep(500);
 
 		logger.log(Level.INFO, "browser.getCurrentUrl() = " + browser.getCurrentUrl());
 
-		logger.log(Level.INFO, "ajaxButton.isDisplayed() = " + ajaxButton.isDisplayed());
-		logger.log(Level.INFO, "fullPostBackButton.isDisplayed() = " + fullPostBackButton.isDisplayed());
+		logger.log(Level.INFO, "ajaxButton2.isDisplayed() = " + ajaxButton2.isDisplayed());
+		logger.log(Level.INFO, "fullPostBackButton2.isDisplayed() = " + fullPostBackButton2.isDisplayed());
 
-		assertTrue("ajaxButton should be displayed, but it is not", ajaxButton.isDisplayed());
-		assertTrue("fullPostBackButton should be displayed, but it is not", fullPostBackButton.isDisplayed());
+		assertTrue("ajaxButton2 should be displayed, but it is not", ajaxButton2.isDisplayed());
+		assertTrue("fullPostBackButton2 should be displayed, but it is not", fullPostBackButton2.isDisplayed());
 
 	}
 
@@ -154,20 +152,21 @@ public class FACES1470PortletTest extends TesterBase {
 
 	@Test
 	@RunAsClient
-	@InSequence(2000)
-	public void View2ViaAjax() throws Exception {
+	@InSequence(5000)
+	public void View1PostBack() throws Exception {
 
-		ajaxButton.click();
+		fullPostBackButton2.click();
 		Thread.sleep(500);
 
 		logger.log(Level.INFO, "browser.getCurrentUrl() = " + browser.getCurrentUrl());
 
-		logger.log(Level.INFO, "ajaxButton2.isDisplayed() = " + ajaxButton2.isDisplayed());
-		logger.log(Level.INFO, "fullPostBackButton2.isDisplayed() = " + fullPostBackButton2.isDisplayed());
+		logger.log(Level.INFO, "ajaxButton.isDisplayed() = " + ajaxButton.isDisplayed());
+		logger.log(Level.INFO, "fullPostBackButton.isDisplayed() = " + fullPostBackButton.isDisplayed());
 
-		assertTrue("ajaxButton2 should be displayed, but it is not", ajaxButton2.isDisplayed());
-		assertTrue("fullPostBackButton2 should be displayed, but it is not", fullPostBackButton2.isDisplayed());
+		assertTrue("ajaxButton should be displayed, but it is not", ajaxButton.isDisplayed());
+		assertTrue("fullPostBackButton should be displayed, but it is not", fullPostBackButton.isDisplayed());
 
 	}
 
 }
+//J+
