@@ -42,7 +42,7 @@ import com.liferay.faces.util.render.RendererUtil;
 
 
 /**
- * This class is a JSF {@link javax.faces.render.Renderer} for the aui:tabView component.
+ * This class is a JSF {@link javax.faces.render.Renderer} for the alloy:tabView component.
  *
  * @author  Neil Griffin
  * @author  Vernon Singleton
@@ -124,7 +124,7 @@ public class TabViewRenderer extends TabViewRendererBase {
 
 			}
 			else {
-				logger.warn("Unable to iterate because aui:tabView does not have an aui:tab child element.");
+				logger.warn("Unable to iterate because alloy:tabView does not have an alloy:tab child element.");
 			}
 		}
 		else {
