@@ -1027,7 +1027,6 @@ public class OrderingTest {
 	@Test
 	public void test21_AafterOthers_BbeforeOthers_DafterOthers_EafterCbeforeOthers_startingWithABCDEF()
 		throws Exception {
-		// AafterOthers_BbeforeOthers_DafterOthers_EafterCbeforeOthers_startingWithABCDEF
 
 		List<FacesConfigDescriptor> facesConfigDescriptors = new ArrayList<FacesConfigDescriptor>();
 		parseConfigurationResources(
@@ -1040,6 +1039,8 @@ public class OrderingTest {
 		// some solutions:
 		// [B, C, E, F, A, D]
 		// [B, C, E, F, D, A]
+		// [C, E, B, F, A, D]
+		// [C, E, B, F, D, A]
 
 		String[] orderedNames = Ordering.extractNames(facesConfigDescriptors);
 
@@ -1048,11 +1049,20 @@ public class OrderingTest {
 
 		List<String> possibility1 = Arrays.asList("b", "c", "e", "f", "a", "d");
 		List<String> possibility2 = Arrays.asList("b", "c", "e", "f", "d", "a");
+		List<String> possibility3 = Arrays.asList("c", "e", "b", "f", "a", "d");
+		List<String> possibility4 = Arrays.asList("c", "e", "b", "f", "d", "a");
 
-		boolean assertion = (actually.equals(possibility1) || actually.equals(possibility2));
-		String message = "\n original: " + original + "\n expected: " + possibility1 + "\n       or: " + possibility1 + "\n actually: " + actually +
-			"\n";
-//		Assert.assertTrue(message, assertion);
+		boolean assertion = (
+			actually.equals(possibility1) || actually.equals(possibility2) ||
+			actually.equals(possibility3) || actually.equals(possibility4)
+		);
+		String message = "\n original: " + original +
+			"\n expected: " + possibility1 +
+			"\n       or: " + possibility2 +
+			"\n       or: " + possibility3 +
+			"\n       or: " + possibility4 +
+			"\n actually: " + actually + "\n";
+		Assert.assertTrue(message, assertion);
 		logger.info("test21_AafterOthers_BbeforeOthers_DafterOthers_EafterCbeforeOthers_startingWithABCDEF: Passed" +
 			message);
 	}
