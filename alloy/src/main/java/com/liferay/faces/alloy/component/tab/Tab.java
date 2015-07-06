@@ -24,14 +24,14 @@ import com.liferay.faces.alloy.component.tabview.TabView;
 
 
 /**
- * This is the {@link UIComponent} class associated with the aui:tab component tag. The intended usage is for the
- * developer to specify aui:tab as a child element of aui:tabView. For example:
+ * This is the {@link UIComponent} class associated with the alloy:tab component tag. The intended usage is for the
+ * developer to specify alloy:tab as a child element of alloy:tabView. For example:
  *
  * <pre>
     {@code
-    <aui:tabView value="#{modelBean.items}" var="item">
-        <aui:tab label="#{item.label}" />
-    </aui:tabView>
+    <alloy:tabView value="#{modelBean.items}" var="item">
+        <alloy:tab label="#{item.label}" />
+    </alloy:tabView>
     }
  * </pre>
  *
