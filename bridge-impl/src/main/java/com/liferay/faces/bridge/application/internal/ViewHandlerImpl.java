@@ -17,7 +17,6 @@ import javax.faces.application.ViewHandler;
 import javax.faces.component.UIViewRoot;
 import javax.faces.context.FacesContext;
 
-import com.liferay.faces.bridge.internal.BridgeConstants;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -26,9 +25,6 @@ import com.liferay.faces.util.logging.LoggerFactory;
  * @author  Neil Griffin
  */
 public class ViewHandlerImpl extends ViewHandlerCompatImpl {
-
-	// Private Constants
-	private static final String DOT_REPLACEMENT = "_DOT_";
 
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(ViewHandlerImpl.class);
@@ -109,7 +105,7 @@ public class ViewHandlerImpl extends ViewHandlerCompatImpl {
 
 				if (dotPos > 0) {
 					String queryString = viewId.substring(questionMarkPos);
-					queryString = queryString.replaceAll(BridgeConstants.REGEX_DOT_DELIMITER, DOT_REPLACEMENT);
+					queryString = queryString.replaceAll("[.]", "_DOT_");
 					viewId = viewId.substring(0, questionMarkPos) + queryString;
 					replacedDotChars = true;
 				}
@@ -119,7 +115,7 @@ public class ViewHandlerImpl extends ViewHandlerCompatImpl {
 			actionURL = super.getActionURL(facesContext, viewId);
 
 			if (replacedDotChars) {
-				actionURL = actionURL.replaceAll(DOT_REPLACEMENT, ".");
+				actionURL = actionURL.replaceAll("_DOT_", ".");
 			}
 		}
 

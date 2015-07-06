@@ -19,7 +19,6 @@ import javax.portlet.PortletContext;
 import javax.portlet.filter.EventResponseWrapper;
 
 import com.liferay.faces.bridge.context.BridgeContext;
-import com.liferay.faces.bridge.internal.BridgeConstants;
 
 
 /**
@@ -42,7 +41,7 @@ public class EventResponseBridgeImpl extends EventResponseWrapper {
 
 			namespace = super.getNamespace();
 
-			if (namespace.startsWith(BridgeConstants.WSRP_REWRITE)) {
+			if (namespace.startsWith("wsrp_rewrite")) {
 
 				BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
 				namespace = getNamespaceWSRP(bridgeContext);
