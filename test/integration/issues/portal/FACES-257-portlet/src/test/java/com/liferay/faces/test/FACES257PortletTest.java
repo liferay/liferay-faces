@@ -12,6 +12,9 @@
  * details.
  */
 package com.liferay.faces.test;
+//J-
+
+import static org.junit.Assert.assertTrue;
 
 import java.util.logging.Level;
 
@@ -19,13 +22,8 @@ import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.drone.api.annotation.Drone;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.junit.InSequence;
-
-import static org.junit.Assert.assertTrue;
-
 import org.junit.Test;
-
 import org.junit.runner.RunWith;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -34,7 +32,7 @@ import com.liferay.faces.test.util.TesterBase;
 
 
 /**
- * @author  Liferay Faces Team
+ * @author	Liferay Faces Team
  */
 @RunWith(Arquillian.class)
 public class FACES257PortletTest extends TesterBase {
@@ -249,3 +247,4 @@ public class FACES257PortletTest extends TesterBase {
 	}
 
 }
+//J+
