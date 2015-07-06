@@ -22,6 +22,7 @@ import javax.faces.component.FacesComponent;
 import javax.faces.component.UIComponent;
 import javax.faces.component.behavior.Behavior;
 import javax.faces.component.behavior.ClientBehaviorHolder;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.event.FacesEvent;
@@ -47,7 +48,8 @@ public class ProgressBar extends ProgressBarBase implements ClientBehaviorHolder
 		if (facesEvent instanceof AjaxBehaviorEvent) {
 
 			FacesContext facesContext = FacesContext.getCurrentInstance();
-			Map<String, String> requestParameterMap = facesContext.getExternalContext().getRequestParameterMap();
+			ExternalContext externalContext = facesContext.getExternalContext();
+			Map<String, String> requestParameterMap = externalContext.getRequestParameterMap();
 			String eventName = requestParameterMap.get("javax.faces.behavior.event");
 
 			// If the AjaxBehaviorEvent indicates completion of progress, then
