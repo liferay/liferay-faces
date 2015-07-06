@@ -25,7 +25,6 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.Cookie;
 
 import com.liferay.faces.bridge.context.BridgeContext;
-import com.liferay.faces.bridge.internal.BridgeConstants;
 import com.liferay.faces.bridge.scope.BridgeRequestScope;
 import com.liferay.faces.util.context.map.FacesRequestParameterMap;
 import com.liferay.faces.util.context.map.MultiPartFormData;
@@ -65,8 +64,7 @@ public class ContextMapFactoryImpl extends ContextMapFactory {
 			String contentType = clientDataRequest.getContentType();
 
 			// Note: ICEfaces ace:fileEntry relies on its own mechanism for handling file upload.
-			if (!ICEFACES_DETECTED && (contentType != null) &&
-					contentType.toLowerCase().startsWith(BridgeConstants.MULTIPART_CONTENT_TYPE_PREFIX)) {
+			if (!ICEFACES_DETECTED && (contentType != null) && contentType.toLowerCase().startsWith("multipart/")) {
 
 				MultiPartFormData multiPartFormData = (MultiPartFormData) portletRequest.getAttribute(
 						MULTIPART_FORM_DATA_FQCN);

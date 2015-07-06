@@ -16,7 +16,6 @@ package com.liferay.faces.bridge.context.internal;
 import javax.portlet.PortalContext;
 import javax.portlet.PortletRequest;
 
-import com.liferay.faces.bridge.internal.BridgeConstants;
 import com.liferay.faces.util.helper.BooleanHelper;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
@@ -45,7 +44,7 @@ public class BridgePortalContextLiferayImpl extends BridgePortalContextLiferayCo
 		super(portalContext);
 
 		// Determine whether or not the portlet was added via $theme.runtime(...)
-		Boolean renderPortletResource = (Boolean) portletRequest.getAttribute(BridgeConstants.RENDER_PORTLET_RESOURCE);
+		Boolean renderPortletResource = (Boolean) portletRequest.getAttribute("RENDER_PORTLET_RESOURCE");
 		boolean runtimePortlet = (renderPortletResource != null) && renderPortletResource;
 
 		// If this is a runtime portlet, then it is not possible to add resources to the head section since
@@ -61,7 +60,7 @@ public class BridgePortalContextLiferayImpl extends BridgePortalContextLiferayCo
 
 			// If this portlet is running via WSRP, then it is not possible to add resources to the head section
 			// because Liferay doesn't support that feature with WSRP.
-			if (BooleanHelper.isTrueToken(portletRequest.getParameter(BridgeConstants.WSRP))) {
+			if (BooleanHelper.isTrueToken(portletRequest.getParameter("wsrp"))) {
 				this.ableToAddScriptResourceToHead = null;
 				this.ableToAddScriptTextToHead = null;
 				this.ableToAddStyleSheetResourceToHead = null;
