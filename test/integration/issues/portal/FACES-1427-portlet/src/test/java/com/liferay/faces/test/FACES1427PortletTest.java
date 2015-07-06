@@ -12,6 +12,9 @@
  * details.
  */
 package com.liferay.faces.test;
+//J-
+
+import static org.junit.Assert.assertTrue;
 
 import java.util.logging.Level;
 
@@ -20,25 +23,20 @@ import org.jboss.arquillian.drone.api.annotation.Drone;
 import org.jboss.arquillian.graphene.javascript.JavaScript;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.junit.InSequence;
-
-import static org.junit.Assert.assertTrue;
-
 import org.junit.Before;
 import org.junit.Test;
-
 import org.junit.runner.RunWith;
-
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
-import com.liferay.faces.test.util.TesterBase;
+import com.liferay.faces.test.util.TesterBase;;
 
 
 /**
- * @author  Liferay Faces Team
+ * @author	Liferay Faces Team
  */
 @RunWith(Arquillian.class)
 public class FACES1427PortletTest extends TesterBase {
@@ -130,7 +128,7 @@ public class FACES1427PortletTest extends TesterBase {
 		logger.log(Level.INFO, "portletDisplayName.getText() = " + portletDisplayName.getText());
 		Thread.sleep(250);
 
-		if (isThere(browser, errorMessageXpath) && errorMessage.isDisplayed()) {
+		if(isThere(browser, errorMessageXpath) && errorMessage.isDisplayed()) {
 			return;
 		}
 
@@ -167,7 +165,7 @@ public class FACES1427PortletTest extends TesterBase {
 	@InSequence(1100)
 	public void steps1and2() throws Exception {
 
-		if (isThere(browser, errorMessageXpath) && errorMessage.isDisplayed()) {
+		if(isThere(browser, errorMessageXpath) && errorMessage.isDisplayed()) {
 			return;
 		}
 
@@ -195,7 +193,7 @@ public class FACES1427PortletTest extends TesterBase {
 	@InSequence(1200)
 	public void steps34567() throws Exception {
 
-		if (isThere(browser, errorMessageXpath) && errorMessage.isDisplayed()) {
+		if(isThere(browser, errorMessageXpath) && errorMessage.isDisplayed()) {
 			return;
 		}
 
@@ -228,7 +226,7 @@ public class FACES1427PortletTest extends TesterBase {
 	@InSequence(1300)
 	public void steps89012() throws Exception {
 
-		if (isThere(browser, errorMessageXpath) && errorMessage.isDisplayed()) {
+		if(isThere(browser, errorMessageXpath) && errorMessage.isDisplayed()) {
 			return;
 		}
 
@@ -396,3 +394,4 @@ public class FACES1427PortletTest extends TesterBase {
 	}
 
 }
+//J+

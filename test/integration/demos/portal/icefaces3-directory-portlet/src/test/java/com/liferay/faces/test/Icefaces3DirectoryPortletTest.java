@@ -12,6 +12,9 @@
  * details.
  */
 package com.liferay.faces.test;
+//J-
+
+import static org.junit.Assert.assertTrue;
 
 import java.util.logging.Level;
 
@@ -19,13 +22,8 @@ import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.drone.api.annotation.Drone;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.junit.InSequence;
-
-import static org.junit.Assert.assertTrue;
-
 import org.junit.Test;
-
 import org.junit.runner.RunWith;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -34,7 +32,7 @@ import com.liferay.faces.test.util.TesterBase;
 
 
 /**
- * @author  Liferay Faces Team
+ * @author	Liferay Faces Team
  */
 @RunWith(Arquillian.class)
 public class Icefaces3DirectoryPortletTest extends TesterBase {
@@ -124,31 +122,6 @@ public class Icefaces3DirectoryPortletTest extends TesterBase {
 
 	@Test
 	@RunAsClient
-	@InSequence(2000)
-	public void search() throws Exception {
-
-		lastNameSearchInput.sendKeys("test");
-
-		searchButton.click();
-
-		Thread.sleep(1000);
-
-		logger.log(Level.INFO, "testUserLastNameCell.isDisplayed() = " + testUserLastNameCell.isDisplayed());
-		assertTrue(
-			"The Last Name Cell of the Test user should be displayed on the page as Test at this point but it is not.",
-			testUserLastNameCell.isDisplayed());
-		logger.log(Level.INFO, "testUserLastNameCell.isDisplayed() = " + testUserFirstNameCell.isDisplayed());
-		assertTrue(
-			"The First Name Cell of the Test user should be displayed on the page as Test at this point but it is not.",
-			testUserFirstNameCell.isDisplayed());
-		logger.log(Level.INFO, "testUserEmailAddressCell.isDisplayed() = " + testUserEmailAddressCell.isDisplayed());
-		assertTrue(
-			"The Email Address Cell of the Test user should be displayed on the page as test@liferay.com at this point but it is not.",
-			testUserEmailAddressCell.isDisplayed());
-	}
-
-	@Test
-	@RunAsClient
 	@InSequence(1000)
 	public void usersListView() throws Exception {
 
@@ -201,4 +174,30 @@ public class Icefaces3DirectoryPortletTest extends TesterBase {
 			jobTitleColumnHeader.isDisplayed());
 	}
 
+	@Test
+	@RunAsClient
+	@InSequence(2000)
+	public void search() throws Exception {
+
+		lastNameSearchInput.sendKeys("test");
+
+		searchButton.click();
+
+		Thread.sleep(1000);
+
+		logger.log(Level.INFO, "testUserLastNameCell.isDisplayed() = " + testUserLastNameCell.isDisplayed());
+		assertTrue(
+			"The Last Name Cell of the Test user should be displayed on the page as Test at this point but it is not.",
+			testUserLastNameCell.isDisplayed());
+		logger.log(Level.INFO, "testUserLastNameCell.isDisplayed() = " + testUserFirstNameCell.isDisplayed());
+		assertTrue(
+			"The First Name Cell of the Test user should be displayed on the page as Test at this point but it is not.",
+			testUserFirstNameCell.isDisplayed());
+		logger.log(Level.INFO, "testUserEmailAddressCell.isDisplayed() = " + testUserEmailAddressCell.isDisplayed());
+		assertTrue(
+			"The Email Address Cell of the Test user should be displayed on the page as test@liferay.com at this point but it is not.",
+			testUserEmailAddressCell.isDisplayed());
+	}
+
 }
+//J+

@@ -12,6 +12,10 @@
  * details.
  */
 package com.liferay.faces.test;
+//J-
+
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.util.logging.Level;
 
@@ -19,14 +23,8 @@ import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.drone.api.annotation.Drone;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.junit.InSequence;
-
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
 import org.junit.Test;
-
 import org.junit.runner.RunWith;
-
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -37,7 +35,7 @@ import com.liferay.faces.test.util.TesterBase;
 
 
 /**
- * @author  Liferay Faces Team
+ * @author	Liferay Faces Team
  */
 @RunWith(Arquillian.class)
 public class Icefaces3UsersPortletTest extends TesterBase {
@@ -56,8 +54,7 @@ public class Icefaces3UsersPortletTest extends TesterBase {
 	private static final String controlPanelTestSetupXpath = "//*[contains(text(),'Control Panel')]";
 	private static final String usersLinkTestSetupXpath = "//img[@alt='Users' and @title='Users']/../..";
 	private static final String searchAllUsersLinkTestSetupXpath = "//a[text()='Search All Users']";
-	private static final String backLinkTestSetupXpath =
-		"//a[contains(text(), 'Back to Users and Organizations Home')]";
+	private static final String backLinkTestSetupXpath = "//a[contains(text(), 'Back to Users and Organizations Home')]";
 	private static final String advancedSearchLinkTestSetupXpath = "//a[contains(text(), 'Advanced')]";
 	private static final String selectStatusTestSetupXpath = "//select[contains(@id, '_status')]";
 	private static final String johnAdamsTestSetupXpath = "//a[text()='john.adams']";
@@ -70,16 +67,13 @@ public class Icefaces3UsersPortletTest extends TesterBase {
 	private static final String lastNameInputTestSetupXpath = "//input[contains(@id, 'lastName')]";
 	private static final String jobTitleInputTestSetupXpath = "//input[contains(@id, 'jobTitle')]";
 	private static final String saveButtonTestSetupXpath = "//input[@type='submit' and @value='Save']";
-	private static final String errorMessageTestSetupXpath =
-		"//div[@class='portlet-msg-error' and text()='Your request failed to complete.']";
+	private static final String errorMessageTestSetupXpath = "//div[@class='portlet-msg-error' and text()='Your request failed to complete.']";
 	@FindBy(xpath = errorMessageTestSetupXpath)
 	private static WebElement errorMessageTestSetup;
-	private static final String errorPassword1TestSetupXpath =
-		"//input[contains(@id, 'password1') and @type='password']";
+	private static final String errorPassword1TestSetupXpath = "//input[contains(@id, 'password1') and @type='password']";
 	@FindBy(xpath = errorPassword1TestSetupXpath)
 	private static WebElement errorPassword1TestSetup;
-	private static final String errorPassword2TestSetupXpath =
-		"//input[contains(@id, 'password2') and @type='password']";
+	private static final String errorPassword2TestSetupXpath = "//input[contains(@id, 'password2') and @type='password']";
 	@FindBy(xpath = errorPassword2TestSetupXpath)
 	private static WebElement errorPassword2TestSetup;
 
@@ -321,443 +315,51 @@ public class Icefaces3UsersPortletTest extends TesterBase {
 	@Drone
 	WebDriver browser;
 
-	@Test
+//	@Test // Not applicable for Liferay Portal 6.0
 	@RunAsClient
-	@InSequence(7000)
-	public void changeUserAttributes() throws Exception {
+	@InSequence(0)
+	public void testSetupActivateUser() throws Exception {
+		browser.manage().window().maximize();
+		signIn(browser);
+		(new Actions(browser)).click(dropdownTestSetup);
 
-		waitForElement(browser, johnAdamsUserScreenNameCellXpath);
-		(new Actions(browser)).doubleClick(johnAdamsUserScreenNameCell).perform();
-		Thread.sleep(250);
-		(new Actions(browser)).doubleClick(johnAdamsUserScreenNameCell).perform();
-
-		waitForElement(browser, firstNameFieldXpath);
-
-		firstNameField.clear();
-		firstNameField.sendKeys("Aa");
-		middleNameField.clear();
-		middleNameField.sendKeys("Aa");
-		lastNameField.clear();
-		lastNameField.sendKeys("Aa");
-		emailAddressField.clear();
-		emailAddressField.sendKeys("A@A.com");
-		jobTitleField.clear();
-		jobTitleField.sendKeys("Aa");
-		submitButton.click();
-
-		logger.log(Level.INFO,
-			"isThere(browser, firstNameFieldErrorXpath) = " + isThere(browser, firstNameFieldErrorXpath));
-		assertFalse("The First Name Validation Error should be displayed on the page at this point but it is not.",
-			isThere(browser, firstNameFieldErrorXpath));
-
-		logger.log(Level.INFO,
-			".isThere(browser, lastNameFieldErrorXpath) = " + isThere(browser, lastNameFieldErrorXpath));
-		assertFalse("The Last Name Validation Error should be displayed on the page at this point but it is not.",
-			isThere(browser, lastNameFieldErrorXpath));
-
-		logger.log(Level.INFO,
-			"isThere(browser, emailAddressFieldErrorXpath) = " + isThere(browser, emailAddressFieldErrorXpath));
-		assertFalse("The Email Address Validation Error should be displayed on the page at this point but it is not.",
-			isThere(browser, emailAddressFieldErrorXpath));
-
-		waitForElement(browser, johnAdamsUserScreenNameCellXpath);
-
-		logger.log(Level.INFO, "changedUserLastNameCell.isDisplayed() = " + changedUserLastNameCell.isDisplayed());
-		assertTrue(
-			"The Last Name Cell of the changed user should be displayed on the page as A at this point but it is not.",
-			changedUserLastNameCell.isDisplayed());
-		logger.log(Level.INFO, "changedUserLastNameCell.isDisplayed() = " + changedUserFirstNameCell.isDisplayed());
-		assertTrue(
-			"The First Name Cell of the changed user should be displayed on the page as A at this point but it is not.",
-			changedUserFirstNameCell.isDisplayed());
-		logger.log(Level.INFO, "changedUserMiddleNameCell.isDisplayed() = " + changedUserMiddleNameCell.isDisplayed());
-		assertTrue(
-			"The Middle Name Cell of the changed user should be displayed on the page as A at this point but it is not.",
-			changedUserMiddleNameCell.isDisplayed());
-		logger.log(Level.INFO,
-			"changedUserEmailAddressCell.isDisplayed() = " + changedUserEmailAddressCell.isDisplayed());
-		assertTrue(
-			"The Email Address Cell of the changed user should be displayed on the page as A@A.com at this point but it is not.",
-			changedUserEmailAddressCell.isDisplayed());
-		logger.log(Level.INFO, "changedUserJobTitleCell.isDisplayed() = " + changedUserJobTitleCell.isDisplayed());
-		assertTrue(
-			"The Job Title Cell of the changed user should be displayed on the page as A at this point but it is not.",
-			changedUserJobTitleCell.isDisplayed());
-
-		waitForElement(browser, johnAdamsUserScreenNameCellXpath);
-
-		(new Actions(browser)).doubleClick(johnAdamsUserScreenNameCell).perform();
-		Thread.sleep(250);
-		(new Actions(browser)).doubleClick(johnAdamsUserScreenNameCell).perform();
-
-		waitForElement(browser, firstNameFieldXpath);
-
-		firstNameField.clear();
-		firstNameField.sendKeys("John");
-		middleNameField.clear();
-		lastNameField.clear();
-		lastNameField.sendKeys("Adams");
-		emailAddressField.clear();
-		emailAddressField.sendKeys("john.adams@liferay.com");
-		jobTitleField.clear();
-		submitButton.click();
-
-		logger.log(Level.INFO,
-			"isThere(browser, firstNameFieldErrorXpath) = " + isThere(browser, firstNameFieldErrorXpath));
-		assertFalse("The First Name Validation Error should be displayed on the page at this point but it is not.",
-			isThere(browser, firstNameFieldErrorXpath));
-		logger.log(Level.INFO,
-			"isThere(browser, lastNameFieldErrorXpath) = " + isThere(browser, lastNameFieldErrorXpath));
-		assertFalse("The Last Name Validation Error should be displayed on the page at this point but it is not.",
-			isThere(browser, lastNameFieldErrorXpath));
-		logger.log(Level.INFO,
-			"isThere(browser, emailAddressFieldErrorXpath) = " + isThere(browser, emailAddressFieldErrorXpath));
-		assertFalse("The Email Address Validation Error should be displayed on the page at this point but it is not.",
-			isThere(browser, emailAddressFieldErrorXpath));
-
-		waitForElement(browser, johnAdamsUserScreenNameCellXpath);
-
-		logger.log(Level.INFO,
-			"johnAdamsUserScreenNameCell.isDisplayed() = " + johnAdamsUserScreenNameCell.isDisplayed());
-		assertTrue(
-			"The Screen Name Cell of the John Adams user should be displayed on the page as john.adams at this point but it is not.",
-			johnAdamsUserScreenNameCell.isDisplayed());
-		logger.log(Level.INFO, "johnAdamsUserLastNameCell.isDisplayed() = " + johnAdamsUserLastNameCell.isDisplayed());
-		assertTrue(
-			"The Last Name Cell of the John Adams user should be displayed on the page as John at this point but it is not.",
-			johnAdamsUserLastNameCell.isDisplayed());
-		logger.log(Level.INFO, "johnAdamsUserLastNameCell.isDisplayed() = " + johnAdamsUserFirstNameCell.isDisplayed());
-		assertTrue(
-			"The First Name Cell of the John Adams user should be displayed on the page as Adams at this point but it is not.",
-			johnAdamsUserFirstNameCell.isDisplayed());
-		logger.log(Level.INFO,
-			"johnAdamsUserEmailAddressCell.isDisplayed() = " + johnAdamsUserEmailAddressCell.isDisplayed());
-		assertTrue(
-			"The Email Address Cell of the John Adams user should be displayed on the page as john.adams@liferay.com at this point but it is not.",
-			johnAdamsUserEmailAddressCell.isDisplayed());
-	}
-
-	@Test
-	@RunAsClient
-	@InSequence(3000)
-	public void checkRequiredFieldsAndCancel() throws Exception {
-
-		firstNameField.clear();
-		middleNameField.clear();
-		lastNameField.clear();
-		emailAddressField.clear();
-		jobTitleField.clear();
-		submitButton.click();
-
-		waitForElement(browser, firstNameFieldErrorXpath);
-
-		logger.log(Level.INFO, "firstNameFieldError.isDisplayed() = " + firstNameFieldError.isDisplayed());
-		assertTrue("The First Name Validation Error should be displayed on the page at this point but it is not.",
-			firstNameFieldError.isDisplayed());
-		logger.log(Level.INFO, "lastNameFieldError.isDisplayed() = " + lastNameFieldError.isDisplayed());
-		assertTrue("The Last Name Validation Error should be displayed on the page at this point but it is not.",
-			lastNameFieldError.isDisplayed());
-		logger.log(Level.INFO, "emailAddressFieldError.isDisplayed() = " + emailAddressFieldError.isDisplayed());
-		assertTrue("The Email Address Validation Error should be displayed on the page at this point but it is not.",
-			emailAddressFieldError.isDisplayed());
-
-		cancelButton.click();
-
-	}
-
-//  @Test // Not applicable for Liferay Portal 6.0
-	@RunAsClient
-	@InSequence(8000)
-	public void deactivateUser() throws Exception {
-
-		waitForElement(browser, johnAdamsUserScreenNameCellXpath);
-		(new Actions(browser)).doubleClick(johnAdamsUserScreenNameCell).perform();
-		Thread.sleep(250);
-		(new Actions(browser)).doubleClick(johnAdamsUserScreenNameCell).perform();
-
-		waitForElement(browser, dropdownInactiveFieldXpath);
-
-		dropdownInactiveField.click();
-
-		submitButton.click();
-
-		waitForElement(browser, johnAdamsUserScreenNameCellXpath);
-
-		(new Actions(browser)).doubleClick(johnAdamsUserScreenNameCell).perform();
-		Thread.sleep(250);
-		(new Actions(browser)).doubleClick(johnAdamsUserScreenNameCell).perform();
-
-		waitForElement(browser, dropdownActiveFieldXpath);
-
-		logger.log(Level.INFO,
-			"dropdownInactiveSelectedField.isDisplayed() = " + dropdownInactiveSelectedField.isDisplayed());
-		assertTrue("The dropdown Inactive Field should be selected now, but it is not.",
-			dropdownInactiveSelectedField.isDisplayed());
-
-		dropdownActiveField.click();
-
-		submitButton.click();
-
-		waitForElement(browser, johnAdamsUserScreenNameCellXpath);
-
-		logger.log(Level.INFO,
-			"johnAdamsUserScreenNameCell.isDisplayed() = " + johnAdamsUserScreenNameCell.isDisplayed());
-		assertTrue(
-			"The Screen Name Cell of the John Adams user should be displayed on the page as john.adams at this point but it is not.",
-			johnAdamsUserScreenNameCell.isDisplayed());
-		logger.log(Level.INFO, "johnAdamsUserLastNameCell.isDisplayed() = " + johnAdamsUserLastNameCell.isDisplayed());
-		assertTrue(
-			"The Last Name Cell of the John Adams user should be displayed on the page as John at this point but it is not.",
-			johnAdamsUserLastNameCell.isDisplayed());
-		logger.log(Level.INFO, "johnAdamsUserLastNameCell.isDisplayed() = " + johnAdamsUserFirstNameCell.isDisplayed());
-		assertTrue(
-			"The First Name Cell of the John Adams user should be displayed on the page as Adams at this point but it is not.",
-			johnAdamsUserFirstNameCell.isDisplayed());
-		logger.log(Level.INFO,
-			"johnAdamsUserEmailAddressCell.isDisplayed() = " + johnAdamsUserEmailAddressCell.isDisplayed());
-		assertTrue(
-			"The Email Address Cell of the John Adams user should be displayed on the page as john.adams@liferay.com at this point but it is not.",
-			johnAdamsUserEmailAddressCell.isDisplayed());
-
-		(new Actions(browser)).doubleClick(johnAdamsUserScreenNameCell).perform();
-		Thread.sleep(250);
-		(new Actions(browser)).doubleClick(johnAdamsUserScreenNameCell).perform();
-
-		waitForElement(browser, dropdownInactiveFieldXpath);
-
-		logger.log(Level.INFO,
-			"dropdownActiveSelectedField.isDisplayed() = " + dropdownActiveSelectedField.isDisplayed());
-		assertTrue("The dropdown Active Field should be selected now, but it is not.",
-			dropdownActiveSelectedField.isDisplayed());
-	}
-
-	@Test
-	@RunAsClient
-	@InSequence(4000)
-	public void screenNameColumnFilter() throws Exception {
-
-		waitForElement(browser, screenNameColumnFilterXpath);
-		screenNameColumnFilter.sendKeys("john.adams");
-
-		Thread.sleep(1000);
-
-		logger.log(Level.INFO,
-			"johnAdamsUserScreenNameCell.isDisplayed() = " + johnAdamsUserScreenNameCell.isDisplayed());
-		assertTrue(
-			"The Screen Name Cell of the John Adams user should be displayed on the page as john.adams at this point but it is not.",
-			johnAdamsUserScreenNameCell.isDisplayed());
-		logger.log(Level.INFO, "johnAdamsUserLastNameCell.isDisplayed() = " + johnAdamsUserLastNameCell.isDisplayed());
-		assertTrue(
-			"The Last Name Cell of the John Adams user should be displayed on the page as John at this point but it is not.",
-			johnAdamsUserLastNameCell.isDisplayed());
-		logger.log(Level.INFO, "johnAdamsUserLastNameCell.isDisplayed() = " + johnAdamsUserFirstNameCell.isDisplayed());
-		assertTrue(
-			"The First Name Cell of the John Adams user should be displayed on the page as Adams at this point but it is not.",
-			johnAdamsUserFirstNameCell.isDisplayed());
-		logger.log(Level.INFO,
-			"johnAdamsUserEmailAddressCell.isDisplayed() = " + johnAdamsUserEmailAddressCell.isDisplayed());
-		assertTrue(
-			"The Email Address Cell of the John Adams user should be displayed on the page as john.adams@liferay.com at this point but it is not.",
-			johnAdamsUserEmailAddressCell.isDisplayed());
-
-		logger.log(Level.INFO,
-			"isThere(browser, samuelAdamsUserScreenNameCellXpath) = " +
-			isThere(browser, samuelAdamsUserScreenNameCellXpath));
-		assertFalse("The row for Samuel Adams should NOT be displayed now becuase of filtering, but it is displayed.",
-			isThere(browser, samuelAdamsUserScreenNameCellXpath));
-
-		for (int i = 0; i < "john.adams".length(); i++) {
-			screenNameColumnFilter.sendKeys(Keys.BACK_SPACE);
+		if(!controlPanelTestSetup.isDisplayed()) {
+			dropdownTestSetup.click();
 		}
 
-		Thread.sleep(1000);
+		controlPanelTestSetup.click();
+		waitForElement(browser, usersLinkTestSetupXpath);
+		usersLinkTestSetup.click();
+		waitForElement(browser, searchAllUsersLinkTestSetupXpath);
 
-		logger.log(Level.INFO,
-			"isThere(browser, samuelAdamsUserScreenNameCellXpath) = " +
-			isThere(browser, samuelAdamsUserScreenNameCellXpath));
-		assertTrue("The row for Samuel Adams should be displayed now becuase of filtering, but it is not.",
-			isThere(browser, samuelAdamsUserScreenNameCellXpath));
+		if(!isThere(browser, johnAdamsTestSetupXpath) || !johnAdamsTestSetup.isDisplayed()) {
 
-	}
+			searchAllUsersLinkTestSetup.click();
+			waitForElement(browser, backLinkTestSetupXpath);
 
-	@Test
-	@RunAsClient
-	@InSequence(2000)
-	public void specificUserView() throws Exception {
+			if (isThere(browser, advancedSearchLinkTestSetupXpath) && advancedSearchLinkTestSetup.isDisplayed()) {
+				advancedSearchLinkTestSetup.click();
+			}
 
-		(new Actions(browser)).doubleClick(johnAdamsUserScreenNameCell).perform();
+			waitForElement(browser, selectStatusTestSetupXpath);
+			selectStatusTestSetup.click();
+			(new Actions(browser)).sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.TAB).perform();
+			Thread.sleep(250);
 
-		waitForElement(browser, firstNameFieldXpath);
+			if(isThere(browser, johnAdamsTestSetupXpath)) {
+				//no-op
+			} else {
+				selectStatusTestSetup.submit();
+				Thread.sleep(250);
+			}
 
-		logger.log(Level.INFO, "firstNameField.isDisplayed() = " + firstNameField.isDisplayed());
-		assertTrue("The First Name Text Entry Field should be displayed on the page at this point but it is not.",
-			firstNameField.isDisplayed());
-		logger.log(Level.INFO, "middleNameField.isDisplayed() = " + middleNameField.isDisplayed());
-		assertTrue("The Middle Name Text Entry Field should be displayed on the page at this point but it is not.",
-			middleNameField.isDisplayed());
-		logger.log(Level.INFO, "lastNameField.isDisplayed() = " + lastNameField.isDisplayed());
-		assertTrue("The Last Name Text Entry Field should be displayed on the page at this point but it is not.",
-			lastNameField.isDisplayed());
-		logger.log(Level.INFO, "emailAddressField.isDisplayed() = " + emailAddressField.isDisplayed());
-		assertTrue("The Email Address Text Entry Field should be displayed on the page at this point but it is not.",
-			emailAddressField.isDisplayed());
-		logger.log(Level.INFO, "jobTitleField.isDisplayed() = " + jobTitleField.isDisplayed());
-		assertTrue("The Job Title Text Entry Field should be displayed on the page at this point but it is not.",
-			jobTitleField.isDisplayed());
-		logger.log(Level.INFO, "submitButton.isDisplayed() = " + submitButton.isDisplayed());
-		assertTrue("The Submit Button should be displayed on the page at this point but it is not.",
-			submitButton.isDisplayed());
-		logger.log(Level.INFO, "cancelButton.isDisplayed() = " + cancelButton.isDisplayed());
-		assertTrue("The Cancel Button should be displayed on the page at this point but it is not.",
-			cancelButton.isDisplayed());
+			if (isThere(browser, johnAdamsTestSetupXpath)) {
+				johnAdamsMenuTestSetup.click();
+				activateJohnAdamsTestSetup.click();
+			}
 
-		logger.log(Level.INFO, "dropdownActiveField.isDisplayed() = " + dropdownActiveField.isDisplayed());
-		assertTrue(
-			"The The Dropdown Menu should be displayed  on the page and Active should be the selected item at this point but it is not.",
-			dropdownActiveField.isDisplayed());
-
-		logger.log(Level.INFO, "portrait.isDisplayed() = " + portrait.isDisplayed());
-		assertTrue("The User Portrait should be displayed on the page at this point but it is not.",
-			portrait.isDisplayed());
-		logger.log(Level.INFO, "fileEntry.isDisplayed() = " + fileEntry.isDisplayed());
-		assertTrue("The File Entry should be displayed on the page at this point but it is not.",
-			fileEntry.isDisplayed());
-		logger.log(Level.INFO, "fileUploadButton.isDisplayed() = " + fileUploadButton.isDisplayed());
-		assertTrue("The File Upload Button should be displayed on the page at this point but it is not.",
-			fileUploadButton.isDisplayed());
-
-	}
-
-	@Test
-	@RunAsClient
-	@InSequence(6000)
-	public void testFileUpload() throws Exception {
-
-		waitForElement(browser, johnAdamsUserScreenNameCellXpath);
-		(new Actions(browser)).doubleClick(johnAdamsUserScreenNameCell).perform();
-		Thread.sleep(250);
-		(new Actions(browser)).doubleClick(johnAdamsUserScreenNameCell).perform();
-
-		waitForElement(browser, fileEntryXpath);
-
-		fileEntry.sendKeys(getPathToJerseyFile());
-		fileUploadButton.click();
-
-		waitForElement(browser, changedPortraitXpath);
-
-		logger.log(Level.INFO, "changedPortrait.isDisplayed() = " + changedPortrait.isDisplayed());
-		assertTrue("The Changed User Portrait should be displayed on the page at this point but it is not.",
-			changedPortrait.isDisplayed());
-
-		cancelButton.click();
-
-		waitForElement(browser, johnAdamsUserScreenNameCellXpath);
-		(new Actions(browser)).doubleClick(johnAdamsUserScreenNameCell).perform();
-		Thread.sleep(250);
-		(new Actions(browser)).doubleClick(johnAdamsUserScreenNameCell).perform();
-
-		waitForElement(browser, fileEntryXpath);
-
-		logger.log(Level.INFO, "portrait.isDisplayed() = " + portrait.isDisplayed());
-		assertTrue("The User Portrait should be displayed on the page at this point but it is not.",
-			portrait.isDisplayed());
-
-		fileEntry.sendKeys(getPathToJerseyFile());
-		fileUploadButton.click();
-
-		waitForElement(browser, changedPortraitXpath);
-
-		submitButton.click();
-
-		waitForElement(browser, johnAdamsUserScreenNameCellXpath);
-
-		(new Actions(browser)).doubleClick(johnAdamsUserScreenNameCell).perform();
-		Thread.sleep(250);
-		(new Actions(browser)).doubleClick(johnAdamsUserScreenNameCell).perform();
-
-		waitForElement(browser, changedPortraitXpath);
-
-		logger.log(Level.INFO, "changedPortrait.isDisplayed() = " + changedPortrait.isDisplayed());
-		assertTrue("The Changed User Portrait should be displayed on the page at this point but it is not.",
-			changedPortrait.isDisplayed());
-
-		cancelButton.click();
-	}
-
-	@Test
-	@RunAsClient
-	@InSequence(6000)
-	public void testImageChosenButNotUploaded() throws Exception {
-
-		waitForElement(browser, johnAdamsUserScreenNameCellXpath);
-		(new Actions(browser)).doubleClick(johnAdamsUserScreenNameCell).perform();
-		Thread.sleep(250);
-		(new Actions(browser)).doubleClick(johnAdamsUserScreenNameCell).perform();
-
-		waitForElement(browser, fileEntryXpath);
-
-		fileEntry.sendKeys(getPathToJerseyFile());
-
-		logger.log(Level.INFO, "portrait.isDisplayed() = " + portrait.isDisplayed());
-		assertTrue("The User Portrait should be displayed on the page at this point but it is not.",
-			portrait.isDisplayed());
-
-		cancelButton.click();
-
-		waitForElement(browser, johnAdamsUserScreenNameCellXpath);
-
-		logger.log(Level.INFO, "screenNameColumnHeader.isDisplayed() = " + screenNameColumnHeader.isDisplayed());
-		assertTrue("The Screen Name Column Header should be displayed on the page at this point but it is not.",
-			screenNameColumnHeader.isDisplayed());
-		logger.log(Level.INFO, "screenNameColumnSortIcon.isDisplayed() = " + screenNameColumnSortIcon.isDisplayed());
-		assertTrue("The Screen Name Column Sort Icon should be displayed on the page at this point but it is not.",
-			screenNameColumnSortIcon.isDisplayed());
-		logger.log(Level.INFO, "screenNameColumnFilter.isDisplayed() = " + screenNameColumnFilter.isDisplayed());
-		assertTrue("The Screen Name Column Text Filter should be displayed on the page at this point but it is not.",
-			screenNameColumnFilter.isDisplayed());
-
-		(new Actions(browser)).doubleClick(johnAdamsUserScreenNameCell).perform();
-		Thread.sleep(250);
-		(new Actions(browser)).doubleClick(johnAdamsUserScreenNameCell).perform();
-
-		waitForElement(browser, fileEntryXpath);
-
-		logger.log(Level.INFO, "portrait.isDisplayed() = " + portrait.isDisplayed());
-		assertTrue("The User Portrait should be displayed on the page at this point but it is not.",
-			portrait.isDisplayed());
-
-		fileEntry.sendKeys(getPathToJerseyFile());
-
-		logger.log(Level.INFO, "portrait.isDisplayed() = " + portrait.isDisplayed());
-		assertTrue("The User Portrait should be displayed on the page at this point but it is not.",
-			portrait.isDisplayed());
-
-		submitButton.click();
-
-		waitForElement(browser, johnAdamsUserScreenNameCellXpath);
-
-		logger.log(Level.INFO, "screenNameColumnHeader.isDisplayed() = " + screenNameColumnHeader.isDisplayed());
-		assertTrue("The Screen Name Column Header should be displayed on the page at this point but it is not.",
-			screenNameColumnHeader.isDisplayed());
-		logger.log(Level.INFO, "screenNameColumnSortIcon.isDisplayed() = " + screenNameColumnSortIcon.isDisplayed());
-		assertTrue("The Screen Name Column Sort Icon should be displayed on the page at this point but it is not.",
-			screenNameColumnSortIcon.isDisplayed());
-		logger.log(Level.INFO, "screenNameColumnFilter.isDisplayed() = " + screenNameColumnFilter.isDisplayed());
-		assertTrue("The Screen Name Column Text Filter should be displayed on the page at this point but it is not.",
-			screenNameColumnFilter.isDisplayed());
-
-		(new Actions(browser)).doubleClick(johnAdamsUserScreenNameCell).perform();
-		Thread.sleep(250);
-		(new Actions(browser)).doubleClick(johnAdamsUserScreenNameCell).perform();
-
-		waitForElement(browser, cancelButtonXpath);
-
-		logger.log(Level.INFO, "portrait.isDisplayed() = " + portrait.isDisplayed());
-		assertTrue("The User Portrait should be displayed on the page at this point but it is not.",
-			portrait.isDisplayed());
-
-		cancelButton.click();
-
+			waitForElement(browser, usersLinkTestSetupXpath);
+		}
 	}
 
 	@Test
@@ -769,7 +371,7 @@ public class Icefaces3UsersPortletTest extends TesterBase {
 		signIn(browser);
 		(new Actions(browser)).click(dropdownTestSetup);
 
-		if (!controlPanelTestSetup.isDisplayed()) {
+		if(!controlPanelTestSetup.isDisplayed()) {
 			dropdownTestSetup.click();
 		}
 
@@ -800,54 +402,6 @@ public class Icefaces3UsersPortletTest extends TesterBase {
 			errorPassword2TestSetup.clear();
 			errorPassword2TestSetup.sendKeys("testtest");
 			saveButtonTestSetup.click();
-		}
-	}
-
-//  @Test // Not applicable for Liferay Portal 6.0
-	@RunAsClient
-	@InSequence(0)
-	public void testSetupActivateUser() throws Exception {
-		browser.manage().window().maximize();
-		signIn(browser);
-		(new Actions(browser)).click(dropdownTestSetup);
-
-		if (!controlPanelTestSetup.isDisplayed()) {
-			dropdownTestSetup.click();
-		}
-
-		controlPanelTestSetup.click();
-		waitForElement(browser, usersLinkTestSetupXpath);
-		usersLinkTestSetup.click();
-		waitForElement(browser, searchAllUsersLinkTestSetupXpath);
-
-		if (!isThere(browser, johnAdamsTestSetupXpath) || !johnAdamsTestSetup.isDisplayed()) {
-
-			searchAllUsersLinkTestSetup.click();
-			waitForElement(browser, backLinkTestSetupXpath);
-
-			if (isThere(browser, advancedSearchLinkTestSetupXpath) && advancedSearchLinkTestSetup.isDisplayed()) {
-				advancedSearchLinkTestSetup.click();
-			}
-
-			waitForElement(browser, selectStatusTestSetupXpath);
-			selectStatusTestSetup.click();
-			(new Actions(browser)).sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.TAB).perform();
-			Thread.sleep(250);
-
-			if (isThere(browser, johnAdamsTestSetupXpath)) {
-				// no-op
-			}
-			else {
-				selectStatusTestSetup.submit();
-				Thread.sleep(250);
-			}
-
-			if (isThere(browser, johnAdamsTestSetupXpath)) {
-				johnAdamsMenuTestSetup.click();
-				activateJohnAdamsTestSetup.click();
-			}
-
-			waitForElement(browser, usersLinkTestSetupXpath);
 		}
 	}
 
@@ -943,4 +497,434 @@ public class Icefaces3UsersPortletTest extends TesterBase {
 			"The Email Address Cell of the John Adams user should be displayed on the page as john.adams@liferay.com at this point but it is not.",
 			johnAdamsUserEmailAddressCell.isDisplayed());
 	}
+
+	@Test
+	@RunAsClient
+	@InSequence(2000)
+	public void specificUserView() throws Exception {
+
+		(new Actions(browser)).doubleClick(johnAdamsUserScreenNameCell).perform();
+
+		waitForElement(browser, firstNameFieldXpath);
+
+		logger.log(Level.INFO, "firstNameField.isDisplayed() = " + firstNameField.isDisplayed());
+		assertTrue("The First Name Text Entry Field should be displayed on the page at this point but it is not.",
+			firstNameField.isDisplayed());
+		logger.log(Level.INFO, "middleNameField.isDisplayed() = " + middleNameField.isDisplayed());
+		assertTrue("The Middle Name Text Entry Field should be displayed on the page at this point but it is not.",
+			middleNameField.isDisplayed());
+		logger.log(Level.INFO, "lastNameField.isDisplayed() = " + lastNameField.isDisplayed());
+		assertTrue("The Last Name Text Entry Field should be displayed on the page at this point but it is not.",
+			lastNameField.isDisplayed());
+		logger.log(Level.INFO, "emailAddressField.isDisplayed() = " + emailAddressField.isDisplayed());
+		assertTrue("The Email Address Text Entry Field should be displayed on the page at this point but it is not.",
+			emailAddressField.isDisplayed());
+		logger.log(Level.INFO, "jobTitleField.isDisplayed() = " + jobTitleField.isDisplayed());
+		assertTrue("The Job Title Text Entry Field should be displayed on the page at this point but it is not.",
+			jobTitleField.isDisplayed());
+		logger.log(Level.INFO, "submitButton.isDisplayed() = " + submitButton.isDisplayed());
+		assertTrue("The Submit Button should be displayed on the page at this point but it is not.",
+			submitButton.isDisplayed());
+		logger.log(Level.INFO, "cancelButton.isDisplayed() = " + cancelButton.isDisplayed());
+		assertTrue("The Cancel Button should be displayed on the page at this point but it is not.",
+			cancelButton.isDisplayed());
+
+		logger.log(Level.INFO, "dropdownActiveField.isDisplayed() = " + dropdownActiveField.isDisplayed());
+		assertTrue(
+			"The The Dropdown Menu should be displayed	on the page and Active should be the selected item at this point but it is not.",
+			dropdownActiveField.isDisplayed());
+
+		logger.log(Level.INFO, "portrait.isDisplayed() = " + portrait.isDisplayed());
+		assertTrue("The User Portrait should be displayed on the page at this point but it is not.",
+			portrait.isDisplayed());
+		logger.log(Level.INFO, "fileEntry.isDisplayed() = " + fileEntry.isDisplayed());
+		assertTrue("The File Entry should be displayed on the page at this point but it is not.",
+			fileEntry.isDisplayed());
+		logger.log(Level.INFO, "fileUploadButton.isDisplayed() = " + fileUploadButton.isDisplayed());
+		assertTrue("The File Upload Button should be displayed on the page at this point but it is not.",
+			fileUploadButton.isDisplayed());
+
+	}
+
+	@Test
+	@RunAsClient
+	@InSequence(3000)
+	public void checkRequiredFieldsAndCancel() throws Exception {
+
+		firstNameField.clear();
+		middleNameField.clear();
+		lastNameField.clear();
+		emailAddressField.clear();
+		jobTitleField.clear();
+		submitButton.click();
+
+		waitForElement(browser, firstNameFieldErrorXpath);
+
+		logger.log(Level.INFO, "firstNameFieldError.isDisplayed() = " + firstNameFieldError.isDisplayed());
+		assertTrue("The First Name Validation Error should be displayed on the page at this point but it is not.",
+			firstNameFieldError.isDisplayed());
+		logger.log(Level.INFO, "lastNameFieldError.isDisplayed() = " + lastNameFieldError.isDisplayed());
+		assertTrue("The Last Name Validation Error should be displayed on the page at this point but it is not.",
+			lastNameFieldError.isDisplayed());
+		logger.log(Level.INFO, "emailAddressFieldError.isDisplayed() = " + emailAddressFieldError.isDisplayed());
+		assertTrue("The Email Address Validation Error should be displayed on the page at this point but it is not.",
+			emailAddressFieldError.isDisplayed());
+
+		cancelButton.click();
+
+	}
+
+	@Test
+	@RunAsClient
+	@InSequence(4000)
+	public void screenNameColumnFilter() throws Exception {
+
+		waitForElement(browser, screenNameColumnFilterXpath);
+		screenNameColumnFilter.sendKeys("john.adams");
+
+		Thread.sleep(1000);
+
+		logger.log(Level.INFO,
+			"johnAdamsUserScreenNameCell.isDisplayed() = " + johnAdamsUserScreenNameCell.isDisplayed());
+		assertTrue(
+			"The Screen Name Cell of the John Adams user should be displayed on the page as john.adams at this point but it is not.",
+			johnAdamsUserScreenNameCell.isDisplayed());
+		logger.log(Level.INFO, "johnAdamsUserLastNameCell.isDisplayed() = " + johnAdamsUserLastNameCell.isDisplayed());
+		assertTrue(
+			"The Last Name Cell of the John Adams user should be displayed on the page as John at this point but it is not.",
+			johnAdamsUserLastNameCell.isDisplayed());
+		logger.log(Level.INFO, "johnAdamsUserLastNameCell.isDisplayed() = " + johnAdamsUserFirstNameCell.isDisplayed());
+		assertTrue(
+			"The First Name Cell of the John Adams user should be displayed on the page as Adams at this point but it is not.",
+			johnAdamsUserFirstNameCell.isDisplayed());
+		logger.log(Level.INFO,
+			"johnAdamsUserEmailAddressCell.isDisplayed() = " + johnAdamsUserEmailAddressCell.isDisplayed());
+		assertTrue(
+			"The Email Address Cell of the John Adams user should be displayed on the page as john.adams@liferay.com at this point but it is not.",
+			johnAdamsUserEmailAddressCell.isDisplayed());
+
+		logger.log(Level.INFO,
+			"isThere(browser, samuelAdamsUserScreenNameCellXpath) = " + isThere(browser, samuelAdamsUserScreenNameCellXpath));
+		assertFalse("The row for Samuel Adams should NOT be displayed now becuase of filtering, but it is displayed.",
+			isThere(browser, samuelAdamsUserScreenNameCellXpath));
+
+		for (int i = 0; i < "john.adams".length(); i++) {
+			screenNameColumnFilter.sendKeys(Keys.BACK_SPACE);
+		}
+
+		Thread.sleep(1000);
+
+		logger.log(Level.INFO,
+			"isThere(browser, samuelAdamsUserScreenNameCellXpath) = " + isThere(browser, samuelAdamsUserScreenNameCellXpath));
+		assertTrue("The row for Samuel Adams should be displayed now becuase of filtering, but it is not.",
+			isThere(browser, samuelAdamsUserScreenNameCellXpath));
+
+	}
+
+	@Test
+	@RunAsClient
+	@InSequence(6000)
+	public void testImageChosenButNotUploaded() throws Exception {
+
+		waitForElement(browser, johnAdamsUserScreenNameCellXpath);
+		(new Actions(browser)).doubleClick(johnAdamsUserScreenNameCell).perform();
+		Thread.sleep(250);
+		(new Actions(browser)).doubleClick(johnAdamsUserScreenNameCell).perform();
+
+		waitForElement(browser, fileEntryXpath);
+
+		fileEntry.sendKeys(getPathToJerseyFile());
+
+		logger.log(Level.INFO, "portrait.isDisplayed() = " + portrait.isDisplayed());
+		assertTrue("The User Portrait should be displayed on the page at this point but it is not.",
+			portrait.isDisplayed());
+
+		cancelButton.click();
+
+		waitForElement(browser, johnAdamsUserScreenNameCellXpath);
+
+		logger.log(Level.INFO, "screenNameColumnHeader.isDisplayed() = " + screenNameColumnHeader.isDisplayed());
+		assertTrue("The Screen Name Column Header should be displayed on the page at this point but it is not.",
+			screenNameColumnHeader.isDisplayed());
+		logger.log(Level.INFO, "screenNameColumnSortIcon.isDisplayed() = " + screenNameColumnSortIcon.isDisplayed());
+		assertTrue("The Screen Name Column Sort Icon should be displayed on the page at this point but it is not.",
+			screenNameColumnSortIcon.isDisplayed());
+		logger.log(Level.INFO, "screenNameColumnFilter.isDisplayed() = " + screenNameColumnFilter.isDisplayed());
+		assertTrue("The Screen Name Column Text Filter should be displayed on the page at this point but it is not.",
+			screenNameColumnFilter.isDisplayed());
+
+		(new Actions(browser)).doubleClick(johnAdamsUserScreenNameCell).perform();
+		Thread.sleep(250);
+		(new Actions(browser)).doubleClick(johnAdamsUserScreenNameCell).perform();
+
+		waitForElement(browser, fileEntryXpath);
+
+		logger.log(Level.INFO, "portrait.isDisplayed() = " + portrait.isDisplayed());
+		assertTrue("The User Portrait should be displayed on the page at this point but it is not.",
+			portrait.isDisplayed());
+
+		fileEntry.sendKeys(getPathToJerseyFile());
+
+		logger.log(Level.INFO, "portrait.isDisplayed() = " + portrait.isDisplayed());
+		assertTrue("The User Portrait should be displayed on the page at this point but it is not.",
+			portrait.isDisplayed());
+
+		submitButton.click();
+
+		waitForElement(browser, johnAdamsUserScreenNameCellXpath);
+
+		logger.log(Level.INFO, "screenNameColumnHeader.isDisplayed() = " + screenNameColumnHeader.isDisplayed());
+		assertTrue("The Screen Name Column Header should be displayed on the page at this point but it is not.",
+			screenNameColumnHeader.isDisplayed());
+		logger.log(Level.INFO, "screenNameColumnSortIcon.isDisplayed() = " + screenNameColumnSortIcon.isDisplayed());
+		assertTrue("The Screen Name Column Sort Icon should be displayed on the page at this point but it is not.",
+			screenNameColumnSortIcon.isDisplayed());
+		logger.log(Level.INFO, "screenNameColumnFilter.isDisplayed() = " + screenNameColumnFilter.isDisplayed());
+		assertTrue("The Screen Name Column Text Filter should be displayed on the page at this point but it is not.",
+			screenNameColumnFilter.isDisplayed());
+
+		(new Actions(browser)).doubleClick(johnAdamsUserScreenNameCell).perform();
+		Thread.sleep(250);
+		(new Actions(browser)).doubleClick(johnAdamsUserScreenNameCell).perform();
+
+		waitForElement(browser, cancelButtonXpath);
+
+		logger.log(Level.INFO, "portrait.isDisplayed() = " + portrait.isDisplayed());
+		assertTrue("The User Portrait should be displayed on the page at this point but it is not.",
+			portrait.isDisplayed());
+
+		cancelButton.click();
+
+	}
+
+	@Test
+	@RunAsClient
+	@InSequence(6000)
+	public void testFileUpload() throws Exception {
+
+		waitForElement(browser, johnAdamsUserScreenNameCellXpath);
+		(new Actions(browser)).doubleClick(johnAdamsUserScreenNameCell).perform();
+		Thread.sleep(250);
+		(new Actions(browser)).doubleClick(johnAdamsUserScreenNameCell).perform();
+
+		waitForElement(browser, fileEntryXpath);
+
+		fileEntry.sendKeys(getPathToJerseyFile());
+		fileUploadButton.click();
+
+		waitForElement(browser, changedPortraitXpath);
+
+		logger.log(Level.INFO, "changedPortrait.isDisplayed() = " + changedPortrait.isDisplayed());
+		assertTrue("The Changed User Portrait should be displayed on the page at this point but it is not.",
+			changedPortrait.isDisplayed());
+
+		cancelButton.click();
+
+		waitForElement(browser, johnAdamsUserScreenNameCellXpath);
+		(new Actions(browser)).doubleClick(johnAdamsUserScreenNameCell).perform();
+		Thread.sleep(250);
+		(new Actions(browser)).doubleClick(johnAdamsUserScreenNameCell).perform();
+
+		waitForElement(browser, fileEntryXpath);
+
+		logger.log(Level.INFO, "portrait.isDisplayed() = " + portrait.isDisplayed());
+		assertTrue("The User Portrait should be displayed on the page at this point but it is not.",
+			portrait.isDisplayed());
+
+		fileEntry.sendKeys(getPathToJerseyFile());
+		fileUploadButton.click();
+
+		waitForElement(browser, changedPortraitXpath);
+
+		submitButton.click();
+
+		waitForElement(browser, johnAdamsUserScreenNameCellXpath);
+
+		(new Actions(browser)).doubleClick(johnAdamsUserScreenNameCell).perform();
+		Thread.sleep(250);
+		(new Actions(browser)).doubleClick(johnAdamsUserScreenNameCell).perform();
+
+		waitForElement(browser, changedPortraitXpath);
+
+		logger.log(Level.INFO, "changedPortrait.isDisplayed() = " + changedPortrait.isDisplayed());
+		assertTrue("The Changed User Portrait should be displayed on the page at this point but it is not.",
+			changedPortrait.isDisplayed());
+
+		cancelButton.click();
+	}
+
+	@Test
+	@RunAsClient
+	@InSequence(7000)
+	public void changeUserAttributes() throws Exception {
+
+		waitForElement(browser, johnAdamsUserScreenNameCellXpath);
+		(new Actions(browser)).doubleClick(johnAdamsUserScreenNameCell).perform();
+		Thread.sleep(250);
+		(new Actions(browser)).doubleClick(johnAdamsUserScreenNameCell).perform();
+
+		waitForElement(browser, firstNameFieldXpath);
+
+		firstNameField.clear();
+		firstNameField.sendKeys("Aa");
+		middleNameField.clear();
+		middleNameField.sendKeys("Aa");
+		lastNameField.clear();
+		lastNameField.sendKeys("Aa");
+		emailAddressField.clear();
+		emailAddressField.sendKeys("A@A.com");
+		jobTitleField.clear();
+		jobTitleField.sendKeys("Aa");
+		submitButton.click();
+
+		logger.log(Level.INFO, "isThere(browser, firstNameFieldErrorXpath) = " + isThere(browser, firstNameFieldErrorXpath));
+		assertFalse("The First Name Validation Error should be displayed on the page at this point but it is not.",
+			isThere(browser, firstNameFieldErrorXpath));
+
+		logger.log(Level.INFO, ".isThere(browser, lastNameFieldErrorXpath) = " + isThere(browser, lastNameFieldErrorXpath));
+		assertFalse("The Last Name Validation Error should be displayed on the page at this point but it is not.",
+			isThere(browser, lastNameFieldErrorXpath));
+
+		logger.log(Level.INFO, "isThere(browser, emailAddressFieldErrorXpath) = " + isThere(browser, emailAddressFieldErrorXpath));
+		assertFalse("The Email Address Validation Error should be displayed on the page at this point but it is not.",
+			isThere(browser, emailAddressFieldErrorXpath));
+
+		waitForElement(browser, johnAdamsUserScreenNameCellXpath);
+
+		logger.log(Level.INFO, "changedUserLastNameCell.isDisplayed() = " + changedUserLastNameCell.isDisplayed());
+		assertTrue(
+			"The Last Name Cell of the changed user should be displayed on the page as A at this point but it is not.",
+			changedUserLastNameCell.isDisplayed());
+		logger.log(Level.INFO, "changedUserLastNameCell.isDisplayed() = " + changedUserFirstNameCell.isDisplayed());
+		assertTrue(
+			"The First Name Cell of the changed user should be displayed on the page as A at this point but it is not.",
+			changedUserFirstNameCell.isDisplayed());
+		logger.log(Level.INFO, "changedUserMiddleNameCell.isDisplayed() = " + changedUserMiddleNameCell.isDisplayed());
+		assertTrue(
+			"The Middle Name Cell of the changed user should be displayed on the page as A at this point but it is not.",
+			changedUserMiddleNameCell.isDisplayed());
+		logger.log(Level.INFO,
+			"changedUserEmailAddressCell.isDisplayed() = " + changedUserEmailAddressCell.isDisplayed());
+		assertTrue(
+			"The Email Address Cell of the changed user should be displayed on the page as A@A.com at this point but it is not.",
+			changedUserEmailAddressCell.isDisplayed());
+		logger.log(Level.INFO, "changedUserJobTitleCell.isDisplayed() = " + changedUserJobTitleCell.isDisplayed());
+		assertTrue(
+			"The Job Title Cell of the changed user should be displayed on the page as A at this point but it is not.",
+			changedUserJobTitleCell.isDisplayed());
+
+		waitForElement(browser, johnAdamsUserScreenNameCellXpath);
+
+		(new Actions(browser)).doubleClick(johnAdamsUserScreenNameCell).perform();
+		Thread.sleep(250);
+		(new Actions(browser)).doubleClick(johnAdamsUserScreenNameCell).perform();
+
+		waitForElement(browser, firstNameFieldXpath);
+
+		firstNameField.clear();
+		firstNameField.sendKeys("John");
+		middleNameField.clear();
+		lastNameField.clear();
+		lastNameField.sendKeys("Adams");
+		emailAddressField.clear();
+		emailAddressField.sendKeys("john.adams@liferay.com");
+		jobTitleField.clear();
+		submitButton.click();
+
+		logger.log(Level.INFO, "isThere(browser, firstNameFieldErrorXpath) = " + isThere(browser, firstNameFieldErrorXpath));
+		assertFalse("The First Name Validation Error should be displayed on the page at this point but it is not.",
+			isThere(browser, firstNameFieldErrorXpath));
+		logger.log(Level.INFO, "isThere(browser, lastNameFieldErrorXpath) = " + isThere(browser, lastNameFieldErrorXpath));
+		assertFalse("The Last Name Validation Error should be displayed on the page at this point but it is not.",
+			isThere(browser, lastNameFieldErrorXpath));
+		logger.log(Level.INFO, "isThere(browser, emailAddressFieldErrorXpath) = " + isThere(browser, emailAddressFieldErrorXpath));
+		assertFalse("The Email Address Validation Error should be displayed on the page at this point but it is not.",
+			isThere(browser, emailAddressFieldErrorXpath));
+
+		waitForElement(browser, johnAdamsUserScreenNameCellXpath);
+
+		logger.log(Level.INFO,
+			"johnAdamsUserScreenNameCell.isDisplayed() = " + johnAdamsUserScreenNameCell.isDisplayed());
+		assertTrue(
+			"The Screen Name Cell of the John Adams user should be displayed on the page as john.adams at this point but it is not.",
+			johnAdamsUserScreenNameCell.isDisplayed());
+		logger.log(Level.INFO, "johnAdamsUserLastNameCell.isDisplayed() = " + johnAdamsUserLastNameCell.isDisplayed());
+		assertTrue(
+			"The Last Name Cell of the John Adams user should be displayed on the page as John at this point but it is not.",
+			johnAdamsUserLastNameCell.isDisplayed());
+		logger.log(Level.INFO, "johnAdamsUserLastNameCell.isDisplayed() = " + johnAdamsUserFirstNameCell.isDisplayed());
+		assertTrue(
+			"The First Name Cell of the John Adams user should be displayed on the page as Adams at this point but it is not.",
+			johnAdamsUserFirstNameCell.isDisplayed());
+		logger.log(Level.INFO,
+			"johnAdamsUserEmailAddressCell.isDisplayed() = " + johnAdamsUserEmailAddressCell.isDisplayed());
+		assertTrue(
+			"The Email Address Cell of the John Adams user should be displayed on the page as john.adams@liferay.com at this point but it is not.",
+			johnAdamsUserEmailAddressCell.isDisplayed());
+	}
+
+//	@Test // Not applicable for Liferay Portal 6.0
+	@RunAsClient
+	@InSequence(8000)
+	public void deactivateUser() throws Exception{
+
+		waitForElement(browser, johnAdamsUserScreenNameCellXpath);
+		(new Actions(browser)).doubleClick(johnAdamsUserScreenNameCell).perform();
+		Thread.sleep(250);
+		(new Actions(browser)).doubleClick(johnAdamsUserScreenNameCell).perform();
+
+		waitForElement(browser, dropdownInactiveFieldXpath);
+
+		dropdownInactiveField.click();
+
+		submitButton.click();
+
+		waitForElement(browser, johnAdamsUserScreenNameCellXpath);
+
+		(new Actions(browser)).doubleClick(johnAdamsUserScreenNameCell).perform();
+		Thread.sleep(250);
+		(new Actions(browser)).doubleClick(johnAdamsUserScreenNameCell).perform();
+
+		waitForElement(browser, dropdownActiveFieldXpath);
+
+		logger.log(Level.INFO, "dropdownInactiveSelectedField.isDisplayed() = " + dropdownInactiveSelectedField.isDisplayed());
+		assertTrue("The dropdown Inactive Field should be selected now, but it is not.",
+			dropdownInactiveSelectedField.isDisplayed());
+
+		dropdownActiveField.click();
+
+		submitButton.click();
+
+		waitForElement(browser, johnAdamsUserScreenNameCellXpath);
+
+		logger.log(Level.INFO,
+			"johnAdamsUserScreenNameCell.isDisplayed() = " + johnAdamsUserScreenNameCell.isDisplayed());
+		assertTrue(
+			"The Screen Name Cell of the John Adams user should be displayed on the page as john.adams at this point but it is not.",
+			johnAdamsUserScreenNameCell.isDisplayed());
+		logger.log(Level.INFO, "johnAdamsUserLastNameCell.isDisplayed() = " + johnAdamsUserLastNameCell.isDisplayed());
+		assertTrue(
+			"The Last Name Cell of the John Adams user should be displayed on the page as John at this point but it is not.",
+			johnAdamsUserLastNameCell.isDisplayed());
+		logger.log(Level.INFO, "johnAdamsUserLastNameCell.isDisplayed() = " + johnAdamsUserFirstNameCell.isDisplayed());
+		assertTrue(
+			"The First Name Cell of the John Adams user should be displayed on the page as Adams at this point but it is not.",
+			johnAdamsUserFirstNameCell.isDisplayed());
+		logger.log(Level.INFO,
+			"johnAdamsUserEmailAddressCell.isDisplayed() = " + johnAdamsUserEmailAddressCell.isDisplayed());
+		assertTrue(
+			"The Email Address Cell of the John Adams user should be displayed on the page as john.adams@liferay.com at this point but it is not.",
+			johnAdamsUserEmailAddressCell.isDisplayed());
+
+		(new Actions(browser)).doubleClick(johnAdamsUserScreenNameCell).perform();
+		Thread.sleep(250);
+		(new Actions(browser)).doubleClick(johnAdamsUserScreenNameCell).perform();
+
+		waitForElement(browser, dropdownInactiveFieldXpath);
+
+		logger.log(Level.INFO, "dropdownActiveSelectedField.isDisplayed() = " + dropdownActiveSelectedField.isDisplayed());
+		assertTrue("The dropdown Active Field should be selected now, but it is not.",
+			dropdownActiveSelectedField.isDisplayed());
+	}
 }
+//J+

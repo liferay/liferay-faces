@@ -12,6 +12,10 @@
  * details.
  */
 package com.liferay.faces.test;
+//J-
+
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.util.logging.Level;
 
@@ -19,23 +23,16 @@ import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.drone.api.annotation.Drone;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.junit.InSequence;
-
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
 import org.junit.Test;
-
 import org.junit.runner.RunWith;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import com.liferay.faces.test.util.TesterBase;
 
-
 /**
- * @author  Liferay Faces Team
+ * @author	Liferay Faces Team
  */
 @RunWith(Arquillian.class)
 public class Icefaces3CrudPortletTest extends TesterBase {
@@ -144,110 +141,27 @@ public class Icefaces3CrudPortletTest extends TesterBase {
 
 	@Test
 	@RunAsClient
-	@InSequence(4000)
-	public void addCustomer() throws Exception {
+	@InSequence(1000)
+	public void customerMasterViewMode() throws Exception {
 
-		Thread.sleep(250);
+		signIn(browser);
+		logger.log(Level.INFO, "browser.navigate().to(" + url + ")");
+		browser.navigate().to(url);
+		logger.log(Level.INFO, "browser.getTitle() = " + browser.getTitle());
+		logger.log(Level.INFO, "browser.getCurrentUrl() = " + browser.getCurrentUrl());
+		getPortletDisplayName();
+		logger.log(Level.INFO, "displayName.getText() = " + displayName.getText());
 
-		addButton.click();
+		getPortletDisplayName();
+		assertTrue("displayName.isDisplayed()", displayName.isDisplayed());
 
-		Thread.sleep(250);
+		logger.log(Level.INFO, "addButton.isDisplayed() = " + addButton.isDisplayed());
+		assertTrue("The \"Add New\" button should be displayed on the page at this point but it is not.",
+			addButton.isDisplayed());
 
-		firstNameField.sendKeys("A");
-		lastNameField.sendKeys("A");
-		emailAddressField.sendKeys("A@liferay.com");
-		phoneNumberField.sendKeys("9876543210");
-		dateOfBirthField.sendKeys("11/11/1111");
-		cityField.sendKeys("A");
-		provinceFl.click();
-		postalCodeField.sendKeys("11111");
-		saveButton.click();
-
-		Thread.sleep(250);
-
-		logger.log(Level.INFO,
-			"isThere(browser, firstNameFieldErrorXpath) = " + isThere(browser, firstNameFieldErrorXpath));
-		assertFalse("There should NOT be a First Name Validation Error on the but there is.",
-			isThere(browser, firstNameFieldErrorXpath));
-
-		logger.log(Level.INFO,
-			"isThere(browser, lastNameFieldErrorXpath) = " + isThere(browser, lastNameFieldErrorXpath));
-		assertFalse("There should NOT be a Last Name Validation Error on the but there is.",
-			isThere(browser, lastNameFieldErrorXpath));
-
-		logger.log(Level.INFO,
-			"isThere(browser, emailAddressFieldErrorXpath) = " + isThere(browser, emailAddressFieldErrorXpath));
-		assertFalse("There should NOT be a Email Validation Error on the but there is.",
-			isThere(browser, emailAddressFieldErrorXpath));
-
-		logger.log(Level.INFO,
-			"isThere(browser, phoneNumberFieldErrorXpath) = " + isThere(browser, phoneNumberFieldErrorXpath));
-		assertFalse("There should NOT be a Phone Number Validation Error on the but there is.",
-			isThere(browser, phoneNumberFieldErrorXpath));
-
-		logger.log(Level.INFO,
-			"isThere(browser, dateOfBirthFieldErrorXpath) = " + isThere(browser, dateOfBirthFieldErrorXpath));
-		assertFalse("There should NOT be a Date of Birth Validation Error on the but there is.",
-			isThere(browser, dateOfBirthFieldErrorXpath));
-
-		logger.log(Level.INFO, "isThere(browser, cityFieldErrorXpath) = " + isThere(browser, cityFieldErrorXpath));
-		assertFalse("There should NOT be a City Validation Error on the but there is.",
-			isThere(browser, cityFieldErrorXpath));
-
-		logger.log(Level.INFO,
-			"isThere(browser, provinceIdFieldErrorXpath) = " + isThere(browser, provinceIdFieldErrorXpath));
-		assertFalse("There should NOT be a province Validation Error on the but there is.",
-			isThere(browser, provinceIdFieldErrorXpath));
-
-		logger.log(Level.INFO,
-			"isThere(browser, postalCodeFieldErrorXpath) = " + isThere(browser, postalCodeFieldErrorXpath));
-		assertFalse("There should NOT be a Postal Code Validation Error on the but there is.",
-			isThere(browser, postalCodeFieldErrorXpath));
-
-	}
-
-	@Test
-	@RunAsClient
-	@InSequence(3000)
-	public void allFieldsRequired() throws Exception {
-
-		saveButton.click();
-
-		Thread.sleep(250);
-
-		logger.log(Level.INFO, "firstNameFieldError.isDisplayed() = " + firstNameFieldError.isDisplayed());
-		assertTrue("The First Name Validation Error should be displayed on the page at this point but it is not.",
-			firstNameFieldError.isDisplayed());
-
-		logger.log(Level.INFO, "lastNameFieldError.isDisplayed() = " + lastNameFieldError.isDisplayed());
-		assertTrue("The Last Name Validation Error should be displayed on the page at this point but it is not.",
-			lastNameFieldError.isDisplayed());
-
-		logger.log(Level.INFO, "emailAddressFieldError..isDisplayed() = " + emailAddressFieldError.isDisplayed());
-		assertTrue("The Email Address Validation Error should be displayed on the page at this point but it is not.",
-			emailAddressFieldError.isDisplayed());
-
-		logger.log(Level.INFO, "phoneNumberFieldError.isDisplayed() = " + phoneNumberFieldError.isDisplayed());
-		assertTrue("The Phone Number Validation Error should be displayed on the page at this point but it is not.",
-			phoneNumberFieldError.isDisplayed());
-
-		logger.log(Level.INFO, "dateOfBirthFieldError.isDisplayed() = " + dateOfBirthFieldError.isDisplayed());
-		assertTrue("The Date of Birth Validation Error should be displayed on the page at this point but it is not.",
-			dateOfBirthFieldError.isDisplayed());
-
-		logger.log(Level.INFO, "cityFieldError.isDisplayed() = " + cityFieldError.isDisplayed());
-		assertTrue("The City Validation Error should be displayed on the page at this point but it is not.",
-			cityFieldError.isDisplayed());
-
-		logger.log(Level.INFO, "provinceIdFieldError.isDisplayed() = " + provinceIdFieldError.isDisplayed());
-		assertTrue("The Province ID Validation Error should be displayed on the page at this point but it is not.",
-			provinceIdFieldError.isDisplayed());
-
-		logger.log(Level.INFO, "postalCodeFieldError..isDisplayed() = " + postalCodeFieldError.isDisplayed());
-		assertTrue("The Postal Code Validation Error should be displayed on the page at this point but it is not.",
-			postalCodeFieldError.isDisplayed());
-
-		cancelButton.click();
+		logger.log(Level.INFO, "deleteButton.isDisplayed() = " + deleteButton.isDisplayed());
+		assertTrue("The \"Delete Selected\" button should be displayed on the page at this point but it is not.",
+			deleteButton.isDisplayed());
 
 	}
 
@@ -304,28 +218,104 @@ public class Icefaces3CrudPortletTest extends TesterBase {
 
 	@Test
 	@RunAsClient
-	@InSequence(1000)
-	public void customerMasterViewMode() throws Exception {
+	@InSequence(3000)
+	public void allFieldsRequired() throws Exception {
 
-		signIn(browser);
-		logger.log(Level.INFO, "browser.navigate().to(" + url + ")");
-		browser.navigate().to(url);
-		logger.log(Level.INFO, "browser.getTitle() = " + browser.getTitle());
-		logger.log(Level.INFO, "browser.getCurrentUrl() = " + browser.getCurrentUrl());
-		getPortletDisplayName();
-		logger.log(Level.INFO, "displayName.getText() = " + displayName.getText());
+		saveButton.click();
 
-		getPortletDisplayName();
-		assertTrue("displayName.isDisplayed()", displayName.isDisplayed());
+		Thread.sleep(250);
 
-		logger.log(Level.INFO, "addButton.isDisplayed() = " + addButton.isDisplayed());
-		assertTrue("The \"Add New\" button should be displayed on the page at this point but it is not.",
-			addButton.isDisplayed());
+		logger.log(Level.INFO, "firstNameFieldError.isDisplayed() = " + firstNameFieldError.isDisplayed());
+		assertTrue("The First Name Validation Error should be displayed on the page at this point but it is not.",
+			firstNameFieldError.isDisplayed());
 
-		logger.log(Level.INFO, "deleteButton.isDisplayed() = " + deleteButton.isDisplayed());
-		assertTrue("The \"Delete Selected\" button should be displayed on the page at this point but it is not.",
-			deleteButton.isDisplayed());
+		logger.log(Level.INFO, "lastNameFieldError.isDisplayed() = " + lastNameFieldError.isDisplayed());
+		assertTrue("The Last Name Validation Error should be displayed on the page at this point but it is not.",
+			lastNameFieldError.isDisplayed());
+
+		logger.log(Level.INFO, "emailAddressFieldError..isDisplayed() = " + emailAddressFieldError.isDisplayed());
+		assertTrue("The Email Address Validation Error should be displayed on the page at this point but it is not.",
+			emailAddressFieldError.isDisplayed());
+
+		logger.log(Level.INFO, "phoneNumberFieldError.isDisplayed() = " + phoneNumberFieldError.isDisplayed());
+		assertTrue("The Phone Number Validation Error should be displayed on the page at this point but it is not.",
+			phoneNumberFieldError.isDisplayed());
+
+		logger.log(Level.INFO, "dateOfBirthFieldError.isDisplayed() = " + dateOfBirthFieldError.isDisplayed());
+		assertTrue("The Date of Birth Validation Error should be displayed on the page at this point but it is not.",
+			dateOfBirthFieldError.isDisplayed());
+
+		logger.log(Level.INFO, "cityFieldError.isDisplayed() = " + cityFieldError.isDisplayed());
+		assertTrue("The City Validation Error should be displayed on the page at this point but it is not.",
+			cityFieldError.isDisplayed());
+
+		logger.log(Level.INFO, "provinceIdFieldError.isDisplayed() = " + provinceIdFieldError.isDisplayed());
+		assertTrue("The Province ID Validation Error should be displayed on the page at this point but it is not.",
+			provinceIdFieldError.isDisplayed());
+
+		logger.log(Level.INFO, "postalCodeFieldError..isDisplayed() = " + postalCodeFieldError.isDisplayed());
+		assertTrue("The Postal Code Validation Error should be displayed on the page at this point but it is not.",
+			postalCodeFieldError.isDisplayed());
+
+		cancelButton.click();
+
+	}
+
+	@Test
+	@RunAsClient
+	@InSequence(4000)
+	public void addCustomer() throws Exception {
+
+		Thread.sleep(250);
+
+		addButton.click();
+
+		Thread.sleep(250);
+
+		firstNameField.sendKeys("A");
+		lastNameField.sendKeys("A");
+		emailAddressField.sendKeys("A@liferay.com");
+		phoneNumberField.sendKeys("9876543210");
+		dateOfBirthField.sendKeys("11/11/1111");
+		cityField.sendKeys("A");
+		provinceFl.click();
+		postalCodeField.sendKeys("11111");
+		saveButton.click();
+
+		Thread.sleep(250);
+
+		logger.log(Level.INFO, "isThere(browser, firstNameFieldErrorXpath) = " + isThere(browser, firstNameFieldErrorXpath));
+		assertFalse("There should NOT be a First Name Validation Error on the but there is.",
+			isThere(browser, firstNameFieldErrorXpath));
+
+		logger.log(Level.INFO, "isThere(browser, lastNameFieldErrorXpath) = " + isThere(browser, lastNameFieldErrorXpath));
+		assertFalse("There should NOT be a Last Name Validation Error on the but there is.",
+			isThere(browser, lastNameFieldErrorXpath));
+
+		logger.log(Level.INFO, "isThere(browser, emailAddressFieldErrorXpath) = " + isThere(browser, emailAddressFieldErrorXpath));
+		assertFalse("There should NOT be a Email Validation Error on the but there is.",
+			isThere(browser, emailAddressFieldErrorXpath));
+
+		logger.log(Level.INFO, "isThere(browser, phoneNumberFieldErrorXpath) = " + isThere(browser, phoneNumberFieldErrorXpath));
+		assertFalse("There should NOT be a Phone Number Validation Error on the but there is.",
+			isThere(browser, phoneNumberFieldErrorXpath));
+
+		logger.log(Level.INFO, "isThere(browser, dateOfBirthFieldErrorXpath) = " + isThere(browser, dateOfBirthFieldErrorXpath));
+		assertFalse("There should NOT be a Date of Birth Validation Error on the but there is.",
+			isThere(browser, dateOfBirthFieldErrorXpath));
+
+		logger.log(Level.INFO, "isThere(browser, cityFieldErrorXpath) = " + isThere(browser, cityFieldErrorXpath));
+		assertFalse("There should NOT be a City Validation Error on the but there is.", isThere(browser, cityFieldErrorXpath));
+
+		logger.log(Level.INFO, "isThere(browser, provinceIdFieldErrorXpath) = " + isThere(browser, provinceIdFieldErrorXpath));
+		assertFalse("There should NOT be a province Validation Error on the but there is.",
+			isThere(browser, provinceIdFieldErrorXpath));
+
+		logger.log(Level.INFO, "isThere(browser, postalCodeFieldErrorXpath) = " + isThere(browser, postalCodeFieldErrorXpath));
+		assertFalse("There should NOT be a Postal Code Validation Error on the but there is.",
+			isThere(browser, postalCodeFieldErrorXpath));
 
 	}
 
 }
+//J+
