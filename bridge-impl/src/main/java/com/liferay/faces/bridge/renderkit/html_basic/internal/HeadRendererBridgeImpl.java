@@ -33,7 +33,6 @@ import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.bridge.context.BridgePortalContext;
 import com.liferay.faces.bridge.context.HeadResponseWriter;
 import com.liferay.faces.bridge.context.HeadResponseWriterFactory;
-import com.liferay.faces.bridge.internal.BridgeConstants;
 import com.liferay.faces.bridge.renderkit.bridge.internal.BridgeRenderer;
 import com.liferay.faces.util.application.ComponentResource;
 import com.liferay.faces.util.application.ComponentResourceFactory;
@@ -150,7 +149,7 @@ public class HeadRendererBridgeImpl extends BridgeRenderer {
 
 		// Determine whether or not this might be a Liferay runtime portlet (which does not have the ability to add
 		// script resources to the head).
-		Boolean renderPortletResource = (Boolean) portletRequest.getAttribute(BridgeConstants.RENDER_PORTLET_RESOURCE);
+		Boolean renderPortletResource = (Boolean) portletRequest.getAttribute("RENDER_PORTLET_RESOURCE");
 		boolean liferayRuntimePortlet = (renderPortletResource != null) && renderPortletResource.booleanValue();
 
 		// Note: The HeadManagedBean is a ViewScoped manage-bean that keeps a list of resources that have been added to

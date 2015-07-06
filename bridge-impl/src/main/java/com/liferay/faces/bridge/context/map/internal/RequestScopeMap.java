@@ -31,7 +31,6 @@ import com.liferay.faces.bridge.bean.internal.BeanManager;
 import com.liferay.faces.bridge.bean.internal.BeanManagerFactory;
 import com.liferay.faces.bridge.config.internal.PortletConfigParam;
 import com.liferay.faces.bridge.context.BridgeContext;
-import com.liferay.faces.bridge.internal.BridgeConstants;
 import com.liferay.faces.bridge.scope.BridgeRequestScope;
 import com.liferay.faces.util.config.ApplicationConfig;
 import com.liferay.faces.util.map.AbstractPropertyMap;
@@ -143,8 +142,7 @@ public class RequestScopeMap extends AbstractPropertyMap<Object> {
 	protected Object getProperty(String name) {
 
 		if ((NULL_PATH_ATTRIBUTES) &&
-				(BridgeConstants.REQ_ATTR_PATH_INFO.equals(name) ||
-					BridgeConstants.REQ_ATTR_SERVLET_PATH.equals(name))) {
+				("javax.servlet.include.path_info".equals(name) || "javax.servlet.include.servlet_path".equals(name))) {
 			return null;
 		}
 		else {
