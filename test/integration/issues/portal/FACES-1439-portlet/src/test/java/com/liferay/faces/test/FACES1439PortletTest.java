@@ -12,6 +12,10 @@
  * details.
  */
 package com.liferay.faces.test;
+//J-
+
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.util.logging.Level;
 
@@ -19,14 +23,8 @@ import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.drone.api.annotation.Drone;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.junit.InSequence;
-
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
 import org.junit.Test;
-
 import org.junit.runner.RunWith;
-
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -37,7 +35,7 @@ import com.liferay.faces.test.util.TesterBase;
 
 
 /**
- * @author  Liferay Faces Team
+ * @author	Liferay Faces Team
  */
 @RunWith(Arquillian.class)
 public class FACES1439PortletTest extends TesterBase {
@@ -119,7 +117,6 @@ public class FACES1439PortletTest extends TesterBase {
 		logger.log(Level.INFO, "Typing into htmlEditor1 ...");
 
 		iframe1.click();
-
 		// Apparently sending a TAB key brings the iframe into focus, so that you can type into it
 		(new Actions(browser)).sendKeys(Keys.TAB).perform();
 
@@ -182,7 +179,6 @@ public class FACES1439PortletTest extends TesterBase {
 
 		// show iframe 1
 		showHideOne.click();
-
 		// Now wait for the comments to actually show
 		Thread.sleep(250);
 
@@ -263,3 +259,4 @@ public class FACES1439PortletTest extends TesterBase {
 	}
 
 }
+//J+

@@ -12,6 +12,10 @@
  * details.
  */
 package com.liferay.faces.test;
+//J-
+
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.util.logging.Level;
 
@@ -19,16 +23,10 @@ import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.drone.api.annotation.Drone;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.junit.InSequence;
-
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
 import org.junit.Test;
-
 import org.junit.runner.RunWith;
-
-import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -39,7 +37,7 @@ import com.liferay.faces.test.util.TesterBase;
 
 
 /**
- * @author  Liferay Faces Team
+ * @author	Liferay Faces Team
  */
 @RunWith(Arquillian.class)
 public class Jsf2CdiPortletTest extends TesterBase {
@@ -55,36 +53,30 @@ public class Jsf2CdiPortletTest extends TesterBase {
 	private static final String logoXpath = "//img[contains(@src,'liferay-logo.png')]";
 
 	private static final String firstNameFieldXpath = "//input[contains(@id,':firstName')]";
-	private static final String firstNameFieldErrorXpath =
-		"//input[contains(@id,':firstName')]/following-sibling::*[1]";
+	private static final String firstNameFieldErrorXpath = "//input[contains(@id,':firstName')]/following-sibling::*[1]";
 
 	private static final String lastNameFieldXpath = "//input[contains(@id,':lastName')]";
 	private static final String lastNameFieldErrorXpath = "//input[contains(@id,':lastName')]/following-sibling::*[1]";
 
 	private static final String emailAddressFieldXpath = "//input[contains(@id,':emailAddress')]";
-	private static final String emailAddressFieldErrorXpath =
-		"//input[contains(@id,':emailAddress')]/following-sibling::*[1]";
+	private static final String emailAddressFieldErrorXpath = "//input[contains(@id,':emailAddress')]/following-sibling::*[1]";
 
 	private static final String phoneNumberFieldXpath = "//input[contains(@id,':phoneNumber')]";
-	private static final String phoneNumberFieldErrorXpath =
-		"//input[contains(@id,':phoneNumber')]/following-sibling::*[1]";
+	private static final String phoneNumberFieldErrorXpath = "//input[contains(@id,':phoneNumber')]/following-sibling::*[1]";
 
 	private static final String dateOfBirthFieldXpath = "//input[contains(@id,':dateOfBirth')]";
-	private static final String dateOfBirthFieldErrorXpath =
-		"//input[contains(@id,':dateOfBirth')]/following-sibling::*[1]";
+	private static final String dateOfBirthFieldErrorXpath = "//input[contains(@id,':dateOfBirth')]/following-sibling::*[1]";
 
 	private static final String cityFieldXpath = "//input[contains(@id,':city')]";
 	private static final String cityFieldErrorXpath = "//input[contains(@id,':city')]/following-sibling::*[1]";
 
 	private static final String provinceIdFieldXpath = "//select[contains(@id,':provinceId')]";
-	private static final String provinceIdFieldErrorXpath =
-		"//select[contains(@id,':provinceId')]/following-sibling::*[1]";
+	private static final String provinceIdFieldErrorXpath = "//select[contains(@id,':provinceId')]/following-sibling::*[1]";
 
 	private static final String provinceIdSelectorXpath = "";
 
 	private static final String postalCodeFieldXpath = "//input[contains(@id,':postalCode')]";
-	private static final String postalCodeFieldErrorXpath =
-		"//input[contains(@id,':postalCode')]/following-sibling::*[1]/following-sibling::*[1]";
+	private static final String postalCodeFieldErrorXpath = "//input[contains(@id,':postalCode')]/following-sibling::*[1]/following-sibling::*[1]";
 
 	private static final String postalCodeToolTipXpath = "//img[contains(@title,'Type any of these ZIP codes')]";
 
@@ -93,8 +85,7 @@ public class Jsf2CdiPortletTest extends TesterBase {
 	private static final String commentsXpath = "//textarea[contains(@id,':comments')]";
 
 	private static final String fileUploadChooserXpath = "//input[@type='file' and @multiple='multiple']";
-	private static final String submitFileXpath =
-		"//form[@method='post' and @enctype='multipart/form-data']/input[@type='submit' and @value='Submit']";
+	private static final String submitFileXpath = "//form[@method='post' and @enctype='multipart/form-data']/input[@type='submit' and @value='Submit']";
 	private static final String uploadedFileXpath = "//tr[@class='portlet-section-body results-row']/td[2]";
 
 	private static final String submitButtonXpath = "//input[@type='submit' and @value='Submit']";
@@ -193,6 +184,283 @@ public class Jsf2CdiPortletTest extends TesterBase {
 
 	@Test
 	@RunAsClient
+	@InSequence(1000)
+	public void jobApplicantRenderViewMode() throws Exception {
+
+		logger.log(Level.INFO, "portal = " + portal);
+		logger.log(Level.INFO, "baseUrl = " + baseUrl);
+		logger.log(Level.INFO, "signInContext = " + signInContext);
+		logger.log(Level.INFO, "webContext = " + webContext);
+
+		signIn(browser);
+
+		logger.log(Level.INFO, "browser.navigate().to(" + url + ")");
+		browser.navigate().to(url);
+		logger.log(Level.INFO, "browser.getTitle() = " + browser.getTitle());
+		logger.log(Level.INFO, "browser.getCurrentUrl() = " + browser.getCurrentUrl());
+		getPortletDisplayName();
+		logger.log(Level.INFO, "displayName.getText() = " + displayName.getText());
+
+		assertTrue("displayName.isDisplayed()", displayName.isDisplayed());
+		// assertTrue("preferencesMenuButton.isDisplayed()", preferencesMenuButton.isDisplayed());
+		// assertFalse("preferencesMenuItem is NOT displayed()", preferencesMenuItem.isDisplayed());
+
+		if (isThere(browser, logoXpath)) {
+			assertTrue("logo.isDisplayed()", logo.isDisplayed());
+		}
+
+		assertTrue("firstNameField.isDisplayed()", firstNameField.isDisplayed());
+		assertTrue("lastNameField.isDisplayed()", lastNameField.isDisplayed());
+		assertTrue("emailAddressField.isDisplayed()", emailAddressField.isDisplayed());
+		assertTrue("phoneNumberField.isDisplayed()", phoneNumberField.isDisplayed());
+
+		assertTrue("dateOfBirthField.isDisplayed()", dateOfBirthField.isDisplayed());
+		assertTrue("cityField.isDisplayed()", cityField.isDisplayed());
+		assertTrue("isThere(browser, provinceIdFieldXpath)", isThere(browser, provinceIdFieldXpath));
+		assertTrue("postalCodeField.isDisplayed()", postalCodeField.isDisplayed());
+		if (isThere(browser, postalCodeToolTipXpath)) {
+			assertTrue("postalCodeToolTip.isDisplayed()", postalCodeToolTip.isDisplayed());
+		} else {
+			assertTrue("Postal code tool tips should be present, but are not.  No postal code tool tips present", false);
+		}
+
+		assertTrue("showCommentsLink.isDisplayed()", showCommentsLink.isDisplayed());
+
+		if (isThere(browser, fileUploadChooserXpath)) {
+			logger.log(Level.INFO, "fileUploadChooser.isDisplayed() = " + fileUploadChooser.isDisplayed());
+			logger.log(Level.INFO, "submitFile.isDisplayed() = " + submitFile.isDisplayed());
+		}
+
+		assertTrue("submitButton.isDisplayed()", submitButton.isDisplayed());
+		logger.log(Level.INFO, "submitButton.getTagName() = " + submitButton.getTagName());
+
+		assertTrue("mojarraVersion.isDisplayed()", mojarraVersion.isDisplayed());
+		logger.log(Level.INFO, mojarraVersion.getText());
+
+		if (isThere(browser, componentLibraryVersionXpath)) {
+			assertTrue("componentLibraryVersion.isDisplayed()", componentLibraryVersion.isDisplayed());
+			logger.log(Level.INFO, componentLibraryVersion.getText());
+		}
+
+		assertTrue("alloyVersion.isDisplayed()", alloyVersion.isDisplayed());
+		logger.log(Level.INFO, alloyVersion.getText());
+		assertTrue("bridgeVersion.isDisplayed()", bridgeVersion.isDisplayed());
+		logger.log(Level.INFO, bridgeVersion.getText());
+
+	}
+
+	@Test
+	@RunAsClient
+	@InSequence(1500)
+	public void dataEntry() throws Exception {
+
+		logger.log(Level.INFO, "clicking into the firstNameField ...");
+		firstNameField.click();
+//		Thread.sleep(50);
+		logger.log(Level.INFO, "tabbing into the next field ...");
+		firstNameField.sendKeys(Keys.TAB);
+//		Thread.sleep(500);
+		logger.log(Level.INFO, "firstNameField.getAttribute('value') = " + firstNameField.getAttribute("value"));
+		logger.log(Level.INFO, "isThere(browser, firstNameFieldErrorXpath) = " + isThere(browser, firstNameFieldErrorXpath));
+
+		if (isThere(browser, firstNameFieldErrorXpath)) { // houston we have a problem
+			logger.log(Level.INFO, "firstNameFieldError.isDisplayed() = " + firstNameFieldError.isDisplayed());
+			assertFalse(
+				"firstNameFieldError should not be displayed after simply tabbing out of the empty field, having never entered any data.  " +
+				"But we see '" + firstNameFieldError.getText() + "'", firstNameFieldError.isDisplayed());
+		}
+
+		logger.log(Level.INFO, "Shift tabbing back into the firstNameField ...");
+		(new Actions(browser)).keyDown(Keys.SHIFT).sendKeys(Keys.TAB).keyDown(Keys.SHIFT).perform();
+//		Thread.sleep(50);
+		logger.log(Level.INFO, "isThere(browser, firstNameFieldErrorXpath) = " + isThere(browser, firstNameFieldErrorXpath));
+
+		logger.log(Level.INFO, "entering 'asdf' into the firstNameField and then tabbing out of it...");
+		firstNameField.sendKeys("asdf");
+		firstNameField.sendKeys(Keys.TAB);
+//		Thread.sleep(50);
+		logger.log(Level.INFO, "firstNameField.getAttribute('value') = " + firstNameField.getAttribute("value"));
+		logger.log(Level.INFO, "isThere(browser, firstNameFieldErrorXpath) = " + isThere(browser, firstNameFieldErrorXpath));
+		assertTrue("The data 'asdf' should be in the firstNameField after tabbing out of it",
+			"asdf".equals(firstNameField.getAttribute("value")));
+
+		logger.log(Level.INFO, "Shift tabbing back into the firstNameField ...");
+		(new Actions(browser)).keyDown(Keys.SHIFT).sendKeys(Keys.TAB).keyDown(Keys.SHIFT).perform();
+		Thread.sleep(250);
+		logger.log(Level.INFO,
+			"clearing the firstNameField using the BACKSPACE key, and then tabbing out of the firstNameField ...");
+		firstNameField.sendKeys(Keys.BACK_SPACE);
+		Thread.sleep(150);
+		firstNameField.sendKeys(Keys.BACK_SPACE);
+		Thread.sleep(150);
+		firstNameField.sendKeys(Keys.BACK_SPACE);
+		Thread.sleep(150);
+		firstNameField.sendKeys(Keys.BACK_SPACE);
+		Thread.sleep(150);
+		firstNameField.sendKeys(Keys.TAB);
+		Thread.sleep(150);
+		logger.log(Level.INFO, "firstNameField.getAttribute('value') = " + firstNameField.getAttribute("value"));
+		assertTrue(
+			"The data 'asdf' should no longer be in the firstNameField after clearing it out with BACK_SPACE and then tabbing out.	" +
+			"But we see '" + firstNameField.getAttribute("value") + "'",
+			"".equals(firstNameField.getAttribute("value")));
+		logger.log(Level.INFO, "isThere(browser, firstNameFieldErrorXpath) = " + isThere(browser, firstNameFieldErrorXpath));
+		assertTrue("The firstNameFieldError should at least be in the DOM somewhere by this point, but it is not there",
+			isThere(browser, firstNameFieldErrorXpath));
+		logger.log(Level.INFO, "firstNameFieldError.getText() = " + firstNameFieldError.getText());
+		assertTrue("The firstNameFieldError should say 'Value is required'",
+			firstNameFieldError.getText().contains("Value is required"));
+
+	}
+
+	@Test
+	@RunAsClient
+	@InSequence(2000)
+	public void validateEmail() throws Exception {
+
+		int tags = 0;
+		int tagsWhileValid = 0;
+
+		// checks an invalid email address
+		logger.log(Level.INFO, "Entering an invalid email address 'test' ...");
+		emailAddressField.sendKeys("test");
+		phoneNumberField.click();
+		Thread.sleep(500);
+		logger.log(Level.INFO, "emailAddressField.getAttribute('value') = " + emailAddressField.getAttribute("value"));
+		tags = browser.findElements(By.xpath("//span[contains(text(),'Invalid e-mail address')]")).size();
+		logger.log(Level.INFO, "# of error tags = " + tags);
+		assertTrue("There should be an 'Invalid e-mail address' messaged displayed, but " + tags +
+			" error messages are displayed", tags > tagsWhileValid);
+		assertTrue("Invalid e-mail address validation message displayed",
+			emailAddressFieldError.getText().contains("Invalid e-mail address"));
+		logger.log(Level.INFO, "emailAddressFieldError.isDisplayed() = " + emailAddressFieldError.isDisplayed());
+		logger.log(Level.INFO, "emailAddressFieldError.getText() = " + emailAddressFieldError.getText());
+
+		// checks a valid email address
+		logger.log(Level.INFO, "Entering a valid email address 'test@liferay.com' ...");
+		emailAddressField.clear();
+		Thread.sleep(500);
+		emailAddressField.sendKeys("test@liferay.com");
+		phoneNumberField.click();
+		Thread.sleep(500);
+		logger.log(Level.INFO, "emailAddressField.getAttribute('value') = " + emailAddressField.getAttribute("value"));
+		tags = browser.findElements(By.xpath("//span[contains(text(),'Invalid e-mail address')]")).size();
+		logger.log(Level.INFO, "tags = " + tags);
+		assertTrue("# of error tags == tagsWhileValid", tags == tagsWhileValid);
+
+	}
+
+	@Test
+	@RunAsClient
+	@InSequence(3000)
+	public void preferencesAndEditMode() throws Exception {
+
+		// test for both
+		int dateLengthAfterChange = 8;
+		int dateLengthAfterReset = 10;
+
+		logger.log(Level.INFO, "preferencesMenuButton.click() ... ");
+
+		selectEditMode(browser, portal);
+
+		logger.log(Level.INFO, "done with selectEditMode: isThere(browser, datePatternFieldXpath) = " + isThere(browser, datePatternFieldXpath));
+		logger.log(Level.INFO, "datePatternField.getAttribute('value') = " + datePatternField.getAttribute("value"));
+		logger.log(Level.INFO, "resetButton.isDisplayed() = " + resetButton.isDisplayed());
+
+		// MM/dd/yyyy
+		datePatternField.clear();
+		datePatternField.sendKeys("MM/dd/yy");
+		preferencesSubmitButton.click();
+
+		// after clicking the preferencesSubmitButton, all of the job applicant demos need to end up on the same
+		// page.  Here is a log statement that should give you a clue between the different testers as to which ones are
+		// different from others
+		logger.log(Level.INFO, "browser.getCurrentUrl() = " + browser.getCurrentUrl());
+
+		logger.log(Level.INFO, "browser.navigate().to(" + url + ")");
+		browser.navigate().to(url);
+//		Thread.sleep(1000);
+		logger.log(Level.INFO, "dateOfBirthField.getAttribute('value') = " + dateOfBirthField.getAttribute("value"));
+		logger.log(Level.INFO,
+			"dateOfBirthField.getAttribute('value').length() = " + dateOfBirthField.getAttribute("value").length());
+
+		assertTrue("dateOfBirthField should have " + dateLengthAfterChange +
+			" characters after changing preferences to MM/dd/yy, but " +
+			dateOfBirthField.getAttribute("value").length() + " != " + dateLengthAfterChange,
+			dateOfBirthField.getAttribute("value").length() == dateLengthAfterChange);
+
+		if (isThere(browser, editPreferencesButtonXpath)) {
+			editPreferencesButton.click();
+			Thread.sleep(1500);
+			logger.log(Level.INFO, "editPreferencesButton.click() ...");
+		}
+		else {
+			logger.log(Level.INFO, "NO editPreferencesButton isThere, so preferencesMenuItem.click() ...");
+			selectEditMode(browser, portal);
+		}
+
+		logger.log(Level.INFO, "done with selectEditMode: isThere(browser, resetButtonXpath) = " + isThere(browser, resetButtonXpath));
+		logger.log(Level.INFO, "browser.getCurrentUrl() = " + browser.getCurrentUrl());
+
+		resetButton.click();
+		logger.log(Level.INFO, "resetButton.click() ...");
+//		Thread.sleep(1000);
+
+		// after clicking the resetButton all of the job applicant demos need to end up on the same page Here is a
+		// log statement that should give you a clue between the different testers as to which ones are different from
+		// others
+		logger.log(Level.INFO, "browser.getCurrentUrl() = " + browser.getCurrentUrl());
+
+		logger.log(Level.INFO, "browser.navigate().to(" + url + ")");
+		browser.navigate().to(url);
+
+		waitForElement(browser, dateOfBirthFieldXpath);
+
+		logger.log(Level.INFO, "dateOfBirthField.getAttribute('value') = " + dateOfBirthField.getAttribute("value"));
+		logger.log(Level.INFO,
+			"dateOfBirthField.getAttribute('value').length() = " + dateOfBirthField.getAttribute("value").length());
+
+		assertTrue("date of birth has " + dateLengthAfterReset + " characters after resetting preferences",
+			dateOfBirthField.getAttribute("value").length() == dateLengthAfterReset);
+
+	}
+
+	@Test
+	@RunAsClient
+	@InSequence(4000)
+	public void reset() throws Exception {
+
+		// because some test failures throw us into a strange state,
+		// let's reset preferences and the page we are on
+		logger.log(Level.INFO, "browser.navigate().to(" + url + ")");
+		browser.navigate().to(url);
+
+		logger.log(Level.INFO, "browser.getTitle() = " + browser.getTitle());
+		logger.log(Level.INFO, "browser.getCurrentUrl() = " + browser.getCurrentUrl());
+		logger.log(Level.INFO, "isThere(browser, dateOfBirthFieldXpath) = " + isThere(browser, dateOfBirthFieldXpath));
+
+		waitForElement(browser, dateOfBirthFieldXpath);
+//		Thread.sleep(250);
+
+		selectEditMode(browser, portal);
+
+		logger.log(Level.INFO, "browser.getTitle() = " + browser.getTitle());
+		logger.log(Level.INFO, "browser.getCurrentUrl() = " + browser.getCurrentUrl());
+
+		logger.log(Level.INFO, "resetButton.click() ...");
+		resetButton.click();
+
+//		Thread.sleep(500);
+		logger.log(Level.INFO, "browser.navigate().to(" + url + ")");
+		browser.navigate().to(url);
+//		Thread.sleep(500);
+		logger.log(Level.INFO, "browser.getCurrentUrl() = " + browser.getCurrentUrl());
+		assertTrue("We are on the correct page, which should be, url = " + url, browser.getCurrentUrl().contains(url));
+
+	}
+
+	@Test
+	@RunAsClient
 	@InSequence(5000)
 	public void allFieldsRequiredUponSubmit() throws Exception {
 
@@ -231,8 +499,7 @@ public class Jsf2CdiPortletTest extends TesterBase {
 		logger.log(Level.INFO, "cityFieldError.getText() = " + cityFieldError.getText());
 
 		logger.log(Level.INFO, "isThere(browser, provinceIdFieldXpath) = " + isThere(browser, provinceIdFieldXpath));
-		logger.log(Level.INFO,
-			"isThere(browser, provinceIdFieldErrorXpath) = " + isThere(browser, provinceIdFieldErrorXpath));
+		logger.log(Level.INFO, "isThere(browser, provinceIdFieldErrorXpath) = " + isThere(browser, provinceIdFieldErrorXpath));
 
 		assertTrue("firstNameFieldError should contain 'Value is required', but instead contains '" +
 			firstNameFieldError.getText() + "'", firstNameFieldError.getText().contains("Value is required"));
@@ -263,12 +530,9 @@ public class Jsf2CdiPortletTest extends TesterBase {
 			"before provinceIdField.getAttribute('value') = " + provinceIdField.getAttribute("value"));
 		logger.log(Level.INFO,
 			"before postalCodeField.getAttribute('value') = " + postalCodeField.getAttribute("value"));
-		assertTrue("cityField is empty",
-			((cityField.getAttribute("value") == null) || (cityField.getAttribute("value").length() == 0)));
-		assertTrue("provinceIdField is empty",
-			((provinceIdField.getAttribute("value") == null) || (provinceIdField.getAttribute("value").length() == 0)));
-		assertTrue("postalCodeField is empty",
-			((postalCodeField.getAttribute("value") == null) || (postalCodeField.getAttribute("value").length() == 0)));
+		assertTrue("cityField is empty", (cityField.getAttribute("value") == null || cityField.getAttribute("value").length() == 0));
+		assertTrue("provinceIdField is empty", (provinceIdField.getAttribute("value") == null || provinceIdField.getAttribute("value").length() == 0));
+		assertTrue("postalCodeField is empty", (postalCodeField.getAttribute("value") == null || postalCodeField.getAttribute("value").length() == 0));
 
 		postalCodeField.sendKeys("32801");
 
@@ -283,30 +547,18 @@ public class Jsf2CdiPortletTest extends TesterBase {
 
 		// If the (primefaces) selector is empty
 		if ("".equals(provinceIdSelectorXpath)) {
-			logger.log(Level.INFO,
-				" provinceIdFieldXpath tagName = " + browser.findElement(By.xpath(provinceIdFieldXpath)).getTagName());
-			logger.log(Level.INFO,
-				" provinceIdFieldXpath id = " + browser.findElement(By.xpath(provinceIdFieldXpath)).getAttribute("id"));
+			logger.log(Level.INFO, " provinceIdFieldXpath tagName = " + browser.findElement(By.xpath(provinceIdFieldXpath)).getTagName());
+			logger.log(Level.INFO, " provinceIdFieldXpath id = " + browser.findElement(By.xpath(provinceIdFieldXpath)).getAttribute("id"));
 			logger.log(Level.INFO, " provinceIdField value = " + provinceIdField.getAttribute("value"));
-			assertTrue("provinceIdField should contain 3, but instead it contains '" +
-				provinceIdField.getAttribute("value") + "'", provinceIdField.getAttribute("value").contains("3"));
+			assertTrue("provinceIdField should contain 3, but instead it contains '" + provinceIdField.getAttribute("value") + "'", provinceIdField.getAttribute("value").contains("3"));
 		}
-
 		// otherwise, use the (primefaces) selector
 		else {
-			logger.log(Level.INFO,
-				" provinceIdSelectorXpath tagName = " +
-				browser.findElement(By.xpath(provinceIdSelectorXpath)).getTagName());
-			logger.log(Level.INFO,
-				" provinceIdSelectorXpath id = " +
-				browser.findElement(By.xpath(provinceIdSelectorXpath)).getAttribute("id"));
-			logger.log(Level.INFO,
-				" provinceIdSelectorXpath value = " +
-				browser.findElement(By.xpath(provinceIdSelectorXpath)).getAttribute("value"));
-			assertTrue("provinceIdSelector should contain 3, but instead it contains '" +
-				provinceIdSelector.getAttribute("value") + "'", provinceIdSelector.getAttribute("value").contains("3"));
+			logger.log(Level.INFO, " provinceIdSelectorXpath tagName = " + browser.findElement(By.xpath(provinceIdSelectorXpath)).getTagName());
+			logger.log(Level.INFO, " provinceIdSelectorXpath id = " + browser.findElement(By.xpath(provinceIdSelectorXpath)).getAttribute("id"));
+			logger.log(Level.INFO, " provinceIdSelectorXpath value = " + browser.findElement(By.xpath(provinceIdSelectorXpath)).getAttribute("value"));
+			assertTrue("provinceIdSelector should contain 3, but instead it contains '" + provinceIdSelector.getAttribute("value") + "'", provinceIdSelector.getAttribute("value").contains("3"));
 		}
-
 		assertTrue("postalCodeField contains 32801", postalCodeField.getAttribute("value").contains("32801"));
 
 	}
@@ -331,11 +583,9 @@ public class Jsf2CdiPortletTest extends TesterBase {
 		assertTrue("comments textarea is displayed", comments.isDisplayed());
 		tags = browser.findElements(By.xpath("//a[contains(text(),'Hide Comments')]/../../child::node()")).size();
 		logger.log(Level.INFO, "tags = " + tags);
-
 		if (tags != tagsWhileShowing) {
 			logger.log(Level.INFO, "tagsWhileShowing = " + tagsWhileShowing);
 		}
-
 		assertTrue("tag for Hide and tag for textarea are showing", tags == tagsWhileShowing);
 
 		comments.sendKeys(testing123);
@@ -346,85 +596,15 @@ public class Jsf2CdiPortletTest extends TesterBase {
 		tags = browser.findElements(By.xpath("//a[contains(text(),'Show Comments')]/../../child::node()")).size();
 		logger.log(Level.INFO, "tags = " + tags);
 		assertTrue("no textarea is showing", tags == tagsWhileHidden);
-
 		if (tags != tagsWhileHidden) {
 			logger.log(Level.INFO, "tagsWhileHidden = " + tagsWhileHidden);
 		}
-
 		logger.log(Level.INFO, "showCommentsLink.isDisplayed() = " + showCommentsLink.isDisplayed());
 		showCommentsLink.click();
 		waitForElement(browser, commentsXpath);
 		logger.log(Level.INFO,
 			"after hide and show comments.getAttribute('value') = " + comments.getAttribute("value"));
 		assertTrue("comments are still there after hide and show", testing123.equals(comments.getAttribute("value")));
-
-	}
-
-	@Test
-	@RunAsClient
-	@InSequence(1500)
-	public void dataEntry() throws Exception {
-
-		logger.log(Level.INFO, "clicking into the firstNameField ...");
-		firstNameField.click();
-//      Thread.sleep(50);
-		logger.log(Level.INFO, "tabbing into the next field ...");
-		firstNameField.sendKeys(Keys.TAB);
-//      Thread.sleep(500);
-		logger.log(Level.INFO, "firstNameField.getAttribute('value') = " + firstNameField.getAttribute("value"));
-		logger.log(Level.INFO,
-			"isThere(browser, firstNameFieldErrorXpath) = " + isThere(browser, firstNameFieldErrorXpath));
-
-		if (isThere(browser, firstNameFieldErrorXpath)) { // houston we have a problem
-			logger.log(Level.INFO, "firstNameFieldError.isDisplayed() = " + firstNameFieldError.isDisplayed());
-			assertFalse(
-				"firstNameFieldError should not be displayed after simply tabbing out of the empty field, having never entered any data.  " +
-				"But we see '" + firstNameFieldError.getText() + "'", firstNameFieldError.isDisplayed());
-		}
-
-		logger.log(Level.INFO, "Shift tabbing back into the firstNameField ...");
-		(new Actions(browser)).keyDown(Keys.SHIFT).sendKeys(Keys.TAB).keyDown(Keys.SHIFT).perform();
-//      Thread.sleep(50);
-		logger.log(Level.INFO,
-			"isThere(browser, firstNameFieldErrorXpath) = " + isThere(browser, firstNameFieldErrorXpath));
-
-		logger.log(Level.INFO, "entering 'asdf' into the firstNameField and then tabbing out of it...");
-		firstNameField.sendKeys("asdf");
-		firstNameField.sendKeys(Keys.TAB);
-//      Thread.sleep(50);
-		logger.log(Level.INFO, "firstNameField.getAttribute('value') = " + firstNameField.getAttribute("value"));
-		logger.log(Level.INFO,
-			"isThere(browser, firstNameFieldErrorXpath) = " + isThere(browser, firstNameFieldErrorXpath));
-		assertTrue("The data 'asdf' should be in the firstNameField after tabbing out of it",
-			"asdf".equals(firstNameField.getAttribute("value")));
-
-		logger.log(Level.INFO, "Shift tabbing back into the firstNameField ...");
-		(new Actions(browser)).keyDown(Keys.SHIFT).sendKeys(Keys.TAB).keyDown(Keys.SHIFT).perform();
-		Thread.sleep(250);
-		logger.log(Level.INFO,
-			"clearing the firstNameField using the BACKSPACE key, and then tabbing out of the firstNameField ...");
-		firstNameField.sendKeys(Keys.BACK_SPACE);
-		Thread.sleep(150);
-		firstNameField.sendKeys(Keys.BACK_SPACE);
-		Thread.sleep(150);
-		firstNameField.sendKeys(Keys.BACK_SPACE);
-		Thread.sleep(150);
-		firstNameField.sendKeys(Keys.BACK_SPACE);
-		Thread.sleep(150);
-		firstNameField.sendKeys(Keys.TAB);
-		Thread.sleep(150);
-		logger.log(Level.INFO, "firstNameField.getAttribute('value') = " + firstNameField.getAttribute("value"));
-		assertTrue(
-			"The data 'asdf' should no longer be in the firstNameField after clearing it out with BACK_SPACE and then tabbing out.  " +
-			"But we see '" + firstNameField.getAttribute("value") + "'",
-			"".equals(firstNameField.getAttribute("value")));
-		logger.log(Level.INFO,
-			"isThere(browser, firstNameFieldErrorXpath) = " + isThere(browser, firstNameFieldErrorXpath));
-		assertTrue("The firstNameFieldError should at least be in the DOM somewhere by this point, but it is not there",
-			isThere(browser, firstNameFieldErrorXpath));
-		logger.log(Level.INFO, "firstNameFieldError.getText() = " + firstNameFieldError.getText());
-		assertTrue("The firstNameFieldError should say 'Value is required'",
-			firstNameFieldError.getText().contains("Value is required"));
 
 	}
 
@@ -444,9 +624,7 @@ public class Jsf2CdiPortletTest extends TesterBase {
 		}
 		catch (Exception e) {
 			logger.log(Level.INFO, "Exception e.getMessage() = " + e.getMessage());
-			assertTrue(
-				"No exceptions should occur when clearing the dateOfBirthField, but one did occur with the following message: " +
-				e.getMessage(), false);
+			assertTrue("No exceptions should occur when clearing the dateOfBirthField, but one did occur with the following message: " + e.getMessage(), false);
 		}
 
 		Thread.sleep(500);
@@ -461,10 +639,8 @@ public class Jsf2CdiPortletTest extends TesterBase {
 		assertTrue("dateOfBirthFieldError should contain 'Invalid date format', but insteead contains '" +
 			dateOfBirthFieldError.getText() + "'", dateOfBirthFieldError.getText().contains("Invalid date format"));
 
-		logger.log(Level.INFO,
-			" dateValidationXpath tagName = " + browser.findElement(By.xpath(dateValidationXpath)).getTagName());
-		logger.log(Level.INFO,
-			" dateValidationXpath id = " + browser.findElement(By.xpath(dateValidationXpath)).getAttribute("id"));
+		logger.log(Level.INFO, " dateValidationXpath tagName = " + browser.findElement(By.xpath(dateValidationXpath)).getTagName());
+		logger.log(Level.INFO, " dateValidationXpath id = " + browser.findElement(By.xpath(dateValidationXpath)).getAttribute("id"));
 
 		tags = browser.findElements(By.xpath(dateValidationXpath)).size() - dateValidationXpathModifier;
 		logger.log(Level.INFO, "tags = " + tags);
@@ -481,7 +657,6 @@ public class Jsf2CdiPortletTest extends TesterBase {
 		logger.log(Level.INFO, "dateOfBirthField.getAttribute('value') = " + dateOfBirthField.getAttribute("value"));
 		logger.log(Level.INFO, "dateOfBirthFieldError.isDisplayed() = " + dateOfBirthFieldError.isDisplayed());
 		logger.log(Level.INFO, "dateOfBirthFieldError.getText() = " + dateOfBirthFieldError.getText());
-
 		// Should I be this lenient?
 		assertTrue("dateOfBirthField validation message should be displayed when no date is entered",
 			dateOfBirthFieldError.getText().contains("Value is required") ||
@@ -510,11 +685,9 @@ public class Jsf2CdiPortletTest extends TesterBase {
 		tags = browser.findElements(By.xpath(dateValidationXpath)).size() - dateValidationXpathModifier;
 		logger.log(Level.INFO, "tags = " + tags);
 
-		logger.log(Level.INFO,
-			"isThere(browser, dateOfBirthFieldErrorXpath) = " + isThere(browser, dateOfBirthFieldErrorXpath));
+		logger.log(Level.INFO, "isThere(browser, dateOfBirthFieldErrorXpath) = " + isThere(browser, dateOfBirthFieldErrorXpath));
 
 		if (tags > tagsWhileValid) {
-
 			if (isThere(browser, dateOfBirthFieldErrorXpath)) {
 				foo = dateOfBirthFieldError.getText();
 			}
@@ -533,8 +706,7 @@ public class Jsf2CdiPortletTest extends TesterBase {
 		boolean uploaded = false;
 
 		if (isThere(browser, fileUploadChooserXpath)) {
-			logger.log(Level.INFO,
-				"isThere(browser, fileUploadChooserXpath) = " + isThere(browser, fileUploadChooserXpath));
+			logger.log(Level.INFO, "isThere(browser, fileUploadChooserXpath) = " + isThere(browser, fileUploadChooserXpath));
 		}
 		else {
 
@@ -548,12 +720,11 @@ public class Jsf2CdiPortletTest extends TesterBase {
 		logger.log(Level.INFO, "entering in " + getPathToJerseyFile() + " for fileUploadChooser ...");
 
 		// This was the magic that fixed the primefaces4 fileupload component the transform needed to be set to 'none'
-		((JavascriptExecutor) browser).executeScript("arguments[0].style.transform = 'none';", fileUploadChooser);
+		((JavascriptExecutor)browser).executeScript("arguments[0].style.transform = 'none';", fileUploadChooser);
 
 		// when transform is NOT set to 'none' then we get:
 		// fileUploadChooser.getCssValue(transform) = matrix(4, 0, 0, 4, -300, 0)
-		logger.log(Level.INFO,
-			"fileUploadChooser.getCssValue(transform) = " + fileUploadChooser.getCssValue("transform"));
+		logger.log(Level.INFO, "fileUploadChooser.getCssValue(transform) = " + fileUploadChooser.getCssValue("transform"));
 
 		fileUploadChooser.sendKeys(getPathToJerseyFile());
 
@@ -603,188 +774,6 @@ public class Jsf2CdiPortletTest extends TesterBase {
 		else {
 			assertTrue("file should have been uploaded, but was not ...", uploaded);
 		}
-	}
-
-	@Test
-	@RunAsClient
-	@InSequence(1000)
-	public void jobApplicantRenderViewMode() throws Exception {
-
-		logger.log(Level.INFO, "portal = " + portal);
-		logger.log(Level.INFO, "baseUrl = " + baseUrl);
-		logger.log(Level.INFO, "signInContext = " + signInContext);
-		logger.log(Level.INFO, "webContext = " + webContext);
-
-		signIn(browser);
-
-		logger.log(Level.INFO, "browser.navigate().to(" + url + ")");
-		browser.navigate().to(url);
-		logger.log(Level.INFO, "browser.getTitle() = " + browser.getTitle());
-		logger.log(Level.INFO, "browser.getCurrentUrl() = " + browser.getCurrentUrl());
-		getPortletDisplayName();
-		logger.log(Level.INFO, "displayName.getText() = " + displayName.getText());
-
-		assertTrue("displayName.isDisplayed()", displayName.isDisplayed());
-		// assertTrue("preferencesMenuButton.isDisplayed()", preferencesMenuButton.isDisplayed());
-		// assertFalse("preferencesMenuItem is NOT displayed()", preferencesMenuItem.isDisplayed());
-
-		if (isThere(browser, logoXpath)) {
-			assertTrue("logo.isDisplayed()", logo.isDisplayed());
-		}
-
-		assertTrue("firstNameField.isDisplayed()", firstNameField.isDisplayed());
-		assertTrue("lastNameField.isDisplayed()", lastNameField.isDisplayed());
-		assertTrue("emailAddressField.isDisplayed()", emailAddressField.isDisplayed());
-		assertTrue("phoneNumberField.isDisplayed()", phoneNumberField.isDisplayed());
-
-		assertTrue("dateOfBirthField.isDisplayed()", dateOfBirthField.isDisplayed());
-		assertTrue("cityField.isDisplayed()", cityField.isDisplayed());
-		assertTrue("isThere(browser, provinceIdFieldXpath)", isThere(browser, provinceIdFieldXpath));
-		assertTrue("postalCodeField.isDisplayed()", postalCodeField.isDisplayed());
-
-		if (isThere(browser, postalCodeToolTipXpath)) {
-			assertTrue("postalCodeToolTip.isDisplayed()", postalCodeToolTip.isDisplayed());
-		}
-		else {
-			assertTrue("Postal code tool tips should be present, but are not.  No postal code tool tips present",
-				false);
-		}
-
-		assertTrue("showCommentsLink.isDisplayed()", showCommentsLink.isDisplayed());
-
-		if (isThere(browser, fileUploadChooserXpath)) {
-			logger.log(Level.INFO, "fileUploadChooser.isDisplayed() = " + fileUploadChooser.isDisplayed());
-			logger.log(Level.INFO, "submitFile.isDisplayed() = " + submitFile.isDisplayed());
-		}
-
-		assertTrue("submitButton.isDisplayed()", submitButton.isDisplayed());
-		logger.log(Level.INFO, "submitButton.getTagName() = " + submitButton.getTagName());
-
-		assertTrue("mojarraVersion.isDisplayed()", mojarraVersion.isDisplayed());
-		logger.log(Level.INFO, mojarraVersion.getText());
-
-		if (isThere(browser, componentLibraryVersionXpath)) {
-			assertTrue("componentLibraryVersion.isDisplayed()", componentLibraryVersion.isDisplayed());
-			logger.log(Level.INFO, componentLibraryVersion.getText());
-		}
-
-		assertTrue("alloyVersion.isDisplayed()", alloyVersion.isDisplayed());
-		logger.log(Level.INFO, alloyVersion.getText());
-		assertTrue("bridgeVersion.isDisplayed()", bridgeVersion.isDisplayed());
-		logger.log(Level.INFO, bridgeVersion.getText());
-
-	}
-
-	@Test
-	@RunAsClient
-	@InSequence(3000)
-	public void preferencesAndEditMode() throws Exception {
-
-		// test for both
-		int dateLengthAfterChange = 8;
-		int dateLengthAfterReset = 10;
-
-		logger.log(Level.INFO, "preferencesMenuButton.click() ... ");
-
-		selectEditMode(browser, portal);
-
-		logger.log(Level.INFO,
-			"done with selectEditMode: isThere(browser, datePatternFieldXpath) = " +
-			isThere(browser, datePatternFieldXpath));
-		logger.log(Level.INFO, "datePatternField.getAttribute('value') = " + datePatternField.getAttribute("value"));
-		logger.log(Level.INFO, "resetButton.isDisplayed() = " + resetButton.isDisplayed());
-
-		// MM/dd/yyyy
-		datePatternField.clear();
-		datePatternField.sendKeys("MM/dd/yy");
-		preferencesSubmitButton.click();
-
-		// after clicking the preferencesSubmitButton, all of the job applicant demos need to end up on the same page.
-		// Here is a log statement that should give you a clue between the different testers as to which ones are
-		// different from others
-		logger.log(Level.INFO, "browser.getCurrentUrl() = " + browser.getCurrentUrl());
-
-		logger.log(Level.INFO, "browser.navigate().to(" + url + ")");
-		browser.navigate().to(url);
-//      Thread.sleep(1000);
-		logger.log(Level.INFO, "dateOfBirthField.getAttribute('value') = " + dateOfBirthField.getAttribute("value"));
-		logger.log(Level.INFO,
-			"dateOfBirthField.getAttribute('value').length() = " + dateOfBirthField.getAttribute("value").length());
-
-		assertTrue("dateOfBirthField should have " + dateLengthAfterChange +
-			" characters after changing preferences to MM/dd/yy, but " +
-			dateOfBirthField.getAttribute("value").length() + " != " + dateLengthAfterChange,
-			dateOfBirthField.getAttribute("value").length() == dateLengthAfterChange);
-
-		if (isThere(browser, editPreferencesButtonXpath)) {
-			editPreferencesButton.click();
-			Thread.sleep(1500);
-			logger.log(Level.INFO, "editPreferencesButton.click() ...");
-		}
-		else {
-			logger.log(Level.INFO, "NO editPreferencesButton isThere, so preferencesMenuItem.click() ...");
-			selectEditMode(browser, portal);
-		}
-
-		logger.log(Level.INFO,
-			"done with selectEditMode: isThere(browser, resetButtonXpath) = " + isThere(browser, resetButtonXpath));
-		logger.log(Level.INFO, "browser.getCurrentUrl() = " + browser.getCurrentUrl());
-
-		resetButton.click();
-		logger.log(Level.INFO, "resetButton.click() ...");
-//      Thread.sleep(1000);
-
-		// after clicking the resetButton all of the job applicant demos need to end up on the same page Here is a
-		// log statement that should give you a clue between the different testers as to which ones are different from
-		// others
-		logger.log(Level.INFO, "browser.getCurrentUrl() = " + browser.getCurrentUrl());
-
-		logger.log(Level.INFO, "browser.navigate().to(" + url + ")");
-		browser.navigate().to(url);
-
-		waitForElement(browser, dateOfBirthFieldXpath);
-
-		logger.log(Level.INFO, "dateOfBirthField.getAttribute('value') = " + dateOfBirthField.getAttribute("value"));
-		logger.log(Level.INFO,
-			"dateOfBirthField.getAttribute('value').length() = " + dateOfBirthField.getAttribute("value").length());
-
-		assertTrue("date of birth has " + dateLengthAfterReset + " characters after resetting preferences",
-			dateOfBirthField.getAttribute("value").length() == dateLengthAfterReset);
-
-	}
-
-	@Test
-	@RunAsClient
-	@InSequence(4000)
-	public void reset() throws Exception {
-
-		// because some test failures throw us into a strange state,
-		// let's reset preferences and the page we are on
-		logger.log(Level.INFO, "browser.navigate().to(" + url + ")");
-		browser.navigate().to(url);
-
-		logger.log(Level.INFO, "browser.getTitle() = " + browser.getTitle());
-		logger.log(Level.INFO, "browser.getCurrentUrl() = " + browser.getCurrentUrl());
-		logger.log(Level.INFO, "isThere(browser, dateOfBirthFieldXpath) = " + isThere(browser, dateOfBirthFieldXpath));
-
-		waitForElement(browser, dateOfBirthFieldXpath);
-//      Thread.sleep(250);
-
-		selectEditMode(browser, portal);
-
-		logger.log(Level.INFO, "browser.getTitle() = " + browser.getTitle());
-		logger.log(Level.INFO, "browser.getCurrentUrl() = " + browser.getCurrentUrl());
-
-		logger.log(Level.INFO, "resetButton.click() ...");
-		resetButton.click();
-
-//      Thread.sleep(500);
-		logger.log(Level.INFO, "browser.navigate().to(" + url + ")");
-		browser.navigate().to(url);
-//      Thread.sleep(500);
-		logger.log(Level.INFO, "browser.getCurrentUrl() = " + browser.getCurrentUrl());
-		assertTrue("We are on the correct page, which should be, url = " + url, browser.getCurrentUrl().contains(url));
-
 	}
 
 	@Test
@@ -875,41 +864,5 @@ public class Jsf2CdiPortletTest extends TesterBase {
 
 	}
 
-	@Test
-	@RunAsClient
-	@InSequence(2000)
-	public void validateEmail() throws Exception {
-
-		int tags = 0;
-		int tagsWhileValid = 0;
-
-		// checks an invalid email address
-		logger.log(Level.INFO, "Entering an invalid email address 'test' ...");
-		emailAddressField.sendKeys("test");
-		phoneNumberField.click();
-		Thread.sleep(500);
-		logger.log(Level.INFO, "emailAddressField.getAttribute('value') = " + emailAddressField.getAttribute("value"));
-		tags = browser.findElements(By.xpath("//span[contains(text(),'Invalid e-mail address')]")).size();
-		logger.log(Level.INFO, "# of error tags = " + tags);
-		assertTrue("There should be an 'Invalid e-mail address' messaged displayed, but " + tags +
-			" error messages are displayed", tags > tagsWhileValid);
-		assertTrue("Invalid e-mail address validation message displayed",
-			emailAddressFieldError.getText().contains("Invalid e-mail address"));
-		logger.log(Level.INFO, "emailAddressFieldError.isDisplayed() = " + emailAddressFieldError.isDisplayed());
-		logger.log(Level.INFO, "emailAddressFieldError.getText() = " + emailAddressFieldError.getText());
-
-		// checks a valid email address
-		logger.log(Level.INFO, "Entering a valid email address 'test@liferay.com' ...");
-		emailAddressField.clear();
-		Thread.sleep(500);
-		emailAddressField.sendKeys("test@liferay.com");
-		phoneNumberField.click();
-		Thread.sleep(500);
-		logger.log(Level.INFO, "emailAddressField.getAttribute('value') = " + emailAddressField.getAttribute("value"));
-		tags = browser.findElements(By.xpath("//span[contains(text(),'Invalid e-mail address')]")).size();
-		logger.log(Level.INFO, "tags = " + tags);
-		assertTrue("# of error tags == tagsWhileValid", tags == tagsWhileValid);
-
-	}
-
 }
+//J+
