@@ -16,11 +16,13 @@ package com.liferay.faces.alloy.component.progressbar;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Map;
 
 import javax.faces.component.FacesComponent;
 import javax.faces.component.UIComponent;
 import javax.faces.component.behavior.Behavior;
 import javax.faces.component.behavior.ClientBehaviorHolder;
+import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.event.FacesEvent;
 
@@ -44,10 +46,19 @@ public class ProgressBar extends ProgressBarBase implements ClientBehaviorHolder
 
 		if (facesEvent instanceof AjaxBehaviorEvent) {
 
-			AjaxBehaviorEvent ajaxBehaviorEvent = (AjaxBehaviorEvent) facesEvent;
-			UIComponent component = ajaxBehaviorEvent.getComponent();
-			Behavior behavior = ajaxBehaviorEvent.getBehavior();
-			facesEvent = new ProgressCompleteEvent(component, behavior);
+			FacesContext facesContext = FacesContext.getCurrentInstance();
+			Map<String, String> requestParameterMap = facesContext.getExternalContext().getRequestParameterMap();
+			String eventName = requestParameterMap.get("javax.faces.behavior.event");
+
+			// If the AjaxBehaviorEvent indicates completion of progress, then
+			if (ProgressCompleteEvent.PROGRESS_COMPLETE.equals(eventName)) {
+
+				// Queue a progress complete event rather than the specified faces event.
+				AjaxBehaviorEvent ajaxBehaviorEvent = (AjaxBehaviorEvent) facesEvent;
+				UIComponent component = ajaxBehaviorEvent.getComponent();
+				Behavior behavior = ajaxBehaviorEvent.getBehavior();
+				facesEvent = new ProgressCompleteEvent(component, behavior);
+			}
 		}
 
 		super.queueEvent(facesEvent);

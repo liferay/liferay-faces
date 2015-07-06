@@ -47,56 +47,56 @@ public class Accordion extends AccordionBase implements ClientBehaviorHolder {
 	public void queueEvent(FacesEvent facesEvent) {
 
 		// This method is called by the AjaxBehavior renderer's decode() method. If the specified event is an ajax
-		// behavior event that indicates a tab being collapsed/expanded, then
+		// behavior event, then
 		if (facesEvent instanceof AjaxBehaviorEvent) {
 
-			// Determine the client-side state of the selected tab index.
 			FacesContext facesContext = FacesContext.getCurrentInstance();
 			Map<String, String> requestParameterMap = facesContext.getExternalContext().getRequestParameterMap();
-			String clientId = getClientId(facesContext);
-			int selectedIndex = IntegerHelper.toInteger(requestParameterMap.get(clientId + "selectedIndex"));
-
-			// If iterating over a data model, then determine the row data and tab associated with the data model
-			// iteration.
-			Object rowData = null;
-			Tab tab = null;
-			String var = getVar();
-
-			if (var != null) {
-				setRowIndex(selectedIndex);
-				rowData = getRowData();
-				tab = TabUtil.getFirstChildTab(this);
-				setRowIndex(-1);
-			}
-
-			// Otherwise, determine the tab associated with the client-side state of the selected tab index.
-			else {
-				List<Tab> childTabs = TabUtil.getChildTabs(this);
-
-				if (childTabs.size() >= (selectedIndex + 1)) {
-					tab = childTabs.get(selectedIndex);
-				}
-			}
-
-			// Queue an accordion tab event rather than the specified faces event.
-			AjaxBehaviorEvent behaviorEvent = (AjaxBehaviorEvent) facesEvent;
-			Behavior behavior = behaviorEvent.getBehavior();
 			String eventName = requestParameterMap.get("javax.faces.behavior.event");
 
-			if (TabCollapseEvent.TAB_COLLAPSE.equals(eventName)) {
-				TabCollapseEvent tabCollapseEvent = new TabCollapseEvent(this, behavior, tab, rowData);
-				super.queueEvent(tabCollapseEvent);
-			}
-			else if (TabExpandEvent.TAB_EXPAND.equals(eventName)) {
-				TabExpandEvent tabExpandEvent = new TabExpandEvent(this, behavior, tab, rowData);
-				super.queueEvent(tabExpandEvent);
+			// If the AjaxBehaviorEvent indicates a tab being collapsed/expanded, then
+			if (TabCollapseEvent.TAB_COLLAPSE.equals(eventName) || TabExpandEvent.TAB_EXPAND.equals(eventName)) {
+
+				// Determine the client-side state of the selected tab index.
+				String clientId = getClientId(facesContext);
+				int selectedIndex = IntegerHelper.toInteger(requestParameterMap.get(clientId + "selectedIndex"));
+
+				// If iterating over a data model, then determine the row data and tab associated with the data model
+				// iteration.
+				Object rowData = null;
+				Tab tab = null;
+				String var = getVar();
+
+				if (var != null) {
+					setRowIndex(selectedIndex);
+					rowData = getRowData();
+					tab = TabUtil.getFirstChildTab(this);
+					setRowIndex(-1);
+				}
+
+				// Otherwise, determine the tab associated with the client-side state of the selected tab index.
+				else {
+					List<Tab> childTabs = TabUtil.getChildTabs(this);
+
+					if (childTabs.size() >= (selectedIndex + 1)) {
+						tab = childTabs.get(selectedIndex);
+					}
+				}
+
+				// Queue a tab collapse/expand event rather than the specified faces event.
+				AjaxBehaviorEvent behaviorEvent = (AjaxBehaviorEvent) facesEvent;
+				Behavior behavior = behaviorEvent.getBehavior();
+
+				if (TabCollapseEvent.TAB_COLLAPSE.equals(eventName)) {
+					facesEvent = new TabCollapseEvent(this, behavior, tab, rowData);
+				}
+				else {
+					facesEvent = new TabExpandEvent(this, behavior, tab, rowData);
+				}
 			}
 		}
 
-		// Otherwise, queue the specified faces event.
-		else {
-			super.queueEvent(facesEvent);
-		}
+		super.queueEvent(facesEvent);
 	}
 
 	@Override
