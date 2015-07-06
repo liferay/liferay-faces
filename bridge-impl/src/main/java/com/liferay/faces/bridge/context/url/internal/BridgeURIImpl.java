@@ -21,7 +21,6 @@ import java.util.Map;
 import javax.portlet.faces.Bridge;
 
 import com.liferay.faces.bridge.context.url.BridgeURI;
-import com.liferay.faces.bridge.internal.BridgeConstants;
 import com.liferay.faces.bridge.util.internal.URLUtil;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
@@ -182,7 +181,7 @@ public class BridgeURIImpl implements BridgeURI {
 				}
 			}
 
-			if (stringValue.startsWith(BridgeConstants.WSRP_REWRITE)) {
+			if (stringValue.startsWith("wsrp_rewrite")) {
 				external = Boolean.FALSE;
 			}
 		}

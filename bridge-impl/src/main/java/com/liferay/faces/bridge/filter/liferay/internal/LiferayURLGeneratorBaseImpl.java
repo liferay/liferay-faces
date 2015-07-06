@@ -28,7 +28,6 @@ import javax.portlet.PortletRequest;
 import javax.portlet.WindowState;
 
 import com.liferay.faces.bridge.filter.liferay.LiferayURLGenerator;
-import com.liferay.faces.bridge.internal.BridgeConstants;
 import com.liferay.faces.bridge.util.internal.URLParameter;
 import com.liferay.faces.util.helper.StringHelper;
 import com.liferay.faces.util.logging.Logger;
@@ -411,7 +410,7 @@ public abstract class LiferayURLGeneratorBaseImpl implements LiferayURLGenerator
 			}
 
 			// Add request parameters from the request parameter map.
-			boolean namespaced = !responseNamespace.startsWith(BridgeConstants.WSRP);
+			boolean namespaced = !responseNamespace.startsWith("wsrp");
 
 			Set<Map.Entry<String, String[]>> mapEntries = additionalParameterMap.entrySet();
 
@@ -455,8 +454,8 @@ public abstract class LiferayURLGeneratorBaseImpl implements LiferayURLGenerator
 
 			if (urlResourceId == null) {
 
-				if (prefix.startsWith(BridgeConstants.WSRP)) {
-					appendParameterToURL(P_P_RESOURCE_ID, BridgeConstants.WSRP, url);
+				if (prefix.startsWith("wsrp")) {
+					appendParameterToURL(P_P_RESOURCE_ID, "wsrp", url);
 				}
 			}
 			else {
@@ -538,7 +537,7 @@ public abstract class LiferayURLGeneratorBaseImpl implements LiferayURLGenerator
 			queryString = baseURL.substring(queryPos + 1);
 		}
 
-		String[] nameValuePairs = queryString.split(BridgeConstants.REGEX_AMPERSAND_DELIMITER);
+		String[] nameValuePairs = queryString.split("[&]");
 
 		if (nameValuePairs != null) {
 
@@ -551,7 +550,7 @@ public abstract class LiferayURLGeneratorBaseImpl implements LiferayURLGenerator
 					String name = nameValuePair.substring(0, equalsPos);
 					String value = nameValuePair.substring(equalsPos + 1);
 
-					if (nameValuePair.startsWith(BridgeConstants.WSRP)) {
+					if (nameValuePair.startsWith("wsrp")) {
 						URLParameter urlParameter = new URLParameter(name, value);
 						wsrpParameters.add(urlParameter);
 					}

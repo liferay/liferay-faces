@@ -31,7 +31,6 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.Cookie;
 
 import com.liferay.faces.bridge.context.BridgePortalContext;
-import com.liferay.faces.bridge.internal.BridgeConstants;
 import com.liferay.faces.bridge.util.internal.FileNameUtil;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
@@ -299,8 +298,7 @@ public abstract class ExternalContextCompat_2_0_Impl extends ExternalContextComp
 
 			String requestContentType = clientDataRequest.getContentType();
 
-			if ((requestContentType != null) &&
-					requestContentType.toLowerCase().startsWith(BridgeConstants.MULTIPART_CONTENT_TYPE_PREFIX)) {
+			if ((requestContentType != null) && requestContentType.toLowerCase().startsWith("multipart/")) {
 
 				Product iceFaces = ProductMap.getInstance().get(ProductConstants.ICEFACES);
 
