@@ -13,6 +13,7 @@
  */
 package com.liferay.faces.bridge.application.internal;
 
+import javax.el.ValueExpression;
 import javax.faces.application.Application;
 import javax.faces.application.ApplicationWrapper;
 import javax.faces.application.ResourceHandler;
