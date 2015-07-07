@@ -46,6 +46,11 @@ public abstract class ApplicationCompatImpl extends ApplicationWrapper {
 		this.wrappedApplication = application;
 	}
 
+	/**
+	 * @deprecated  The JSF API JavaDoc indicates that this method has been deprecated in favor of {@link
+	 *              #createComponent(ValueExpression, FacesContext, String)}. However, Mojarra and MyFaces both end up
+	 *              calling through to this method, which is why it must be implemented here in the bridge.
+	 */
 	@Deprecated
 	@Override
 	public UIComponent createComponent(FacesContext facesContext, String componentType, String rendererType) {
