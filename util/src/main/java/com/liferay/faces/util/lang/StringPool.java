@@ -15,7 +15,9 @@ package com.liferay.faces.util.lang;
 
 /**
  * @author  Neil Griffin
+ * @deprecated Use the corresponding literal values of each constant instead.
  */
+@Deprecated
 public class StringPool {
 
 	public static final String AMPERSAND = "&";
