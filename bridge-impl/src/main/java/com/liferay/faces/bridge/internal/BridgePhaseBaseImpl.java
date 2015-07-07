@@ -112,7 +112,8 @@ public abstract class BridgePhaseBaseImpl implements BridgePhase {
 		this.facesLifecycle = lifecycleFactory.getLifecycle(lifecycleId);
 	}
 
-	@SuppressWarnings("deprecation")
+	protected abstract void removeBridgeContextAttribute(PortletRequest portletRequest);
+
 	protected void cleanup() {
 
 		if (facesContext != null) {
@@ -125,7 +126,7 @@ public abstract class BridgePhaseBaseImpl implements BridgePhase {
 			PortletRequest portletRequest = bridgeContext.getPortletRequest();
 
 			if (portletRequest != null) {
-				portletRequest.removeAttribute(BridgeExt.BRIDGE_CONTEXT_ATTRIBUTE);
+				removeBridgeContextAttribute(portletRequest);
 				portletRequest.removeAttribute(Bridge.PORTLET_LIFECYCLE_PHASE);
 
 				// Restore the cached attributes.
@@ -160,7 +161,6 @@ public abstract class BridgePhaseBaseImpl implements BridgePhase {
 		}
 	}
 
-	@SuppressWarnings("deprecation")
 	protected void init(PortletRequest portletRequest, PortletResponse portletResponse,
 		Bridge.PortletPhase portletPhase) {
 
@@ -178,7 +178,7 @@ public abstract class BridgePhaseBaseImpl implements BridgePhase {
 				portletContext, portletRequest, portletResponse, portletPhase, incongruityContext);
 
 		// Save the BridgeContext as a request attribute for legacy versions of ICEfaces.
-		portletRequest.setAttribute(BridgeExt.BRIDGE_CONTEXT_ATTRIBUTE, bridgeContext);
+		setBridgeContextAttribute(portletRequest, bridgeContext);
 
 		// Get the FacesContext.
 		facesContext = getFacesContext(portletRequest, portletResponse, facesLifecycle);
@@ -344,6 +344,8 @@ public abstract class BridgePhaseBaseImpl implements BridgePhase {
 			}
 		}
 	}
+
+	protected abstract void setBridgeContextAttribute(PortletRequest portletRequest, BridgeContext bridgeContext);
 
 	protected FacesContext getFacesContext(PortletRequest portletRequest, PortletResponse portletResponse,
 		Lifecycle lifecycle) {
