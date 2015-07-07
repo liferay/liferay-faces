@@ -16,10 +16,8 @@ package com.liferay.faces.bridge.internal;
 import javax.faces.context.FacesContext;
 import javax.faces.lifecycle.Lifecycle;
 import javax.portlet.PortletConfig;
-import javax.portlet.PortletRequest;
 
 import com.liferay.faces.bridge.config.BridgeConfig;
-import com.liferay.faces.bridge.context.BridgeContext;
 
 
 /**
@@ -35,15 +33,5 @@ public abstract class BridgePhaseCompat_2_2_Impl extends BridgePhaseCompat_2_0_I
 
 	protected void attachClientWindowToLifecycle(FacesContext facesContext, Lifecycle lifecycle) {
 		lifecycle.attachWindow(facesContext);
-	}
-
-	@Override
-	protected void removeBridgeContextAttribute(PortletRequest portletRequest) {
-		// no-op since this is only used to support legacy ICEFaces (which is not compatible with JSF2.2).
-	}
-
-	@Override
-	protected void setBridgeContextAttribute(PortletRequest portletRequest, BridgeContext bridgeContext) {
-		// no-op since this is only used to support legacy ICEFaces (which is not compatible with JSF2.2).
 	}
 }
