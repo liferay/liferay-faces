@@ -35,7 +35,7 @@ import com.liferay.faces.test.util.TesterBase;
  * @author	Liferay Faces Team
  */
 @RunWith(Arquillian.class)
-public class Jsf2EventsTest extends TesterBase {
+public class Jsf1IpcPubRenderParamsPortletTest extends TesterBase {
 
 	// portlet topper for customer
 	private static final String customerPortletDisplayNameXpath = "(//header[@class='portlet-topper']/h1/span)[1]";
@@ -64,7 +64,7 @@ public class Jsf2EventsTest extends TesterBase {
 	// <input type="submit" name="A8622:f1:j_idt28" value="Submit" id="aui_3_4_0_1_2331">
 	private static final String submitXpath = "//input[@type='submit' and @value='Submit']";
 
-	static final String url = baseUrl + "/group/bridge-demos/jsf2-events";
+	private static final String url = baseUrl + "/group/bridge-demos/jsf1-prp?p_p_parallel=0";
 
 	@FindBy(xpath = customerPortletDisplayNameXpath)
 	private WebElement customerPortletDisplayName;

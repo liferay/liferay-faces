@@ -14,8 +14,8 @@
 	<packaging>pom</packaging>
 
 	<modules>
-		<module>jsf2-events</module>
-		<module>jsf2-ipc-pub-render-params-portlet</module>
+		<module>jsf1-events</module>
+		<module>jsf1-ipc-pub-render-params-portlet</module>
 	</modules>
 
 </project>
