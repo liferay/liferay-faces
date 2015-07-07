@@ -21,6 +21,7 @@ import javax.portlet.PortletResponse;
 import javax.portlet.faces.Bridge.PortletPhase;
 
 import com.liferay.faces.bridge.config.BridgeConfig;
+import com.liferay.faces.bridge.context.BridgeContext;
 
 
 /**
@@ -52,5 +53,17 @@ public abstract class BridgePhaseCompat_1_2_Impl extends BridgePhaseBaseImpl {
 		if (mojarraRequestStateManager != null) {
 			mojarraRequestStateManager.remove(MOJARRA_RENDER_KIT_IMPL_FOR_REQUEST);
 		}
+	}
+
+	@Override
+	@SuppressWarnings("deprecation")
+	protected void removeBridgeContextAttribute(PortletRequest portletRequest) {
+		portletRequest.removeAttribute(BridgeExt.BRIDGE_CONTEXT_ATTRIBUTE);
+	}
+
+	@Override
+	@SuppressWarnings("deprecation")
+	protected void setBridgeContextAttribute(PortletRequest portletRequest, BridgeContext bridgeContext) {
+		portletRequest.setAttribute(BridgeExt.BRIDGE_CONTEXT_ATTRIBUTE, bridgeContext);
 	}
 }
