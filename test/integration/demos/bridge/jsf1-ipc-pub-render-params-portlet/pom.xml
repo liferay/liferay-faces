@@ -10,8 +10,8 @@
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 
-	<artifactId>test-jsf2-events</artifactId>
+	<artifactId>test-jsf1-ipc-pub-render-params-portlet</artifactId>
 	<packaging>jar</packaging>
-	<name>jsf2-events integration tests</name>
+	<name>jsf1-ipc-pub-render-params-portlet integration tests</name>
 
 </project>
