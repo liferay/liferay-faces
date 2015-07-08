@@ -26,7 +26,6 @@
 		<profile>
 			<id>chat</id>
 			<modules>
-				<module>icefaces3-chat-portlet</module>
 			</modules>
 		</profile>
 	</profiles>
