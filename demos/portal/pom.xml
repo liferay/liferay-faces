@@ -22,15 +22,6 @@
 		<module>primefaces5-users-portlet</module>
 	</modules>
 
-	<profiles>
-		<profile>
-			<id>chat</id>
-			<modules>
-				<module>icefaces3-chat-portlet</module>
-			</modules>
-		</profile>
-	</profiles>
-
 	<build>
 		<plugins>
 			<plugin>
