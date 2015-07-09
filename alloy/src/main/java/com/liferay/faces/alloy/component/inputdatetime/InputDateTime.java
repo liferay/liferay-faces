@@ -26,8 +26,6 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.DateTimeConverter;
 
-import com.liferay.faces.util.client.BrowserSniffer;
-import com.liferay.faces.util.client.BrowserSnifferFactory;
 import com.liferay.faces.util.component.ClientComponent;
 import com.liferay.faces.util.context.MessageContext;
 import com.liferay.faces.util.context.MessageContextFactory;
@@ -39,11 +37,7 @@ import com.liferay.faces.util.factory.FactoryExtensionFinder;
  */
 public abstract class InputDateTime extends InputDateTimeBase implements ClientComponent {
 
-	// Public Constants
-	public static final String FOCUS = "focus";
-	public static final String GREENWICH = "Greenwich";
-
-	protected void validateValue(FacesContext facesContext, Object newValue, Date minDate, Date maxDate,
+	protected final void validateValue(FacesContext facesContext, Object newValue, Date minDate, Date maxDate,
 		TimeZone timeZone) {
 
 		String pattern = getPattern();
@@ -70,7 +64,10 @@ public abstract class InputDateTime extends InputDateTimeBase implements ClientC
 					String minDateString = simpleDateFormat.format(minDate);
 					String maxDateString = simpleDateFormat.format(maxDate);
 					Locale locale = getObjectAsLocale(getLocale(facesContext));
-					String message = getMessageContext().getMessage(locale, "please-enter-a-value-between-x-and-x",
+					MessageContextFactory messageContextFactory = (MessageContextFactory) FactoryExtensionFinder
+						.getFactory(MessageContextFactory.class);
+					MessageContext messageContext = messageContextFactory.getMessageContext();
+					String message = messageContext.getMessage(locale, "please-enter-a-value-between-x-and-x",
 							minDateString, maxDateString);
 					facesMessage = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
 				}
@@ -118,19 +115,6 @@ public abstract class InputDateTime extends InputDateTimeBase implements ClientC
 	}
 
 	@Override
-	public abstract boolean isNativeWhenMobile();
-
-	protected boolean isNative() {
-
-		FacesContext facesContext = FacesContext.getCurrentInstance();
-		BrowserSnifferFactory browserSnifferFactory = (BrowserSnifferFactory) FactoryExtensionFinder.getFactory(
-				BrowserSnifferFactory.class);
-		BrowserSniffer browserSniffer = browserSnifferFactory.getBrowserSniffer(facesContext.getExternalContext());
-
-		return browserSniffer.isMobile() && isNativeWhenMobile();
-	}
-
-	@Override
 	public Object getLocale() {
 		return getLocale(FacesContext.getCurrentInstance());
 	}
@@ -146,14 +130,6 @@ public abstract class InputDateTime extends InputDateTimeBase implements ClientC
 		}
 
 		return locale;
-	}
-
-	protected MessageContext getMessageContext() {
-
-		MessageContextFactory messageContextFactory = (MessageContextFactory) FactoryExtensionFinder.getFactory(
-				MessageContextFactory.class);
-
-		return messageContextFactory.getMessageContext();
 	}
 
 	public final Date getObjectAsDate(Object dateAsObject, String datePattern, TimeZone timeZone)
@@ -235,11 +211,11 @@ public abstract class InputDateTime extends InputDateTimeBase implements ClientC
 
 	@Override
 	public String getShowOn() {
-		return (String) getStateHelper().eval(InputDateTimePropertyKeys.showOn, FOCUS);
+		return (String) getStateHelper().eval(InputDateTimePropertyKeys.showOn, "focus");
 	}
 
 	@Override
 	public String getTimeZone() {
-		return (String) getStateHelper().eval(InputDateTimePropertyKeys.timeZone, GREENWICH);
+		return (String) getStateHelper().eval(InputDateTimePropertyKeys.timeZone, "Greenwich");
 	}
 }
