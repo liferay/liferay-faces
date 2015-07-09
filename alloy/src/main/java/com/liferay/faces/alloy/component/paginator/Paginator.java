@@ -86,7 +86,7 @@ public class Paginator extends PaginatorBase implements ClientBehaviorHolder {
 		return render;
 	}
 
-	public UIData getUIData() {
+	public final UIData getUIData() {
 
 		UIData uiData = null;
 		String for_ = getFor();
@@ -110,7 +110,7 @@ public class Paginator extends PaginatorBase implements ClientBehaviorHolder {
 		return uiData;
 	}
 
-	protected UIData getUIDataParent(UIComponent uiComponent) {
+	private UIData getUIDataParent(UIComponent uiComponent) {
 
 		UIData uiDataParent = null;
 
