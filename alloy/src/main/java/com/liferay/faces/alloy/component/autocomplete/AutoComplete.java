@@ -87,7 +87,7 @@ public class AutoComplete extends AutoCompleteBase implements ClientBehaviorHold
 		}
 	}
 
-	public List<String> getAllItems(FacesContext facesContext) {
+	public final List<String> getAllItems(FacesContext facesContext) {
 
 		List<String> allItems = new ArrayList<String>();
 		List<UIComponent> children = getChildren();

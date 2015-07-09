@@ -42,7 +42,7 @@ public class Field extends FieldBase {
 	private static final String WARNING = "warning";
 	private static final String SUCCESS = "success";
 
-	protected List<EditableValueHolder> getEditableValueHoldersRecurse(UIComponent uiComponent) {
+	private List<EditableValueHolder> getEditableValueHoldersRecurse(UIComponent uiComponent) {
 
 		List<EditableValueHolder> editableValueHolders = null;
 
@@ -85,7 +85,7 @@ public class Field extends FieldBase {
 		return editableValueHolders;
 	}
 
-	protected FacesMessage.Severity getHighestMessageSeverityRecurse(FacesContext facesContext, UIComponent uiComponent,
+	private FacesMessage.Severity getHighestMessageSeverityRecurse(FacesContext facesContext, UIComponent uiComponent,
 		FacesMessage.Severity severity) {
 
 		List<UIComponent> children = uiComponent.getChildren();
