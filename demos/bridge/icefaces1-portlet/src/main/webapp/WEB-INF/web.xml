@@ -85,17 +85,12 @@
 		<servlet-name>Persistent Faces Servlet</servlet-name>
 		<url-pattern>/xmlhttp/*</url-pattern>
 	</servlet-mapping>
-	<!-- Prevent direct access to Facelet view XHTML by the userAgent (browser). -->
 	<security-constraint>
+		<display-name>Prevent direct access to Facelet XHTML</display-name>
 		<web-resource-collection>
-			<web-resource-name>Facelet View XHTML</web-resource-name>
+			<web-resource-name>Facelet XHTML</web-resource-name>
 			<url-pattern>*.xhtml</url-pattern>
 		</web-resource-collection>
-		<auth-constraint>
-			<role-name>nobody</role-name>
-		</auth-constraint>
+		<auth-constraint />
 	</security-constraint>
-	<security-role>
-		<role-name>nobody</role-name>
-	</security-role>
 </web-app>
