@@ -13,34 +13,12 @@
  */
 package com.liferay.faces.util.config.internal;
 
-import java.util.EnumMap;
-
-
 /**
  * @author  Vernon Singleton
  */
-public interface Ordering {
+public class OrderingMaxAttemptsException extends Exception {
 
-	/**
-	 * @author  Vernon Singleton
-	 */
-	public enum Path {
-		BEFORE, AFTER
+	public OrderingMaxAttemptsException(int limit) {
+		super("Too many attempts needed to sort the faces-config files. Exceeded the limit of " + limit + " passes.");
 	}
-
-	public String OTHERS = Ordering.class.getName() + ".OTHERS";
-
-	public boolean isOrdered();
-
-	public boolean isBefore(String name);
-
-	public boolean isAfter(String name);
-
-	public EnumMap<Path, String[]> getRoutes();
-
-	public void setRoutes(EnumMap<Path, String[]> routes);
-
-	public boolean isAfterOthers();
-
-	public boolean isBeforeOthers();
 }
