@@ -188,7 +188,7 @@ public class InputTimeRenderer extends InputTimeRendererBase {
 			String timePattern = inputTime.getPattern();
 			Object objectLocale = inputTime.getLocale();
 			Locale locale = inputTime.getObjectAsLocale(objectLocale);
-			TimeZone timeZone = TimeZone.getTimeZone(InputDateTime.GREENWICH);
+			TimeZone timeZone = TimeZone.getTimeZone("Greenwich");
 			SimpleDateFormat simpleDateFormat = new SimpleDateFormat(timePattern, locale);
 			simpleDateFormat.setTimeZone(timeZone);
 
