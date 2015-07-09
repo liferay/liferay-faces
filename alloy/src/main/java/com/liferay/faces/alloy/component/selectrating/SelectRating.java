@@ -15,14 +15,13 @@ package com.liferay.faces.alloy.component.selectrating;
 
 import javax.faces.context.FacesContext;
 
-import com.liferay.faces.alloy.component.selectoneradio.SelectOneRadioBase;
 import com.liferay.faces.util.component.ClientComponent;
 
 
 /**
  * @author  Vernon Singleton
  */
-public abstract class SelectRating extends SelectOneRadioBase implements ClientComponent {
+public abstract class SelectRating extends SelectRatingBase implements ClientComponent {
 
 	@Override
 	protected void validateValue(FacesContext context, Object value) {
