@@ -13,34 +13,12 @@
  */
 package com.liferay.faces.util.config.internal;
 
-import java.util.EnumMap;
-
-
 /**
  * @author  Vernon Singleton
  */
-public interface Ordering {
+public class OrderingBeforeAndAfterException extends Exception {
 
-	/**
-	 * @author  Vernon Singleton
-	 */
-	public enum Path {
-		BEFORE, AFTER
+	public OrderingBeforeAndAfterException(String configName, String name) {
+		super(configName + " cannot be both before and after " + name + "\n");
 	}
-
-	public String OTHERS = Ordering.class.getName() + ".OTHERS";
-
-	public boolean isOrdered();
-
-	public boolean isBefore(String name);
-
-	public boolean isAfter(String name);
-
-	public EnumMap<Path, String[]> getRoutes();
-
-	public void setRoutes(EnumMap<Path, String[]> routes);
-
-	public boolean isAfterOthers();
-
-	public boolean isBeforeOthers();
 }
