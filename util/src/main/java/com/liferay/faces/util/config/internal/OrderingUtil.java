@@ -142,52 +142,6 @@ public class OrderingUtil {
 		return result;
 	}
 
-	// Check to see if the ordering is complete, and if not, finish it, if possible.
-	private static boolean done(FacesConfigDescriptor[] configs, LinkedList<String> names) {
-
-		for (int i = 0; i < configs.length; i++) {
-			int ii = 0;
-
-			for (String configName : names) {
-
-				if (configs[i].getName().equals(configName)) {
-					break;
-				}
-
-				if (configs[i].getOrdering().isBefore(configName)) {
-
-					// we have a document that is out of order, and his index is ii, he belongs at index i, and all
-					// the documents in between need to be shifted left.
-					FacesConfigDescriptor temp = null;
-
-					for (int j = 0; j < configs.length; j++) {
-
-						// This is one that is out of order and needs to be moved.
-						if (j == ii) {
-							temp = configs[j];
-						}
-
-						// this is one in between that needs to be shifted left.
-						if ((temp != null) && (j != i)) {
-							configs[j] = configs[j + 1];
-						}
-
-						// this is where the one that is out of order needs to be moved to.
-						if (j == i) {
-							configs[j] = temp;
-
-							return false;
-						}
-					}
-				}
-
-				ii = ii + 1;
-			}
-		}
-
-		return true;
-	}
-
 	private static LinkedList<String> extractNamesList(FacesConfigDescriptor[] configs) {
 
 		LinkedList<String> names = new LinkedList<String>();
@@ -300,6 +254,69 @@ public class OrderingUtil {
 						}
 					}
 				}
+			}
+		}
+	}
+
+	private static void postSort(FacesConfigDescriptor[] configs) {
+
+		int i = 0;
+
+		while (i < configs.length) {
+
+			LinkedList<String> names = extractNamesList(configs);
+
+			boolean done = true;
+
+			for (int j = 0; j < configs.length; j++) {
+				int k = 0;
+
+				for (String configName : names) {
+
+					if (configs[j].getName().equals(configName)) {
+						break;
+					}
+
+					if (configs[j].getOrdering().isBefore(configName)) {
+
+						// We have a document that is out of order, and his index is k, he belongs at index j, and all
+						// the documents in between need to be shifted left.
+						FacesConfigDescriptor temp = null;
+
+						for (int m = 0; m < configs.length; m++) {
+
+							// This is one that is out of order and needs to be moved.
+							if (m == k) {
+								temp = configs[m];
+							}
+
+							// This is one in between that needs to be shifted left.
+							if ((temp != null) && (m != j)) {
+								configs[m] = configs[m + 1];
+							}
+
+							// This is where the one that is out of order needs to be moved to.
+							if (m == j) {
+								configs[m] = temp;
+
+								done = false;
+
+								break;
+							}
+						}
+
+						if (!done) {
+							break;
+						}
+					}
+
+					k = k + 1;
+
+				}
+			}
+
+			if (done) {
+				break;
 			}
 		}
 	}
@@ -470,18 +487,13 @@ public class OrderingUtil {
 
 		FacesConfigDescriptor[] configs = configList.toArray(new FacesConfigDescriptor[configList.size()]);
 
-		// innerSort
+		// This is a multiple pass sorting routine which gets the documents close to the order they need to be in
 		innerSort(configs);
 
-		// final sort
-		for (FacesConfigDescriptor config : configs) {
-
-			LinkedList<String> ids = extractNamesList(configs);
-
-			if (done(configs, ids)) {
-				break;
-			}
-		}
+		// This is the final sort which checks the list from left to right to see if they are in the specified order and
+		// if they are not, it moves the incorrectly placed document(s) to the right into its proper place, and 
+		// shifts others left as necessary.
+		postSort(configs);
 
 		return new ArrayList<FacesConfigDescriptor>(Arrays.asList(configs));
 	}
