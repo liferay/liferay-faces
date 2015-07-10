@@ -24,11 +24,11 @@ import com.liferay.faces.util.component.ComponentUtil;
 @FacesComponent(value = Messages.COMPONENT_TYPE)
 public class Messages extends MessagesBase {
 
-	// Public Constants
-	public static final String ERROR_CLASS_NAME = "text-error";
-	public static final String FATAL_CLASS_NAME = ERROR_CLASS_NAME;
-	public static final String INFO_CLASS_NAME = "text-info";
-	public static final String WARN_CLASS_NAME = "text-warning";
+	// Private Constants
+	private static final String ERROR_CLASS_NAME = "text-error";
+	private static final String FATAL_CLASS_NAME = ERROR_CLASS_NAME;
+	private static final String INFO_CLASS_NAME = "text-info";
+	private static final String WARN_CLASS_NAME = "text-warning";
 
 	@Override
 	public String getErrorClass() {

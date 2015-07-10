@@ -115,7 +115,7 @@ public class InputRichText extends InputRichTextBase implements ClientBehaviorHo
 		return EVENT_NAMES;
 	}
 
-	protected MessageContext getMessageContext() {
+	private MessageContext getMessageContext() {
 
 		MessageContextFactory messageContextFactory = (MessageContextFactory) FactoryExtensionFinder.getFactory(
 				MessageContextFactory.class);

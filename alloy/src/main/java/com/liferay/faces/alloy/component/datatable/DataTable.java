@@ -109,7 +109,7 @@ public class DataTable extends DataTableBase implements ClientBehaviorHolder {
 		getAttributes().put("oldRows", getRows());
 	}
 
-	public int[] toIntArray(String commaDelimitedValue) {
+	public final int[] toIntArray(String commaDelimitedValue) {
 
 		int[] intArray = null;
 

@@ -59,21 +59,6 @@ public class InputFile extends InputFileBase {
 		}
 	}
 
-	protected final void handleInvalidFile(FacesContext facesContext, String clientId, UploadedFile uploadedFile,
-		String errorMessage) {
-
-		facesContext.addMessage(clientId, new FacesMessage(FacesMessage.SEVERITY_ERROR, errorMessage, errorMessage));
-
-		setValid(false);
-
-		try {
-			uploadedFile.delete();
-		}
-		catch (IOException e) {
-			logger.error(e);
-		}
-	}
-
 	@Override
 	protected void validateValue(FacesContext facesContext, Object value) {
 
@@ -109,6 +94,21 @@ public class InputFile extends InputFileBase {
 					handleInvalidFile(facesContext, clientId, uploadedFile, errorMessage);
 				}
 			}
+		}
+	}
+
+	private final void handleInvalidFile(FacesContext facesContext, String clientId, UploadedFile uploadedFile,
+		String errorMessage) {
+
+		facesContext.addMessage(clientId, new FacesMessage(FacesMessage.SEVERITY_ERROR, errorMessage, errorMessage));
+
+		setValid(false);
+
+		try {
+			uploadedFile.delete();
+		}
+		catch (IOException e) {
+			logger.error(e);
 		}
 	}
 }
