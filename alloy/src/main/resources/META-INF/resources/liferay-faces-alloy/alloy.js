@@ -60,7 +60,6 @@ LFAI = {
 			var contentTypeArray = A.Array(contentTypes),
 				escapedClientId = LFA.escapeClientId(clientId),
 				escapedFormClientId = LFA.escapeClientId(formClientId),
-				options = { execute : '@none', render : render},
 				uploadComplete = false;
 
 			A.Uploader.HTML5FILEFIELD_TEMPLATE =
@@ -96,11 +95,14 @@ LFAI = {
 				}
 			});
 
-			if (namingContainerId) {
-				options['com.sun.faces.namingContainerId'] = namingContainerId;
-			}
-
 			clientComponent.on('uploadcomplete', function() {
+
+				var options = { execute : '@none', render : render };
+
+				if (namingContainerId) {
+					options['com.sun.faces.namingContainerId'] = namingContainerId;
+				}
+
 				jsf.ajax.request(clientId, 'valueChange', options);
 			});
 
