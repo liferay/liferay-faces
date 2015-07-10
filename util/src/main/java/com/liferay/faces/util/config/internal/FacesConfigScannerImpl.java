@@ -198,20 +198,6 @@ public class FacesConfigScannerImpl implements FacesConfigScanner {
 					FacesConfigDescriptor facesConfigDescriptor = facesConfigDescriptorParser.parse(inputStream,
 							facesConfigURL);
 
-					// If the name is not set, then the <name> element was omitted. In JSF 2.x the <name> element is
-					// optional, and it JSF 1.x <name> element is not permitted by the XML Schema. Regardless, use the
-					// URL as the name in order to uniquely identify the configuration.
-					String facesConfigName = facesConfigDescriptor.getName();
-
-					if (facesConfigName == null) {
-
-						// Example #1 (JRebel ClassLoader URL):
-						// file:/Projects/liferay-faces/bridge-impl/target/classes/META-INF/faces-config.xml
-						// Example #2 (Typical ClassLoader URL):
-						// jar:file:/Servers/liferay-portal/tomcat/webapps/WEB-INF/lib/liferay-faces-bridge-impl.jar!/META-INF/faces-config.xml
-						facesConfigName = facesConfigURL.toString();
-					}
-
 					facesConfigDescriptors.add(facesConfigDescriptor);
 
 					inputStream.close();
