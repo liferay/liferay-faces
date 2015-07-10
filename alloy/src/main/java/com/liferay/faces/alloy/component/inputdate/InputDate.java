@@ -24,6 +24,10 @@ import java.util.TimeZone;
 import javax.faces.component.FacesComponent;
 import javax.faces.context.FacesContext;
 
+import com.liferay.faces.util.client.BrowserSniffer;
+import com.liferay.faces.util.client.BrowserSnifferFactory;
+import com.liferay.faces.util.factory.FactoryExtensionFinder;
+
 
 /**
  * @author  Kyle Stiemann
@@ -72,7 +76,7 @@ public class InputDate extends InputDateBase {
 		}
 	}
 
-	protected Date getDateAtMidnight(Date date, TimeZone timeZone) {
+	private Date getDateAtMidnight(Date date, TimeZone timeZone) {
 
 		Calendar calendar = new GregorianCalendar(timeZone);
 		calendar.setTime(date);
@@ -84,7 +88,7 @@ public class InputDate extends InputDateBase {
 		return calendar.getTime();
 	}
 
-	protected final String getDefaultDatePattern(Object componentLocale) {
+	private String getDefaultDatePattern(Object componentLocale) {
 
 		Locale locale = getObjectAsLocale(componentLocale);
 
@@ -100,8 +104,12 @@ public class InputDate extends InputDateBase {
 	public String getPattern() {
 
 		String datePattern;
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		BrowserSnifferFactory browserSnifferFactory = (BrowserSnifferFactory) FactoryExtensionFinder.getFactory(
+				BrowserSnifferFactory.class);
+		BrowserSniffer browserSniffer = browserSnifferFactory.getBrowserSniffer(facesContext.getExternalContext());
 
-		if (isNative()) {
+		if (browserSniffer.isMobile() && isNativeWhenMobile()) {
 			datePattern = DEFAULT_HTML5_DATE_PATTERN;
 		}
 		else {

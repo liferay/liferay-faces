@@ -22,6 +22,10 @@ import javax.faces.FacesException;
 import javax.faces.component.FacesComponent;
 import javax.faces.context.FacesContext;
 
+import com.liferay.faces.util.client.BrowserSniffer;
+import com.liferay.faces.util.client.BrowserSnifferFactory;
+import com.liferay.faces.util.factory.FactoryExtensionFinder;
+
 
 /**
  * @author  Bruno Basto
@@ -69,8 +73,12 @@ public class InputTime extends InputTimeBase {
 	public String getPattern() {
 
 		String timePattern;
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		BrowserSnifferFactory browserSnifferFactory = (BrowserSnifferFactory) FactoryExtensionFinder.getFactory(
+				BrowserSnifferFactory.class);
+		BrowserSniffer browserSniffer = browserSnifferFactory.getBrowserSniffer(facesContext.getExternalContext());
 
-		if (isNative()) {
+		if (browserSniffer.isMobile() && isNativeWhenMobile()) {
 			timePattern = DEFAULT_HTML5_TIME_PATTERN;
 		}
 		else {
