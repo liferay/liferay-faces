@@ -3,12 +3,11 @@
 	xmlns:showcase="http://java.sun.com/jsf/composite/showcase" template="/WEB-INF/templates/component-1col-60.xhtml">
 
 	<ui:define name="col1">
-		<alloy:form>
-			<showcase:example renderedCheckbox="true">
-				<alloy:icon name="warning-sign" />
-				<alloy:outputText value="Example Under Construction" />
-			</showcase:example>
-		</alloy:form>
+		<showcase:example renderedCheckbox="true">
+			<ui:remove>
+				<!-- THIS PART WILL NOT SHOW IN THE MARKUP -->
+			</ui:remove>
+		</showcase:example>
 	</ui:define>
 
 </ui:composition>

@@ -13,7 +13,9 @@
  */
 package com.liferay.faces.demos.bean;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -24,6 +26,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.component.UIOutput;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
+import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.event.PhaseId;
 
 import com.liferay.faces.demos.dto.Customer;
@@ -60,6 +63,48 @@ public class CommandBackingBean {
 		facesContext.addMessage(null, facesMessage);
 	}
 
+	public void ajaxListener(AjaxBehaviorEvent ajaxBehaviorEvent) {
+
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		PhaseId phaseId = facesContext.getCurrentPhaseId();
+		logger.debug("ajaxListener: phaseId=[{0}]", phaseId.toString());
+
+		String phaseName = phaseId.getName();
+		FacesMessage facesMessage = new FacesMessage("The ajaxListener method was called during the " + phaseName +
+				" phase of the JSF lifecycle.");
+		facesContext.addMessage(null, facesMessage);
+	}
+
+	public void attributeActionListener(ActionEvent actionEvent) {
+
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		PhaseId phaseId = facesContext.getCurrentPhaseId();
+		logger.debug("actionListener: phaseId=[{0}]", phaseId.toString());
+
+		String value = (String) actionEvent.getComponent().getAttributes().get("attribute");
+
+		String phaseName = phaseId.getName();
+		FacesMessage facesMessage = new FacesMessage("The actionListener method was called during the " + phaseName +
+				" phase of the JSF lifecycle.The attribute value is " + value);
+		facesContext.addMessage(null, facesMessage);
+	}
+
+	public void attributesActionListener(ActionEvent actionEvent) {
+
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		PhaseId phaseId = facesContext.getCurrentPhaseId();
+		logger.debug("actionListener: phaseId=[{0}]", phaseId.toString());
+
+		Map<String, Object> attributes = actionEvent.getComponent().getAttributes();
+		String value1 = (String) attributes.get("attribute1");
+		String value2 = (String) attributes.get("attribute2");
+
+		String phaseName = phaseId.getName();
+		FacesMessage facesMessage = new FacesMessage("The actionListener method was called during the " + phaseName +
+				" phase of the JSF lifecycle.The attributes value are " + value1 + " and " + value2);
+		facesContext.addMessage(null, facesMessage);
+	}
+
 	public void feedbackListener(ActionEvent actionEvent) {
 
 		String value = "";
@@ -80,6 +125,21 @@ public class CommandBackingBean {
 		facesContext.addMessage(null, facesMessage);
 	}
 
+	public void parameterActionListener() {
+
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		PhaseId phaseId = facesContext.getCurrentPhaseId();
+		logger.debug("actionListener: phaseId=[{0}]", phaseId.toString());
+
+		Map<String, String> requestParameterMap = facesContext.getExternalContext().getRequestParameterMap();
+		String value = requestParameterMap.get("parameter");
+
+		String phaseName = phaseId.getName();
+		FacesMessage facesMessage = new FacesMessage("The actionListener method was called during the " + phaseName +
+				" phase of the JSF lifecycle.The parameter value is " + value);
+		facesContext.addMessage(null, facesMessage);
+	}
+
 	public void selectionListener(ActionEvent actionEvent) {
 
 		UICommand uiCommand = (UICommand) actionEvent.getComponent();
@@ -89,6 +149,14 @@ public class CommandBackingBean {
 
 	public void setAjax(boolean ajax) {
 		this.ajax = ajax;
+	}
+
+	public Map<String, Object> getAttributes() {
+		Map<String, Object> attributes = new HashMap<String, Object>();
+		attributes.put("attribute1", "value1");
+		attributes.put("attribute2", "value2");
+
+		return attributes;
 	}
 
 	public void setCommandModelBean(CommandModelBean commandModelBean) {

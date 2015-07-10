@@ -13,8 +13,13 @@
  */
 package com.liferay.faces.demos.bean;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+
+import com.liferay.faces.demos.dto.Country;
+import com.liferay.faces.demos.service.CountryService;
 
 
 /**
@@ -24,14 +29,30 @@ import javax.faces.bean.RequestScoped;
 @RequestScoped
 public class OutputLinkModelBean {
 
-	// Private properties
-	public long countryId = 1;
+	@ManagedProperty(value = "#{countryService}")
+	private CountryService countryService;
 
-	public long getCountryId() {
-		return countryId;
+	// Private properties
+	private Country	country;
+
+	@PostConstruct
+	public void postConstruct() {
+		this.country = countryService.getAllCountries().get(0);
 	}
 
-	public void setCountryId(long countryId) {
-		this.countryId = countryId;
+	public Country getCountry() {
+		return country;
+	}
+
+	public void setCountry(Country country) {
+		this.country = country;
+	}
+
+	public CountryService getCountryService() {
+		return countryService;
+	}
+
+	public void setCountryService(CountryService countryService) {
+		this.countryService = countryService;
 	}
 }

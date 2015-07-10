@@ -18,10 +18,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.Locale;
 import java.util.TimeZone;
 
-import javax.faces.FacesException;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -30,9 +28,6 @@ import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 
 import com.liferay.faces.alloy.component.inputdate.InputDate;
-import com.liferay.faces.util.context.MessageContext;
-import com.liferay.faces.util.context.MessageContextFactory;
-import com.liferay.faces.util.factory.FactoryExtensionFinder;
 
 
 /**
@@ -66,7 +61,7 @@ public class WeekdayValidator implements Validator {
 				}
 				catch (ParseException e) {
 
-					String message = getMessage(facesContext, inputDate, "invalid-selection");
+					String message = ValidatorHelper.getMessage(facesContext, inputDate, "invalid-selection");
 					FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
 					throw new ValidatorException(facesMessage, e);
 				}
@@ -79,53 +74,10 @@ public class WeekdayValidator implements Validator {
 
 			if ((dayOfWeek == Calendar.SATURDAY) || (dayOfWeek == Calendar.SUNDAY)) {
 
-				String message = getMessage(facesContext, inputDate, "sat-and-sun-are-not-valid");
+				String message = ValidatorHelper.getMessage(facesContext, inputDate, "sat-and-sun-are-not-valid");
 				FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_WARN, message, message);
 				throw new ValidatorException(facesMessage);
 			}
 		}
-	}
-
-	private String getMessage(FacesContext facesContext, InputDate inputDate, String messageId) {
-
-		MessageContextFactory messageContextFactory = (MessageContextFactory) FactoryExtensionFinder.getFactory(
-				MessageContextFactory.class);
-		MessageContext messageContext = messageContextFactory.getMessageContext();
-		Object localeObject = inputDate.getLocale(facesContext);
-		Locale locale = getObjectAsLocale(localeObject);
-
-		return messageContext.getMessage(locale, messageId);
-	}
-
-	private Locale getObjectAsLocale(Object localeAsObject) throws FacesException {
-
-		Locale locale = null;
-
-		if (localeAsObject != null) {
-
-			if (localeAsObject instanceof Locale) {
-				locale = (Locale) localeAsObject;
-			}
-			else if (localeAsObject instanceof String) {
-
-				String localeAsString = (String) localeAsObject;
-
-				if (localeAsString.length() > 0) {
-					String[] locales = localeAsString.split("-");
-
-					if (locales.length > 1) {
-						locale = new Locale(locales[0], locales[1]);
-					}
-					else {
-						locale = new Locale(locales[0]);
-					}
-				}
-			}
-			else {
-				throw new FacesException("Unable to convert value to locale.");
-			}
-		}
-
-		return locale;
 	}
 }

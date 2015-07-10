@@ -8,6 +8,10 @@
 			<f:viewParam name="componentPrefix" value="#{showcaseModelBean.viewParameters.componentPrefix}" />
 			<f:viewParam name="componentName" value="#{showcaseModelBean.viewParameters.componentName}" />
 			<f:viewParam name="componentUseCase" value="#{showcaseModelBean.viewParameters.componentUseCase}" />
+			<f:viewAction action="#{viewMetadataBackingBean.viewAction}" phase="UPDATE_MODEL_VALUES"/>
+			<f:viewParam name="viewParamShowcase" value="#{viewMetadataBackingBean.viewCountry}">
+				<f:converter converterId="convertCountry"/>
+			</f:viewParam>
 		</f:metadata>
 		<h:outputStylesheet name="component.css" library="css" />
 		<c:set value="#{showcaseModelBean.selectedComponent}" var="selectedComponent" />

@@ -13,6 +13,8 @@
  */
 package com.liferay.faces.demos.converter;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.Map;
 
 import javax.el.ELContext;
@@ -47,7 +49,16 @@ public class CountryGmapConverter implements Converter {
 
 		Country country = getCountryMap(facesContext).get(value);
 
-		return "https://www.google.com/maps/place/" + country.getCountryName();
+		String URL = "https://www.google.com/maps/place/";
+
+		try {
+			return URL + URLEncoder.encode(country.getCountryName(), "UTF-8");
+		}
+		catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+
+			return null;
+		}
 	}
 
 	protected Map<Long, Country> getCountryMap(FacesContext facesContext) {
