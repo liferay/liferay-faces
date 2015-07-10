@@ -34,7 +34,7 @@ public class ViewMetadataBackingBean {
 	public String viewAction() {
 		PhaseId phaseId = FacesContext.getCurrentInstance().getCurrentPhaseId();
 
-		String phaseName = phaseId.getName();
+		String phaseName = phaseId.toString();
 
 		this.viewActionText = "View action was executed in phase " + phaseName;
 
