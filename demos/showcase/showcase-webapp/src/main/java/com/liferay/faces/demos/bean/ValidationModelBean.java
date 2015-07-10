@@ -15,22 +15,22 @@ package com.liferay.faces.demos.bean;
 
 import java.util.Date;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
-import javax.validation.constraints.Past;
-import javax.validation.constraints.Size;
+// JSF 2+ import javax.faces.bean.ManagedBean;
+// JSF 2+ import javax.faces.bean.RequestScoped;
+// JSF 2+ import javax.validation.constraints.Past;
+// JSF 2+ import javax.validation.constraints.Size;
 
 
 /**
  * @author  Juan Gonzalez
  */
-@ManagedBean
-@RequestScoped
+// JSF 2+ @ManagedBean
+// JSF 2+ @RequestScoped
 public class ValidationModelBean {
 
-	@Past
+	// JSF 2+ @Past
 	private Date birthDay;
-	@Size(max = 5)
+	// JSF 2+ @Size(max = 5)
 	private String text;
 	private Double doubleRange;
 	private String otherText;

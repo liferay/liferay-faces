@@ -19,14 +19,15 @@ import java.util.GregorianCalendar;
 import java.util.TimeZone;
 
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.RequestScoped;
+// JSF 2 + import javax.faces.bean.ManagedBean;
+// JSF 2 + import javax.faces.bean.ManagedProperty;
+// JSF 2 + import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.PhaseId;
 import javax.faces.event.ValueChangeEvent;
 import javax.faces.model.SelectItem;
 
+import com.liferay.faces.demos.event.CurrentPhaseListener;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -34,17 +35,18 @@ import com.liferay.faces.util.logging.LoggerFactory;
 /**
  * @author  Vernon Singleton
  */
-@ManagedBean
-@RequestScoped
+// JSF 2 + @ManagedBean
+// JSF 2 + @RequestScoped
 public class SelectOneBackingBean {
 
 	private static final Logger logger = LoggerFactory.getLogger(SelectOneBackingBean.class);
 
-	@ManagedProperty(name = "selectOneModelBean", value = "#{selectOneModelBean}")
+	// JSF 2 + @ManagedProperty(name = "selectOneModelBean", value = "#{selectOneModelBean}")
 	private SelectOneModelBean selectOneModelBean;
 
 	public void submit() {
-		PhaseId phaseId = FacesContext.getCurrentInstance().getCurrentPhaseId();
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		PhaseId phaseId = (PhaseId) facesContext.getExternalContext().getRequestMap().get(CurrentPhaseListener.PHASE_ID);
 		logger.info("submit: phaseId=[{0}] favoriteId=[{1}]", phaseId.toString(), selectOneModelBean.getFavoriteId());
 	}
 
@@ -78,7 +80,7 @@ public class SelectOneBackingBean {
 	public void valueChangeListener(ValueChangeEvent valueChangeEvent) {
 
 		FacesContext facesContext = FacesContext.getCurrentInstance();
-		PhaseId phaseId = facesContext.getCurrentPhaseId();
+		PhaseId phaseId = (PhaseId) facesContext.getExternalContext().getRequestMap().get(CurrentPhaseListener.PHASE_ID);
 		logger.debug("valueChangeListener: phaseId=[{0}]", phaseId.toString());
 
 		String phaseName = phaseId.toString();

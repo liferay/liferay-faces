@@ -25,6 +25,15 @@
 		<!-- <phase-listener>com.liferay.faces.util.lifecycle.ViewScopePhaseListener</phase-listener> -->
 	</lifecycle>
 	<managed-bean>
+		<managed-bean-name>converterModelBean</managed-bean-name>
+		<managed-bean-class>com.liferay.faces.demos.bean.ConverterModelBean</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+		<managed-property>
+			<property-name>countryService</property-name>
+			<value>#{countryService}</value>
+		</managed-property>
+	</managed-bean>
+	<managed-bean>
 		<managed-bean-name>countryService</managed-bean-name>
 		<managed-bean-class>com.liferay.faces.demos.service.CountryServiceMockImpl</managed-bean-class>
 		<managed-bean-scope>application</managed-bean-scope>
@@ -34,5 +43,47 @@
 		<managed-bean-class>com.liferay.faces.demos.service.CustomerServiceMockImpl</managed-bean-class>
 		<managed-bean-scope>application</managed-bean-scope>
 	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>inputTextModelBean</managed-bean-name>
+		<managed-bean-class>com.liferay.faces.demos.bean.InputTextModelBean</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>jSTLBackingBean</managed-bean-name>
+		<managed-bean-class>com.liferay.faces.demos.bean.JSTLBackingBean</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>selectOneBackingBean</managed-bean-name>
+		<managed-bean-class>com.liferay.faces.demos.bean.SelectOneBackingBean</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+		<managed-property>
+			<property-name>selectOneModelBean</property-name>
+			<value>#{selectOneModelBean}</value>
+		</managed-property>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>selectOneModelBean</managed-bean-name>
+		<managed-bean-class>com.liferay.faces.demos.bean.SelectOneModelBean</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+		<managed-property>
+			<property-name>liferayBenefitService</property-name>
+			<value>#{liferayBenefitService}</value>
+		</managed-property>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>setPropertyActionListenerBackingBean</managed-bean-name>
+		<managed-bean-class>com.liferay.faces.demos.bean.SetPropertyActionListenerBackingBean</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>validationModelBean</managed-bean-name>
+		<managed-bean-class>com.liferay.faces.demos.bean.ValidationModelBean</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+	<validator>
+		<validator-id>validateEmail</validator-id>
+		<validator-class>com.liferay.faces.demos.validator.EmailValidator</validator-class>
+	</validator>
 
 </faces-config>

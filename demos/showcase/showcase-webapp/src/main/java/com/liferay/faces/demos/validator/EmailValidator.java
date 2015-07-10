@@ -20,7 +20,7 @@ import java.util.regex.PatternSyntaxException;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
-import javax.faces.validator.FacesValidator;
+// JSF 2+ import javax.faces.validator.FacesValidator;
 import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 
@@ -28,7 +28,7 @@ import javax.faces.validator.ValidatorException;
 /**
  * @author  Juan Gonzalez
  */
-@FacesValidator("com.liferay.faces.demos.validator.EmailValidator")
+// JSF 2+ @FacesValidator("com.liferay.faces.demos.validator.EmailValidator")
 public class EmailValidator implements Validator {
 
 	private static final String EMAIL_REGEX = "^([a-z0-9_\\.-]+)@([\\da-z\\.-]+)\\.([a-z\\.]{2,6})$";
