@@ -1,14 +1,18 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
-	xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:showcase="http://liferay.com/faces/showcase" template="/WEB-INF/templates/component-1col-60.xhtml">
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:showcase="http://java.sun.com/jsf/composite/showcase"
+	template="/WEB-INF/templates/component-1col-60.xhtml">
 
 	<ui:define name="col1">
-		<alloy:form>
+		<h:form>
 			<showcase:example renderedCheckbox="true">
-				<alloy:icon name="warning-sign" />
-				<alloy:outputText value="Example Under Construction" />
+				<alloy:messages id="feedback" globalOnly="true" layout="table" />
+				<h:commandLink actionListener="#{commandBackingBean.parameterActionListener}"
+				value="#{i18n['link']}" render="feedback">
+					<f:param name="parameter" value="parameterValue"/>
+				</h:commandLink>
 			</showcase:example>
-		</alloy:form>
+		</h:form>
 	</ui:define>
 
 </ui:composition>
