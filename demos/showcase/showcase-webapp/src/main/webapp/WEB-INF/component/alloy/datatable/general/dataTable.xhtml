@@ -22,9 +22,7 @@
 						</alloy:outputText>
 					</alloy:column>
 					<alloy:column headerText="#{i18n['country']}">
-						<alloy:outputText value="#{customer.countryId}">
-							<f:converter converterId="convertCountry" />
-						</alloy:outputText>
+						<alloy:outputText value="#{customer.country.countryName}"/>
 					</alloy:column>
 					<f:facet name="footer">
 						<alloy:outputText value="#{i18n['footer']}" />

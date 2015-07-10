@@ -1,14 +1,22 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
-	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-	xmlns:showcase="http://xmlns.jcp.org/jsf/composite/showcase" template="/WEB-INF/templates/component-1col-60.xhtml">
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:showcase="http://xmlns.jcp.org/jsf/composite/showcase"
+	template="/WEB-INF/templates/component-1col-60.xhtml">
 
 	<ui:define name="col1">
-		<alloy:form>
-			<showcase:example renderedCheckbox="true">
-				<alloy:icon name="warning-sign" />
-				<alloy:outputText value="Example Under Construction" />
-			</showcase:example>
-		</alloy:form>
+		<h:form id="resetFrm">
+			<showcase:example id="example1" renderedCheckbox="true">
+				<h:messages/>		
+				<h:inputText id="required1" value="#{resetValuesBackingBean.requiredText1}" required="true"/>
+				<h:inputText id="required2" value="#{resetValuesBackingBean.requiredText2}" required="true"/>
+				
+				<h:commandButton value="#{i18n['submit']}"/>
+
+				<h:commandButton value="#{i18n['reset']}" actionListener="#{resetValuesBackingBean.actionListener}" immediate="true">					
+					<f:resetValues render="resetFrm:example1:required1 resetFrm:example1:required2"/>				
+				</h:commandButton>								
+			</showcase:example>			
+		</h:form>
 	</ui:define>
 
 </ui:composition>

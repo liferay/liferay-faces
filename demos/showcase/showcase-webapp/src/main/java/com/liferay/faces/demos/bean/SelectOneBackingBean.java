@@ -25,6 +25,7 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.PhaseId;
 import javax.faces.event.ValueChangeEvent;
+import javax.faces.model.SelectItem;
 
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
@@ -84,6 +85,19 @@ public class SelectOneBackingBean {
 		FacesMessage facesMessage = new FacesMessage("The valueChangeListener method was called during the " +
 				phaseName + " phase of the JSF lifecycle.");
 		facesContext.addMessage(null, facesMessage);
+	}
+
+	public SelectItem[] getSelectItems() {
+		SelectItem[] selectItems = new SelectItem[3];
+
+		for (int i = 0; i < 3; i++) {
+			SelectItem item = new SelectItem();
+			item.setLabel("Item " + (i + 1));
+			item.setValue(i);
+			selectItems[i] = item;
+		}
+
+		return selectItems;
 	}
 
 	public void setSelectOneModelBean(SelectOneModelBean selectOneModelBean) {

@@ -6,16 +6,16 @@
 		<alloy:form>
 			<showcase:example>
 				<alloy:outputLabel value="#{i18n['country']}" />
-				<alloy:selectOneMenu id="selectOneMenuId" value="#{outputLinkModelBean.countryId}">
-					<f:selectItems value="#{countryService.allCountries}" var="country" itemValue="#{country.countryId}"
+				<alloy:selectOneMenu id="selectOneMenuId" value="#{outputLinkModelBean.country}">
+					<f:selectItems value="#{countryService.allCountries}" var="country" itemValue="#{country}"
 						itemLabel="#{country.countryName}" />
-					<f:ajax render="outputLinkId" />
+					<f:ajax render="selectOneMenuId outputLinkId" />
+					<f:converter converterId="convertCountry"/>
 				</alloy:selectOneMenu>
 				<br />
 				<alloy:outputLink id="outputLinkId" converter="convertGmapCountry" target="_blank"
-					value="#{outputLinkModelBean.countryId}">
-					<alloy:outputText value="#{i18n['link-to-a-map-of']} " />
-					<alloy:outputText converter="convertCountry" value="#{outputLinkModelBean.countryId}" />
+					value="#{outputLinkModelBean.country.countryId}">
+					<alloy:outputText value="#{i18n['link-to-a-map-of']} #{outputLinkModelBean.country.countryName}" />
 				</alloy:outputLink>
 			</showcase:example>
 		</alloy:form>
