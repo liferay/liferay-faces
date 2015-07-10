@@ -83,7 +83,13 @@ public class OrderingUtil {
 
 		for (String name : beforeRoutes) {
 			Integer value = map.get(name);
-			value = (value == null) ? 1 : (value + 1);
+
+			if (value == null) {
+				value = 1;
+			} else {
+				value += 1;
+			}
+
 			map.put(name, value);
 		}
 
@@ -91,7 +97,13 @@ public class OrderingUtil {
 
 		for (String name : afterRoutes) {
 			Integer value = map.get(name);
-			value = (value == null) ? 1 : (value + 1);
+
+			if (value == null) {
+				value = 1;
+			} else {
+				value += 1;
+			}
+
 			map.put(name, value);
 		}
 
