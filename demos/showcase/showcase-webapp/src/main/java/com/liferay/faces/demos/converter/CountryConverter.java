@@ -28,6 +28,7 @@ import com.liferay.faces.demos.service.CountryService;
 
 /**
  * @author  Neil Griffin
+ * @author  Juan Gonzalez
  */
 @FacesConverter(value = "convertCountry")
 public class CountryConverter implements Converter {
@@ -37,17 +38,27 @@ public class CountryConverter implements Converter {
 
 	@Override
 	public Object getAsObject(FacesContext facesContext, UIComponent uiComponent, String value) {
+		Object countryObject = null;
 
-		// no-op
-		return null;
+		if ((value != null) && !"".equals(value)) {
+			Long countryId = Long.parseLong(value);
+
+			countryObject = getCountryMap(facesContext).get(countryId);
+		}
+
+		return countryObject;
 	}
 
 	@Override
 	public String getAsString(FacesContext facesContext, UIComponent uiComponent, Object value) {
+		String strValue = "";
 
-		Country country = getCountryMap(facesContext).get(value);
+		if (value != null) {
+			Country country = (Country) value;
+			strValue = Long.toString(country.getCountryId());
+		}
 
-		return country.getCountryName();
+		return strValue;
 	}
 
 	protected Map<Long, Country> getCountryMap(FacesContext facesContext) {

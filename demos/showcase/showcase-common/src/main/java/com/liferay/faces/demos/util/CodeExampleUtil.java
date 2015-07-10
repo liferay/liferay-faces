@@ -77,7 +77,7 @@ public class CodeExampleUtil {
 				// Reset the stringBuilder
 				stringBuilder.setLength(0);
 				fileExtension = XML;
-				sourceCodeText = TEMPLATE_ATTRIBUTE_PATTERN.matcher(sourceCodeText).replaceAll("");
+				sourceCodeText = TEMPLATE_ATTRIBUTE_PATTERN.matcher(sourceCodeText).replaceFirst("");
 				sourceCodeText = SHOWCASE_NAMESPACE_PATTERN.matcher(sourceCodeText).replaceAll("");
 
 				StringReader stringReader = new StringReader(sourceCodeText);
@@ -85,6 +85,7 @@ public class CodeExampleUtil {
 				int trimTab = 0;
 				String line;
 				boolean ignoreNextLine = false;
+				int defineCount = 0;
 
 				while ((line = bufferedReader.readLine()) != null) {
 					String trimmedLine = line.trim();
@@ -94,11 +95,25 @@ public class CodeExampleUtil {
 					}
 					else {
 
-						if (trimmedLine.startsWith("<showcase") || trimmedLine.startsWith("<ui:define")) {
+						boolean defineColOpen = trimmedLine.startsWith("<ui:define name=\"col");
+
+						if (!defineColOpen && trimmedLine.startsWith("<ui:define")) {
+							defineCount++;
+						}
+
+						boolean defineClose = trimmedLine.startsWith("</ui:define");
+						boolean defineColClose = ((defineCount == 0) && defineClose);
+
+						if (defineClose && !defineColClose) {
+							defineCount--;
+						}
+
+						if (trimmedLine.startsWith("<showcase") || defineColOpen) {
 							trimTab++;
 							ignoreNextLine = !trimmedLine.endsWith(">");
+
 						}
-						else if (trimmedLine.startsWith("</showcase") || trimmedLine.startsWith("</ui:define")) {
+						else if (trimmedLine.startsWith("</showcase") || defineColClose) {
 							trimTab--;
 						}
 						else {

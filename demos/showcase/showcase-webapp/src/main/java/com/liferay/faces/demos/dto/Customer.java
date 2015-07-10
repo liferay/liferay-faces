@@ -27,25 +27,25 @@ public class Customer implements Serializable {
 
 	// Private Data Members
 	private long customerId;
-	private long countryId;
+	private Country country;
 	private Date dateOfBirth;
 	private String firstName;
 	private String lastName;
 
-	public Customer(long customerId, long countryId, String firstName, String lastName, Date dateOfBirth) {
+	public Customer(long customerId, Country country, String firstName, String lastName, Date dateOfBirth) {
 		this.customerId = customerId;
-		this.countryId = countryId;
+		this.country = country;
 		this.dateOfBirth = dateOfBirth;
 		this.firstName = firstName;
 		this.lastName = lastName;
 	}
 
-	public long getCountryId() {
-		return countryId;
+	public Country getCountry() {
+		return country;
 	}
 
-	public void setCountryId(long countryId) {
-		this.countryId = countryId;
+	public void setCountry(Country country) {
+		this.country = country;
 	}
 
 	public long getCustomerId() {
