@@ -13,26 +13,36 @@
  */
 package com.liferay.faces.demos.bean;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
-import javax.faces.event.AbortProcessingException;
-import javax.faces.event.ComponentSystemEvent;
+import java.util.Date;
+import java.util.GregorianCalendar;
+
+// JSF2+ import javax.faces.bean.ManagedBean;
+// JSF2+ import javax.faces.bean.RequestScoped;
 
 
 /**
- * @author  Juan Gonzalez
+ * @author  Neil Griffin
  */
-@ManagedBean
-@RequestScoped
-public class EventBackingBean {
+// JSF2+ @ManagedBean
+// JSF2+ @RequestScoped
+public class InputTextModelBean {
 
-	private StringBuilder text = new StringBuilder();
+	private Date date = new GregorianCalendar().getTime();
+	private String text;
 
-	public void preRenderComponent(ComponentSystemEvent event) throws AbortProcessingException {
-		text.append("Component with id " + event.getComponent().getId() + " generated an event.<br/>");
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
 	}
 
 	public String getText() {
-		return text.toString();
+		return text;
+	}
+
+	public void setText(String text) {
+		this.text = text;
 	}
 }

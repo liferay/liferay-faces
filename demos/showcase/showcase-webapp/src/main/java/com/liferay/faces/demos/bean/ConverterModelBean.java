@@ -14,9 +14,9 @@
 package com.liferay.faces.demos.bean;
 
 import javax.annotation.PostConstruct;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.RequestScoped;
+// JSF 2+ import javax.faces.bean.ManagedBean;
+// JSF 2+ import javax.faces.bean.ManagedProperty;
+// JSF 2+ import javax.faces.bean.RequestScoped;
 
 import com.liferay.faces.demos.dto.Country;
 import com.liferay.faces.demos.service.CountryService;
@@ -25,11 +25,11 @@ import com.liferay.faces.demos.service.CountryService;
 /**
  * @author  Juan Gonzalez
  */
-@ManagedBean
-@RequestScoped
+// JSF 2+ @ManagedBean
+// JSF 2+ @RequestScoped
 public class ConverterModelBean {
 
-	@ManagedProperty(value = "#{countryService}")
+	// JSF 2+ @ManagedProperty(value = "#{countryService}")
 	private CountryService countryService;
 
 	// Private properties
