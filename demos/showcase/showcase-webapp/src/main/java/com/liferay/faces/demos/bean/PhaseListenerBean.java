@@ -26,7 +26,7 @@ import javax.faces.event.PhaseListener;
  */
 public class PhaseListenerBean implements PhaseListener {
 
-	@Override
+	// Java 1.6+ @Override
 	public void afterPhase(PhaseEvent event) {
 		InputTextModelBean inputTextModelBean = getInputTextModelBean(event.getFacesContext());
 		inputTextModelBean.setText(inputTextModelBean.getText() + "<br/>PhaseListenerBean in afterPhase of " +
@@ -34,7 +34,7 @@ public class PhaseListenerBean implements PhaseListener {
 
 	}
 
-	@Override
+	// Java 1.6+ @Override
 	public void beforePhase(PhaseEvent event) {
 		InputTextModelBean inputTextModelBean = getInputTextModelBean(event.getFacesContext());
 		inputTextModelBean.setText(inputTextModelBean.getText() + "<br/>PhaseListenerBean in beforePhase of " +
@@ -55,7 +55,7 @@ public class PhaseListenerBean implements PhaseListener {
 		return inputTextModelBean;
 	}
 
-	@Override
+	// Java 1.6+ @Override
 	public PhaseId getPhaseId() {
 		return PhaseId.ANY_PHASE;
 	}
