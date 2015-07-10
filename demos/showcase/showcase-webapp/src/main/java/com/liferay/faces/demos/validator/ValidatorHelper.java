@@ -13,16 +13,13 @@
  */
 package com.liferay.faces.demos.validator;
 
-import java.util.Locale;
-
-import javax.faces.FacesException;
-import javax.faces.context.FacesContext;
-
-import com.liferay.faces.alloy.component.inputdate.InputDate;
-import com.liferay.faces.alloy.component.inputtime.InputTime;
 import com.liferay.faces.util.context.MessageContext;
 import com.liferay.faces.util.context.MessageContextFactory;
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
+
+import javax.faces.FacesException;
+import javax.faces.context.FacesContext;
+import java.util.Locale;
 
 
 /**
@@ -37,28 +34,6 @@ public class ValidatorHelper {
 		final MessageContext messageContext = messageContextFactory.getMessageContext();
 
 		return messageContext.getMessage(facesContext.getViewRoot().getLocale(), messageId);
-	}
-
-	public static String getMessage(FacesContext facesContext, InputDate inputDate, String messageId) {
-
-		MessageContextFactory messageContextFactory = (MessageContextFactory) FactoryExtensionFinder.getFactory(
-				MessageContextFactory.class);
-		MessageContext messageContext = messageContextFactory.getMessageContext();
-		Object localeObject = inputDate.getLocale(facesContext);
-		Locale locale = getObjectAsLocale(localeObject);
-
-		return messageContext.getMessage(locale, messageId);
-	}
-
-	public static String getMessage(FacesContext facesContext, InputTime inputTime, String messageId) {
-
-		MessageContextFactory messageContextFactory = (MessageContextFactory) FactoryExtensionFinder.getFactory(
-				MessageContextFactory.class);
-		final MessageContext messageContext = messageContextFactory.getMessageContext();
-		final Object localeObject = inputTime.getLocale(facesContext);
-		Locale locale = getObjectAsLocale(localeObject);
-
-		return messageContext.getMessage(locale, messageId);
 	}
 
 	public static Locale getObjectAsLocale(Object localeAsObject) throws FacesException {
