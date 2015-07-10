@@ -1144,10 +1144,10 @@
 				</exclusions>
 			</dependency>
 			<dependency>
-        			<groupId>org.hibernate</groupId>
-		        	<artifactId>hibernate-validator</artifactId>
-        			<version>${hibernate.validator.version}</version>        	
-		    	</dependency>
+				<groupId>org.hibernate</groupId>
+				<artifactId>hibernate-validator</artifactId>
+				<version>${hibernate.validator.version}</version>
+			</dependency>
 			<dependency>
 				<groupId>org.icefaces</groupId>
 				<artifactId>icefaces</artifactId>
