@@ -87,6 +87,7 @@
 		<faces.spec.version>2.1</faces.spec.version>
 		<faces.version>${mojarra.version}</faces.version>
 		<full.version>${project.version} (${codename} / ${timestamp} AD)</full.version>
+		<hibernate.validator.version>5.1.3.Final</hibernate.validator.version>
 		<icefaces3.version>3.3.0</icefaces3.version>
 		<jstl.version>1.2</jstl.version>
 		<liferay.version>6.1.2</liferay.version>
@@ -132,6 +133,7 @@
 		<surefire.version>2.12</surefire.version>
 		<tck.version>jsr329-1.0.1-liferay</tck.version>
 		<tck.trinidad.version>2.0.1</tck.trinidad.version>
+		<validation-api.version>1.1.0.Final</validation-api.version>
 		<war.packaging.excludes>
 			WEB-INF/glassfish-*.xml,
 			WEB-INF/ibm-*.xml,
@@ -1113,6 +1115,11 @@
 				<scope>provided</scope>
 			</dependency>
 			<dependency>
+				<groupId>javax.validation</groupId>
+				<artifactId>validation-api</artifactId>
+				<version>${validation-api.version}</version>
+			</dependency>
+			<dependency>
 				<groupId>junit</groupId>
 				<artifactId>junit</artifactId>
 				<version>4.10</version>
@@ -1132,6 +1139,11 @@
 				<groupId>org.apache.myfaces.core</groupId>
 				<artifactId>myfaces-impl</artifactId>
 				<version>${myfaces.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.hibernate</groupId>
+				<artifactId>hibernate-validator</artifactId>
+				<version>${hibernate.validator.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.icefaces</groupId>

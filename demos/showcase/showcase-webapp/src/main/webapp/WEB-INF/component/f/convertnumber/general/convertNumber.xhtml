@@ -1,14 +1,15 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
 	xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:showcase="http://java.sun.com/jsf/composite/showcase" template="/WEB-INF/templates/component-1col-60.xhtml">
+	xmlns:h="http://java.sun.com/jsf/html" xmlns:showcase="http://java.sun.com/jsf/composite/showcase"
+	template="/WEB-INF/templates/component-1col-60.xhtml">
 
 	<ui:define name="col1">
-		<alloy:form>
-			<showcase:example renderedCheckbox="true">
-				<alloy:icon name="warning-sign" />
-				<alloy:outputText value="Example Under Construction" />
-			</showcase:example>
-		</alloy:form>
+		<showcase:example renderedCheckbox="true">				
+			<h:outputText value="#{i18n['this-text-is-a-number-with-2-max-fraction-digits']}:"/>								
+			<h:outputText value="3.141516">
+				<f:convertNumber type="number" maxFractionDigits="2" />
+			</h:outputText>
+		</showcase:example>
 	</ui:define>
 
 </ui:composition>
