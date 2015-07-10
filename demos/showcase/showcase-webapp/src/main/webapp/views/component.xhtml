@@ -1,15 +1,19 @@
-<ui:composition xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:c="http://java.sun.com/jstl/core" xmlns:f="http://java.sun.com/jsf/core"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
+	xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html" xmlns:showcase-fn="http://liferay.com/faces/showcase-fn"
 	xmlns:ui="http://java.sun.com/jsf/facelets" template="/WEB-INF/templates/showcase-#{showcaseModelBean.deploymentType}.xhtml">
 
 	<ui:define name="content">
-		<ui:remove><!-- <f:metadata>
+		<f:metadata>
 			<f:viewParam name="componentPrefix" value="#{showcaseModelBean.viewParameters.componentPrefix}" />
 			<f:viewParam name="componentName" value="#{showcaseModelBean.viewParameters.componentName}" />
 			<f:viewParam name="componentUseCase" value="#{showcaseModelBean.viewParameters.componentUseCase}" />
-		</f:metadata> --></ui:remove>
-		<link rel="stylesheet" type="text/css" href="#{request.contextPath}/resources/css/component.css" />
+			<f:viewAction action="#{viewMetadataBackingBean.viewAction}" phase="UPDATE_MODEL_VALUES"/>
+			<f:viewParam name="viewParamShowcase" value="#{viewMetadataBackingBean.viewCountry}">
+				<f:converter converterId="convertCountry"/>
+			</f:viewParam>
+		</f:metadata>
+		<h:outputStylesheet name="component.css" library="css" />
 		<c:set value="#{showcaseModelBean.selectedComponent}" var="selectedComponent" />
 		<c:set value="#{selectedComponent.camelCaseName}" var="selectedComponentCamelCaseName" />
 		<c:set value="#{selectedComponent.lowerCaseName}" var="selectedComponentLowerCaseName" />
@@ -21,23 +25,22 @@
 		<c:set value="#{i18n[selectedComponentKey]}" var="selectedComponentDescription" />
 		<c:set value="#{i18n[selectedComponentUseCaseKey]}" var="selectedComponentUseCaseDescription" />
 		<c:set value="vdldoc:#{selectedComponentFullName}" var="selectedComponentDocKey" />
-		<button onclick="window.open('#{showcase-fn:encodeVDLDocURL(selectedComponentDocKey)}')" style="float: right;">
-			<h:outputText value="#{i18n['vdl-documentation']}" />
-		</button>
+		<alloy:button onclick="window.open('#{showcase-fn:encodeVDLDocURL(selectedComponentDocKey)}')" style="float: right;"
+			value="#{i18n['vdl-documentation']}" />
 		<ui:include src="/WEB-INF/component/#{selectedComponentPrefix}/#{selectedComponentLowerCaseName}/header.xhtml" />
 		<h3>#{selectedComponentFullName}</h3>
-		<h:outputText escape="false" value="#{selectedComponentDescription}" />
+		<alloy:outputText escape="false" value="#{selectedComponentDescription}" />
 		<h4>#{i18n[selectedComponentUseCaseName]} #{i18n['usage']}</h4>
-		<h:outputText escape="false" value="#{selectedComponentUseCaseDescription}" />
+		<alloy:outputText escape="false" value="#{selectedComponentUseCaseDescription}" />
 		<ui:include
 			src="/WEB-INF/component/#{selectedComponentPrefix}/#{selectedComponentLowerCaseName}/#{selectedComponentUseCaseName}/#{selectedComponentCamelCaseName}.xhtml" />
 		<h4>#{i18n['source-code']}</h4>
-		<ui:repeat value="#{showcaseModelBean.selectedComponent.useCaseCodeExamples}" var="useCaseCodeExample">
-			<h:panelGroup layout="block">
-				<h:outputText value="#{useCaseCodeExample.fileName}" />
-				<pre><h:outputText value="#{useCaseCodeExample.rawText}" /></pre>
-			</h:panelGroup>
-		</ui:repeat>
+		<alloy:tabView value="#{showcaseModelBean.selectedComponent.useCaseCodeExamples}" var="useCaseCodeExample">
+			<alloy:tab headerText="#{useCaseCodeExample.fileName}">
+				<alloy:inputSourceCode mode="#{useCaseCodeExample.fileExtension}" readOnly="true" showPrintMargin="false"
+					useWrapMode="false" height="800" width="100%" value="#{useCaseCodeExample.rawText}" />
+			</alloy:tab>
+		</alloy:tabView>
 	</ui:define>
 
 </ui:composition>
