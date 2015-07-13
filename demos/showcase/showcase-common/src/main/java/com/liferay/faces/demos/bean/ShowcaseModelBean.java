@@ -15,6 +15,11 @@ package com.liferay.faces.demos.bean;
 
 import java.io.Serializable;
 
+import javax.el.ELContext;
+import javax.el.ELResolver;
+import javax.faces.application.Application;
+import javax.faces.context.FacesContext;
+
 import com.liferay.faces.demos.dto.SelectedComponent;
 import com.liferay.faces.demos.dto.SelectedComponentImpl;
 import com.liferay.faces.demos.dto.ShowcaseComponent;
@@ -64,10 +69,18 @@ public class ShowcaseModelBean implements Serializable {
 		return deploymentType;
 	}
 
+	public ListModelBean getListModelBean() {
+		if (this.listModelBean == null) {
+			this.listModelBean = getLModelBean(FacesContext.getCurrentInstance());
+		}
+
+		return this.listModelBean;
+	}
+
 	public void setListModelBean(ListModelBean listModelBean) {
 		this.listModelBean = listModelBean;
 	}
-
+	
 	public SelectedComponent getSelectedComponent() {
 
 		if (selectedComponent == null) {
@@ -76,7 +89,7 @@ public class ShowcaseModelBean implements Serializable {
 
 			if (viewParameters.isValid()) {
 
-				ShowcaseComponent showcaseComponent = listModelBean.findShowcaseComponent(
+				ShowcaseComponent showcaseComponent = getListModelBean().findShowcaseComponent(
 						viewParameters.getComponentPrefix(), viewParameters.getComponentName());
 
 				selectedComponent = new SelectedComponentImpl(showcaseComponent, viewParameters.getComponentUseCase());
@@ -90,6 +103,15 @@ public class ShowcaseModelBean implements Serializable {
 		this.selectedComponent = selectedComponent;
 	}
 
+	protected ListModelBean getLModelBean(FacesContext facesContext) {
+
+		Application application = facesContext.getApplication();
+		ELResolver elResolver = application.getELResolver();
+		ELContext elContext = facesContext.getELContext();
+
+		return (ListModelBean) elResolver.getValue(elContext, null, "listModelBean");
+	}
+	
 	public ViewParameters getViewParameters() {
 
 		if (viewParameters == null) {

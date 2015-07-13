@@ -23,6 +23,8 @@ import javax.annotation.PostConstruct;
 // JSF 2: import javax.faces.bean.ApplicationScoped;
 // JSF 2: import javax.faces.bean.ManagedBean;
 
+import javax.faces.model.SelectItem;
+
 import com.liferay.faces.demos.dto.Country;
 
 
@@ -62,6 +64,20 @@ public class CountryServiceMockImpl implements CountryService, Serializable {
 		return countryList;
 	}
 
+	@Override
+	public List<SelectItem> getAllCountriesSelectItems() {
+		List<SelectItem> items = new ArrayList<SelectItem>();
+		if (countryList != null) {
+			for (Country country : countryList) {
+				SelectItem item = new SelectItem();
+				item.setLabel(country.getCountryName());
+				item.setValue(country);
+				items.add(item);
+			}
+		}
+		return items;
+	}
+	
 	@Override
 	public Country getCountryByCode(String countryCode) {
 

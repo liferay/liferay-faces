@@ -16,6 +16,8 @@ package com.liferay.faces.demos.service;
 import java.util.List;
 import java.util.Map;
 
+import javax.faces.model.SelectItem;
+
 import com.liferay.faces.demos.dto.Country;
 
 
@@ -25,6 +27,8 @@ import com.liferay.faces.demos.dto.Country;
 public interface CountryService {
 
 	public List<Country> getAllCountries();
+	
+	public List<SelectItem> getAllCountriesSelectItems();
 
 	public Country getCountryByCode(String countryCode);
 

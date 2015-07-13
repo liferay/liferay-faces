@@ -25,6 +25,11 @@
 		<!-- <phase-listener>com.liferay.faces.util.lifecycle.ViewScopePhaseListener</phase-listener> -->
 	</lifecycle>
 	<managed-bean>
+		<managed-bean-name>commandBackingBean</managed-bean-name>
+		<managed-bean-class>com.liferay.faces.demos.bean.CommandBackingBean</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
 		<managed-bean-name>converterModelBean</managed-bean-name>
 		<managed-bean-class>com.liferay.faces.demos.bean.ConverterModelBean</managed-bean-class>
 		<managed-bean-scope>request</managed-bean-scope>
@@ -42,6 +47,19 @@
 		<managed-bean-name>customerService</managed-bean-name>
 		<managed-bean-class>com.liferay.faces.demos.service.CustomerServiceMockImpl</managed-bean-class>
 		<managed-bean-scope>application</managed-bean-scope>
+		<managed-property>
+			<property-name>countryService</property-name>
+			<value>#{countryService}</value>
+		</managed-property>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>dataTableBacking</managed-bean-name>
+		<managed-bean-class>com.liferay.faces.demos.bean.DataTableBacking</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+		<managed-property>
+			<property-name>customerService</property-name>
+			<value>#{customerService}</value>
+		</managed-property>
 	</managed-bean>
 	<managed-bean>
 		<managed-bean-name>inputTextModelBean</managed-bean-name>
@@ -82,7 +100,7 @@
 		<managed-bean-scope>request</managed-bean-scope>
 	</managed-bean>
 	<validator>
-		<validator-id>validateEmail</validator-id>
+		<validator-id>com.liferay.faces.demos.validator.EmailValidator</validator-id>
 		<validator-class>com.liferay.faces.demos.validator.EmailValidator</validator-class>
 	</validator>
 

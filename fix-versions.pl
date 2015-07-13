@@ -306,8 +306,13 @@ sub do_inplace_edits {
 		if ($facesMajor > 2 or ($facesMajor == 2 and $facesMinor > 1)) {
 			`perl -pi -e 's/java.sun.com/xmlns.jcp.org/g' $file`;
 			`perl -pi -e 's/xmlns.jcp.org\\/portlet_2_0/java.sun.com\\/portlet_2_0/g' $file`;
-		} else {
+		}
+		elsif ($facesMajor == 2){
 			`perl -pi -e 's/xmlns.jcp.org/java.sun.com/g' $file`;
+		} else {
+			`perl -pi -e 's/java.sun.com\\/jsp\\/jstl\\/core/java.sun.com\\/jstl\\/core/g' $file`;
+			`perl -pi -e 's/xmlns.jcp.org\\/jsp\\/jstl\\/core/java.sun.com\\/jstl\\/core/g' $file`;
+			`perl -pi -e 's/java.sun.com\\/jsf\\/composite\\/showcase/liferay.com\\/faces\\/showcase/g' $file`;
 		}
 	}
 

@@ -18,8 +18,14 @@ import javax.annotation.PostConstruct;
 // JSF 2+ import javax.faces.bean.ManagedProperty;
 // JSF 2+ import javax.faces.bean.RequestScoped;
 
+import javax.el.ELContext;
+import javax.el.ELResolver;
+import javax.faces.application.Application;
+import javax.faces.context.FacesContext;
+
 import com.liferay.faces.demos.dto.Country;
 import com.liferay.faces.demos.service.CountryService;
+import com.liferay.faces.demos.service.CustomerService;
 
 
 /**
@@ -37,7 +43,7 @@ public class ConverterModelBean {
 
 	@PostConstruct
 	public void postConstruct() {
-		this.country = countryService.getAllCountries().get(0);
+		this.country = getCountryService().getAllCountries().get(0);
 	}
 
 	public Country getCountry() {
@@ -49,11 +55,24 @@ public class ConverterModelBean {
 	}
 
 	public CountryService getCountryService() {
+		if (countryService == null) {
+			countryService = getCService(FacesContext.getCurrentInstance());
+		}
+
 		return countryService;
 	}
 
 	public void setCountryService(CountryService countryService) {
 		this.countryService = countryService;
+	}
+
+	protected CountryService getCService(FacesContext facesContext) {
+
+		Application application = facesContext.getApplication();
+		ELResolver elResolver = application.getELResolver();
+		ELContext elContext = facesContext.getELContext();
+
+		return (CountryService) elResolver.getValue(elContext, null, "countryService");
 	}
 
 }
