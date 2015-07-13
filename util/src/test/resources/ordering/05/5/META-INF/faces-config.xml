@@ -4,10 +4,14 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_1_2.xsd">
 
+	<faces-config-extension>
 	<name>ICEfacesAce</name>
+	</faces-config-extension>
+	<faces-config-extension>
     <ordering>
         <after>
         	<name>ICEfacesCore</name>
         </after>
     </ordering>
+	</faces-config-extension>
 </faces-config>
