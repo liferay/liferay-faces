@@ -3,11 +3,15 @@
 	template="/WEB-INF/templates/component-1col-60.xhtml">
 
 	<ui:define name="col1">
+
+		<!-- The enclosing form must have enctype="multipart/form-data" in order for files to upload correctly. -->
 		<alloy:form enctype="multipart/form-data" includeViewParams="false">
 			<showcase:example>
 				<alloy:messages globalOnly="true" layout="table" />
 				<alloy:inputFile fileUploadListener="#{inputFileBackingBean.handleFileUpload}" />
 				<hr />
+
+				<!-- Note: ajax="true" works in JSF 2.2 -->
 				<alloy:commandButton ajax="false" value="#{i18n['submit']}" />
 			</showcase:example>
 			<showcase:outputModel>
