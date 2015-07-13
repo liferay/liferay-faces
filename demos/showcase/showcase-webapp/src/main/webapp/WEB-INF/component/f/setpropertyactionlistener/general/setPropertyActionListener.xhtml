@@ -5,13 +5,13 @@
 
 	<ui:define name="col1">
 		<h:form>
-			<showcase:example renderedCheckbox="true">								
+			<showcase:example renderedCheckbox="true">
 				<h:commandButton value="#{i18n['submit']}">
 					<f:setPropertyActionListener target="#{setPropertyActionListenerBackingBean.targetText}" 
 					value="Source Text"/>
 					<f:ajax execute="@form" render="@form"/>
-				</h:commandButton>											
-			</showcase:example>		
+				</h:commandButton>
+			</showcase:example>
 			<showcase:outputModel>
 				<h:outputText value="#{setPropertyActionListenerBackingBean.targetText}"/>
 			</showcase:outputModel>	

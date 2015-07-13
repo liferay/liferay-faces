@@ -80,19 +80,7 @@ public class ListModelBean {
 		boolean systemTestMode = startupFacesContext.isProjectStage(ProjectStage.SystemTest);
 		boolean productionMode = startupFacesContext.isProjectStage(ProjectStage.Production);
 		showcaseCategoryList = new ArrayList<String>();
-		showcaseCategoryList.add("buttonlink");
-		showcaseCategoryList.add("data");
-		showcaseCategoryList.add("input");
-		showcaseCategoryList.add("misc");
-		showcaseCategoryList.add("multimedia");
-		showcaseCategoryList.add("output");
-		showcaseCategoryList.add("panel");
-		showcaseCategoryList.add("select");
-
-		if (LIFERAY_PORTAL_DETECTED) {
-			showcaseCategoryList.add("portal");
-		}
-
+		
 		if (LIFERAY_FACES_BRIDGE_DETECTED) {
 			showcaseCategoryList.add("portlet");
 		}
@@ -108,7 +96,6 @@ public class ListModelBean {
 		ClassLoader classLoader = getClass().getClassLoader();
 
 		List<String> namespaces = new ArrayList<String>();
-		namespaces.add("alloy");
 
 		if (LIFERAY_FACES_BRIDGE_DETECTED) {
 			namespaces.add("bridge");
@@ -127,8 +114,6 @@ public class ListModelBean {
 				namespaces.add("aui");
 				namespaces.add("liferay-ui");
 			}
-
-			namespaces.add("portal");
 		}
 
 		if (LIFERAY_FACES_BRIDGE_DETECTED) {
