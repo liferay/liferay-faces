@@ -28,6 +28,11 @@ import javax.annotation.PostConstruct;
 // JSF 2: import javax.faces.bean.ManagedBean;
 // JSF 2: import javax.faces.bean.ManagedProperty;
 
+import javax.el.ELContext;
+import javax.el.ELResolver;
+import javax.faces.application.Application;
+import javax.faces.context.FacesContext;
+
 import com.liferay.faces.demos.dto.Country;
 import com.liferay.faces.demos.dto.Customer;
 
@@ -52,9 +57,9 @@ public class CustomerServiceMockImpl implements CustomerService, Serializable {
 	@PostConstruct
 	public void postConstruct() {
 
-		Country unitedStates = countryService.getCountryByCode("US");
+		Country unitedStates = getCountryService().getCountryByCode("US");
 
-		Country unitedKingdom = countryService.getCountryByCode("UK");
+		Country unitedKingdom = getCountryService().getCountryByCode("UK");
 
 		allCustomers = new ArrayList<Customer>();
 
@@ -236,6 +241,13 @@ public class CustomerServiceMockImpl implements CustomerService, Serializable {
 		this.countryService = countryService;
 	}
 
+	public CountryService getCountryService() {
+		if (countryService == null) {
+			countryService = getCService(FacesContext.getCurrentInstance());
+		}
+		return countryService;
+	}
+	
 	@Override
 	public int getCustomerCount() {
 		return allCustomers.size();
@@ -263,5 +275,14 @@ public class CustomerServiceMockImpl implements CustomerService, Serializable {
 		calendar.set(Calendar.YEAR, year);
 
 		return calendar.getTime();
+	}
+	
+	protected CountryService getCService(FacesContext facesContext) {
+
+		Application application = facesContext.getApplication();
+		ELResolver elResolver = application.getELResolver();
+		ELContext elContext = facesContext.getELContext();
+
+		return (CountryService) elResolver.getValue(elContext, null, "countryService");
 	}
 }

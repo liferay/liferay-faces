@@ -1,6 +1,6 @@
-<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
-	xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:showcase="http://java.sun.com/jsf/composite/showcase"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:showcase="http://liferay.com/faces/showcase"
 	template="/WEB-INF/templates/component-1col-60.xhtml">
 
 	<ui:define name="col1">
@@ -11,9 +11,7 @@
 					<f:selectItem itemLabel="#{i18n['item-4-label']}" itemValue="#{i18n['item-4-value']}"/>					
 				</h:selectOneMenu>		
 								
-				<h:commandButton value="#{i18n['submit']}">
-					<f:ajax execute="@form" render="@form"/>
-				</h:commandButton>											
+				<h:commandButton value="#{i18n['submit']}"/>
 			</showcase:example>		
 			<showcase:outputModel>
 				<h:outputText value="#{inputTextModelBean.text}"/>

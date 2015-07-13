@@ -42,14 +42,6 @@
 				</c:if>
 			</h:outputLabel>
 			<div class="example-content">
-				<c:if test="#{(renderedCheckbox and (facesContext.application.projectStage != 'Production'))}">
-					<span class="component-rendered-checkbox">
-						<h:selectBooleanCheckbox immediate="true" onclick="submit()" value="#{showcaseModelBean.selectedComponent.rendered}">
-							<ui:remove><!-- <f:ajax render="@form" /> --></ui:remove>
-						</h:selectBooleanCheckbox>
-						<h:outputLabel styleClass="inline-label" value="#{i18n['rendered']}" />
-					</span>
-				</c:if>
 				<c:if test="#{requiredCheckbox}">
 					<span class="component-required-checkbox">
 						<h:selectBooleanCheckbox immediate="true" onclick="submit()" value="#{showcaseModelBean.selectedComponent.required}">

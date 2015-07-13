@@ -7,11 +7,6 @@
 		<param-name>facelets.DEVELOPMENT</param-name>
 		<param-value>true</param-value>
 	</context-param>
-	<!-- Inform the JSF runtime of additional faces-config.xml files. -->
-	<context-param>
-		<param-name>javax.faces.CONFIG_FILES</param-name>
-		<param-value>/WEB-INF/navigation-rule.xml</param-value>
-	</context-param>
 	<!-- Instruct Mojarra/MyFaces to use .xhtml instead of .jsp as the default suffix. -->
 	<context-param>
 		<param-name>javax.faces.DEFAULT_SUFFIX</param-name>
@@ -22,11 +17,6 @@
 		<param-name>facelets.LIBRARIES</param-name>
 		<param-value>/WEB-INF/showcase.taglib.xml;/WEB-INF/showcase-fn.taglib.xml</param-value>
 	</context-param>
-    <!-- Inform the JSF runtime (Mojarra) that this application is under development. -->
-	<context-param>
-		<param-name>javax.faces.PROJECT_STAGE</param-name>
-		<param-value>${project.stage}</param-value>
-	</context-param>    
     <!-- Instruct Mojarra to utilize JBoss-EL instead of the EL implementation provided by the servlet container. -->
 	<context-param>
 		<param-name>com.sun.faces.expressionFactory</param-name>
