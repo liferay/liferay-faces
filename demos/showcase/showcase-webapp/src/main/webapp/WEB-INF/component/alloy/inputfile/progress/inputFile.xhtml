@@ -3,6 +3,8 @@
 	xmlns:showcase="http://xmlns.jcp.org/jsf/composite/showcase" template="/WEB-INF/templates/component-1col-80.xhtml">
 
 	<ui:define name="col1">
+
+		<!-- The enclosing form must have enctype="multipart/form-data" in order for files to upload correctly. -->
 		<alloy:form enctype="multipart/form-data">
 			<showcase:example>
 				<alloy:selectBooleanCheckbox immediate="true" value="#{inputFileModelBean.appendNewFiles}">
