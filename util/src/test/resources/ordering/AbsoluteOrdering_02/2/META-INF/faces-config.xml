@@ -1,12 +1,16 @@
 <faces-config version="1.2" xmlns="http://java.sun.com/xml/ns/javaee"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_1_2.xsd">
+	<faces-config-extension>
 	<name>b</name>
+	</faces-config-extension>
+	<faces-config-extension>
 	<ordering>
 		<before>
 			<others />
 		</before>
 	</ordering>
+	</faces-config-extension>
 	<application>
 		<view-handler>com.a.ViewHandlerImpl</view-handler>
 	</application>
