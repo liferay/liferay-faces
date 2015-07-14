@@ -6,8 +6,6 @@
 
 	<faces-config-extension>
 	<name>prettyfaces</name>
-	</faces-config-extension>
-	<faces-config-extension>
 	<ordering>
 		<before>
 			<others/>

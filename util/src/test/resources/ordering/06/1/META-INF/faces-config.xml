@@ -6,8 +6,6 @@
 
 	<faces-config-extension>
 	<name>LiferayFacesAlloy</name>
-	</faces-config-extension>
-	<faces-config-extension>
 	<ordering>
 		<after>
 			<name>LiferayFacesUtil</name>
