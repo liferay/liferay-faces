@@ -4,8 +4,6 @@
 	xmlns:bridge="http://www.liferay.com/xml/ns/liferay-faces-bridge-2.0-extension">
 	<faces-config-extension>
 	<name>LiferayFacesBridge</name>
-	</faces-config-extension>
-	<faces-config-extension>
 	<ordering>
 		<after>
 			<name>LiferayFacesUtil</name>

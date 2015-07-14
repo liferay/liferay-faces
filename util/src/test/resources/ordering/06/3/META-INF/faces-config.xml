@@ -4,8 +4,6 @@
 	xmlns:util="http://www.liferay.com/xml/ns/liferay-faces-util-extension">
 	<faces-config-extension>
 	<name>LiferayFacesUtil</name>
-	</faces-config-extension>
-	<faces-config-extension>
 	<ordering>
 		<!-- Ordering must be "after" ICEfacesCore because com.liferay.faces.util.context.PartialViewContexCleanupImpl -->
 		<!-- needs to be able to wrap org.icefaces.impl.context.DOMPartialViewContext. -->

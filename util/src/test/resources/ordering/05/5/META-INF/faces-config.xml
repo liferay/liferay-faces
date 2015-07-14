@@ -6,8 +6,6 @@
 
 	<faces-config-extension>
 	<name>ICEfacesAce</name>
-	</faces-config-extension>
-	<faces-config-extension>
     <ordering>
         <after>
         	<name>ICEfacesCore</name>

@@ -3,8 +3,6 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_1_2.xsd">
 	<faces-config-extension>
 	<name>my</name>
-	</faces-config-extension>
-	<faces-config-extension>
 	<absolute-ordering>
 		<name>C</name>
 		<name>A</name>

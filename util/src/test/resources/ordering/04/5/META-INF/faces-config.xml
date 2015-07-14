@@ -6,8 +6,6 @@
 
 	<faces-config-extension>
 	<name>ICEfacesAce</name>
-	</faces-config-extension>
-	<faces-config-extension>
     <ordering>
     	<!-- NOTE: intentionally invalid xml below - testing a work around for http://jira.icesoft.org/browse/ICE-10437 -->
         <after>ICEfacesCore</after>
