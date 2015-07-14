@@ -212,6 +212,16 @@ sub do_inplace_edits {
 	}
 
 	#
+	# Otherwise, if the current file is named "liferay-hook.xml" then potentially fix the version
+	# numbers specified in DOCTYPE line for the DTD.
+	#
+	elsif ($file eq "liferay-hook.xml" and ($File::Find::name =~ /\/src/)) {
+		print "$File::Find::name\n";
+		`perl -pi -e 's/DTD Hook ..*\\/\\/EN/DTD Hook $portalDtdDisplay\\/\\/EN/' $file`;
+		`perl -pi -e 's/-hook_..*\\.dtd/-hook_$portalDtdUrl\\.dtd/' $file`;
+	}
+
+	#
 	# Otherwise, if the current file is named "liferay-plugin-package.properties" then potentially fix
 	# the version wildcard that indicates compatible versions of Liferay Portal.
 	#
