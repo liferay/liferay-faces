@@ -561,7 +561,7 @@ public abstract class LiferayURLGeneratorBaseImpl implements LiferayURLGenerator
 			}
 		}
 
-		int pos = baseURL.indexOf("%");
+		int pos = baseURL.indexOf("#");
 
 		if (pos > 0) {
 			portletURLAnchor = baseURL.substring(pos);
