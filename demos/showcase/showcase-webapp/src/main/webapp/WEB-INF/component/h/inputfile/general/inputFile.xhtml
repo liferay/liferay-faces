@@ -8,7 +8,7 @@
 			<showcase:example>
 				<h:inputFile value="#{htmlInputFileBackingBean.uploadedPart}" />
 				<hr />
-				<alloy:commandButton value="#{i18n['submit']}" />
+				<alloy:commandButton ajax="false" value="#{i18n['submit']}" />
 			</showcase:example>
 			<showcase:outputModel>
 				<ui:include src="../htmlInputFileCommon.xhtml" />
