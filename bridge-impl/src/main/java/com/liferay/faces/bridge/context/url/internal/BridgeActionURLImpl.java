@@ -14,6 +14,8 @@
 package com.liferay.faces.bridge.context.url.internal;
 
 import java.net.MalformedURLException;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.portlet.BaseURL;
 import javax.portlet.PortletRequest;
@@ -105,10 +107,16 @@ public class BridgeActionURLImpl extends BridgeURLBase implements BridgeURL {
 					}
 				}
 				else {
+
+					String bridgeAjaxRedirectValue = removeParameter("_bridgeAjaxRedirect");
+					boolean bridgeAjaxRedirect = "true".equals(bridgeAjaxRedirectValue);
 					String urlWithModifiedParameters = _toString(modeChanged);
 
 					if (portletRequestPhase == Bridge.PortletPhase.EVENT_PHASE) {
 						baseURL = new BaseURLNonEncodedStringImpl(urlWithModifiedParameters);
+					}
+					else if ((portletRequestPhase == Bridge.PortletPhase.RESOURCE_PHASE) && bridgeAjaxRedirect) {
+						baseURL = createRenderURL(urlWithModifiedParameters);
 					}
 					else {
 						baseURL = createActionURL(urlWithModifiedParameters);

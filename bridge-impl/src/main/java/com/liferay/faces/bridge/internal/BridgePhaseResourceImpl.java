@@ -119,7 +119,6 @@ public class BridgePhaseResourceImpl extends BridgePhaseCompat_2_2_Impl {
 				// DOM-update back to the jsf.js Javascript code that issued the XmlHttpRequest in the first place.
 				facesLifecycle.render(facesContext);
 
-				// If the {@link BridgeConfigConstants#PARAM_BRIDGE_REQUEST_SCOPE_AJAX_ENABLED} feature is enabled, then
 				if (bridgeRequestScope != null) {
 
 					// PROPOSED-FOR-BRIDGE3-API: https://issues.apache.org/jira/browse/PORTLETBRIDGE-202
