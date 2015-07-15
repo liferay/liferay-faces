@@ -19,6 +19,7 @@
 			<util:browser-sniffer-factory>com.liferay.faces.util.client.internal.BrowserSnifferFactoryImpl</util:browser-sniffer-factory>
 			<util:jsp-adapter-factory>com.liferay.faces.util.jsp.internal.JspAdapterFactoryImpl</util:jsp-adapter-factory>
 			<util:message-context-factory>com.liferay.faces.util.context.internal.MessageContextFactoryImpl</util:message-context-factory>
+			<util:resource-validator-factory>com.liferay.faces.util.application.internal.ResourceValidatorFactoryImpl</util:resource-validator-factory>
 			<util:rich-text-factory>com.liferay.faces.util.text.internal.RichTextFactoryImpl</util:rich-text-factory>
 			<util:script-factory>com.liferay.faces.util.client.internal.ScriptFactoryImpl</util:script-factory>
 			<util:uploaded-file-factory>com.liferay.faces.util.model.internal.UploadedFileFactoryImpl</util:uploaded-file-factory>
