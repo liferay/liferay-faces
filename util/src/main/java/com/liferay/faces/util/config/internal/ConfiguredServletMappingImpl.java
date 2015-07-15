@@ -34,15 +34,17 @@ public class ConfiguredServletMappingImpl implements ConfiguredServletMapping {
 	// Private Data Members
 	private String extension;
 	private boolean extensionMapped;
+	private boolean implicit;
 	private String path;
 	private boolean pathMapped;
 	private String servletName;
 	private String urlPattern;
 
-	public ConfiguredServletMappingImpl(String servletName, String urlPattern) {
+	public ConfiguredServletMappingImpl(String servletName, String urlPattern, boolean implicit) {
 
 		this.servletName = servletName;
 		this.urlPattern = urlPattern;
+		this.implicit = implicit;
 
 		if (urlPattern != null) {
 
@@ -55,24 +57,30 @@ public class ConfiguredServletMappingImpl implements ConfiguredServletMapping {
 
 			// Otherwise, if the specified urlPattern is extension-mapped (like *.faces), then set a flag and remember
 			// the extension (.faces).
+			else if (urlPattern.startsWith(EXTENSION_WILDCARD)) {
+
+				extensionMapped = true;
+				extension = urlPattern.substring("*".length());
+			}
+
+			// Otherwise, assume that the specified urlPattern is path-mapped without a wildcard (like /foo/bar)
 			else {
 
-				if (urlPattern.startsWith(EXTENSION_WILDCARD)) {
-					extensionMapped = true;
-					extension = urlPattern.substring("*".length());
-				}
+				pathMapped = true;
+				path = urlPattern;
 			}
 		}
 	}
 
 	public ConfiguredServletMappingImpl(String extension, boolean extensionMapped, String path, boolean pathMapped,
-		String servletName, String urlPattern) {
+		String servletName, String urlPattern, boolean implicit) {
 		this.extension = extension;
 		this.extensionMapped = extensionMapped;
 		this.path = path;
 		this.pathMapped = pathMapped;
 		this.servletName = servletName;
 		this.urlPattern = urlPattern;
+		this.implicit = implicit;
 	}
 
 	@Override
@@ -128,6 +136,11 @@ public class ConfiguredServletMappingImpl implements ConfiguredServletMapping {
 
 	public String getServletPath() {
 		return path;
+	}
+
+	@Override
+	public boolean isImplicit() {
+		return implicit;
 	}
 
 	public String getUrlPattern() {

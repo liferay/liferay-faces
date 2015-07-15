@@ -27,6 +27,7 @@ public class ServletMappingImpl extends ConfiguredServletMappingImpl implements 
 	public ServletMappingImpl(ConfiguredServletMapping configuredServletMapping) {
 		super(configuredServletMapping.getExtension(), configuredServletMapping.isExtensionMapped(),
 			configuredServletMapping.getServletPath(), configuredServletMapping.isPathMapped(),
-			configuredServletMapping.getServletName(), configuredServletMapping.getUrlPattern());
+			configuredServletMapping.getServletName(), configuredServletMapping.getUrlPattern(),
+			configuredServletMapping.isImplicit());
 	}
 }

@@ -26,6 +26,7 @@ public class TestPages {
 
 	public static final List<PortalPage> BRIDGE_DEMO_PAGES;
 	public static final List<PortalPage> BRIDGE_ISSUE_PAGES;
+	public static final List<PortalPage> LSV_ISSUE_PAGES;
 	public static final List<PortalPage> PORTAL_DEMO_PAGES;
 	public static final List<PortalPage> PORTAL_ISSUE_PAGES;
 	public static final List<PortalPage> GUEST_PAGES;
@@ -65,6 +66,14 @@ public class TestPages {
 		BRIDGE_ISSUE_PAGES.add(new PortalPage("FACES-1635",
 				new String[] { "1_WAR_jsf2portlet_INSTANCE_", "1_WAR_primefaces3portlet_INSTANCE_" }));
 		BRIDGE_ISSUE_PAGES.add(new PortalPage("FACES-1638", "1_WAR_FACES1638portlet"));
+	}
+
+	static {
+		LSV_ISSUE_PAGES = new ArrayList<PortalPage>();
+		LSV_ISSUE_PAGES.add(new PortalPage("LSV-5", "1_WAR_lsv5portlet"));
+		LSV_ISSUE_PAGES.add(new PortalPage("LSV-71-Auto-Dispatch", "1_WAR_lsv71portlet"));
+		LSV_ISSUE_PAGES.add(new PortalPage("LSV-71-Non-Dispatch", "2_WAR_lsv71portlet"));
+		LSV_ISSUE_PAGES.add(new PortalPage("LSV-71-Resource-Handler", "3_WAR_lsv71portlet"));
 	}
 
 	static {
