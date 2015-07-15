@@ -1578,6 +1578,10 @@
           <name>javax.portlet.faces.defaultViewId.view</name>
           <value>/tests/NonFacesResourceTestStartPage.jsp</value>
         </init-param>
+        <init-param>
+          <name>javax.portlet.automaticResourceDispatching</name>
+          <value>true</value>
+        </init-param>
         
         <expiration-cache>0</expiration-cache>
     

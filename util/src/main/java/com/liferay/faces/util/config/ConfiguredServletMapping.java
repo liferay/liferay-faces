@@ -53,6 +53,13 @@ public interface ConfiguredServletMapping {
 	public String getServletPath();
 
 	/**
+	 * Flag indicating whether or not the servlet-mapping is implicit, meaning it is associated with {@link
+	 * javax.faces.application.ViewHandler#DEFAULT_SUFFIX} or {@link
+	 * javax.faces.application.ViewHandler#DEFAULT_SUFFIX_PARAM_NAME}.
+	 */
+	public boolean isImplicit();
+
+	/**
 	 * Returns the servlet-mapping url-pattern.
 	 */
 	public String getUrlPattern();
