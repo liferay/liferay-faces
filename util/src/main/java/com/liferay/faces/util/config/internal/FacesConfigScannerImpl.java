@@ -128,7 +128,7 @@ public class FacesConfigScannerImpl implements FacesConfigScanner {
 			if (!found) {
 				String urlPattern = "*" + configuredSuffix;
 				ConfiguredServletMapping implicitFacesServletMapping = new ConfiguredServletMappingImpl(FACES_SERVLET,
-						urlPattern);
+						urlPattern, true);
 				facesServletMappings.add(implicitFacesServletMapping);
 				logger.debug("Added implicit extension-mapped servlet-mapping for urlPattern=[{0}]", urlPattern);
 			}

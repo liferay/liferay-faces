@@ -82,7 +82,6 @@
 	<factory>
 		<application-factory>com.liferay.faces.bridge.application.internal.ApplicationFactoryImpl</application-factory>
 		<factory-extension>
-			<util:browser-sniffer-factory>com.liferay.faces.bridge.client.internal.BrowserSnifferFactoryLiferayImpl</util:browser-sniffer-factory>
 			<bridge:bean-manager-factory>com.liferay.faces.bridge.bean.internal.BeanManagerFactoryImpl</bridge:bean-manager-factory>
 			<bridge:bridge-config-factory>com.liferay.faces.bridge.config.internal.BridgeConfigFactoryImpl</bridge:bridge-config-factory>
 			<bridge:bridge-context-factory>com.liferay.faces.bridge.context.internal.BridgeContextFactoryImpl</bridge:bridge-context-factory>
@@ -100,6 +99,8 @@
 			<bridge:incongruity-context-factory>com.liferay.faces.bridge.context.internal.IncongruityContextFactoryImpl</bridge:incongruity-context-factory>
 			<bridge:liferay-url-factory>com.liferay.faces.bridge.filter.liferay.internal.LiferayURLFactoryImpl</bridge:liferay-url-factory>
 			<bridge:view-handler-factory>com.liferay.faces.bridge.application.internal.ViewHandlerFactoryImpl</bridge:view-handler-factory>
+			<util:browser-sniffer-factory>com.liferay.faces.bridge.client.internal.BrowserSnifferFactoryLiferayImpl</util:browser-sniffer-factory>
+			<util:resource-validator-factory>com.liferay.faces.bridge.application.internal.ResourceValidatorFactoryBridgeImpl</util:resource-validator-factory>
 		</factory-extension>
 	</factory>
 	<lifecycle>
