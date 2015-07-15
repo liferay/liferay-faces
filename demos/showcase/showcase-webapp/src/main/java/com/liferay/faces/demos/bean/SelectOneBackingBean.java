@@ -93,7 +93,7 @@ public class SelectOneBackingBean {
 		for (int i = 0; i < 3; i++) {
 			SelectItem item = new SelectItem();
 			item.setLabel("Item " + (i + 1));
-			item.setValue(i);
+			item.setValue(i + 1);
 			selectItems[i] = item;
 		}
 
