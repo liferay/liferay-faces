@@ -27,6 +27,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ClientDataRequest;
@@ -214,8 +215,12 @@ public class MultiPartFormDataProcessorImpl implements MultiPartFormDataProcesso
 								File copiedFile = new File(copiedFileAbsolutePath);
 								FileUtils.copyFile(tempFile, copiedFile);
 
-								// If present, build up a map of headers.
-								Map<String, List<String>> headersMap = new HashMap<String, List<String>>();
+								// If present, build up a map of headers. According to Hypertext Transfer Protocol --
+								// HTTP/1.1 (http://www.w3.org/Protocols/rfc2616/rfc2616-sec4.html#sec4.2), header names
+								// are case-insensitive. In order to support this, use a TreeMap with case insensitive
+								// keys.
+								Map<String, List<String>> headersMap = new TreeMap<String, List<String>>(
+										String.CASE_INSENSITIVE_ORDER);
 								FileItemHeaders fileItemHeaders = fieldStream.getHeaders();
 
 								if (fileItemHeaders != null) {
