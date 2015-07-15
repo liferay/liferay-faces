@@ -21,8 +21,6 @@ import java.util.Enumeration;
 import javax.xml.parsers.SAXParser;
 
 import com.liferay.faces.util.config.WebConfig;
-import com.liferay.faces.util.config.internal.ResourceReader;
-import com.liferay.faces.util.config.internal.WebConfigImpl;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 

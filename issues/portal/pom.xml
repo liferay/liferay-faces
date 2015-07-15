@@ -16,4 +16,15 @@
 		<module>FACES-257-portlet</module>
 	</modules>
 
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-install-plugin</artifactId>
+				<configuration>
+					<skip>true</skip>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
 </project>

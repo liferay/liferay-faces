@@ -18,6 +18,15 @@
 		<module>portal</module>
 	</modules>
 
+	<profiles>
+		<profile>
+			<id>lsv</id>
+			<modules>
+				<module>lsv</module>
+			</modules>
+		</profile>
+	</profiles>
+
 	<build>
 		<plugins>
 			<plugin>
@@ -27,12 +36,7 @@
 					<skip>true</skip>
 				</configuration>
 			</plugin>
-			<plugin>
-				<artifactId>maven-install-plugin</artifactId>
-				<configuration>
-					<skip>true</skip>
-				</configuration>
-			</plugin>
 		</plugins>
 	</build>
+
 </project>
