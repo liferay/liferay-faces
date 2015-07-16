@@ -13,8 +13,22 @@
  */
 package com.liferay.faces.bridge.internal;
 
+import java.util.List;
+import java.util.Map;
+
+import javax.faces.context.ExternalContext;
+import javax.portlet.PortletConfig;
+import javax.portlet.PortletRequestDispatcher;
+import javax.portlet.ResourceRequest;
+import javax.portlet.ResourceResponse;
+import javax.portlet.faces.Bridge;
+import javax.portlet.faces.BridgeDefaultViewNotSpecifiedException;
+import javax.portlet.faces.BridgeException;
+import javax.servlet.http.HttpServletResponse;
+
 import com.liferay.faces.bridge.BridgeFactoryFinder;
 import com.liferay.faces.bridge.config.BridgeConfig;
+import com.liferay.faces.bridge.config.internal.PortletConfigParam;
 import com.liferay.faces.bridge.filter.BridgePortletRequestFactory;
 import com.liferay.faces.bridge.filter.BridgePortletResponseFactory;
 import com.liferay.faces.bridge.scope.BridgeRequestScope;
@@ -29,18 +43,6 @@ import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.util.product.ProductConstants;
 import com.liferay.faces.util.product.ProductMap;
-
-import javax.faces.context.ExternalContext;
-import javax.portlet.PortletConfig;
-import javax.portlet.PortletRequestDispatcher;
-import javax.portlet.ResourceRequest;
-import javax.portlet.ResourceResponse;
-import javax.portlet.faces.Bridge;
-import javax.portlet.faces.BridgeDefaultViewNotSpecifiedException;
-import javax.portlet.faces.BridgeException;
-import javax.servlet.http.HttpServletResponse;
-import java.util.List;
-import java.util.Map;
 
 
 /**
@@ -272,6 +274,9 @@ public class BridgePhaseResourceImpl extends BridgePhaseCompat_2_2_Impl {
 				// DOM-update back to the jsf.js Javascript code that issued the XmlHttpRequest in the first place.
 				facesLifecycle.render(facesContext);
 
+				// The default behavior of Liferay Faces Bridge is to not manage the BridgeRequestScope during the
+				// RESOURCE_PHASE of the portlet lifecycle. But if the developer has enabled it via the
+				// "com.liferay.faces.bridge.bridgeRequestScopeAjaxEnabled" configuration parameter, then
 				if (bridgeRequestScope != null) {
 
 					// PROPOSED-FOR-BRIDGE3-API: https://issues.apache.org/jira/browse/PORTLETBRIDGE-202
