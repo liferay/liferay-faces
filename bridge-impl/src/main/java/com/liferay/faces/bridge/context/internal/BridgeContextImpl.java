@@ -91,7 +91,6 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 	// Private Data Members
 	private Map<String, Object> attributeMap = new HashMap<String, Object>();
 	private BridgeConfig bridgeConfig;
-	private Boolean bridgeRequestScopePreserved;
 	private BridgeRequestScope bridgeRequestScope;
 	private BridgeURIFactory bridgeURIFactory;
 	private BridgeURLFactory bridgeURLFactory;
@@ -300,12 +299,10 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 			parameters.put("_bridgeAjaxRedirect", bridgeAjaxRedirect);
 		}
 
-		BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
-
 		try {
 
+			BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
 			BridgeURI bridgeURI = bridgeURIFactory.getBridgeURI(baseUrl);
-
 			String redirectViewId = null;
 
 			if (!bridgeURI.isExternal()) {
@@ -627,7 +624,6 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 	public void release() {
 		this.attributeMap = null;
 		this.bridgeConfig = null;
-		this.bridgeRequestScopePreserved = null;
 		this.bridgeRequestScope = null;
 		this.bridgeURLFactory = null;
 		this.configuredFacesServletMappings = null;
@@ -673,10 +669,6 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 	@Override
 	public BridgeRequestScope getBridgeRequestScope() {
 		return bridgeRequestScope;
-	}
-
-	public void setBridgeRequestScopePreserved(boolean bridgeRequestScopePreserved) {
-		this.bridgeRequestScopePreserved = bridgeRequestScopePreserved;
 	}
 
 	@Override
