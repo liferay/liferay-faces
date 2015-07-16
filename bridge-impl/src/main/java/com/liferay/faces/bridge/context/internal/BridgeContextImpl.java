@@ -20,6 +20,7 @@ import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLDecoder;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -289,6 +290,15 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 	public BridgeURL encodeRedirectURL(String baseUrl, Map<String, List<String>> parameters) {
 
 		logger.debug("encodeRedirectURL fromURL=[{0}]", baseUrl);
+
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+
+		if (isJSF2PartialRequest(facesContext)) {
+
+			ArrayList<String> bridgeAjaxRedirect = new ArrayList<String>();
+			bridgeAjaxRedirect.add("true");
+			parameters.put("_bridgeAjaxRedirect", bridgeAjaxRedirect);
+		}
 
 		BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
 
