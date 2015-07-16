@@ -66,22 +66,24 @@ public class BaseURLNonEncodedStringImpl implements BaseURL {
 		if (toStringValue == null) {
 
 			StringBuilder buf = new StringBuilder();
-			int queryPos = url.indexOf("?");
 
-			if (queryPos >= 0) {
+			if ((parameterMap != null) && !parameterMap.isEmpty()) {
 
-				if (parameterMap == null) {
-					buf.append(url);
+				String urlWithoutParams = url;
+				int queryPos = url.indexOf("?");
+
+				if (queryPos >= 0) {
+					urlWithoutParams = url.substring(0, queryPos);
 				}
-				else {
-					buf.append(url.substring(0, queryPos));
 
-					String queryString = getQuery();
+				buf.append(urlWithoutParams);
 
-					if (queryString.length() > 0) {
-						buf.append("?");
-						buf.append(queryString);
-					}
+				String queryString = getQuery();
+
+				if (queryString.length() > 0) {
+
+					buf.append("?");
+					buf.append(queryString);
 				}
 			}
 			else {
