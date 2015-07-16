@@ -6,11 +6,9 @@
 		<alloy:form>
 			<showcase:example>
 				<alloy:field label="#{i18n['ajax']}">
-					<alloy:selectOneMenu value="#{commandBackingBean.ajax}">
-						<f:selectItem itemLabel="true" itemValue="true" />
-						<f:selectItem itemLabel="false" itemValue="false" />
+					<alloy:selectBooleanCheckbox value="#{commandBackingBean.ajax}">
 						<f:ajax render="nav" />
-					</alloy:selectOneMenu>
+					</alloy:selectBooleanCheckbox>
 				</alloy:field>
 				<alloy:commandLink id="nav"
 					action="/views/component.xhtml?faces-redirect=true&amp;componentPrefix=alloy&amp;componentName=commandlink&amp;componentUseCase=navigation&amp;foo=1234"
