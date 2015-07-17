@@ -249,7 +249,7 @@ public class FACES1427PortletTest extends TesterBase {
 		Thread.sleep(50);
 
 		// move to the beginning of textarea1
-		textarea1.sendKeys(Keys.HOME); // firefox cursor is on the left after the last click, in chromium cursor is on
+		textarea1.sendKeys(Keys.UP); // firefox cursor is on the left after the last click, in chromium cursor is on
 									   // the right of the text ... grr
 		Thread.sleep(50);
 
@@ -293,7 +293,7 @@ public class FACES1427PortletTest extends TesterBase {
 
 		// type the word 'subsequent'
 		textarea1.sendKeys("subsequent");
-		Thread.sleep(50);
+		Thread.sleep(100);
 
 		// select the word 'subsequent' ... easier said than done
 		logger.log(Level.INFO, "8: textarea1.getAttribute('id') = '" + textarea1.getAttribute("id") + "'");
