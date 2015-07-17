@@ -30,22 +30,75 @@ public class ProgressBarAjaxBehavior extends AjaxBehaviorWrapper {
 
 	// Private Members
 	private AjaxBehavior ajaxBehavior;
-	private String clientId;
-	private String onsuccessCallback;
+	private String pollingOnsuccessExecutableCallback;
+	private String pollingOnerrorExecutableCallback;
 
 	/**
-	 * @param  ajaxBehavior       The wrapped AjaxBehavior.
-	 * @param  clientId           The clientId of the progressBar which is added to the render attribute of the wrapped
-	 *                            AjaxBehavior.
-	 * @param  onsuccessCallback  The name of the callback which should be executed after a successful Ajax call. This
-	 *                            argument is used to facilitate a recursive call to the polling function of the
-	 *                            progressBar.
+	 * @param  ajaxBehavior              The wrapped AjaxBehavior.
+	 * @param  pollingOnsuccessCallback  The name of the callback which should be executed after a successful Ajax call.
+	 *                                   This argument is used to facilitate a recursive call to the polling function of
+	 *                                   the progressBar.
+	 * @param  pollingOnerrorCallback    The name of the callback which should be executed after an error within an Ajax
+	 *                                   call. This argument is used to stop polling the server when an error occurs.
 	 */
-	public ProgressBarAjaxBehavior(AjaxBehavior ajaxBehavior, String clientId, String onsuccessCallback) {
+	public ProgressBarAjaxBehavior(AjaxBehavior ajaxBehavior, String pollingOnsuccessCallback,
+		String pollingOnerrorCallback) {
 
 		this.ajaxBehavior = ajaxBehavior;
-		this.clientId = clientId;
-		this.onsuccessCallback = onsuccessCallback;
+		this.pollingOnsuccessExecutableCallback = getExecutableCallback(pollingOnsuccessCallback);
+		this.pollingOnerrorExecutableCallback = getExecutableCallback(pollingOnerrorCallback);
+	}
+
+	private String getExecutableCallback(String callback) {
+
+		String executableCallback;
+
+		if (callback == null) {
+			executableCallback = "";
+		}
+
+		// Otherwise if the developer specified function is anonymous, surround it with parentheses and append
+		// "(data)" so that it is executed.
+		else if (callback.startsWith("function(")) {
+			executableCallback = "(" + callback + ")(data)";
+		}
+
+		// Otherwise, append "(data)" so that the developer specified function is executed.
+		else {
+			executableCallback = callback.concat("(data)");
+		}
+
+		return executableCallback;
+	}
+
+	@Override
+	public Collection<String> getExecute() {
+
+		Collection<String> executeCollection = super.getExecute();
+		List<String> executeList = new ArrayList<String>(executeCollection);
+
+		if (!executeList.contains("@this")) {
+			executeList.add("@this");
+		}
+
+		return executeList;
+	}
+
+	@Override
+	public String getOnerror() {
+
+		String onerror = super.getOnerror();
+		String onerrorExecutableCallback = getExecutableCallback(onerror);
+
+		// Add the pollingOnerror() callback to the onerror() callback in order to stop polling when an error occurs.
+		StringBuilder onerrorStringBuilder = new StringBuilder();
+		onerrorStringBuilder.append("function(data){");
+		onerrorStringBuilder.append(pollingOnerrorExecutableCallback);
+		onerrorStringBuilder.append(";");
+		onerrorStringBuilder.append(onerrorExecutableCallback);
+		onerrorStringBuilder.append(";}");
+
+		return onerrorStringBuilder.toString();
 	}
 
 	/**
@@ -65,19 +118,18 @@ public class ProgressBarAjaxBehavior extends AjaxBehaviorWrapper {
 	public String getOnevent() {
 
 		String onevent = super.getOnevent();
-
-		if (onevent == null) {
-			onevent = "";
-		}
-
-		// Otherwise, append "()" so that the developer specified function is executed.
-		else {
-			onevent = onevent.concat("()");
-		}
+		String oneventExecutableCallback = getExecutableCallback(onevent);
 
 		// Add the onsuccess() callback to the onevent() callback in order to allow for a recursive call to our
 		// polling function.
-		return "function(data){if(data.status==='success'){" + onsuccessCallback + "();}" + onevent + "}";
+		StringBuilder oneventStringBuilder = new StringBuilder();
+		oneventStringBuilder.append("function(data){if(data.status==='success'){");
+		oneventStringBuilder.append(pollingOnsuccessExecutableCallback);
+		oneventStringBuilder.append(";}");
+		oneventStringBuilder.append(oneventExecutableCallback);
+		oneventStringBuilder.append(";}");
+
+		return oneventStringBuilder.toString();
 	}
 
 	@Override
@@ -86,8 +138,8 @@ public class ProgressBarAjaxBehavior extends AjaxBehaviorWrapper {
 		Collection<String> renderCollection = super.getRender();
 		List<String> renderList = new ArrayList<String>(renderCollection);
 
-		if (!renderList.contains(clientId)) {
-			renderList.add(clientId);
+		if (!renderList.contains("@this")) {
+			renderList.add("@this");
 		}
 
 		return renderList;
