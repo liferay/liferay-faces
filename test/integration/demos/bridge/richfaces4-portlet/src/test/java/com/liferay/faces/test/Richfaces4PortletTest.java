@@ -285,8 +285,9 @@ public class Richfaces4PortletTest extends TesterBase {
 			"asdf".equals(firstNameField.getAttribute("value")));
 
 		logger.log(Level.INFO, "Shift tabbing back into the firstNameField ...");
-		(new Actions(browser)).keyDown(Keys.SHIFT).sendKeys(Keys.TAB).keyDown(Keys.SHIFT).perform();
-		Thread.sleep(250);
+		(new Actions(browser)).keyDown(Keys.SHIFT).sendKeys(Keys.TAB).keyUp(Keys.SHIFT).perform();
+//		Thread.sleep(250);
+		firstNameField.click();
 		logger.log(Level.INFO,
 			"clearing the firstNameField using the BACKSPACE key, and then tabbing out of the firstNameField ...");
 		firstNameField.sendKeys(Keys.BACK_SPACE);
@@ -379,7 +380,7 @@ public class Richfaces4PortletTest extends TesterBase {
 
 		logger.log(Level.INFO, "browser.navigate().to(" + url + ")");
 		browser.navigate().to(url);
-//		Thread.sleep(1000);
+		waitForElement(browser, dateOfBirthFieldXpath);
 		logger.log(Level.INFO, "dateOfBirthField.getAttribute('value') = " + dateOfBirthField.getAttribute("value"));
 		logger.log(Level.INFO,
 			"dateOfBirthField.getAttribute('value').length() = " + dateOfBirthField.getAttribute("value").length());
@@ -694,7 +695,7 @@ public class Richfaces4PortletTest extends TesterBase {
 		}
 
 		assertTrue("There should be no dateOfBirth validation errors showing when a valid date has been submitted, " +
-			"but '" + foo + "' is now showing there", tags == tagsWhileValid);
+			"but '" + foo + "' is now showing there", "".equals(foo) || tags == tagsWhileValid);
 
 	}
 
