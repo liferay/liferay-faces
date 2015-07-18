@@ -285,9 +285,8 @@ public class Jsf2SpringPortletTest extends TesterBase {
 			"asdf".equals(firstNameField.getAttribute("value")));
 
 		logger.log(Level.INFO, "Shift tabbing back into the firstNameField ...");
-		(new Actions(browser)).keyDown(Keys.SHIFT).sendKeys(Keys.TAB).keyUp(Keys.SHIFT).perform();
-//		Thread.sleep(250);
-		firstNameField.click();
+		(new Actions(browser)).keyDown(Keys.SHIFT).sendKeys(Keys.TAB).keyDown(Keys.SHIFT).perform();
+		Thread.sleep(250);
 		logger.log(Level.INFO,
 			"clearing the firstNameField using the BACKSPACE key, and then tabbing out of the firstNameField ...");
 		firstNameField.sendKeys(Keys.BACK_SPACE);
@@ -380,6 +379,7 @@ public class Jsf2SpringPortletTest extends TesterBase {
 
 		logger.log(Level.INFO, "browser.navigate().to(" + url + ")");
 		browser.navigate().to(url);
+//		Thread.sleep(1000);
 		waitForElement(browser, dateOfBirthFieldXpath);
 		logger.log(Level.INFO, "dateOfBirthField.getAttribute('value') = " + dateOfBirthField.getAttribute("value"));
 		logger.log(Level.INFO,
@@ -391,14 +391,16 @@ public class Jsf2SpringPortletTest extends TesterBase {
 			dateOfBirthField.getAttribute("value").length() == dateLengthAfterChange);
 
 		if (isThere(browser, editPreferencesButtonXpath)) {
-			editPreferencesButton.click();
-			Thread.sleep(1500);
 			logger.log(Level.INFO, "editPreferencesButton.click() ...");
+			editPreferencesButton.click();
 		}
 		else {
 			logger.log(Level.INFO, "NO editPreferencesButton isThere, so preferencesMenuItem.click() ...");
 			selectEditMode(browser, portal);
 		}
+		
+//		Thread.sleep(1500);
+		waitForElement(browser, resetButtonXpath);
 
 		logger.log(Level.INFO, "done with selectEditMode: isThere(browser, resetButtonXpath) = " + isThere(browser, resetButtonXpath));
 		logger.log(Level.INFO, "browser.getCurrentUrl() = " + browser.getCurrentUrl());
@@ -484,7 +486,14 @@ public class Jsf2SpringPortletTest extends TesterBase {
 		postalCodeField.clear();
 		logger.log(Level.INFO, "clicking submit ...");
 		submitButton.click();
-		waitForElement(browser, firstNameFieldErrorXpath);
+		try {
+			waitForElement(browser, firstNameFieldErrorXpath);
+		}
+		catch (Exception e) {
+			logger.log(Level.INFO, "Exception e.getMessage() = " + e.getMessage());
+			assertTrue("firstNameFieldErrorXpath should have been visible since all fields " + 
+			"are required upon submit, but the 'Value is required' validation message never showed up ...", e == null);
+		}
 
 		logger.log(Level.INFO, "checking for error tags on firstNameField ...");
 
@@ -538,8 +547,15 @@ public class Jsf2SpringPortletTest extends TesterBase {
 		postalCodeField.sendKeys("32801");
 
 		phoneNumberField.click();
-
-		Thread.sleep(250);
+		try {
+			waitForElement(browser, cityFieldXpath);
+		}
+		catch (Exception e) {
+			logger.log(Level.INFO, "Exception e.getMessage() = " + e.getMessage());
+			assertTrue("cityFieldXpath should have been visible after entering the postal code 32801," +
+			" but the " + cityFieldXpath + " never showed up ...", e == null);
+		}
+	
 		logger.log(Level.INFO, "after cityField.getAttribute('value') = " + cityField.getAttribute("value"));
 		logger.log(Level.INFO,
 			"after postalCodeField.getAttribute('value') = " + postalCodeField.getAttribute("value"));
@@ -574,9 +590,11 @@ public class Jsf2SpringPortletTest extends TesterBase {
 		int tagsWhileHidden = 2;
 		int tagsWhileShowing = 3;
 
+		waitForElement(browser, showCommentsLinkXpath);
 		showCommentsLink.click();
-		Thread.sleep(500);
+//		Thread.sleep(500);
 
+		waitForElement(browser, "//a[contains(text(),'Hide Comments')]");
 		int hideCommentsLinks = browser.findElements(By.xpath("//a[contains(text(),'Hide Comments')]")).size();
 		logger.log(Level.INFO, "# of hideCommentsLinks = " + hideCommentsLinks);
 		assertTrue("# of hideCommentsLinks == 1", hideCommentsLinks == 1);
@@ -591,9 +609,11 @@ public class Jsf2SpringPortletTest extends TesterBase {
 
 		comments.sendKeys(testing123);
 		phoneNumberField.click();
-		Thread.sleep(500);
+//		Thread.sleep(500);
+		waitForElement(browser, hideCommentsLinkXpath);
 		hideCommentsLink.click();
-		Thread.sleep(500);
+//		Thread.sleep(500);
+		waitForElement(browser, "//a[contains(text(),'Show Comments')]/../../child::node()");
 		tags = browser.findElements(By.xpath("//a[contains(text(),'Show Comments')]/../../child::node()")).size();
 		logger.log(Level.INFO, "tags = " + tags);
 		assertTrue("no textarea should be showing at this point.  Tags counted at this pint("+ tags +") should equal tags neeeded to be in the DOM when the textarea is hidden("+ tagsWhileHidden +")", tags == tagsWhileHidden);
@@ -605,7 +625,8 @@ public class Jsf2SpringPortletTest extends TesterBase {
 		waitForElement(browser, commentsXpath);
 		logger.log(Level.INFO,
 			"after hide and show comments.getAttribute('value') = " + comments.getAttribute("value"));
-		assertTrue("comments are still there after hide and show", testing123.equals(comments.getAttribute("value")));
+		assertTrue("comments should be there after hide and then show, but comments value is '" + 
+			comments.getAttribute("value") +"' after clicking show comments.", testing123.equals(comments.getAttribute("value")));
 
 	}
 
@@ -628,12 +649,17 @@ public class Jsf2SpringPortletTest extends TesterBase {
 			assertTrue("No exceptions should occur when clearing the dateOfBirthField, but one did occur with the following message: " + e.getMessage(), false);
 		}
 
-		Thread.sleep(500);
+//		Thread.sleep(500);
+		waitForElement(browser, dateOfBirthFieldXpath);
+		dateOfBirthField.clear();
 		logger.log(Level.INFO, "Entering an invalid value for the date of birth ... 12/34/5678 ...");
+		waitForElement(browser, dateOfBirthFieldXpath);
 		dateOfBirthField.sendKeys("12/34/5678");
-		Thread.sleep(500);
+//		Thread.sleep(500);
+		waitForElement(browser, submitButtonXpath);
 		submitButton.click();
-		Thread.sleep(500);
+//		Thread.sleep(500);
+		waitForElement(browser, dateOfBirthFieldXpath);
 		logger.log(Level.INFO, "dateOfBirthField.getAttribute('value') = " + dateOfBirthField.getAttribute("value"));
 		logger.log(Level.INFO, "dateOfBirthFieldError.isDisplayed() = " + dateOfBirthFieldError.isDisplayed());
 		logger.log(Level.INFO, "dateOfBirthFieldError.getText() = " + dateOfBirthFieldError.getText());
@@ -652,9 +678,11 @@ public class Jsf2SpringPortletTest extends TesterBase {
 		// checks with no dateOfBirth
 		dateOfBirthField.clear();
 		logger.log(Level.INFO, "clearing the dateOfBirthField and then clicking into the phoneNumberField ...");
-		Thread.sleep(500);
+//		Thread.sleep(500);
+		waitForElement(browser, phoneNumberFieldXpath);
 		phoneNumberField.click();
-		Thread.sleep(500);
+//		Thread.sleep(500);
+		waitForElement(browser, dateOfBirthFieldXpath);
 		logger.log(Level.INFO, "dateOfBirthField.getAttribute('value') = " + dateOfBirthField.getAttribute("value"));
 		logger.log(Level.INFO, "dateOfBirthFieldError.isDisplayed() = " + dateOfBirthFieldError.isDisplayed());
 		logger.log(Level.INFO, "dateOfBirthFieldError.getText() = " + dateOfBirthFieldError.getText());
@@ -672,13 +700,16 @@ public class Jsf2SpringPortletTest extends TesterBase {
 		// checks a valid dateOfBirth
 		foo = "";
 		dateOfBirthField.clear();
-		Thread.sleep(500);
+//		Thread.sleep(500);
+		waitForElement(browser, dateOfBirthFieldXpath);
 		logger.log(Level.INFO, "Entering a valid dateOfBirth = 01/02/3456 ...");
 		dateOfBirthField.sendKeys("01/02/3456");
-		Thread.sleep(500);
+//		Thread.sleep(500);
+		waitForElement(browser, phoneNumberFieldXpath);
 		logger.log(Level.INFO, "Clicking into the phoneNumberField ...");
 		phoneNumberField.click();
-		Thread.sleep(1000);
+//		Thread.sleep(1000);
+		waitForElement(browser, dateOfBirthFieldXpath);
 		logger.log(Level.INFO,
 			"Now the dateOfBirthField.getAttribute('value') = " + dateOfBirthField.getAttribute("value"));
 		assertTrue("dateOfBirthField is currently showing 01/02/3456 ?",
@@ -695,7 +726,7 @@ public class Jsf2SpringPortletTest extends TesterBase {
 		}
 
 		assertTrue("There should be no dateOfBirth validation errors showing when a valid date has been submitted, " +
-			"but '" + foo + "' is now showing there", "".equals(foo) || tags == tagsWhileValid);
+			"but '" + foo + "' is now showing there", tags == tagsWhileValid);
 
 	}
 
@@ -715,9 +746,21 @@ public class Jsf2SpringPortletTest extends TesterBase {
 			// front view
 			logger.log(Level.INFO, "clicking the Add Attachment button ...");
 			browser.findElement(By.xpath("//input[@type='submit' and @value='Add Attachment']")).click();
-			Thread.sleep(500);
+//			Thread.sleep(500);
+			waitForElement(browser, fileUploadChooserXpath);
 		}
+		
+		logger.log(Level.INFO, "fileUploadChooser.getCssValue(transform) = " + fileUploadChooser.getCssValue("transform"));
+		logger.log(Level.INFO, "fileUploadChooser.getCssValue(visibility) = " + fileUploadChooser.getCssValue("visibility"));
+		logger.log(Level.INFO, "fileUploadChooser.getCssValue(display) = " + fileUploadChooser.getCssValue("display"));
+		logger.log(Level.INFO, "fileUploadChooser.getCssValue(display) = " + fileUploadChooser.getCssValue("display"));
+		logger.log(Level.INFO, "fileUploadChooser.getCssValue(opacity) = " + fileUploadChooser.getCssValue("opacity"));
+		logger.log(Level.INFO, "fileUploadChooser.getCssValue(height) = " + fileUploadChooser.getCssValue("height"));
+		logger.log(Level.INFO, "fileUploadChooser.getCssValue(width) = " + fileUploadChooser.getCssValue("width"));
+		logger.log(Level.INFO, "fileUploadChooser.getCssValue(overflow) = " + fileUploadChooser.getCssValue("overflow"));
 
+		logger.log(Level.INFO, "fileUploadChooser.getAttribute(type) = " + fileUploadChooser.getAttribute("type"));
+		
 		logger.log(Level.INFO, "entering in " + getPathToJerseyFile() + " for fileUploadChooser ...");
 
 		// This was the magic that fixed the primefaces4 fileupload component the transform needed to be set to 'none'
@@ -727,17 +770,34 @@ public class Jsf2SpringPortletTest extends TesterBase {
 		// fileUploadChooser.getCssValue(transform) = matrix(4, 0, 0, 4, -300, 0)
 		logger.log(Level.INFO, "fileUploadChooser.getCssValue(transform) = " + fileUploadChooser.getCssValue("transform"));
 
+//		try {
+//			waitForElement(browser, fileUploadChooserXpath);
+//		}
+//		catch (Exception e) {
+//			logger.log(Level.INFO, "Exception e.getMessage() = " + e.getMessage());
+//			assertTrue("fileUploadChooser should be visible in order to specify a file," +
+//				" but " + fileUploadChooserXpath + " is not visible.", e == null);
+//		}
+		
 		fileUploadChooser.sendKeys(getPathToJerseyFile());
 
 		// submitFileXpath
 		logger.log(Level.INFO, " submitFileXpath tagName = " + browser.findElement(By.xpath(submitFileXpath)).getTagName());
 		logger.log(Level.INFO, " submitFileXpath type = " + browser.findElement(By.xpath(submitFileXpath)).getAttribute("type"));
 
-		Thread.sleep(50);
+//		Thread.sleep(50);
+		waitForElement(browser, submitFileXpath);
 		logger.log(Level.INFO, "submitting the uploaded file ...");
 		submitFile.click();
 
-		waitForElement(browser, uploadedFileXpath);
+		try {
+			waitForElement(browser, uploadedFileXpath);
+		}
+		catch (Exception e) {
+			logger.log(Level.INFO, "Exception e.getMessage() = " + e.getMessage());
+			assertTrue("uploadedFile should be visible after submitting the file," +
+				" but " + uploadedFileXpath + " is not visible.", e == null);
+		}
 
 		if (isThere(browser, uploadedFileXpath)) {
 			logger.log(Level.INFO, "uploadedFile.getText() = " + uploadedFile.getText() + " is there.");
@@ -771,21 +831,35 @@ public class Jsf2SpringPortletTest extends TesterBase {
 		emailAddressField.clear();
 		postalCodeField.clear();
 
+		if (isThere(browser, hideCommentsLinkXpath)) {
+			waitForElement(browser, "//textarea[contains(@id,':comments')]");
+		}
 		int commentsTextAreas = browser.findElements(By.xpath("//textarea[contains(@id,':comments')]")).size();
 		logger.log(Level.INFO, "# of commentsTextAreas = " + commentsTextAreas);
 
 		if (commentsTextAreas == 0) { // if comments were not previously exercised, then we may need to show the
 									  // comments text area.
+			try {
+				waitForElement(browser, showCommentsLinkXpath);
+			}
+			catch (Exception e) {
+				logger.log(Level.INFO, "Exception e.getMessage() = " + e.getMessage());
+				assertTrue("showCommentsLinkXpath should be visible when their is no text area for comments showing," +
+						" but the " + showCommentsLinkXpath + " is not visible.", e == null);
+			}
+			
 			showCommentsLink.click();
-			Thread.sleep(500);
+//			Thread.sleep(500);
+			waitForElement(browser, "//textarea[contains(@id,':comments')]");
 			commentsTextAreas = browser.findElements(By.xpath("//textarea[contains(@id,':comments')]")).size();
 			logger.log(Level.INFO, "# of commentsTextAreas = " + commentsTextAreas);
 		}
 
-		assertTrue("# of commentsTextAreas == 1", commentsTextAreas == 1);
+		assertTrue("The commentsTextArea should be showing, but it is not visible.", commentsTextAreas == 1);
 
 		comments.clear();
-		Thread.sleep(500);
+//		Thread.sleep(500);
+		waitForElement(browser, emailAddressFieldXpath);
 		logger.log(Level.INFO, "fields were cleared now, but let's see ...");
 		logger.log(Level.INFO, "emailAddressField.getAttribute('value') = " + emailAddressField.getAttribute("value"));
 		assertTrue("emailAddressField is empty after clearing and clicking into another field",
@@ -806,10 +880,13 @@ public class Jsf2SpringPortletTest extends TesterBase {
 		}
 
 		postalCodeField.sendKeys("32801");
+		logger.log(Level.INFO, "Clicking into phone number field ...");
 		phoneNumberField.click();
-		Thread.sleep(500);
+//		Thread.sleep(500);
+		waitForElement(browser, commentsXpath);
 		comments.sendKeys("If as one people speaking the same language, they have begun to do this ...");
-		Thread.sleep(500);
+//		Thread.sleep(500);
+		waitForElement(browser, submitButtonXpath);
 
 		// asserting correct data is still there
 		assertTrue("asserting that firstNameField.getText().equals('David'), " + "but it is '" +
@@ -832,9 +909,18 @@ public class Jsf2SpringPortletTest extends TesterBase {
 			comments.getAttribute("value").equals(
 				"If as one people speaking the same language, they have begun to do this ..."));
 
+		logger.log(Level.INFO, "Correct data asserted.  Clicking submit button ...");
 		submitButton.click();
-		Thread.sleep(500);
 
+//		Thread.sleep(500);
+		try {
+			waitForElement(browser, formTagXpath);
+		}
+		catch (Exception e) {
+			logger.log(Level.INFO, "Exception e.getMessage() = " + e.getMessage());
+			assertTrue("formTag should be visible after form submission," +
+				" but the " + formTagXpath + " is not visible.", e == null);
+		}
 		logger.log(Level.INFO, "formTag.getText() = " + formTag.getText());
 		assertTrue("The text 'Dear David' should be showing in the portlet after submitting valid data, " +
 			"but it is not", formTag.getText().contains("Dear David"));
