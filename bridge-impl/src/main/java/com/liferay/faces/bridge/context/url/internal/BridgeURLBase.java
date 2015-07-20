@@ -444,12 +444,27 @@ public abstract class BridgeURLBase implements BridgeURL {
 					String[] queryParameters = queryString.split("[&]");
 
 					for (String queryParameter : queryParameters) {
+
 						String[] nameValueArray = queryParameter.split("[=]");
 
-						if (nameValueArray.length == 2) {
+						if (nameValueArray.length == 1) {
+
 							String name = nameValueArray[0];
-							String value = nameValueArray[1];
-							requestParameters.add(new RequestParameter(name, value));
+							requestParameters.add(new RequestParameter(name, ""));
+						}
+						else if (nameValueArray.length == 2) {
+
+							String name = nameValueArray[0];
+
+							if ("".equals(name)) {
+								throw new MalformedURLException(
+									"invalid name/value pair: name cannot be empty. value is " + queryParameter);
+							}
+							else {
+
+								String value = nameValueArray[1];
+								requestParameters.add(new RequestParameter(name, value));
+							}
 						}
 						else {
 							throw new MalformedURLException("invalid name/value pair: " + queryParameter);

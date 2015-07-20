@@ -75,17 +75,25 @@ public class URLUtil {
 								parameterMapValuesArray.put(name, newValues);
 							}
 							else if (nameValueArray.length == 2) {
-								String[] newValues = null;
 
-								if (existingValues == null) {
-									newValues = new String[] { nameValueArray[1] };
+								if ("".equals(name)) {
+									logger.error("Invalid name=value pair=[{0}] in URL=[{1}]: name cannot be empty",
+										nameValueArray, url);
 								}
 								else {
-									newValues = Arrays.copyOf(existingValues, existingValues.length + 1);
-									newValues[existingValues.length] = nameValueArray[1];
-								}
 
-								parameterMapValuesArray.put(name, newValues);
+									String[] newValues = null;
+
+									if (existingValues == null) {
+										newValues = new String[] { nameValueArray[1] };
+									}
+									else {
+										newValues = Arrays.copyOf(existingValues, existingValues.length + 1);
+										newValues[existingValues.length] = nameValueArray[1];
+									}
+
+									parameterMapValuesArray.put(name, newValues);
+								}
 							}
 							else {
 								logger.error("Invalid name=value pair=[{0}] in URL=[{1}]", nameValueArray, url);
