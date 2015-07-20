@@ -88,9 +88,32 @@
 		<bridge.tck.test.host>localhost</bridge.tck.test.host>
 		<bridge.tck.test.port>8080</bridge.tck.test.port>
 		<webapp.descriptor>web-${bridge.tck.portal}-${app.server.type}.xml</webapp.descriptor>
+		<bridge.tck.browser>*firefox /Applications/Firefox21.app/Contents/MacOS/firefox-bin</bridge.tck.browser>
 	</properties>
 
 	<profiles>
+		<profile>
+			<id>linux</id>
+			<activation>
+				<os>
+					<family>unix</family>
+				</os>
+			</activation>
+			<properties>
+				<bridge.tck.browser>*firefox /usr/lib64/firefox-21.0</bridge.tck.browser>
+			</properties>
+		</profile>
+		<profile>
+			<id>mac-osx</id>
+			<activation>
+				<os>
+					<family>mac</family>
+				</os>
+			</activation>
+			<properties>
+				<bridge.tck.browser>*firefox /Applications/Firefox21.app/Contents/MacOS/firefox-bin</bridge.tck.browser>
+			</properties>
+		</profile>
 		<profile>
 			<id>pluto</id>
 			<properties>
@@ -101,7 +124,6 @@
 		<profile>
 			<id>tck</id>
 			<properties>
-				<bridge.tck.browser>*firefox</bridge.tck.browser>
 				<bridge.tck.selenium.host>localhost</bridge.tck.selenium.host>
 				<bridge.tck.selenium.port>4444</bridge.tck.selenium.port>
 				<bridge.tck.login.file>src/test/resources/${bridge.tck.portal}-login.properties</bridge.tck.login.file>
