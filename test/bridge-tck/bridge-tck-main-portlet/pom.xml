@@ -101,7 +101,7 @@
 		<profile>
 			<id>tck</id>
 			<properties>
-				<bridge.tck.browser>*firefox</bridge.tck.browser>
+				<bridge.tck.browser>*firefox /Applications/Firefox-testing/Firefox21.0.app/Contents/MacOS/firefox-bin</bridge.tck.browser>
 				<bridge.tck.selenium.host>localhost</bridge.tck.selenium.host>
 				<bridge.tck.selenium.port>4444</bridge.tck.selenium.port>
 				<bridge.tck.login.file>src/test/resources/${bridge.tck.portal}-login.properties</bridge.tck.login.file>
