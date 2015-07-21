@@ -18,7 +18,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
 
 import com.liferay.faces.demos.dto.Customer;
 import com.liferay.faces.demos.service.CustomerService;
@@ -29,19 +29,25 @@ import com.liferay.faces.demos.service.CustomerService;
  * @author  Kyle Stiemann
  */
 @ManagedBean
-@RequestScoped
+@ViewScoped
 public class CommandModelBean {
 
 	// Injections
 	@ManagedProperty(value = "#{customerService}")
 	private CustomerService customerService;
 
+	// Private Data Members
+	private boolean ajax;
 	private Customer selectedCustomer;
 	private List<Customer> customers;
 
 	@PostConstruct
 	public void postConstruct() {
 		customers = customerService.getCustomers(0, 5);
+	}
+
+	public void setAjax(boolean ajax) {
+		this.ajax = ajax;
 	}
 
 	public List<Customer> getCustomers() {
@@ -58,5 +64,9 @@ public class CommandModelBean {
 
 	public void setSelectedCustomer(Customer selectedCustomer) {
 		this.selectedCustomer = selectedCustomer;
+	}
+
+	public boolean isAjax() {
+		return ajax;
 	}
 }
