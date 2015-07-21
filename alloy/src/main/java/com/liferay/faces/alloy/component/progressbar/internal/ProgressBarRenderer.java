@@ -77,6 +77,8 @@ public class ProgressBarRenderer extends ProgressBarRendererBase {
 		List<ClientBehavior> pollEventClientBehaviors = clientBehaviorMap.get("poll");
 
 		// If the developer has specified <f:ajax event="poll" />, then
+		String javaScriptText = "Liferay.component('".concat(clientKey).concat("')");
+
 		if ((pollEventClientBehaviors != null) && !pollEventClientBehaviors.isEmpty()) {
 
 			// Build up an anonymous function, which contains all clientBehaviors for the "poll" event, so that it can
@@ -121,7 +123,7 @@ public class ProgressBarRenderer extends ProgressBarRendererBase {
 			//J-
 			//	Liferay.component('clientKey')
 			//J+
-			JavaScriptFragment liferayComponent = new JavaScriptFragment("Liferay.component('" + clientKey + "')");
+			JavaScriptFragment liferayComponent = new JavaScriptFragment(javaScriptText);
 
 			// It is possible to specify multiple <f:ajax event="poll" /> tags (even though there is no benefit).
 			for (int i = 0; i < size; i++) {
@@ -131,7 +133,8 @@ public class ProgressBarRenderer extends ProgressBarRendererBase {
 				if (i == 0) {
 
 					AjaxBehavior firstPollEventAjaxBehavior = (AjaxBehavior) pollEventClientBehavior;
-					String stopPollingFunction = "function(){" + liferayComponent.toString() + ".stopPolling();}";
+					String stopPollingFunction = "function(){".concat(liferayComponent.toString()).concat(
+							".stopPolling();}");
 
 					// Ensure that render is '@this', execute is '@this', the pollingFunction is called onsuccess, and
 					// the stopPolling function is called onerror.
@@ -182,7 +185,7 @@ public class ProgressBarRenderer extends ProgressBarRendererBase {
 			//J-
 			//	LFAI.initProgressBarClientMode(Liferay.component('clientKey'), projectStageDevelopment);
 			//J+
-			JavaScriptFragment liferayComponent = new JavaScriptFragment("Liferay.component('" + clientKey + "')");
+			JavaScriptFragment liferayComponent = new JavaScriptFragment(javaScriptText);
 			encodeFunctionCall(responseWriter, "LFAI.initProgressBarClientMode", liferayComponent);
 		}
 	}

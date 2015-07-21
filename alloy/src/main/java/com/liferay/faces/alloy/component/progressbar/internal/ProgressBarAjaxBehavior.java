@@ -60,7 +60,7 @@ public class ProgressBarAjaxBehavior extends AjaxBehaviorWrapper {
 		// Otherwise if the developer specified function is anonymous, surround it with parentheses and append
 		// "(data)" so that it is executed.
 		else if (callback.startsWith("function(")) {
-			executableCallback = "(" + callback + ")(data)";
+			executableCallback = "(".concat(callback).concat(")(data)");
 		}
 
 		// Otherwise, append "(data)" so that the developer specified function is executed.
