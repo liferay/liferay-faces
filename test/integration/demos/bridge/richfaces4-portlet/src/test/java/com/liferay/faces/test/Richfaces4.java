@@ -87,6 +87,10 @@ public class Richfaces4 extends TesterBase {
 	private static final String alloyVersionXpath = "//*[contains(text(),'Liferay Faces Alloy')]";
 	private static final String bridgeVersionXpath = "//*[contains(text(),'Liferay Faces Bridge')]";
 
+	private static final String versionUlXpath = "//*[contains(text(),'Liferay Faces Bridge')]/../../../ul";
+	private static final String windowInnerHeightXpath = "//em[@id='window.innerHeight']";
+	private static final String windowInnerWidthXpath = "//em[@id='window.innerWidth']";
+
 	// xpath for specific tests
 	private static final String dateValidationXpath = "//span[contains(@id,':dateOfBirthField')]/span/span/span/span[contains(@id,':dateOfBirth')]/span";
 
