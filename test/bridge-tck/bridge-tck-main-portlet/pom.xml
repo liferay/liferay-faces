@@ -88,7 +88,7 @@
 		<bridge.tck.test.host>localhost</bridge.tck.test.host>
 		<bridge.tck.test.port>8080</bridge.tck.test.port>
 		<webapp.descriptor>web-${bridge.tck.portal}-${app.server.type}.xml</webapp.descriptor>
-		<bridge.tck.browser>*firefox /Applications/Firefox21.app/Contents/MacOS/firefox-bin</bridge.tck.browser>
+		<bridge.tck.browser>*firefox</bridge.tck.browser>
 	</properties>
 
 	<profiles>
