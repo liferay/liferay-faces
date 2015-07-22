@@ -27,6 +27,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
+
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -73,7 +75,7 @@ public class Icefaces3PortletTest extends TesterBase {
 	private static final String provinceIdFieldXpath = "//select[contains(@id,':provinceId')]";
 	private static final String provinceIdFieldErrorXpath = "//select[contains(@id,':provinceId')]/following-sibling::*[1]";
 
-	private static final String provinceIdSelectorXpath = "";
+	private static final String provinceIdSelectorXpath = "//select[contains(@id,':provinceId')]";
 
 	private static final String postalCodeFieldXpath = "//input[contains(@id,':postalCode_input')]";
 	private static final String postalCodeFieldErrorXpath = "//input[contains(@id,':postalCode_input')]/../../following-sibling::*[1]/following-sibling::*[1]";
@@ -97,11 +99,15 @@ public class Icefaces3PortletTest extends TesterBase {
 	private static final String componentLibraryVersionXpath = "//*[contains(text(),'ICEfaces ')]";
 	private static final String alloyVersionXpath = "//*[contains(text(),'Liferay Faces Alloy')]";
 	private static final String bridgeVersionXpath = "//*[contains(text(),'Liferay Faces Bridge')]";
+	
+	private static final String versionUlXpath = "//*[contains(text(),'Liferay Faces Bridge')]/../../../ul";
+	private static final String windowInnerHeightXpath = "//em[@id='window.innerHeight']";
+	private static final String windowInnerWidthXpath = "//em[@id='window.innerWidth']";
 
 	// xpath for specific tests
 	private static final String dateValidationXpath = "//input[contains(@id,':dateOfBirth')]/../following-sibling::*[1]/child::node()";
 
-	static final String url = baseUrl + webContext + "/ice3";
+	static final String url = baseUrl + webContext + "/ice4";
 
 	@FindBy(xpath = formTagXpath)
 	private WebElement formTag;
@@ -176,8 +182,17 @@ public class Icefaces3PortletTest extends TesterBase {
 	private WebElement alloyVersion;
 	@FindBy(xpath = bridgeVersionXpath)
 	private WebElement bridgeVersion;
+	@FindBy(xpath = versionUlXpath)
+	private WebElement versionUl;
+	@FindBy(xpath = windowInnerHeightXpath)
+	private WebElement windowInnerHeight;
+	@FindBy(xpath = windowInnerWidthXpath)
+	private WebElement windowInnerWidth;
 
 	protected int dateValidationXpathModifier = 0;
+	
+	protected String innerHeight = "-1";
+    protected String innerWidth = "-1";
 
 	@Drone
 	WebDriver browser;
@@ -246,6 +261,63 @@ public class Icefaces3PortletTest extends TesterBase {
 		logger.log(Level.INFO, alloyVersion.getText());
 		assertTrue("bridgeVersion.isDisplayed()", bridgeVersion.isDisplayed());
 		logger.log(Level.INFO, bridgeVersion.getText());
+		
+		// get the window.innerHeight and window.innerWidth
+		try {
+			((JavascriptExecutor) browser).executeScript(
+				"var w = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth; " +
+				"var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight; "
+
+				+ "var em1 = document.createElement('em'); "
+				+ "var id1 = document.createAttribute('id'); "
+				+ "id1.value = 'window.innerHeight'; "
+				+ "em1.setAttributeNode(id1); "
+				+ "var textNode1 = document.createTextNode(h); "
+				+ "em1.appendChild(textNode1); "
+				+ "var li1 = document.createElement('li'); "
+				+ "li1.appendChild(em1); "
+
+				+ "var em2 = document.createElement('em'); "
+				+ "var id2 = document.createAttribute('id'); "
+				+ "id2.value = 'window.innerWidth'; "
+				+ "em2.setAttributeNode(id2);   "
+				+ "var textNode2 = document.createTextNode(w); "
+				+ "em2.appendChild(textNode2); "
+				+ "var li2 = document.createElement('li'); "
+				+ "li2.appendChild(em2); "
+
+				+ "arguments[0].appendChild(li1); "
+				+ "arguments[0].appendChild(li2); ",
+
+				versionUl
+			);
+			
+		} catch (Exception e) {
+			logger.log(Level.INFO,
+					"Exception e.getMessage() = " + e.getMessage());
+		}
+
+		waitForElement(browser, windowInnerWidthXpath);
+		if (isThere(browser, windowInnerWidthXpath)) {
+			logger.log(Level.INFO,
+					"window.innerHeight = " + windowInnerHeight.getText());
+			logger.log(Level.INFO,
+					"window.innerWidth = " + windowInnerWidth.getText());
+
+			innerHeight = windowInnerHeight.getText();
+			innerWidth = windowInnerWidth.getText();
+		} else {
+			logger.log(Level.INFO, windowInnerWidthXpath + " not found.");
+		}
+
+		Dimension bodyDimension = browser.findElement(By.xpath("//body[1]"))
+				.getSize();
+		logger.log(Level.INFO, "bodyDimension.height = " + bodyDimension.height);
+		logger.log(Level.INFO, "bodyDimension.width = " + bodyDimension.width);
+
+		Dimension windowDimension = browser.manage().window().getSize();
+		logger.log(Level.INFO, "windowDimension.height = " + windowDimension.height);
+		logger.log(Level.INFO, "windowDimension.width = " + windowDimension.width);
 
 	}
 
@@ -380,6 +452,7 @@ public class Icefaces3PortletTest extends TesterBase {
 
 		logger.log(Level.INFO, "browser.navigate().to(" + url + ")");
 		browser.navigate().to(url);
+//		Thread.sleep(1000);
 		waitForElement(browser, dateOfBirthFieldXpath);
 		logger.log(Level.INFO, "dateOfBirthField.getAttribute('value') = " + dateOfBirthField.getAttribute("value"));
 		logger.log(Level.INFO,
@@ -391,14 +464,16 @@ public class Icefaces3PortletTest extends TesterBase {
 			dateOfBirthField.getAttribute("value").length() == dateLengthAfterChange);
 
 		if (isThere(browser, editPreferencesButtonXpath)) {
-			editPreferencesButton.click();
-			Thread.sleep(1500);
 			logger.log(Level.INFO, "editPreferencesButton.click() ...");
+			editPreferencesButton.click();
 		}
 		else {
 			logger.log(Level.INFO, "NO editPreferencesButton isThere, so preferencesMenuItem.click() ...");
 			selectEditMode(browser, portal);
 		}
+		
+//		Thread.sleep(1500);
+		waitForElement(browser, resetButtonXpath);
 
 		logger.log(Level.INFO, "done with selectEditMode: isThere(browser, resetButtonXpath) = " + isThere(browser, resetButtonXpath));
 		logger.log(Level.INFO, "browser.getCurrentUrl() = " + browser.getCurrentUrl());
@@ -484,7 +559,14 @@ public class Icefaces3PortletTest extends TesterBase {
 		postalCodeField.clear();
 		logger.log(Level.INFO, "clicking submit ...");
 		submitButton.click();
-		waitForElement(browser, firstNameFieldErrorXpath);
+		try {
+			waitForElement(browser, firstNameFieldErrorXpath);
+		}
+		catch (Exception e) {
+			logger.log(Level.INFO, "Exception e.getMessage() = " + e.getMessage());
+			assertTrue("firstNameFieldErrorXpath should have been visible since all fields " + 
+			"are required upon submit, but the 'Value is required' validation message never showed up ...", e == null);
+		}
 
 		logger.log(Level.INFO, "checking for error tags on firstNameField ...");
 
@@ -538,8 +620,15 @@ public class Icefaces3PortletTest extends TesterBase {
 		postalCodeField.sendKeys("32801");
 
 		phoneNumberField.click();
-
-		Thread.sleep(250);
+		try {
+			waitForElement(browser, cityFieldXpath);
+		}
+		catch (Exception e) {
+			logger.log(Level.INFO, "Exception e.getMessage() = " + e.getMessage());
+			assertTrue("cityFieldXpath should have been visible after entering the postal code 32801," +
+			" but the " + cityFieldXpath + " never showed up ...", e == null);
+		}
+	
 		logger.log(Level.INFO, "after cityField.getAttribute('value') = " + cityField.getAttribute("value"));
 		logger.log(Level.INFO,
 			"after postalCodeField.getAttribute('value') = " + postalCodeField.getAttribute("value"));
@@ -574,9 +663,11 @@ public class Icefaces3PortletTest extends TesterBase {
 		int tagsWhileHidden = 1;
 		int tagsWhileShowing = 2;
 
+		waitForElement(browser, showCommentsLinkXpath);
 		showCommentsLink.click();
-		Thread.sleep(500);
+//		Thread.sleep(500);
 
+		waitForElement(browser, "//a[contains(text(),'Hide Comments')]");
 		int hideCommentsLinks = browser.findElements(By.xpath("//a[contains(text(),'Hide Comments')]")).size();
 		logger.log(Level.INFO, "# of hideCommentsLinks = " + hideCommentsLinks);
 		assertTrue("# of hideCommentsLinks == 1", hideCommentsLinks == 1);
@@ -587,16 +678,18 @@ public class Icefaces3PortletTest extends TesterBase {
 		if (tags != tagsWhileShowing) {
 			logger.log(Level.INFO, "tagsWhileShowing = " + tagsWhileShowing);
 		}
-		assertTrue("tag for Hide and tag for textarea are showing", tags == tagsWhileShowing);
+		assertTrue("count of tags when Hide link is showing(" + tags + ") and count of tags for textarea when showing(" + tagsWhileShowing + ") should be equal", tags == tagsWhileShowing);
 
 		comments.sendKeys(testing123);
 		phoneNumberField.click();
-		Thread.sleep(500);
+//		Thread.sleep(500);
+		waitForElement(browser, hideCommentsLinkXpath);
 		hideCommentsLink.click();
-		Thread.sleep(500);
+//		Thread.sleep(500);
+		waitForElement(browser, "//a[contains(text(),'Show Comments')]/../../child::node()");
 		tags = browser.findElements(By.xpath("//a[contains(text(),'Show Comments')]/../../child::node()")).size();
 		logger.log(Level.INFO, "tags = " + tags);
-		assertTrue("no textarea is showing", tags == tagsWhileHidden);
+		assertTrue("no textarea should be showing at this point.  Tags counted at this pint("+ tags +") should equal tags neeeded to be in the DOM when the textarea is hidden("+ tagsWhileHidden +")", tags == tagsWhileHidden);
 		if (tags != tagsWhileHidden) {
 			logger.log(Level.INFO, "tagsWhileHidden = " + tagsWhileHidden);
 		}
@@ -605,7 +698,8 @@ public class Icefaces3PortletTest extends TesterBase {
 		waitForElement(browser, commentsXpath);
 		logger.log(Level.INFO,
 			"after hide and show comments.getAttribute('value') = " + comments.getAttribute("value"));
-		assertTrue("comments are still there after hide and show", testing123.equals(comments.getAttribute("value")));
+		assertTrue("comments should be there after hide and then show, but comments value is '" + 
+			comments.getAttribute("value") +"' after clicking show comments.", testing123.equals(comments.getAttribute("value")));
 
 	}
 
@@ -628,12 +722,17 @@ public class Icefaces3PortletTest extends TesterBase {
 			assertTrue("No exceptions should occur when clearing the dateOfBirthField, but one did occur with the following message: " + e.getMessage(), false);
 		}
 
-		Thread.sleep(500);
+//		Thread.sleep(500);
+		waitForElement(browser, dateOfBirthFieldXpath);
+		dateOfBirthField.clear();
 		logger.log(Level.INFO, "Entering an invalid value for the date of birth ... 12/34/5678 ...");
+		waitForElement(browser, dateOfBirthFieldXpath);
 		dateOfBirthField.sendKeys("12/34/5678");
-		Thread.sleep(500);
+//		Thread.sleep(500);
+		waitForElement(browser, submitButtonXpath);
 		submitButton.click();
-		Thread.sleep(500);
+//		Thread.sleep(500);
+		waitForElement(browser, dateOfBirthFieldXpath);
 		logger.log(Level.INFO, "dateOfBirthField.getAttribute('value') = " + dateOfBirthField.getAttribute("value"));
 		logger.log(Level.INFO, "dateOfBirthFieldError.isDisplayed() = " + dateOfBirthFieldError.isDisplayed());
 		logger.log(Level.INFO, "dateOfBirthFieldError.getText() = " + dateOfBirthFieldError.getText());
@@ -652,9 +751,11 @@ public class Icefaces3PortletTest extends TesterBase {
 		// checks with no dateOfBirth
 		dateOfBirthField.clear();
 		logger.log(Level.INFO, "clearing the dateOfBirthField and then clicking into the phoneNumberField ...");
-		Thread.sleep(500);
+//		Thread.sleep(500);
+		waitForElement(browser, phoneNumberFieldXpath);
 		phoneNumberField.click();
-		Thread.sleep(500);
+//		Thread.sleep(500);
+		waitForElement(browser, dateOfBirthFieldXpath);
 		logger.log(Level.INFO, "dateOfBirthField.getAttribute('value') = " + dateOfBirthField.getAttribute("value"));
 		logger.log(Level.INFO, "dateOfBirthFieldError.isDisplayed() = " + dateOfBirthFieldError.isDisplayed());
 		logger.log(Level.INFO, "dateOfBirthFieldError.getText() = " + dateOfBirthFieldError.getText());
@@ -672,13 +773,16 @@ public class Icefaces3PortletTest extends TesterBase {
 		// checks a valid dateOfBirth
 		foo = "";
 		dateOfBirthField.clear();
-		Thread.sleep(500);
+//		Thread.sleep(500);
+		waitForElement(browser, dateOfBirthFieldXpath);
 		logger.log(Level.INFO, "Entering a valid dateOfBirth = 01/02/3456 ...");
 		dateOfBirthField.sendKeys("01/02/3456");
-		Thread.sleep(500);
+//		Thread.sleep(500);
+		waitForElement(browser, phoneNumberFieldXpath);
 		logger.log(Level.INFO, "Clicking into the phoneNumberField ...");
 		phoneNumberField.click();
-		Thread.sleep(1000);
+//		Thread.sleep(1000);
+		waitForElement(browser, dateOfBirthFieldXpath);
 		logger.log(Level.INFO,
 			"Now the dateOfBirthField.getAttribute('value') = " + dateOfBirthField.getAttribute("value"));
 		assertTrue("dateOfBirthField is currently showing 01/02/3456 ?",
@@ -695,7 +799,7 @@ public class Icefaces3PortletTest extends TesterBase {
 		}
 
 		assertTrue("There should be no dateOfBirth validation errors showing when a valid date has been submitted, " +
-			"but '" + foo + "' is now showing there", "".equals(foo) || tags == tagsWhileValid);
+			"but '" + foo + "' is now showing there", tags == tagsWhileValid);
 
 	}
 
@@ -715,9 +819,21 @@ public class Icefaces3PortletTest extends TesterBase {
 			// front view
 			logger.log(Level.INFO, "clicking the Add Attachment button ...");
 			browser.findElement(By.xpath("//input[@type='submit' and @value='Add Attachment']")).click();
-			Thread.sleep(500);
+//			Thread.sleep(500);
+			waitForElement(browser, fileUploadChooserXpath);
 		}
+		
+		logger.log(Level.INFO, "fileUploadChooser.getCssValue(transform) = " + fileUploadChooser.getCssValue("transform"));
+		logger.log(Level.INFO, "fileUploadChooser.getCssValue(visibility) = " + fileUploadChooser.getCssValue("visibility"));
+		logger.log(Level.INFO, "fileUploadChooser.getCssValue(display) = " + fileUploadChooser.getCssValue("display"));
+		logger.log(Level.INFO, "fileUploadChooser.getCssValue(display) = " + fileUploadChooser.getCssValue("display"));
+		logger.log(Level.INFO, "fileUploadChooser.getCssValue(opacity) = " + fileUploadChooser.getCssValue("opacity"));
+		logger.log(Level.INFO, "fileUploadChooser.getCssValue(height) = " + fileUploadChooser.getCssValue("height"));
+		logger.log(Level.INFO, "fileUploadChooser.getCssValue(width) = " + fileUploadChooser.getCssValue("width"));
+		logger.log(Level.INFO, "fileUploadChooser.getCssValue(overflow) = " + fileUploadChooser.getCssValue("overflow"));
 
+		logger.log(Level.INFO, "fileUploadChooser.getAttribute(type) = " + fileUploadChooser.getAttribute("type"));
+		
 		logger.log(Level.INFO, "entering in " + getPathToJerseyFile() + " for fileUploadChooser ...");
 
 		// This was the magic that fixed the primefaces4 fileupload component the transform needed to be set to 'none'
@@ -727,45 +843,56 @@ public class Icefaces3PortletTest extends TesterBase {
 		// fileUploadChooser.getCssValue(transform) = matrix(4, 0, 0, 4, -300, 0)
 		logger.log(Level.INFO, "fileUploadChooser.getCssValue(transform) = " + fileUploadChooser.getCssValue("transform"));
 
-		fileUploadChooser.sendKeys(getPathToJerseyFile());
+		try {
 
-		Thread.sleep(50);
+			fileUploadChooser.sendKeys(getPathToJerseyFile());
+
+		} catch (Exception e) {
+			logger.log(Level.INFO, "Exception e.getMessage() = " + e.getMessage());
+
+			if (e.getMessage().contains("Element is not currently visible")) {
+
+				Dimension windowDimension = browser.manage().window().getSize();
+				logger.log(Level.INFO, "windowDimension.height = " + windowDimension.height);
+				logger.log(Level.INFO, "windowDimension.width = " + windowDimension.width);
+
+				logger.log(Level.INFO, "attempting to resize the browser window ... ");
+				browser.manage().window().setSize(new Dimension(1260, 747));
+
+				windowDimension = browser.manage().window().getSize();
+				logger.log(Level.INFO, "windowDimension.height = " + windowDimension.height);
+				logger.log(Level.INFO, "windowDimension.width = " + windowDimension.width);
+
+				fileUploadChooser.sendKeys(getPathToJerseyFile());
+
+			} else {
+
+				assertTrue("No unexpected exceptions should occur when clearing the dateOfBirthField, but one did occur with the following message: " + e.getMessage(), false);
+
+			}
+		}
+
+		// submitFileXpath
+		logger.log(Level.INFO, " submitFileXpath tagName = " + browser.findElement(By.xpath(submitFileXpath)).getTagName());
+		logger.log(Level.INFO, " submitFileXpath type = " + browser.findElement(By.xpath(submitFileXpath)).getAttribute("type"));
+
+//		Thread.sleep(50);
+		waitForElement(browser, submitFileXpath);
 		logger.log(Level.INFO, "submitting the uploaded file ...");
 		submitFile.click();
 
-		if (isThere(browser, uploadedFileXpath)) {
-			logger.log(Level.INFO, "uploadedFile.getText() = " + uploadedFile.getText() + " was there immediately");
-			uploaded = true;
+		try {
+			waitForElement(browser, uploadedFileXpath);
 		}
-		else {
-			Thread.sleep(1000);
+		catch (Exception e) {
+			logger.log(Level.INFO, "Exception e.getMessage() = " + e.getMessage());
+			assertTrue("uploadedFile should be visible after submitting the file," +
+				" but " + uploadedFileXpath + " is not visible.", e == null);
+		}
 
-			if (isThere(browser, uploadedFileXpath)) {
-				logger.log(Level.INFO,
-					"uploadedFile.getText() = " + uploadedFile.getText() + " was there after 1 second");
-				uploaded = true;
-			}
-			else {
-				Thread.sleep(1000);
-
-				if (isThere(browser, uploadedFileXpath)) {
-					logger.log(Level.INFO,
-						"uploadedFile.getText() = " + uploadedFile.getText() + " was there after 2 seconds");
-					uploaded = true;
-				}
-				else {
-					Thread.sleep(1000);
-
-					if (isThere(browser, uploadedFileXpath)) {
-						logger.log(Level.INFO,
-							"uploadedFile.getText() = " + uploadedFile.getText() + " was there after 3 seconds");
-						uploaded = true;
-					}
-					else {
-						logger.log(Level.INFO, "uploadedFile was NOT there after 3 seconds");
-					}
-				}
-			}
+		if (isThere(browser, uploadedFileXpath)) {
+			logger.log(Level.INFO, "uploadedFile.getText() = " + uploadedFile.getText() + " is there.");
+			uploaded = true;
 		}
 
 		if (uploaded) {
@@ -795,21 +922,35 @@ public class Icefaces3PortletTest extends TesterBase {
 		emailAddressField.clear();
 		postalCodeField.clear();
 
+		if (isThere(browser, hideCommentsLinkXpath)) {
+			waitForElement(browser, "//textarea[contains(@id,':comments')]");
+		}
 		int commentsTextAreas = browser.findElements(By.xpath("//textarea[contains(@id,':comments')]")).size();
 		logger.log(Level.INFO, "# of commentsTextAreas = " + commentsTextAreas);
 
 		if (commentsTextAreas == 0) { // if comments were not previously exercised, then we may need to show the
 									  // comments text area.
+			try {
+				waitForElement(browser, showCommentsLinkXpath);
+			}
+			catch (Exception e) {
+				logger.log(Level.INFO, "Exception e.getMessage() = " + e.getMessage());
+				assertTrue("showCommentsLinkXpath should be visible when their is no text area for comments showing," +
+						" but the " + showCommentsLinkXpath + " is not visible.", e == null);
+			}
+			
 			showCommentsLink.click();
-			Thread.sleep(500);
+//			Thread.sleep(500);
+			waitForElement(browser, "//textarea[contains(@id,':comments')]");
 			commentsTextAreas = browser.findElements(By.xpath("//textarea[contains(@id,':comments')]")).size();
 			logger.log(Level.INFO, "# of commentsTextAreas = " + commentsTextAreas);
 		}
 
-		assertTrue("# of commentsTextAreas == 1", commentsTextAreas == 1);
+		assertTrue("The commentsTextArea should be showing, but it is not visible.", commentsTextAreas == 1);
 
 		comments.clear();
-		Thread.sleep(500);
+//		Thread.sleep(500);
+		waitForElement(browser, emailAddressFieldXpath);
 		logger.log(Level.INFO, "fields were cleared now, but let's see ...");
 		logger.log(Level.INFO, "emailAddressField.getAttribute('value') = " + emailAddressField.getAttribute("value"));
 		assertTrue("emailAddressField is empty after clearing and clicking into another field",
@@ -830,10 +971,13 @@ public class Icefaces3PortletTest extends TesterBase {
 		}
 
 		postalCodeField.sendKeys("32801");
+		logger.log(Level.INFO, "Clicking into phone number field ...");
 		phoneNumberField.click();
-		Thread.sleep(500);
+//		Thread.sleep(500);
+		waitForElement(browser, commentsXpath);
 		comments.sendKeys("If as one people speaking the same language, they have begun to do this ...");
-		Thread.sleep(500);
+//		Thread.sleep(500);
+		waitForElement(browser, submitButtonXpath);
 
 		// asserting correct data is still there
 		assertTrue("asserting that firstNameField.getText().equals('David'), " + "but it is '" +
@@ -856,9 +1000,18 @@ public class Icefaces3PortletTest extends TesterBase {
 			comments.getAttribute("value").equals(
 				"If as one people speaking the same language, they have begun to do this ..."));
 
+		logger.log(Level.INFO, "Correct data asserted.  Clicking submit button ...");
 		submitButton.click();
-		Thread.sleep(500);
 
+//		Thread.sleep(500);
+		try {
+			waitForElement(browser, formTagXpath);
+		}
+		catch (Exception e) {
+			logger.log(Level.INFO, "Exception e.getMessage() = " + e.getMessage());
+			assertTrue("formTag should be visible after form submission," +
+				" but the " + formTagXpath + " is not visible.", e == null);
+		}
 		logger.log(Level.INFO, "formTag.getText() = " + formTag.getText());
 		assertTrue("The text 'Dear David' should be showing in the portlet after submitting valid data, " +
 			"but it is not", formTag.getText().contains("Dear David"));
