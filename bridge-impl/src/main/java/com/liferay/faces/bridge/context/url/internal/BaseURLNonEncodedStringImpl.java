@@ -173,11 +173,13 @@ public class BaseURLNonEncodedStringImpl implements BaseURL {
 					String[] values = null;
 
 					if (nameValueArray.length == 1) {
-						name = nameValueArray[0];
+
+						name = nameValueArray[0].trim();
 						values = new String[] { "" };
 					}
 					else if (nameValueArray.length == 2) {
-						name = nameValueArray[0];
+
+						name = nameValueArray[0].trim();
 
 						// If the parameter name is present in the parameter map, then that means it should be appended
 						// to the return value. Otherwise, it should not be appended, because absence from the parameter
@@ -185,7 +187,19 @@ public class BaseURLNonEncodedStringImpl implements BaseURL {
 						values = parameterMap.get(name);
 					}
 
-					if ((name != null) && (values != null) && (values.length > 0)) {
+					if ((name == null) || (name.length() == 0)) {
+						logger.error("Invalid name=value pair=[{0}] in URL=[{1}]: name cannot be empty", queryParameter,
+							url);
+					}
+					else if ((values == null) || (values.length == 0)) {
+
+						// Note that "javax.portlet.faces.BackLink" is sometimes deliberately removed and therefore is
+						// not an error.
+						if (!Bridge.BACK_LINK.equals(name)) {
+							logger.error("Invalid name=value pair=[{0}] in URL=[{1}]", queryParameter, url);
+						}
+					}
+					else {
 
 						if (firstParam) {
 							firstParam = false;
@@ -207,16 +221,6 @@ public class BaseURLNonEncodedStringImpl implements BaseURL {
 						buf.append(value);
 						parameterOccurrences = new Integer(parameterOccurrences.intValue() + 1);
 						parameterOccurrenceMap.put(name, parameterOccurrences);
-					}
-
-					// Otherwise, log an error.
-					else {
-
-						// Note that "javax.portlet.faces.BackLink" is sometimes deliberately removed and therefore is
-						// not an error.
-						if (!Bridge.BACK_LINK.equals(name)) {
-							logger.error("Invalid name=value pair=[{0}] in URL=[{1}]", queryParameter, url);
-						}
 					}
 				}
 			}
