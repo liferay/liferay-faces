@@ -60,14 +60,22 @@ public class FacesViewParameterMap extends HashMap<String, String> implements Ma
 
 					if (nameValueArray.length == 1) {
 
-						String parameterName = nameValueArray[0];
-						put(parameterName, "");
+						String parameterName = nameValueArray[0].trim();
+
+						if (parameterName.length() == 0) {
+							logger.error(
+								"Invalid name=value pair=[{0}] in facesViewQueryString=[{1}]: name cannot be empty",
+								nameValueArray, facesViewQueryString);
+						}
+						else {
+							put(parameterName, "");
+						}
 					}
 					else if (nameValueArray.length == 2) {
 
-						String parameterName = nameValueArray[0];
+						String parameterName = nameValueArray[0].trim();
 
-						if ("".equals(parameterName)) {
+						if (parameterName.length() == 0) {
 							logger.error(
 								"Invalid name=value pair=[{0}] in facesViewQueryString=[{1}]: name cannot be empty",
 								nameValueArray, facesViewQueryString);

@@ -449,16 +449,23 @@ public abstract class BridgeURLBase implements BridgeURL {
 
 						if (nameValueArray.length == 1) {
 
-							String name = nameValueArray[0];
-							requestParameters.add(new RequestParameter(name, ""));
+							String name = nameValueArray[0].trim();
+
+							if (name.length() == 0) {
+								throw new MalformedURLException("Invalid name/value pair=[" + queryParameter +
+									"]: name cannot be empty.");
+							}
+							else {
+								requestParameters.add(new RequestParameter(name, ""));
+							}
 						}
 						else if (nameValueArray.length == 2) {
 
-							String name = nameValueArray[0];
+							String name = nameValueArray[0].trim();
 
-							if ("".equals(name)) {
-								throw new MalformedURLException(
-									"invalid name/value pair: name cannot be empty. value is " + queryParameter);
+							if (name.length() == 0) {
+								throw new MalformedURLException("Invalid name/value pair=[" + queryParameter +
+									"]: name cannot be empty.");
 							}
 							else {
 
@@ -467,7 +474,7 @@ public abstract class BridgeURLBase implements BridgeURL {
 							}
 						}
 						else {
-							throw new MalformedURLException("invalid name/value pair: " + queryParameter);
+							throw new MalformedURLException("Invalid name/value pair: " + queryParameter);
 						}
 					}
 				}
