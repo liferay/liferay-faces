@@ -32,13 +32,15 @@ import javax.faces.context.ResponseWriter;
 public class PrimeFacesHeadResponseWriter extends ResponseWriter {
 
 	// Private Data Members
-	private List<String> externalScriptURLs;
+	private List<String> externalResourceURLs;
 	private boolean inlineScript;
 	private StringWriter stringWriter;
 	private boolean writingScript;
+	private boolean writingCss;
 
 	public PrimeFacesHeadResponseWriter() {
-		this.externalScriptURLs = new ArrayList<String>();
+
+		this.externalResourceURLs = new ArrayList<String>();
 		this.inlineScript = true;
 		this.stringWriter = new StringWriter();
 	}
@@ -61,8 +63,12 @@ public class PrimeFacesHeadResponseWriter extends ResponseWriter {
 	public void endElement(String name) throws IOException {
 
 		if ("script".equals(name)) {
+
 			writingScript = false;
 			inlineScript = true;
+		}
+		else if (writingCss && "link".equals(name)) {
+			writingCss = false;
 		}
 	}
 
@@ -99,16 +105,23 @@ public class PrimeFacesHeadResponseWriter extends ResponseWriter {
 	@Override
 	public void writeAttribute(String name, Object value, String property) throws IOException {
 
-		if (writingScript) {
+		if (writingScript && "src".equals(name)) {
 
-			if ("src".equals(name)) {
-				inlineScript = false;
+			inlineScript = false;
 
-				if (value != null) {
-					String externalScriptURL = value.toString();
-					externalScriptURLs.add(externalScriptURL);
-				}
+			if (value != null) {
+
+				String externalScriptURL = value.toString();
+				externalResourceURLs.add(externalScriptURL);
 			}
+		}
+		else if ("type".equals(name) && "text/css".equals(value)) {
+			writingCss = true;
+		}
+		else if (writingCss && "href".equals(name) && value != null) {
+
+			String externalCssURL = value.toString();
+			externalResourceURLs.add(externalCssURL);
 		}
 	}
 
@@ -151,7 +164,7 @@ public class PrimeFacesHeadResponseWriter extends ResponseWriter {
 		return null;
 	}
 
-	public List<String> getExternalScriptURLs() {
-		return externalScriptURLs;
+	public List<String> getExternalResourceURLs() {
+		return externalResourceURLs;
 	}
 }
