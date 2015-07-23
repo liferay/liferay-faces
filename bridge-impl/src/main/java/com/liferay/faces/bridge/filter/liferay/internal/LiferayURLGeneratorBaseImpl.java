@@ -504,20 +504,14 @@ public abstract class LiferayURLGeneratorBaseImpl implements LiferayURLGenerator
 
 		String encodedValue = "";
 
-		if (value != null) {
+		if ((value != null) && (value.length() > 0)) {
 
-			if (value.length() == 0) {
-				encodedValue = " ";
+			try {
+				encodedValue = URLEncoder.encode(value, "UTF-8");
 			}
-			else {
-
-				try {
-					encodedValue = URLEncoder.encode(value, "UTF-8");
-				}
-				catch (UnsupportedEncodingException e) {
-					logger.error(e);
-					encodedValue = " ";
-				}
+			catch (UnsupportedEncodingException e) {
+				logger.error(e);
+				encodedValue = "";
 			}
 		}
 
