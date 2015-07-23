@@ -54,28 +54,35 @@ public class URLUtil {
 					String[] queryParameters = queryString.split("[&]");
 
 					for (String queryParameter : queryParameters) {
+
 						String[] nameValueArray = queryParameter.split("[=]");
 
-						if (nameValueArray != null) {
+						String name = nameValueArray[0].trim();
+						String[] existingValues = parameterMapValuesArray.get(name);
 
-							String name = nameValueArray[0];
-							String[] existingValues = parameterMapValuesArray.get(name);
+						if (nameValueArray.length == 1) {
 
-							if (nameValueArray.length == 1) {
-								String[] newValues = null;
+							String[] newValues;
 
-								if (existingValues == null) {
-									newValues = new String[] { "" };
-								}
-								else {
-									newValues = Arrays.copyOf(existingValues, existingValues.length + 1);
-									newValues[existingValues.length] = "";
-								}
-
-								parameterMapValuesArray.put(name, newValues);
+							if (existingValues == null) {
+								newValues = new String[] { "" };
 							}
-							else if (nameValueArray.length == 2) {
-								String[] newValues = null;
+							else {
+								newValues = Arrays.copyOf(existingValues, existingValues.length + 1);
+								newValues[existingValues.length] = "";
+							}
+
+							parameterMapValuesArray.put(name, newValues);
+						}
+						else if (nameValueArray.length == 2) {
+
+							if (name.length() == 0) {
+								logger.error("Invalid name=value pair=[{0}] in URL=[{1}]: name cannot be empty",
+									nameValueArray, url);
+							}
+							else {
+
+								String[] newValues;
 
 								if (existingValues == null) {
 									newValues = new String[] { nameValueArray[1] };
@@ -87,9 +94,9 @@ public class URLUtil {
 
 								parameterMapValuesArray.put(name, newValues);
 							}
-							else {
-								logger.error("Invalid name=value pair=[{0}] in URL=[{1}]", nameValueArray, url);
-							}
+						}
+						else {
+							logger.error("Invalid name=value pair=[{0}] in URL=[{1}]", nameValueArray, url);
 						}
 					}
 				}
