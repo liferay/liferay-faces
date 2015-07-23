@@ -101,10 +101,10 @@ public class HeadRendererPrimeFacesImpl extends HeadRendererBridgeImpl {
 		// element to the response writer with a "src" attribute containing a URL (an external script). When this
 		// occurs, it is necessary to reverse-engineer the URL of each external script in order to determine the
 		// name/library of the corresponding JSF2 resource.
-		List<String> externalScriptURLs = primeFacesHeadResponseWriter.getExternalScriptURLs();
+		List<String> externalResourceURLs = primeFacesHeadResponseWriter.getExternalResourceURLs();
 
 		// For each external script URL:
-		if (externalScriptURLs.size() > 0) {
+		if (externalResourceURLs.size() > 0) {
 
 			ExternalContext externalContext = facesContext.getExternalContext();
 			PortletResponse portletResponse = (PortletResponse) externalContext.getResponse();
@@ -112,7 +112,7 @@ public class HeadRendererPrimeFacesImpl extends HeadRendererBridgeImpl {
 			String resourceNameParam = namespace + "javax.faces.resource";
 			String libraryNameParam = namespace + "ln";
 
-			for (String externalScriptURL : externalScriptURLs) {
+			for (String externalScriptURL : externalResourceURLs) {
 
 				// Determine the value of the "javax.faces.resource" and "ln" parameters from the URL.
 				String resourceName = null;
@@ -140,14 +140,14 @@ public class HeadRendererPrimeFacesImpl extends HeadRendererBridgeImpl {
 				if ((resourceName != null) && (libraryName != null)) {
 					Application application = facesContext.getApplication();
 					ResourceHandler resourceHandler = application.getResourceHandler();
-					UIComponent outputScript = application.createComponent(UIOutput.COMPONENT_TYPE);
+					UIComponent resource = application.createComponent(UIOutput.COMPONENT_TYPE);
 					String rendererType = resourceHandler.getRendererTypeForResourceName(resourceName);
-					outputScript.setRendererType(rendererType);
-					outputScript.setTransient(true);
-					outputScript.getAttributes().put("name", resourceName);
-					outputScript.getAttributes().put("library", libraryName);
-					outputScript.getAttributes().put("target", "head");
-					capturedResources.add(outputScript);
+					resource.setRendererType(rendererType);
+					resource.setTransient(true);
+					resource.getAttributes().put("name", resourceName);
+					resource.getAttributes().put("library", libraryName);
+					resource.getAttributes().put("target", "head");
+					capturedResources.add(resource);
 				}
 			}
 		}
@@ -171,41 +171,5 @@ public class HeadRendererPrimeFacesImpl extends HeadRendererBridgeImpl {
 		// Delegate rendering to the superclass so that it can write resources found in the view root to the head
 		// section of the portal page.
 		super.encodeBegin(facesContext, uiComponent);
-	}
-
-	@Override
-	protected List<UIComponent> getFirstResources(FacesContext facesContext, UIComponent uiComponent) {
-
-		List<UIComponent> resources = super.getFirstResources(facesContext, uiComponent);
-
-		// PrimeFaces Theme
-		ExternalContext externalContext = facesContext.getExternalContext();
-		String primeFacesThemeName = externalContext.getInitParameter(PRIMEFACES_THEME_PARAM);
-
-		if (primeFacesThemeName != null) {
-			ELContext elContext = facesContext.getELContext();
-			ExpressionFactory expressionFactory = facesContext.getApplication().getExpressionFactory();
-			ValueExpression valueExpression = expressionFactory.createValueExpression(elContext, primeFacesThemeName,
-					String.class);
-			primeFacesThemeName = (String) valueExpression.getValue(elContext);
-
-		}
-		else {
-			primeFacesThemeName = PRIMEFACES_THEME_DEFAULT;
-		}
-
-		if ((primeFacesThemeName != null) && !primeFacesThemeName.equals(PRIMEFACES_THEME_NONE)) {
-
-			if (resources == null) {
-				resources = new ArrayList<UIComponent>();
-			}
-
-			String resourceLibrary = PRIMEFACES_THEME_PREFIX + primeFacesThemeName;
-			ResourceComponent primeFacesStyleSheet = new ResourceComponent(facesContext, PRIMEFACES_THEME_RESOURCE_NAME,
-					resourceLibrary, "head");
-			resources.add(primeFacesStyleSheet);
-		}
-
-		return resources;
 	}
 }
