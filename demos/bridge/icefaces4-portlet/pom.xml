@@ -53,4 +53,17 @@
 		</dependency>
 	</dependencies>
 
+	<!-- Don't release the iceface4-portlet because of FACES-2040 and ICE-10335. -->
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-deploy-plugin</artifactId>
+				<configuration>
+					<skip>true</skip>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
 </project>
