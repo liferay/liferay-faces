@@ -47,11 +47,6 @@ public class HeadRendererPrimeFacesImpl extends HeadRendererBridgeImpl {
 	private static final Logger logger = LoggerFactory.getLogger(HeadRendererPrimeFacesImpl.class);
 
 	// Private Constants
-	private static final String PRIMEFACES_THEME_DEFAULT = "aristo";
-	private static final String PRIMEFACES_THEME_PARAM = "primefaces.THEME";
-	private static final String PRIMEFACES_THEME_NONE = "none";
-	private static final String PRIMEFACES_THEME_PREFIX = "primefaces-";
-	private static final String PRIMEFACES_THEME_RESOURCE_NAME = "theme.css";
 	private static final Renderer PRIMEFACES_HEAD_RENDERER;
 
 	static {
@@ -107,16 +102,17 @@ public class HeadRendererPrimeFacesImpl extends HeadRendererBridgeImpl {
 			String resourceNameParam = namespace + "javax.faces.resource";
 			String libraryNameParam = namespace + "ln";
 
-			for (String externalScriptURL : externalResourceURLs) {
+			for (String externalResourceURL : externalResourceURLs) {
 
 				// Determine the value of the "javax.faces.resource" and "ln" parameters from the URL.
 				String resourceName = null;
 				String libraryName = null;
-				String decodedExternalScriptURL = URLDecoder.decode(externalScriptURL, "UTF-8");
+				String decodedExternalResourceURL = URLDecoder.decode(externalResourceURL, "UTF-8");
 				Map<String, String[]> parsedParameterMapValuesArray = URLUtil.parseParameterMapValuesArray(
-						decodedExternalScriptURL);
+						decodedExternalResourceURL);
 
 				if (parsedParameterMapValuesArray != null) {
+
 					String[] resourceNameParamValues = parsedParameterMapValuesArray.get(resourceNameParam);
 
 					if ((resourceNameParamValues != null) && (resourceNameParamValues.length > 0)) {
@@ -133,6 +129,7 @@ public class HeadRendererPrimeFacesImpl extends HeadRendererBridgeImpl {
 				// If the "javax.faces.resource" and "ln" parameters were found, then create the corresponding JSF2
 				// resource and add it to the view root.
 				if ((resourceName != null) && (libraryName != null)) {
+
 					Application application = facesContext.getApplication();
 					ResourceHandler resourceHandler = application.getResourceHandler();
 					UIComponent resource = application.createComponent(UIOutput.COMPONENT_TYPE);
@@ -159,6 +156,7 @@ public class HeadRendererPrimeFacesImpl extends HeadRendererBridgeImpl {
 		String inlineScriptText = primeFacesHeadResponseWriter.toString();
 
 		if ((inlineScriptText != null) && (inlineScriptText.length() > 0)) {
+
 			PrimeFacesInlineScript primeFacesInlineScript = new PrimeFacesInlineScript(inlineScriptText);
 			originalUIViewRoot.addComponentResource(facesContext, primeFacesInlineScript, "head");
 		}
