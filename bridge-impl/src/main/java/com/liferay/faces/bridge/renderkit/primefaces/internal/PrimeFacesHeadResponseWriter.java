@@ -32,13 +32,17 @@ import javax.faces.context.ResponseWriter;
 public class PrimeFacesHeadResponseWriter extends ResponseWriter {
 
 	// Private Data Members
-	private List<String> externalScriptURLs;
+	private List<String> externalResourceURLs;
 	private boolean inlineScript;
 	private StringWriter stringWriter;
 	private boolean writingScript;
+	private boolean writingCss;
+	private boolean writingLink;
+	private String potentialExternalCssURL;
 
 	public PrimeFacesHeadResponseWriter() {
-		this.externalScriptURLs = new ArrayList<String>();
+
+		this.externalResourceURLs = new ArrayList<String>();
 		this.inlineScript = true;
 		this.stringWriter = new StringWriter();
 	}
@@ -61,8 +65,15 @@ public class PrimeFacesHeadResponseWriter extends ResponseWriter {
 	public void endElement(String name) throws IOException {
 
 		if ("script".equals(name)) {
+
 			writingScript = false;
 			inlineScript = true;
+		}
+		else if ("link".equals(name)) {
+
+			potentialExternalCssURL = null;
+			writingCss = false;
+			writingLink = false;
 		}
 	}
 
@@ -80,6 +91,9 @@ public class PrimeFacesHeadResponseWriter extends ResponseWriter {
 
 		if ("script".equals(name)) {
 			writingScript = true;
+		}
+		else if ("link".equals(name)) {
+			writingLink = true;
 		}
 	}
 
@@ -99,15 +113,38 @@ public class PrimeFacesHeadResponseWriter extends ResponseWriter {
 	@Override
 	public void writeAttribute(String name, Object value, String property) throws IOException {
 
-		if (writingScript) {
+		if (writingScript && "src".equals(name)) {
 
-			if ("src".equals(name)) {
-				inlineScript = false;
+			inlineScript = false;
 
-				if (value != null) {
-					String externalScriptURL = value.toString();
-					externalScriptURLs.add(externalScriptURL);
-				}
+			if (value != null) {
+
+				String externalScriptURL = value.toString();
+				externalResourceURLs.add(externalScriptURL);
+			}
+		}
+		else if (writingLink && "type".equals(name) && "text/css".equals(value)) {
+
+			// If a resource URL has been saved while writing this link, then it is a CSS resource URL.
+			if (potentialExternalCssURL != null) {
+				externalResourceURLs.add(potentialExternalCssURL);
+			}
+			else {
+				writingCss = true;
+			}
+		}
+		else if (writingLink && "href".equals(name) && (value != null)) {
+
+			String externalResourceURL = value.toString();
+
+			if (writingCss) {
+				externalResourceURLs.add(externalResourceURL);
+			}
+
+			// Otherwise, the resource may or may not be a CSS resource URL, so save it until it's type can be
+			// determined.
+			else {
+				potentialExternalCssURL = externalResourceURL;
 			}
 		}
 	}
@@ -151,7 +188,7 @@ public class PrimeFacesHeadResponseWriter extends ResponseWriter {
 		return null;
 	}
 
-	public List<String> getExternalScriptURLs() {
-		return externalScriptURLs;
+	public List<String> getExternalResourceURLs() {
+		return externalResourceURLs;
 	}
 }
