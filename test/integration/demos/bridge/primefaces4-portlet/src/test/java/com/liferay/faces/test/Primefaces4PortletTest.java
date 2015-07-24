@@ -99,7 +99,7 @@ public class Primefaces4PortletTest extends TesterBase {
 	private static final String componentLibraryVersionXpath = "//*[contains(text(),'PrimeFaces ')]";
 	private static final String alloyVersionXpath = "//*[contains(text(),'Liferay Faces Alloy')]";
 	private static final String bridgeVersionXpath = "//*[contains(text(),'Liferay Faces Bridge')]";
-	
+
 	private static final String versionUlXpath = "//*[contains(text(),'Liferay Faces Bridge')]/../../../ul";
 	private static final String windowInnerHeightXpath = "//em[@id='window.innerHeight']";
 	private static final String windowInnerWidthXpath = "//em[@id='window.innerWidth']";
@@ -190,9 +190,9 @@ public class Primefaces4PortletTest extends TesterBase {
 	private WebElement windowInnerWidth;
 
 	protected int dateValidationXpathModifier = 0;
-	
+
 	protected String innerHeight = "-1";
-    protected String innerWidth = "-1";
+	protected String innerWidth = "-1";
 
 	@Drone
 	WebDriver browser;
@@ -261,9 +261,10 @@ public class Primefaces4PortletTest extends TesterBase {
 		logger.log(Level.INFO, alloyVersion.getText());
 		assertTrue("bridgeVersion.isDisplayed()", bridgeVersion.isDisplayed());
 		logger.log(Level.INFO, bridgeVersion.getText());
-		
+
 		// get the window.innerHeight and window.innerWidth
 		try {
+
 			((JavascriptExecutor) browser).executeScript(
 				"var w = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth; " +
 				"var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight; "
@@ -280,7 +281,7 @@ public class Primefaces4PortletTest extends TesterBase {
 				+ "var em2 = document.createElement('em'); "
 				+ "var id2 = document.createAttribute('id'); "
 				+ "id2.value = 'window.innerWidth'; "
-				+ "em2.setAttributeNode(id2);   "
+				+ "em2.setAttributeNode(id2); "
 				+ "var textNode2 = document.createTextNode(w); "
 				+ "em2.appendChild(textNode2); "
 				+ "var li2 = document.createElement('li'); "
@@ -291,7 +292,7 @@ public class Primefaces4PortletTest extends TesterBase {
 
 				versionUl
 			);
-			
+
 		} catch (Exception e) {
 			logger.log(Level.INFO,
 					"Exception e.getMessage() = " + e.getMessage());
@@ -471,7 +472,7 @@ public class Primefaces4PortletTest extends TesterBase {
 			logger.log(Level.INFO, "NO editPreferencesButton isThere, so preferencesMenuItem.click() ...");
 			selectEditMode(browser, portal);
 		}
-		
+
 //		Thread.sleep(1500);
 		waitForElement(browser, resetButtonXpath);
 
@@ -526,12 +527,21 @@ public class Primefaces4PortletTest extends TesterBase {
 		logger.log(Level.INFO, "resetButton.click() ...");
 		resetButton.click();
 
-//		Thread.sleep(500);
+		Thread.sleep(500);
 		logger.log(Level.INFO, "browser.navigate().to(" + url + ")");
 		browser.navigate().to(url);
 //		Thread.sleep(500);
 		logger.log(Level.INFO, "browser.getCurrentUrl() = " + browser.getCurrentUrl());
 		assertTrue("We are on the correct page, which should be, url = " + url, browser.getCurrentUrl().contains(url));
+
+		try {
+			waitForElement(browser, firstNameFieldXpath);
+		}
+		catch (Exception e) {
+			logger.log(Level.INFO, "Exception e.getMessage() = " + e.getMessage());
+			assertTrue("firstNameField should be visible after reset, " +
+			"but " + firstNameFieldXpath + " is not visible.", false);
+		}
 
 	}
 
@@ -564,7 +574,7 @@ public class Primefaces4PortletTest extends TesterBase {
 		}
 		catch (Exception e) {
 			logger.log(Level.INFO, "Exception e.getMessage() = " + e.getMessage());
-			assertTrue("firstNameFieldErrorXpath should have been visible since all fields " + 
+			assertTrue("firstNameFieldErrorXpath should have been visible since all fields " +
 			"are required upon submit, but the 'Value is required' validation message never showed up ...", e == null);
 		}
 
@@ -628,7 +638,7 @@ public class Primefaces4PortletTest extends TesterBase {
 			assertTrue("cityFieldXpath should have been visible after entering the postal code 32801," +
 			" but the " + cityFieldXpath + " never showed up ...", e == null);
 		}
-	
+
 		logger.log(Level.INFO, "after cityField.getAttribute('value') = " + cityField.getAttribute("value"));
 		logger.log(Level.INFO,
 			"after postalCodeField.getAttribute('value') = " + postalCodeField.getAttribute("value"));
@@ -698,7 +708,7 @@ public class Primefaces4PortletTest extends TesterBase {
 		waitForElement(browser, commentsXpath);
 		logger.log(Level.INFO,
 			"after hide and show comments.getAttribute('value') = " + comments.getAttribute("value"));
-		assertTrue("comments should be there after hide and then show, but comments value is '" + 
+		assertTrue("comments should be there after hide and then show, but comments value is '" +
 			comments.getAttribute("value") +"' after clicking show comments.", testing123.equals(comments.getAttribute("value")));
 
 	}
@@ -731,8 +741,17 @@ public class Primefaces4PortletTest extends TesterBase {
 //		Thread.sleep(500);
 		waitForElement(browser, submitButtonXpath);
 		submitButton.click();
+
 //		Thread.sleep(500);
-		waitForElement(browser, dateOfBirthFieldXpath);
+		try {
+			waitForElement(browser, dateOfBirthFieldErrorXpath);
+		}
+		catch (Exception e) {
+			logger.log(Level.INFO, "Exception e.getMessage() = " + e.getMessage());
+			assertTrue("dateOfBirthFieldError should be visible after submitting," +
+			" but " + dateOfBirthFieldErrorXpath + " is not visible.", e == null);
+		}
+
 		logger.log(Level.INFO, "dateOfBirthField.getAttribute('value') = " + dateOfBirthField.getAttribute("value"));
 		logger.log(Level.INFO, "dateOfBirthFieldError.isDisplayed() = " + dateOfBirthFieldError.isDisplayed());
 		logger.log(Level.INFO, "dateOfBirthFieldError.getText() = " + dateOfBirthFieldError.getText());
@@ -822,7 +841,7 @@ public class Primefaces4PortletTest extends TesterBase {
 //			Thread.sleep(500);
 			waitForElement(browser, fileUploadChooserXpath);
 		}
-		
+
 		logger.log(Level.INFO, "fileUploadChooser.getCssValue(transform) = " + fileUploadChooser.getCssValue("transform"));
 		logger.log(Level.INFO, "fileUploadChooser.getCssValue(visibility) = " + fileUploadChooser.getCssValue("visibility"));
 		logger.log(Level.INFO, "fileUploadChooser.getCssValue(display) = " + fileUploadChooser.getCssValue("display"));
@@ -833,7 +852,7 @@ public class Primefaces4PortletTest extends TesterBase {
 		logger.log(Level.INFO, "fileUploadChooser.getCssValue(overflow) = " + fileUploadChooser.getCssValue("overflow"));
 
 		logger.log(Level.INFO, "fileUploadChooser.getAttribute(type) = " + fileUploadChooser.getAttribute("type"));
-		
+
 		logger.log(Level.INFO, "entering in " + getPathToJerseyFile() + " for fileUploadChooser ...");
 
 		// This was the magic that fixed the primefaces4 fileupload component the transform needed to be set to 'none'
@@ -938,7 +957,7 @@ public class Primefaces4PortletTest extends TesterBase {
 				assertTrue("showCommentsLinkXpath should be visible when their is no text area for comments showing," +
 						" but the " + showCommentsLinkXpath + " is not visible.", e == null);
 			}
-			
+
 			showCommentsLink.click();
 //			Thread.sleep(500);
 			waitForElement(browser, "//textarea[contains(@id,':comments')]");

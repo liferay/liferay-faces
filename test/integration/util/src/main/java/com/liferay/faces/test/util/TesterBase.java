@@ -123,10 +123,32 @@ public class TesterBase {
 		if (browser.getTitle().contains("Status")) {
 			logger.log(Level.INFO, "welcome-theme installed ...");
 			String welcomeSignInUrl = signInUrl.replace("home", "welcome");
+			logger.log(Level.INFO, "browser.navigate().to(" + welcomeSignInUrl + ")");
 			browser.navigate().to(welcomeSignInUrl);
 			logger.log(Level.INFO, "browser.getTitle() = " + browser.getTitle() + " before signing in ...");
 		} else {
 			logger.log(Level.INFO, "no welcome-theme, no problem ...");
+		}
+
+		if (isThere(browser, "//div[contains(text()[2],'was not found')]")) {
+
+			// attempt to go to a Bridge Demos to get to the login page
+			logger.log(Level.INFO, "Attempting to go to a Bridge Demos to get to the login page ...");
+			String bridgeDemosSignInUrl = baseUrl + "/group/bridge-demos/jsf2";
+			logger.log(Level.INFO, "browser.navigate().to(" + bridgeDemosSignInUrl + ")");
+			browser.navigate().to(bridgeDemosSignInUrl);
+			logger.log(Level.INFO, "browser.getTitle() = " + browser.getTitle() + " before signing in ...");
+
+			waitForElement(browser, emailFieldXpath);
+			user.clear();
+			user.sendKeys(u);
+			pass.clear();
+			pass.sendKeys(p);
+			button.click();
+
+			waitForElement(browser, "//span[contains(text(),'Bridge Demos')]");
+
+			return;
 		}
 
 		user.clear();
@@ -160,7 +182,7 @@ public class TesterBase {
 			logger.log(Level.INFO, "menuPreferences is already displayed ... why is that? ");
 		} else {
 			menuButton.click();
-			}
+		}
 		logger.log(Level.INFO, "menuPreferences.click() ... ");
 		if (menuPreferences.isDisplayed()) {
 			menuPreferences.click();
