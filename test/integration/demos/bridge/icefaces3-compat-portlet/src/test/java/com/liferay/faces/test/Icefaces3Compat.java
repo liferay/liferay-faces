@@ -65,6 +65,8 @@ public class Icefaces3Compat extends TesterBase {
 	private static final String provinceIdFieldXpath = "//select[contains(@id,':provinceId')]";
 	private static final String provinceIdFieldErrorXpath = "//select[contains(@id,':provinceId')]/following-sibling::*[1]";
 
+	private static final String provinceIdSelectorXpath = "";
+
 	private static final String postalCodeFieldXpath = "//input[contains(@id,':postalCode')]";
 	private static final String postalCodeFieldErrorXpath = "//input[contains(@id,':postalCode')]/following-sibling::*[1]/following-sibling::*[1]";
 
@@ -88,7 +90,7 @@ public class Icefaces3Compat extends TesterBase {
 	private static final String alloyVersionXpath = "//*[contains(text(),'Liferay Faces Alloy')]";
 	private static final String bridgeVersionXpath = "//*[contains(text(),'Liferay Faces Bridge')]";
 
-	private static final String versionUlXpath = "//*[contains(text(),'Liferay Faces Bridge')]/../../../ul";
+	private static final String versionUlXpath = "//*[contains(text(),'Liferay Faces Bridge')]/../../../../ul";
 	private static final String windowInnerHeightXpath = "//em[@id='window.innerHeight']";
 	private static final String windowInnerWidthXpath = "//em[@id='window.innerWidth']";
 
@@ -173,6 +175,12 @@ public class Icefaces3Compat extends TesterBase {
 	private WebElement alloyVersion;
 	@FindBy(xpath = bridgeVersionXpath)
 	private WebElement bridgeVersion;
+	@FindBy(xpath = versionUlXpath)
+	private WebElement versionUl;
+	@FindBy(xpath = windowInnerHeightXpath)
+	private WebElement windowInnerHeight;
+	@FindBy(xpath = windowInnerWidthXpath)
+	private WebElement windowInnerWidth;
 
 	protected int dateValidationXpathModifier = 0;
 

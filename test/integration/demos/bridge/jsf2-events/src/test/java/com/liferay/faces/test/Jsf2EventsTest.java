@@ -131,7 +131,16 @@ public class Jsf2EventsTest extends TesterBase {
 	public void checkBriansBookings() throws Exception {
 
 		briansInput.click();
-		Thread.sleep(500);
+
+//		Thread.sleep(500);
+		try {
+			waitForElement(browser, firstNameXpath);
+		}
+		catch (Exception e) { 
+			logger.log(Level.INFO, "Exception e.getMessage() = " + e.getMessage());
+			assertTrue("firstField should be visible, " +
+			"but " + firstNameXpath + " is not visible.", false);
+		}
 
 		logger.log(Level.INFO, "firstName.getAttribute(value) = " + firstName.getAttribute("value"));
 		logger.log(Level.INFO, "lastName.getAttribute(value) = " + lastName.getAttribute("value"));
