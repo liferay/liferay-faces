@@ -28,12 +28,13 @@ import org.junit.runner.RunWith;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
-
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.liferay.faces.test.util.TesterBase;
 
@@ -103,9 +104,6 @@ public class Jsf2JspPortletTest extends TesterBase {
 	private static final String versionUlXpath = "//*[contains(text(),'Liferay Faces Bridge')]/../../../ul";
 	private static final String windowInnerHeightXpath = "//em[@id='window.innerHeight']";
 	private static final String windowInnerWidthXpath = "//em[@id='window.innerWidth']";
-
-	// xpath for specific tests
-	private static final String dateValidationXpath = "//input[contains(@id,':dateOfBirth')]/../child::node()";
 
 	static final String url = baseUrl + webContext + "/jsf2-jsp";
 
@@ -189,8 +187,6 @@ public class Jsf2JspPortletTest extends TesterBase {
 	@FindBy(xpath = windowInnerWidthXpath)
 	private WebElement windowInnerWidth;
 
-	protected int dateValidationXpathModifier = 1;
-
 	protected String innerHeight = "-1";
 	protected String innerWidth = "-1";
 
@@ -217,8 +213,6 @@ public class Jsf2JspPortletTest extends TesterBase {
 		logger.log(Level.INFO, "displayName.getText() = " + displayName.getText());
 
 		assertTrue("displayName.isDisplayed()", displayName.isDisplayed());
-		// assertTrue("preferencesMenuButton.isDisplayed()", preferencesMenuButton.isDisplayed());
-		// assertFalse("preferencesMenuItem is NOT displayed()", preferencesMenuItem.isDisplayed());
 
 		if (isThere(browser, logoXpath)) {
 			assertTrue("logo.isDisplayed()", logo.isDisplayed());
@@ -326,13 +320,14 @@ public class Jsf2JspPortletTest extends TesterBase {
 	@RunAsClient
 	@InSequence(1500)
 	public void dataEntry() throws Exception {
+		
+		String foo = "";
 
 		logger.log(Level.INFO, "clicking into the firstNameField ...");
 		firstNameField.click();
-//		Thread.sleep(50);
 		logger.log(Level.INFO, "tabbing into the next field ...");
 		firstNameField.sendKeys(Keys.TAB);
-//		Thread.sleep(500);
+		
 		logger.log(Level.INFO, "firstNameField.getAttribute('value') = " + firstNameField.getAttribute("value"));
 		logger.log(Level.INFO, "isThere(browser, firstNameFieldErrorXpath) = " + isThere(browser, firstNameFieldErrorXpath));
 
@@ -345,13 +340,13 @@ public class Jsf2JspPortletTest extends TesterBase {
 
 		logger.log(Level.INFO, "Shift tabbing back into the firstNameField ...");
 		(new Actions(browser)).keyDown(Keys.SHIFT).sendKeys(Keys.TAB).keyDown(Keys.SHIFT).perform();
-//		Thread.sleep(50);
+
 		logger.log(Level.INFO, "isThere(browser, firstNameFieldErrorXpath) = " + isThere(browser, firstNameFieldErrorXpath));
 
 		logger.log(Level.INFO, "entering 'asdf' into the firstNameField and then tabbing out of it...");
 		firstNameField.sendKeys("asdf");
 		firstNameField.sendKeys(Keys.TAB);
-//		Thread.sleep(50);
+
 		logger.log(Level.INFO, "firstNameField.getAttribute('value') = " + firstNameField.getAttribute("value"));
 		logger.log(Level.INFO, "isThere(browser, firstNameFieldErrorXpath) = " + isThere(browser, firstNameFieldErrorXpath));
 		assertTrue("The data 'asdf' should be in the firstNameField after tabbing out of it",
@@ -359,20 +354,84 @@ public class Jsf2JspPortletTest extends TesterBase {
 
 		logger.log(Level.INFO, "Shift tabbing back into the firstNameField ...");
 		(new Actions(browser)).keyDown(Keys.SHIFT).sendKeys(Keys.TAB).keyUp(Keys.SHIFT).perform();
-//		Thread.sleep(250);
+
 		firstNameField.click();
 		logger.log(Level.INFO,
 			"clearing the firstNameField using the BACKSPACE key, and then tabbing out of the firstNameField ...");
 		firstNameField.sendKeys(Keys.BACK_SPACE);
-		Thread.sleep(150);
+
+		logger.log(Level.INFO, "Waiting for the firstNameField to contain 'asd' ...");
+		try {
+			WebDriverWait wait = new WebDriverWait(browser, 10);
+			wait.until(ExpectedConditions.textToBePresentInElementValue(By.xpath(firstNameFieldXpath), "asd"));
+		}
+		catch (Exception e) {
+			logger.log(Level.INFO, "Exception e.getMessage() = " + e.getMessage());
+			if (isThere(browser, firstNameFieldXpath)) {
+				foo = firstNameField.getText();
+			}
+			logger.log(Level.INFO, "firstNameField.getText() = " + firstNameField.getText());
+			assertTrue("firstNameField should contain 'asd', but " + firstNameFieldXpath + " contains '" + foo + "'.", false);
+		}
+
 		firstNameField.sendKeys(Keys.BACK_SPACE);
-		Thread.sleep(150);
+
+		logger.log(Level.INFO, "Waiting for the firstNameField to contain 'as' ...");
+		try {
+			WebDriverWait wait = new WebDriverWait(browser, 10);
+			wait.until(ExpectedConditions.textToBePresentInElementValue(By.xpath(firstNameFieldXpath), "as"));
+		}
+		catch (Exception e) {
+			logger.log(Level.INFO, "Exception e.getMessage() = " + e.getMessage());
+			if (isThere(browser, firstNameFieldXpath)) {
+				foo = firstNameField.getText();
+			}
+			assertTrue("firstNameField should contain 'as', but " + firstNameFieldXpath + " contains '" + foo + "'.", false);
+		}
+
 		firstNameField.sendKeys(Keys.BACK_SPACE);
-		Thread.sleep(150);
+
+		logger.log(Level.INFO, "Waiting for the firstNameField to contain 'a' ...");
+		try {
+			WebDriverWait wait = new WebDriverWait(browser, 10);
+			wait.until(ExpectedConditions.textToBePresentInElementValue(By.xpath(firstNameFieldXpath), "a"));
+		}
+		catch (Exception e) {
+			logger.log(Level.INFO, "Exception e.getMessage() = " + e.getMessage());
+			if (isThere(browser, firstNameFieldXpath)) {
+				foo = firstNameField.getText();
+			}
+			assertTrue("firstNameField should contain 'a', but " + firstNameFieldXpath + " contains '" + foo + "'.", false);
+		}
+
 		firstNameField.sendKeys(Keys.BACK_SPACE);
-		Thread.sleep(150);
+
+		logger.log(Level.INFO, "Waiting for the firstNameField to contain '' ...");
+		try {
+			WebDriverWait wait = new WebDriverWait(browser, 10);
+			wait.until(ExpectedConditions.textToBePresentInElementValue(By.xpath(firstNameFieldXpath), ""));
+		}
+		catch (Exception e) {
+			logger.log(Level.INFO, "Exception e.getMessage() = " + e.getMessage());
+			if (isThere(browser, firstNameFieldXpath)) {
+				foo = firstNameField.getText();
+			}
+			assertTrue("firstNameField should contain '', but " + firstNameFieldXpath + " contains '" + foo + "'.", false);
+		}
+
 		firstNameField.sendKeys(Keys.TAB);
-		Thread.sleep(150);
+
+		logger.log(Level.INFO, "Waiting for the firstNameFieldError to contain 'Value is required' ...");
+		try {
+			WebDriverWait wait = new WebDriverWait(browser, 10);
+			wait.until(ExpectedConditions.textToBePresentInElementLocated(By.xpath(firstNameFieldErrorXpath), "Value is required"));
+		}
+		catch (Exception e) {
+			logger.log(Level.INFO, "Exception e.getMessage() = " + e.getMessage());
+			assertTrue("firstNameFieldError should be visible after tabbing out with no value," +
+			" but " + firstNameFieldErrorXpath + " is not visible.", false);
+		}
+
 		logger.log(Level.INFO, "firstNameField.getAttribute('value') = " + firstNameField.getAttribute("value"));
 		assertTrue(
 			"The data 'asdf' should no longer be in the firstNameField after clearing it out with BACK_SPACE and then tabbing out.	" +
@@ -392,35 +451,81 @@ public class Jsf2JspPortletTest extends TesterBase {
 	@InSequence(2000)
 	public void validateEmail() throws Exception {
 
-		int tags = 0;
-		int tagsWhileValid = 0;
+		String foo = "";
 
 		// checks an invalid email address
 		logger.log(Level.INFO, "Entering an invalid email address 'test' ...");
 		emailAddressField.sendKeys("test");
 		phoneNumberField.click();
-		Thread.sleep(500);
+
+		logger.log(Level.INFO, "Waiting for the emailAddressFieldError to contain 'Invalid e-mail address' ...");
+		try {
+			WebDriverWait wait = new WebDriverWait(browser, 10);
+			wait.until(ExpectedConditions.textToBePresentInElementLocated(By.xpath(emailAddressFieldErrorXpath), "Invalid e-mail address"));
+		}
+		catch (Exception e) {
+			logger.log(Level.INFO, "Exception e.getMessage() = " + e.getMessage());
+			assertTrue("emailAddressField should be visible after tabbing out with no value," +
+			" but " + emailAddressFieldErrorXpath + " is not visible.", false);
+		}
 		logger.log(Level.INFO, "emailAddressField.getAttribute('value') = " + emailAddressField.getAttribute("value"));
-		tags = browser.findElements(By.xpath("//span[contains(text(),'Invalid e-mail address')]")).size();
-		logger.log(Level.INFO, "# of error tags = " + tags);
-		assertTrue("There should be an 'Invalid e-mail address' messaged displayed, but " + tags +
-			" error messages are displayed", tags > tagsWhileValid);
+
 		assertTrue("Invalid e-mail address validation message displayed",
 			emailAddressFieldError.getText().contains("Invalid e-mail address"));
 		logger.log(Level.INFO, "emailAddressFieldError.isDisplayed() = " + emailAddressFieldError.isDisplayed());
 		logger.log(Level.INFO, "emailAddressFieldError.getText() = " + emailAddressFieldError.getText());
 
 		// checks a valid email address
+		logger.log(Level.INFO, "Waiting for the emailAddressFieldError to contain '' ...");
+		try {
+			emailAddressField.clear();
+			WebDriverWait wait = new WebDriverWait(browser, 10);
+			wait.until(ExpectedConditions.textToBePresentInElementValue(By.xpath(emailAddressFieldXpath), ""));
+			logger.log(Level.INFO, "emailAddressField.getText() = '" + emailAddressField.getText() + "'");
+		}
+		catch (Exception e) {
+			logger.log(Level.INFO, "Exception e.getMessage() = " + e.getMessage());
+			if (isThere(browser, emailAddressFieldXpath)) {
+				foo = emailAddressField.getText();
+			}
+			assertTrue("emailAddressField should be clear," +
+			" but " + emailAddressFieldXpath + " contains '" + foo + "'", false);
+		}
+		
 		logger.log(Level.INFO, "Entering a valid email address 'test@liferay.com' ...");
-		emailAddressField.clear();
-		Thread.sleep(500);
+		emailAddressField.click();
 		emailAddressField.sendKeys("test@liferay.com");
+		emailAddressField.sendKeys(Keys.TAB);
 		phoneNumberField.click();
-		Thread.sleep(500);
-		logger.log(Level.INFO, "emailAddressField.getAttribute('value') = " + emailAddressField.getAttribute("value"));
-		tags = browser.findElements(By.xpath("//span[contains(text(),'Invalid e-mail address')]")).size();
-		logger.log(Level.INFO, "tags = " + tags);
-		assertTrue("# of error tags == tagsWhileValid", tags == tagsWhileValid);
+		
+		logger.log(Level.INFO, "Waiting for the emailAddressFieldError to contain 'test@liferay.com' ...");
+		try {
+			WebDriverWait wait = new WebDriverWait(browser, 10);
+			wait.until(ExpectedConditions.textToBePresentInElementValue(By.xpath(emailAddressFieldXpath), "test@liferay.com"));
+		}
+		catch (Exception e) {
+			logger.log(Level.INFO, "Exception e.getMessage() = " + e.getMessage());
+			if (isThere(browser, emailAddressFieldXpath)) {
+				foo = emailAddressField.getText();
+			}
+			assertTrue("emailAddressField should contain 'test@liferay.com'," +
+			" but " + emailAddressFieldXpath + " contains '" + foo + "'", false);
+		}
+
+		logger.log(Level.INFO, "Waiting for the emailAddressFieldError to disappear ...");
+		try {
+			WebDriverWait wait = new WebDriverWait(browser, 10);
+			wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(emailAddressFieldErrorXpath)));
+			logger.log(Level.INFO, "emailAddressField.getAttribute('value') = " + emailAddressField.getAttribute("value"));
+		}
+		catch (Exception e) {
+			logger.log(Level.INFO, "Exception e.getMessage() = " + e.getMessage());
+			if (isThere(browser, emailAddressFieldErrorXpath)) {
+				foo = emailAddressFieldError.getText();
+			}
+			assertTrue("emailAddressFieldError should NOT be visible after entering 'test@liferay.com'," +
+			" but " + emailAddressFieldErrorXpath + " is still there showing '" + foo + "'", false);
+		}
 
 	}
 
@@ -434,6 +539,7 @@ public class Jsf2JspPortletTest extends TesterBase {
 		int dateLengthAfterReset = 10;
 
 		logger.log(Level.INFO, "preferencesMenuButton.click() ... ");
+		logger.log(Level.INFO, "Waiting for datePatternField to show on the page ... ");
 
 		selectEditMode(browser, portal);
 
@@ -453,8 +559,17 @@ public class Jsf2JspPortletTest extends TesterBase {
 
 		logger.log(Level.INFO, "browser.navigate().to(" + url + ")");
 		browser.navigate().to(url);
-//		Thread.sleep(1000);
-		waitForElement(browser, dateOfBirthFieldXpath);
+
+		try {
+			WebDriverWait wait = new WebDriverWait(browser, 10);
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(dateOfBirthFieldXpath)));
+		}
+		catch (Exception e) {
+			logger.log(Level.INFO, "Exception e.getMessage() = " + e.getMessage());
+			assertTrue("dateOfBirthField should be visible after navigating to " + url + "," +
+			" but " + dateOfBirthFieldXpath + " is not visible.", false);
+		}
+		
 		logger.log(Level.INFO, "dateOfBirthField.getAttribute('value') = " + dateOfBirthField.getAttribute("value"));
 		logger.log(Level.INFO,
 			"dateOfBirthField.getAttribute('value').length() = " + dateOfBirthField.getAttribute("value").length());
@@ -473,15 +588,22 @@ public class Jsf2JspPortletTest extends TesterBase {
 			selectEditMode(browser, portal);
 		}
 
-//		Thread.sleep(1500);
-		waitForElement(browser, resetButtonXpath);
+		logger.log(Level.INFO, "Waiting for the resetButton to show on the page ...");
+		try {
+			WebDriverWait wait = new WebDriverWait(browser, 10);
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(resetButtonXpath)));
+		}
+		catch (Exception e) {
+			logger.log(Level.INFO, "Exception e.getMessage() = " + e.getMessage());
+			assertTrue("resetButton should be visible after selecting edit mode," +
+			" but " + resetButtonXpath + " is not visible.", false);
+		}
 
 		logger.log(Level.INFO, "done with selectEditMode: isThere(browser, resetButtonXpath) = " + isThere(browser, resetButtonXpath));
 		logger.log(Level.INFO, "browser.getCurrentUrl() = " + browser.getCurrentUrl());
 
-		resetButton.click();
 		logger.log(Level.INFO, "resetButton.click() ...");
-//		Thread.sleep(1000);
+		resetButton.click();
 
 		// after clicking the resetButton all of the job applicant demos need to end up on the same page Here is a
 		// log statement that should give you a clue between the different testers as to which ones are different from
@@ -491,7 +613,16 @@ public class Jsf2JspPortletTest extends TesterBase {
 		logger.log(Level.INFO, "browser.navigate().to(" + url + ")");
 		browser.navigate().to(url);
 
-		waitForElement(browser, dateOfBirthFieldXpath);
+		logger.log(Level.INFO, "Waiting for the dateOfBirthField to show on the page ...");
+		try {
+			WebDriverWait wait = new WebDriverWait(browser, 10);
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(dateOfBirthFieldXpath)));
+		}
+		catch (Exception e) {
+			logger.log(Level.INFO, "Exception e.getMessage() = " + e.getMessage());
+			assertTrue("dateOfBirthField should be visible after navigating back to view mode," +
+			" but " + dateOfBirthFieldXpath + " is not visible.", false);
+		}
 
 		logger.log(Level.INFO, "dateOfBirthField.getAttribute('value') = " + dateOfBirthField.getAttribute("value"));
 		logger.log(Level.INFO,
@@ -516,32 +647,64 @@ public class Jsf2JspPortletTest extends TesterBase {
 		logger.log(Level.INFO, "browser.getCurrentUrl() = " + browser.getCurrentUrl());
 		logger.log(Level.INFO, "isThere(browser, dateOfBirthFieldXpath) = " + isThere(browser, dateOfBirthFieldXpath));
 
-		waitForElement(browser, dateOfBirthFieldXpath);
-//		Thread.sleep(250);
+		logger.log(Level.INFO, "Waiting for the dateOfBirthField to show on the page ...");
+		try {
+			WebDriverWait wait = new WebDriverWait(browser, 10);
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(dateOfBirthFieldXpath)));
+		}
+		catch (Exception e) {
+			logger.log(Level.INFO, "Exception e.getMessage() = " + e.getMessage());
+			refreshBrowser();
+			assertTrue("dateOfBirthField should have been visible after navigating back to view mode," +
+			" but " + dateOfBirthFieldXpath + " was not visible.", false);
+		}
 
 		selectEditMode(browser, portal);
+		
+		logger.log(Level.INFO, "Waiting for the resetButton to show on the page ...");
+		try {
+			WebDriverWait wait = new WebDriverWait(browser, 10);
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(resetButtonXpath)));
+		}
+		catch (Exception e) {
+			logger.log(Level.INFO, "Exception e.getMessage() = " + e.getMessage());
+			assertTrue("resetButton should be visible after selecting edit mode," +
+			" but " + resetButtonXpath + " is not visible.", false);
+		}
 
 		logger.log(Level.INFO, "browser.getTitle() = " + browser.getTitle());
 		logger.log(Level.INFO, "browser.getCurrentUrl() = " + browser.getCurrentUrl());
 
 		logger.log(Level.INFO, "resetButton.click() ...");
 		resetButton.click();
-
-		Thread.sleep(500);
-		logger.log(Level.INFO, "browser.navigate().to(" + url + ")");
-		browser.navigate().to(url);
-//		Thread.sleep(500);
-		logger.log(Level.INFO, "browser.getCurrentUrl() = " + browser.getCurrentUrl());
-		assertTrue("We are on the correct page, which should be, url = " + url, browser.getCurrentUrl().contains(url));
-
+		
+		logger.log(Level.INFO, "Waiting for the firstNameField to show on the page ...");
 		try {
-			waitForElement(browser, firstNameFieldXpath);
+			WebDriverWait wait = new WebDriverWait(browser, 10);
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(firstNameFieldXpath)));
 		}
 		catch (Exception e) {
 			logger.log(Level.INFO, "Exception e.getMessage() = " + e.getMessage());
-			assertTrue("firstNameField should be visible after reset, " +
-			"but " + firstNameFieldXpath + " is not visible.", false);
+			refreshBrowser();
+			assertTrue("firstNameField should have been visible after clicking the reset button," +
+			" but " + firstNameFieldXpath + " was not visible.", false);
 		}
+
+	}
+	
+	// because some test failures throw us into a strange state,
+	// let's refresh the browser to get back to the page we need to test
+	public void refreshBrowser() throws Exception {
+
+		browser.manage().deleteAllCookies();
+		signIn(browser);
+
+		logger.log(Level.INFO, "browser.navigate().to(" + url + ")");
+		browser.navigate().to(url);
+
+		logger.log(Level.INFO, "browser.getTitle() = " + browser.getTitle());
+		logger.log(Level.INFO, "browser.getCurrentUrl() = " + browser.getCurrentUrl());
+		logger.log(Level.INFO, "isThere(browser, dateOfBirthFieldXpath) = " + isThere(browser, dateOfBirthFieldXpath));
 
 	}
 
@@ -550,8 +713,17 @@ public class Jsf2JspPortletTest extends TesterBase {
 	@InSequence(5000)
 	public void allFieldsRequiredUponSubmit() throws Exception {
 
-		int tagsWhileInvalid = 1;
-
+		logger.log(Level.INFO, "Waiting for the firstNameField to show on the page ...");
+		try {
+			WebDriverWait wait = new WebDriverWait(browser, 10);
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(firstNameFieldXpath)));
+		}
+		catch (Exception e) {
+			logger.log(Level.INFO, "Exception e.getMessage() = " + e.getMessage());
+			assertTrue("firstNameField should be visible after reset," +
+			" but " + firstNameFieldXpath + " is not visible.", false);
+		}
+		
 		logger.log(Level.INFO, "clearing fields ...");
 		firstNameField.clear();
 		lastNameField.clear();
@@ -569,20 +741,17 @@ public class Jsf2JspPortletTest extends TesterBase {
 		postalCodeField.clear();
 		logger.log(Level.INFO, "clicking submit ...");
 		submitButton.click();
+
+		logger.log(Level.INFO, "Waiting for the firstNameFieldError to contain 'Value is required' ...");
 		try {
-			waitForElement(browser, firstNameFieldErrorXpath);
+			WebDriverWait wait = new WebDriverWait(browser, 10);
+			wait.until(ExpectedConditions.textToBePresentInElementLocated(By.xpath(firstNameFieldErrorXpath), "Value is required"));
 		}
 		catch (Exception e) {
 			logger.log(Level.INFO, "Exception e.getMessage() = " + e.getMessage());
-			assertTrue("firstNameFieldErrorXpath should have been visible since all fields " +
-			"are required upon submit, but the 'Value is required' validation message never showed up ...", e == null);
+			assertTrue("firstNameFieldError should be visible after tabbing out with no value," +
+			" but " + firstNameFieldErrorXpath + " is not visible.", false);
 		}
-
-		logger.log(Level.INFO, "checking for error tags on firstNameField ...");
-
-		int tags = browser.findElements(By.xpath(firstNameFieldErrorXpath)).size();
-		logger.log(Level.INFO, "tags = " + tags);
-		assertTrue("# of error tags == tagsWhileInvalid", tags == tagsWhileInvalid);
 
 		logger.log(Level.INFO, "firstNameFieldError.getText() = " + firstNameFieldError.getText());
 		logger.log(Level.INFO, "lastNameFieldError.getText() = " + lastNameFieldError.getText());
@@ -618,6 +787,17 @@ public class Jsf2JspPortletTest extends TesterBase {
 	@InSequence(6000)
 	public void cityAndStateAutoPopulate() throws Exception {
 
+		logger.log(Level.INFO, "Waiting for the cityField to show on the page ...");
+		try {
+			WebDriverWait wait = new WebDriverWait(browser, 10);
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(cityFieldXpath)));
+		}
+		catch (Exception e) {
+			logger.log(Level.INFO, "Exception e.getMessage() = " + e.getMessage());
+			assertTrue("cityField should be visible after submitting the form," +
+			" but " + cityFieldXpath + " is not visible.", false);
+		}
+		
 		logger.log(Level.INFO, "before cityField.getAttribute('value') = " + cityField.getAttribute("value"));
 		logger.log(Level.INFO,
 			"before provinceIdField.getAttribute('value') = " + provinceIdField.getAttribute("value"));
@@ -628,18 +808,20 @@ public class Jsf2JspPortletTest extends TesterBase {
 		assertTrue("postalCodeField is empty", (postalCodeField.getAttribute("value") == null || postalCodeField.getAttribute("value").length() == 0));
 
 		postalCodeField.sendKeys("32801");
-
 		phoneNumberField.click();
+		
+		logger.log(Level.INFO, "Waiting for the cityField to contain 'Orlando' ...");
 		try {
-			waitForElement(browser, cityFieldXpath);
+			WebDriverWait wait = new WebDriverWait(browser, 10);
+			wait.until(ExpectedConditions.textToBePresentInElementValue(By.xpath(cityFieldXpath), "Orlando"));
+			logger.log(Level.INFO, "after cityField.getAttribute('value') = " + cityField.getAttribute("value"));
 		}
 		catch (Exception e) {
 			logger.log(Level.INFO, "Exception e.getMessage() = " + e.getMessage());
-			assertTrue("cityFieldXpath should have been visible after entering the postal code 32801," +
-			" but the " + cityFieldXpath + " never showed up ...", e == null);
+			assertTrue("cityField should conatin 'Orlando' after entering postal code 32801 and clicking into another field," +
+			" but " + cityFieldXpath + " contains '" + cityField.getText() + "'", e == null);
 		}
 
-		logger.log(Level.INFO, "after cityField.getAttribute('value') = " + cityField.getAttribute("value"));
 		logger.log(Level.INFO,
 			"after postalCodeField.getAttribute('value') = " + postalCodeField.getAttribute("value"));
 		assertTrue("cityField should contain 'Orlando' after auto populating from postalCode, but instead contains '" +
@@ -669,45 +851,77 @@ public class Jsf2JspPortletTest extends TesterBase {
 	public void commentsFunctioning() throws Exception {
 
 		String testing123 = "testing 1, 2, 3";
-		int tags = 0;
-		int tagsWhileHidden = 1;
-		int tagsWhileShowing = 2;
 
-		waitForElement(browser, showCommentsLinkXpath);
+		logger.log(Level.INFO, "Waiting for the showCommentsLink to show on the page ...");
+		try {
+			WebDriverWait wait = new WebDriverWait(browser, 10);
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(showCommentsLinkXpath)));
+		}
+		catch (Exception e) {
+			logger.log(Level.INFO, "Exception e.getMessage() = " + e.getMessage());
+			assertTrue("showCommentsLink should be visible," +
+			" but " + showCommentsLinkXpath + " is not visible.", false);
+		}
+		 	
 		showCommentsLink.click();
-//		Thread.sleep(500);
 
-		waitForElement(browser, "//a[contains(text(),'Hide Comments')]");
-		int hideCommentsLinks = browser.findElements(By.xpath("//a[contains(text(),'Hide Comments')]")).size();
-		logger.log(Level.INFO, "# of hideCommentsLinks = " + hideCommentsLinks);
-		assertTrue("# of hideCommentsLinks == 1", hideCommentsLinks == 1);
+		logger.log(Level.INFO, "Waiting for the hideCommentsLink to contain 'Hide Comments' ...");
+		try {
+			WebDriverWait wait = new WebDriverWait(browser, 10);
+			wait.until(ExpectedConditions.textToBePresentInElementLocated(By.xpath(hideCommentsLinkXpath), "Hide Comments"));
+		}
+		catch (Exception e) {
+			logger.log(Level.INFO, "Exception e.getMessage() = " + e.getMessage());
+			assertTrue("'Hide Comments' should be visible after clicking 'Show Comments'," +
+			" but //a[contains(text(),'Hide Comments')] is not visible.", false);
+		}
+		
 		logger.log(Level.INFO, "comments.isDisplayed() = " + comments.isDisplayed());
 		assertTrue("comments textarea is displayed", comments.isDisplayed());
-		tags = browser.findElements(By.xpath("//a[contains(text(),'Hide Comments')]/../../child::node()")).size();
-		logger.log(Level.INFO, "tags = " + tags);
-		if (tags != tagsWhileShowing) {
-			logger.log(Level.INFO, "tagsWhileShowing = " + tagsWhileShowing);
-		}
-		assertTrue("count of tags when Hide link is showing(" + tags + ") and count of tags for textarea when showing(" + tagsWhileShowing + ") should be equal", tags == tagsWhileShowing);
-
+		
 		comments.sendKeys(testing123);
 		phoneNumberField.click();
-//		Thread.sleep(500);
-		waitForElement(browser, hideCommentsLinkXpath);
-		hideCommentsLink.click();
-//		Thread.sleep(500);
-		waitForElement(browser, "//a[contains(text(),'Show Comments')]/../../child::node()");
-		tags = browser.findElements(By.xpath("//a[contains(text(),'Show Comments')]/../../child::node()")).size();
-		logger.log(Level.INFO, "tags = " + tags);
-		assertTrue("no textarea should be showing at this point.  Tags counted at this pint("+ tags +") should equal tags neeeded to be in the DOM when the textarea is hidden("+ tagsWhileHidden +")", tags == tagsWhileHidden);
-		if (tags != tagsWhileHidden) {
-			logger.log(Level.INFO, "tagsWhileHidden = " + tagsWhileHidden);
+
+		logger.log(Level.INFO, "Waiting for the hideCommentsLinkXpath to show on the page ...");
+		try {
+			WebDriverWait wait = new WebDriverWait(browser, 10);
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(hideCommentsLinkXpath)));
 		}
-		logger.log(Level.INFO, "showCommentsLink.isDisplayed() = " + showCommentsLink.isDisplayed());
+		catch (Exception e) {
+			logger.log(Level.INFO, "Exception e.getMessage() = " + e.getMessage());
+			assertTrue("hideCommentsLink should be visible," +
+			" but " + hideCommentsLinkXpath + " is not visible.", false);
+		}
+
+		hideCommentsLink.click();
+
+		logger.log(Level.INFO, "Waiting for the showCommentsLink to contain 'Show Comments' ...");
+		try {
+			WebDriverWait wait = new WebDriverWait(browser, 10);
+			wait.until(ExpectedConditions.textToBePresentInElementLocated(By.xpath(showCommentsLinkXpath), "Show Comments"));
+			logger.log(Level.INFO, "showCommentsLink.isDisplayed() = " + showCommentsLink.isDisplayed());
+		}
+		catch (Exception e) {
+			logger.log(Level.INFO, "Exception e.getMessage() = " + e.getMessage());
+			assertTrue("'Show Comments' should be visible after clicking 'Hide Comments'," +
+			" but " + showCommentsLinkXpath + " is not visible.", false);
+		}
+
 		showCommentsLink.click();
-		waitForElement(browser, commentsXpath);
-		logger.log(Level.INFO,
-			"after hide and show comments.getAttribute('value') = " + comments.getAttribute("value"));
+
+		logger.log(Level.INFO, "Waiting for the commentsXpath to contain '" + testing123 + "' ...");
+		try {
+			WebDriverWait wait = new WebDriverWait(browser, 10);
+			wait.until(ExpectedConditions.textToBePresentInElementLocated(By.xpath(commentsXpath), testing123));
+			logger.log(Level.INFO,
+					"after hide and show comments.getAttribute('value') = " + comments.getAttribute("value"));
+		}
+		catch (Exception e) {
+			logger.log(Level.INFO, "Exception e.getMessage() = " + e.getMessage());
+			assertTrue("comments should be visible after clicking 'Hide Comments'," +
+			" but " + commentsXpath + " is not visible.", false);
+		}
+		
 		assertTrue("comments should be there after hide and then show, but comments value is '" +
 			comments.getAttribute("value") +"' after clicking show comments.", testing123.equals(comments.getAttribute("value")));
 
@@ -718,8 +932,6 @@ public class Jsf2JspPortletTest extends TesterBase {
 	@InSequence(8000)
 	public void dateValidation() throws Exception {
 
-		int tags = 0;
-		int tagsWhileValid = 0;
 		String foo = "";
 
 		// checks an invalid dateOfBirth
@@ -732,24 +944,50 @@ public class Jsf2JspPortletTest extends TesterBase {
 			assertTrue("No exceptions should occur when clearing the dateOfBirthField, but one did occur with the following message: " + e.getMessage(), false);
 		}
 
-//		Thread.sleep(500);
-		waitForElement(browser, dateOfBirthFieldXpath);
-		dateOfBirthField.clear();
-		logger.log(Level.INFO, "Entering an invalid value for the date of birth ... 12/34/5678 ...");
-		waitForElement(browser, dateOfBirthFieldXpath);
-		dateOfBirthField.sendKeys("12/34/5678");
-//		Thread.sleep(500);
-		waitForElement(browser, submitButtonXpath);
-		submitButton.click();
-
-//		Thread.sleep(500);
+		logger.log(Level.INFO, "Waiting for the dateOfBirthField to contain '' ...");
 		try {
-			waitForElement(browser, dateOfBirthFieldErrorXpath);
+			WebDriverWait wait = new WebDriverWait(browser, 10);
+			wait.until(ExpectedConditions.textToBePresentInElementLocated(By.xpath(dateOfBirthFieldXpath), ""));
+			logger.log(Level.INFO,
+					"after clearing dateOfBirthField.getAttribute('value') = " + dateOfBirthField.getAttribute("value"));
 		}
 		catch (Exception e) {
 			logger.log(Level.INFO, "Exception e.getMessage() = " + e.getMessage());
-			assertTrue("dateOfBirthFieldError should be visible after submitting," +
-			" but " + dateOfBirthFieldErrorXpath + " is not visible.", e == null);
+			if (isThere(browser, dateOfBirthFieldErrorXpath)) {
+				foo = dateOfBirthFieldError.getText();
+			}
+			assertTrue("dateOfBirthField should be empty after clearing," +
+			" but " + dateOfBirthFieldXpath + " contains '" + foo + "'.", false);
+		}
+
+		logger.log(Level.INFO, "Entering an invalid value for the date of birth ... 12/34/5678 ...");
+		dateOfBirthField.sendKeys("12/34/5678");
+
+		logger.log(Level.INFO, "Waiting for the dateOfBirthField to contain '12/34/5678' ...");
+		try {
+			WebDriverWait wait = new WebDriverWait(browser, 10);
+			wait.until(ExpectedConditions.textToBePresentInElementValue(By.xpath(dateOfBirthFieldXpath), "12/34/5678"));
+		}
+		catch (Exception e) {
+			logger.log(Level.INFO, "Exception e.getMessage() = " + e.getMessage());
+			if (isThere(browser, dateOfBirthFieldErrorXpath)) {
+				foo = dateOfBirthFieldError.getText();
+			}
+			assertTrue("dateOfBirthField should contain '12/34/5678'," +
+			" but " + dateOfBirthFieldXpath + " contains '" + foo + "'.", false);
+		}
+		
+		submitButton.click();
+
+		logger.log(Level.INFO, "Waiting for the dateOfBirthFieldError to contain 'Invalid date format' ...");
+		try {
+			WebDriverWait wait = new WebDriverWait(browser, 10);
+			wait.until(ExpectedConditions.textToBePresentInElementLocated(By.xpath(dateOfBirthFieldErrorXpath), "Invalid date format"));
+		}
+		catch (Exception e) {
+			logger.log(Level.INFO, "Exception e.getMessage() = " + e.getMessage());
+			assertTrue("dateOfBirthFieldError should be visible after submitting with '12/34/5678'," +
+			" but " + dateOfBirthFieldErrorXpath + " is not visible.", false);
 		}
 
 		logger.log(Level.INFO, "dateOfBirthField.getAttribute('value') = " + dateOfBirthField.getAttribute("value"));
@@ -758,67 +996,80 @@ public class Jsf2JspPortletTest extends TesterBase {
 		assertTrue("dateOfBirthFieldError should contain 'Invalid date format', but insteead contains '" +
 			dateOfBirthFieldError.getText() + "'", dateOfBirthFieldError.getText().contains("Invalid date format"));
 
-		logger.log(Level.INFO, " dateValidationXpath tagName = " + browser.findElement(By.xpath(dateValidationXpath)).getTagName());
-		logger.log(Level.INFO, " dateValidationXpath id = " + browser.findElement(By.xpath(dateValidationXpath)).getAttribute("id"));
-
-		tags = browser.findElements(By.xpath(dateValidationXpath)).size() - dateValidationXpathModifier;
-		logger.log(Level.INFO, "tags = " + tags);
-		logger.log(Level.INFO, "asserting: tags > tagsWhileValid? " + tags + " > " + tagsWhileValid + "? ...");
-		assertTrue("There should be some kind of error message showing under the dateOfBirthField, " + "but " + tags +
-			" messages are there", tags > tagsWhileValid);
-
 		// checks with no dateOfBirth
 		dateOfBirthField.clear();
-		logger.log(Level.INFO, "clearing the dateOfBirthField and then clicking into the phoneNumberField ...");
-//		Thread.sleep(500);
-		waitForElement(browser, phoneNumberFieldXpath);
+		
+		logger.log(Level.INFO, "Waiting for the dateOfBirthField to contain '' ...");
+		try {
+			WebDriverWait wait = new WebDriverWait(browser, 10);
+			wait.until(ExpectedConditions.textToBePresentInElementLocated(By.xpath(dateOfBirthFieldXpath), ""));
+			logger.log(Level.INFO,
+					"after clearing dateOfBirthField.getAttribute('value') = " + dateOfBirthField.getAttribute("value"));
+		}
+		catch (Exception e) {
+			logger.log(Level.INFO, "Exception e.getMessage() = " + e.getMessage());
+			if (isThere(browser, dateOfBirthFieldErrorXpath)) {
+				foo = dateOfBirthFieldError.getText();
+			}
+			assertTrue("dateOfBirthField should be empty after clearing," +
+			" but " + dateOfBirthFieldXpath + " contains '" + foo + "'.", false);
+		}
+		
 		phoneNumberField.click();
-//		Thread.sleep(500);
-		waitForElement(browser, dateOfBirthFieldXpath);
+
+		logger.log(Level.INFO, "Waiting for the dateOfBirthFieldError to contain 'Value is required' ...");
+		try {
+			WebDriverWait wait = new WebDriverWait(browser, 10);
+			wait.until(ExpectedConditions.textToBePresentInElementLocated(By.xpath(dateOfBirthFieldErrorXpath), "Value is required"));
+		}
+		catch (Exception e) {
+			logger.log(Level.INFO, "Exception e.getMessage() = " + e.getMessage());
+			assertTrue("dateOfBirthFieldError should be visible after entering '12/34/5678' and clicking into another field," +
+			" but " + dateOfBirthFieldErrorXpath + " does not contain 'Value is required'.", false);
+		}
+
 		logger.log(Level.INFO, "dateOfBirthField.getAttribute('value') = " + dateOfBirthField.getAttribute("value"));
 		logger.log(Level.INFO, "dateOfBirthFieldError.isDisplayed() = " + dateOfBirthFieldError.isDisplayed());
 		logger.log(Level.INFO, "dateOfBirthFieldError.getText() = " + dateOfBirthFieldError.getText());
-		// Should I be this lenient?
-		assertTrue("dateOfBirthField validation message should be displayed when no date is entered",
-			dateOfBirthFieldError.getText().contains("Value is required") ||
-			dateOfBirthFieldError.getText().contains("Invalid date format"));
-
-		tags = browser.findElements(By.xpath(dateValidationXpath)).size() - dateValidationXpathModifier;
-		logger.log(Level.INFO, "tags = " + tags);
-		logger.log(Level.INFO, "asserting: tags > tagsWhileValid? " + tags + " > " + tagsWhileValid + "? ...");
-		assertTrue("There should be some kind of error message showing under the dateOfBirthField, " + "but " + tags +
-			" messages are there", tags > tagsWhileValid);
 
 		// checks a valid dateOfBirth
 		foo = "";
 		dateOfBirthField.clear();
-//		Thread.sleep(500);
-		waitForElement(browser, dateOfBirthFieldXpath);
-		logger.log(Level.INFO, "Entering a valid dateOfBirth = 01/02/3456 ...");
-		dateOfBirthField.sendKeys("01/02/3456");
-//		Thread.sleep(500);
-		waitForElement(browser, phoneNumberFieldXpath);
-		logger.log(Level.INFO, "Clicking into the phoneNumberField ...");
-		phoneNumberField.click();
-//		Thread.sleep(1000);
-		waitForElement(browser, dateOfBirthFieldXpath);
-		logger.log(Level.INFO,
-			"Now the dateOfBirthField.getAttribute('value') = " + dateOfBirthField.getAttribute("value"));
-		assertTrue("dateOfBirthField is currently showing 01/02/3456 ?",
-			"01/02/3456".equals(dateOfBirthField.getAttribute("value")));
-		tags = browser.findElements(By.xpath(dateValidationXpath)).size() - dateValidationXpathModifier;
-		logger.log(Level.INFO, "tags = " + tags);
 
-		logger.log(Level.INFO, "isThere(browser, dateOfBirthFieldErrorXpath) = " + isThere(browser, dateOfBirthFieldErrorXpath));
-
-		if (tags > tagsWhileValid) {
+		logger.log(Level.INFO, "Waiting for the dateOfBirthField to contain '' ...");
+		try {
+			WebDriverWait wait = new WebDriverWait(browser, 10);
+			wait.until(ExpectedConditions.textToBePresentInElementLocated(By.xpath(dateOfBirthFieldXpath), ""));
+			logger.log(Level.INFO,
+					"after clearing dateOfBirthField.getAttribute('value') = " + dateOfBirthField.getAttribute("value"));
+		}
+		catch (Exception e) {
+			logger.log(Level.INFO, "Exception e.getMessage() = " + e.getMessage());
 			if (isThere(browser, dateOfBirthFieldErrorXpath)) {
 				foo = dateOfBirthFieldError.getText();
 			}
+			assertTrue("dateOfBirthField should be empty after clearing," +
+			" but " + dateOfBirthFieldXpath + " contains '" + foo + "'.", false);
 		}
+		
+		logger.log(Level.INFO, "Entering a valid dateOfBirth = 01/02/3456 ...");
+		dateOfBirthField.sendKeys("01/02/3456");
+		logger.log(Level.INFO, "Clicking into the phoneNumberField ...");
+		phoneNumberField.click();
 
-		assertTrue("There should be no dateOfBirth validation errors showing when a valid date has been submitted, " +
-			"but '" + foo + "' is now showing there", tags == tagsWhileValid);
+		logger.log(Level.INFO, "Waiting for the dateOfBirthFieldError to disappear ...");
+		try {
+			WebDriverWait wait = new WebDriverWait(browser, 10);
+			wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(dateOfBirthFieldErrorXpath)));
+		}
+		catch (Exception e) {
+			logger.log(Level.INFO, "Exception e.getMessage() = " + e.getMessage());
+			if (isThere(browser, dateOfBirthFieldErrorXpath)) {
+				foo = dateOfBirthFieldError.getText();
+			}
+			assertTrue("dateOfBirthFieldError should NOT be visible after entering 01/02/3456," +
+			" but " + dateOfBirthFieldErrorXpath + " is still there showing '" + foo + "'", false);
+		}
 
 	}
 
@@ -833,13 +1084,35 @@ public class Jsf2JspPortletTest extends TesterBase {
 			logger.log(Level.INFO, "isThere(browser, fileUploadChooserXpath) = " + isThere(browser, fileUploadChooserXpath));
 		}
 		else {
+			
+			// the ice1-portlet seems to render the input type="file" in a separate iframe ... why bother?
+			// assuming that this is the jsf2-jsp-portlet and waiting for its 'Add Attachment' button to appear
+			logger.log(Level.INFO, "Waiting for the //input[@type='submit' and @value='Add Attachment'] to show on the page ...");
+			try {
+				WebDriverWait wait = new WebDriverWait(browser, 10);
+				wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@type='submit' and @value='Add Attachment']")));
+			}
+			catch (Exception e) {
+				logger.log(Level.INFO, "Exception e.getMessage() = " + e.getMessage());
+				assertTrue("'Add Attachment' should be visible," +
+				" but //input[@type='submit' and @value='Add Attachment'] is not visible.", false);
+			}
 
 			// As of the time of this comment, only the jsf2-jsp-portlet did not render a fileUploadChooser on the
 			// front view
 			logger.log(Level.INFO, "clicking the Add Attachment button ...");
 			browser.findElement(By.xpath("//input[@type='submit' and @value='Add Attachment']")).click();
-//			Thread.sleep(500);
-			waitForElement(browser, fileUploadChooserXpath);
+
+			logger.log(Level.INFO, "Waiting for the fileUploadChooser to show on the page ...");
+			try {
+				WebDriverWait wait = new WebDriverWait(browser, 10);
+				wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(fileUploadChooserXpath)));
+			}
+			catch (Exception e) {
+				logger.log(Level.INFO, "Exception e.getMessage() = " + e.getMessage());
+				assertTrue("fileUploadChooser should be visible," +
+				" but " + fileUploadChooserXpath + " is not visible.", false);
+			}
 		}
 
 		logger.log(Level.INFO, "fileUploadChooser.getCssValue(transform) = " + fileUploadChooser.getCssValue("transform"));
@@ -895,18 +1168,29 @@ public class Jsf2JspPortletTest extends TesterBase {
 		logger.log(Level.INFO, " submitFileXpath tagName = " + browser.findElement(By.xpath(submitFileXpath)).getTagName());
 		logger.log(Level.INFO, " submitFileXpath type = " + browser.findElement(By.xpath(submitFileXpath)).getAttribute("type"));
 
-//		Thread.sleep(50);
-		waitForElement(browser, submitFileXpath);
-		logger.log(Level.INFO, "submitting the uploaded file ...");
-		submitFile.click();
-
+		logger.log(Level.INFO, "Waiting for the submitFile button to show on the page ...");
 		try {
-			waitForElement(browser, uploadedFileXpath);
+			WebDriverWait wait = new WebDriverWait(browser, 10);
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(submitFileXpath)));
 		}
 		catch (Exception e) {
 			logger.log(Level.INFO, "Exception e.getMessage() = " + e.getMessage());
-			assertTrue("uploadedFile should be visible after submitting the file," +
-				" but " + uploadedFileXpath + " is not visible.", e == null);
+			assertTrue("submitFile should be visible," +
+			" but " + submitFileXpath + " is not visible.", false);
+		}
+		
+		logger.log(Level.INFO, "submitting the uploaded file ...");
+		submitFile.click();
+
+		logger.log(Level.INFO, "Waiting for the uploadedFile to show on the page ...");
+		try {
+			WebDriverWait wait = new WebDriverWait(browser, 10);
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(uploadedFileXpath)));
+		}
+		catch (Exception e) {
+			logger.log(Level.INFO, "Exception e.getMessage() = " + e.getMessage());
+			assertTrue("uploadedFileX should be visible," +
+			" but " + uploadedFileXpath + " is not visible.", false);
 		}
 
 		if (isThere(browser, uploadedFileXpath)) {
@@ -928,7 +1212,19 @@ public class Jsf2JspPortletTest extends TesterBase {
 	@InSequence(9000)
 	public void submitAndValidate() throws Exception {
 
+		String foo = "";
 		logger.log(Level.INFO, "clearing fields ...");
+		
+		logger.log(Level.INFO, "Waiting for the dateOfBirthField to show on the page ...");
+		try {
+			WebDriverWait wait = new WebDriverWait(browser, 10);
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(dateOfBirthFieldXpath)));
+		}
+		catch (Exception e) {
+			logger.log(Level.INFO, "Exception e.getMessage() = " + e.getMessage());
+			assertTrue("dateOfBirthField should be visible after fileUpload," +
+			" but " + dateOfBirthFieldXpath + " is not visible.", false);
+		}
 
 		try {
 			dateOfBirthField.clear();
@@ -959,17 +1255,37 @@ public class Jsf2JspPortletTest extends TesterBase {
 			}
 
 			showCommentsLink.click();
-//			Thread.sleep(500);
-			waitForElement(browser, "//textarea[contains(@id,':comments')]");
-			commentsTextAreas = browser.findElements(By.xpath("//textarea[contains(@id,':comments')]")).size();
+
+			logger.log(Level.INFO, "Waiting for the comments textrea to show on the page ...");
+			try {
+				WebDriverWait wait = new WebDriverWait(browser, 10);
+				wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(commentsXpath)));
+			}
+			catch (Exception e) {
+				logger.log(Level.INFO, "Exception e.getMessage() = " + e.getMessage());
+				assertTrue("comments textarea should be visible after clicking 'Show Comments'," +
+				" but " + commentsXpath + " is not visible.", false);
+			}
+			
+			commentsTextAreas = browser.findElements(By.xpath(commentsXpath)).size();
 			logger.log(Level.INFO, "# of commentsTextAreas = " + commentsTextAreas);
 		}
 
 		assertTrue("The commentsTextArea should be showing, but it is not visible.", commentsTextAreas == 1);
 
 		comments.clear();
-//		Thread.sleep(500);
-		waitForElement(browser, emailAddressFieldXpath);
+
+		logger.log(Level.INFO, "Waiting for the emailAddressField to show on the page ...");
+		try {
+			WebDriverWait wait = new WebDriverWait(browser, 10);
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(emailAddressFieldXpath)));
+		}
+		catch (Exception e) {
+			logger.log(Level.INFO, "Exception e.getMessage() = " + e.getMessage());
+			assertTrue("emailAddressField should be visible after clearing comments field," +
+			" but " + emailAddressFieldXpath + " is not visible.", false);
+		}
+
 		logger.log(Level.INFO, "fields were cleared now, but let's see ...");
 		logger.log(Level.INFO, "emailAddressField.getAttribute('value') = " + emailAddressField.getAttribute("value"));
 		assertTrue("emailAddressField is empty after clearing and clicking into another field",
@@ -992,11 +1308,35 @@ public class Jsf2JspPortletTest extends TesterBase {
 		postalCodeField.sendKeys("32801");
 		logger.log(Level.INFO, "Clicking into phone number field ...");
 		phoneNumberField.click();
-//		Thread.sleep(500);
-		waitForElement(browser, commentsXpath);
-		comments.sendKeys("If as one people speaking the same language, they have begun to do this ...");
-//		Thread.sleep(500);
-		waitForElement(browser, submitButtonXpath);
+
+		logger.log(Level.INFO, "Waiting for the commentsXpath to show on the page ...");
+		try {
+			WebDriverWait wait = new WebDriverWait(browser, 10);
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(commentsXpath)));
+		}
+		catch (Exception e) {
+			logger.log(Level.INFO, "Exception e.getMessage() = " + e.getMessage());
+			assertTrue("comments should be visible after clicking into the phoneNumberField," +
+			" but " + commentsXpath + " is not visible.", false);
+		}
+
+		String genesis11 = "Indeed the people are one and they all have one language, and this is what they begin to do ...";
+		comments.sendKeys(genesis11);
+
+		logger.log(Level.INFO, "Waiting for the comments to contain '" + genesis11 + "' ...");
+		try {
+			WebDriverWait wait = new WebDriverWait(browser, 10);
+			wait.until(ExpectedConditions.textToBePresentInElementValue(By.xpath(commentsXpath), genesis11));
+			logger.log(Level.INFO, "comments.getText() = " + comments.getText());
+		}
+		catch (Exception e) {
+			logger.log(Level.INFO, "Exception e.getMessage() = " + e.getMessage());
+			if (isThere(browser, commentsXpath)) {
+				foo = comments.getText();
+			}
+			assertTrue("comments should be correct after entering," +
+			" but " + commentsXpath + " contains '" + foo + "'.", false);
+		}
 
 		// asserting correct data is still there
 		assertTrue("asserting that firstNameField.getText().equals('David'), " + "but it is '" +
@@ -1014,28 +1354,23 @@ public class Jsf2JspPortletTest extends TesterBase {
 		assertTrue("asserting that postalCodeField.getText().equals('32801'), " + "but it is '" +
 			postalCodeField.getAttribute("value") + "'", postalCodeField.getAttribute("value").equals("32801"));
 		assertTrue(
-			"asserting that comments.getText().equals('If as one people speaking the same language, they have begun to do this ...'), " +
+			"asserting that comments.getText().equals(genesis11), " +
 			"but it is '" + comments.getAttribute("value") + "'",
-			comments.getAttribute("value").equals(
-				"If as one people speaking the same language, they have begun to do this ..."));
+			comments.getAttribute("value").equals(genesis11));
 
 		logger.log(Level.INFO, "Correct data asserted.  Clicking submit button ...");
 		submitButton.click();
 
-//		Thread.sleep(500);
+		logger.log(Level.INFO, "Waiting for the text 'Dear ' to show on the page ...");		
 		try {
-			waitForElement(browser, formTagXpath);
+			WebDriverWait wait = new WebDriverWait(browser, 10);
+			wait.until(ExpectedConditions.textToBePresentInElementLocated(By.xpath(formTagXpath), "Dear "));
 		}
 		catch (Exception e) {
 			logger.log(Level.INFO, "Exception e.getMessage() = " + e.getMessage());
-			assertTrue("formTag should be visible after form submission," +
-				" but the " + formTagXpath + " is not visible.", e == null);
+			assertTrue("formTag should contain 'Dear '," +
+			" but " + formTagXpath + " does not contain 'Dear '.", false);
 		}
-		logger.log(Level.INFO, "formTag.getText() = " + formTag.getText());
-		assertTrue("The text 'Dear David' should be showing in the portlet after submitting valid data, " +
-			"but it is not", formTag.getText().contains("Dear David"));
-
 	}
-
 }
 //J+
