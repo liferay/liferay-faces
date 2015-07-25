@@ -94,9 +94,6 @@ public class Richfaces4 extends TesterBase {
 	private static final String windowInnerHeightXpath = "//em[@id='window.innerHeight']";
 	private static final String windowInnerWidthXpath = "//em[@id='window.innerWidth']";
 
-	// xpath for specific tests
-	protected static final String dateValidationXpath = "//div[contains(@id,':dateOfBirthField')]/span/span[contains(@id,':dateOfBirth')]/span";
-
 	static final String url = baseUrl + webContext + "/rich4";
 
 	@FindBy(xpath = formTagXpath)
@@ -181,8 +178,6 @@ public class Richfaces4 extends TesterBase {
 	private WebElement windowInnerHeight;
 	@FindBy(xpath = windowInnerWidthXpath)
 	private WebElement windowInnerWidth;
-
-	protected int dateValidationXpathModifier = 0;
 
 }
 //J+
