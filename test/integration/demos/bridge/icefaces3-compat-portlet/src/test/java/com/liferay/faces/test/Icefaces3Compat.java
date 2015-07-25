@@ -94,9 +94,6 @@ public class Icefaces3Compat extends TesterBase {
 	private static final String windowInnerHeightXpath = "//em[@id='window.innerHeight']";
 	private static final String windowInnerWidthXpath = "//em[@id='window.innerWidth']";
 
-	// xpath for specific tests
-	protected static final String dateValidationXpath = "//input[contains(@id,':dateOfBirth')]/../following-sibling::*[1]/child::node()";
-
 	static final String url = baseUrl + webContext + "/ice3-compat";
 
 	@FindBy(xpath = formTagXpath)
@@ -181,8 +178,6 @@ public class Icefaces3Compat extends TesterBase {
 	private WebElement windowInnerHeight;
 	@FindBy(xpath = windowInnerWidthXpath)
 	private WebElement windowInnerWidth;
-
-	protected int dateValidationXpathModifier = 0;
 
 }
 //J+
