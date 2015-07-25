@@ -94,9 +94,6 @@ public class Liferayfaces4 extends TesterBase {
 	private static final String windowInnerHeightXpath = "//em[@id='window.innerHeight']";
 	private static final String windowInnerWidthXpath = "//em[@id='window.innerWidth']";
 
-	// xpath for specific tests
-	protected static final String dateValidationXpath = "//div[contains(@id,':dateOfBirthField')]/*";
-
 	static final String url = baseUrl + webContext + "/lf4";
 
 	@FindBy(xpath = formTagXpath)
@@ -177,8 +174,6 @@ public class Liferayfaces4 extends TesterBase {
 	private WebElement alloyVersion;
 	@FindBy(xpath = bridgeVersionXpath)
 	private WebElement bridgeVersion;
-
-	protected int dateValidationXpathModifier = 2;
 
 }
 //J+

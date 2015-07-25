@@ -94,9 +94,6 @@ public class Primefaces5 extends TesterBase {
 	private static final String windowInnerHeightXpath = "//em[@id='window.innerHeight']";
 	private static final String windowInnerWidthXpath = "//em[@id='window.innerWidth']";
 
-	// xpath for specific tests
-	protected static final String dateValidationXpath = "//input[contains(@id,':dateOfBirth')]/../following-sibling::*[1]/child::node()";
-
 	static final String url = baseUrl + webContext + "/prime5";
 
 	@FindBy(xpath = formTagXpath)
@@ -177,8 +174,6 @@ public class Primefaces5 extends TesterBase {
 	private WebElement alloyVersion;
 	@FindBy(xpath = bridgeVersionXpath)
 	private WebElement bridgeVersion;
-
-	protected int dateValidationXpathModifier = 0;
 
 }
 //J+
