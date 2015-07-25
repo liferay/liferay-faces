@@ -33,7 +33,8 @@ public class Jsf2 extends TesterBase {
 
 	// portlet topper and menu elements
 	private static final String portletDisplayNameXpath = "//header[@class='portlet-topper']/h1/span";
-	private static final String menuButtonXpath = "//a[contains(@id,'menuButton')]";
+	// <a class="dropdown-toggle direction-down max-display-items-15" href="javascript:;" id="_1_WAR_jsf2portlet_INSTANCE_ABCD_kldx_menu" title="Options">
+	private static final String menuButtonXpath = "//a[contains(@id,'_menu') and @title='Options']";
 	private static final String menuPreferencesXpath = "//a[contains(@id,'menu_preferences')]";
 
 	// preferences elements
@@ -64,6 +65,8 @@ public class Jsf2 extends TesterBase {
 	private static final String provinceIdFieldXpath = "//select[contains(@id,':provinceId')]";
 	private static final String provinceIdFieldErrorXpath = "//select[contains(@id,':provinceId')]/following-sibling::*[1]";
 
+	private static final String provinceIdSelectorXpath = "";
+
 	private static final String postalCodeFieldXpath = "//input[contains(@id,':postalCode')]";
 	private static final String postalCodeFieldErrorXpath = "//input[contains(@id,':postalCode')]/following-sibling::*[1]/following-sibling::*[1]";
 
@@ -91,10 +94,7 @@ public class Jsf2 extends TesterBase {
 	private static final String windowInnerHeightXpath = "//em[@id='window.innerHeight']";
 	private static final String windowInnerWidthXpath = "//em[@id='window.innerWidth']";
 
-	// xpath for specific tests
-	protected static final String dateValidationXpath = "//input[contains(@id,':dateOfBirth')]/../child::node()";
-
-	static final String url = baseUrl + "/group/bridge-demos/jsf2";
+	static final String url = baseUrl + webContext + "/jsf1";
 
 	@FindBy(xpath = formTagXpath)
 	private WebElement formTag;
@@ -172,8 +172,12 @@ public class Jsf2 extends TesterBase {
 	private WebElement alloyVersion;
 	@FindBy(xpath = bridgeVersionXpath)
 	private WebElement bridgeVersion;
-
-	protected int dateValidationXpathModifier = 2;
+	@FindBy(xpath = versionUlXpath)
+	private WebElement versionUl;
+	@FindBy(xpath = windowInnerHeightXpath)
+	private WebElement windowInnerHeight;
+	@FindBy(xpath = windowInnerWidthXpath)
+	private WebElement windowInnerWidth;
 
 }
 //J+
