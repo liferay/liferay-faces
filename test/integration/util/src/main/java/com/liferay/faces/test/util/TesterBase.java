@@ -134,7 +134,7 @@ public class TesterBase {
 
 			// attempt to go to a Bridge Demos to get to the login page
 			logger.log(Level.INFO, "Attempting to go to a Bridge Demos to get to the login page ...");
-			String bridgeDemosSignInUrl = baseUrl + "/group/bridge-demos/jsf2";
+			String bridgeDemosSignInUrl = baseUrl + "/group/bridge-demos/";
 			logger.log(Level.INFO, "browser.navigate().to(" + bridgeDemosSignInUrl + ")");
 			browser.navigate().to(bridgeDemosSignInUrl);
 			logger.log(Level.INFO, "browser.getTitle() = " + browser.getTitle() + " before signing in ...");
