@@ -43,29 +43,31 @@ public class Icefaces3 extends TesterBase {
 	// elements for Job Applicants
 	private static final String logoXpath = "//img[contains(@src,'liferay-logo.png')]";
 
-	private static final String firstNameFieldXpath = "//input[contains(@id,':firstName_input')]";
-	private static final String firstNameFieldErrorXpath = "//input[contains(@id,':firstName_input')]/../../following-sibling::*[1]/child::node()";
+	private static final String firstNameFieldXpath = "//input[contains(@id,':firstName')]";
+	private static final String firstNameFieldErrorXpath = "//input[contains(@id,':firstName')]/following-sibling::*[1]";
 
-	private static final String lastNameFieldXpath = "//input[contains(@id,':lastName_input')]";
-	private static final String lastNameFieldErrorXpath = "//input[contains(@id,':lastName_input')]/../../following-sibling::*[1]/child::node()";
+	private static final String lastNameFieldXpath = "//input[contains(@id,':lastName')]";
+	private static final String lastNameFieldErrorXpath = "//input[contains(@id,':lastName')]/following-sibling::*[1]";
 
-	private static final String emailAddressFieldXpath = "//input[contains(@id,':emailAddress_input')]";
-	private static final String emailAddressFieldErrorXpath = "//input[contains(@id,':emailAddress_input')]/../../following-sibling::*[1]/child::node()";
+	private static final String emailAddressFieldXpath = "//input[contains(@id,':emailAddress')]";
+	private static final String emailAddressFieldErrorXpath = "//input[contains(@id,':emailAddress')]/following-sibling::*[1]";
 
-	private static final String phoneNumberFieldXpath = "//input[contains(@id,':phoneNumber_input')]";
-	private static final String phoneNumberFieldErrorXpath = "//input[contains(@id,':phoneNumber_input')]/../../following-sibling::*[1]/child::node()";
+	private static final String phoneNumberFieldXpath = "//input[contains(@id,':phoneNumber')]";
+	private static final String phoneNumberFieldErrorXpath = "//input[contains(@id,':phoneNumber')]/following-sibling::*[1]";
 
-	private static final String dateOfBirthFieldXpath = "//input[contains(@id,':dateOfBirth_input')]";
-	private static final String dateOfBirthFieldErrorXpath = "//input[contains(@id,':dateOfBirth_input')]/../following-sibling::*[1]/child::node()";
+	private static final String dateOfBirthFieldXpath = "//input[contains(@id,':dateOfBirth')]";
+	private static final String dateOfBirthFieldErrorXpath = "//input[contains(@id,':dateOfBirth')]/../following-sibling::*[1]";
 
-	private static final String cityFieldXpath = "//input[contains(@id,':city_input')]";
-	private static final String cityFieldErrorXpath = "//input[contains(@id,':city_input')]/../../following-sibling::*[1]";
+	private static final String cityFieldXpath = "//input[contains(@id,':city')]";
+	private static final String cityFieldErrorXpath = "//input[contains(@id,':city')]/following-sibling::*[1]";
 
 	private static final String provinceIdFieldXpath = "//select[contains(@id,':provinceId')]";
 	private static final String provinceIdFieldErrorXpath = "//select[contains(@id,':provinceId')]/following-sibling::*[1]";
 
-	private static final String postalCodeFieldXpath = "//input[contains(@id,':postalCode_input')]";
-	private static final String postalCodeFieldErrorXpath = "//input[contains(@id,':postalCode_input')]/../../following-sibling::*[1]/following-sibling::*[1]";
+	private static final String provinceIdSelectorXpath = "";
+
+	private static final String postalCodeFieldXpath = "//input[contains(@id,':postalCode')]";
+	private static final String postalCodeFieldErrorXpath = "//input[contains(@id,':postalCode')]/following-sibling::*[1]/following-sibling::*[1]";
 
 	private static final String postalCodeToolTipXpath = "//img[contains(@title,'Type any of these ZIP codes')]";
 
@@ -73,8 +75,8 @@ public class Icefaces3 extends TesterBase {
 	private static final String hideCommentsLinkXpath = "//a[contains(text(),'Hide Comments')]";
 	private static final String commentsXpath = "//textarea[contains(@id,':comments')]";
 
-	private static final String fileUploadChooserXpath = "//input[@type='file' and contains(@id,':fileEntryComp')]";
-	private static final String submitFileXpath = "//input[@type='submit' and @value='Add Attachment']";
+	private static final String fileUploadChooserXpath = "//input[@type='file' and name='upload']";
+	private static final String submitFileXpath = "//input[@type='submit' and @value='Upload']";
 	private static final String uploadedFileXpath = "//span[contains(text(),'jersey')]";
 
 	private static final String submitButtonXpath = "//input[@type='submit' and @value='Submit']";
@@ -91,10 +93,7 @@ public class Icefaces3 extends TesterBase {
 	private static final String windowInnerHeightXpath = "//em[@id='window.innerHeight']";
 	private static final String windowInnerWidthXpath = "//em[@id='window.innerWidth']";
 
-	// xpath for specific tests
-	protected static final String dateValidationXpath = "//input[contains(@id,':dateOfBirth')]/../following-sibling::*[1]/child::node()";
-
-	static final String url = baseUrl + "/group/bridge-demos/ice3";
+	static final String url = baseUrl + webContext + "/ice1";
 
 	@FindBy(xpath = formTagXpath)
 	private WebElement formTag;
@@ -172,8 +171,12 @@ public class Icefaces3 extends TesterBase {
 	private WebElement alloyVersion;
 	@FindBy(xpath = bridgeVersionXpath)
 	private WebElement bridgeVersion;
-
-	protected int dateValidationXpathModifier = 0;
+	@FindBy(xpath = versionUlXpath)
+	private WebElement versionUl;
+	@FindBy(xpath = windowInnerHeightXpath)
+	private WebElement windowInnerHeight;
+	@FindBy(xpath = windowInnerWidthXpath)
+	private WebElement windowInnerWidth;
 
 }
 //J+

@@ -64,6 +64,8 @@ public class Jsf2 extends TesterBase {
 	private static final String provinceIdFieldXpath = "//select[contains(@id,':provinceId')]";
 	private static final String provinceIdFieldErrorXpath = "//select[contains(@id,':provinceId')]/following-sibling::*[1]";
 
+	private static final String provinceIdSelectorXpath = "";
+
 	private static final String postalCodeFieldXpath = "//input[contains(@id,':postalCode')]";
 	private static final String postalCodeFieldErrorXpath = "//input[contains(@id,':postalCode')]/following-sibling::*[1]/following-sibling::*[1]";
 
@@ -91,10 +93,7 @@ public class Jsf2 extends TesterBase {
 	private static final String windowInnerHeightXpath = "//em[@id='window.innerHeight']";
 	private static final String windowInnerWidthXpath = "//em[@id='window.innerWidth']";
 
-	// xpath for specific tests
-	protected static final String dateValidationXpath = "//input[contains(@id,':dateOfBirth')]/../child::node()";
-
-	static final String url = baseUrl + "/group/bridge-demos/jsf2";
+	static final String url = baseUrl + webContext + "/jsf1";
 
 	@FindBy(xpath = formTagXpath)
 	private WebElement formTag;
@@ -172,8 +171,12 @@ public class Jsf2 extends TesterBase {
 	private WebElement alloyVersion;
 	@FindBy(xpath = bridgeVersionXpath)
 	private WebElement bridgeVersion;
-
-	protected int dateValidationXpathModifier = 2;
+	@FindBy(xpath = versionUlXpath)
+	private WebElement versionUl;
+	@FindBy(xpath = windowInnerHeightXpath)
+	private WebElement windowInnerHeight;
+	@FindBy(xpath = windowInnerWidthXpath)
+	private WebElement windowInnerWidth;
 
 }
 //J+
