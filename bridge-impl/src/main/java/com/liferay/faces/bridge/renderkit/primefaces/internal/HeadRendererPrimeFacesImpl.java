@@ -15,6 +15,7 @@ package com.liferay.faces.bridge.renderkit.primefaces.internal;
 
 import java.io.IOException;
 import java.net.URLDecoder;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -29,6 +30,7 @@ import javax.faces.context.ResponseWriter;
 import javax.faces.render.Renderer;
 import javax.portlet.PortletResponse;
 
+import com.liferay.faces.bridge.component.internal.ResourceComponent;
 import com.liferay.faces.bridge.renderkit.html_basic.internal.HeadRendererBridgeImpl;
 import com.liferay.faces.bridge.util.internal.URLUtil;
 import com.liferay.faces.util.logging.Logger;
@@ -47,6 +49,8 @@ public class HeadRendererPrimeFacesImpl extends HeadRendererBridgeImpl {
 	private static final Logger logger = LoggerFactory.getLogger(HeadRendererPrimeFacesImpl.class);
 
 	// Private Constants
+	private static final String PRIMEFACES_THEME_PREFIX = "primefaces-";
+	private static final String PRIMEFACES_THEME_RESOURCE_NAME = "theme.css";
 	private static final Renderer PRIMEFACES_HEAD_RENDERER;
 
 	static {
@@ -130,16 +134,27 @@ public class HeadRendererPrimeFacesImpl extends HeadRendererBridgeImpl {
 				// resource and add it to the view root.
 				if ((resourceName != null) && (libraryName != null)) {
 
-					Application application = facesContext.getApplication();
-					ResourceHandler resourceHandler = application.getResourceHandler();
-					UIComponent resource = application.createComponent(UIOutput.COMPONENT_TYPE);
-					String rendererType = resourceHandler.getRendererTypeForResourceName(resourceName);
-					resource.setRendererType(rendererType);
-					resource.setTransient(true);
-					resource.getAttributes().put("name", resourceName);
-					resource.getAttributes().put("library", libraryName);
-					resource.getAttributes().put("target", "head");
-					capturedResources.add(resource);
+					if (resourceName.equals(PRIMEFACES_THEME_RESOURCE_NAME) &&
+							libraryName.startsWith(PRIMEFACES_THEME_PREFIX)) {
+
+						ResourceComponent primefacesThemeResource = new ResourceComponent(facesContext, resourceName,
+								libraryName, namespace);
+						Map<Object, Object> facesContextAttributes = facesContext.getAttributes();
+						facesContextAttributes.put("primefacesTheme", primefacesThemeResource);
+					}
+					else {
+
+						Application application = facesContext.getApplication();
+						ResourceHandler resourceHandler = application.getResourceHandler();
+						UIComponent resource = application.createComponent(UIOutput.COMPONENT_TYPE);
+						String rendererType = resourceHandler.getRendererTypeForResourceName(resourceName);
+						resource.setRendererType(rendererType);
+						resource.setTransient(true);
+						resource.getAttributes().put("name", resourceName);
+						resource.getAttributes().put("library", libraryName);
+						resource.getAttributes().put("target", "head");
+						capturedResources.add(resource);
+					}
 				}
 			}
 		}
@@ -164,5 +179,25 @@ public class HeadRendererPrimeFacesImpl extends HeadRendererBridgeImpl {
 		// Delegate rendering to the superclass so that it can write resources found in the view root to the head
 		// section of the portal page.
 		super.encodeBegin(facesContext, uiComponent);
+	}
+
+	@Override
+	protected List<UIComponent> getFirstResources(FacesContext facesContext, UIComponent uiComponent) {
+
+		List<UIComponent> firstResources = super.getFirstResources(facesContext, uiComponent);
+
+		if (firstResources == null) {
+			firstResources = new ArrayList<UIComponent>();
+		}
+
+		Map<Object, Object> facesContextAttributes = facesContext.getAttributes();
+		ResourceComponent primefacesThemeResource = (ResourceComponent) facesContextAttributes.remove(
+				"primefacesTheme");
+
+		if (primefacesThemeResource != null) {
+			firstResources.add(primefacesThemeResource);
+		}
+
+		return firstResources;
 	}
 }
