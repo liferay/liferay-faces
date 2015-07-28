@@ -3,34 +3,34 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
    http://java.sun.com/xml/ns/javaee/web-facelettaglibrary_2_0.xsd http://vdldoc.org/vdldoc https://raw.githubusercontent.com/omnifaces/vdldoc/master/src/main/resources/org/omnifaces/vdldoc/resources/vdldoc.taglib.xml.xsd"
 	version="2.0">
-	<description><![CDATA[<strong>Deprecated:</strong> Please use <code>portal</code> tags instead. The Liferay Faces Portal facelet component tags with the <code>liferay-util:</code> tag name prefix.]]></description>
+	<description><![CDATA[<strong>Deprecated.</strong> Please use <code>portal</code> tags instead. The Liferay Faces Portal facelet component tags with the <code>liferay-util:</code> tag name prefix.]]></description>
 	<namespace>http://liferay.com/faces/util</namespace>
 	<function>
-		<description><![CDATA[<strong>Deprecated:</strong> No replacement available. If the specified value is a portal property such as "editor.wysiwyg.default" then this function returns the value of the portal property such as "ckeditor". Otherwise if the specified value is null or empty, then the browser capabilities determine the return value. Browsers that do not have the ability to support rich text will cause this function to return "simple" or "tinymce_simple".]]></description>
+		<description><![CDATA[<strong>Deprecated.</strong> No replacement available. If the specified value is a portal property such as "editor.wysiwyg.default" then this function returns the value of the portal property such as "ckeditor". Otherwise if the specified value is null or empty, then the browser capabilities determine the return value. Browsers that do not have the ability to support rich text will cause this function to return "simple" or "tinymce_simple".]]></description>
 		<function-name>getEditorValue</function-name>
 		<function-class>com.liferay.faces.portal.util.FaceletUtil</function-class>
 		<function-signature>java.lang.String getEditorValue(java.lang.String)</function-signature>
 	</function>
 	<function>
-		<description><![CDATA[<strong>Deprecated:</strong> No replacement available. Returns the <code>dataModel</code> associated with the specified clientId.]]></description>
+		<description><![CDATA[<strong>Deprecated.</strong> No replacement available. Returns the <code>dataModel</code> associated with the specified clientId.]]></description>
 		<function-name>findDataModel</function-name>
 		<function-class>com.liferay.faces.util.el.FaceletUtil</function-class>
 		<function-signature>javax.faces.model.DataModel findDataModel(java.lang.String)</function-signature>
 	</function>
 	<function>
-		<description><![CDATA[<strong>Deprecated:</strong> Please use <code>portal:escapeURL</code> instead. Returns an escaped/encoded representation of the specified URL.]]></description>
+		<description><![CDATA[<strong>Deprecated.</strong> Please use <code>portal:escapeURL</code> instead. Returns an escaped/encoded representation of the specified URL.]]></description>
 		<function-name>escapeURL</function-name>
 		<function-class>com.liferay.portal.kernel.util.HttpUtil</function-class>
 		<function-signature>java.lang.String encodeURL(java.lang.String)</function-signature>
 	</function>
 	<function>
-		<description><![CDATA[<strong>Deprecated:</strong> Please use <code>portal:getProperty</code> instead. Returns the value of the specified portal property name.]]></description>
+		<description><![CDATA[<strong>Deprecated.</strong> Please use <code>portal:getProperty</code> instead. Returns the value of the specified portal property name.]]></description>
 		<function-name>portalProperty</function-name>
 		<function-class>com.liferay.portal.kernel.util.PropsUtil</function-class>
 		<function-signature>java.lang.String get(java.lang.String)</function-signature>
 	</function>
 	<function>
-		<description><![CDATA[<strong>Deprecated:</strong> No replacement available. Returns a modified version of the first argument by substituting all occurrences of the second argument with the third argument.]]></description>
+		<description><![CDATA[<strong>Deprecated.</strong> No replacement available. Returns a modified version of the first argument by substituting all occurrences of the second argument with the third argument.]]></description>
 		<function-name>stringReplace</function-name>
 		<function-class>com.liferay.portal.kernel.util.StringUtil</function-class>
 		<function-signature>java.lang.String replace(java.lang.String, java.lang.String, java.lang.String)</function-signature>
