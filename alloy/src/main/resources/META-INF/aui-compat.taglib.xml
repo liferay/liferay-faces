@@ -5,7 +5,7 @@
    http://java.sun.com/xml/ns/javaee/web-facelettaglibrary_2_0.xsd http://vdldoc.org/vdldoc https://raw.githubusercontent.com/omnifaces/vdldoc/master/src/main/resources/org/omnifaces/vdldoc/resources/vdldoc.xhtml.xsd"
 	version="2.0">
 	<namespace>http://portletfaces.org/alloyfaces/aui</namespace>
-	<description><![CDATA[<strong>Deprecated:</strong> Please use <code>alloy</code> tags instead.]]></description>
+	<description><![CDATA[<strong>Deprecated.</strong> Please use <code>alloy</code> tags instead.]]></description>
 	<tag>
 		<tag-name>button-row</tag-name>
 		<component>

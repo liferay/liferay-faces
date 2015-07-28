@@ -4,10 +4,10 @@
    http://java.sun.com/xml/ns/javaee/web-facelettaglibrary_2_0.xsd"
 	version="2.0">
 	<namespace>http://portletfaces.org/alloyfaces/aui-cc</namespace>
-	<description><![CDATA[<strong>Deprecated:</strong> Please use <code>alloy</code> tags instead.]]></description>
+	<description><![CDATA[<strong>Deprecated.</strong> Please use <code>alloy</code> tags instead.]]></description>
 	<composite-library-name>aui-cc</composite-library-name>
 	<function>
-		<description><![CDATA[<strong>Deprecated:</strong> No replacement available.]]></description>
+		<description><![CDATA[<strong>Deprecated.</strong> No replacement available.]]></description>
 		<function-name>appendToCssClasses</function-name>
 		<function-class>com.liferay.faces.alloy.util.AlloyUtil</function-class>
 		<function-signature>java.lang.String appendToCssClasses(java.lang.String, java.lang.String)</function-signature>
