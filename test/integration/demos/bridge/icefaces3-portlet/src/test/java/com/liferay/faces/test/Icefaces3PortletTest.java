@@ -539,9 +539,18 @@ public class Icefaces3PortletTest extends TesterBase {
 		int dateLengthAfterReset = 10;
 
 		logger.log(Level.INFO, "preferencesMenuButton.click() ... ");
-		logger.log(Level.INFO, "Waiting for datePatternField to show on the page ... ");
-
 		selectEditMode(browser, portal);
+
+		logger.log(Level.INFO, "Waiting for datePatternField to show on the page ... ");
+		try {
+			WebDriverWait wait = new WebDriverWait(browser, 10);
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(datePatternFieldXpath)));
+		}
+		catch (Exception e) {
+			logger.log(Level.INFO, "Exception e.getMessage() = " + e.getMessage());
+			assertTrue("datePatternField should be visible after selecting edit mode," +
+			" but " + datePatternFieldXpath + " is not visible.", false);
+		}
 
 		logger.log(Level.INFO, "done with selectEditMode: isThere(browser, datePatternFieldXpath) = " + isThere(browser, datePatternFieldXpath));
 		logger.log(Level.INFO, "datePatternField.getAttribute('value') = " + datePatternField.getAttribute("value"));
