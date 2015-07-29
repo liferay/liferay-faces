@@ -53,7 +53,7 @@
 		<from-view-id>/WEB-INF/views/portletViewMode.xhtml</from-view-id>
 		<navigation-case>
 			<from-outcome>edit-preferences</from-outcome>
-			<to-view-id>/WEB-INF/views/portletEditMode.html?javax.portlet.faces.PortletMode=edit&amp;javax.portlet.faces.WindowState=maximized</to-view-id>
+			<to-view-id>/WEB-INF/views/portletEditMode.xhtml?javax.portlet.faces.PortletMode=edit&amp;javax.portlet.faces.WindowState=maximized</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
