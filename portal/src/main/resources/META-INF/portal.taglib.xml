@@ -126,20 +126,20 @@ java.lang.Object)</method-signature>
 		</tag-extension>
 	</tag>
 	<tag>
-		<description><![CDATA[TODO.]]></description>
+		<description><![CDATA[The component is used to display header text by specifying the title attribute. It can also display a clickable back icon.]]></description>
 		<tag-name>header</tag-name>
 		<component>
 			<component-type>com.liferay.faces.portal.component.header.Header</component-type>
 			<renderer-type>com.liferay.faces.portal.component.header.HeaderRenderer</renderer-type>
 		</component>
 		<attribute>
-			<description><![CDATA[TODO.]]></description>
+			<description><![CDATA[This value will be used to populate the title attribute of the back icon.]]></description>
 			<name>backLabel</name>
 			<required>false</required>
 			<type>String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[TODO.]]></description>
+			<description><![CDATA[The URL of the anchor tag rendered for the back icon.  The back icon is not rendered unless this is specified.]]></description>
 			<name>backURL</name>
 			<required>false</required>
 			<type>String</type>
@@ -151,7 +151,7 @@ java.lang.Object)</method-signature>
 			<type>boolean</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[TODO.]]></description>
+			<description><![CDATA[When false, the back icon is not rendered. The default is true.]]></description>
 			<name>showBackURL</name>
 			<required>false</required>
 			<type>boolean</type>
@@ -169,7 +169,7 @@ java.lang.Object)</method-signature>
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[TODO.]]></description>
+			<description><![CDATA[This value will be used as the header text for the component.]]></description>
 			<name>title</name>
 			<required>false</required>
 			<type>String</type>
