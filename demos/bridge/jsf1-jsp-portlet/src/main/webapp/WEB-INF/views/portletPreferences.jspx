@@ -17,8 +17,8 @@
 
 		<hr />
 
-		<h:commandButton action="#{portletPreferencesBackingBean.submit}" value="#{i18n['submit']}" />
-		<h:commandButton action="#{portletPreferencesBackingBean.reset}" value="#{i18n['reset']}" />
+		<h:commandButton actionListener="#{portletPreferencesBackingBean.submit}" value="#{i18n['submit']}" />
+		<h:commandButton actionListener="#{portletPreferencesBackingBean.reset}" value="#{i18n['reset']}" />
 
 	</h:form>
 
