@@ -14,6 +14,7 @@
 package com.liferay.faces.bridge.component.inputfile.internal;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -53,7 +54,16 @@ public class InputFileRenderer extends InputFileRendererCompat {
 
 			if ((uploadedFiles != null) && (uploadedFiles.size() > 0)) {
 
-				inputFile.setSubmittedValue(uploadedFiles);
+				List<com.liferay.faces.bridge.model.UploadedFile> bridgeUploadedFiles =
+					new ArrayList<com.liferay.faces.bridge.model.UploadedFile>(uploadedFiles.size());
+
+				for (UploadedFile uploadedFile : uploadedFiles) {
+					com.liferay.faces.bridge.model.UploadedFile bridgeUploadedFile = new UploadedFileBridgeImpl(
+							uploadedFile);
+					bridgeUploadedFiles.add(bridgeUploadedFile);
+				}
+
+				inputFile.setSubmittedValue(bridgeUploadedFiles);
 
 				// Queue the FileUploadEvent so that each uploaded file can be handled individually with an
 				// ActionListener.
