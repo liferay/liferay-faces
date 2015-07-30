@@ -9,7 +9,7 @@
 		<portlet-class>javax.portlet.faces.GenericFacesPortlet</portlet-class>
 		<init-param>
 			<name>javax.portlet.faces.defaultViewId.view</name>
-			<value>/WEB-INF/views/portletViewMode.faces?testParam=1234</value>
+			<value>/WEB-INF/views/portletViewMode.faces</value>
 		</init-param>
 		<init-param>
 			<name>javax.portlet.faces.defaultViewId.edit</name>
