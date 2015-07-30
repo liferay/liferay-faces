@@ -14,7 +14,6 @@
 package com.liferay.faces.test;
 //J-
 
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.util.logging.Level;
@@ -30,6 +29,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import com.liferay.faces.test.util.TesterBase;
+import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 /**
  * @author	Liferay Faces Team
@@ -89,6 +91,13 @@ public class Icefaces3CrudPortletTest extends TesterBase {
 	// Cancel button
 	private static final String cancelButtonXpath = "//input[@type='submit' and @value='Cancel']";
 
+	// Page 2 Button
+	private static final String page2ButtonXpath = "//a[contains(@id,'idx2')]";
+
+	// Created User elements
+	private static final String createdUserFirstNameXpath = "//tr/td[3]/span[text()='A']";
+	private static final String createdUserEmailXpath = "//tr/td[5]/a/span[text()='A@liferay.com']";
+
 	static final String url = baseUrl + webContext + "/ice3-crud";
 
 	@FindBy(xpath = formTagXpath)
@@ -135,6 +144,12 @@ public class Icefaces3CrudPortletTest extends TesterBase {
 	private WebElement saveButton;
 	@FindBy(xpath = cancelButtonXpath)
 	private WebElement cancelButton;
+	@FindBy(xpath = page2ButtonXpath)
+	private WebElement page2Button;
+	@FindBy(xpath = createdUserFirstNameXpath)
+	private WebElement createdUserFirstName;
+	@FindBy(xpath = createdUserEmailXpath)
+	private WebElement createdUserEmail;
 
 	@Drone
 	WebDriver browser;
@@ -172,7 +187,17 @@ public class Icefaces3CrudPortletTest extends TesterBase {
 
 		addButton.click();
 
-		Thread.sleep(500);
+		logger.log(Level.INFO, "Waiting for firstNameFieldXpath to show on the page ... ");
+
+		try {
+			WebDriverWait wait = new WebDriverWait(browser, 10);
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(firstNameFieldXpath)));
+		}
+		catch (Exception e) {
+			logger.log(Level.INFO, "Exception e.getMessage() = " + e.getMessage());
+			assertTrue("firstNameField should be visible after clicking the add button," +
+			" but " + firstNameFieldXpath + " is not visible.", false);
+		}
 
 		logger.log(Level.INFO, "firstNameField.isDisplayed() = " + firstNameField.isDisplayed());
 		assertTrue("The First Name Field should be displayed on the page at this point but it is not.",
@@ -223,7 +248,17 @@ public class Icefaces3CrudPortletTest extends TesterBase {
 
 		saveButton.click();
 
-		Thread.sleep(250);
+		logger.log(Level.INFO, "Waiting for firstNameFieldErrorXpath to show on the page ... ");
+
+		try {
+			WebDriverWait wait = new WebDriverWait(browser, 10);
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(firstNameFieldErrorXpath)));
+		}
+		catch (Exception e) {
+			logger.log(Level.INFO, "Exception e.getMessage() = " + e.getMessage());
+			assertTrue("firstNameFieldError should be visible after clicking the save button," +
+			" but " + firstNameFieldErrorXpath + " is not visible.", false);
+		}
 
 		logger.log(Level.INFO, "firstNameFieldError.isDisplayed() = " + firstNameFieldError.isDisplayed());
 		assertTrue("The First Name Validation Error should be displayed on the page at this point but it is not.",
@@ -266,11 +301,31 @@ public class Icefaces3CrudPortletTest extends TesterBase {
 	@InSequence(4000)
 	public void addCustomer() throws Exception {
 
-		Thread.sleep(250);
+		logger.log(Level.INFO, "Waiting for addButtonXpath to show on the page ... ");
+
+		try {
+			WebDriverWait wait = new WebDriverWait(browser, 10);
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(addButtonXpath)));
+		}
+		catch (Exception e) {
+			logger.log(Level.INFO, "Exception e.getMessage() = " + e.getMessage());
+			assertTrue("addButton should be visible after clicking the cancel button," +
+			" but " + addButtonXpath + " is not visible.", false);
+		}
 
 		addButton.click();
 
-		Thread.sleep(250);
+		logger.log(Level.INFO, "Waiting for firstNameFieldXpath to show on the page ... ");
+
+		try {
+			WebDriverWait wait = new WebDriverWait(browser, 10);
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(firstNameFieldXpath)));
+		}
+		catch (Exception e) {
+			logger.log(Level.INFO, "Exception e.getMessage() = " + e.getMessage());
+			assertTrue("firstNameField should be visible after clicking the add button," +
+			" but " + firstNameFieldXpath + " is not visible.", false);
+		}
 
 		firstNameField.sendKeys("A");
 		lastNameField.sendKeys("A");
@@ -282,39 +337,39 @@ public class Icefaces3CrudPortletTest extends TesterBase {
 		postalCodeField.sendKeys("11111");
 		saveButton.click();
 
-		Thread.sleep(250);
+		logger.log(Level.INFO, "Waiting for page2ButtonXpath to show on the page ... ");
 
-		logger.log(Level.INFO, "isThere(browser, firstNameFieldErrorXpath) = " + isThere(browser, firstNameFieldErrorXpath));
-		assertFalse("There should NOT be a First Name Validation Error on the but there is.",
-			isThere(browser, firstNameFieldErrorXpath));
+		try {
+			WebDriverWait wait = new WebDriverWait(browser, 10);
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(page2ButtonXpath)));
+		}
+		catch (Exception e) {
+			logger.log(Level.INFO, "Exception e.getMessage() = " + e.getMessage());
+			assertTrue("page2Button should be visible after clicking the save button," +
+			" but " + page2ButtonXpath + " is not visible.", false);
+		}
 
-		logger.log(Level.INFO, "isThere(browser, lastNameFieldErrorXpath) = " + isThere(browser, lastNameFieldErrorXpath));
-		assertFalse("There should NOT be a Last Name Validation Error on the but there is.",
-			isThere(browser, lastNameFieldErrorXpath));
+		page2Button.click();
 
-		logger.log(Level.INFO, "isThere(browser, emailAddressFieldErrorXpath) = " + isThere(browser, emailAddressFieldErrorXpath));
-		assertFalse("There should NOT be a Email Validation Error on the but there is.",
-			isThere(browser, emailAddressFieldErrorXpath));
+		logger.log(Level.INFO, "Waiting for createdUserFirstNameXpath to show on the page ... ");
 
-		logger.log(Level.INFO, "isThere(browser, phoneNumberFieldErrorXpath) = " + isThere(browser, phoneNumberFieldErrorXpath));
-		assertFalse("There should NOT be a Phone Number Validation Error on the but there is.",
-			isThere(browser, phoneNumberFieldErrorXpath));
+		try {
+			WebDriverWait wait = new WebDriverWait(browser, 10);
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(createdUserFirstNameXpath)));
+		}
+		catch (Exception e) {
+			logger.log(Level.INFO, "Exception e.getMessage() = " + e.getMessage());
+			assertTrue("createdUserFirstName should be visible after selecting edit mode," +
+			" but " + createdUserFirstNameXpath + " is not visible.", false);
+		}
 
-		logger.log(Level.INFO, "isThere(browser, dateOfBirthFieldErrorXpath) = " + isThere(browser, dateOfBirthFieldErrorXpath));
-		assertFalse("There should NOT be a Date of Birth Validation Error on the but there is.",
-			isThere(browser, dateOfBirthFieldErrorXpath));
+		logger.log(Level.INFO, "createdUserFirstName.isDisplayed() = " + createdUserFirstName.isDisplayed());
+		assertTrue("The Created User First Name should be displayed on the page at this point but it is not.",
+			createdUserFirstName.isDisplayed());
 
-		logger.log(Level.INFO, "isThere(browser, cityFieldErrorXpath) = " + isThere(browser, cityFieldErrorXpath));
-		assertFalse("There should NOT be a City Validation Error on the but there is.", isThere(browser, cityFieldErrorXpath));
-
-		logger.log(Level.INFO, "isThere(browser, provinceIdFieldErrorXpath) = " + isThere(browser, provinceIdFieldErrorXpath));
-		assertFalse("There should NOT be a province Validation Error on the but there is.",
-			isThere(browser, provinceIdFieldErrorXpath));
-
-		logger.log(Level.INFO, "isThere(browser, postalCodeFieldErrorXpath) = " + isThere(browser, postalCodeFieldErrorXpath));
-		assertFalse("There should NOT be a Postal Code Validation Error on the but there is.",
-			isThere(browser, postalCodeFieldErrorXpath));
-
+		logger.log(Level.INFO, "createdUserEmail.isDisplayed() = " + createdUserEmail.isDisplayed());
+		assertTrue("The Created User Email should be displayed on the page at this point but it is not.",
+			createdUserEmail.isDisplayed());
 	}
 
 }
