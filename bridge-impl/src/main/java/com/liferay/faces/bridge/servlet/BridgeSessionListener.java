@@ -24,10 +24,6 @@ import javax.portlet.faces.BridgeException;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletRequestWrapper;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpServletResponseWrapper;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
@@ -275,25 +271,9 @@ public class BridgeSessionListener implements HttpSessionListener, ServletContex
 		}
 	}
 
-	private class HttpServletRequestExpirationImpl extends HttpServletRequestWrapper {
-
-		public HttpServletRequestExpirationImpl() {
-			this(null);
-		}
-
-		public HttpServletRequestExpirationImpl(HttpServletRequest httpServletRequest) {
-			super(httpServletRequest);
-		}
+	private class HttpServletRequestExpirationImpl {
 	}
 
-	private class HttpServletResponseExpirationImpl extends HttpServletResponseWrapper {
-
-		public HttpServletResponseExpirationImpl() {
-			this(null);
-		}
-
-		public HttpServletResponseExpirationImpl(HttpServletResponse httpServletResponse) {
-			super(httpServletResponse);
-		}
+	private class HttpServletResponseExpirationImpl {
 	}
 }
