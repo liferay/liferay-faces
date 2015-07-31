@@ -39,16 +39,41 @@ public class FacesContextFactoryImpl extends FacesContextFactory {
 	public FacesContext getFacesContext(Object context, Object request, Object response, Lifecycle lifecycle)
 		throws FacesException {
 
-		// If the session is expiring, then return an instance of FacesContext that can function in a
-		// limited manner during session expiration.
-		if ((context instanceof ServletContext) && (request == null) && (response == null)) {
+		// If the specified context is a ServletContext, then it is possible that the session is expiring.
+		if ((context != null) && (context instanceof ServletContext)) {
 
-			ExternalContextFactory externalContextFactory = (ExternalContextFactory) FactoryFinder.getFactory(
-					FactoryFinder.EXTERNAL_CONTEXT_FACTORY);
+			// If the session is expiring, then return an instance of FacesContext that can function in a limited
+			// manner during session expiration.
+			String requestFQCN = "";
 
-			ExternalContext externalContext = externalContextFactory.getExternalContext(context, request, response);
+			if (request != null) {
+				requestFQCN = request.getClass().getName().toLowerCase();
+			}
 
-			return new FacesContextExpirationImpl(externalContext);
+			String responseFQCN = "";
+
+			if (response != null) {
+				responseFQCN = response.getClass().getName().toLowerCase();
+			}
+
+			// NOTE: BridgeSessionListener creates classes named HttpServletRequestExpirationImpl and
+			// HttpServletResponseExpirationImpl.
+			if ((requestFQCN.length() == 0) || (responseFQCN.length() == 0) || requestFQCN.contains("expiration") ||
+					responseFQCN.contains("expiration")) {
+
+				ExternalContextFactory externalContextFactory = (ExternalContextFactory) FactoryFinder.getFactory(
+						FactoryFinder.EXTERNAL_CONTEXT_FACTORY);
+
+				ExternalContext externalContext = externalContextFactory.getExternalContext(context, request, response);
+
+				return new FacesContextExpirationImpl(externalContext);
+			}
+
+			// Otherwise, delegate to the wrapped factory.
+			else {
+
+				return wrappedFacesContextFactory.getFacesContext(context, request, response, lifecycle);
+			}
 		}
 
 		// Otherwise, delegate to the wrapped factory.
