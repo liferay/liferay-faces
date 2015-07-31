@@ -14,9 +14,7 @@
 package com.liferay.faces.bridge.context.internal;
 
 import javax.faces.FacesException;
-import javax.faces.FactoryFinder;
 import javax.faces.context.ExternalContext;
-import javax.faces.context.ExternalContextFactory;
 import javax.faces.context.FacesContext;
 import javax.faces.context.FacesContextFactory;
 import javax.faces.lifecycle.Lifecycle;
@@ -61,10 +59,7 @@ public class FacesContextFactoryImpl extends FacesContextFactory {
 			if ((requestFQCN.length() == 0) || (responseFQCN.length() == 0) || requestFQCN.contains("expiration") ||
 					responseFQCN.contains("expiration")) {
 
-				ExternalContextFactory externalContextFactory = (ExternalContextFactory) FactoryFinder.getFactory(
-						FactoryFinder.EXTERNAL_CONTEXT_FACTORY);
-
-				ExternalContext externalContext = externalContextFactory.getExternalContext(context, request, response);
+				ExternalContext externalContext = new ExternalContextExpirationImpl((ServletContext) context);
 
 				return new FacesContextExpirationImpl(externalContext);
 			}
