@@ -46,7 +46,7 @@ public class FacesContextFactoryImpl extends FacesContextFactory implements Wrap
 
 		// If this is a request coming from the portlet container, then return an instance of FacesContext that is
 		// compatible with the portlet lifecycle.
-		if (context instanceof PortletContext) {
+		if ((context != null) && (context instanceof PortletContext)) {
 			PortletContext portletContext = (PortletContext) context;
 			PortletRequest portletRequest = (PortletRequest) request;
 			String requestContextPath = portletRequest.getContextPath();
@@ -62,13 +62,37 @@ public class FacesContextFactoryImpl extends FacesContextFactory implements Wrap
 			return new FacesContextImpl(wrappedFacesContext, externalContext);
 		}
 
-		// Otherwise, if the session is expiring, then return an instance of FacesContext that can function in a
-		// limited manner during session expiration.
-		else if ((context instanceof ServletContext) && (request == null) && (response == null)) {
+		// If the specified context is a ServletContext, then it is possible that the session is expiring.
+		else if ((context != null) && (context instanceof ServletContext)) {
 
-			ExternalContext externalContext = new ExternalContextExpirationImpl((ServletContext) context);
+			// If the session is expiring, then return an instance of FacesContext that can function in a limited
+			// manner during session expiration.
+			String requestFQCN = "";
 
-			return new FacesContextExpirationImpl(externalContext);
+			if (request != null) {
+				requestFQCN = request.getClass().getName().toLowerCase();
+			}
+
+			String responseFQCN = "";
+
+			if (response != null) {
+				responseFQCN = response.getClass().getName().toLowerCase();
+			}
+
+			// NOTE: BridgeSessionListener creates classes named HttpServletRequestExpirationImpl and
+			// HttpServletResponseExpirationImpl.
+			if ((requestFQCN.length() == 0) || (responseFQCN.length() == 0) || requestFQCN.contains("expiration") ||
+					responseFQCN.contains("expiration")) {
+
+				ExternalContext externalContext = new ExternalContextExpirationImpl((ServletContext) context);
+
+				return new FacesContextExpirationImpl(externalContext);
+			}
+
+			// Otherwise, delegate to the wrapped factory.
+			else {
+				return wrappedFacesContextFactory.getFacesContext(context, request, response, lifecycle);
+			}
 		}
 
 		// Otherwise, delegate to the wrapped factory.
