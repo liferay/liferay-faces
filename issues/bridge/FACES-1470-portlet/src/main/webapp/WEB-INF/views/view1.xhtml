@@ -7,6 +7,12 @@
 		<h:form id="f1">
 			<h:outputText value="This is view1.xhtml" />
 			<br />
+			<h:commandButton action="/WEB-INF/views/view2.xhtml" value="Click me to navigate to view2.xhtml via Ajax">
+				<f:ajax execute="@form" />
+			</h:commandButton>
+			<br />
+			<h:commandButton action="/WEB-INF/views/view2.xhtml" value="Click me to navigate to view2.xhtml via non-Ajax (full postback)" />
+			<br />
 			<h:outputText value="#{as7LeakRequestScopeBean.foo}" />
 			<br />
 			<h:outputText value="#{as7LeakRequestScopeInjectedBean.foo}" />
@@ -20,11 +26,19 @@
 			<h:outputText value="#{as7LeakViewScopeInjectedBean.foo}" />
 			<br />
 			<h:outputText value="#{as7LeakViewScopeInjectedBeanInnerClass.foo}" />
-			<h:commandButton action="/WEB-INF/views/view2.xhtml" value="Click me to navigate to view2.xhtml via Ajax">
-				<f:ajax execute="@form" />
-			</h:commandButton>
-			<h:commandButton action="/WEB-INF/views/view2.xhtml" value="Click me to navigate to view2.xhtml via non-Ajax (full postback)" />
 		</h:form>
+		<br />
+		<h:panelGroup>
+			Above you will see the contents of primitives from several AS7Leak objects which were constructed in order to render this view.  Clicking the buttons, and then navigating back to this view will generate additional AS7Leak objects.<br /> <br /> Instructions:<br />
+			<ol>
+				<li>Count these objects using a monitoring tool, for example: <br /> jvisualvm -&gt; Applications -&gt; pid for jvm -&gt; Sampler -&gt; Memory -&gt; Filter -&gt; AS7Leak</li>
+				<li>Generate several of them by clicking the commandButtons to get to view2, and then click the buttons to return here.</li>
+				<li>Then click the sign out link to sign out of the portal and end your session.</li>
+				<li>Check the console log for the server to make sure there were no Exceptions thrown during the sign out.</li>
+				<li>Check the number of AS7Leak objects still in memory after signing out, and after garbage collection.</li>
+				<li>If there are any Exceptions thrown during the sign out, or any AS7Leak objects left after garbage collection, let us know.</li>
+			</ol>
+		</h:panelGroup>
 		<alloy:row>
 			<alloy:column>
 				<ul>
