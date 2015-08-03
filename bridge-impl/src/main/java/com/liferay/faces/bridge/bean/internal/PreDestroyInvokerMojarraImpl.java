@@ -60,6 +60,9 @@ public class PreDestroyInvokerMojarraImpl extends PreDestroyInvokerImpl {
 			if (invokePreDestroyMethod != null) {
 
 				try {
+					logger.debug(
+						"Invoking methods annotated with @PreDestroy: mojarraInjectionProvider=[{0}] managedBean=[{1}]",
+						mojarraInjectionProvider, managedBean);
 					invokePreDestroyMethod.invoke(mojarraInjectionProvider, managedBean);
 				}
 				catch (Exception e) {
