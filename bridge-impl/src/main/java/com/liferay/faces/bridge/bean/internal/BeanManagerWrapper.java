@@ -21,10 +21,6 @@ import javax.faces.FacesWrapper;
  */
 public abstract class BeanManagerWrapper implements BeanManager, FacesWrapper<BeanManager> {
 
-	public void invokePreDestroyMethods(Object managedBean, boolean preferPreDestroy) {
-		getWrapped().invokePreDestroyMethods(managedBean, preferPreDestroy);
-	}
-
 	public boolean isManagedBean(String name, Object value) {
 		return getWrapped().isManagedBean(name, value);
 	}
