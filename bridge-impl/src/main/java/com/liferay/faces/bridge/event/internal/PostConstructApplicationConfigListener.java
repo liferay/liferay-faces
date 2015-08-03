@@ -20,8 +20,6 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AbortProcessingException;
 
-import com.liferay.faces.bridge.application.internal.MojarraApplicationAssociate;
-import com.liferay.faces.bridge.bean.internal.MojarraInjectionProvider;
 import com.liferay.faces.util.event.PostConstructApplicationConfigEvent;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
@@ -61,23 +59,20 @@ public class PostConstructApplicationConfigListener extends PostConstructApplica
 	@Override
 	public void processSystemEvent(EventObject systemEvent) throws AbortProcessingException {
 
-		Product jsf = ProductMap.getInstance().get(ProductConstants.JSF);
-
-		if (jsf.isDetected() && ProductConstants.MOJARRA.equals(jsf.getTitle())) {
-
-			FacesContext facesContext = FacesContext.getCurrentInstance();
-			ExternalContext externalContext = facesContext.getExternalContext();
-			Map<String, Object> applicationMap = externalContext.getApplicationMap();
-			MojarraInjectionProvider mojarraInjectionProvider = MojarraApplicationAssociate.getInjectionProvider(
-					externalContext);
-			applicationMap.put(MojarraInjectionProvider.class.getName(), mojarraInjectionProvider);
-
-			if (mojarraInjectionProvider == null) {
-				logger.error("Unable to discover Mojarra InjectionProvider during startup");
-			}
-			else {
-				logger.debug("Mojarra injectionProvider=[{0}]", mojarraInjectionProvider);
-			}
-		}
+//		Product jsf = ProductMap.getInstance().get(ProductConstants.JSF);
+//
+//		if (jsf.isDetected() && ProductConstants.MOJARRA.equals(jsf.getTitle())) {
+//
+//			FacesContext facesContext = FacesContext.getCurrentInstance();
+//			ExternalContext externalContext = facesContext.getExternalContext();
+//			Map<String, Object> applicationMap = externalContext.getApplicationMap();
+//
+//			if (mojarraInjectionProvider == null) {
+//				logger.error("Unable to discover Mojarra InjectionProvider during startup");
+//			}
+//			else {
+//				logger.debug("Mojarra injectionProvider=[{0}]", mojarraInjectionProvider);
+//			}
+//		}
 	}
 }

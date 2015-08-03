@@ -26,6 +26,8 @@ import javax.portlet.PortletSession;
 import com.liferay.faces.bridge.BridgeFactoryFinder;
 import com.liferay.faces.bridge.bean.internal.BeanManager;
 import com.liferay.faces.bridge.bean.internal.BeanManagerFactory;
+import com.liferay.faces.bridge.bean.internal.PreDestroyInvoker;
+import com.liferay.faces.bridge.bean.internal.PreDestroyInvokerFactory;
 import com.liferay.faces.bridge.config.internal.PortletConfigParam;
 import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.util.config.ApplicationConfig;
@@ -41,6 +43,7 @@ public class SessionScopeMap extends AbstractPropertyMap<Object> {
 	// Private Data Members
 	private BeanManager beanManager;
 	private PortletSession portletSession;
+	private PreDestroyInvoker preDestroyInvoker;
 	private boolean preferPreDestroy;
 	private int scope;
 
@@ -59,6 +62,13 @@ public class SessionScopeMap extends AbstractPropertyMap<Object> {
 		BeanManagerFactory beanManagerFactory = (BeanManagerFactory) BridgeFactoryFinder.getFactory(
 				BeanManagerFactory.class);
 		this.beanManager = beanManagerFactory.getBeanManager(applicationConfig.getFacesConfig());
+
+		ContextMapFactory contextMapFactory = (ContextMapFactory) BridgeFactoryFinder.getFactory(
+				ContextMapFactory.class);
+		Map<String, Object> applicationScopeMap = contextMapFactory.getApplicationScopeMap(bridgeContext);
+		PreDestroyInvokerFactory preDestroyInvokerFactory = (PreDestroyInvokerFactory) BridgeFactoryFinder.getFactory(
+				PreDestroyInvokerFactory.class);
+		this.preDestroyInvoker = preDestroyInvokerFactory.getPreDestroyInvoker(applicationScopeMap);
 
 		PortletRequest portletRequest = bridgeContext.getPortletRequest();
 		this.portletSession = portletRequest.getPortletSession();
@@ -89,7 +99,7 @@ public class SessionScopeMap extends AbstractPropertyMap<Object> {
 				Object potentialManagedBeanValue = mapEntry.getValue();
 
 				if (beanManager.isManagedBean(potentialManagedBeanName, potentialManagedBeanValue)) {
-					beanManager.invokePreDestroyMethods(potentialManagedBeanValue, preferPreDestroy);
+					preDestroyInvoker.invokeAnnotatedMethods(potentialManagedBeanValue, preferPreDestroy);
 				}
 			}
 		}
@@ -109,7 +119,7 @@ public class SessionScopeMap extends AbstractPropertyMap<Object> {
 		Object potentialManagedBeanValue = super.remove(key);
 
 		if (beanManager.isManagedBean(potentialManagedBeanName, potentialManagedBeanValue)) {
-			beanManager.invokePreDestroyMethods(potentialManagedBeanValue, preferPreDestroy);
+			preDestroyInvoker.invokeAnnotatedMethods(potentialManagedBeanValue, preferPreDestroy);
 		}
 
 		return potentialManagedBeanValue;
