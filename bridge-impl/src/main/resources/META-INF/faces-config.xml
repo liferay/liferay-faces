@@ -23,10 +23,6 @@
 				<bridge:render-response-wrapper-class>com.liferay.faces.bridge.application.view.internal.BridgeWriteBehindResponseRenderImpl</bridge:render-response-wrapper-class>
 				<bridge:resource-response-wrapper-class>com.liferay.faces.bridge.application.view.internal.BridgeWriteBehindResponseResourceImpl</bridge:resource-response-wrapper-class>
 			</bridge:write-behind-response-wrappers>
-	        <util:system-event-listener>
-	            <util:system-event-listener-class>com.liferay.faces.bridge.event.internal.PostConstructApplicationConfigListener</util:system-event-listener-class>
-	            <util:system-event-class>com.liferay.faces.util.event.PostConstructApplicationConfigEvent</util:system-event-class>
-	        </util:system-event-listener>
 		</application-extension>
 		<el-resolver>com.liferay.faces.bridge.el.internal.ELResolverImpl</el-resolver>
 		<view-handler>com.liferay.faces.bridge.application.internal.ViewHandlerImpl</view-handler>

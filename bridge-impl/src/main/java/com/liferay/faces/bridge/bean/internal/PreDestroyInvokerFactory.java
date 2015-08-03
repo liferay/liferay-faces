@@ -13,14 +13,15 @@
  */
 package com.liferay.faces.bridge.bean.internal;
 
-import javax.faces.FacesWrapper;
 import java.util.Map;
+
+import com.liferay.faces.util.helper.Wrapper;
 
 
 /**
  * @author  Neil Griffin
  */
-public abstract class PreDestroyInvokerFactory implements FacesWrapper<PreDestroyInvokerFactory> {
+public abstract class PreDestroyInvokerFactory implements Wrapper<PreDestroyInvokerFactory> {
 
 	public abstract PreDestroyInvoker getPreDestroyInvoker(Map<String, Object> applicationMap);
 }

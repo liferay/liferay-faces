@@ -13,13 +13,13 @@
  */
 package com.liferay.faces.bridge.bean.internal;
 
-import javax.faces.FacesWrapper;
+import com.liferay.faces.util.helper.Wrapper;
 
 
 /**
  * @author  Neil Griffin
  */
-public abstract class PreDestroyInvokerWrapper implements PreDestroyInvoker, FacesWrapper<PreDestroyInvoker> {
+public abstract class PreDestroyInvokerWrapper implements PreDestroyInvoker, Wrapper<PreDestroyInvoker> {
 
 	@Override
 	public void invokeAnnotatedMethods(Object managedBean, boolean preferPreDestroy) {
