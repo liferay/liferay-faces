@@ -15,11 +15,6 @@ package com.liferay.faces.bridge.servlet;
 
 import java.util.Enumeration;
 
-import javax.faces.FactoryFinder;
-import javax.faces.context.FacesContext;
-import javax.faces.context.FacesContextFactory;
-import javax.faces.lifecycle.Lifecycle;
-import javax.faces.lifecycle.LifecycleFactory;
 import javax.portlet.faces.BridgeException;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
@@ -31,11 +26,15 @@ import javax.servlet.http.HttpSessionListener;
 import com.liferay.faces.bridge.BridgeFactoryFinder;
 import com.liferay.faces.bridge.bean.internal.BeanManager;
 import com.liferay.faces.bridge.bean.internal.BeanManagerFactory;
+import com.liferay.faces.bridge.bean.internal.PreDestroyInvoker;
+import com.liferay.faces.bridge.bean.internal.PreDestroyInvokerFactory;
 import com.liferay.faces.bridge.scope.BridgeRequestScopeManager;
 import com.liferay.faces.bridge.scope.BridgeRequestScopeManagerFactory;
 import com.liferay.faces.util.config.ApplicationConfig;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
+import com.liferay.faces.util.map.AbstractPropertyMap;
+import com.liferay.faces.util.map.AbstractPropertyMapEntry;
 import com.liferay.faces.util.product.Product;
 import com.liferay.faces.util.product.ProductConstants;
 import com.liferay.faces.util.product.ProductMap;
@@ -187,23 +186,13 @@ public class BridgeSessionListener implements HttpSessionListener, ServletContex
 									// one would get cleaned-up by Mojarra.
 									if (beanManager.isManagedBean(attributeName, attributeValue)) {
 
-										// NOTE: The BeanManager implementation utilizes FacesContext in order to
-										// determine the Mojarra injection provider. For this reason it is necessary to
-										// create a special FacesContext instance (that can function during session
-										// expiration) before invoking any methods on the BeanManager.
-										LifecycleFactory lifecycleFactory = (LifecycleFactory) FactoryFinder.getFactory(
-												FactoryFinder.LIFECYCLE_FACTORY);
-										Lifecycle lifecycle = lifecycleFactory.getLifecycle(
-												LifecycleFactory.DEFAULT_LIFECYCLE);
-										FacesContextFactory facesContextFactory = (FacesContextFactory) FactoryFinder
-											.getFactory(FactoryFinder.FACES_CONTEXT_FACTORY);
-
-										FacesContext facesContext = facesContextFactory.getFacesContext(servletContext,
-												new HttpServletRequestExpirationImpl(),
-												new HttpServletResponseExpirationImpl(), lifecycle);
-
-										beanManager.invokePreDestroyMethods(attributeValue, true);
-										facesContext.release();
+										PreDestroyInvokerFactory preDestroyInvokerFactory = (PreDestroyInvokerFactory)
+											BridgeFactoryFinder.getFactory(PreDestroyInvokerFactory.class);
+										ExpirationApplicationMap expirationApplicationMap =
+											new ExpirationApplicationMap(servletContext);
+										PreDestroyInvoker preDestroyInvoker =
+											preDestroyInvokerFactory.getPreDestroyInvoker(expirationApplicationMap);
+										preDestroyInvoker.invokeAnnotatedMethods(attributeValue, true);
 									}
 
 									// Otherwise,
@@ -272,9 +261,63 @@ public class BridgeSessionListener implements HttpSessionListener, ServletContex
 		}
 	}
 
-	private class HttpServletRequestExpirationImpl {
+	private class ExpirationApplicationMap extends AbstractPropertyMap<Object> {
+
+		// Private Data Members
+		private ServletContext servletContext;
+
+		public ExpirationApplicationMap(ServletContext servletContext) {
+			this.servletContext = servletContext;
+		}
+
+		@Override
+		protected AbstractPropertyMapEntry<Object> createPropertyMapEntry(String name) {
+			return new ExpirationApplicationMapEntry(servletContext, name);
+		}
+
+		@Override
+		protected void removeProperty(String name) {
+			servletContext.removeAttribute(name);
+		}
+
+		@Override
+		protected Object getProperty(String name) {
+			return servletContext.getAttribute(name);
+		}
+
+		@Override
+		protected void setProperty(String name, Object value) {
+			servletContext.setAttribute(name, value);
+		}
+
+		@Override
+		protected Enumeration<String> getPropertyNames() {
+			return servletContext.getAttributeNames();
+		}
 	}
 
-	private class HttpServletResponseExpirationImpl {
+	private class ExpirationApplicationMapEntry extends AbstractPropertyMapEntry<Object> {
+
+		// Private Data Members
+		private ServletContext servletContext;
+
+		public ExpirationApplicationMapEntry(ServletContext servletContext, String key) {
+			super(key);
+			this.servletContext = servletContext;
+		}
+
+		@Override
+		public Object getValue() {
+			return servletContext.getAttribute(getKey());
+		}
+
+		@Override
+		public Object setValue(Object value) {
+
+			Object oldValue = getValue();
+			servletContext.setAttribute(getKey(), value);
+
+			return oldValue;
+		}
 	}
 }
