@@ -23,10 +23,6 @@
 		</application-extension>
 		<el-resolver>com.liferay.faces.bridge.el.ELResolverImpl</el-resolver>
 		<resource-handler>com.liferay.faces.bridge.application.ResourceHandlerInnerImpl</resource-handler>
-        <system-event-listener>
-            <system-event-listener-class>com.liferay.faces.bridge.event.internal.PostConstructApplicationConfigListener</system-event-listener-class>
-            <system-event-class>com.liferay.faces.util.event.PostConstructApplicationConfigEvent</system-event-class>
-        </system-event-listener>
 		<view-handler>com.liferay.faces.bridge.application.ViewHandlerImpl</view-handler>
 	</application>
 	<component>
