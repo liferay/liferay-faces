@@ -24,6 +24,8 @@ import javax.portlet.PortletContext;
 import com.liferay.faces.bridge.BridgeFactoryFinder;
 import com.liferay.faces.bridge.bean.internal.BeanManager;
 import com.liferay.faces.bridge.bean.internal.BeanManagerFactory;
+import com.liferay.faces.bridge.bean.internal.PreDestroyInvoker;
+import com.liferay.faces.bridge.bean.internal.PreDestroyInvokerFactory;
 import com.liferay.faces.bridge.config.internal.PortletConfigParam;
 import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.util.config.ApplicationConfig;
@@ -39,6 +41,7 @@ public class ApplicationScopeMap extends AbstractPropertyMap<Object> {
 	// Private Data Members
 	private BeanManager beanManager;
 	private PortletContext portletContext;
+	private PreDestroyInvoker preDestroyInvoker;
 	private boolean preferPreDestroy;
 
 	public ApplicationScopeMap(BridgeContext bridgeContext) {
@@ -55,6 +58,10 @@ public class ApplicationScopeMap extends AbstractPropertyMap<Object> {
 		// over the @BridgePreDestroy annotation.
 		PortletConfig portletConfig = bridgeContext.getPortletConfig();
 		this.preferPreDestroy = PortletConfigParam.PreferPreDestroy.getBooleanValue(portletConfig);
+
+		PreDestroyInvokerFactory preDestroyInvokerFactory = (PreDestroyInvokerFactory) BridgeFactoryFinder.getFactory(
+				PreDestroyInvokerFactory.class);
+		this.preDestroyInvoker = preDestroyInvokerFactory.getPreDestroyInvoker(this);
 	}
 
 	/**
@@ -73,7 +80,7 @@ public class ApplicationScopeMap extends AbstractPropertyMap<Object> {
 				Object potentialManagedBeanValue = mapEntry.getValue();
 
 				if (beanManager.isManagedBean(potentialManagedBeanName, potentialManagedBeanValue)) {
-					beanManager.invokePreDestroyMethods(potentialManagedBeanValue, preferPreDestroy);
+					preDestroyInvoker.invokeAnnotatedMethods(potentialManagedBeanValue, preferPreDestroy);
 				}
 			}
 		}
@@ -92,7 +99,7 @@ public class ApplicationScopeMap extends AbstractPropertyMap<Object> {
 		Object potentialManagedBeanValue = super.remove(key);
 
 		if (beanManager.isManagedBean(potentialManagedBeanName, potentialManagedBeanValue)) {
-			beanManager.invokePreDestroyMethods(potentialManagedBeanValue, preferPreDestroy);
+			preDestroyInvoker.invokeAnnotatedMethods(potentialManagedBeanValue, preferPreDestroy);
 		}
 
 		return potentialManagedBeanValue;

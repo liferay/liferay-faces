@@ -13,15 +13,14 @@
  */
 package com.liferay.faces.bridge.bean.internal;
 
+import javax.faces.FacesWrapper;
+import java.util.Map;
+
+
 /**
- * This interface defines a contract for utility methods for beans that are managed by the JSF managed-bean facility.
- *
  * @author  Neil Griffin
  */
-public interface BeanManager {
+public abstract class PreDestroyInvokerFactory implements FacesWrapper<PreDestroyInvokerFactory> {
 
-	/**
-	 * Determines whether or not the specified value is a bean that is managed by the JSF managed-bean facility.
-	 */
-	public boolean isManagedBean(String name, Object value);
+	public abstract PreDestroyInvoker getPreDestroyInvoker(Map<String, Object> applicationMap);
 }

@@ -13,24 +13,36 @@
  */
 package com.liferay.faces.bridge.bean.internal;
 
-import com.liferay.faces.util.config.FacesConfig;
+import java.util.Map;
+
+import com.liferay.faces.util.product.Product;
+import com.liferay.faces.util.product.ProductConstants;
+import com.liferay.faces.util.product.ProductMap;
 
 
 /**
  * @author  Neil Griffin
  */
-public class BeanManagerFactoryImpl extends BeanManagerFactory {
+public class PreDestroyInvokerFactoryImpl extends PreDestroyInvokerFactory {
 
 	@Override
-	public BeanManager getBeanManager(FacesConfig facesConfig) {
+	public PreDestroyInvoker getPreDestroyInvoker(Map<String, Object> applicationMap) {
 
-		return new BeanManagerImpl(facesConfig.getConfiguredManagedBeans());
+		Product jsf = ProductMap.getInstance().get(ProductConstants.JSF);
+
+		if (jsf.isDetected() && ProductConstants.MOJARRA.equals(jsf.getTitle())) {
+
+			return new PreDestroyInvokerMojarraImpl(applicationMap);
+		}
+		else {
+			return new PreDestroyInvokerImpl();
+		}
 	}
 
-	public BeanManagerFactory getWrapped() {
+	@Override
+	public PreDestroyInvokerFactory getWrapped() {
 
 		// Since this is the factory instance provided by the bridge, it will never wrap another factory.
 		return null;
 	}
-
 }
