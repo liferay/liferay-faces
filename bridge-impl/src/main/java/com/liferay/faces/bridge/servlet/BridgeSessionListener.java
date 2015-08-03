@@ -15,7 +15,6 @@ package com.liferay.faces.bridge.servlet;
 
 import java.util.Enumeration;
 
-import javax.portlet.faces.BridgeException;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -134,8 +133,27 @@ public class BridgeSessionListener implements HttpSessionListener, ServletContex
 				bridgeRequestScopeManagerFactory = (BridgeRequestScopeManagerFactory) BridgeFactoryFinder.getFactory(
 						BridgeRequestScopeManagerFactory.class);
 			}
-			catch (BridgeException e) {
-				logger.debug("Unable to discover factories because portlet never received a RenderRequest");
+			catch (Exception e) {
+
+				String contextPath = "unknown";
+
+				if (httpSessionEvent != null) {
+
+					HttpSession httpSession = httpSessionEvent.getSession();
+
+					if (httpSession != null) {
+
+						ServletContext servletContext = httpSession.getServletContext();
+
+						if (servletContext != null) {
+							contextPath = servletContext.getContextPath();
+						}
+					}
+				}
+
+				logger.error(
+					"Unable to discover factories for contextPath=[{0}] possibly because the portlet never received a RenderRequest",
+					contextPath);
 			}
 
 			if ((beanManagerFactory != null) && (bridgeRequestScopeManagerFactory != null)) {
