@@ -436,6 +436,10 @@
             <name>javax.portlet.faces.defaultViewId.view</name>
             <value>/tests/MultiRequestTest.jsp</value>
         </init-param>
+        <init-param>
+            <name>javax.portlet.faces.automaticNonFacesViewDispatching</name>
+            <value>true</value>
+        </init-param>
         <expiration-cache>0</expiration-cache>
         <supports>
             <mime-type>text/html</mime-type>
