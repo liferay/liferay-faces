@@ -54,7 +54,6 @@
 			<bridge:bean-manager-factory>com.liferay.faces.bridge.bean.internal.BeanManagerFactoryImpl</bridge:bean-manager-factory>
 			<bridge:bridge-config-factory>com.liferay.faces.bridge.config.internal.BridgeConfigFactoryImpl</bridge:bridge-config-factory>
 			<bridge:bridge-context-factory>com.liferay.faces.bridge.context.internal.BridgeContextFactoryImpl</bridge:bridge-context-factory>
-			<bridge:bridge-flash-factory>com.liferay.faces.bridge.context.flash.internal.BridgeFlashFactoryImpl</bridge:bridge-flash-factory>
 			<bridge:bridge-phase-factory>com.liferay.faces.bridge.internal.BridgePhaseFactoryImpl</bridge:bridge-phase-factory>
 			<bridge:bridge-portlet-context-factory>com.liferay.faces.bridge.filter.internal.BridgePortletContextFactoryImpl</bridge:bridge-portlet-context-factory>
 			<bridge:bridge-portlet-request-factory>com.liferay.faces.bridge.filter.internal.BridgePortletRequestFactoryImpl</bridge:bridge-portlet-request-factory>
