@@ -182,9 +182,12 @@ public class GenericFacesPortlet extends GenericPortlet {
 	protected void doDispatch(RenderRequest renderRequest, RenderResponse renderResponse) throws PortletException,
 		IOException {
 
+		String autoNonFacesViewDispatch = getInitParameter("javax.portlet.faces.automaticNonFacesViewDispatching");
 		String nonFacesTargetPath = renderRequest.getParameter(Bridge.NONFACES_TARGET_PATH_PARAMETER);
 
-		if (nonFacesTargetPath != null) {
+		if ((autoNonFacesViewDispatch != null) && autoNonFacesViewDispatch.equalsIgnoreCase("true") &&
+				(nonFacesTargetPath != null)) {
+
 			PortletContext portletContext = getPortletContext();
 			String responseContentType = renderRequest.getResponseContentType();
 
