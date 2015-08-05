@@ -87,10 +87,12 @@ public class InputFile extends InputFileBase {
 					handleInvalidFile(facesContext, clientId, uploadedFile, errorMessage);
 				}
 
-				if ((contentTypeSet != null) && !contentTypeSet.contains(uploadedFile.getContentType())) {
+				String contentType = uploadedFile.getContentType();
+
+				if ((contentType == null) || ((contentTypeSet != null) && !contentTypeSet.contains(contentType))) {
 
 					String errorMessage = messageContext.getMessage(locale, "file-x-has-an-invalid-content-type-y",
-							uploadedFile.getName(), uploadedFile.getContentType());
+							uploadedFile.getName(), contentType);
 					handleInvalidFile(facesContext, clientId, uploadedFile, errorMessage);
 				}
 			}
