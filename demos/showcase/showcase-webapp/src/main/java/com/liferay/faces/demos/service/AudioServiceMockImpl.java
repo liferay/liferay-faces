@@ -44,7 +44,7 @@ public class AudioServiceMockImpl implements AudioService, Serializable {
 		audioList.add(new FacesResource("audios", "over-the-rainbow.m4a"));
 		audioList.add(new FacesResource("audios", "over-the-rainbow.wav"));
 		audioList.add(new FacesResource("audios", "over-the-rainbow.webm"));
-		audioList.add(new FacesResource("audios", "over-the-rainbow.ogv"));
+		audioList.add(new FacesResource("audios", "over-the-rainbow.ogg"));
 	}
 
 	@Override
