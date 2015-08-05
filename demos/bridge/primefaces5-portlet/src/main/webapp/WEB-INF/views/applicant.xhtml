@@ -120,7 +120,7 @@
 					</p:commandButton>
 					<p:dataTable id="uploadedFilesTable" value="#{applicantModelBean.uploadedFiles}" var="uploadedFile">
 						<p:column exportable="false">
-							<p:commandButton id="showDialogButton" icon="ui-icon-trash" onclick="confirmation.show()">
+							<p:commandButton id="showDialogButton" icon="ui-icon-trash" onclick="PF('confirmation').show()">
 								<f:setPropertyActionListener value="#{uploadedFile.id}" target="#{applicantViewBean.uploadedFileId}" />
 							</p:commandButton>
 						</p:column>
