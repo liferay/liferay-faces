@@ -26,13 +26,8 @@ import com.liferay.faces.portal.component.captcha.Captcha;
 import com.liferay.faces.portal.render.internal.DelayedPortalTagRenderer;
 import com.liferay.faces.portal.resource.CaptchaResource;
 import com.liferay.faces.portal.resource.LiferayFacesResourceHandler;
-import com.liferay.faces.util.logging.Logger;
-import com.liferay.faces.util.logging.LoggerFactory;
 
 import com.liferay.portal.kernel.captcha.CaptchaUtil;
-import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
-import com.liferay.portal.kernel.util.PrefsPropsUtil;
-import com.liferay.portal.kernel.util.PropsKeys;
 
 import com.liferay.taglib.ui.CaptchaTag;
 
@@ -44,30 +39,6 @@ import com.liferay.taglib.ui.CaptchaTag;
 @FacesRenderer(componentFamily = Captcha.COMPONENT_FAMILY, rendererType = Captcha.RENDERER_TYPE)
 //J+
 public class CaptchaRenderer extends DelayedPortalTagRenderer<Captcha, CaptchaTag> {
-
-	// Logger
-	private static final Logger logger = LoggerFactory.getLogger(CaptchaRenderer.class);
-
-	static {
-
-		try {
-			String captchaClassName = PrefsPropsUtil.getString(PropsKeys.CAPTCHA_ENGINE_IMPL);
-			ClassLoader portalClassLoader = PortalClassLoaderUtil.getClassLoader();
-
-			@SuppressWarnings("unchecked")
-			Class<com.liferay.portal.kernel.captcha.Captcha> captchaClass =
-				(Class<com.liferay.portal.kernel.captcha.Captcha>) portalClassLoader.loadClass(captchaClassName);
-
-			CaptchaUtil captchaUtil = new CaptchaUtil();
-			com.liferay.portal.kernel.captcha.Captcha captcha;
-
-			captcha = captchaClass.newInstance();
-			captchaUtil.setCaptcha(captcha);
-		}
-		catch (Exception e) {
-			logger.error(e);
-		}
-	}
 
 	@Override
 	public void decode(FacesContext facesContext, UIComponent uiComponent) {
