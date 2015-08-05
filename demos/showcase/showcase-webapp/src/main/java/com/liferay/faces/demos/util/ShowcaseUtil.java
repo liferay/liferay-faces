@@ -59,7 +59,7 @@ public class ShowcaseUtil {
 	private static final String LIFERAY_FACES_BRIDGE_VERSION = LIFERAY_FACES_BRIDGE_PRODUCT.getMajorVersion() + "." +
 		LIFERAY_FACES_BRIDGE_PRODUCT.getMinorVersion();
 	private static final String LIFERAY_FACES_BRIDGE_JAVADOC_BASE_URL = "http://www.liferayfaces.org/doc/faces/" +
-		LIFERAY_FACES_BRIDGE_VERSION + "/javadoc/bridge-impl/";
+		LIFERAY_FACES_BRIDGE_VERSION + "/javadoc/bridge-api/";
 	private static final Product LIFERAY_FACES_PORTAL_PRODUCT = ProductMap.getInstance().get(
 			ProductConstants.LIFERAY_FACES_PORTAL);
 	private static final String LIFERAY_FACES_PORTAL_PACKAGE_PREFIX = "com.liferay.faces.portal";
