@@ -67,6 +67,7 @@ public class ShowcaseUtil {
 		LIFERAY_FACES_PORTAL_PRODUCT.getMinorVersion();
 	private static final String LIFERAY_FACES_PORTAL_JAVADOC_BASE_URL = "http://www.liferayfaces.org/doc/faces/" +
 		LIFERAY_FACES_PORTAL_VERSION + "/javadoc/portal/";
+	private static final String LIFERAY_FACES_PORTLET_PACKAGE_PREFIX = "com.liferay.faces.portlet";
 	private static final Product LIFERAY_FACES_UTIL_PRODUCT = ProductMap.getInstance().get(
 			ProductConstants.LIFERAY_FACES_UTIL);
 	private static final String LIFERAY_FACES_UTIL_PACKAGE_PREFIX = "com.liferay.faces.util";
@@ -179,7 +180,9 @@ public class ShowcaseUtil {
 		else if (fqcn.startsWith(LIFERAY_FACES_ALLOY_PACKAGE_PREFIX)) {
 			javaDocURL.append(LIFERAY_FACES_ALLOY_JAVADOC_BASE_URL);
 		}
-		else if (fqcn.startsWith(LIFERAY_FACES_BRIDGE_PACKAGE_PREFIX)) {
+		else if (fqcn.startsWith(LIFERAY_FACES_BRIDGE_PACKAGE_PREFIX) ||
+				fqcn.startsWith(LIFERAY_FACES_PORTLET_PACKAGE_PREFIX)) {
+			System.err.println("!@#$ fqcn=" + fqcn);
 			javaDocURL.append(LIFERAY_FACES_BRIDGE_JAVADOC_BASE_URL);
 		}
 		else if (fqcn.startsWith(LIFERAY_FACES_PORTAL_PACKAGE_PREFIX)) {
