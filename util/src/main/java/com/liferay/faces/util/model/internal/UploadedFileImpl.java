@@ -63,8 +63,11 @@ public class UploadedFileImpl implements Serializable, UploadedFile {
 	}
 
 	public void delete() throws IOException {
-		File file = new File(absolutePath);
-		file.delete();
+
+		if (absolutePath != null) {
+			File file = new File(absolutePath);
+			file.delete();
+		}
 	}
 
 	@Override
@@ -87,16 +90,20 @@ public class UploadedFileImpl implements Serializable, UploadedFile {
 	}
 
 	public byte[] getBytes() throws IOException {
+
 		byte[] bytes = null;
 
 		try {
-			File file = new File(absolutePath);
 
-			if (file.exists()) {
-				RandomAccessFile randomAccessFile = new RandomAccessFile(file, "r");
-				bytes = new byte[(int) randomAccessFile.length()];
-				randomAccessFile.readFully(bytes);
-				randomAccessFile.close();
+			if (absolutePath != null) {
+				File file = new File(absolutePath);
+
+				if (file.exists()) {
+					RandomAccessFile randomAccessFile = new RandomAccessFile(file, "r");
+					bytes = new byte[(int) randomAccessFile.length()];
+					randomAccessFile.readFully(bytes);
+					randomAccessFile.close();
+				}
 			}
 		}
 		catch (Exception e) {
@@ -115,6 +122,7 @@ public class UploadedFileImpl implements Serializable, UploadedFile {
 	}
 
 	public String getHeader(String name) {
+
 		String header = null;
 		List<String> headers = headersMap.get(name);
 
@@ -138,7 +146,15 @@ public class UploadedFileImpl implements Serializable, UploadedFile {
 	}
 
 	public InputStream getInputStream() throws IOException {
-		return new FileInputStream(getAbsolutePath());
+
+		String absolutePath = getAbsolutePath();
+
+		if (absolutePath == null) {
+			return null;
+		}
+		else {
+			return new FileInputStream(absolutePath);
+		}
 	}
 
 	public String getMessage() {
