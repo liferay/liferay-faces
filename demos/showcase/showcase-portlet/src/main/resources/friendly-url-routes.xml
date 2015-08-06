@@ -3,7 +3,26 @@
 
 <routes>
 	<route>
+		<pattern>/{componentPrefix}/{componentName}/{componentUseCase}/foo/{foo}</pattern>
+		<ignored-parameter name="_facesViewIdRender" />
+		<ignored-parameter name="countryId" />
+		<ignored-parameter name="menuItem" />
+	</route>
+	<route>
+		<pattern>/{componentPrefix}/{componentName}/{componentUseCase}/countryId/{countryId}</pattern>
+		<ignored-parameter name="_facesViewIdRender" />
+		<ignored-parameter name="foo" />
+		<ignored-parameter name="menuItem" />
+	</route>
+	<route>
+		<pattern>/{componentPrefix}/{componentName}/{componentUseCase}/{menuItem}</pattern>
+		<ignored-parameter name="_facesViewIdRender" />
+		<ignored-parameter name="countryId" />
+	</route>
+	<route>
 		<pattern>/{componentPrefix}/{componentName}/{componentUseCase}</pattern>
 		<ignored-parameter name="_facesViewIdRender" />
+		<ignored-parameter name="countryId" />
+		<ignored-parameter name="menuItem" />
 	</route>
 </routes>
