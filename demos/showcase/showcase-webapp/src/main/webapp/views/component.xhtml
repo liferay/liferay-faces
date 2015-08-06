@@ -1,6 +1,6 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html" xmlns:showcase-fn="http://liferay.com/faces/showcase-fn"
+	xmlns:h="http://java.sun.com/jsf/html" xmlns:showcaseFn="http://liferay.com/faces/showcase-fn"
 	xmlns:ui="http://java.sun.com/jsf/facelets" template="/WEB-INF/templates/showcase-#{showcaseModelBean.deploymentType}.xhtml">
 
 	<ui:define name="content">
@@ -25,7 +25,7 @@
 		<c:set value="#{i18n[selectedComponentKey]}" var="selectedComponentDescription" />
 		<c:set value="#{i18n[selectedComponentUseCaseKey]}" var="selectedComponentUseCaseDescription" />
 		<c:set value="vdldoc:#{selectedComponentFullName}" var="selectedComponentDocKey" />
-		<h:button onclick="window.open('#{showcase-fn:encodeVDLDocURL(selectedComponentDocKey)}')" style="float: right;"
+		<h:button onclick="window.open('#{showcaseFn:encodeVDLDocURL(selectedComponentDocKey)}')" style="float: right;"
 			value="#{i18n['vdl-documentation']}" />
 		<ui:include src="/WEB-INF/component/#{selectedComponentPrefix}/#{selectedComponentLowerCaseName}/header.xhtml" />
 		<h3>#{selectedComponentFullName}</h3>
