@@ -8,7 +8,8 @@
 			<f:viewParam name="componentPrefix" value="#{showcaseModelBean.viewParameters.componentPrefix}" />
 			<f:viewParam name="componentName" value="#{showcaseModelBean.viewParameters.componentName}" />
 			<f:viewParam name="componentUseCase" value="#{showcaseModelBean.viewParameters.componentUseCase}" />
-			<f:viewParam name="viewParamShowcase" value="#{viewMetadataBackingBean.viewCountry}">
+			<f:viewParam name="menuItem" value="#{buttonBean.menuItem}" />
+			<f:viewParam name="countryId" value="#{viewMetadataBackingBean.viewCountry}">
 				<f:converter converterId="convertCountry"/>
 			</f:viewParam>
 		</f:metadata>

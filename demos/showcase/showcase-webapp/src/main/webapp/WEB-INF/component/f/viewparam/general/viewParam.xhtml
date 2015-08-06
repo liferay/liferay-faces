@@ -5,7 +5,7 @@
 
 	<ui:define name="col1">
 		<f:metadata>
-			<f:viewParam name="viewParamShowcase" value="#{viewMetadataBackingBean.viewCountry}">
+			<f:viewParam name="countryId" value="#{viewMetadataBackingBean.viewCountry}">
 				<f:converter converterId="convertCountry"/>
 			</f:viewParam>
 		</f:metadata>
@@ -13,7 +13,7 @@
 			<showcase:example renderedCheckbox="true">
 				<h:messages/>
 				<h:link includeViewParams="true" value="#{i18n['link']}">
-					<f:param name="viewParamShowcase" value="1"/>
+					<f:param name="countryId" value="1"/>
 				</h:link>
 			</showcase:example>
 			<showcase:outputModel>
