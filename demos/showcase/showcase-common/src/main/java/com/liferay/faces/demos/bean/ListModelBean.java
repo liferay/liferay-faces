@@ -62,8 +62,8 @@ public class ListModelBean {
 		.isDetected();
 	private static final String[] PACKAGE_NAMES = new String[] {
 			"com.liferay.faces.demos.bean", "com.liferay.faces.demos.constants", "com.liferay.faces.demos.dto",
-			"com.liferay.faces.demos.converter", "com.liferay.faces.demos.portlet", "com.liferay.faces.demos.validator",
-			"com.liferay.faces.demos.service"
+			"com.liferay.faces.demos.converter", "com.liferay.faces.demos.model", "com.liferay.faces.demos.portlet",
+			"com.liferay.faces.demos.validator", "com.liferay.faces.demos.service"
 		};
 
 	// Private Data Members
@@ -166,15 +166,15 @@ public class ListModelBean {
 
 								if (sourceFileName.endsWith(".css")) {
 
-									String sourcePath = File.separator + "resources" + File.separator + "css" +
-										File.separator + sourceFileName;
+									String sourcePath = File.separator + "WEB-INF" + File.separator + "resources" +
+										File.separator + "css" + File.separator + sourceFileName;
 
 									sourceFileURL = startupExternalContext.getResource(sourcePath);
 								}
 								else if (sourceFileName.endsWith(".js")) {
 
-									String sourcePath = File.separator + "resources" + File.separator + "js" +
-										File.separator + sourceFileName;
+									String sourcePath = File.separator + "WEB-INF" + File.separator + "resources" +
+										File.separator + "js" +	File.separator + sourceFileName;
 
 									sourceFileURL = startupExternalContext.getResource(sourcePath);
 								}
