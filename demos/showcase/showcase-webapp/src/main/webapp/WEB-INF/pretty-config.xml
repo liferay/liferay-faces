@@ -8,7 +8,22 @@
 		<view-id value="/views/home.faces" />
 	</url-mapping>
 
-	<url-mapping id="liferay-friendly-url">
+	<url-mapping id="liferay-friendly-url-1">
+		<pattern value="/web/guest/showcase/-/component/#{componentPrefix}/#{componentName}/#{componentUseCase}/foo/#{foo}" />
+		<view-id value="/views/component.faces" />
+	</url-mapping>
+
+	<url-mapping id="liferay-friendly-url-2">
+		<pattern value="/web/guest/showcase/-/component/#{componentPrefix}/#{componentName}/#{componentUseCase}/countryId/#{countryId}" />
+		<view-id value="/views/component.faces" />
+	</url-mapping>
+
+	<url-mapping id="liferay-friendly-url-3">
+		<pattern value="/web/guest/showcase/-/component/#{componentPrefix}/#{componentName}/#{componentUseCase}/#{menuItem}" />
+		<view-id value="/views/component.faces" />
+	</url-mapping>
+
+	<url-mapping id="liferay-friendly-url-4">
 		<pattern value="/web/guest/showcase/-/component/#{componentPrefix}/#{componentName}/#{componentUseCase}" />
 		<view-id value="/views/component.faces" />
 	</url-mapping>
