@@ -10,6 +10,10 @@
 }
 
 /* alloy-button-row */
+div.alloy-button-row {
+	overflow: visible;
+}
+
 div.alloy-button-row:after {
 	clear: both;
 	content: " ";
@@ -205,10 +209,6 @@ a.yui3-menu-label .alloy-icon,li.yui3-menuitem .alloy-icon {
 /* yui3-splitbuttonnav: adjust padding to make splitButtons look like other bootstrap buttons */
 div.yui3-splitbuttonnav .yui3-menu-label a.btn {
 	padding: 4px 12px;
-}
-
-div.yui3-splitbuttonnav {
-	margin-top: 2px;
 }
 
 /* yui3-splitbuttonnav: adjust splitButton menus to look more like other overlays such as popovers and dialogs */
