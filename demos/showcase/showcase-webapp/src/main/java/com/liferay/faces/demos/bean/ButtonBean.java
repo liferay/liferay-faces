@@ -13,15 +13,15 @@
  */
 package com.liferay.faces.demos.bean;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+// JSF 2: import javax.faces.bean.ManagedBean;
+// JSF 2: import javax.faces.bean.RequestScoped;
 
 
 /**
  * @author  Neil Griffin
  */
-@ManagedBean
-@RequestScoped
+// JSF 2: @ManagedBean
+// JSF 2: @RequestScoped
 public class ButtonBean {
 
 	private String menuItem;

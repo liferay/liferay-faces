@@ -25,6 +25,11 @@
 		<!-- <phase-listener>com.liferay.faces.util.lifecycle.ViewScopePhaseListener</phase-listener> -->
 	</lifecycle>
 	<managed-bean>
+		<managed-bean-name>buttonBean</managed-bean-name>
+		<managed-bean-class>com.liferay.faces.demos.bean.ButtonBean</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
 		<managed-bean-name>commandBackingBean</managed-bean-name>
 		<managed-bean-class>com.liferay.faces.demos.bean.CommandBackingBean</managed-bean-class>
 		<managed-bean-scope>request</managed-bean-scope>
