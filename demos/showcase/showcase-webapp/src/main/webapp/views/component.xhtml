@@ -1,6 +1,6 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
 	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core" xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:showcaseFn="http://liferay.com/faces/showcase-fn"
+	xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:showcase-fn="http://liferay.com/faces/showcase-fn"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets" template="/WEB-INF/templates/showcase-#{showcaseModelBean.deploymentType}.xhtml">
 
 	<ui:define name="content">
@@ -8,8 +8,8 @@
 			<f:viewParam name="componentPrefix" value="#{showcaseModelBean.viewParameters.componentPrefix}" />
 			<f:viewParam name="componentName" value="#{showcaseModelBean.viewParameters.componentName}" />
 			<f:viewParam name="componentUseCase" value="#{showcaseModelBean.viewParameters.componentUseCase}" />
-			<f:viewAction action="#{viewMetadataBackingBean.viewAction}" phase="UPDATE_MODEL_VALUES"/>
-			<f:viewParam name="viewParamShowcase" value="#{viewMetadataBackingBean.viewCountry}">
+			<f:viewParam name="menuItem" value="#{buttonBean.menuItem}" />
+			<f:viewParam name="countryId" value="#{viewMetadataBackingBean.viewCountry}">
 				<f:converter converterId="convertCountry"/>
 			</f:viewParam>
 		</f:metadata>
@@ -25,7 +25,7 @@
 		<c:set value="#{i18n[selectedComponentKey]}" var="selectedComponentDescription" />
 		<c:set value="#{i18n[selectedComponentUseCaseKey]}" var="selectedComponentUseCaseDescription" />
 		<c:set value="vdldoc:#{selectedComponentFullName}" var="selectedComponentDocKey" />
-		<alloy:button onclick="window.open('#{showcaseFn:encodeVDLDocURL(selectedComponentDocKey)}')" style="float: right;"
+		<alloy:button onclick="window.open('#{showcase-fn:encodeVDLDocURL(selectedComponentDocKey)}')" style="float: right;"
 			value="#{i18n['vdl-documentation']}" />
 		<ui:include src="/WEB-INF/component/#{selectedComponentPrefix}/#{selectedComponentLowerCaseName}/header.xhtml" />
 		<h3>#{selectedComponentFullName}</h3>

@@ -3,6 +3,10 @@
 	xmlns:showcase="http://xmlns.jcp.org/jsf/composite/showcase" template="/WEB-INF/templates/component-3col.xhtml">
 
 	<ui:define name="col1">
+		<f:metadata>
+			<f:viewParam name="menuItem" value="#{buttonBean.menuItem}" />
+		</f:metadata>
+
 		<!-- Example 1: Creating menus via the alloy:menu tag -->
 		<alloy:form>
 			<showcase:example description="#{i18n['alloy-button-menu-example-1']}" number="1">
@@ -10,29 +14,37 @@
 					<alloy:button includeViewParams="true">
 						<alloy:icon name="user" />
 						<alloy:outputText value="#{i18n['user']}" />
+						<f:param name="menuItem" value="view" />
 						<alloy:menu>
 							<alloy:link includeViewParams="true">
 								<alloy:icon name="pencil" />
 								<alloy:outputText value="#{i18n['edit']}" />
+								<f:param name="menuItem" value="edit" />
 							</alloy:link>
 							<hr />
 							<alloy:link includeViewParams="true">
 								<alloy:icon name="ok-sign" />
 								<alloy:outputText value="#{i18n['enable']}" />
+								<f:param name="menuItem" value="enable" />
 							</alloy:link>
 							<alloy:link includeViewParams="true">
 								<alloy:icon name="minus-sign" />
 								<alloy:outputText value="#{i18n['disable']}" />
+								<f:param name="menuItem" value="disable" />
 							</alloy:link>
 							<hr />
 							<alloy:link includeViewParams="true">
 								<alloy:icon name="trash" />
 								<alloy:outputText value="#{i18n['delete']}" />
+								<f:param name="menuItem" value="delete" />
 							</alloy:link>
 						</alloy:menu>
 					</alloy:button>
 				</alloy:buttonRow>
 			</showcase:example>
+			<showcase:outputModel>
+				<alloy:outputText value="#{buttonBean.menuItem}" />
+			</showcase:outputModel>
 		</alloy:form>
 	</ui:define>
 
@@ -44,6 +56,7 @@
 					<alloy:button includeViewParams="true">
 						<alloy:icon name="user" />
 						<alloy:outputText value="#{i18n['user']}" />
+						<f:param name="menuItem" value="view" />
 						<alloy:menu>
 							<f:facet name="label">
 								<alloy:icon name="chevron-down" />
@@ -52,20 +65,24 @@
 							<alloy:link includeViewParams="true">
 								<alloy:icon name="pencil" />
 								<alloy:outputText value="#{i18n['edit']}" />
+								<f:param name="menuItem" value="edit" />
 							</alloy:link>
 							<hr />
 							<alloy:link includeViewParams="true">
 								<alloy:icon name="ok-sign" />
 								<alloy:outputText value="#{i18n['enable']}" />
+								<f:param name="menuItem" value="enable" />
 							</alloy:link>
 							<alloy:link includeViewParams="true">
 								<alloy:icon name="minus-sign" />
 								<alloy:outputText value="#{i18n['disable']}" />
+								<f:param name="menuItem" value="disable" />
 							</alloy:link>
 							<hr />
 							<alloy:link includeViewParams="true">
 								<alloy:icon name="trash" />
 								<alloy:outputText value="#{i18n['delete']}" />
+								<f:param name="menuItem" value="delete" />
 							</alloy:link>
 						</alloy:menu>
 					</alloy:button>
