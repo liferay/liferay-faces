@@ -13,7 +13,6 @@
  */
 package com.liferay.faces.util.model;
 
-import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
 
@@ -26,10 +25,7 @@ import com.liferay.faces.util.logging.LoggerFactory;
 /**
  * @author  Neil Griffin
  */
-public abstract class OnDemandDataModel<E> extends DataModel implements Paginated, Serializable, Sortable {
-
-	// serialVersionUID
-	private static final long serialVersionUID = 1715725381634521866L;
+public abstract class OnDemandDataModel<E> extends DataModel implements Paginated, Sortable {
 
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(OnDemandDataModel.class);
