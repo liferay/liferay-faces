@@ -104,15 +104,15 @@ public class TesterBase {
 	public void signIn(WebDriver browser) throws Exception {
 		logger.log(Level.INFO, "portal = " + portal);
 		if ("liferay".equals(portal)) {
-			signIn(browser, emailField, passwordField, signInButton, signedInText, "test@liferay.com", "test");
+			signIn(browser, emailField, passwordField, signInButton, signedInText, signedInTextXpath, "test@liferay.com", "test");
 		} else if ("pluto".equals(portal)) {
-			signIn(browser, userName, password, loginButton, logout, "pluto", "pluto");
+			signIn(browser, userName, password, loginButton, logout, logoutXpath, "pluto", "pluto");
 		} else {
 			logger.log(Level.SEVERE, "not a supported portal for this tester base: portal = " + portal + "");
 		}
 	}
 
-	public void signIn(WebDriver browser, WebElement user, WebElement pass, WebElement button, WebElement text, String u, String p) throws Exception {
+	public void signIn(WebDriver browser, WebElement user, WebElement pass, WebElement button, WebElement text, String textXpath, String u, String p) throws Exception {
 
 		java.util.logging.Logger.getLogger("com.gargoylesoftware.htmlunit").setLevel(Level.OFF);
 
@@ -157,7 +157,7 @@ public class TesterBase {
 		pass.sendKeys(p);
 		button.click();
 		logger.log(Level.INFO, "browser.getTitle() = " + browser.getTitle() + " after clicking the sign in button.	Now waiting ...");
-		waitForElement(browser, signedInTextXpath);
+		waitForElement(browser, textXpath);
 		logger.log(Level.INFO, text.getText());
 
 	}
