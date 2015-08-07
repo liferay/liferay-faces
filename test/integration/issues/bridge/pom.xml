@@ -17,4 +17,18 @@
 		<module>FACES-1478-portlet</module>
 	</modules>
 
+	<properties>
+		<integration.context>/group/bridge-issues</integration.context>
+	</properties>
+
+	<profiles>
+		<profile>
+			<id>pluto</id>
+			<properties>
+				<integration.portal>pluto</integration.portal>
+				<integration.context>/pluto/portal</integration.context>
+				<integration.signin>/pluto/portal</integration.signin>
+			</properties>
+		</profile>
+	</profiles>
 </project>
