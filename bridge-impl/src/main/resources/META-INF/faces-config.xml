@@ -96,7 +96,7 @@
 			<bridge:liferay-url-factory>com.liferay.faces.bridge.filter.liferay.internal.LiferayURLFactoryImpl</bridge:liferay-url-factory>
 			<bridge:pre-destroy-invoker-factory>com.liferay.faces.bridge.bean.internal.PreDestroyInvokerFactoryImpl</bridge:pre-destroy-invoker-factory>
 			<bridge:view-handler-factory>com.liferay.faces.bridge.application.internal.ViewHandlerFactoryImpl</bridge:view-handler-factory>
-			<util:browser-sniffer-factory>com.liferay.faces.bridge.client.internal.BrowserSnifferFactoryLiferayImpl</util:browser-sniffer-factory>
+			<util:browser-sniffer-factory>com.liferay.faces.bridge.client.internal.BrowserSnifferFactoryBridgeImpl</util:browser-sniffer-factory>
 			<util:resource-validator-factory>com.liferay.faces.bridge.application.internal.ResourceValidatorFactoryBridgeImpl</util:resource-validator-factory>
 		</factory-extension>
 	</factory>
