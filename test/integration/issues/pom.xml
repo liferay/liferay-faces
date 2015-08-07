@@ -19,6 +19,15 @@
 		<module>portal</module>
 	</modules>
 
+	<profiles>
+		<profile>
+			<id>pluto</id>
+			<modules>
+				<module>bridge</module>
+			</modules>
+		</profile>
+	</profiles>
+
 	<dependencies>
 		<dependency>
 			<groupId>com.liferay.faces.test</groupId>
