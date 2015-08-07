@@ -14,4 +14,22 @@
 	<packaging>jar</packaging>
 	<name>FACES-1638-portlet integration tests</name>
 
+	<profiles>
+		<profile>
+			<!-- This portlet must be tested manually on pluto. -->
+			<id>pluto</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-surefire-plugin</artifactId>
+						<configuration>
+							<skipTests>true</skipTests>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+
 </project>

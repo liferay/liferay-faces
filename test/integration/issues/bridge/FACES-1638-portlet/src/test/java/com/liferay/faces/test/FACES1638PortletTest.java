@@ -38,8 +38,6 @@ import com.liferay.faces.test.util.TesterBase;
 public class FACES1638PortletTest extends TesterBase {
 
 	// portlet topper and menu elements
-	private static final String portletDisplayNameXpath = "//header[@class='portlet-topper']/h1/span";
-
 	private static final String formTagXpath = "//form[@method='post']";
 
 	private static final String firstByItemIdXpath = "//a[contains(@href,'portlet_itemId') and text()='First-Item']";
@@ -53,12 +51,10 @@ public class FACES1638PortletTest extends TesterBase {
 	// http://localhost:8080/web/bridge-issues/faces-1638?p_p_id=1_WAR_FACES1638portlet&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&p_p_col_id=column-1&p_p_col_count=1&_1_WAR_FACES1638portlet__facesViewIdRender=%2Fviews%2Fview1.xhtml&_1_WAR_FACES1638portlet_itemId=3
 	// http://localhost:8080/web/bridge-issues/faces-1638?p_p_id=1_WAR_FACES1638portlet&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&p_p_col_id=column-1&p_p_col_count=1&_1_WAR_FACES1638portlet__facesViewIdRender=%2Fviews%2Fview1.xhtml&_1_WAR_FACES1638portlet_First-Item=1
 
-	static final String url = baseUrl + "/web/bridge-issues/faces-1638";
+	static final String url = baseUrl + webContext + "/faces-1638";
 	static final String ITEM_ID = "itemId=";
 	static final String ITEM_NAME = "-Item=";
 
-	@FindBy(xpath = portletDisplayNameXpath)
-	private WebElement portletDisplayName;
 	@FindBy(xpath = formTagXpath)
 	private WebElement formTag;
 
@@ -84,14 +80,19 @@ public class FACES1638PortletTest extends TesterBase {
 	@InSequence(1000)
 	public void FACES1638Test() throws Exception {
 
+		if ("pluto".equals(portal)) {
+			signIn(browser);
+		}
+
 		logger.log(Level.INFO, "browser.navigate().to(" + url + ")");
 		browser.navigate().to(url);
 		logger.log(Level.INFO, "browser.getTitle() = " + browser.getTitle());
 		logger.log(Level.INFO, "browser.getCurrentUrl() = " + browser.getCurrentUrl());
-		logger.log(Level.INFO, "portletDisplayName.getText() = " + portletDisplayName.getText());
+		getPortletDisplayName();
+		logger.log(Level.INFO, "displayName.getText() = " + displayName.getText());
 		logger.log(Level.INFO, "formTag.getText() = " + formTag.getText());
 
-		assertTrue("portletDisplayName.isDisplayed()", portletDisplayName.isDisplayed());
+		assertTrue("displayName.isDisplayed()", displayName.isDisplayed());
 		assertTrue("formTag.isDisplayed()", formTag.isDisplayed());
 
 
