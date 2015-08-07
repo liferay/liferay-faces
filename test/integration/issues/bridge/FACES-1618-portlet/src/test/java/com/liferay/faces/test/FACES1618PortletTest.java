@@ -39,8 +39,6 @@ import com.liferay.faces.test.util.TesterBase;
 public class FACES1618PortletTest extends TesterBase {
 
 	// portlet topper and menu elements
-	private static final String portletDisplayNameXpath = "//div[@class='portlet-topper']/span";
-
 	private static final String formTagXpath = "//form[@method='post']";
 
 	// <span id="A3981:j_idt3:headResourceIds">
@@ -49,10 +47,8 @@ public class FACES1618PortletTest extends TesterBase {
 	// <input id="A3981:j_idt3:_t11" name="A3981:j_idt3:_t11" type="submit" value="go to next view">
 	private static final String submitButtonXpath = "//input[contains(@value,'go to ')]";
 
-	static final String url =  baseUrl + "/web/bridge-issues/faces-1618";
+	static final String url = baseUrl + webContext + "/faces-1618";
 
-	@FindBy(xpath = portletDisplayNameXpath)
-	private WebElement portletDisplayName;
 	@FindBy(xpath = formTagXpath)
 	private WebElement formTag;
 	@FindBy(xpath = headResourceIdsSpanXpath)
@@ -72,11 +68,16 @@ public class FACES1618PortletTest extends TesterBase {
 	@InSequence(1000)
 	public void portletViewMode() throws Exception {
 
+		if ("pluto".equals(portal)) {
+			signIn(browser);
+		}
+
 		logger.log(Level.INFO, "browser.navigate().to(" + url + ")");
 		browser.navigate().to(url);
 		logger.log(Level.INFO, "browser.getTitle() = " + browser.getTitle());
 		logger.log(Level.INFO, "browser.getCurrentUrl() = " + browser.getCurrentUrl());
-		logger.log(Level.INFO, "portletDisplayName.getText() = " + portletDisplayName.getText());
+		getPortletDisplayName();
+		logger.log(Level.INFO, "displayName.getText() = " + displayName.getText());
 
 		logger.log(Level.INFO, "headResourceIdsSpan.getText() = " + headResourceIdsSpan.getText());
 		headResourceIds = new StringBuilder();
@@ -93,7 +94,7 @@ public class FACES1618PortletTest extends TesterBase {
 
 		logger.log(Level.INFO, "submitButton.isDisplayed() = " + submitButton.isDisplayed());
 
-		assertTrue("portletDisplayName.isDisplayed()", portletDisplayName.isDisplayed());
+		assertTrue("displayName.isDisplayed()", displayName.isDisplayed());
 		assertTrue(
 			"There should be more than 1 headResourceIds, but resourceIds.length == " + resourceIds.length,
 			(resourceIds.length > 1)

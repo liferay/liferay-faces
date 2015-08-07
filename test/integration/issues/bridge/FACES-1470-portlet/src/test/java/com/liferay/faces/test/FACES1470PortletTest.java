@@ -38,8 +38,6 @@ import com.liferay.faces.test.util.TesterBase;
 public class FACES1470PortletTest extends TesterBase {
 
 	// portlet topper and menu elements
-	private static final String portletDisplayNameXpath = "//div[@class='portlet-topper']/span";
-
 	private static final String formTagXpath = "//form[@method='post']";
 
 	// <input id="A5773:f1:j_idt18" type="submit" name="A5773:f1:j_idt18" value="Click me to navigate to view2.xhtml
@@ -58,10 +56,8 @@ public class FACES1470PortletTest extends TesterBase {
 	private static final String fullPostBackButton2Xpath =
 		"//input[contains(@value,'Click me to navigate to view1.xhtml via non-Ajax')]";
 
-	static final String url = baseUrl + "/web/bridge-issues/faces-1470";
+	static final String url = baseUrl + webContext + "/faces-1470";
 
-	@FindBy(xpath = portletDisplayNameXpath)
-	private WebElement portletDisplayName;
 	@FindBy(xpath = formTagXpath)
 	private WebElement formTag;
 	@FindBy(xpath = ajaxButtonXpath)
@@ -81,16 +77,21 @@ public class FACES1470PortletTest extends TesterBase {
 	@InSequence(1000)
 	public void FACES1470PortletViewMode() throws Exception {
 
+		if ("pluto".equals(portal)) {
+			signIn(browser);
+		}
+
 		logger.log(Level.INFO, "browser.navigate().to(" + url + ")");
 		browser.navigate().to(url);
 		logger.log(Level.INFO, "browser.getTitle() = " + browser.getTitle());
 		logger.log(Level.INFO, "browser.getCurrentUrl() = " + browser.getCurrentUrl());
-		logger.log(Level.INFO, "portletDisplayName.getText() = " + portletDisplayName.getText());
+		getPortletDisplayName();
+		logger.log(Level.INFO, "displayName.getText() = " + displayName.getText());
 
 		logger.log(Level.INFO, "ajaxButton.isDisplayed() = " + ajaxButton.isDisplayed());
 		logger.log(Level.INFO, "fullPostBackButton.isDisplayed() = " + fullPostBackButton.isDisplayed());
 
-		assertTrue("portletDisplayName.isDisplayed()", portletDisplayName.isDisplayed());
+		assertTrue("displayName.isDisplayed()", displayName.isDisplayed());
 		assertTrue("ajaxButton should be displayed, but it is not", ajaxButton.isDisplayed());
 		assertTrue("fullPostBackButton should be displayed, but it is not", fullPostBackButton.isDisplayed());
 

@@ -38,15 +38,12 @@ import com.liferay.faces.test.util.TesterBase;
 public class FACES1478PortletTest extends TesterBase {
 
 	// portlet topper and menu elements
-	private static final String portletDisplayNameXpath = "//div[@class='portlet-topper']/span";
 	private static final String formTagXpath = "//form[@method='post']";
 
 	private static final String secondLinkXpath = "//form[@method='post']/a[2]";
 
-	static final String url = baseUrl + "/web/bridge-issues/faces-1478";
+	static final String url = baseUrl + webContext + "/faces-1478";
 
-	@FindBy(xpath = portletDisplayNameXpath)
-	private WebElement portletDisplayName;
 	@FindBy(xpath = formTagXpath)
 	private WebElement formTag;
 	@FindBy(xpath = secondLinkXpath)
@@ -60,15 +57,20 @@ public class FACES1478PortletTest extends TesterBase {
 	@InSequence(1000)
 	public void FACES1478PortletParameters() throws Exception {
 
+		if ("pluto".equals(portal)) {
+			signIn(browser);
+		}
+
 		logger.log(Level.INFO, "browser.navigate().to(" + url + ")");
 		browser.navigate().to(url);
 		logger.log(Level.INFO, "browser.getTitle() = " + browser.getTitle());
 		logger.log(Level.INFO, "browser.getCurrentUrl() = " + browser.getCurrentUrl());
-		logger.log(Level.INFO, "portletDisplayName.getText() = " + portletDisplayName.getText());
+		getPortletDisplayName();
+		logger.log(Level.INFO, "displayName.getText() = " + displayName.getText());
 		logger.log(Level.INFO, "formTag.getText() = " + formTag.getText());
 		logger.log(Level.INFO, "secondLink.getAttribute('href') = " + secondLink.getAttribute("href"));
 
-		assertTrue("portletDisplayName.isDisplayed()", portletDisplayName.isDisplayed());
+		assertTrue("displayName.isDisplayed()", displayName.isDisplayed());
 		assertTrue("formTag.isDisplayed()", formTag.isDisplayed());
 		assertTrue("secondLink.isDisplayed()", secondLink.isDisplayed());
 

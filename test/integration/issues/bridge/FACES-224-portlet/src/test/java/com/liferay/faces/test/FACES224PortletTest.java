@@ -41,8 +41,6 @@ public class FACES224PortletTest extends TesterBase {
 	private static final Logger logger = Logger.getLogger(FACES224PortletTest.class.getName());
 
 	// portlet topper and menu elements
-	private static final String portletDisplayNameXpath = "//div[@class='portlet-topper']/span";
-
 	private static final String formTagXpath = "//form[@method='post']";
 
 	// <input id="A2535:httpGetButton" type="button" value="Click me to render view2.xhtml via HTTP GET">
@@ -51,12 +49,10 @@ public class FACES224PortletTest extends TesterBase {
 	// <div class="portlet-body" id="aui_3_4_0_1_500"> <div id="A2535" class="liferay-faces-bridge-body">This is
 	// view2.xhtml <br>viewParam1='' (if the issue is fixed, the value should be equal to 'abc') <br>viewParam2='' (if
 	// the issue is fixed, the value should be equal to 'xyz')</div> </div>
-	private static final String view2DivXpath = "//div[@class='liferay-faces-bridge-body']";
+	private static final String view2DivXpath = "//div[@class='portlet-body']/div[1]";
 
-	static final String url = baseUrl + "/web/bridge-issues/faces-224";
+	static final String url = baseUrl + webContext + "/faces-224";
 
-	@FindBy(xpath = portletDisplayNameXpath)
-	private WebElement portletDisplayName;
 	@FindBy(xpath = formTagXpath)
 	private WebElement formTag;
 	@FindBy(xpath = buttonXpath)
@@ -72,11 +68,16 @@ public class FACES224PortletTest extends TesterBase {
 	@InSequence(1000)
 	public void FACES224PortletViewMode() throws Exception {
 
+		if ("pluto".equals(portal)) {
+			signIn(browser);
+		}
+
 		logger.log(Level.INFO, "browser.navigate().to(" + url + ")");
 		browser.navigate().to(url);
 		logger.log(Level.INFO, "browser.getTitle() = " + browser.getTitle());
 		logger.log(Level.INFO, "browser.getCurrentUrl() = " + browser.getCurrentUrl());
-		logger.log(Level.INFO, "portletDisplayName.getText() = " + portletDisplayName.getText());
+		getPortletDisplayName();
+		logger.log(Level.INFO, "displayName.getText() = " + displayName.getText());
 
 		logger.log(Level.INFO, "button.isDisplayed() = " + button.isDisplayed());
 
