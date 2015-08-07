@@ -49,7 +49,7 @@ public class FACES224PortletTest extends TesterBase {
 	// <div class="portlet-body" id="aui_3_4_0_1_500"> <div id="A2535" class="liferay-faces-bridge-body">This is
 	// view2.xhtml <br>viewParam1='' (if the issue is fixed, the value should be equal to 'abc') <br>viewParam2='' (if
 	// the issue is fixed, the value should be equal to 'xyz')</div> </div>
-	private static final String view2DivXpath = "//div[@class='portlet-body']/div[1]";
+	private static final String view2DivXpath = "//div[@class='liferay-faces-bridge-body']";
 
 	static final String url = baseUrl + webContext + "/faces-224";
 
