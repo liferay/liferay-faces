@@ -22,4 +22,28 @@
 		<module>FACES-1638-portlet</module>
 	</modules>
 
+	<properties>
+		<integration.context>/group/bridge-issues</integration.context>
+	</properties>
+
+	<profiles>
+		<profile>
+			<id>pluto</id>
+			<properties>
+				<integration.portal>pluto</integration.portal>
+				<integration.context>/pluto/portal</integration.context>
+				<integration.signin>/pluto/portal</integration.signin>
+			</properties>
+			<modules>
+				<module>FACES-224-portlet</module>
+				<module>FACES-1470-portlet</module>
+				<!-- This portlet must be tested manually on pluto. -->
+				<!--<module>FACES-1478-portlet</module>-->
+				<module>FACES-1618-portlet</module>
+				<module>FACES-1635-resources</module>
+				<!-- This portlet must be tested manually on pluto. -->
+				<!--<module>FACES-1638-portlet</module>-->
+			</modules>
+		</profile>
+	</profiles>
 </project>
