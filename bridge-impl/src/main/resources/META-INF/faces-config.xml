@@ -70,7 +70,7 @@
 			<bridge:incongruity-context-factory>com.liferay.faces.bridge.context.internal.IncongruityContextFactoryImpl</bridge:incongruity-context-factory>
 			<bridge:liferay-url-factory>com.liferay.faces.bridge.filter.liferay.internal.LiferayURLFactoryImpl</bridge:liferay-url-factory>
 			<bridge:pre-destroy-invoker-factory>com.liferay.faces.bridge.bean.internal.PreDestroyInvokerFactoryImpl</bridge:pre-destroy-invoker-factory>
-			<util:browser-sniffer-factory>com.liferay.faces.bridge.client.internal.BrowserSnifferFactoryLiferayImpl</util:browser-sniffer-factory>
+			<util:browser-sniffer-factory>com.liferay.faces.bridge.client.internal.BrowserSnifferFactoryBridgeImpl</util:browser-sniffer-factory>
 			<util:resource-validator-factory>com.liferay.faces.bridge.application.internal.ResourceValidatorFactoryBridgeImpl</util:resource-validator-factory>
 		</factory-extension>
 	</factory>

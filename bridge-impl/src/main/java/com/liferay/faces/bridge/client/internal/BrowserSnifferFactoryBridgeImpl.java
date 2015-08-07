@@ -28,7 +28,7 @@ import com.liferay.portal.util.PortalUtil;
 /**
  * @author  Kyle Stiemann
  */
-public class BrowserSnifferFactoryLiferayImpl extends BrowserSnifferFactory {
+public class BrowserSnifferFactoryBridgeImpl extends BrowserSnifferFactory {
 
 	// Private Constants
 	private static final boolean LIFERAY_PORTAL_DETECTED = ProductMap.getInstance().get(ProductConstants.LIFERAY_PORTAL)
@@ -37,7 +37,7 @@ public class BrowserSnifferFactoryLiferayImpl extends BrowserSnifferFactory {
 	// Private Data Memebers
 	private BrowserSnifferFactory wrappedBrowserSnifferFactory;
 
-	public BrowserSnifferFactoryLiferayImpl(BrowserSnifferFactory browserSnifferFactory) {
+	public BrowserSnifferFactoryBridgeImpl(BrowserSnifferFactory browserSnifferFactory) {
 		this.wrappedBrowserSnifferFactory = browserSnifferFactory;
 	}
 
@@ -52,6 +52,13 @@ public class BrowserSnifferFactoryLiferayImpl extends BrowserSnifferFactory {
 			// Calling ExternalContext.setRequest(httpServletRequest) adds extra overhead because all of the
 			// underlying maps have to get re-created. Instead, create a simple ExternalContextWrapper.
 			externalContext = new ExternalContextBrowserSnifferImpl(externalContext, httpServletRequest);
+		}
+
+		// Otherwise we cannot obtain the HttpServletRequest, so we cannot obtain information about the browser, so
+		// return a BrowserSniffer implementation which returns false for all booleans, 0 for all numbers, and "" for
+		// all Strings.
+		else {
+			return new BrowserSnifferPortalImpl();
 		}
 
 		return wrappedBrowserSnifferFactory.getBrowserSniffer(externalContext);
