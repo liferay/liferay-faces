@@ -45,7 +45,7 @@ public class FACES1635ResourcesTest extends TesterBase {
 
 	private static final String textarea1Xpath = "//textarea[contains(@id,':comments1:inputText')]";
 
-	private static final String url = baseUrl + "/web/bridge-issues/faces-1635?p_p_parallel=0";
+	static final String url = baseUrl + webContext + "/faces-1635?p_p_parallel=0";
 
 	@FindBy(xpath = textarea1Xpath)
 	private WebElement textarea1;
@@ -123,6 +123,10 @@ public class FACES1635ResourcesTest extends TesterBase {
 	@RunAsClient
 	@InSequence(1000)
 	public void FACES1635ResourcesTest1() throws Exception {
+
+		if ("pluto".equals(portal)) {
+			signIn(browser);
+		}
 
 		logger.log(Level.INFO, "browser.navigate().to(" + url + ")");
 		browser.navigate().to(url);
