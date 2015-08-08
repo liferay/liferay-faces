@@ -84,7 +84,7 @@ public class BridgeSessionListener implements HttpSessionListener, ServletContex
 	}
 
 	public void sessionCreated(HttpSessionEvent httpSessionEvent) {
-		// This method is required by the HttpSessionListener interface but is not used.
+		BridgeFactoryFinder.getFactory(BeanManagerFactory.class);
 	}
 
 	public void sessionDestroyed(HttpSessionEvent httpSessionEvent) {
