@@ -937,7 +937,7 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 
 		String value = (String) getPortletRequest().getAttribute(name);
 
-		if ((value != null) && (value.contains(":"))) {
+		if ((value != null) && (value.contains(":") || value.contains("%"))) {
 
 			logger.warn("Invalid character in request attribute {0}=[{1}]", name, value);
 			value = null;
@@ -950,7 +950,7 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 
 		String value = getPortletRequest().getParameter(name);
 
-		if ((value != null) && (value.contains(":"))) {
+		if ((value != null) && (value.contains(":") || value.contains("%"))) {
 
 			logger.warn("Invalid character in request parameter {0}=[{1}]", name, value);
 			value = null;
