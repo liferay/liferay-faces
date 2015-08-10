@@ -38,167 +38,177 @@
 		<weblogic.mojarra.pom>${env.MW_HOME}/wlserver/plugins/maven/com/oracle/weblogic/glassfish.jsf_2.0.0.0_2-1-20/12.1.3/glassfish.jsf_2.0.0.0_2-1-20.12.1.3.pom</weblogic.mojarra.pom>
 	</properties>
 
+	<profiles>
+		<profile>
+			<id>upgrade</id>
+			<build>
+				<plugins>
+					<plugin>
+						<artifactId>maven-antrun-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>initialize-properties</id>
+								<phase>initialize</phase>
+								<goals>
+									<goal>run</goal>
+								</goals>
+								<configuration>
+									<tasks>
+										<echo message="Upgrading Mojarra for WebLogic ${liferay.weblogic.version}" />
+										<echo message="If you are not using ${liferay.weblogic.version}, then specify the path to WebLogic's JSF2 pom.xml descriptor using a shell command such as:" />
+										<echo message="    mvn clean install -P weblogic -Dweblogic.mojarra.pom=${weblogic.mojarra.pom}" />
+										<xmlproperty file="${weblogic.mojarra.pom}" keeproot="false"
+											prefix="weblogic.mojarra.pom" />
+										<taskdef resource="net/sf/antcontrib/antlib.xml" />
+										<propertyregex property="weblogic.dir" input="${weblogic.mojarra.pom}"
+											regexp="/plugins/.*" replace="" />
+										<propertyregex property="weblogic-mojarra-version"
+											input="${weblogic.mojarra.pom.artifactId}" regexp=".*_" replace="" />
+										<propertyregex property="weblogic.mojarra.version" input="${weblogic-mojarra-version}"
+											regexp="[-]" replace="." />
+										<propertyregex property="mojarra-version" input="${mojarra.version}"
+											regexp="[.]" replace="-" />
+										<echoproperties destfile="${project.build.directory}/weblogic.mojarra.properties"
+											regex="(weblogic.mojarra|weblogic[.]dir|mojarra.version)" />
+									</tasks>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>properties-maven-plugin</artifactId>
+						<version>1.0-alpha-2</version>
+						<executions>
+							<execution>
+								<phase>initialize</phase>
+								<goals>
+									<goal>read-project-properties</goal>
+								</goals>
+								<configuration>
+									<files>
+										<file>${project.build.directory}/weblogic.mojarra.properties</file>
+									</files>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-install-plugin</artifactId>
+						<version>2.5.1</version>
+						<executions>
+							<execution>
+								<id>install</id>
+								<phase>process-resources</phase>
+								<goals>
+									<goal>install-file</goal>
+								</goals>
+								<configuration>
+									<file>${weblogic.dir}/modules/${weblogic.mojarra.pom.name}.jar</file>
+									<pomFile>${weblogic.mojarra.pom}</pomFile>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>com.coderplus.maven.plugins</groupId>
+						<artifactId>copy-rename-maven-plugin</artifactId>
+						<version>1.0.1</version>
+						<executions>
+							<execution>
+								<id>rename-file</id>
+								<phase>process-resources</phase>
+								<goals>
+									<goal>rename</goal>
+								</goals>
+								<configuration>
+									<sourceFile>${weblogic.dir}/modules/${weblogic.mojarra.pom.artifactId}.jar</sourceFile>
+									<destinationFile>${weblogic.dir}/modules/${weblogic.mojarra.pom.artifactId}.jar.bak</destinationFile>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-dependency-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>unpack</id>
+								<phase>process-resources</phase>
+								<goals>
+									<goal>unpack</goal>
+								</goals>
+								<configuration>
+									<artifactItems>
+										<artifactItem>
+											<groupId>${weblogic.mojarra.pom.groupId}</groupId>
+											<artifactId>${weblogic.mojarra.pom.artifactId}</artifactId>
+											<version>${weblogic.mojarra.pom.version}</version>
+											<type>jar</type>
+											<overWrite>false</overWrite>
+											<outputDirectory>${project.build.directory}/classes</outputDirectory>
+											<includes>com/bea/faces/*.class,META-INF/MANIFEST.MF</includes>
+										</artifactItem>
+										<artifactItem>
+											<groupId>org.glassfish</groupId>
+											<artifactId>javax.faces</artifactId>
+											<version>${mojarra.version}</version>
+											<type>jar</type>
+											<overWrite>false</overWrite>
+											<outputDirectory>${project.build.directory}/classes</outputDirectory>
+											<excludes>META-INF/MANIFEST.MF</excludes>
+										</artifactItem>
+									</artifactItems>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<artifactId>maven-antrun-plugin</artifactId>
+						<executions>
+							<execution>
+								<phase>prepare-package</phase>
+								<configuration>
+									<tasks>
+										<replace token="${weblogic.mojarra.version}" value="${mojarra.version}" dir="${project.build.directory}/classes/META-INF">
+											<include name="MANIFEST.MF" />
+										</replace>
+										<replace token="${weblogic-mojarra-version}" value="${mojarra-version}" dir="${project.build.directory}/classes/META-INF">
+											<include name="MANIFEST.MF" />
+										</replace>
+									</tasks>
+								</configuration>
+								<goals>
+									<goal>run</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-jar-plugin</artifactId>
+						<configuration>
+							<finalName>${weblogic.mojarra.pom.artifactId}</finalName>
+							<archive>
+								<addMavenDescriptor>false</addMavenDescriptor>
+								<manifestFile>${project.build.directory}/classes/META-INF/MANIFEST.MF</manifestFile>
+							</archive>
+							<outputDirectory>${weblogic.dir}/modules</outputDirectory>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+
 	<build>
 		<plugins>
-			<plugin>
-				<artifactId>maven-antrun-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>initialize-properties</id>
-						<phase>initialize</phase>
-						<goals>
-							<goal>run</goal>
-						</goals>
-						<configuration>
-							<tasks>
-								<echo message="Upgrading Mojarra for WebLogic ${liferay.weblogic.version}" />
-								<echo message="If you are not using ${liferay.weblogic.version}, then specify the path to WebLogic's JSF2 pom.xml descriptor using a shell command such as:" />
-								<echo message="    mvn clean install -P weblogic -Dweblogic.mojarra.pom=${weblogic.mojarra.pom}" />
-								<xmlproperty file="${weblogic.mojarra.pom}" keeproot="false"
-									prefix="weblogic.mojarra.pom" />
-								<taskdef resource="net/sf/antcontrib/antlib.xml" />
-								<propertyregex property="weblogic.dir" input="${weblogic.mojarra.pom}"
-									regexp="/plugins/.*" replace="" />
-								<propertyregex property="weblogic-mojarra-version"
-									input="${weblogic.mojarra.pom.artifactId}" regexp=".*_" replace="" />
-								<propertyregex property="weblogic.mojarra.version" input="${weblogic-mojarra-version}"
-									regexp="[-]" replace="." />
-								<propertyregex property="mojarra-version" input="${mojarra.version}"
-									regexp="[.]" replace="-" />
-								<echoproperties destfile="${project.build.directory}/weblogic.mojarra.properties"
-									regex="(weblogic.mojarra|weblogic[.]dir|mojarra.version)" />
-							</tasks>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>properties-maven-plugin</artifactId>
-				<version>1.0-alpha-2</version>
-				<executions>
-					<execution>
-						<phase>initialize</phase>
-						<goals>
-							<goal>read-project-properties</goal>
-						</goals>
-						<configuration>
-							<files>
-								<file>${project.build.directory}/weblogic.mojarra.properties</file>
-							</files>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-install-plugin</artifactId>
-				<version>2.5.1</version>
-				<executions>
-					<execution>
-						<id>install</id>
-						<phase>process-resources</phase>
-						<goals>
-							<goal>install-file</goal>
-						</goals>
-						<configuration>
-							<file>${weblogic.dir}/modules/${weblogic.mojarra.pom.name}.jar</file>
-							<pomFile>${weblogic.mojarra.pom}</pomFile>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>com.coderplus.maven.plugins</groupId>
-				<artifactId>copy-rename-maven-plugin</artifactId>
-				<version>1.0.1</version>
-				<executions>
-					<execution>
-						<id>rename-file</id>
-						<phase>process-resources</phase>
-						<goals>
-							<goal>rename</goal>
-						</goals>
-						<configuration>
-							<sourceFile>${weblogic.dir}/modules/${weblogic.mojarra.pom.artifactId}.jar</sourceFile>
-							<destinationFile>${weblogic.dir}/modules/${weblogic.mojarra.pom.artifactId}.jar.bak</destinationFile>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-dependency-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>unpack</id>
-						<phase>process-resources</phase>
-						<goals>
-							<goal>unpack</goal>
-						</goals>
-						<configuration>
-							<artifactItems>
-								<artifactItem>
-									<groupId>${weblogic.mojarra.pom.groupId}</groupId>
-									<artifactId>${weblogic.mojarra.pom.artifactId}</artifactId>
-									<version>${weblogic.mojarra.pom.version}</version>
-									<type>jar</type>
-									<overWrite>false</overWrite>
-									<outputDirectory>${project.build.directory}/classes</outputDirectory>
-									<includes>com/bea/faces/*.class,META-INF/MANIFEST.MF</includes>
-								</artifactItem>
-								<artifactItem>
-									<groupId>org.glassfish</groupId>
-									<artifactId>javax.faces</artifactId>
-									<version>${mojarra.version}</version>
-									<type>jar</type>
-									<overWrite>false</overWrite>
-									<outputDirectory>${project.build.directory}/classes</outputDirectory>
-									<excludes>META-INF/MANIFEST.MF</excludes>
-								</artifactItem>
-							</artifactItems>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-deploy-plugin</artifactId>
 				<configuration>
 					<skip>true</skip>
-				</configuration>
-			</plugin>
-			<plugin>
-				<artifactId>maven-antrun-plugin</artifactId>
-				<executions>
-					<execution>
-						<phase>prepare-package</phase>
-						<configuration>
-							<tasks>
-								<replace token="${weblogic.mojarra.version}" value="${mojarra.version}" dir="${project.build.directory}/classes/META-INF">
-									<include name="MANIFEST.MF" />
-								</replace>
-								<replace token="${weblogic-mojarra-version}" value="${mojarra-version}" dir="${project.build.directory}/classes/META-INF">
-									<include name="MANIFEST.MF" />
-								</replace>
-							</tasks>
-						</configuration>
-						<goals>
-							<goal>run</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jar-plugin</artifactId>
-				<configuration>
-					<finalName>${weblogic.mojarra.pom.artifactId}</finalName>
-					<archive>
-						<addMavenDescriptor>false</addMavenDescriptor>
-						<manifestFile>${project.build.directory}/classes/META-INF/MANIFEST.MF</manifestFile>
-					</archive>
-					<outputDirectory>${weblogic.dir}/modules</outputDirectory>
 				</configuration>
 			</plugin>
 		</plugins>
@@ -245,4 +255,5 @@
 			</plugins>
 		</pluginManagement>
 	</build>
+
 </project>
