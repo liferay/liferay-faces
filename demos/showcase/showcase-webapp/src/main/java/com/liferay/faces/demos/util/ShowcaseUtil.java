@@ -182,7 +182,6 @@ public class ShowcaseUtil {
 		}
 		else if (fqcn.startsWith(LIFERAY_FACES_BRIDGE_PACKAGE_PREFIX) ||
 				fqcn.startsWith(LIFERAY_FACES_PORTLET_PACKAGE_PREFIX)) {
-			System.err.println("!@#$ fqcn=" + fqcn);
 			javaDocURL.append(LIFERAY_FACES_BRIDGE_JAVADOC_BASE_URL);
 		}
 		else if (fqcn.startsWith(LIFERAY_FACES_PORTAL_PACKAGE_PREFIX)) {
