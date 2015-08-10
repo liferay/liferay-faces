@@ -438,8 +438,19 @@ LFAI = {
 		}
 	},
 
+	initProgressBar: function(progressBar) {
+
+		var orientation = progressBar.get('orientation');
+
+		if ('vertical' === orientation) {
+			var progressBarLabel = progressBar.get('contentBox').one('*');
+			progressBarLabel.removeAttribute('style');
+		}
+	},
+
 	initProgressBarServerMode: function(progressBar, clientId, pollingDelay, clientBehaviorsForPolling) {
 
+		LFAI.initProgressBar(progressBar);
 		var hiddenClientId = clientId + '_hidden';
 
 		// Define the start() method for progressBar which starts polling the server for progress.
@@ -502,6 +513,7 @@ LFAI = {
 	// Initilize a consistent API for progressBar when ajax is not enabled.
 	initProgressBarClientMode: function(progressBar) {
 
+		LFAI.initProgressBar(progressBar);
 		progressBar.startPolling = function() {
 			// no-op
 		};
