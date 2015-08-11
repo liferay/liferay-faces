@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>com.liferay.faces.demos</groupId>
 		<artifactId>liferay-faces-bridge-demos</artifactId>
-		<version>4.2.5-ga6-SNAPSHOT</version>
+		<version>4.2.5-ga6</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 	<artifactId>primefaces5-portlet</artifactId>
