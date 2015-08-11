@@ -48,14 +48,15 @@ public class FACES1439PortletTest extends TesterBase {
 
 	private static final String comments1OutputXpath = "//span[contains(@id,':comments1Output')]";
 
-	private static final String iframe1Xpath = "//iframe[contains(@title,'_inputEditor1')]";
+	private static final String iframe1Xpath = "//span[contains(@id,':panelGroup1')]/div/div/div/div/iframe";
+	
 
 	// text area 2
 	private static final String showHideTwoXpath = "//input[@type='submit' and @value='Show/Hide Editor 2']";
 
 	private static final String comments2OutputXpath = "//span[contains(@id,':comments2Output')]";
 
-	private static final String iframe2Xpath = "//iframe[contains(@title,'_inputEditor2')]";
+	private static final String iframe2Xpath = "//span[contains(@id,':panelGroup2')]/div/div/div/div/iframe";
 
 	// input 3
 	private static final String comments3OutputXpath = "//span[contains(@id,':comments3Output')]";
