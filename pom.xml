@@ -119,7 +119,7 @@
 		<pluto.home>${env.PORTALS_HOME}/liferay.com/${pluto.portal}-jsf-${faces.spec.version}</pluto.home>
 		<pluto.portal>pluto-${pluto.version}</pluto.portal>
 		<pluto.tomcat.dir>${pluto.home}/tomcat-${pluto.tomcat.version}</pluto.tomcat.dir>
-		<pluto.tomcat.version>7.0.21</pluto.tomcat.version>
+		<pluto.tomcat.version>7.0.42</pluto.tomcat.version>
 		<pluto.version>2.0.3</pluto.version>
 		<portal.type>liferay</portal.type>
 		<portlet.war.deployment.type>deploy</portlet.war.deployment.type>
