@@ -19,6 +19,7 @@
 		<dependency>
 			<groupId>com.sun.faces</groupId>
 			<artifactId>jsf-impl</artifactId>
+			<scope>provided</scope>
 		</dependency>
 	</dependencies>
 
