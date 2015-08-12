@@ -484,6 +484,7 @@
 				<module>alloy</module>
 				<module>bridge-api</module>
 				<module>bridge-impl</module>
+				<module>bridge-ice</module>
 				<module>portal</module>
 				<module>demos</module>
 			</modules>
@@ -649,6 +650,7 @@
 				<module>alloy</module>
 				<module>bridge-api</module>
 				<module>bridge-impl</module>
+				<module>bridge-ice</module>
 				<module>portal</module>
 				<module>support</module>
 				<module>demos</module>
