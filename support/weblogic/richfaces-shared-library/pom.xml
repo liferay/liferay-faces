@@ -12,14 +12,20 @@
 	<packaging>war</packaging>
 	<name>RichFaces Shared Libraray</name>
 
+	<properties>
+		<richfaces4.weblogic.version>4.3.2.Final</richfaces4.weblogic.version>
+	</properties>
+
 	<dependencies>
 			<dependency>
 				<groupId>org.richfaces.ui</groupId>
 				<artifactId>richfaces-components-api</artifactId>
+				<version>${richfaces4.weblogic.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.richfaces.core</groupId>
 				<artifactId>richfaces-core-api</artifactId>
+				<version>${richfaces4.weblogic.version}</version>
 			</dependency>
 	</dependencies>
 
