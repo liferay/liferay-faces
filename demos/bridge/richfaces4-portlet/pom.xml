@@ -15,6 +15,9 @@
 	<profiles>
 		<profile>
 			<id>weblogic</id>
+			<properties>
+				<richfaces4.weblogic.version>4.3.2.Final</richfaces4.weblogic.version>
+			</properties>
 			<dependencies>
 				<dependency>
 					<groupId>com.sun.xml.bind</groupId>
@@ -25,16 +28,19 @@
 				<dependency>
 					<groupId>org.richfaces.core</groupId>
 					<artifactId>richfaces-core-api</artifactId>
+					<version>${richfaces4.weblogic.version}</version>
 					<scope>provided</scope>
 				</dependency>
 				<dependency>
 					<groupId>org.richfaces.ui</groupId>
 					<artifactId>richfaces-components-api</artifactId>
+					<version>${richfaces4.weblogic.version}</version>
 					<scope>provided</scope>
 				</dependency>
 				<dependency>
 					<groupId>org.richfaces.core</groupId>
 					<artifactId>richfaces-core-impl</artifactId>
+					<version>${richfaces4.weblogic.version}</version>
 					<exclusions>
 						<exclusion>
 							<groupId>com.google.guava</groupId>
