@@ -31,7 +31,7 @@ import javax.faces.validator.ValidatorException;
 @FacesValidator("com.liferay.faces.demos.validator.EmailValidator")
 public class EmailValidator implements Validator {
 
-	private static final String EMAIL_REGEX = "^([a-z0-9_\\.-]+)@([\\da-z\\.-]+)\\.([a-z\\.]{2,6})$";
+	private static final String EMAIL_REGEX = ".+[@].+[.].+";
 
 	@Override
 	public void validate(FacesContext context, UIComponent component, Object value) throws ValidatorException {
