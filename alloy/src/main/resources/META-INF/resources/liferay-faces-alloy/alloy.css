@@ -355,3 +355,37 @@ div.yui3-splitbuttonnav .yui3-menu-label span.btn-disabled {
 	float: left;
 	opacity: .65;
 }
+
+/* vertical alloy-progress-bar */
+.alloy-progress-bar .vertical {
+	-o-transform: scaleY(-1);
+	-ms-transform: scaleY(-1);
+	-moz-transform: scaleY(-1);
+	-webkit-transform: scaleY(-1);
+	transform: scaleY(-1);
+	-moz-transform-style: preserve-3d;
+	-webkit-transform-style: preserve-3d;
+	transform-style: preserve-3d;
+}
+
+.alloy-progress-bar .vertical .progress-content {
+	transition: height 0.6s ease 0s;
+}
+
+.alloy-progress-bar .vertical p {
+	position: relative;
+	top: 50%;
+	-o-transform: translateY(-50%) scaleY(-1);
+	-ms-transform: translateY(-50%) scaleY(-1);
+	-moz-transform: translateY(-50%) scaleY(-1);
+	-webkit-transform: translateY(-50%) scaleY(-1);
+	transform: translateY(-50%) scaleY(-1);
+}
+
+/* Flip the vertical progressBar for IE8. The reason that the rule below must only target IE8 is because the rule */
+/* above works in IE9, and the rule below would break it if applied in IE9. */
+@media \0screen {
+	.alloy-progress-bar .vertical {
+		-ms-filter:"progid:DXImageTransform.Microsoft.BasicImage(Rotation=2)";
+	}
+}
