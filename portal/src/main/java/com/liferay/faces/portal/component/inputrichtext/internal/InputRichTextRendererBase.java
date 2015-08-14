@@ -31,7 +31,6 @@ public abstract class InputRichTextRendererBase extends PortalTagRenderer<com.li
 	protected static final String CONTENTS_LANGUAGE_ID = "contentsLanguageId";
 	protected static final String EDITOR_KEY = "editorKey";
 	protected static final String FILE_BROWSER_PARAMS = "fileBrowserParams";
-	protected static final String LABEL = "label";
 	protected static final String MAX_PLAIN_TEXT_CHARS = "maxPlainTextChars";
 	protected static final String MIN_PLAIN_TEXT_CHARS = "minPlainTextChars";
 	protected static final String ONBLUR = "onblur";
