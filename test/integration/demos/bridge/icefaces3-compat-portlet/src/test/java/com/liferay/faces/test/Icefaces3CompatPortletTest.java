@@ -758,7 +758,7 @@ public class Icefaces3CompatPortletTest extends TesterBase {
 		}
 		catch (Exception e) {
 			logger.log(Level.INFO, "Exception e.getMessage() = " + e.getMessage());
-			assertTrue("firstNameFieldError should be visible after submitting the form with no value,"
+			assertTrue("firstNameFieldError should be visible after submitting the form with no value," +
 			" but " + firstNameFieldErrorXpath + " is not visible.", false);
 		}
 
