@@ -38,7 +38,8 @@ public class ShowcaseUtil {
 	private static final Pattern COLON_DELIMITER_PATTERN = Pattern.compile(":");
 	private static final Product JSF_PRODUCT = ProductMap.getInstance().get(ProductConstants.JSF);
 	private static final String JSF_VERSION = JSF_PRODUCT.getMajorVersion() + "." + JSF_PRODUCT.getMinorVersion();
-	private static final String JSF_VDLDOC_BASE_URL = "https://javaserverfaces.java.net/nonav/docs/" + JSF_VERSION +
+	private static final String JSF_VDLDOC_VERSION= (JSF_PRODUCT.getMajorVersion() < 2) ? "2.0" : JSF_VERSION;
+	private static final String JSF_VDLDOC_BASE_URL = "https://javaserverfaces.java.net/nonav/docs/" + JSF_VDLDOC_VERSION +
 		"/vdldocs/facelets/";
 	private static final String HTML_EXTENSION = ".html";
 	private static final String JAVADOC_PREFIX = "javadoc:";
