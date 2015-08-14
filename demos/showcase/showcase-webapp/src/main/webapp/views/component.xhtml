@@ -16,7 +16,7 @@
 		<c:set value="#{i18n[selectedComponentUseCaseKey]}" var="selectedComponentUseCaseDescription" />
 		<c:set value="vdldoc:#{selectedComponentFullName}" var="selectedComponentDocKey" />
 		<button onclick="window.open('#{showcaseFn:encodeVDLDocURL(selectedComponentDocKey)}')" style="float: right;">
-			"#{i18n['vdl-documentation']}"
+			#{i18n['vdl-documentation']}
 		</button>
 		<ui:include src="/WEB-INF/component/#{selectedComponentPrefix}/#{selectedComponentLowerCaseName}/header.xhtml" />
 		<h3>#{selectedComponentFullName}</h3>
