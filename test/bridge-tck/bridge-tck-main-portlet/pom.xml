@@ -214,7 +214,6 @@
 									<configuration>
 										<background>true</background>
 										<logOutput>true</logOutput>
-										<multiWindow>true</multiWindow>
 									</configuration>
 								</execution>
 							</executions>
