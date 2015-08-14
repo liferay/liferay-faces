@@ -129,7 +129,7 @@
 			<vdldoc:since>3.2.4</vdldoc:since>
 			<vdldoc:deprecation>
 				<vdldoc:deprecated>true</vdldoc:deprecated>
-				<vdldoc:description>Please use alloy:col instead.</vdldoc:description>
+				<vdldoc:description>Please use alloy:column instead.</vdldoc:description>
 			</vdldoc:deprecation>
 		</tag-extension>
 	</tag>	
@@ -186,7 +186,7 @@
 			<vdldoc:since>3.2.4</vdldoc:since>
 			<vdldoc:deprecation>
 				<vdldoc:deprecated>true</vdldoc:deprecated>
-				<vdldoc:description>Please use alloy:row and alloy:col instead.</vdldoc:description>
+				<vdldoc:description>Please use alloy:row and alloy:column instead.</vdldoc:description>
 			</vdldoc:deprecation>
 		</tag-extension>
 	</tag>
