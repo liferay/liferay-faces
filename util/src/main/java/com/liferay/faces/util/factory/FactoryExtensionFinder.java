@@ -17,6 +17,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.Iterator;
+import java.util.ServiceLoader;
 
 import javax.faces.FacesException;
 
@@ -75,23 +77,23 @@ public abstract class FactoryExtensionFinder {
 
 		if (instance == null) {
 
-			ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+			ServiceLoader<FactoryExtensionFinder> serviceLoader = ServiceLoader.load(FactoryExtensionFinder.class);
 
-			try {
-				String facesFactoryFinderService =
-					"META-INF/services/com.liferay.faces.util.factory.FactoryExtensionFinder";
-				String facesFactoryFinderClassName = getClassPathResourceAsString(facesFactoryFinderService);
+			if (serviceLoader != null) {
 
-				if (facesFactoryFinderClassName != null) {
-					Class<?> facesFactoryFinderClass = classLoader.loadClass(facesFactoryFinderClassName);
-					instance = (FactoryExtensionFinder) facesFactoryFinderClass.newInstance();
+				Iterator<FactoryExtensionFinder> iterator = serviceLoader.iterator();
+
+				while ((instance == null) && iterator.hasNext()) {
+					instance = iterator.next();
 				}
-				else {
-					throw new FacesException("Unable to load resource=[" + facesFactoryFinderService + "]");
+
+				if (instance == null) {
+					throw new FacesException("Unable locate service for " + FactoryExtensionFinder.class.getName());
 				}
 			}
-			catch (Exception e) {
-				throw new FacesException(e);
+			else {
+				throw new FacesException("Unable to acquire ServiceLoader for " +
+					FactoryExtensionFinder.class.getName());
 			}
 		}
 
