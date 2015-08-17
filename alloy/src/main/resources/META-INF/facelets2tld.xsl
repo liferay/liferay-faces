@@ -8,7 +8,7 @@
 		<taglib xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 			xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd"
 			version="2.1">
-			<tlib-version><xsl:value-of select="replace($projectVersion,'-.*$','')" /></tlib-version>
+			<tlib-version><xsl:value-of select="replace($projectVersion,'-ga[0-9]+(-SNAPSHOT)?$','')" /></tlib-version>
 			<short-name><xsl:value-of select="substring-after(/facelet-taglib/namespace,'http://liferay.com/faces/')" /></short-name>
 			<uri><xsl:value-of select="/facelet-taglib/namespace" /></uri>
 			<xsl:apply-templates select="/facelet-taglib/tag"/>
