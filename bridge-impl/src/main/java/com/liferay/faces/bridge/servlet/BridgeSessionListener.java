@@ -84,7 +84,10 @@ public class BridgeSessionListener implements HttpSessionListener, ServletContex
 	}
 
 	public void sessionCreated(HttpSessionEvent httpSessionEvent) {
-		// This method is required by the HttpSessionListener interface but is not used.
+
+		// FACES-2427: Prevent an error message during session expiration by ensuring that the BridgeFactoryFinder has
+		// been initialized during session creation.
+		BridgeFactoryFinder.getFactory(BeanManagerFactory.class);
 	}
 
 	public void sessionDestroyed(HttpSessionEvent httpSessionEvent) {
