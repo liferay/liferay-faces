@@ -33,59 +33,6 @@
 				</executions>
 			</plugin>
 			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>xml-maven-plugin</artifactId>
-				<version>1.0</version>
-				<executions>
-					<execution>
-						<goals>
-							<goal>transform</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<transformationSets>
-						<transformationSet>
-							<dir>src/main/resources/META-INF</dir>
-							<outputDir>src/main/resources/META-INF</outputDir>
-							<includes>
-								<include>aui.taglib.xml</include>
-							</includes>
-							<fileMappers>
-								<fileMapper implementation="org.codehaus.plexus.components.io.filemappers.RegExpFileMapper">
-									<pattern>.taglib.xml</pattern>
-									<replacement>.tld</replacement>
-								</fileMapper>
-							</fileMappers>
-							<stylesheet>src/main/resources/META-INF/facelets2tld.xsl</stylesheet>
-							<outputProperties>
-								<outputProperty>
-									<name>indent</name>
-									<value>yes</value>
-								</outputProperty>
-							</outputProperties>
-							<parameters>
-								<parameter>
-									<name>projectVersion</name>
-									<value>${project.version}</value>
-								</parameter>
-								<parameter>
-									<name>taglibPackage</name>
-									<value>com.liferay.faces.alloy.taglib</value>
-								</parameter>
-							</parameters>
-						</transformationSet>
-					</transformationSets>
-				</configuration>
-				<dependencies>
-					<dependency>
-						<groupId>net.sf.saxon</groupId>
-						<artifactId>saxon</artifactId>
-						<version>8.7</version>
-					</dependency>
-				</dependencies>
-			</plugin>
-			<plugin>
 				<groupId>net.alchim31.maven</groupId>
 				<artifactId>yuicompressor-maven-plugin</artifactId>
 				<executions>
