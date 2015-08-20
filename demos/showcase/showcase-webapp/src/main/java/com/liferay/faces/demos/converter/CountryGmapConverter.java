@@ -31,7 +31,7 @@ import com.liferay.faces.demos.service.CountryService;
 /**
  * @author  Vernon Singleton
  */
-@FacesConverter(value = "convertGmapCountry")
+@FacesConverter(value = "com.liferay.faces.demos.converter.CountryGmapConverter")
 public class CountryGmapConverter implements Converter {
 
 	// Private Data Members
