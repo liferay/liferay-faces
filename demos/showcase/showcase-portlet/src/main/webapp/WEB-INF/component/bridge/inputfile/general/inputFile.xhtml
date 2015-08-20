@@ -6,7 +6,7 @@
 	<ui:define name="col1">
 		<h:form enctype="multipart/form-data">
 			<showcase:example>
-				<bridge:inputFile fileUploadListener="#{bridgeInputFileBackingBean.handleFileUpload}" />
+				<h:inputFile fileUploadListener="#{bridgeInputFileBackingBean.handleFileUpload}" />
 				<hr />
 				<alloy:commandButton ajax="false" value="#{i18n['submit']}" />
 			</showcase:example>
