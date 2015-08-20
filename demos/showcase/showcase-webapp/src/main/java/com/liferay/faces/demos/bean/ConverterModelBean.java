@@ -34,6 +34,7 @@ public class ConverterModelBean {
 
 	// Private properties
 	private Country country;
+	private double number = 3.141516;
 
 	@PostConstruct
 	public void postConstruct() {
@@ -54,6 +55,14 @@ public class ConverterModelBean {
 
 	public void setCountryService(CountryService countryService) {
 		this.countryService = countryService;
+	}
+
+	public double getNumber() {
+		return number;
+	}
+
+	public void setNumber(double number) {
+		this.number = number;
 	}
 
 }
