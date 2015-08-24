@@ -175,53 +175,6 @@
 
 	<profiles>
 		<profile>
-			<id>generate-xml</id>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.codehaus.mojo</groupId>
-						<artifactId>exec-maven-plugin</artifactId>
-						<version>1.2.1</version>
-						<executions>
-							<execution>
-								<goals>
-									<goal>java</goal>
-								</goals>
-								<id>generate-sources</id>
-								<phase>initialize</phase>
-								<configuration>
-									<includeProjectDependencies>false</includeProjectDependencies>
-									<includePluginDependencies>true</includePluginDependencies>
-									<mainClass>com.liferay.alloy.tools.transformer.AlloyDocsTransformer</mainClass>
-									<systemProperties>
-										<systemProperty>
-											<key>build-ext</key>
-											<value>generator.properties</value>
-										</systemProperty>
-										<systemProperty>
-											<key>HOME</key>
-											<value>${env.HOME}</value>
-										</systemProperty>
-									</systemProperties>
-									<executableDependency>
-										<groupId>com.liferay.alloy</groupId>
-										<artifactId>alloy-generator</artifactId>
-									</executableDependency>
-								</configuration>
-							</execution>
-						</executions>
-						<dependencies>
-							<dependency>
-								<groupId>com.liferay.alloy</groupId>
-								<artifactId>alloy-generator</artifactId>
-								<version>0.1.0</version>
-							</dependency>
-						</dependencies>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-		<profile>
 			<id>generate-components</id>
 			<properties>
 				<authors>
