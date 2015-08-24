@@ -1,21 +1,23 @@
-<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
-	xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:showcase="http://java.sun.com/jsf/composite/showcase"
-	template="/WEB-INF/templates/component-1col-60.xhtml">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:showcase="http://java.sun.com/jsf/composite/showcase" template="/WEB-INF/templates/component-1col-60.xhtml">
 
 	<ui:define name="col1">
 		<h:form>
-			<showcase:example renderedCheckbox="true">
-				<alloy:messages layout="table" />
-				<h:inputText value="#{validationModelBean.otherText}" label="#{i18n['f-validateregex-label']}">
-					<f:validateRegex pattern="^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$"/>
+			<showcase:example>
+				<label class="control-label">#{i18n['please-enter-your-email']}</label>
+				<h:inputText id="email" value="#{inputTextModelBean.text}" label="#{i18n['validate-email-label']}">
+					<f:validateRegex pattern=".+[@].+[.].+" />
 				</h:inputText>
+				<br />
+				<h:message for="email" />
+				<hr />
 				<h:commandButton value="#{i18n['submit']}">
-					<f:ajax	execute="@form" render="@form"/>
+					<f:ajax	execute="@form" render="@form" />
 				</h:commandButton>
 			</showcase:example>
 			<showcase:outputModel>
-				<h:outputText value="#{validationModelBean.otherText}"/>
+				<h:outputText value="#{inputTextModelBean.text}" />
 			</showcase:outputModel>
 		</h:form>
 	</ui:define>
