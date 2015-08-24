@@ -10,11 +10,11 @@
 					<f:selectItems value="#{countryService.allCountries}" var="country" itemValue="#{country}"
 						itemLabel="#{country.countryName}" />
 					<f:ajax render="selectOneMenuId outputLinkId" />
-					<f:converter converterId="convertCountry"/>
+					<f:converter converterId="com.liferay.faces.demos.converter.CountryConverter" />
 				</alloy:selectOneMenu>
 				<br />
-				<alloy:outputLink id="outputLinkId" converter="convertGmapCountry" target="_blank"
-					value="#{outputLinkModelBean.country.countryId}">
+				<alloy:outputLink id="outputLinkId" converter="com.liferay.faces.demos.converter.CountryGmapConverter"
+					target="_blank" value="#{outputLinkModelBean.country.countryId}">
 					<alloy:outputText value="#{i18n['link-to-a-map-of']} #{outputLinkModelBean.country.countryName}" />
 				</alloy:outputLink>
 			</showcase:example>
