@@ -8,11 +8,11 @@
 		<view-handler>com.liferay.faces.bridge.application.PortletFaceletViewHandler</view-handler>
 	</application>
 	<converter>
-		<converter-id>convertGmapCountry</converter-id>
+		<converter-id>com.liferay.faces.demos.converter.CountryGmapConverter</converter-id>
 		<converter-class>com.liferay.faces.demos.converter.CountryGmapConverter</converter-class>
 	</converter>
 	<converter>
-		<converter-id>convertCountry</converter-id>
+		<converter-id>com.liferay.faces.demos.converter.CountryConverter</converter-id>
 		<converter-class>com.liferay.faces.demos.converter.CountryConverter</converter-class>
 	</converter>
 	<factory>

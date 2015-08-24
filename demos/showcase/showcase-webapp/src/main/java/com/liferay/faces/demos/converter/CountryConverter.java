@@ -30,7 +30,7 @@ import com.liferay.faces.demos.service.CountryService;
  * @author  Neil Griffin
  * @author  Juan Gonzalez
  */
-// JSF 2: @FacesConverter(value = "convertCountry")
+// JSF 2: @FacesConverter(value = "com.liferay.faces.demos.converter.CountryConverter")
 public class CountryConverter implements Converter {
 
 	// Private Data Members
