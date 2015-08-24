@@ -25,30 +25,6 @@
 				</executions>
 			</plugin>
 			<plugin>
-				<artifactId>maven-resources-plugin</artifactId>
-				<version>2.7</version>
-				<executions>
-					<execution>
-						<phase>process-sources</phase>
-						<goals>
-							<goal>copy-resources</goal>
-						</goals>
-						<configuration>
-							<overwrite>true</overwrite>
-							<outputDirectory>src/main/java/com/liferay/faces/portal/render/internal</outputDirectory>
-							<resources>
-								<resource>
-									<directory>../bridge-impl/src/main/java/com/liferay/faces/bridge/context/internal</directory>
-									<includes>
-										<include>ScriptTagUtil.java</include>
-									</includes>
-								</resource>
-							</resources>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
 				<groupId>com.google.code.maven-replacer-plugin</groupId>
 				<artifactId>replacer</artifactId>
 				<version>1.5.1</version>
@@ -61,13 +37,11 @@
 					</execution>
 				</executions>
 				<configuration>
-					<file>src/main/java/com/liferay/faces/portal/render/internal/ScriptTagUtil.java</file>
-					<replacements>
-						<replacement>
-							<token>com[.]liferay[.]faces[.]bridge[.]context[.]internal</token>
-							<value>com.liferay.faces.portal.render.internal</value>
-						</replacement>
-					</replacements>
+					<file>../bridge-impl/src/main/java/com/liferay/faces/bridge/context/internal/ScriptTagUtil.java</file>
+					<outputFile>src/main/java/com/liferay/faces/portal/render/internal/ScriptTagUtil.java</outputFile>
+					<regex>false</regex>
+					<token>com.liferay.faces.bridge.context.internal</token>
+					<value>com.liferay.faces.portal.render.internal</value>
 				</configuration>
 			</plugin>
 		</plugins>
