@@ -1,21 +1,24 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:showcase="http://java.sun.com/jsf/composite/showcase"
-	template="/WEB-INF/templates/component-1col-60.xhtml">
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:showcase="http://java.sun.com/jsf/composite/showcase" template="/WEB-INF/templates/component-1col-60.xhtml">
 
 	<ui:define name="col1">
 		<h:form>
-			<showcase:example renderedCheckbox="true">
-				<h:messages layout="table" />
-				<h:inputText value="#{validationModelBean.doubleRange}" label="#{i18n['f-validatedoublerange-label']}">
-					<f:validateDoubleRange minimum="1.25" maximum="2.50"/>
+			<showcase:example>
+				<label class="control-label">#{i18n.replace('please-enter-a-value-between-x-and-x', 1.25, 2.50)}</label>
+				<h:inputText id="double" value="#{validationModelBean.doubleNumber}"
+					label="#{i18n['f-validatedoublerange-label']}">
+					<f:validateDoubleRange minimum="1.25" maximum="2.50" />
 				</h:inputText>
+				<br />
+				<h:message for="double" />
+				<hr />
 				<h:commandButton value="#{i18n['submit']}">
-					<f:ajax	execute="@form" render="@form"/>
+					<f:ajax	execute="@form" render="@form" />
 				</h:commandButton>
 			</showcase:example>
 			<showcase:outputModel>
-				<h:outputText value="#{validationModelBean.doubleRange}"/>
+				<h:outputText value="#{validationModelBean.doubleNumber}" />
 			</showcase:outputModel>
 		</h:form>
 	</ui:define>
