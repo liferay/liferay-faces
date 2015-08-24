@@ -6,18 +6,18 @@
 	<ui:define name="col1">
 		<f:metadata>
 			<f:viewParam name="countryId" value="#{viewMetadataBackingBean.viewCountry}">
-				<f:converter converterId="convertCountry"/>
+				<f:converter converterId="com.liferay.faces.demos.converter.CountryConverter" />
 			</f:viewParam>
 		</f:metadata>
 		<h:form>
 			<showcase:example renderedCheckbox="true">
 				<h:messages/>
 				<h:link includeViewParams="true" value="#{i18n['link']}">
-					<f:param name="countryId" value="1"/>
+					<f:param name="countryId" value="1" />
 				</h:link>
 			</showcase:example>
 			<showcase:outputModel>
-				<h:outputText value="#{viewMetadataBackingBean.viewCountry.countryName}"/>
+				<h:outputText value="#{viewMetadataBackingBean.viewCountry.countryName}" />
 			</showcase:outputModel>
 		</h:form>
 	</ui:define>
