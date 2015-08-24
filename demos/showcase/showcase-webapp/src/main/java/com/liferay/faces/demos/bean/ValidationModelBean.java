@@ -13,8 +13,6 @@
  */
 package com.liferay.faces.demos.bean;
 
-import java.util.Date;
-
 // JSF 2+ import javax.faces.bean.ManagedBean;
 // JSF 2+ import javax.faces.bean.RequestScoped;
 // JSF 2+ import javax.validation.constraints.Past;
@@ -28,51 +26,32 @@ import java.util.Date;
 // JSF 2+ @RequestScoped
 public class ValidationModelBean {
 
-	// JSF 2+ @Past
-	private Date birthDay;
-	// JSF 2+ @Size(max = 5)
-	private String text;
-	private Double doubleRange;
-	private String otherText;
-	private Long longRange;
+	// JSF 2+ @Pattern(regexp = ".+[@].+[.].+")
+	private String email;
+	private Double doubleNumber;
+	private Long longNumber;
 
-	public Date getBirthDay() {
-		return birthDay;
+	public Double getDoubleNumber() {
+		return doubleNumber;
 	}
 
-	public void setBirthDay(Date birthDay) {
-		this.birthDay = birthDay;
+	public void setDoubleNumber(Double doubleNumber) {
+		this.doubleNumber = doubleNumber;
 	}
 
-	public Double getDoubleRange() {
-		return doubleRange;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setDoubleRange(Double doubleRange) {
-		this.doubleRange = doubleRange;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
-	public Long getLongRange() {
-		return longRange;
+	public Long getLongNumber() {
+		return longNumber;
 	}
 
-	public void setLongRange(Long longRange) {
-		this.longRange = longRange;
-	}
-
-	public String getOtherText() {
-		return otherText;
-	}
-
-	public void setOtherText(String otherText) {
-		this.otherText = otherText;
-	}
-
-	public String getText() {
-		return text;
-	}
-
-	public void setText(String text) {
-		this.text = text;
+	public void setLongNumber(Long longNumber) {
+		this.longNumber = longNumber;
 	}
 }
