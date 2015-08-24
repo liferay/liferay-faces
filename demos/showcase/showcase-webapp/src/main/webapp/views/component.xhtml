@@ -10,7 +10,7 @@
 			<f:viewParam name="componentUseCase" value="#{showcaseModelBean.viewParameters.componentUseCase}" />
 			<f:viewParam name="menuItem" value="#{buttonBean.menuItem}" />
 			<f:viewParam name="countryId" value="#{viewMetadataBackingBean.viewCountry}">
-				<f:converter converterId="convertCountry"/>
+				<f:converter converterId="com.liferay.faces.demos.converter.CountryConverter" />
 			</f:viewParam>
 		</f:metadata>
 		<h:outputStylesheet name="component.css" library="css" />

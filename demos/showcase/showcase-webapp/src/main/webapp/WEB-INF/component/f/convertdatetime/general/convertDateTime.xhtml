@@ -1,15 +1,27 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:showcase="http://java.sun.com/jsf/composite/showcase"
-	template="/WEB-INF/templates/component-1col-60.xhtml">
+	xmlns:showcase="http://java.sun.com/jsf/composite/showcase" template="/WEB-INF/templates/component-1col-60.xhtml">
 
 	<ui:define name="col1">
-		<showcase:example renderedCheckbox="true">				
-			<h:outputText value="#{i18n['this-text-is-a-date-with-ddmmYYYY-format']}:"/>
-			<h:outputText value="#{inputTextModelBean.date}">
-				<f:convertDateTime pattern="dd/MM/yyyy" />
-			</h:outputText>
-		</showcase:example>
+		<h:form>
+			<showcase:example>
+				<h:inputText id="date" converterMessage="#{i18n['converter-message']}"
+					value="#{inputTextModelBean.date}">
+					<f:convertDateTime pattern="MM/dd/yyyy" />
+				</h:inputText>
+				<br />
+				<h:message for="date" />
+				<hr />
+				<h:commandButton value="#{i18n['submit']}">
+					 <f:ajax render="@form" execute="@form" />
+				</h:commandButton>
+			</showcase:example>
+			<showcase:outputModel>
+				<h:outputText id="modelValue" value="#{inputTextModelBean.date}">
+					<f:convertDateTime pattern="MM/dd/yyyy" />
+				</h:outputText>
+			</showcase:outputModel>
+		</h:form>
 	</ui:define>
 
 </ui:composition>
