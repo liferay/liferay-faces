@@ -18,7 +18,6 @@ package com.liferay.faces.portal.component.inputrichtext.internal;
 import javax.annotation.Generated;
 
 import com.liferay.faces.portal.render.internal.DelayedPortalTagRenderer;
-import com.liferay.faces.portal.render.internal.PortalTagRenderer;
 
 
 /**
