@@ -188,7 +188,7 @@ public abstract class InputRichTextBase extends UIInput implements Styleable {
 	}
 
 	public String getToolbarSet() {
-		return (String) getStateHelper().eval(InputRichTextPropertyKeys.toolbarSet, "liferay");
+		return (String) getStateHelper().eval(InputRichTextPropertyKeys.toolbarSet, null);
 	}
 
 	public void setToolbarSet(String toolbarSet) {

@@ -83,7 +83,7 @@
       </attributes>
    </component>
 	<component name="InputRichText" generateJavaComponent="true" generateJavaRenderer="false" extendsTags="FacesMessageLabel Styleable UIInput"
-		parentClass="javax.faces.component.UIInput" rendererParentClass="com.liferay.faces.portal.render.internal.PortalTagRenderer&lt;com.liferay.faces.portal.component.inputrichtext.InputRichText, com.liferay.taglib.ui.InputEditorTag&gt;">
+		parentClass="javax.faces.component.UIInput" rendererParentClass="com.liferay.faces.portal.render.internal.DelayedPortalTagRenderer&lt;com.liferay.faces.portal.component.inputrichtext.InputRichText, com.liferay.taglib.ui.InputEditorTag&gt;">
 		<description><![CDATA[InputRichText is a UIInput component that renders a field for editing rich text.]]></description>
 		<attributes>
 			<attribute>

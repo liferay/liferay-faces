@@ -102,10 +102,15 @@ public abstract class DelayedPortalTagRenderer<U extends UIComponent, T extends 
 			// Ensure that scripts are rendered at the bottom of the page.
 			String scripts = portalTagOutput.getScripts();
 
-			if (scripts != null) {
+			if ((scripts != null) && (scripts.length() > 0)) {
+
+				logger.debug("Scripts before transformation:{0}", scripts);
+
+				String processedScripts = getScripts(uiComponent, scripts);
+				logger.debug("Scripts after transformation:{0}", processedScripts);
 
 				FacesRequestContext facesRequestContext = FacesRequestContext.getCurrentInstance();
-				facesRequestContext.addScript(scripts);
+				facesRequestContext.addScript(processedScripts);
 			}
 
 			// Encode the children markup.
@@ -144,5 +149,9 @@ public abstract class DelayedPortalTagRenderer<U extends UIComponent, T extends 
 	@Override
 	public boolean getRendersChildren() {
 		return true;
+	}
+
+	protected String getScripts(UIComponent uiComponent, String scripts) throws Exception {
+		return scripts;
 	}
 }

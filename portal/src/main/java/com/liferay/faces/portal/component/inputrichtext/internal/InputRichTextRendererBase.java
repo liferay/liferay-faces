@@ -17,6 +17,7 @@ package com.liferay.faces.portal.component.inputrichtext.internal;
 
 import javax.annotation.Generated;
 
+import com.liferay.faces.portal.render.internal.DelayedPortalTagRenderer;
 import com.liferay.faces.portal.render.internal.PortalTagRenderer;
 
 
@@ -24,7 +25,7 @@ import com.liferay.faces.portal.render.internal.PortalTagRenderer;
  * @author	Neil Griffin
  */
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
-public abstract class InputRichTextRendererBase extends PortalTagRenderer<com.liferay.faces.portal.component.inputrichtext.InputRichText, com.liferay.taglib.ui.InputEditorTag> {
+public abstract class InputRichTextRendererBase extends DelayedPortalTagRenderer<com.liferay.faces.portal.component.inputrichtext.InputRichText, com.liferay.taglib.ui.InputEditorTag> {
 
 	// Protected Constants
 	protected static final String CONFIG_PARAMS = "configParams";
