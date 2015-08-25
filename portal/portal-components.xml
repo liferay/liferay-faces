@@ -147,7 +147,7 @@
 				<type>boolean</type>
 			</attribute>
 			<attribute>
-				<defaultValue>"liferay"</defaultValue>
+				<defaultValue>null</defaultValue>
 				<description><![CDATA[The name of the set of toolbars that are to be displayed above the rich text input area. Valid values are "bbcode", "creole", "editInPlace", "email", "liferay", "liferayArticle", "phone", "simple", and "tablet". The default value depends on the value of the editorKey attribute. If editorKey's property evaluates to "ckeditor" then the default value is "liferay". If editorKey's property evaluates to "ckeditor_bbcode" then the default value is "bbcode". If editorKey's property evaluates to "ckeditor_creole" then the default value is "creole".]]></description>
 				<name>toolbarSet</name>
 				<type>String</type>
