@@ -102,7 +102,7 @@ public abstract class DelayedPortalTagRenderer<U extends UIComponent, T extends 
 			// Ensure that scripts are rendered at the bottom of the page.
 			String scripts = portalTagOutput.getScripts();
 
-			if ((scripts != null) && !"".equals(scripts)) {
+			if ((scripts != null) && (scripts.length() > 0)) {
 
 				logger.debug("Scripts before transformation:{0}", scripts);
 

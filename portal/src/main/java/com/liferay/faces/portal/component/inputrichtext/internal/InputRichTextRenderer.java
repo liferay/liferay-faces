@@ -90,8 +90,10 @@ public class InputRichTextRenderer extends InputRichTextRendererBase {
 		inputEditorTag.setResizable(inputRichText.isResizable());
 		inputEditorTag.setSkipEditorLoading(inputRichText.isSkipEditorLoading());
 
-		if (inputRichText.getToolbarSet() != null) {
-			inputEditorTag.setToolbarSet(inputRichText.getToolbarSet());
+		String toolbarSet = inputRichText.getToolbarSet();
+
+		if (toolbarSet != null) {
+			inputEditorTag.setToolbarSet(toolbarSet);
 		}
 		else {
 			String editorType = getEditorType(inputRichText);
@@ -114,10 +116,9 @@ public class InputRichTextRenderer extends InputRichTextRendererBase {
 		ExternalContext externalContext = facesContext.getExternalContext();
 		Map<String, String> requestParameterMap = externalContext.getRequestParameterMap();
 		String escapedEditorName = getEditorId(facesContext, uiComponent);
-
 		String submittedValue = requestParameterMap.get(escapedEditorName);
-
 		InputRichText inputRichText = (InputRichText) uiComponent;
+
 		inputRichText.setSubmittedValue(submittedValue);
 	}
 
@@ -305,6 +306,7 @@ public class InputRichTextRenderer extends InputRichTextRendererBase {
 	}
 
 	protected String getEditorId(FacesContext facesContext, UIComponent uiComponent) {
+
 		String clientId = uiComponent.getClientId();
 		char separatorChar = UINamingContainer.getSeparatorChar(facesContext);
 		String editorId = clientId.replace(separatorChar, '_').concat("_jsptag");
@@ -336,14 +338,13 @@ public class InputRichTextRenderer extends InputRichTextRendererBase {
 	protected String getScripts(UIComponent uiComponent, String scripts) throws Exception {
 
 		if (scripts != null) {
+
 			FacesContext facesContext = FacesContext.getCurrentInstance();
 			String escapedEditorName = getEditorId(facesContext, uiComponent);
 
 			// There are two possible methods to be executed, depending on inline editor enabled or not:
 			// CKEDITOR.replace or CKEDITOR.inline
-
 			int configIndex = scripts.indexOf("CKEDITOR.replace");
-
 			Boolean editorConfigReplace = null;
 
 			if (configIndex != -1) {
@@ -359,18 +360,20 @@ public class InputRichTextRenderer extends InputRichTextRendererBase {
 
 			if (editorConfigReplace != null) {
 
-				// Due to Liferay's CKEditor javascript not ready for AJAX re-rendering,
-				// we have to dynamically add some lines to the tag generated scripts
+				// Due to Liferay's CKEditor javascript not ready for AJAX re-rendering, we have to dynamically add
+				// some lines to the tag generated scripts
 				StringBuilder replacement = new StringBuilder();
 				replacement.append("createEditor(); ");
-				replacement.append("if (CKEDITOR.instances['" + escapedEditorName + "']) {");
-				replacement.append("CKEDITOR.instances['" + escapedEditorName +
-					"'].fire('customDataProcessorLoaded');");
-				replacement.append("} ");
+				replacement.append("if (CKEDITOR.instances['");
+				replacement.append(escapedEditorName);
+				replacement.append("']) {");
+				replacement.append("CKEDITOR.instances['");
+				replacement.append(escapedEditorName);
+				replacement.append("'].fire('customDataProcessorLoaded');} ");
 				scripts = StringUtil.replace(scripts, "createEditor();", replacement.toString());
 
 				// Now, in order to refresh the config, we have to enter a different URL. We achieve this by adding a
-				// "timestamp" param Without this, a default toolbar will be loaded
+				// "timestamp" param (without this, a default toolbar will be loaded).
 				int customConfigIndex = scripts.indexOf("customConfig");
 
 				String configURL = scripts.substring(customConfigIndex, scripts.indexOf(",", customConfigIndex));
