@@ -13,9 +13,7 @@
 				<br />
 				<h:message for="long" />
 				<hr />
-				<h:commandButton value="#{i18n['submit']}">
-					<f:ajax	execute="@form" render="@form" />
-				</h:commandButton>
+				<h:commandButton value="#{i18n['submit']}" />
 			</showcase:example>
 			<showcase:outputModel>
 				<h:outputText value="#{validationModelBean.longNumber}" />
