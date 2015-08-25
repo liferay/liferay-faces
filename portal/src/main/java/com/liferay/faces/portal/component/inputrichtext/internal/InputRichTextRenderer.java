@@ -15,6 +15,7 @@ package com.liferay.faces.portal.component.inputrichtext.internal;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -37,6 +38,7 @@ import com.liferay.faces.util.render.RendererUtil;
 
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
+import com.liferay.portal.kernel.util.StringUtil;
 
 import com.liferay.taglib.ui.InputEditorTag;
 
@@ -64,18 +66,9 @@ public class InputRichTextRenderer extends InputRichTextRendererBase {
 		// When ckeditor.jsp renders a hidden textarea, the name is rendered as the id and name attributes of the
 		// textarea element. Since this renderer creates its own textarea, it is necessary to set a name that will
 		// not interfere when decoding.
-		String editorType = getEditorType(inputRichText);
-		String escapedEditorName = inputRichText.getClientId();
+		String escapedEditorName = getEditorId(facesContext, inputRichText);
 
-		char separatorChar = UINamingContainer.getSeparatorChar(facesContext);
-		escapedEditorName = escapedEditorName.replace(separatorChar, '_').concat("_jsptag");
-
-		if ("bbcode".equals(editorType)) {
-			inputEditorTag.setName(escapedEditorName + "_bbcodeInput");
-		}
-		else {
-			inputEditorTag.setName(escapedEditorName + "_nonInput");
-		}
+		inputEditorTag.setName(escapedEditorName);
 	}
 
 	@Override
@@ -96,7 +89,23 @@ public class InputRichTextRenderer extends InputRichTextRendererBase {
 		inputEditorTag.setOnFocusMethod(functionNamespace + "Focus");
 		inputEditorTag.setResizable(inputRichText.isResizable());
 		inputEditorTag.setSkipEditorLoading(inputRichText.isSkipEditorLoading());
-		inputEditorTag.setToolbarSet(inputRichText.getToolbarSet());
+
+		if (inputRichText.getToolbarSet() != null) {
+			inputEditorTag.setToolbarSet(inputRichText.getToolbarSet());
+		}
+		else {
+			String editorType = getEditorType(inputRichText);
+
+			if ("ckeditor_bbcode".equals(editorType)) {
+				inputEditorTag.setToolbarSet("bbcode");
+			}
+			else if ("ckeditor_creole".equals(editorType)) {
+				inputEditorTag.setToolbarSet("creole");
+			}
+			else {
+				inputEditorTag.setToolbarSet("liferay");
+			}
+		}
 	}
 
 	@Override
@@ -104,15 +113,9 @@ public class InputRichTextRenderer extends InputRichTextRendererBase {
 
 		ExternalContext externalContext = facesContext.getExternalContext();
 		Map<String, String> requestParameterMap = externalContext.getRequestParameterMap();
-		String clientId = uiComponent.getClientId();
-		char separatorChar = UINamingContainer.getSeparatorChar(facesContext);
-		String escapedEditorName = clientId.replace(separatorChar, '_').concat("_jsptag");
+		String escapedEditorName = getEditorId(facesContext, uiComponent);
 
-		String submittedValue = requestParameterMap.get(escapedEditorName + "_bbcodeInput");
-
-		if (submittedValue == null) {
-			submittedValue = requestParameterMap.get(escapedEditorName);
-		}
+		String submittedValue = requestParameterMap.get(escapedEditorName);
 
 		InputRichText inputRichText = (InputRichText) uiComponent;
 		inputRichText.setSubmittedValue(submittedValue);
@@ -127,7 +130,7 @@ public class InputRichTextRenderer extends InputRichTextRendererBase {
 
 		String clientId = uiComponent.getClientId();
 		char separatorChar = UINamingContainer.getSeparatorChar(facesContext);
-		String escapedEditorName = clientId.replace(separatorChar, '_').concat("_jsptag");
+		String escapedEditorName = getEditorId(facesContext, uiComponent);
 		responseWriter.writeAttribute("id", clientId, null);
 		RendererUtil.encodeStyleable(responseWriter, (Styleable) uiComponent);
 
@@ -296,6 +299,27 @@ public class InputRichTextRenderer extends InputRichTextRendererBase {
 		responseWriter.write(");};");
 	}
 
+	@Override
+	public String getChildInsertionMarker() {
+		return "</div>";
+	}
+
+	protected String getEditorId(FacesContext facesContext, UIComponent uiComponent) {
+		String clientId = uiComponent.getClientId();
+		char separatorChar = UINamingContainer.getSeparatorChar(facesContext);
+		String editorId = clientId.replace(separatorChar, '_').concat("_jsptag");
+		String editorType = getEditorType(cast(uiComponent));
+
+		if ("ckeditor_bbcode".equals(editorType)) {
+			editorId = editorId + "_bbcodeInput";
+		}
+		else {
+			editorId = editorId + "_nonInput";
+		}
+
+		return editorId;
+	}
+
 	protected String getEditorType(InputRichText inputRichText) {
 
 		String editorType = PropsUtil.get(PropsKeys.EDITOR_WYSIWYG_DEFAULT);
@@ -306,5 +330,56 @@ public class InputRichTextRenderer extends InputRichTextRendererBase {
 		}
 
 		return editorType;
+	}
+
+	@Override
+	protected String getScripts(UIComponent uiComponent, String scripts) throws Exception {
+
+		if (scripts != null) {
+			FacesContext facesContext = FacesContext.getCurrentInstance();
+			String escapedEditorName = getEditorId(facesContext, uiComponent);
+
+			// There are two possible methods to be executed, depending on inline editor enabled or not:
+			// CKEDITOR.replace or CKEDITOR.inline
+
+			int configIndex = scripts.indexOf("CKEDITOR.replace");
+
+			Boolean editorConfigReplace = null;
+
+			if (configIndex != -1) {
+				editorConfigReplace = Boolean.TRUE;
+			}
+			else {
+				configIndex = scripts.indexOf("CKEDITOR.inline");
+
+				if (configIndex != -1) {
+					editorConfigReplace = Boolean.FALSE;
+				}
+			}
+
+			if (editorConfigReplace != null) {
+
+				// Due to Liferay's CKEditor javascript not ready for AJAX re-rendering,
+				// we have to dynamically add some lines to the tag generated scripts
+				StringBuilder replacement = new StringBuilder();
+				replacement.append("createEditor(); ");
+				replacement.append("if (CKEDITOR.instances['" + escapedEditorName + "']) {");
+				replacement.append("CKEDITOR.instances['" + escapedEditorName +
+					"'].fire('customDataProcessorLoaded');");
+				replacement.append("} ");
+				scripts = StringUtil.replace(scripts, "createEditor();", replacement.toString());
+
+				// Now, in order to refresh the config, we have to enter a different URL. We achieve this by adding a
+				// "timestamp" param Without this, a default toolbar will be loaded
+				int customConfigIndex = scripts.indexOf("customConfig");
+
+				String configURL = scripts.substring(customConfigIndex, scripts.indexOf(",", customConfigIndex));
+				String[] configArray = configURL.split("'");
+				configURL = configArray[1];
+				scripts = StringUtil.replace(scripts, configURL, configURL.concat("&t=" + new Date().getTime()));
+			}
+		}
+
+		return scripts;
 	}
 }
