@@ -11,9 +11,9 @@
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 
-	<artifactId>test-job-application-portlet</artifactId>
+	<artifactId>test-jsf1-portlet</artifactId>
 	<packaging>jar</packaging>
-	<name>job-application-portlet integration tests</name>
+	<name>jsf1-portlet integration tests</name>
 
 	<build>
 		<pluginManagement>
