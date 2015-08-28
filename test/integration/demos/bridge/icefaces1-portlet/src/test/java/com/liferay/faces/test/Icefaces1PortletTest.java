@@ -43,7 +43,7 @@ import com.liferay.faces.test.util.TesterBase;
  * @author	Liferay Faces Team
  */
 @RunWith(Arquillian.class)
-public class JobPortletTest extends TesterBase {
+public class Icefaces1PortletTest extends TesterBase {
 
 	// form tag found after submitting
 	private static final String formTagXpath = "//form[@method='post']";
@@ -68,7 +68,7 @@ public class JobPortletTest extends TesterBase {
 	private static final String phoneNumberFieldErrorXpath = "//input[contains(@id,':phoneNumber')]/following-sibling::*[1]";
 
 	private static final String dateOfBirthFieldXpath = "//input[contains(@id,':dateOfBirth')]";
-	private static final String dateOfBirthFieldErrorXpath = "//input[contains(@id,':dateOfBirth')]/following-sibling::*[1]";
+	private static final String dateOfBirthFieldErrorXpath = "//input[contains(@id,':dateOfBirth')]/../following-sibling::*[1]";
 
 	private static final String cityFieldXpath = "//input[contains(@id,':city')]";
 	private static final String cityFieldErrorXpath = "//input[contains(@id,':city')]/following-sibling::*[1]";
@@ -87,9 +87,9 @@ public class JobPortletTest extends TesterBase {
 	private static final String hideCommentsLinkXpath = "//a[contains(text(),'Hide Comments')]";
 	private static final String commentsXpath = "//textarea[contains(@id,':comments')]";
 
-	private static final String fileUploadChooserXpath = "//input[@type='file' and @multiple='multiple']";
-	private static final String submitFileXpath = "//form[@method='post' and @enctype='multipart/form-data']/input[@type='submit' and @value='Submit']";
-	private static final String uploadedFileXpath = "//tr[@class='portlet-section-body results-row']/td[2]";
+	private static final String fileUploadChooserXpath = "//input[@type='file' and name='upload']";
+	private static final String submitFileXpath = "//input[@type='submit' and @value='Upload']";
+	private static final String uploadedFileXpath = "//span[contains(text(),'jersey')]";
 
 	private static final String submitButtonXpath = "//input[@type='submit' and @value='Submit']";
 	private static final String preferencesSubmitButtonXpath = "//input[@type='submit' and @value='Submit']";
@@ -97,7 +97,7 @@ public class JobPortletTest extends TesterBase {
 	private static final String returnLinkXpath = "//a[contains(text(),'Return to Full Page')]";
 
 	private static final String mojarraVersionXpath = "//*[contains(text(),'Mojarra')]";
-	private static final String componentLibraryVersionXpath = "//*[contains(text(),'PrimeFaces ')]";
+	private static final String componentLibraryVersionXpath = "//*[contains(text(),'ICEfaces ')]";
 	private static final String alloyVersionXpath = "//*[contains(text(),'Liferay Faces Alloy')]";
 	private static final String bridgeVersionXpath = "//*[contains(text(),'Liferay Faces Bridge')]";
 
@@ -105,7 +105,7 @@ public class JobPortletTest extends TesterBase {
 	private static final String windowInnerHeightXpath = "//em[@id='window.innerHeight']";
 	private static final String windowInnerWidthXpath = "//em[@id='window.innerWidth']";
 
-	static final String url = baseUrl + webContext + "/jsf1";
+	static final String url = baseUrl + webContext + "/ice1";
 
 	@FindBy(xpath = formTagXpath)
 	private WebElement formTag;
