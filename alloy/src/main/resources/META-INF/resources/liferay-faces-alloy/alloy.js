@@ -60,26 +60,28 @@ LFAI = {
 			var contentTypeArray = A.Array(contentTypes),
 				escapedClientId = LFA.escapeClientId(clientId),
 				escapedFormClientId = LFA.escapeClientId(formClientId),
-				uploadComplete = false;
+				uploadFilesButton = A.one('#' + escapedClientId + '_uploadFilesButton');
 
 			A.Uploader.HTML5FILEFIELD_TEMPLATE =
 				"<input type='file' style='visibility:hidden; width:0.1px; height: 0px;'>";
 			clientComponent.render('#' + escapedClientId + '_selectFilesBox');
 			A.one('#' + escapedClientId + '_selectFilesBox').one('>div').removeAttribute('style');
 			A.one('#' + escapedClientId + '_selectFilesBox').one('>div>div>button').removeAttribute('style');
-			A.one('#' + escapedClientId + '_uploadFilesButton').on('click', function(e) {
+
+			function uploadAll() {
 				var fileList = clientComponent.get('fileList'),
 					formNode, requestParams, viewStateNode;
-				formNode = A.one('#' + escapedFormClientId);
-				viewStateNode = formNode.one('>input[name="javax.faces.ViewState"]');
 
-				if (!viewStateNode) {
-					viewStateNode = formNode.one('>input[name="' + namingContainerId +
-						'javax.faces.ViewState"]');
-				}
+				if (fileList.length > 0) {
 
-				if (!uploadComplete && fileList.length > 0) {
-					e.preventDefault();
+					formNode = A.one('#' + escapedFormClientId);
+					viewStateNode = formNode.one('>input[name="javax.faces.ViewState"]');
+
+					if (!viewStateNode) {
+						viewStateNode = formNode.one('>input[name="' + namingContainerId +
+							'javax.faces.ViewState"]');
+					}
+
 					requestParams = {};
 					requestParams[namingContainerId + formClientId] = formClientId;
 					requestParams[namingContainerId + 'Faces-Request'] = 'partial/ajax';
@@ -93,9 +95,21 @@ LFAI = {
 						'value');
 					clientComponent.uploadAll(partialActionURL, requestParams);
 				}
-			});
+			}
 
-			clientComponent.on('uploadcomplete', function() {
+			if (!auto) {
+
+				uploadFilesButton.on('click', function(event) {
+
+					event.preventDefault();
+
+					if (!uploadFilesButton.get('disabled')) {
+						uploadAll();
+					}
+				});
+			}
+
+			clientComponent.on('uploadcomplete', function(event) {
 
 				var options = { execute : '@none', render : render };
 
@@ -104,17 +118,34 @@ LFAI = {
 				}
 
 				jsf.ajax.request(clientId, 'valueChange', options);
+				var tableRow = A.one('#' + escapedClientId + '_table #' + event.file.get('id') + '_row');
+				tableRow.remove(true);
 			});
 
 			clientComponent.on('uploadprogress', function(event) {
-				var tableRow = A.one('#' + event.file.get('id') + '_row');
+				var tableRow = A.one('#' + escapedClientId + '_table #' + event.file.get('id') + '_row');
 				tableRow.one('.percent-complete').set('text', event.percentLoaded + '%');
 			});
 
 			clientComponent.on('uploadstart', function() {
 				clientComponent.set('enabled', false);
-				A.one('#' + escapedClientId + '_uploadFilesButton').addClass('yui3-button-disabled').detach(
-					'click');
+
+				if (!auto) {
+					uploadFilesButton.addClass('yui3-button-disabled').set('disabled', true);
+				}
+			});
+
+			clientComponent.after('alluploadscomplete', function() {
+				clientComponent.set('enabled', true);
+
+				if (!auto) {
+					uploadFilesButton.removeClass('yui3-button-disabled').set('disabled', false);
+				}
+
+				clientComponent.set('fileList', []);
+				var fileTable = A.one('#' + escapedClientId + '_table');
+				fileTable.one('tbody').setHTML('');
+				fileTable.one('tfoot').setStyle('display', null);
 			});
 
 			clientComponent.after('fileselect', function(event) {
@@ -125,11 +156,6 @@ LFAI = {
 					appendNewFiles = clientComponent.get('appendNewFiles');
 
 				if (!appendNewFiles) {
-					fileTableBody.setHTML('');
-				}
-
-				if (uploadComplete) {
-					uploadComplete = false;
 					fileTableBody.setHTML('');
 				}
 
@@ -165,7 +191,7 @@ LFAI = {
 				fileTable.one('tfoot').setStyle('display', 'none');
 
 				if (auto) {
-					A.one('#' + escapedClientId + '_uploadFilesButton').simulate('click');
+					uploadAll();
 				}
 			});
 		}

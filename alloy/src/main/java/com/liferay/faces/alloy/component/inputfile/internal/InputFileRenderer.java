@@ -34,7 +34,6 @@ import javax.faces.render.FacesRenderer;
 import com.liferay.faces.alloy.component.inputfile.FileUploadEvent;
 import com.liferay.faces.alloy.component.inputfile.InputFile;
 import com.liferay.faces.alloy.render.internal.JavaScriptFragment;
-import com.liferay.faces.util.component.Styleable;
 import com.liferay.faces.util.context.MessageContext;
 import com.liferay.faces.util.context.MessageContextFactory;
 import com.liferay.faces.util.context.map.MultiPartFormData;
@@ -172,23 +171,23 @@ public class InputFileRenderer extends InputFileRendererBase {
 		if (inputFile.isShowPreview() || inputFile.isShowProgress()) {
 
 			// Start encoding the outermost <div> element.
-			responseWriter.startElement("div", uiComponent);
+			responseWriter.startElement("div", inputFile);
 
-			String clientId = uiComponent.getClientId(facesContext);
+			String clientId = inputFile.getClientId(facesContext);
 			responseWriter.writeAttribute("id", clientId, "id");
-			RendererUtil.encodeStyleable(responseWriter, (Styleable) uiComponent);
+			RendererUtil.encodeStyleable(responseWriter, inputFile);
 
 			// If the component should render the upload progress table, then format the progress-table.html template
 			// and write it to the response.
 			if (inputFile.isShowProgress()) {
-				encodeProgress(facesContext, responseWriter, uiComponent, clientId);
+				encodeProgress(facesContext, responseWriter, inputFile, clientId);
 			}
 
 			// Otherwise, delegate writing to the delegate renderer. Note that this effectively a no-op with Mojarra and
 			// MyFaces, since they both delay writing of the entire <input type="file"...> ... </input> element until
 			// encodeEnd.
 			else {
-				super.encodeMarkupBegin(facesContext, uiComponent);
+				super.encodeMarkupBegin(facesContext, inputFile);
 			}
 		}
 
@@ -196,7 +195,7 @@ public class InputFileRenderer extends InputFileRendererBase {
 		// MyFaces, since they both delay writing of the entire <input type="file"...> ... </input> element until
 		// encodeEnd.
 		else {
-			super.encodeMarkupBegin(facesContext, uiComponent);
+			super.encodeMarkupBegin(facesContext, inputFile);
 		}
 	}
 
@@ -314,60 +313,66 @@ public class InputFileRenderer extends InputFileRendererBase {
 		responseWriter.endElement("div");
 	}
 
-	protected void encodeProgress(FacesContext facesContext, ResponseWriter responseWriter, UIComponent uiComponent,
+	protected void encodeProgress(FacesContext facesContext, ResponseWriter responseWriter, InputFile inputFile,
 		String clientId) throws IOException {
 
 		Locale locale = facesContext.getViewRoot().getLocale();
-		responseWriter.startElement("div", uiComponent);
+		responseWriter.startElement("div", inputFile);
 		responseWriter.writeAttribute("id", clientId + "_selectFilesBox", null);
 		responseWriter.writeAttribute("class", "select-files-box", null);
 		responseWriter.endElement("div");
-		responseWriter.startElement("div", uiComponent);
-		responseWriter.writeAttribute("id", clientId + "_uploadFilesBox", null);
-		responseWriter.writeAttribute("class", "upload-files-box", null);
-		responseWriter.startElement("button", uiComponent);
-		responseWriter.writeAttribute("id", clientId + "_uploadFilesButton", null);
-		responseWriter.writeAttribute("class", "alloy-button", null);
 
 		MessageContextFactory messageContextFactory = (MessageContextFactory) FactoryExtensionFinder.getFactory(
 				MessageContextFactory.class);
 		MessageContext messageContext = messageContextFactory.getMessageContext();
-		String i18nUploadFiles = messageContext.getMessage(locale, "upload-files");
-		responseWriter.writeText(i18nUploadFiles, null);
-		responseWriter.endElement("button");
-		responseWriter.endElement("div");
-		responseWriter.startElement("div", uiComponent);
-		responseWriter.startElement("table", uiComponent);
+
+		if (!inputFile.isAuto()) {
+
+			responseWriter.startElement("div", inputFile);
+			responseWriter.writeAttribute("id", clientId + "_uploadFilesBox", null);
+			responseWriter.writeAttribute("class", "upload-files-box", null);
+			responseWriter.startElement("button", inputFile);
+			responseWriter.writeAttribute("id", clientId + "_uploadFilesButton", null);
+			responseWriter.writeAttribute("class", "alloy-button", null);
+
+			String i18nUploadFiles = messageContext.getMessage(locale, "upload-files");
+			responseWriter.writeText(i18nUploadFiles, null);
+			responseWriter.endElement("button");
+			responseWriter.endElement("div");
+		}
+
+		responseWriter.startElement("div", inputFile);
+		responseWriter.startElement("table", inputFile);
 		responseWriter.writeAttribute("id", clientId + "_table", null);
 		responseWriter.writeAttribute("class", "table table-bordered", null);
-		responseWriter.startElement("thead", uiComponent);
+		responseWriter.startElement("thead", inputFile);
 		responseWriter.writeAttribute("class", "table-columns", null);
-		responseWriter.startElement("tr", uiComponent);
-		responseWriter.startElement("th", uiComponent);
+		responseWriter.startElement("tr", inputFile);
+		responseWriter.startElement("th", inputFile);
 
 		String i18nFileName = messageContext.getMessage(locale, "file-name");
 		responseWriter.writeText(i18nFileName, null);
 		responseWriter.endElement("th");
-		responseWriter.startElement("th", uiComponent);
+		responseWriter.startElement("th", inputFile);
 
 		String i18nFileType = messageContext.getMessage(locale, "file-type");
 		responseWriter.writeText(i18nFileType, null);
 		responseWriter.endElement("th");
-		responseWriter.startElement("th", uiComponent);
+		responseWriter.startElement("th", inputFile);
 
 		String i18nFileSize = messageContext.getMessage(locale, "file-size");
 		responseWriter.writeText(i18nFileSize, null);
 		responseWriter.endElement("th");
-		responseWriter.startElement("th", uiComponent);
+		responseWriter.startElement("th", inputFile);
 
 		String i18nProgress = messageContext.getMessage(locale, "progress");
 		responseWriter.writeText(i18nProgress, null);
 		responseWriter.endElement("th");
 		responseWriter.endElement("tr");
 		responseWriter.endElement("thead");
-		responseWriter.startElement("tfoot", uiComponent);
-		responseWriter.startElement("tr", uiComponent);
-		responseWriter.startElement("td", uiComponent);
+		responseWriter.startElement("tfoot", inputFile);
+		responseWriter.startElement("tr", inputFile);
+		responseWriter.startElement("td", inputFile);
 		responseWriter.writeAttribute("colspan", "4", null);
 
 		String i18nNoFilesSelected = messageContext.getMessage(locale, "no-files-selected");
@@ -375,8 +380,8 @@ public class InputFileRenderer extends InputFileRendererBase {
 		responseWriter.endElement("td");
 		responseWriter.endElement("tr");
 		responseWriter.endElement("tfoot");
-		responseWriter.startElement("tbody", uiComponent);
-		responseWriter.startElement("tr", uiComponent);
+		responseWriter.startElement("tbody", inputFile);
+		responseWriter.startElement("tr", inputFile);
 		responseWriter.endElement("tr");
 		responseWriter.endElement("tbody");
 		responseWriter.endElement("table");
