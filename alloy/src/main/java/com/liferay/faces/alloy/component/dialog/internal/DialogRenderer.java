@@ -118,7 +118,7 @@ public class DialogRenderer extends DialogRendererBase {
 			encodeOverlayDismissible(responseWriter, dialog, clientKey);
 		}
 
-		encodeOverlayJavaScriptCustom(responseWriter, facesContext, dialog);
+		encodeOverlayJavaScriptCustom(responseWriter, facesContext, dialog, clientKey);
 	}
 
 	@Override

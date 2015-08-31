@@ -22,6 +22,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 
 import com.liferay.faces.alloy.render.internal.DelegatingAlloyRendererBase;
+import com.liferay.faces.util.component.ClientComponent;
 import com.liferay.faces.util.render.internal.DelegationResponseWriter;
 import com.liferay.faces.util.render.internal.IdDelegationResponseWriter;
 
@@ -78,7 +79,7 @@ public abstract class OverlayRendererBase extends DelegatingAlloyRendererBase im
 	}
 
 	public void encodeOverlayJavaScriptCustom(ResponseWriter responseWriter, FacesContext facesContext,
-		UIComponent overlay) throws IOException {
+		UIComponent overlay, String clientKey) throws IOException {
 
 		// The outermost <div> (which is the boundingBox) was initially styled with "display:none;" in order to prevent
 		// blinking when Alloy's JavaScript attempts to hide the boundingBox. At this point in JavaScript execution,
@@ -90,6 +91,16 @@ public abstract class OverlayRendererBase extends DelegatingAlloyRendererBase im
 		String escapedBoundingBoxClientId = escapeClientId(clientId);
 		responseWriter.write(escapedBoundingBoxClientId);
 		responseWriter.write("').setStyle('display',null);");
+
+		Map<String, Object> attributes = overlay.getAttributes();
+		boolean autoShow = (Boolean) attributes.get("autoShow");
+
+		if (autoShow) {
+
+			responseWriter.write("Liferay.component('");
+			responseWriter.write(clientKey);
+			responseWriter.write("').show();");
+		}
 	}
 
 	protected void encodeOverlayDismissible(ResponseWriter responseWriter, UIComponent overlay, String clientKey)
@@ -151,12 +162,7 @@ public abstract class OverlayRendererBase extends DelegatingAlloyRendererBase im
 		// Encode the "render: true" Alloy hidden attribute.
 		encodeWidgetRender(responseWriter, first);
 
-		// Encode the "visible" Alloy hidden attribute.
-		Boolean autoShow = (Boolean) attributes.get("autoShow");
-
-		if (autoShow != null) {
-			encodeBoolean(responseWriter, "visible", autoShow, first);
-		}
+		encodeBoolean(responseWriter, "visible", false, first);
 	}
 
 	protected void encodeOverlayZIndex(ResponseWriter responseWriter, UIComponent overlay, Integer zIndex,
