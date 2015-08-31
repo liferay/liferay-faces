@@ -153,7 +153,7 @@ public abstract class PortalTagRenderer<U extends UIComponent, T extends Tag> ex
 	}
 
 	protected HttpServletResponse getHttpServletResponse(PortletResponse portletResponse) {
-		return new HttpServletResponseTagSafeImpl(PortalUtil.getHttpServletResponse(portletResponse));
+		return PortalUtil.getHttpServletResponse(portletResponse);
 	}
 
 	protected Tag getParentTag(FacesContext facesContext, U u, T t) {
@@ -174,6 +174,8 @@ public abstract class PortalTagRenderer<U extends UIComponent, T extends Tag> ex
 		HttpServletRequest httpServletRequest = getHttpServletRequest(portletRequest);
 		PortletResponse portletResponse = (PortletResponse) externalContext.getResponse();
 		HttpServletResponse httpServletResponse = getHttpServletResponse(portletResponse);
+		String contentType = httpServletResponse.getContentType();
+
 		ELContext elContext = facesContext.getELContext();
 		JspAdapterFactory jspAdapterFactory = (JspAdapterFactory) FactoryExtensionFinder.getFactory(
 				JspAdapterFactory.class);
@@ -192,6 +194,10 @@ public abstract class PortalTagRenderer<U extends UIComponent, T extends Tag> ex
 
 		if (partialViewContext.isAjaxRequest()) {
 
+			if ((contentType != null) && (contentType.length() > 0) &&
+					!contentType.equals(httpServletResponse.getContentType())) {
+				httpServletResponse.setContentType(contentType);
+			}
 			//J-
 			// TODO: Possibly need to be concerned about inline scripts written in the <head>...</head> section during Ajax.
 			//
