@@ -521,5 +521,32 @@ LFAI = {
 		progressBar.stopPolling = function() {
 			// no-op
 		};
+	},
+
+	initOverlayDismissible: function(overlay) {
+
+		var boundingBox = overlay.get('boundingBox'),
+			clickoutsideEventHandle;
+
+		overlay.after('visibleChange', function(event) {
+
+			var showing = event.newVal;
+
+			if (showing) {
+
+				// Since the current 'clickoutside' event caused the overlay to show, hide the overlay on the next
+				// 'clickoutside' event.
+				boundingBox.once('clickoutside', function(event) {
+					clickoutsideEventHandle = boundingBox.once('clickoutside', overlay.hide, overlay);
+				});
+			}
+
+			// Otherwise the overlay is being hidden.
+			else {
+				if (clickoutsideEventHandle) {
+					clickoutsideEventHandle.detach();
+				}
+			}
+		});
 	}
 };
