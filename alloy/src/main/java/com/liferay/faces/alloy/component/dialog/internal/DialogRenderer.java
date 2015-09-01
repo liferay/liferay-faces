@@ -14,6 +14,9 @@
 package com.liferay.faces.alloy.component.dialog.internal;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import javax.faces.application.ResourceDependencies;
 import javax.faces.application.ResourceDependency;
@@ -138,5 +141,19 @@ public class DialogRenderer extends DialogRendererBase {
 	protected void encodeZIndex(ResponseWriter responseWriter, Dialog dialog, Integer zIndex, boolean first)
 		throws IOException {
 		encodeOverlayZIndex(responseWriter, dialog, zIndex, LIFERAY_Z_INDEX_OVERLAY, first);
+	}
+
+	@Override
+	protected String[] getModules(FacesContext facesContext, UIComponent uiComponent) {
+
+		String[] modulesArray = super.getModules(facesContext, uiComponent);
+		List<String> modules = new ArrayList<String>(Arrays.asList(modulesArray));
+		Dialog dialog = (Dialog) uiComponent;
+
+		if (!dialog.isModal() && dialog.isDismissible()) {
+			modules.add("event-move");
+		}
+
+		return modules.toArray(new String[] {});
 	}
 }
