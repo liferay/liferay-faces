@@ -24,12 +24,12 @@
 	</context-param>
     <!-- Instruct Mojarra to namespace parameters according to NamingContainer rules. -->
 	<!-- JAVASERVERFACES-3031 -->
-	<!--
+
 	<context-param>
 		<param-name>com.sun.faces.namespaceParameters</param-name>
 		<param-value>true</param-value>
 	</context-param>
-	-->
+
 	<listener>
 		<listener-class>com.liferay.faces.demos.servlet.UploadedFileCleanupListener</listener-class>
 	</listener>
