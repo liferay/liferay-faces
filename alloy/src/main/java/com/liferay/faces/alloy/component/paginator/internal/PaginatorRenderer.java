@@ -22,7 +22,6 @@ import java.util.Map;
 import javax.faces.application.Application;
 import javax.faces.application.ResourceDependencies;
 import javax.faces.application.ResourceDependency;
-import javax.faces.component.NamingContainer;
 import javax.faces.component.UIComponent;
 import javax.faces.component.UIData;
 import javax.faces.component.UIParameter;
@@ -218,13 +217,6 @@ public class PaginatorRenderer extends PaginatorRendererBase implements Componen
 			// Encode the starting <ul> element that represents the unordered list of pagination controls.
 			responseWriter.startElement("ul", uiComponent);
 
-			// Determine whether or not parameters need to be namespaced (as in a portlet environment).
-			String namingContainerId = null;
-
-			if (viewRoot instanceof NamingContainer) {
-				namingContainerId = viewRoot.getContainerClientId(facesContext);
-			}
-
 			// If the summary is to be positioned on the left of the pagination controls, then encode the
 			// summary.
 			if ("left".equals(summaryPosition)) {
@@ -234,12 +226,12 @@ public class PaginatorRenderer extends PaginatorRendererBase implements Componen
 
 			// Encode the "First Page" pagination control.
 			if (showFirstPageControl) {
-				encodeFirstPageListItem(facesContext, responseWriter, paginator, clientId, namingContainerId, first);
+				encodeFirstPageListItem(facesContext, responseWriter, paginator, clientId, first);
 			}
 
 			// Encode the "Previous Page" pagination control.
 			if (showPreviousPageControl) {
-				encodePrevPageListItem(facesContext, responseWriter, paginator, clientId, namingContainerId, first);
+				encodePrevPageListItem(facesContext, responseWriter, paginator, clientId, first);
 			}
 
 			// If pagination controls for page numbers are to be encoded, then
@@ -268,19 +260,19 @@ public class PaginatorRenderer extends PaginatorRendererBase implements Componen
 
 				// Encode the pagination controls for the appropriate page numbers.
 				for (int i = firstPage; i <= lastPage; i++) {
-					encodePageNumberListItem(facesContext, responseWriter, paginator, clientId, namingContainerId, i,
-						curPage, first, rows, rowCount);
+					encodePageNumberListItem(facesContext, responseWriter, paginator, clientId, i, curPage, first, rows,
+						rowCount);
 				}
 			}
 
 			// Encode the "Next Page" pagination control.
 			if (showNextPageControl) {
-				encodeNextPageListItem(facesContext, responseWriter, paginator, uiData, clientId, namingContainerId);
+				encodeNextPageListItem(facesContext, responseWriter, paginator, uiData, clientId);
 			}
 
 			// Encode the "Last Page" pagination control.
 			if (showLastPageControl) {
-				encodeLastPageListItem(facesContext, responseWriter, paginator, uiData, clientId, namingContainerId);
+				encodeLastPageListItem(facesContext, responseWriter, paginator, uiData, clientId);
 			}
 
 			// If the summary is to be positioned on the right of the pagination controls, then encode the summary.
@@ -323,36 +315,36 @@ public class PaginatorRenderer extends PaginatorRendererBase implements Componen
 	}
 
 	protected void encodeFirstPageListItem(FacesContext facesContext, ResponseWriter responseWriter,
-		Paginator paginator, String clientId, String namingContainerId, int first) throws IOException {
+		Paginator paginator, String clientId, int first) throws IOException {
 
 		boolean enabled = (first > 0);
 		String firstPageLabel = paginator.getFirstPageLabel();
 
-		encodeUnorderedListItem(facesContext, responseWriter, paginator, clientId, namingContainerId, "firstPage",
-			firstPageLabel, enabled, false);
+		encodeUnorderedListItem(facesContext, responseWriter, paginator, clientId, "firstPage", firstPageLabel, enabled,
+			false);
 	}
 
 	protected void encodeLastPageListItem(FacesContext facesContext, ResponseWriter responseWriter, Paginator paginator,
-		UIData uiData, String clientId, String namingContainerId) throws IOException {
+		UIData uiData, String clientId) throws IOException {
 
 		boolean enabled = ((uiData.getFirst() + uiData.getRows()) < uiData.getRowCount());
 		String lastPageLabel = paginator.getLastPageLabel();
-		encodeUnorderedListItem(facesContext, responseWriter, paginator, clientId, namingContainerId, "lastPage",
-			lastPageLabel, enabled, false);
+		encodeUnorderedListItem(facesContext, responseWriter, paginator, clientId, "lastPage", lastPageLabel, enabled,
+			false);
 	}
 
 	protected void encodeNextPageListItem(FacesContext facesContext, ResponseWriter responseWriter, Paginator paginator,
-		UIData uiData, String clientId, String namingContainerId) throws IOException {
+		UIData uiData, String clientId) throws IOException {
 
 		boolean enabled = ((uiData.getFirst() + uiData.getRows()) < uiData.getRowCount());
 		String nextPageLabel = paginator.getNextPageLabel();
-		encodeUnorderedListItem(facesContext, responseWriter, paginator, clientId, namingContainerId, "nextPage",
-			nextPageLabel, enabled, false);
+		encodeUnorderedListItem(facesContext, responseWriter, paginator, clientId, "nextPage", nextPageLabel, enabled,
+			false);
 	}
 
 	protected void encodePageNumberListItem(FacesContext facesContext, ResponseWriter responseWriter,
-		Paginator paginator, String clientId, String namingContainerId, int pageNumber, int curPageNumber, int first,
-		int rows, int rowCount) throws IOException {
+		Paginator paginator, String clientId, int pageNumber, int curPageNumber, int first, int rows, int rowCount)
+		throws IOException {
 
 		boolean current = (pageNumber == curPageNumber);
 		boolean enabled = (!current || ((first + rows) < rowCount));
@@ -367,17 +359,17 @@ public class PaginatorRenderer extends PaginatorRendererBase implements Componen
 			pageNumberLabel = "&nbsp;".concat(pageNumberLabel).concat("&nbsp;");
 		}
 
-		encodeUnorderedListItem(facesContext, responseWriter, paginator, clientId, namingContainerId, paginatorAction,
-			pageNumberLabel, enabled, current);
+		encodeUnorderedListItem(facesContext, responseWriter, paginator, clientId, paginatorAction, pageNumberLabel,
+			enabled, current);
 	}
 
 	protected void encodePrevPageListItem(FacesContext facesContext, ResponseWriter responseWriter, Paginator paginator,
-		String clientId, String namingContainerId, int first) throws IOException {
+		String clientId, int first) throws IOException {
 
 		boolean enabled = (first > 0);
 		String previousPageLabel = paginator.getPreviousPageLabel();
-		encodeUnorderedListItem(facesContext, responseWriter, paginator, clientId, namingContainerId, "previousPage",
-			previousPageLabel, enabled, false);
+		encodeUnorderedListItem(facesContext, responseWriter, paginator, clientId, "previousPage", previousPageLabel,
+			enabled, false);
 	}
 
 	protected void encodeSummary(ResponseWriter responseWriter, Paginator paginator, String summaryPostion,
@@ -423,8 +415,8 @@ public class PaginatorRenderer extends PaginatorRendererBase implements Componen
 	}
 
 	protected void encodeUnorderedListItem(FacesContext facesContext, ResponseWriter responseWriter,
-		Paginator paginator, String clientId, String namingContainerId, String paginatorAction, String text,
-		boolean enabled, boolean current) throws IOException {
+		Paginator paginator, String clientId, String paginatorAction, String text, boolean enabled, boolean current)
+		throws IOException {
 
 		// Encode the starting <li> element that contains the Bootstrap pagination control.
 		responseWriter.startElement("li", paginator);
@@ -444,8 +436,7 @@ public class PaginatorRenderer extends PaginatorRendererBase implements Componen
 
 			// If the alloy:paginator has a nested f:ajax tag, then encode a hyperlink that contains the client
 			// behavior script in the onclick attribute.
-			String clientBehaviorScript = getClientBehaviorScript(facesContext, paginator, clientId, namingContainerId,
-					paginatorAction);
+			String clientBehaviorScript = getClientBehaviorScript(facesContext, paginator, clientId, paginatorAction);
 
 			if (clientBehaviorScript != null) {
 				responseWriter.startElement("a", paginator);
@@ -500,7 +491,7 @@ public class PaginatorRenderer extends PaginatorRendererBase implements Componen
 	}
 
 	protected String getClientBehaviorScript(FacesContext facesContext, Paginator paginator, String clientId,
-		String namingContainerId, String paginatorAction) {
+		String paginatorAction) {
 
 		String clientBehaviorScript = null;
 		Map<String, List<ClientBehavior>> clientBehaviorMap = paginator.getClientBehaviors();
@@ -514,11 +505,6 @@ public class PaginatorRenderer extends PaginatorRendererBase implements Componen
 
 				List<ClientBehaviorContext.Parameter> parameters = new ArrayList<ClientBehaviorContext.Parameter>();
 				parameters.add(new ClientBehaviorContext.Parameter(paginatorActionParamName, paginatorAction));
-
-				if (namingContainerId != null) {
-					parameters.add(new ClientBehaviorContext.Parameter("'com.sun.faces.namingContainerId'",
-							namingContainerId));
-				}
 
 				ClientBehaviorContext clientBehaviorContext = ClientBehaviorContext.createClientBehaviorContext(
 						facesContext, paginator, defaultEventName, clientId, parameters);

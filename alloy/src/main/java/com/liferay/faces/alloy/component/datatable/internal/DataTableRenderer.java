@@ -26,7 +26,6 @@ import javax.el.ValueExpression;
 import javax.faces.application.Application;
 import javax.faces.application.ResourceDependencies;
 import javax.faces.application.ResourceDependency;
-import javax.faces.component.NamingContainer;
 import javax.faces.component.UIColumn;
 import javax.faces.component.UIComponent;
 import javax.faces.component.UIParameter;
@@ -578,15 +577,6 @@ public class DataTableRenderer extends DataTableRendererBase {
 
 		if (dataTableInfo.isHeaderFacetOrTextPresentInColumn()) {
 
-			// Determine whether or not parameters need to be namespaced (as in a portlet environment).
-			String namingContainerId = null;
-
-			UIViewRoot viewRoot = facesContext.getViewRoot();
-
-			if (viewRoot instanceof NamingContainer) {
-				namingContainerId = viewRoot.getContainerClientId(facesContext);
-			}
-
 			responseWriter.startElement("tr", null);
 
 			List<UIComponent> children = dataTable.getChildren();
@@ -664,8 +654,7 @@ public class DataTableRenderer extends DataTableRendererBase {
 								String headerText = alloyColumn.getHeaderText();
 
 								if (headerText != null) {
-									encodeHeaderText(facesContext, responseWriter, dataTable, alloyColumn, headerText,
-										namingContainerId);
+									encodeHeaderText(facesContext, responseWriter, dataTable, alloyColumn, headerText);
 								}
 							}
 
@@ -690,7 +679,7 @@ public class DataTableRenderer extends DataTableRendererBase {
 	}
 
 	protected void encodeHeaderText(FacesContext facesContext, ResponseWriter responseWriter, DataTable dataTable,
-		Column column, String headerText, String namingContainerId) throws IOException {
+		Column column, String headerText) throws IOException {
 
 		ValueExpression sortByValueExpression = column.getValueExpression("sortBy");
 
@@ -706,7 +695,7 @@ public class DataTableRenderer extends DataTableRendererBase {
 			// behavior script in the onclick attribute.
 			String dataTableClientId = dataTable.getClientId(facesContext);
 			String clientBehaviorScript = getColumnClientBehaviorScript(facesContext, dataTable, column,
-					dataTableClientId, namingContainerId);
+					dataTableClientId);
 
 			if (clientBehaviorScript != null) {
 
@@ -897,7 +886,7 @@ public class DataTableRenderer extends DataTableRendererBase {
 	}
 
 	protected String getColumnClientBehaviorScript(FacesContext facesContext, DataTable dataTable, Column column,
-		String clientId, String namingContainerId) {
+		String clientId) {
 
 		String clientBehaviorScript = null;
 		Map<String, List<ClientBehavior>> clientBehaviorMap = column.getClientBehaviors();
@@ -915,11 +904,6 @@ public class DataTableRenderer extends DataTableRendererBase {
 
 				String eventMetaKeyParamName = clientId.concat("_eventMetaKey");
 				parameters.add(new ClientBehaviorContext.Parameter(eventMetaKeyParamName, "event.metaKey"));
-
-				if (namingContainerId != null) {
-					parameters.add(new ClientBehaviorContext.Parameter("'com.sun.faces.namingContainerId'",
-							namingContainerId));
-				}
 
 				ClientBehaviorContext clientBehaviorContext = ClientBehaviorContext.createClientBehaviorContext(
 						facesContext, dataTable, defaultEventName, clientId, parameters);
