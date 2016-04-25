@@ -48,9 +48,10 @@
 									<goal>wget</goal>
 								</goals>
 								<configuration>
-									<url>https://github.com/liferay/liferay-portal/raw/6.2.x/portal-web/third-party/alloy-${alloyui.zip.version}.zip</url>
+									<url>https://github.com/liferay/liferay-portal/blob/6.2.3-ga4/portal-web/third-party/alloy-${alloyui.zip.version}.zip?raw=true</url>
 									<unpack>true</unpack>
 									<outputDirectory>${project.build.directory}/classes/META-INF/resources</outputDirectory>
+									<outputFileName>alloy-${alloyui.zip.version}.zip</outputFileName>
 									<md5>37cb9069053f2e181bd26bd78a216c53</md5>
 								</configuration>
 							</execution>
