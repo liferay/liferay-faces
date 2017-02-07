@@ -56,3 +56,8 @@
 	font-style: italic;
 	padding-left: 20px;
 }
+
+th {
+	max-width: 16%;
+	min-width: 16%;
+}
