@@ -98,7 +98,7 @@ public class PopoverRenderer extends PopoverRendererBase {
 			encodeOverlayDismissible(responseWriter, popover, clientKey);
 		}
 
-		encodeOverlayJavaScriptCustom(responseWriter, facesContext, popover);
+		encodeOverlayJavaScriptCustom(responseWriter, facesContext, popover, clientKey);
 
 		if ((popover.getFor() == null) && facesContext.isProjectStage(ProjectStage.Development)) {
 			logger.error("The 'for' attribute is required for alloy:popover");

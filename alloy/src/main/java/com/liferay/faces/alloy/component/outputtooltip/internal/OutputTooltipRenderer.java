@@ -71,20 +71,20 @@ public class OutputTooltipRenderer extends OutputTooltipRendererBase {
 	@Override
 	public void encodeJavaScriptCustom(FacesContext facesContext, UIComponent uiComponent) throws IOException {
 
-		ResponseWriter responseWriter = facesContext.getResponseWriter();
-		OutputTooltip tooltip = (OutputTooltip) uiComponent;
-		encodeOverlayJavaScriptCustom(responseWriter, facesContext, tooltip);
-
-		if ((tooltip.getFor() == null) && facesContext.isProjectStage(ProjectStage.Development)) {
-			logger.error("The 'for' attribute is required for alloy:outputTooltip");
-		}
-
 		ClientComponent clientComponent = (ClientComponent) uiComponent;
 		String clientVarName = getClientVarName(facesContext, clientComponent);
 		String clientKey = clientComponent.getClientKey();
 
 		if (clientKey == null) {
 			clientKey = clientVarName;
+		}
+
+		ResponseWriter responseWriter = facesContext.getResponseWriter();
+		OutputTooltip tooltip = (OutputTooltip) uiComponent;
+		encodeOverlayJavaScriptCustom(responseWriter, facesContext, tooltip, clientKey);
+
+		if ((tooltip.getFor() == null) && facesContext.isProjectStage(ProjectStage.Development)) {
+			logger.error("The 'for' attribute is required for alloy:outputTooltip");
 		}
 
 		// In order to workaround a bug where the tooltip appears in the incorrect place, set the trigger again after
