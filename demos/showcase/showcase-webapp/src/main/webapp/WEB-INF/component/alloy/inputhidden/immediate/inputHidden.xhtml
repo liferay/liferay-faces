@@ -16,7 +16,7 @@
 				</div>
 				<alloy:button onclick="document.getElementById('#{inputHidden1.clientId}').value='1234';"
 					value="#{i18n['copy-1234-to-the-value-of-the-hidden-input']}" />
-				<alloy:button onclick="document.getElementById('#{inputHidden.clientId}').value='';"
+				<alloy:button onclick="document.getElementById('#{inputHidden1.clientId}').value='';"
 					value="#{i18n['clear-the-value-of-the-hidden-input']}" />
 				<hr />
 				<alloy:commandButton action="#{inputHiddenBackingBean.submit}" render="@form"
@@ -38,7 +38,7 @@
 				</div>
 				<alloy:button onclick="document.getElementById('#{inputHidden2.clientId}').value='1234';"
 					value="#{i18n['copy-1234-to-the-value-of-the-hidden-input']}" />
-				<alloy:button onclick="document.getElementById('#{inputHidden.clientId}').value='';"
+				<alloy:button onclick="document.getElementById('#{inputHidden2.clientId}').value='';"
 					value="#{i18n['clear-the-value-of-the-hidden-input']}" />
 				<hr />
 				<alloy:commandButton action="#{inputHiddenBackingBean.submit}" render="@form"
