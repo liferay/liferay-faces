@@ -5,7 +5,7 @@
 	<ui:define name="col1">
 
 		<!-- The enclosing form must have enctype="multipart/form-data" in order for files to upload correctly. -->
-		<alloy:form enctype="multipart/form-data">
+		<alloy:form id="form" enctype="multipart/form-data">
 			<showcase:example>
 				<alloy:selectBooleanCheckbox immediate="true" value="#{inputFileModelBean.appendNewFiles}">
 					<f:ajax render="@form" />
@@ -17,12 +17,14 @@
 				<alloy:outputLabel styleClass="inline-label" value="#{i18n['instant-ajax']}" />
 				<alloy:inputFile appendNewFiles="#{inputFileModelBean.appendNewFiles}" auto="#{inputFileModelBean.auto}"
 					fileUploadListener="#{inputFileBackingBean.handleFileUpload}" multiple="multiple" showProgress="true">
-					<f:ajax render="@form" />
+					<f:ajax render="form:uploadedFiles" />
 				</alloy:inputFile>
 			</showcase:example>
-			<showcase:outputModel>
-				<ui:include src="../inputFileCommon.xhtml" />
-			</showcase:outputModel>
+			<alloy:panelGroup id="uploadedFiles">
+				<showcase:outputModel>
+					<ui:include src="../inputFileCommon.xhtml" />
+				</showcase:outputModel>
+			</alloy:panelGroup>
 		</alloy:form>
 	</ui:define>
 
