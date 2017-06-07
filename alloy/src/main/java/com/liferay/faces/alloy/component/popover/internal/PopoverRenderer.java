@@ -14,6 +14,9 @@
 package com.liferay.faces.alloy.component.popover.internal;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import javax.faces.application.ProjectStage;
 import javax.faces.application.ResourceDependencies;
@@ -51,7 +54,6 @@ public class PopoverRenderer extends PopoverRendererBase {
 
 	// Private Constants
 	private static final String ALIGN = "align";
-	private static final String[] MODULES = { "aui-popover", "event-outside" };
 	private static final String NODE = "node";
 
 	@Override
@@ -151,6 +153,15 @@ public class PopoverRenderer extends PopoverRendererBase {
 
 	@Override
 	protected String[] getModules(FacesContext facesContext, UIComponent uiComponent) {
-		return MODULES;
+
+		String[] modulesArray = super.getModules(facesContext, uiComponent);
+		List<String> modules = new ArrayList<String>(Arrays.asList(modulesArray));
+		Popover popover = (Popover) uiComponent;
+
+		if (popover.isDismissible()) {
+			modules.add("event-move");
+		}
+
+		return modules.toArray(new String[] {});
 	}
 }

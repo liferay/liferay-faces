@@ -22,6 +22,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 
 import com.liferay.faces.alloy.render.internal.DelegatingAlloyRendererBase;
+import com.liferay.faces.alloy.render.internal.JavaScriptFragment;
 import com.liferay.faces.util.render.internal.DelegationResponseWriter;
 import com.liferay.faces.util.render.internal.IdDelegationResponseWriter;
 
@@ -95,34 +96,8 @@ public abstract class OverlayRendererBase extends DelegatingAlloyRendererBase im
 	protected void encodeOverlayDismissible(ResponseWriter responseWriter, UIComponent overlay, String clientKey)
 		throws IOException {
 
-		responseWriter.write("var ");
-		responseWriter.write(clientKey);
-		responseWriter.write("_switched=false;");
-		responseWriter.write("Liferay.component('");
-		responseWriter.write(clientKey);
-		responseWriter.write("').get('boundingBox').on('clickoutside',function(event){if(");
-		responseWriter.write(clientKey);
-		responseWriter.write("_switched){");
-		responseWriter.write(clientKey);
-		responseWriter.write("_switched=false;}else{if(Liferay.component('");
-		responseWriter.write(clientKey);
-		responseWriter.write("').get('visible')){Liferay.component('");
-		responseWriter.write(clientKey);
-		responseWriter.write("').hide();}}});");
-		responseWriter.write("A.Do.after(function(stuff){if(Liferay.component('");
-		responseWriter.write(clientKey);
-		responseWriter.write("').get('visible')){");
-		responseWriter.write(clientKey);
-		responseWriter.write("_switched=true;}},Liferay.component('");
-		responseWriter.write(clientKey);
-		responseWriter.write("'),'toggle');");
-		responseWriter.write("A.Do.after(function(stuff){if(Liferay.component('");
-		responseWriter.write(clientKey);
-		responseWriter.write("').get('visible')){");
-		responseWriter.write(clientKey);
-		responseWriter.write("_switched=true;}},Liferay.component('");
-		responseWriter.write(clientKey);
-		responseWriter.write("'),'show');");
+		JavaScriptFragment overlayClientVar = new JavaScriptFragment("Liferay.component('" + clientKey + "')");
+		encodeFunctionCall(responseWriter, "LFAI.initOverlayDismissible", 'A', overlayClientVar);
 	}
 
 	protected void encodeOverlayHiddenAttributes(FacesContext facesContext, ResponseWriter responseWriter,

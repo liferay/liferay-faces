@@ -521,5 +521,35 @@ LFAI = {
 		progressBar.stopPolling = function() {
 			// no-op
 		};
+	},
+
+	initOverlayDismissible: function(A, overlay) {
+
+		var boundingBox = overlay.get('boundingBox'),
+			outsideEventHandle;
+
+		overlay.after('visibleChange', function(event) {
+
+			var showing = event.newVal;
+
+			if (showing) {
+
+				// The 'gesturemovestart' event works for both the user clicking or touching an element.
+				// See http://yuilibrary.com/yui/docs/event/touch.html#move for more details.
+				outsideEventHandle = A.one(A.config.doc).on('gesturemovestart', function(event) {
+					if (!boundingBox.contains(event.target)) {
+						overlay.hide();
+						outsideEventHandle.detach();
+					}
+				});
+			}
+
+			// Otherwise the overlay is being hidden.
+			else {
+				if (outsideEventHandle) {
+					outsideEventHandle.detach();
+				}
+			}
+		});
 	}
 };
