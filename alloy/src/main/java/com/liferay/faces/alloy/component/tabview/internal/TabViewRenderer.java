@@ -14,16 +14,13 @@
 package com.liferay.faces.alloy.component.tabview.internal;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
 import javax.faces.application.ResourceDependencies;
 import javax.faces.application.ResourceDependency;
-import javax.faces.component.NamingContainer;
 import javax.faces.component.UIComponent;
-import javax.faces.component.UIViewRoot;
 import javax.faces.component.behavior.ClientBehavior;
 import javax.faces.component.behavior.ClientBehaviorContext;
 import javax.faces.context.FacesContext;
@@ -256,19 +253,8 @@ public class TabViewRenderer extends TabViewRendererBase {
 
 				for (ClientBehavior clientBehavior : clientBehaviorsForEvent) {
 
-					List<ClientBehaviorContext.Parameter> parameters = null;
-					UIViewRoot viewRoot = facesContext.getViewRoot();
-
-					if (viewRoot instanceof NamingContainer) {
-
-						String namingContainerId = viewRoot.getContainerClientId(facesContext);
-						parameters = new ArrayList<ClientBehaviorContext.Parameter>();
-						parameters.add(new ClientBehaviorContext.Parameter("'com.sun.faces.namingContainerId'",
-								namingContainerId));
-					}
-
 					ClientBehaviorContext clientBehaviorContext = ClientBehaviorContext.createClientBehaviorContext(
-							facesContext, tabView, eventName, clientId, parameters);
+							facesContext, tabView, eventName, clientId, null);
 					String clientBehaviorScript = clientBehavior.getScript(clientBehaviorContext);
 
 					// If <f:ajax event="tabSelected" /> is specified in the view, then render a script that submits

@@ -14,16 +14,13 @@
 package com.liferay.faces.portal.component.inputrichtext.internal;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 import javax.faces.application.ResourceDependency;
-import javax.faces.component.NamingContainer;
 import javax.faces.component.UIComponent;
 import javax.faces.component.UINamingContainer;
-import javax.faces.component.UIViewRoot;
 import javax.faces.component.behavior.ClientBehavior;
 import javax.faces.component.behavior.ClientBehaviorContext;
 import javax.faces.context.ExternalContext;
@@ -156,19 +153,8 @@ public class InputRichTextRenderer extends InputRichTextRendererBase {
 
 				for (ClientBehavior clientBehavior : clientBehaviorsForEvent) {
 
-					List<ClientBehaviorContext.Parameter> parameters = null;
-					UIViewRoot viewRoot = facesContext.getViewRoot();
-
-					if (viewRoot instanceof NamingContainer) {
-
-						String namingContainerId = viewRoot.getContainerClientId(facesContext);
-						parameters = new ArrayList<ClientBehaviorContext.Parameter>();
-						parameters.add(new ClientBehaviorContext.Parameter("'com.sun.faces.namingContainerId'",
-								namingContainerId));
-					}
-
 					ClientBehaviorContext clientBehaviorContext = ClientBehaviorContext.createClientBehaviorContext(
-							facesContext, inputRichText, eventName, clientId, parameters);
+							facesContext, inputRichText, eventName, clientId, null);
 					String clientBehaviorScript = clientBehavior.getScript(clientBehaviorContext);
 
 					if (clientBehaviorScript != null) {

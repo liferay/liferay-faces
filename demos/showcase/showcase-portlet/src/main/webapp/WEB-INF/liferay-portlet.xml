@@ -8,7 +8,7 @@
 		<friendly-url-mapping>component</friendly-url-mapping>
 		<friendly-url-routes>friendly-url-routes.xml</friendly-url-routes>
 		<!-- JAVASERVERFACES-3031 -->
-		<requires-namespaced-parameters>false</requires-namespaced-parameters>
+		<requires-namespaced-parameters>true</requires-namespaced-parameters>
 		<render-weight>1</render-weight>
 		<ajaxable>false</ajaxable>
 		<add-default-resource>true</add-default-resource>

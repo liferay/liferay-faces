@@ -103,8 +103,23 @@ public class CaptchaRenderer extends DelayedPortalTagRenderer<Captcha, CaptchaTa
 		PortletResponse portletResponse = (PortletResponse) externalContext.getResponse();
 		String namespace = portletResponse.getNamespace();
 		String replacement = "id=\"".concat(namespace).concat("refreshCaptcha\"");
+		String textToReplace = "id=\"refreshCaptcha\"";
 		String modifiedMarkup = markup.toString();
-		modifiedMarkup = modifiedMarkup.replace("id=\"refreshCaptcha\"", replacement);
+
+		modifiedMarkup = modifiedMarkup.replace(textToReplace, replacement);
+
+		String captchaImpl = CaptchaUtil.getCaptcha().getClass().getName();
+
+		if (captchaImpl.contains("ReCaptcha")) {
+			replacement = "name=\"".concat(namespace).concat("recaptcha_response_field\"");
+			textToReplace = "name=\"recaptcha_response_field\"";
+		}
+		else {
+			replacement = "name=\"".concat(namespace).concat("captchaText\"");
+			textToReplace = "name=\"captchaText\"";
+		}
+
+		modifiedMarkup = modifiedMarkup.replace(textToReplace, replacement);
 
 		// Remove <label>Text Verification<span class="required">...</span></label> since it is not possible to
 		// customize the "Text Verification" label in the JSP tag. Better to let JSF developers decorate portal:captcha
