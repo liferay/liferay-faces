@@ -6,9 +6,9 @@
 	<ui:define name="col1">
 		<h:form enctype="multipart/form-data">
 			<showcase:example>
-				<bridge:inputFile fileUploadListener="#{bridgeInputFileBackingBean.handleFileUpload}">
+				<h:inputFile fileUploadListener="#{bridgeInputFileBackingBean.handleFileUpload}">
 					<f:ajax render="@form" />
-				</bridge:inputFile>
+				</h:inputFile>
 			</showcase:example>
 			<showcase:outputModel>
 				<ui:include src="../bridgeInputFileCommon.xhtml" />

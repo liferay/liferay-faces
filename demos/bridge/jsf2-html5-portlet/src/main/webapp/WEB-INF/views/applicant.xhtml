@@ -140,7 +140,7 @@
 					<hr />
 					<form jsf:id="f3" jsf:enctype="multipart/form-data">
 						<h:panelGrid columns="1">
-							<bridge:inputFile fileUploadListener="#{applicantBackingBean.handleFileUpload}" multiple="multiple" />
+							<h:inputFile fileUploadListener="#{applicantBackingBean.handleFileUpload}" multiple="multiple" />
 						</h:panelGrid>
 						<input jsf:value="#{i18n['submit']}" type="submit" />
 					</form>

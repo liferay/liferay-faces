@@ -138,9 +138,9 @@
 					<h3>
 						<h:outputText value="#{i18n['attachments']}" />
 					</h3>
-					<bridge:inputFile binding="#{applicantBackingBean.attachment1}" />
-					<bridge:inputFile binding="#{applicantBackingBean.attachment2}" />
-					<bridge:inputFile binding="#{applicantBackingBean.attachment3}" />
+					<h:inputFile binding="#{applicantBackingBean.attachment1}" />
+					<h:inputFile binding="#{applicantBackingBean.attachment2}" />
+					<h:inputFile binding="#{applicantBackingBean.attachment3}" />
 				</h:panelGrid>
 				<h:commandButton actionListener="#{applicantBackingBean.uploadAttachments}" value="#{i18n['submit']}" />
 			</h:form>
