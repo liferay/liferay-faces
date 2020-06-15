@@ -88,7 +88,7 @@
 		<faces.spec.version>2.2</faces.spec.version>
 		<faces.version>${mojarra.version}</faces.version>
 		<full.version>${project.version} (${codename} / ${timestamp} AD)</full.version>
-		<hibernate.validator.version>5.1.3.Final</hibernate.validator.version>
+		<hibernate.validator.version>5.3.5.Final</hibernate.validator.version>
 		<icefaces4.version>4.0.0</icefaces4.version>
 		<jstl.version>1.2</jstl.version>
 		<liferay.version>6.2.3</liferay.version>
