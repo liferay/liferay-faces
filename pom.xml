@@ -144,7 +144,7 @@
 		</war.packaging.excludes>
 		<webapp.descriptor>web.xml</webapp.descriptor>
 		<weblogic.jaxb.version>2.2.7</weblogic.jaxb.version>
-		<weblogic.xerces.version>2.11.0</weblogic.xerces.version>
+		<weblogic.xerces.version>2.12.0</weblogic.xerces.version>
 		<weld.version>1.1.10.Final</weld.version>
 	</properties>
 
