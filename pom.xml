@@ -129,7 +129,7 @@
 		<project.stage>Production</project.stage>
 		<richfaces4.version>4.5.6.Final</richfaces4.version>
 		<selenium.version>2.46.0</selenium.version>
-		<spring.version>3.0.7.RELEASE</spring.version>
+		<spring.version>3.2.5.RELEASE</spring.version>
 		<surefire.version>2.12</surefire.version>
 		<tck.version>jsr329-1.0.1-liferay</tck.version>
 		<tck.trinidad.version>2.0.1</tck.trinidad.version>
